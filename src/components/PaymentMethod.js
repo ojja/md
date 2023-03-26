@@ -1,0 +1,74 @@
+
+import React, { useState, useEffect } from 'react';
+import { RiRadioButtonLine, RiCheckboxBlankCircleLine } from "react-icons/ri";
+
+
+export default function PaymentMethod() {
+
+    return (
+        <>
+            <h3 className='mb-2 text-lg font-medium text-gray-900 dark:text-white'>
+                Payment Method
+            </h3>
+            <ul className=''>
+                <li className='py-2'>
+                    <label htmlFor="Credit_Card" className='block text-gray-900 peer-checked:text-blue-600'>
+                        <div className="flex flex-col relative pl-3 py-1">
+                            <input type="radio" name="payment_method" id="Credit_Card" className='hidden peer' defaultChecked />
+                            <div className='invisible peer-checked:visible absolute left-0 top-1 mt-0.5'>
+                                <RiRadioButtonLine className='peer-checked:bg-gray-700' />
+                            </div>
+                            <div className='visible peer-checked:invisible absolute left-0 top-1 mt-0.5'>
+                                <RiCheckboxBlankCircleLine className='peer-checked:bg-gray-700' />
+                            </div>
+                            <span className='block ml-2 text-sm font-medium'>Credit Card</span>
+                            <div className="grid grid-cols-2 gap-4 h-0 peer-checked:h-auto overflow-hidden peer-checked:p-2">
+                                <div className="col-span-2 ok">
+                                    <label for="" className="block text-sm font-medium leading-6 text-gray-900"> Card number </label>
+                                    <div className="mt-1">
+                                        <input type="text" name="" id="" placeholder="XXXX XXXX XXXX XXXX" className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
+                                    </div>
+                                </div>
+
+                                <div className="col-span-2">
+                                    <label for="" className="block text-sm font-medium leading-6 text-gray-900"> Name on the card </label>
+                                    <div className="mt-1">
+                                        <input type="text" name="" id="" placeholder="ex: John Doe" className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="" className="block text-sm font-medium leading-6 text-gray-900"> Expiry date </label>
+                                    <div className="mt-1">
+                                        <input type="text" name="" id="" placeholder="MM/YYYY" className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
+                                    </div>
+                                </div>
+
+                                <div>
+                                    <label for="" className="block text-sm font-medium leading-6 text-gray-900"> CSV </label>
+                                    <div className="mt-1">
+                                        <input type="text" name="" id="" placeholder="XXX" className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </label>
+                </li>
+                <li className='py-2 border-t-2 border-dashed'>
+                    <label htmlFor="Cash" className='block text-gray-900 peer-checked:text-blue-600'>
+                        <div className='flex items-center relative pl-3 py-1'>
+                            <input type="radio" name="payment_method" id="Cash" className='hidden peer' />
+                            <div className='invisible peer-checked:visible absolute left-0 top-1 mt-0.5'>
+                                <RiRadioButtonLine className='peer-checked:bg-gray-700' />
+                            </div>
+                            <div className='visible peer-checked:invisible absolute left-0 top-1 mt-0.5'>
+                                <RiCheckboxBlankCircleLine className='peer-checked:bg-gray-700' />
+                            </div>
+                            <span className='ml-2 text-sm font-medium'>Cash on delivery</span>
+                        </div>
+                    </label>
+                </li>
+            </ul>
+        </>
+    )
+}
