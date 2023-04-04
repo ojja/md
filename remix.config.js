@@ -11,9 +11,9 @@ const { withEsbuildOverride } = require("remix-esbuild-override");
 withEsbuildOverride((option, { isServer }) => {
   if (isServer) {
     option.platform = "node";
-    // option.define = {
-    //   global: "globalThis",
-    // };
+    option.define = {
+      global: "globalThis",
+    };
     option.plugins = [
       // GlobalsPolyfills({ buffer: true }),
       ...option.plugins,
