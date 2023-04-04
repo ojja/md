@@ -1,4 +1,4 @@
-import { createEventHandler } from "@remix-run/cloudflare-pages";
+import { createEventHandler } from "@remix-run/cloudflare-workers";
 import * as build from "@remix-run/dev/server-build";
 
 addEventListener(
