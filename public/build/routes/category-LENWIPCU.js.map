@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../app/routes/category.tsx"],
-  "sourcesContent": ["import { json, LoaderFunction } from \"@remix-run/node\"\nimport { Outlet, useLoaderData } from \"@remix-run/react\";\n\nexport default function categoryIndex() {\n  return (\n    <Outlet />\n  )\n}"],
-  "mappings": ";;;;;;;;AAKI;AAFW,SAAR,gBAAiC;AACtC,SACE,mDAAC,YAAD;AAAA;AAAA;AAAA;AAAA,SAAQ;AAEZ;",
-  "names": []
-}

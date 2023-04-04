@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["../../../app/routes/products.tsx"],
-  "sourcesContent": ["import { Outlet } from \"@remix-run/react\";\n\nexport default function productsIndex() {\n    return (\n        <Outlet />\n    )\n  }"],
-  "mappings": ";;;;;;;;AAIQ;AAFO,SAAR,gBAAiC;AACpC,SACI,mDAAC,YAAD;AAAA;AAAA;AAAA;AAAA,SAAQ;AAEd;",
-  "names": []
-}

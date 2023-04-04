@@ -1,7 +1,0 @@
-{
-  "version": 3,
-  "sources": ["empty-module:~/models/category.server", "../../../../../app/routes/category/$catSlug/index.tsx"],
-  "sourcesContent": ["module.exports = {};", "import { json, LoaderFunction } from \"@remix-run/node\"\nimport { Outlet, useLoaderData } from \"@remix-run/react\";\nimport { getCategoryProducts } from \"~/models/category.server\";\n\n\ntype LoaderData = {\n  data: Awaited<ReturnType<typeof getCategoryProducts>>;\n};\n\nexport const loader = async () => {\n  return json<LoaderData>({\n    data: await getCategoryProducts(),\n  });\n};\n\n// export const loader: LoaderFunction = async ({ params }) => {\n//   return json({ slug: params.catSlug, params })\n// };\nexport default function CategorySlug() {\n  const { data } = useLoaderData() as LoaderData;\n  // const { slug, params } = useLoaderData();\n  console.log('params Base childD>',data)\n  return (\n    <div>\n      Slug index: slug\n      <Outlet />\n    </div>\n  )\n}\n"],
-  "mappings": ";;;;;;;;;;;AAAA;AAAA;AAAA,WAAO,UAAU,CAAC;AAAA;AAAA;;;ACElB,sBAAoC;AAuB9B;AAPS,SAAR,eAAgC;AACrC,QAAM,EAAE,KAAK,IAAI,cAAc;AAE/B,UAAQ,IAAI,uBAAsB,IAAI;AACtC,SACE,mDAAC,SAAI;AAAA;AAAA,IAEH,mDAAC,YAAD;AAAA;AAAA;AAAA;AAAA,WAAQ;AAAA,OAFV;AAAA;AAAA;AAAA;AAAA,SAGA;AAEJ;",
-  "names": []
-}

@@ -10,7 +10,7 @@ import {
   useLoaderData,
   useParams,
 } from "@remix-run/react";
-import styles from '~/tailwind.css';
+import styles from './tailwind.css';
 import { NavBar } from "./layouts";
 
 export const links: LinksFunction = () => {
