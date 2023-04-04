@@ -14,10 +14,10 @@ withEsbuildOverride((option, { isServer }) => {
     // option.define = {
     //   global: "globalThis",
     // };
-    option.plugins = [
-      // GlobalsPolyfills({ buffer: true }),
-      ...option.plugins,
-    ];
+    // option.plugins = [
+    //   GlobalsPolyfills({ buffer: true }),
+    //   ...option.plugins,
+    // ];
   }
 
   return option;
@@ -25,15 +25,18 @@ withEsbuildOverride((option, { isServer }) => {
 
 /** @type {import('@remix-run/dev').AppConfig} */
 module.exports = {
-  serverDependenciesToBundle: "all",
   serverBuildTarget: "cloudflare-pages",
-  // ignoredRouteFiles: ['**/.*'],
-  server: "./server.ts",
-  devServerBroadcastDelay: 1000,
+  publicPath: "/build/",
+  serverBuildPath: "functions/[[path]].js",
+  serverConditions: ["worker"],
   serverMainFields: ["browser", "module", "main"],
   serverModuleFormat: "esm",
-  serverPlatform: "neutral",
-  serverConditions: ["worker"],
+  serverPlatform: "node",
+  serverDependenciesToBundle: "all",
   serverMinify: true,
-  // serverPlatform: "node"
+  server: process.env.NODE_ENV === "production" ? "./server.ts" : "./server.js",
+  future: {
+    unstable_tailwind: true,
+    unstable_postcss: true,
+  },
 };

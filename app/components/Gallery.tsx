@@ -3,8 +3,8 @@ import Slider from "react-slick";
 
 import styles from 'https://cdnjs.cloudflare.com/ajax/libs/slick-carousel/1.9.0/slick.min.css'
 // import styles2 from 'slick-carousel/slick/slick.css'
-// import styles3 from 
-import { LinksFunction } from '@remix-run/node';
+// import styles3 from
+import { LinksFunction } from '@remix-run/cloudflare';
 
 
 export const links: LinksFunction = () => [

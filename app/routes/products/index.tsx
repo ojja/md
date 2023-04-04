@@ -1,4 +1,4 @@
-import { LoaderFunction } from "@remix-run/node"
+import { LoaderFunction } from "@remix-run/cloudflare"
 import { Form, useLoaderData } from "@remix-run/react";
 import { ProductWidget } from "~/components/product/ProductWidget";
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react'

@@ -1,4 +1,4 @@
-import { json, LoaderFunction } from "@remix-run/node"
+import { json, LoaderFunction } from "@remix-run/cloudflare"
 import { Outlet, useLoaderData } from "@remix-run/react";
 import { getCategoryProducts } from "~/models/category.server";
 
@@ -19,7 +19,7 @@ export const loader = async () => {
 export default function CategorySlug() {
   const { data } = useLoaderData() as LoaderData;
   // const { slug, params } = useLoaderData();
-  console.log('params Base childD>',data)
+  console.log('params Base childD>', data)
   return (
     <div>
       Slug index: slug
