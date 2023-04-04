@@ -6,7 +6,7 @@
     "build:css": "tailwindcss -o ./app/tailwind.css",
     "dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 concurrently \"npm:dev:css\" \"remix dev\" \"npm:json-server\"",
     "dev:css": "tailwindcss -o ./app/tailwind.css --watch",
-    "postinstall": "remix setup node",
+    "postinstall": "remix setup node && remix-esbuild-override",
     "start": "remix-serve build",
     "json-server": "json-server --watch db.json --port 3001"
   },
@@ -56,6 +56,6 @@
     "typescript": "^4.8.4"
   },
   "engines": {
-    "node": ">=14"
+    "node": "17.9.0"
   }
 }
