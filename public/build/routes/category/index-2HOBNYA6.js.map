@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../app/routes/category/index.tsx"],
+  "sourcesContent": ["import { json, LoaderFunction } from \"@remix-run/node\";\nimport { Outlet, useLoaderData } from \"@remix-run/react\";\n\nexport const loader: LoaderFunction = async ({ params }) => {\n  return json({ slug: params.slug })\n};\n\nexport default function Category() {\n  return (\n    <Outlet />\n  )\n}\n"],
+  "mappings": ";;;;;;;;AASI;AAFW,SAAR,WAA4B;AACjC,SACE,mDAAC,YAAD;AAAA;AAAA;AAAA;AAAA,SAAQ;AAEZ;",
+  "names": []
+}

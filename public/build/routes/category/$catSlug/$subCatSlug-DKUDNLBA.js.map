@@ -1,0 +1,7 @@
+{
+  "version": 3,
+  "sources": ["../../../../../app/routes/category/$catSlug/$subCatSlug.tsx"],
+  "sourcesContent": ["import { json, LoaderFunction } from \"@remix-run/node\";\nimport { useLoaderData } from \"@remix-run/react\";\n\nexport const loader: LoaderFunction = async ({ params }) => {\n  return json({ slug: params.subCatSlug, params })\n};\n\nexport default function CatSlug() {\n  const { slug, params } = useLoaderData();\n  console.log('params Base child inside>',params)\n  return (\n    <div>\n      Cat Sl:::::{slug}\n    </div>\n  )\n}\n"],
+  "mappings": ";;;;;;;;;AAWI;AAJW,SAAR,UAA2B;AAChC,QAAM,EAAE,MAAM,OAAO,IAAI,cAAc;AACvC,UAAQ,IAAI,6BAA4B,MAAM;AAC9C,SACE,mDAAC,SAAI;AAAA;AAAA,IACS;AAAA,OADd;AAAA;AAAA;AAAA;AAAA,SAEA;AAEJ;",
+  "names": []
+}
