@@ -28,7 +28,7 @@ module.exports = {
   serverDependenciesToBundle: "all",
   serverBuildTarget: "cloudflare-pages",
   // ignoredRouteFiles: ['**/.*'],
-  server: "./server.ts",
+  server: "./server.js",
   devServerBroadcastDelay: 1000,
   serverMainFields: ["browser", "module", "main"],
   serverModuleFormat: "esm",
