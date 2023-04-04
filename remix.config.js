@@ -28,16 +28,18 @@ withEsbuildOverride((option, { isServer }) => {
 
 /** @type {import('@remix-run/dev').AppConfig} */
 module.exports = {
-  serverBuildTarget: "cloudflare-pages",
-  publicPath: "/build/",
-  serverBuildPath: "functions/[[path]].js",
-  serverConditions: ["worker"],
-  serverMainFields: ["browser", "module", "main"],
-  serverModuleFormat: "esm",
-  serverPlatform: "node",
-  serverDependenciesToBundle: "all",
-  serverMinify: true,
-  server: process.env.NODE_ENV === "production" ? "./server.ts" : "./server.js",
+  ...(process.env.NODE_ENV === "production" ? {
+    serverBuildTarget: "cloudflare-pages",
+    publicPath: "/build/",
+    serverBuildPath: "functions/[[path]].js",
+    serverConditions: ["worker"],
+    serverMainFields: ["browser", "module", "main"],
+    serverModuleFormat: "esm",
+    serverPlatform: "node",
+    serverDependenciesToBundle: "all",
+    serverMinify: true,
+    server: "./server.ts",
+  } : {}),
   future: {
     unstable_tailwind: true,
     unstable_postcss: true,
