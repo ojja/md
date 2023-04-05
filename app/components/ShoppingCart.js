@@ -2,7 +2,7 @@ import { Fragment, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
-import { useShoppingCart } from '../context/cartContext'
+import useShoppingCart from "~/stores/cartStore";
 import MiniCartItem from './MiniCartItem'
 import FormatCurrency from '../utils/FormatCurrency'
 import storeItems from '../data/items.json';
@@ -60,7 +60,7 @@ export default function ShoppingCart({ isOpen }) {
                         <div className="mt-8">
                           <div className="flow-root">
                             <ul role="list" className="-my-6 divide-y divide-gray-200">
-                              {cartItems.map((index,item) => (
+                              {cartItems.map((index, item) => (
                                 <li key={index} className="flex py-6">
                                   <MiniCartItem {...item} removeFromCart={removeFromCart} />
                                 </li>
@@ -101,7 +101,7 @@ export default function ShoppingCart({ isOpen }) {
                         <p>
                           {/* or */}
                           <Link
-                          to="/cart"
+                            to="/cart"
                             className="font-medium text-indigo-600 hover:text-indigo-500 ml-2"
                             onClick={closeCart}
                           >

@@ -36,10 +36,10 @@ module.exports = {
     serverMainFields: ["browser", "module", "main"],
     serverModuleFormat: "esm",
     serverPlatform: "node",
-    serverDependenciesToBundle: "all",
     serverMinify: true,
     server: "./server.ts",
   } : {}),
+  serverDependenciesToBundle: "all",
   future: {
     unstable_tailwind: true,
     unstable_postcss: true,

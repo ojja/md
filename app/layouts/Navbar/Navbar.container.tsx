@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { Dialog, Popover, Tab, Transition } from '@headlessui/react'
 import { Bars3Icon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from "react-router-dom";
-import { useShoppingCart } from "../../context/cartContext";
+import useShoppingCart from "~/stores/cartStore";
 import { v4 } from 'uuid';
 
 const navigation = {

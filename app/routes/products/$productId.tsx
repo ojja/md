@@ -321,9 +321,9 @@ export default function ProductSingle() {
                                 </div>
                                 <div className="flex mt-10 space-x-4">
                                     <AddToCart
-                                        setIsOpenCart={setIsOpenCart}
-                                        classNames="inline-flex justify-center rounded-lg font-medium py-3 px-8 text-base bg-slate-900 text-white w-full border-2 border-solid border-slate-900 hover:bg-slate-700 hover:border-slate-700"
-                                    // id={product.id}
+                                        className="inline-flex justify-center rounded-lg font-medium py-3 px-8 text-base bg-slate-900 text-white w-full border-2 border-solid border-slate-900 hover:bg-slate-700 hover:border-slate-700"
+                                        product={{ id: product.id, size: selectedSize.name, color: selectedColor.name }}
+                                        disabled={!Boolean(selectedSize.inStock)}
                                     />
                                     <button
                                         type="submit"

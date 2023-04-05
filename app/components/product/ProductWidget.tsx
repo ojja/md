@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-// import { useShoppingCart } from "../../context/cartContext";
+// import useShoppingCart from "~/stores/cartStore";
 import FormatCurrency from "../../utils/FormatCurrency";
 import AddToCart from "../AddToCart";
 import 'react-lazy-load-image-component/src/effects/blur.css';
@@ -14,7 +14,7 @@ type ProductWidgetProps = {
     thumbnail: string
 }
 
-export function ProductWidget({ product }: ProductWidgetProps) {
+export function ProductWidget(product: ProductWidgetProps) {
     const [isOpenCart, setIsOpenCart] = useState(false);
 
     let [openQuick, setOpenQuick] = useState(false)
@@ -48,7 +48,7 @@ export function ProductWidget({ product }: ProductWidgetProps) {
                     </Link>
                     <div className="flex items-end h-full p-4">
                         <button
-                            onClick={openModal} 
+                            onClick={openModal}
                             type="button" className="relative w-full px-4 py-2 text-sm text-gray-900 bg-white bg-opacity-75 rounded-md opacity-0 focus:opacity-100 group-hover:opacity-100">
                             Quick View
                         </button>
@@ -68,12 +68,11 @@ export function ProductWidget({ product }: ProductWidgetProps) {
                 </div>
                 <div className="relative mt-auto z-1">
                     <AddToCart
-                        setIsOpenCart={setIsOpenCart}
-                        classNames="inline-flex justify-center rounded-lg text-sm font-semibold py-2.5 px-4 bg-slate-900 text-white hover:bg-slate-700 w-full"
-                    // id={product.id}
+                        className="inline-flex justify-center rounded-lg text-sm font-semibold py-2.5 px-4 bg-slate-900 text-white hover:bg-slate-700 w-full"
+                        id={product.id}
                     />
                 </div>
-                <Quickview openQuick={openQuick} openModal={openModal} product={product}/>
+                <Quickview openQuick={openQuick} openModal={openModal} product={product} />
             </div>
         </>
     )
