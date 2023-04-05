@@ -16,13 +16,13 @@ export type Product = {
 export async function getProducts(title?: string | null){
   const response = await fetch('https://honorable-nachos.localsite.io/MitchAPI/category.php', {
     method: 'POST',
-    body: JSON.stringify({ "attributes": {}, "category": "*", "price_range": [0, 1000], "products_per_page": 90, "page_number": 1 }),
+    body: JSON.stringify({ "attributes": {}, "category": "bags", "price_range": [0, 1000], "products_per_page": 90, "page_number": 1 }),
     headers: new Headers({
       "Authorization": `Basic ${btoa("survey:makeshift")}`
     }),
   })
 
-    const products: Product[products] = await response.json();
+    const products: Product[] = await response.json();
     return products.filter((product) =>
     title ? product.title.toLowerCase().includes(title.toLowerCase()) : true
   );
