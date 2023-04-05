@@ -1,6 +1,6 @@
 
 // export async function getCategoryProducts(slug?: string | null) {
-//     const response = await fetch('https://127.0.0.1/MitchAPI/category.php', {
+//     const response = await fetch('https://honorable-nachos.localsite.io/MitchAPI/category.php', {
 //         method: 'Post',
 //         headers: {
 //             'Content-Type': 'application/json'
@@ -19,16 +19,17 @@
 
 
 export async function getCategoryProducts(): Promise<void> {
-    const url: string = 'https://127.0.0.1/MitchAPI/category.php';
+    const url: string = 'https://honorable-nachos.localsite.io/MitchAPI/category.php';
     const data: any = { category: 'uncategorized', products_per_page: 20, page_number: 1};
     const options: RequestInit = {
       method: 'POST',
       headers: {
+        "Authorization": `Basic ${btoa("survey:makeshift")}`,
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
     };
-  
+
     try {
       const response = await fetch(url, options);
       const result = await response.json();

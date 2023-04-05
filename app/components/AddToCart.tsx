@@ -1,13 +1,9 @@
 import { MinusIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
-import useShoppingCart from "~/stores/cartStore";
+import useShoppingCart, { CartItem } from "~/stores/cartStore";
 
 export default function AddToCart({ className, product, disabled }: {
     className?: string;
-    product: {
-        id: number;
-        size: string;
-        color: string;
-    };
+    product: CartItem;
     disabled: boolean;
 }) {
     const {

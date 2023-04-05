@@ -1,6 +1,6 @@
 import { persistentAtom } from '@nanostores/persistent';
 import { useStore } from '@nanostores/react';
-type CartItem = {
+export type CartItem = {
     id: number;
     quantity: number;
     size?: string;
@@ -8,6 +8,7 @@ type CartItem = {
 };
 
 const shoppingCart = persistentAtom<CartItem[]>('cart', [], {
+    listen: true,
     encode: JSON.stringify,
     decode: JSON.parse,
 })
@@ -22,6 +23,7 @@ const isShoppingCartOpen = persistentAtom<boolean>('isShoppingCartOpen', false, 
 export const useShoppingCart = () => {
     const cartStore = useStore(shoppingCart);
     const isOpen = useStore(isShoppingCartOpen);
+
     const addToCart = (product: CartItem) => {
         const itemIndex = cartStore.findIndex((item) => item.id === product.id && item.size === product.size && item.color === product.color);
 

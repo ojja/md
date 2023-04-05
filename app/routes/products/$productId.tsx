@@ -100,7 +100,6 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 
     const product = await getProductById(params.productId!);
-
     console.log('fetching product... -->', product.id);
     console.log('fetching product... -->', product.title);
 
@@ -113,7 +112,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export default function ProductSingle() {
     const product = useLoaderData<typeof loader>();
-
+    console.log("product", product)
     const nearestNumberRating = Math.round(product.rating)
     const [selectedColor, setSelectedColor] = useState(product2.colors[0])
     const [selectedSize, setSelectedSize] = useState(product2.sizes[2])
@@ -144,7 +143,7 @@ export default function ProductSingle() {
                         <div className="w-full px-4 lg:w-1/2">
                             <div className="pt-2 mb-6">
                                 <span className="text-xs tracking-wider text-gray-400">APPLE #3299803</span>
-                                <h1 className="mt-2 mb-4 text-5xl font-medium md:text-4xl font-heading">{product.title}</h1>
+                                <h1 className="mt-2 mb-4 text-5xl font-medium md:text-4xl font-heading">{product.name}</h1>
                                 <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">{product.category}</h2>
                                 <h3 id="information-heading" className="sr-only">
                                     Product information
