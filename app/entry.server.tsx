@@ -20,6 +20,11 @@ export default function handleRequest(
                     const body = new PassThrough();
 
                     responseHeaders.set("Content-Type", "text/html");
+                    responseHeaders.set("Transfer-Encoding", "chunked");
+                    responseHeaders.set("Connection", "keep-alive");
+                    if (responseStatusCode === 304)
+                        return new Response(null, { status: responseStatusCode })
+
 
                     resolve(
                         new Response(body, {
