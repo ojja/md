@@ -1,7 +1,6 @@
-import { PassThrough } from "stream";
-import { renderToPipeableStream } from "react-dom/server";
-import { EntryContext } from "@remix-run/cloudflare";
+import type { EntryContext } from "@remix-run/cloudflare";
 import { RemixServer } from "@remix-run/react";
+import { renderToString } from "react-dom/server";
 
 export default function handleRequest(
     request: Request,
@@ -9,32 +8,14 @@ export default function handleRequest(
     responseHeaders: Headers,
     remixContext: EntryContext
 ) {
-    return new Promise((resolve) => {
-        const { pipe } = renderToPipeableStream(
-            <RemixServer
-                context={remixContext}
-                url={request.url}
-            />,
-            {
-                onShellReady() {
-                    const body = new PassThrough();
+    const markup = renderToString(
+        <RemixServer context={remixContext} url={request.url} />
+    );
 
-                    responseHeaders.set("Content-Type", "text/html");
-                    responseHeaders.set("Transfer-Encoding", "chunked");
-                    responseHeaders.set("Connection", "keep-alive");
-                    if (responseStatusCode === 304)
-                        return new Response(null, { status: responseStatusCode })
+    responseHeaders.set("Content-Type", "text/html");
 
-
-                    resolve(
-                        new Response(body, {
-                            status: responseStatusCode,
-                            headers: responseHeaders,
-                        })
-                    );
-                    pipe(body);
-                },
-            }
-        );
+    return new Response("<!DOCTYPE html>" + markup, {
+        status: responseStatusCode,
+        headers: responseHeaders,
     });
 }
