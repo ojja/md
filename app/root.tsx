@@ -61,7 +61,7 @@ interface Props {
   error: Error | null
 }
 export function ErrorBoundary({ error }: Props) {
-  // console.error(error);
+  console.error(error);
   if (error) {
     return (
       <html>

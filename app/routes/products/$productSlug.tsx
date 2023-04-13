@@ -43,7 +43,7 @@ function classNames(...classes: any[]) {
 
 export const loader: LoaderFunction = async ({ params }) => {
     invariant(params.productSlug, 'expected params.productId');
-    // console.log('params... -->', params.productSlug);
+    console.log('params... -->', params.productSlug);
 
 
     const product = await getProductBySlug(params.productSlug!);
@@ -65,15 +65,15 @@ export default function ProductSingle() {
     // const [selectedColor, setSelectedColor] = useState(product2.colors[0])
     // const [selectedSize, setSelectedSize] = useState(product2.sizes[2])
 
-    const [selectedSize, setSelectedSize] = useState(product.attributes?.Size[0]);
-    const [selectedColor, setSelectedColor] = useState(product.attributes?.Color[0]);
+    // const [selectedSize, setSelectedSize] = useState(product.attributes?.Size[0]);
+    // const [selectedColor, setSelectedColor] = useState(product.attributes?.Color[0]);
 
-    const variations = product.variations?.filter((variation: any) => {
-        return (
-            (!selectedSize || variation.attributes.attribute_size === selectedSize) &&
-            (!selectedColor || variation.attributes.attribute_color === selectedColor)
-        );
-    });
+    // const variations = product.variations?.filter((variation: any) => {
+    //     return (
+    //         (!selectedSize || variation.attributes.attribute_size === selectedSize) &&
+    //         (!selectedColor || variation.attributes.attribute_color === selectedColor)
+    //     );
+    // });
     let [isOpenSize, setIsOpenSize] = useState(false)
     const [isOpenCart, setIsOpenCart] = useState(false);
 
@@ -132,7 +132,7 @@ export default function ProductSingle() {
                                 <div>
                                     <h3 className="text-sm font-medium text-gray-900">Color</h3>
                                     <span className={`bg-green-500 bg-yellow-500 bg-orange-500 bg-red-500 bg-purple-500 bg-black bg-white`}></span>
-                                    <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
+                                    {/* <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
                                         <RadioGroup.Label className="sr-only"> Choose a color </RadioGroup.Label>
                                         <div className="flex items-center space-x-3">
                                             {product.attributes?.Color.map((color) => (
@@ -164,7 +164,7 @@ export default function ProductSingle() {
                                                 </RadioGroup.Option>
                                             ))}
                                         </div>
-                                    </RadioGroup>
+                                    </RadioGroup> */}
                                 </div>
 
                                 {/* Sizes */}
@@ -230,7 +230,7 @@ export default function ProductSingle() {
                                         </Transition>
                                     </div>
 
-                                    <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
+                                    {/* <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
                                         <RadioGroup.Label className="sr-only"> Choose a size </RadioGroup.Label>
                                         <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
                                             {product.attributes?.Size.map((size: any) => (
@@ -280,9 +280,9 @@ export default function ProductSingle() {
                                                 </RadioGroup.Option>
                                             ))}
                                         </div>
-                                    </RadioGroup>
+                                    </RadioGroup> */}
                                 </div>
-                                <span className="pt-3 text-xs">{`${selectedSize} - ${selectedColor}`}</span>
+                                {/* <span className="pt-3 text-xs">{`${selectedSize} - ${selectedColor}`}</span> */}
                                 <div className="flex mt-10 space-x-4">
                                     <AddToCartSimple
                                         className="inline-flex justify-center w-full px-8 py-3 text-base font-medium text-white border-2 border-solid rounded-lg bg-slate-900 border-slate-900 hover:bg-slate-700 hover:border-slate-700"
@@ -290,8 +290,8 @@ export default function ProductSingle() {
                                             {
                                                 id: product.id,
                                                 thumbnail: product.main_img,
-                                                size: selectedSize,
-                                                color: selectedColor,
+                                                // size: selectedSize,
+                                                // color: selectedColor,
                                                 slug: product.slug
                                             }
                                         }
