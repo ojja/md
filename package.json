@@ -59,7 +59,6 @@
     "woocommerce-rest-ts-api": "^6.0.1"
   },
   "devDependencies": {
-    // "@esbuild/darwin-x64": "^0.17.16",
     "@remix-run/dev": "^1.7.0",
     "@remix-run/eslint-config": "^1.7.0",
     "@types/react": "^18.0.31",
