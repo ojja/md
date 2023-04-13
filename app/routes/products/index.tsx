@@ -9,7 +9,7 @@ import { Fragment, useState } from "react";
 import Breadcrumbs from "~/components/Breadcrumbs";
 
 
-function classNames(...classes) {
+function classNames(...classes:string[]) {
     return classes.filter(Boolean).join(' ')
 }
 
@@ -83,7 +83,7 @@ export default function shop() {
             ],
         },
     ]
-    console.log('conseeeee222')
+    console.log('conseeeee222',products)
     return (
         <>
             <div className="bg-white">
@@ -232,8 +232,8 @@ export default function shop() {
                                     )}
                                     >
 
-                                        {products.map((product) => (
-                                            <ProductWidget product={product} key={v4()} />
+                                        {products.map((productData) => (
+                                            <ProductWidget product={productData} key={v4()} />
                                         ))}
                                         {/* <ProductLoader />
                                     <ProductLoader /> */}

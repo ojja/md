@@ -2,67 +2,14 @@ import Gallery from "~/components/Gallery";
 import { Dialog, Disclosure, RadioGroup, Tab, Transition } from '@headlessui/react';
 import { ChevronUpIcon } from '@heroicons/react/20/solid';
 import React, { Fragment, useState } from "react";
-import AddToCart from "~/components/AddToCart";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { ActionFunction, json, LoaderFunction, MetaFunction, redirect } from "@remix-run/cloudflare";
 import invariant from 'tiny-invariant';
-import { getProductById, Product } from "~/api/products";
+import { getProductBySlug, Product } from "~/api/products";
 import { useLoaderData } from "@remix-run/react";
-
-
-const product2 = {
-    id: 12,
-    name: 'Basic Tee 6-Pack',
-    price: '$192',
-    href: '#',
-    breadcrumbs: [
-        { id: 1, name: 'Men', href: '#' },
-        { id: 2, name: 'Clothing', href: '#' },
-    ],
-    images: [
-        {
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-secondary-product-shot.jpg',
-            alt: 'Two each of gray, white, and black shirts laying flat.',
-        },
-        {
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-01.jpg',
-            alt: 'Model wearing plain black basic tee.',
-        },
-        {
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-tertiary-product-shot-02.jpg',
-            alt: 'Model wearing plain gray basic tee.',
-        },
-        {
-            src: 'https://tailwindui.com/img/ecommerce-images/product-page-02-featured-product-shot.jpg',
-            alt: 'Model wearing plain white basic tee.',
-        },
-    ],
-    colors: [
-        { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
-        { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
-        { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
-    ],
-    sizes: [
-        { name: 'XXS', inStock: false },
-        { name: 'XS', inStock: true },
-        { name: 'S', inStock: true },
-        { name: 'M', inStock: true },
-        { name: 'L', inStock: true },
-        { name: 'XL', inStock: true },
-        { name: '2XL', inStock: true },
-        { name: '3XL', inStock: true },
-    ],
-    description:
-        'The Basic Tee 6-Pack allows you to fully express your vibrant personality with three grayscale options. Feeling adventurous? Put on a heather gray tee. Want to be a trendsetter? Try our exclusive colorway: "Black". Need to add an extra pop of color to your outfit? Our white tee has you covered.',
-    highlights: [
-        'Hand cut and sewn locally',
-        'Dyed with our proprietary colors',
-        'Pre-washed & pre-shrunk',
-        'Ultra-soft 100% cotton',
-    ],
-    details:
-        'The 6-Pack includes two black, two white, and two heather gray Basic Tees. Sign up for our subscription service and be the first to get new, exciting colors, like our upcoming "Charcoal Gray" limited release.',
-}
+import AddToCartSimple from "~/components/AddToCartSimple";
+import { v4 } from 'uuid';
+import ProductSpecifications from "~/components/ProductSpecifications";
 
 const features = [
     { name: 'Origin', description: 'Designed by Good Goods, Inc.' },
@@ -95,13 +42,13 @@ function classNames(...classes: any[]) {
 // };
 
 export const loader: LoaderFunction = async ({ params }) => {
-    // invariant(params.slug, 'expected params.productId');
-    console.log('params... -->', params.productId);
+    invariant(params.productSlug, 'expected params.productId');
+    // console.log('params... -->', params.productSlug);
 
 
-    const product = await getProductById(params.productId!);
-    console.log('fetching product... -->', product.id);
-    console.log('fetching product... -->', product.title);
+    const product = await getProductBySlug(params.productSlug!);
+    // console.log('fetching product... -->', product.id);
+    // console.log('fetching product... -->', product.title);
 
     return json(product);
     // return json({
@@ -113,11 +60,22 @@ export const loader: LoaderFunction = async ({ params }) => {
 export default function ProductSingle() {
     const product = useLoaderData<typeof loader>();
     console.log("product", product)
-    const nearestNumberRating = Math.round(product.rating)
-    const [selectedColor, setSelectedColor] = useState(product2.colors[0])
-    const [selectedSize, setSelectedSize] = useState(product2.sizes[2])
+    // const nearestNumberRating = Math.round(product.rating)
+    const nearestNumberRating = 12
+    // const [selectedColor, setSelectedColor] = useState(product2.colors[0])
+    // const [selectedSize, setSelectedSize] = useState(product2.sizes[2])
+
+    const [selectedSize, setSelectedSize] = useState(product.attributes?.Size[0]);
+    const [selectedColor, setSelectedColor] = useState(product.attributes?.Color[0]);
+
+    const variations = product.variations?.filter((variation: any) => {
+        return (
+            (!selectedSize || variation.attributes.attribute_size === selectedSize) &&
+            (!selectedColor || variation.attributes.attribute_color === selectedColor)
+        );
+    });
     let [isOpenSize, setIsOpenSize] = useState(false)
-    const [isOpenCart, setIsOpenCart] = React.useState(false);
+    const [isOpenCart, setIsOpenCart] = useState(false);
 
     function closeModal() {
         setIsOpenSize(false)
@@ -127,30 +85,30 @@ export default function ProductSingle() {
         isOpenSize(true)
     }
 
-    // console.log('product.rating.rate',product.rating.rate)
-    // console.log('nearestNumberRating',nearestNumberRating)
+    const checkSize = { inStock: true }
+    const checkColor = { inStock: true }
     return (
         <div>
-            <section className="pt-12 pb-24 overflow-hidden bg-blueGray-100 rounded-b-10xl">
+            <section className="pt-12 pb-24 overflow-hidden rounded-b-10xl">
                 <div className="container px-4 mx-auto">
                     <div className="flex flex-wrap -mx-4">
                         <div className="w-full px-4">
                             {/* <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-4 border-b border-gray-200" /> */}
                         </div>
                         <div className="w-full px-4 mb-16 lg:w-1/2 lg:mb-0">
-                            {/* <Gallery /> */}
+                            <Gallery />
                         </div>
                         <div className="w-full px-4 lg:w-1/2">
                             <div className="pt-2 mb-6">
-                                <span className="text-xs tracking-wider text-gray-400">APPLE #3299803</span>
-                                <h1 className="mt-2 mb-4 text-5xl font-medium md:text-4xl font-heading">{product.name}</h1>
+                                <span className="text-xs tracking-wider text-gray-400">NEED CATEGORY </span>
+                                <span className="text-xs tracking-wider text-gray-400">{product.availability}</span>
+                                <h1 className="mt-2 mb-4 text-5xl font-medium md:text-4xl font-heading">{product.title}</h1>
                                 <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">{product.category}</h2>
                                 <h3 id="information-heading" className="sr-only">
                                     Product information
                                 </h3>
                                 <p className="text-2xl text-gray-900">{product.price}</p>
                             </div>
-
                             {/* Reviews */}
                             <div className="mt-6">
                                 <h3 className="sr-only">Reviews</h3>
@@ -165,21 +123,25 @@ export default function ProductSingle() {
                                     <p className="sr-only">{nearestNumberRating} out of 5 stars</p>
                                 </div>
                             </div>
+                            <div className="mt-6">
+                                <div className="leading-relaxed text-gray-500" dangerouslySetInnerHTML={{ __html: product.description }} />
+                            </div>
                             <div className="mt-10">
+
                                 {/* Colors */}
                                 <div>
                                     <h3 className="text-sm font-medium text-gray-900">Color</h3>
-
+                                    <span className={`bg-green-500 bg-yellow-500 bg-orange-500 bg-red-500 bg-purple-500 bg-black bg-white`}></span>
                                     <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
                                         <RadioGroup.Label className="sr-only"> Choose a color </RadioGroup.Label>
                                         <div className="flex items-center space-x-3">
-                                            {product2.colors.map((color) => (
+                                            {product.attributes?.Color.map((color) => (
                                                 <RadioGroup.Option
-                                                    key={color.name}
+                                                    key={v4()}
                                                     value={color}
                                                     className={({ active, checked }) =>
                                                         classNames(
-                                                            color.selectedClass,
+                                                            `bg-${color.toLowerCase()}-500`,
                                                             active && checked ? 'ring ring-offset-1' : '',
                                                             !active && checked ? 'ring-2' : '',
                                                             'relative -m-0.5 flex cursor-pointer items-center justify-center rounded-full p-0.5 focus:outline-none'
@@ -188,12 +150,14 @@ export default function ProductSingle() {
                                                 >
                                                     <RadioGroup.Label as="span" className="sr-only">
                                                         {' '}
-                                                        {color.name}{' '}
+                                                        {color}{' '}
                                                     </RadioGroup.Label>
                                                     <span
                                                         aria-hidden="true"
                                                         className={classNames(
-                                                            color.class,
+                                                            `bg-${color.toLowerCase()}-500`,
+                                                            color == 'Black' ? 'bg-black' : '',
+                                                            color == 'White' ? 'bg-white' : '',
                                                             'h-8 w-8 rounded-full border border-black border-opacity-10'
                                                         )}
                                                     />
@@ -269,14 +233,14 @@ export default function ProductSingle() {
                                     <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
                                         <RadioGroup.Label className="sr-only"> Choose a size </RadioGroup.Label>
                                         <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
-                                            {product2.sizes.map((size) => (
+                                            {product.attributes?.Size.map((size: any) => (
                                                 <RadioGroup.Option
-                                                    key={size.name}
+                                                    key={v4()}
                                                     value={size}
-                                                    disabled={!size.inStock}
+                                                    // disabled={!size.inStock}
                                                     className={({ active }) =>
                                                         classNames(
-                                                            size.inStock
+                                                            checkSize.inStock
                                                                 ? 'cursor-pointer bg-white text-gray-900 shadow-sm'
                                                                 : 'cursor-not-allowed bg-gray-50 text-gray-200',
                                                             active ? 'ring-2 ring-indigo-500' : '',
@@ -286,8 +250,8 @@ export default function ProductSingle() {
                                                 >
                                                     {({ active, checked }) => (
                                                         <>
-                                                            <RadioGroup.Label as="span">{size.name}</RadioGroup.Label>
-                                                            {size.inStock ? (
+                                                            <RadioGroup.Label as="span">{size}</RadioGroup.Label>
+                                                            {checkSize.inStock ? (
                                                                 <span
                                                                     className={classNames(
                                                                         active ? 'border' : 'border-2',
@@ -318,11 +282,20 @@ export default function ProductSingle() {
                                         </div>
                                     </RadioGroup>
                                 </div>
+                                <span className="pt-3 text-xs">{`${selectedSize} - ${selectedColor}`}</span>
                                 <div className="flex mt-10 space-x-4">
-                                    <AddToCart
-                                        className="inline-flex justify-center rounded-lg font-medium py-3 px-8 text-base bg-slate-900 text-white w-full border-2 border-solid border-slate-900 hover:bg-slate-700 hover:border-slate-700"
-                                        product={{ id: product.id, size: selectedSize.name, color: selectedColor.name }}
-                                        disabled={!Boolean(selectedSize.inStock)}
+                                    <AddToCartSimple
+                                        className="inline-flex justify-center w-full px-8 py-3 text-base font-medium text-white border-2 border-solid rounded-lg bg-slate-900 border-slate-900 hover:bg-slate-700 hover:border-slate-700"
+                                        product={
+                                            {
+                                                id: product.id,
+                                                thumbnail: product.main_img,
+                                                size: selectedSize,
+                                                color: selectedColor,
+                                                slug: product.slug
+                                            }
+                                        }
+                                    // disabled={!Boolean(selectedSize.inStock)}
                                     />
                                     <button
                                         type="submit"
@@ -376,56 +349,10 @@ export default function ProductSingle() {
                     </div>
                 </div>
 
-                <div className="mt-10 bg-white border-t-2">
-                    <div className="container grid items-center grid-cols-1 px-4 mx-auto gap-y-16 gap-x-8 py-14 sm:px-6 lg:grid-cols-2">
-                        <div>
-                            <h2 className="text-3xl font-bold tracking-tight text-gray-900 sm:text-4xl">Technical Specifications</h2>
-                            <p className="mt-4 text-gray-500">
-                                The walnut wood card tray is precision milled to perfectly fit a stack of Focus cards. The powder coated
-                                steel divider separates active cards from new ones, or can be used to archive important task lists.
-                            </p>
-
-                            <dl className="grid grid-cols-1 mt-16 gap-x-6 gap-y-10 sm:grid-cols-2 sm:gap-y-16 lg:gap-x-8">
-                                {features.map((feature) => (
-                                    <div key={feature.name} className="pt-4 border-t border-gray-200">
-                                        <dt className="font-medium text-gray-900">{feature.name}</dt>
-                                        <dd className="mt-2 text-sm text-gray-500">{feature.description}</dd>
-                                    </div>
-                                ))}
-                            </dl>
-                        </div>
-                        <div className="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-6 lg:gap-8">
-                            <LazyLoadImage
-                                alt={product.title}
-                                // effect="blur"
-                                src={"https://picsum.photos/350?random=1"}
-                                placeholderSrc="https://picsum.photos/50?random=1"
-                                className="bg-gray-100 rounded-lg"
-                            />
-                            <LazyLoadImage
-                                alt={product.title}
-                                // effect="blur"
-                                src={"https://picsum.photos/350?random=2"}
-                                placeholderSrc="https://picsum.photos/50?random=2"
-                                className="bg-gray-100 rounded-lg"
-                            />
-                            <LazyLoadImage
-                                alt={product.title}
-                                // effect="blur"
-                                src={"https://picsum.photos/350?random=3"}
-                                placeholderSrc="https://picsum.photos/50?random=3"
-                                className="bg-gray-100 rounded-lg"
-                            />
-                            <LazyLoadImage
-                                alt={product.title}
-                                // effect="blur"
-                                src={"https://picsum.photos/350?random=5"}
-                                // placeholderSrc="https://picsum.photos/50?random=5"
-                                className="bg-gray-100 rounded-lg"
-                            />
-                        </div>
-                    </div>
-                </div>
+                <ProductSpecifications
+                    features={features}
+                    title='Product Extra Specifications'
+                />
             </section>
         </div>
     )

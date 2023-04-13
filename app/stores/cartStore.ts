@@ -5,6 +5,8 @@ export type CartItem = {
     quantity: number;
     size?: string;
     color?: string;
+    slug?: string;
+    thumbnail?: string;
 };
 
 const shoppingCart = persistentAtom<CartItem[]>('cart', [], {
@@ -13,8 +15,8 @@ const shoppingCart = persistentAtom<CartItem[]>('cart', [], {
     decode: JSON.parse,
 })
 
-const isShoppingCartOpen = persistentAtom<boolean>('isShoppingCartOpen', false, {
-    listen: true,
+const isShoppingCartOpen = persistentAtom<boolean>('isShoppingCartOpen', typeof localStorage !== 'undefined' && localStorage.getItem('isShoppingCartOpen') !== 'true', {
+    listen: false,
     encode: (value) => String(value),
     decode: (value) => Boolean(value),
 });
@@ -25,14 +27,14 @@ export const useShoppingCart = () => {
     const isOpen = useStore(isShoppingCartOpen);
 
     const addToCart = (product: CartItem) => {
-        const itemIndex = cartStore.findIndex((item) => item.id === product.id && item.size === product.size && item.color === product.color);
+        const itemIndex = cartStore.findIndex((item) => item.id === product.id && item.size === product.size && item.color === product.color && item.slug === product.slug && item.thumbnail === product.thumbnail);
 
         if (itemIndex !== -1) {
             const newCartItems = [...cartStore];
             newCartItems[itemIndex].quantity++;
             shoppingCart.set(newCartItems);
         } else {
-            shoppingCart.set([...cartStore, { id: product.id, size: product.size, color: product.color, quantity: product.quantity ?? 1 }]);
+            shoppingCart.set([...cartStore, { id: product.id, size: product.size, color: product.color, slug: product.slug, thumbnail: product.thumbnail, quantity: product.quantity ?? 1 }]);
         }
         return;
     }
@@ -69,12 +71,12 @@ export const useShoppingCart = () => {
     };
 
     const openCart = () => isShoppingCartOpen.set(true);
-
     const closeCart = () => isShoppingCartOpen.set(false);
 
     return {
         getItemQuantity,
         cartQuantity: cartStore?.length ?? 0,
+        cartQuantityTotal: cartStore?.reduce((total, item) => total + item.quantity, 0) ?? 0,
         cartItems: cartStore ?? [],
         isOpen,
         addToCart,

@@ -2,30 +2,47 @@ import { json } from "@remix-run/cloudflare";
 import { woo } from "~/lib/woocommerce";
 
 export type Product = {
-    id: string;
-    title: string;
-    price: string;
-    image: string;
-    image_small: string;
-    category: string;
-    rating: string;
-    // rate: string;
-    // count: string;
+  id: string;
+  name: string;
+  price: string;
+  image: string;
+  image_small: string;
+  category: string;
+  // rating: string;
+  // rate: string;
+  // count: string;
 }
 
-export async function getProducts(title?: string | null){
-  const response = await fetch('https://honorable-nachos.localsite.io/MitchAPI/category.php', {
+export async function getProducts(name?: string | null) {
+  // const response = await fetch('https://ay7aga.local/MitchAPI/category.php', {
+  //   method: 'POST',
+  //   headers: { 'Content-Type': 'application/json' },
+  //   body: JSON.stringify({ "attributes": {}, "category": "bags", "price_range": [0, 1000], "products_per_page": 90, "page_number": 1 }),
+  //   // headers: new Headers({
+  //   //   "Authorization": `Basic ${btoa("survey:makeshift")}`
+  //   // }),
+  // })
+  // if (response.ok) {
+  //   return response;
+  // }else{
+  //   throw new Error(`Fetch failed with status ${response.status}`);
+  // }
+  // console.log('products>>>>>>>>>>>',response.json())
+  // const products: Product[] = await response.json();
+  // return products;
+  const url = 'https://127.0.0.1/MitchAPI/category.php';
+  const data = { "attributes": {}, "category": "uncategorized", "price_range": [0, 1000], "products_per_page": 90, "page_number": 1 };
+  const options = {
     method: 'POST',
-    body: JSON.stringify({ "attributes": {}, "category": "bags", "price_range": [0, 1000], "products_per_page": 90, "page_number": 1 }),
-    headers: new Headers({
-      "Authorization": `Basic ${btoa("survey:makeshift")}`
-    }),
-  })
-
-    const products: Product[] = await response.json();
-    return products.filter((product) =>
-    title ? product.title.toLowerCase().includes(title.toLowerCase()) : true
-  );
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
+  };
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch data with status ${response.status}`);
+  }
+  const products: Product[] = await response.json();
+  return products;
 }
 
 
@@ -41,24 +58,54 @@ export async function getProducts(title?: string | null){
 
 
 
-export async function getProductById(productSlug: string) {
-  // const response = await fetch(`https://dummyjson.com/products/${productSlug}`)
+// export async function getProductBySlug(productSlug: string) {
+//   // const response = await fetch(`https://dummyjson.com/products/${productSlug}`)
 
-  try {
-    const response = await fetch(`https://honorable-nachos.localsite.io/wp-json/wc/v3/products/${productSlug}?consumer_key=ck_a531be63b4c4d4782740f48d0269f20ada341fb7&consumer_secret=cs_235666485463566634375908b90462cf65905941`, {
-      headers: new Headers({
-        "Authorization": `Basic ${btoa("survey:makeshift")}`
-      }),
-    })
-    const jsonResponse = await response.json();
-    return {
-      ...jsonResponse as {},
-      totalpages: response.headers['x-wp-totalpages'],
-      wpTotal: response.headers['x-wp-total'],
-    }
-  } catch (error) {
-    console.log("Response Status:", error.response.status);
-    console.log("Response Headers:", error.response.headers);
-    console.log("Response Data:", error.response.data);
+//   // try {
+//   //   const response = await fetch(`https://127.0.0.1/MitchAPI/single.php`, {
+//   //     method: 'POST',
+//   //     body: JSON.stringify({ "slug": productSlug }),
+//   //     // headers: new Headers({
+//   //     //   "Authorization": `Basic ${btoa("survey:makeshift")}`
+//   //     // }),
+//   //   })
+//   //   const jsonResponse = await response.json();
+//   //   return {
+//   //     ...jsonResponse as {},
+//   //     // totalpages: response.headers['x-wp-totalpages'],
+//   //     // wpTotal: response.headers['x-wp-total'],
+//   //   }
+//   // } catch (error) {
+//   //   console.log("Response Status:", error.response.status);
+//   //   console.log("Response Headers:", error.response.headers);
+//   //   console.log("Response Data:", error.response.data);
+//   // }
+//   const url = 'https://127.0.0.1/MitchAPI/single.php';
+//   const data = { "slug": productSlug };
+//   const options = {
+//     method: 'POST',
+//     headers: { 'Content-Type': 'multipart/form-data' },
+//     body: JSON.stringify(data),
+//   };
+//   const response = await fetch(url, options);
+//   if (!response.ok) {
+//     throw new Error(`Failed to fetch data with status ${response.status}`);
+//   }
+//   const product: Product[] = await response.json();
+//   return product;
+// }
+export async function getProductBySlug(productSlug: string) {
+  const url = 'https://127.0.0.1/MitchAPI/single.php';
+  const formData = new FormData();
+  formData.append('slug', productSlug);
+  const options = {
+    method: 'POST',
+    body: formData,
+  };
+  const response = await fetch(url, options);
+  if (!response.ok) {
+    throw new Error(`Failed to fetch data with status ${response.status}`);
   }
-  }
+  const product: Product[] = await response.json();
+  return product;
+}

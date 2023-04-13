@@ -32,9 +32,10 @@ const product2 = {
 function classNames(...classes) {
   return classes.filter(Boolean).join(' ')
 }
-export default function Quickview({ openQuick, openModal, product }) {
+export default function Quickview({ openQuick, openModal, productSlug }) {
 
-  const nearestNumberRating = Math.round(product.rating)
+  // const nearestNumberRating = Math.round(product.rating)
+  const nearestNumberRating = 2
   const [selectedColor, setSelectedColor] = useState(product2.colors[0])
   const [selectedSize, setSelectedSize] = useState(product2.sizes[2])
 

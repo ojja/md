@@ -1,5 +1,5 @@
 import { json, LoaderFunction } from "@remix-run/cloudflare";
-import { useLoaderData } from "@remix-run/react";
+import { Outlet, useLoaderData } from "@remix-run/react";
 
 export const loader: LoaderFunction = async ({ params }) => {
   return json({ slug: params.subCatSlug, params })

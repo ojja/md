@@ -1,10 +1,7 @@
-import React from 'react'
-import { Link } from 'react-router-dom'
-
 export default function Footer() {
     return (
         <div className='p-4 bg-white rounded-lg md:px-6 md:py-8 dark:bg-gray-900'>
-            <footer className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <footer className="container px-4 mx-auto sm:px-6 lg:px-8">
                 <div className="sm:flex sm:items-center sm:justify-between">
                     <a href="https://flowbite.com/" className="flex items-center mb-4 sm:mb-0">
                         <img src="https://tailwindui.com/img/logos/mark.svg?color=indigo&shade=600" className="h-8 mr-3" alt="Flowbite Logo" width={38} height={32}/>

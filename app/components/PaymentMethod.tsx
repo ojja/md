@@ -1,5 +1,4 @@
 
-import React, { useState, useEffect } from 'react';
 import { RiRadioButtonLine, RiCheckboxBlankCircleLine } from "react-icons/ri";
 
 

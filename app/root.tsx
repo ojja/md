@@ -11,10 +11,12 @@ import {
   useParams,
 } from "@remix-run/react";
 import styles from './tailwind.css';
-import { NavBar } from "./layouts";
+import styles2 from 'slick-carousel/slick/slick.css';
+import Footer from "./layouts/footer";
+import NavBar from "./layouts/navbar";
 
 export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: styles }];
+  return [{ rel: 'stylesheet', href: styles },{ rel: 'stylesheet', href: styles2 }];
 }
 
 export const meta: MetaFunction = () => ({
@@ -35,8 +37,6 @@ export default function App() {
           <Outlet />
           <ScrollRestoration />
           <Scripts />
-
-
           {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
         </Layout>
       </body>
@@ -45,38 +45,38 @@ export default function App() {
 }
 
 
-function Layout({ children }) {
+function Layout({ children }: { children: React.ReactNode }) {
   // console.log('params',useParams())
   return (
     <>
-      <div>
-        header
-        {/* <NavBar location={'a'}/> */}
-      </div>
-      <div className=''>{children}</div>
-      <div>
-        footer
-      </div>
+      <NavBar/>
+      <main className="relative z-10">{children}</main>
+      <Footer />
     </>
   )
 }
 
-
-export function ErrorBoundary({ error }) {
+// const error: string = "Error message";
+interface Props {
+  error: Error | null
+}
+export function ErrorBoundary({ error }: Props) {
   // console.error(error);
-  return (
-    <html>
-      <head>
-        <title>Oh no!</title>
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        {/* add the UI you want your users to see */}
-        {/* {error} */}
-        {error.message}
-        <Scripts />
-      </body>
-    </html>
-  );
+  if (error) {
+    return (
+      <html>
+        <head>
+          <title>Oh no!</title>
+          <Meta />
+          <Links />
+        </head>
+        <body>
+          {/* add the UI you want your users to see */}
+          {/* {error} */}
+          {error.message}
+          <Scripts />
+        </body>
+      </html>
+    )
+  }
 }

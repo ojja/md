@@ -1,7 +1,7 @@
 import { MinusIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
 import useShoppingCart, { CartItem } from "~/stores/cartStore";
 
-export default function AddToCart({ className, product, disabled }: {
+export default function AddToCartSimple({ className, product, disabled }: {
     className?: string;
     product: CartItem;
     disabled: boolean;
@@ -23,21 +23,21 @@ export default function AddToCart({ className, product, disabled }: {
             {quantity === 0 ? (
                 "Add to Bag"
             ) : (
-                <div className="pr-8 flex">
+                <div className="flex">
                     <button
                         type="button"
-                        className="-m-2 p-2 text-gray-400 hover:text-gray-500 cursor-pointer"
+                        className="p-2 -m-2 text-gray-400 cursor-pointer hover:text-gray-500"
                         onClick={(e) => { decreaseCartQuantity(product); e.stopPropagation() }}
                     >
-                        {quantity === 1 ? <TrashIcon className="h-4 w-4" aria-hidden="true" /> : <MinusIcon className="h-4 w-4" aria-hidden="true" />}
+                        {quantity === 1 ? <TrashIcon className="w-4 h-4" aria-hidden="true" /> : <MinusIcon className="w-4 h-4" aria-hidden="true" />}
                     </button>
-                    <input type="number" className="focus:outline-none bg-gray-100 border h-6 w-8 rounded text-xs mx-2 text-center text-gray-600 select-none" value={quantity} readOnly />
+                    <input type="text" className="w-8 h-6 mx-2 text-xs text-center text-gray-600 bg-gray-100 border rounded select-none focus:outline-none" value={quantity} readOnly />
                     <button
                         type="button"
                         className={`-m-2 p-2 text-gray-400 hover:text-gray-500 cursor-pointer ${quantity > 9 ? "pointer-events-none" : ''}`}
                         onClick={(e) => { addToCart(product); e.stopPropagation() }}
                     >
-                        <PlusIcon className="h-4 w-4" aria-hidden="true" />
+                        <PlusIcon className="w-4 h-4" aria-hidden="true" />
                     </button>
                 </div>
             )}
