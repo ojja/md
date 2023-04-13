@@ -11,11 +11,11 @@ const navigation = {
       {
         id: 'Clothing',
         name: 'Clothing',
-        slug: 'clothing',
+        slug: 'earrings',
         featured: [
           {
             name: 'All Clothing',
-            href: 'clothing',
+            href: 'all-clothing',
             imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg',
             imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
           },
@@ -31,13 +31,13 @@ const navigation = {
             id: 'clothing',
             name: 'Clothing',
             items: [
-              { name: 'Tops', href: 'tops' },
-              { name: 'Bottoms', href: 'bottoms' },
-              { name: 'Bras & Tanks', href: 'bras-tanks' },
-              { name: 'Shirts', href: 'shirts' },
-              { name: 'Tees', href: 'tees' },
-              { name: 'Jackets', href: 'jackets' },
-              { name: 'Browse All', href: 'clothing' },
+              { name: 'Dresses', href: 'clothing-dresses' },
+              { name: 'Mini Dresses', href: 'clothing-mini-dresses' },
+              { name: 'Maxi Dresses', href: 'maxi-dresses' },
+              // { name: 'Shirts', href: 'shirts' },
+              // { name: 'Tees', href: 'tees' },
+              // { name: 'Jackets', href: 'jackets' },
+              // { name: 'Browse All', href: 'clothing' },
             ],
           },
           {
