@@ -30,7 +30,7 @@ export async function getProducts(name?: string | null) {
   // console.log('products>>>>>>>>>>>',response.json())
   // const products: Product[] = await response.json();
   // return products;
-  const url = 'https://127.0.0.1/MitchAPI/category.php';
+  const url = 'https://www.cloudhosta.com:61/MitchAPI/category.php';
   const data = { "attributes": {}, "category": "uncategorized", "price_range": [0, 1000], "products_per_page": 90, "page_number": 1 };
   const options = {
     method: 'POST',
@@ -95,7 +95,7 @@ export async function getProducts(name?: string | null) {
 //   return product;
 // }
 export async function getProductBySlug(productSlug: string) {
-  const url = 'https://127.0.0.1/MitchAPI/single.php';
+  const url = 'https://www.cloudhosta.com:61/MitchAPI/single.php';
   const formData = new FormData();
   formData.append('slug', productSlug);
   const options = {
