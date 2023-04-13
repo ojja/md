@@ -65,7 +65,7 @@ export default function ProductSingle() {
     // const [selectedColor, setSelectedColor] = useState(product2.colors[0])
     // const [selectedSize, setSelectedSize] = useState(product2.sizes[2])
 
-    // const [selectedSize, setSelectedSize] = useState(product.attributes?.Size[0]);
+    const [selectedSize, setSelectedSize] = useState(product.attributes?.pa_size[0]);
     // const [selectedColor, setSelectedColor] = useState(product.attributes?.Color[0]);
 
     // const variations = product.variations?.filter((variation: any) => {
@@ -230,10 +230,10 @@ export default function ProductSingle() {
                                         </Transition>
                                     </div>
 
-                                    {/* <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
+                                    <RadioGroup value={selectedSize} onChange={setSelectedSize} className="mt-4">
                                         <RadioGroup.Label className="sr-only"> Choose a size </RadioGroup.Label>
                                         <div className="grid grid-cols-4 gap-4 sm:grid-cols-8 lg:grid-cols-4">
-                                            {product.attributes?.Size.map((size: any) => (
+                                            {product.attributes?.pa_size.map((size: any) => (
                                                 <RadioGroup.Option
                                                     key={v4()}
                                                     value={size}
@@ -280,7 +280,7 @@ export default function ProductSingle() {
                                                 </RadioGroup.Option>
                                             ))}
                                         </div>
-                                    </RadioGroup> */}
+                                    </RadioGroup>
                                 </div>
                                 {/* <span className="pt-3 text-xs">{`${selectedSize} - ${selectedColor}`}</span> */}
                                 <div className="flex mt-10 space-x-4">
