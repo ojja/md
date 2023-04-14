@@ -12,6 +12,7 @@ type Product = {
     name: string,
     price: number,
     main_image: string,
+    thumbnail: string,
     slug: string
 }
 
@@ -48,7 +49,7 @@ export function ProductWidget({product}: ProductWidgetProps) {
                         <LazyLoadImage
                             alt={product.name}
                             // effect="blur"
-                            src={product.main_image}
+                            src={product.main_image?product.main_image:product.thumbnail}
                             // placeholderSrc={product.image_small}
                             wrapperClassName="h-full w-full block absolute z-1"
                             className="absolute top-0 bottom-0 left-0 right-0 self-center object-cover object-center w-full h-full m-auto lg:h-full lg:w-full"
@@ -78,10 +79,18 @@ export function ProductWidget({product}: ProductWidgetProps) {
                     <AddToCartSimple
                         className="inline-flex justify-center rounded-lg text-sm font-semibold py-2.5 px-4 bg-slate-900 text-white hover:bg-slate-700 w-full"
                         // id={product.id}
-                        product={{ id: product.id }}
+                        product={
+                            {
+                                id: product.id,
+                                thumbnail: product.thumbnail,
+                                // size: selectedSize,
+                                // color: selectedColor,
+                                slug: product.slug
+                            }
+                        }
                     />
                 </div>
-                {/* <Quickview openQuick={openQuick} openModal={openModal} productSlug={product.slug} /> */}
+                <Quickview openQuick={openQuick} openModal={openModal} product={product} />
             </div>
         </>
     )

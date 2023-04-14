@@ -14,7 +14,7 @@ export default function ShoppingCart() {
   const { closeCart, cartItems, removeFromCart, openCart,isOpen } = useShoppingCart();
   return (
     <div>
-    <Transition.Root show={isOpen}>
+    <Transition show={isOpen}>
       <Dialog as="div" className="relative z-30" onClose={closeCart}>
         <Transition.Child
           
@@ -48,7 +48,7 @@ export default function ShoppingCart() {
                         <div className="flex items-center ml-3 h-7">
                           <button
                             type="button"
-                            className="p-2 -m-2 text-gray-400 hover:text-gray-500"
+                            className="p-2 -m-2 text-gray-400 hover:text-gray-500 outline-none"
                             onClick={closeCart}
                           >
                             <span className="sr-only">Close panel</span>
@@ -62,7 +62,7 @@ export default function ShoppingCart() {
                           <div className="flow-root">
                             <ul role="list" className="-my-6 divide-y divide-gray-200">
                               {cartItems.map((item) => (
-                                <li key={v4()} className="flex py-6">
+                                <li key={v4} className="flex py-6">
                                   <MiniCartItem id={item.id} quantity={item.quantity} color={item.color} size={item.size} slug={item.slug} thumbnail={item.thumbnail} removeFromCart={removeFromCart} />
                                 </li>
                               ))}
@@ -119,7 +119,7 @@ export default function ShoppingCart() {
           </div>
         </div>
       </Dialog>
-    </Transition.Root>
+    </Transition>
     </div>
   )
 }

@@ -1,5 +1,6 @@
 import { MinusIcon, PlusIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import { Link } from "@remix-run/react";
+import ExtraProducts from "~/components/ExtraProducts";
 
 export default function Cart() {
     return (
@@ -243,6 +244,7 @@ export default function Cart() {
                         </div>
                     </div>
                 </div>
+                <ExtraProducts categorySlug="all-clothing" pageNumber={1} title=""/>
             </div>
         </div>
     )

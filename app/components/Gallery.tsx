@@ -1,10 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import Slider from "react-slick";
+import { v4 } from 'uuid';
 
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+interface GalleryProps {
+  galleryImages: string[];
+}
 
-export default function Gallery() {
+export default function Gallery({ galleryImages = [] }: GalleryProps) {
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
   const [slider1, setSlider1] = useState(null);
@@ -79,18 +83,18 @@ export default function Gallery() {
   ];
 
   return (
-    <div className="gallery-slider-wrapper flex p-2">
+    <div className="gallery-slider-wrapper flex">
       <Slider
         {...settingsMain}
         asNavFor={nav2}
         ref={slider => (setSlider1(slider))}
         className="w-10/12 order-1"
       >
-        {slidesData.map(slide => (
-          <div className="slick-slide" key={slide.id}>
+        {galleryImages.map(slide => (
+          <div className="slick-slide" key={v4}>
             <img
               className="slick-slide-image"
-              src={`https://picsum.photos/800/800?img=${slide.id}`}
+              src={`${slide}`}
             />
           </div>
         ))}
@@ -101,11 +105,11 @@ export default function Gallery() {
           asNavFor={nav1}
           ref={slider => (setSlider2(slider))}
         >
-          {slidesData.map(slide => (
-            <div className="slick-slide" key={slide.id}>
+          {galleryImages.map(slide => (
+            <div className="slick-slide" key={v4}>
               <img
                 className="slick-slide-image"
-                src={`https://picsum.photos/800/800?img=${slide.id}`}
+                src={`${slide}`}
               />
             </div>
           ))}
