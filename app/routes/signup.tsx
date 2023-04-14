@@ -1,5 +1,5 @@
 import { Link } from "@remix-run/react";
-import Dots from "~/components/dots";
+import Dots from "~/components/Dots";
 
 export default function signup() {
   return (

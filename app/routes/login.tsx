@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Dots from "~/components/dots";
+import Dots from "~/components/Dots";
 
 export default function login() {
   return (
