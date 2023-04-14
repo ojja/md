@@ -25,7 +25,10 @@ export async function getCategoryProducts(categorySlug: string, pageNumber: numb
       method: 'POST',
       headers: {
         // "Authorization": `Basic ${btoa("survey:makeshift")}`,
-        'Content-Type': 'application/json'
+        "Content-Type": "application/json",
+      // "Authorization": `Basic ${btoa("survey:makeshift")}`,
+      "X-Requested-With": "XMLHttpRequest",
+      "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify(data)
     };

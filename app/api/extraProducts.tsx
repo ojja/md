@@ -30,6 +30,9 @@ interface Product {
       headers: {
         // "Authorization": `Basic ${btoa("survey:makeshift")}`,
         "Content-Type": "application/json",
+      // "Authorization": `Basic ${btoa("survey:makeshift")}`,
+      "X-Requested-With": "XMLHttpRequest",
+      "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify(data),
     };

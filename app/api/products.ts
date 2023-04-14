@@ -34,7 +34,10 @@ export async function getProducts(name?: string | null) {
   const data = { "attributes": {}, "category": "all-clothing", "price_range": [0, 1000], "products_per_page": 90, "page_number": 1 };
   const options = {
     method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
+    headers: { "Content-Type": "application/json",
+    // "Authorization": `Basic ${btoa("survey:makeshift")}`,
+    "X-Requested-With": "XMLHttpRequest",
+    "Access-Control-Allow-Origin": "*" },
     body: JSON.stringify(data),
   };
   const response = await fetch(url, options);
