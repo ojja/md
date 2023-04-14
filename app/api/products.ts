@@ -30,14 +30,11 @@ export async function getProducts(name?: string | null) {
   // console.log('products>>>>>>>>>>>',response.json())
   // const products: Product[] = await response.json();
   // return products;
-  const url = 'https://www.cloudhosta.com:92/MitchAPI/category.php';
+  const url = 'https://www.ar-koueider.com/MitchAPI/category.php';
   const data = { "attributes": {}, "category": "all-clothing", "price_range": [0, 1000], "products_per_page": 90, "page_number": 1 };
   const options = {
     method: 'POST',
-    headers: { "Content-Type": "application/json",
-    // "Authorization": `Basic ${btoa("survey:makeshift")}`,
-    "X-Requested-With": "XMLHttpRequest",
-    "Access-Control-Allow-Origin": "*" },
+    headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   };
   const response = await fetch(url, options);
@@ -98,7 +95,7 @@ export async function getProducts(name?: string | null) {
 //   return product;
 // }
 export async function getProductBySlug(productSlug: string) {
-  const url = 'https://www.cloudhosta.com:92/MitchAPI/single.php';
+  const url = 'https://www.ar-koueider.com/MitchAPI/single.php';
   const formData = new FormData();
   formData.append('slug', productSlug);
   const options = {

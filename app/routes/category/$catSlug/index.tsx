@@ -115,7 +115,7 @@ export default function CategorySlug() {
             <h1 className="text-4xl font-bold tracking-tight text-gray-900">New Arrivals in {categorySlug}</h1>
 
             <div className="flex items-center">
-              <Menu as="div" className="relative inline-block text-left z-20">
+              <Menu as="div" className="relative z-20 inline-block text-left">
                 <div>
                   <Menu.Button className="inline-flex justify-center text-sm font-medium text-gray-700 group hover:text-gray-900">
                     Sort
@@ -247,7 +247,7 @@ export default function CategorySlug() {
               </form>
 
               {/* Product grid */}
-              <div className="lg:col-span-3 relative z-10">
+              <div className="relative z-10 lg:col-span-3">
                 <div className={classNames(
                   grid ? 'sm:grid-cols-1 lg:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-4',
                   'grid grid-cols-1 gap-y-10 gap-x-6 xl:gap-x-8 mt-6'

@@ -19,7 +19,7 @@ interface Product {
     categorySlug: string,
     pageNumber: number
   ): Promise<Product[]> {
-    const url: string = "https://www.cloudhosta.com:92/MitchAPI/category.php";
+    const url: string = "https://www.ar-koueider.com/MitchAPI/category.php";
     const data: any = {
       category: categorySlug,
       products_per_page: 20,
@@ -30,9 +30,6 @@ interface Product {
       headers: {
         // "Authorization": `Basic ${btoa("survey:makeshift")}`,
         "Content-Type": "application/json",
-      // "Authorization": `Basic ${btoa("survey:makeshift")}`,
-      "X-Requested-With": "XMLHttpRequest",
-      "Access-Control-Allow-Origin": "*",
       },
       body: JSON.stringify(data),
     };

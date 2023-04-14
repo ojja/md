@@ -12,17 +12,23 @@ const navigation = {
     {
       id: 'Clothing',
       name: 'Clothing',
-      slug: 'earrings',
+      slug: 'juices',
       featured: [
         {
           name: 'All Clothing',
-          href: 'all-clothing',
+          href: 'oriental-sweets',
           imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg',
           imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
         },
         {
-          name: 'Hoodies & Sweatshirts',
-          href: 'hoodies-sweatshirts',
+          name: 'basbousa-kunafa',
+          href: 'basbousa-kunafa',
+          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg',
+          imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
+        },
+        {
+          name: 'ramadaniyat',
+          href: 'ramadaniyat',
           imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg',
           imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
         },
@@ -32,9 +38,9 @@ const navigation = {
           id: 'clothing',
           name: 'Clothing',
           items: [
-            { name: 'Dresses', href: 'clothing-dresses' },
-            { name: 'Mini Dresses', href: 'clothing-mini-dresses' },
-            { name: 'Maxi Dresses', href: 'maxi-dresses' },
+            { name: 'ramadaniyat', href: 'ramadaniyat' },
+            { name: 'Mini Dresses', href: 'basbousa-kunafa' },
+            { name: 'Maxi Dresses', href: 'oriental-sweets' },
             // { name: 'Shirts', href: 'shirts' },
             // { name: 'Tees', href: 'tees' },
             // { name: 'Jackets', href: 'jackets' },

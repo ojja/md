@@ -19,16 +19,13 @@
 
 
 export async function getCategoryProducts(categorySlug: string, pageNumber: number): Promise<void> {
-    const url: string = 'https://www.cloudhosta.com:92/MitchAPI/category.php';
+    const url: string = 'https://www.ar-koueider.com/MitchAPI/category.php';
     const data: any = { category: categorySlug, products_per_page: 20, page_number: pageNumber};
     const options: RequestInit = {
       method: 'POST',
       headers: {
         // "Authorization": `Basic ${btoa("survey:makeshift")}`,
-        "Content-Type": "application/json",
-      // "Authorization": `Basic ${btoa("survey:makeshift")}`,
-      "X-Requested-With": "XMLHttpRequest",
-      "Access-Control-Allow-Origin": "*",
+        'Content-Type': 'application/json'
       },
       body: JSON.stringify(data)
     };
