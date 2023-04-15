@@ -18,6 +18,9 @@ export const loader: LoaderFunction = async () => {
 };
 
 export default function shop() {
+    const products = useLoaderData<Product[]>();
+    console.log('conseeeee222', products)
+
     return (
         <>
         Products
