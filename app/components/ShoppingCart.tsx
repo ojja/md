@@ -12,6 +12,10 @@ import MiniCartItem from './MiniCartItem';
 export default function ShoppingCart() {
 
   const { closeCart, cartItems, removeFromCart, openCart,isOpen } = useShoppingCart();
+  console.log('isOpen>',isOpen);
+  setTimeout(() => {
+    closeCart;
+  }, 1000);
   return (
     <div>
     <Transition show={isOpen}>
@@ -48,7 +52,7 @@ export default function ShoppingCart() {
                         <div className="flex items-center ml-3 h-7">
                           <button
                             type="button"
-                            className="p-2 -m-2 text-gray-400 hover:text-gray-500 outline-none"
+                            className="p-2 -m-2 text-gray-400 outline-none hover:text-gray-500"
                             onClick={closeCart}
                           >
                             <span className="sr-only">Close panel</span>

@@ -6,6 +6,7 @@ import useShoppingCart from '~/stores/cartStore';
 import ShoppingCart from '~/components/ShoppingCart';
 import { Link } from '@remix-run/react';
 import { v4 } from 'uuid';
+import ChangeCountry from '~/components/ChangeCountry';
 
 const navigation = {
   categories: [
@@ -412,27 +413,66 @@ export default function NavBar() {
                   <div className="flex items-center ml-auto">
                     <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                       <Link to="/login" className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                        Sign in
+                        Login
                       </Link>
                       <span className="w-px h-6 bg-gray-200" aria-hidden="true" />
                       <Link to="/signup" className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                        Create account
+                        Sign Up
                       </Link>
                     </div>
 
+                    {/* Change language */}
                     <div className="hidden lg:ml-8 lg:flex">
-                      {/* <button className="flex items-center text-gray-700 hover:text-gray-800">
-                    <img
-                      src="/images/en.svg"
-                      alt=""
-                      className="flex-shrink-0 block w-5 h-auto"
-                    />
-                    <span className="block ml-3 text-sm font-medium">USD</span>
-                    <span className="sr-only">, change currency</span>
-                  </button> */}
                       <Menu as="div" className="relative z-20 inline-block text-left">
                         <div>
-                          <Menu.Button className="inline-flex justify-center text-sm font-medium text-gray-700 group hover:text-gray-900">
+                          <Menu.Button className="inline-flex items-center justify-center text-sm font-medium text-gray-700 group hover:text-gray-900">
+                            <span className="block ml-3 text-sm font-medium">English</span>
+                            <span className="sr-only">, change language</span>
+                          </Menu.Button>
+                        </div>
+
+                        <Transition
+                          as={Fragment}
+                          enter="transition ease-out duration-100"
+                          enterFrom="transform opacity-0 scale-95"
+                          enterTo="transform opacity-100 scale-100"
+                          leave="transition ease-in duration-75"
+                          leaveFrom="transform opacity-100 scale-100"
+                          leaveTo="transform opacity-0 scale-95"
+                        >
+                          <Menu.Items className="absolute right-0 z-10 w-40 mt-2 origin-top-right bg-white rounded-md shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <div className="py-1">
+                              <Menu.Item key={v4()}>
+                                {({ active }) => (
+                                  <div className='flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-gray-100'>
+                                    <span className="block ml-3">English</span>
+                                  </div>
+                                )}
+                              </Menu.Item>
+                              <Menu.Item key={v4()}>
+                                {({ active }) => (
+                                  <div
+                                  className={classNames(
+                                    active ? 'bg-gray-100' : '',
+                                    'flex justify-center px-4 py-2 text-sm font-medium text-gray-900 w-full cursor-pointer'
+                                  )}
+                                  >
+                                    <span className="block ml-3">العربيه</span>
+                                  </div>
+                                )}
+                              </Menu.Item>
+                            </div>
+                          </Menu.Items>
+                        </Transition>
+                      </Menu>
+                    </div>
+
+
+                    {/* Change Currncy */}
+                    <div className="hidden lg:ml-8 lg:flex">
+                      <Menu as="div" className="relative z-20 inline-block text-left">
+                        <div>
+                          <Menu.Button className="inline-flex items-center justify-center text-sm font-medium text-gray-700 group hover:text-gray-900">
                             <img
                               src="/images/en.svg"
                               alt=""
@@ -440,10 +480,6 @@ export default function NavBar() {
                             />
                             <span className="block ml-3 text-sm font-medium">USD</span>
                             <span className="sr-only">, change currency</span>
-                            {/* <ChevronDownIcon
-                      className="flex-shrink-0 w-5 h-5 ml-1 -mr-1 text-gray-400 group-hover:text-gray-500"
-                      aria-hidden="true"
-                    /> */}
                           </Menu.Button>
                         </div>
 
@@ -472,18 +508,10 @@ export default function NavBar() {
                               </Menu.Item>
                               <Menu.Item key={v4()}>
                                 {({ active }) => (
-                                  // <span
-                                  //   className={classNames(
-                                  //     active ? 'bg-gray-100' : '',
-                                  //     'block px-4 py-2 text-sm'
-                                  //   )}
-                                  // >
-                                  //   EGP
-                                  // </span>
                                   <div
                                   className={classNames(
                                     active ? 'bg-gray-100' : '',
-                                    'flex justify-center px-4 py-2 text-sm font-medium text-gray-900 w-full cursor-auto'
+                                    'flex justify-center px-4 py-2 text-sm font-medium text-gray-900 w-full cursor-pointer'
                                   )}
                                   >
                                     <img
@@ -499,6 +527,12 @@ export default function NavBar() {
                           </Menu.Items>
                         </Transition>
                       </Menu>
+                    </div>
+
+
+                    {/* Change Country */}
+                    <div className="hidden lg:ml-8 lg:flex">
+                      <ChangeCountry/>
                     </div>
 
                     {/* Search */}
