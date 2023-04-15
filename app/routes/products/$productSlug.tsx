@@ -23,7 +23,7 @@ interface Feature {
   }
 const features: Feature[] = [
     { name: 'Origin', description: 'Designed by Good Goods, Inc.' },
-    { name: 'Material', description: 'Solid walnut base with rare earth magnets and powder coated steel card cover' },
+    // { name: 'Material', description: 'Solid walnut base with rare earth magnets and powder coated steel card cover' },
     { name: 'Dimensions', description: '6.25" x 3.55" x 1.15"' },
     { name: 'Finish', description: 'Hand sanded and finished with natural oil' },
     { name: 'Includes', description: 'Wood card tray and 3 refill packs' },
@@ -79,15 +79,16 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export default function ProductSingle() {
     const product = useLoaderData<typeof loader>();
-    // console.log("product", product)
+    console.log("product", product)
     // const nearestNumberRating = Math.round(product.rating)
     const nearestNumberRating = 12
     // const [selectedColor, setSelectedColor] = useState(product2.colors[0])
     // const [selectedSize, setSelectedSize] = useState(product2.sizes[2])
 
-    const [selectedSize, setSelectedSize] = useState(product.attributes?.pa_size[0]);
-    const selectedColor = false;
+    // const [selectedSize, setSelectedSize] = useState(product.attributes?.pa_size[0]);
     // const [selectedColor, setSelectedColor] = useState(product.attributes?.Color[0]);
+    const selectedSize = false;
+    const selectedColor = false;
 
     // const variations = product.variations?.filter((variation: any) => {
     //     return (
@@ -114,7 +115,7 @@ export default function ProductSingle() {
                                 <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-4 border-b border-gray-200" />
                             </div>
                             <div className="w-full px-4 mb-16 lg:w-1/2 lg:mb-0">
-                                <Gallery galleryImages={product.images}/>
+                                {/* <Gallery galleryImages={product.images}/> */}
                             </div>
                             <div className="w-full px-4 lg:w-1/2">
                                 <div className="pt-2 mb-6">
@@ -175,6 +176,7 @@ export default function ProductSingle() {
                                     </div>
                                     ):('')}
                                     {/* Sizes */}
+                                    {product.attributes?.Color?(
                                     <div className="mt-10">
                                         <div className="flex items-center justify-between">
                                             <h3 className="text-sm font-medium text-gray-900">Size</h3>
@@ -233,6 +235,7 @@ export default function ProductSingle() {
                                             </div>
                                         </RadioGroup>
                                     </div>
+                                    ):('')}
                                     {/* <span className="pt-3 text-xs">{`${selectedSize} - ${selectedColor}`}</span> */}
                                     <div className="flex mt-10 space-x-4">
                                         <AddToCartSimple

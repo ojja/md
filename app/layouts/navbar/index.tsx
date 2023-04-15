@@ -11,23 +11,23 @@ const navigation = {
   categories: [
     {
       id: 'Clothing',
-      name: 'Clothing',
+      name: 'Category 1',
       slug: 'juices',
       featured: [
         {
-          name: 'All Clothing',
+          name: 'All Categories',
           href: 'oriental-sweets',
           imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg',
           imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
         },
         {
-          name: 'basbousa-kunafa',
+          name: 'Category 1 > 2',
           href: 'basbousa-kunafa',
           imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg',
           imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
         },
         {
-          name: 'ramadaniyat',
+          name: 'Category 1 > 3',
           href: 'ramadaniyat',
           imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg',
           imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
@@ -49,23 +49,23 @@ const navigation = {
         },
         {
           id: 'accessories',
-          name: 'Accessories',
+          name: 'Accessories X',
           items: [
-            { name: 'Watches', href: 'watches' },
-            { name: 'Fitness Equipment', href: 'fitness-equipment' },
-            { name: 'Bags', href: 'bags' },
-            { name: 'Erin Recommends', href: 'erin-recommends' },
+            { name: 'Watches X', href: 'watches' },
+            { name: 'Fitness Equipment X', href: 'fitness-equipment' },
+            { name: 'Bags X', href: 'bags' },
+            { name: 'Erin Recommends X', href: 'erin-recommends' },
           ],
         },
         {
           id: 'brands',
-          name: 'Brands',
+          name: 'Brands X',
           items: [
-            { name: 'Full Nelson', href: '#' },
-            { name: 'My Way', href: '#' },
-            { name: 'Re-Arranged', href: '#' },
-            { name: 'Counterfeit', href: '#' },
-            { name: 'Significant Other', href: '#' },
+            { name: 'Full Nelson X', href: '#' },
+            { name: 'My Way X', href: '#' },
+            { name: 'Re-Arranged X', href: '#' },
+            { name: 'Counterfeit X', href: '#' },
+            { name: 'Significant Other X', href: '#' },
           ],
         },
       ],

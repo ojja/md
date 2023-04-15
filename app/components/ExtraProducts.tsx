@@ -39,235 +39,212 @@ function shuffleArray(array: any[]) {
 export default function ExtraProducts({ categorySlug, pageNumber, title }: Props) {
     const products = [
         {
-            "id": 2995,
-            "name": "Piscelina Dress",
-            "title": "Piscelina Dress",
-            "slug": "piscelina-dress",
-            "price": "4499",
+            "id": 41510,
+            "name": "طاجن أم علي صغير",
+            "title": "طاجن أم علي صغير",
+            "slug": "umm-ali-tagine-with-nuts-from-abdel-rahim-koueider-small",
+            "price": "35",
             "sale_price": "",
-            "main_image": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5764.jpg",
-            "thumbnail": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5764-150x150.jpg",
+            "main_image": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2022\/10\/طاجن-أم-علي-صغير-thumb-.jpg",
+            "thumbnail": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2022\/10\/طاجن-أم-علي-صغير-thumb--150x150.jpg",
             "images": [
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5760.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/IMG-4144.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5748.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5751.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5764.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5765.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5771.jpg"
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2022\/10\/gall-طاجن-أم-علي-صغير-1.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2022\/10\/gall-طاجن-أم-علي-صغير-2.jpg"
+            ],
+            "type": "simple"
+        },
+        {
+            "id": 40898,
+            "name": "علبه عسل نحل كاجو",
+            "title": "علبه عسل نحل كاجو",
+            "slug": "a-box-of-assorted-oriental-treats-sweetened-with-honey-from-abdel-rahim-koueider",
+            "price": "310",
+            "sale_price": "",
+            "main_image": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2022\/09\/علبه-عسل-نحل-كاجو-1-thumb.jpg",
+            "thumbnail": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2022\/09\/علبه-عسل-نحل-كاجو-1-thumb-150x150.jpg",
+            "images": [
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2022\/09\/علبه-عسل-نحل-كاجو-1-gall.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2022\/09\/علبه-عسل-نحل-كاجو-2-gall.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2022\/09\/علبه-عسل-نحل-كاجو-3-gall.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2022\/09\/علبه-عسل-نحل-كاجو-4-gall.jpg"
+            ],
+            "type": "simple"
+        },
+        {
+            "id": 40899,
+            "name": "علبه عسل نحل فستق",
+            "title": "علبه عسل نحل فستق",
+            "slug": "assorted-oriental-treats-sweetened-with-honey-by-abdel-rahim-koueider-box",
+            "price": "430",
+            "sale_price": "",
+            "main_image": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2022\/09\/علبه-عسل-نحل-فستق-1-thumb.jpg",
+            "thumbnail": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2022\/09\/علبه-عسل-نحل-فستق-1-thumb-150x150.jpg",
+            "images": [
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2022\/09\/علبه-عسل-نحل-فستق-1-gall.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2022\/09\/علبه-عسل-نحل-فستق-2-gall.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2022\/09\/علبه-عسل-نحل-فستق-3-gall.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2022\/09\/علبه-عسل-نحل-فستق-4-gall.jpg"
+            ],
+            "type": "simple"
+        },
+        {
+            "id": 26659,
+            "name": "علبة شرقى لايت",
+            "title": "علبة شرقى لايت",
+            "slug": "a-box-of-light-assorted-oriental-sweets-by-abdel-rahim-koueider",
+            "price": "480",
+            "sale_price": "",
+            "main_image": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2022\/02\/less-sugar-box-thumb.webp",
+            "thumbnail": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2022\/02\/less-sugar-box-thumb-150x150.webp",
+            "images": [
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2022\/02\/less-sugar-box-gall.webp"
+            ],
+            "type": "simple"
+        },
+        {
+            "id": 3499,
+            "name": "طاجن أم علي",
+            "title": "طاجن أم علي",
+            "slug": "zaatar-croissant-by-abdel-rahim-koueider-piece-4",
+            "price": "250",
+            "sale_price": "",
+            "main_image": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/04\/طاجن-أم-علي-thumb-.jpg",
+            "thumbnail": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/04\/طاجن-أم-علي-thumb--150x150.jpg",
+            "images": [
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/04\/gall-طاجن-أم-علي-1.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/04\/gall-طاجن-أم-علي-2.jpg"
+            ],
+            "type": "simple"
+        },
+        {
+            "id": 3498,
+            "name": "ليالي لبنان بالكنافة",
+            "title": "ليالي لبنان بالكنافة",
+            "slug": "%d9%84%d9%8a%d8%a7%d9%84%d9%8a-%d9%84%d8%a8%d9%86%d8%a7%d9%86-%d8%a8%d8%a7%d9%84%d9%83%d9%86%d8%a7%d9%81%d8%a9",
+            "price": "220",
+            "sale_price": "",
+            "main_image": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/04\/4018007-thumb.jpg",
+            "thumbnail": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/04\/4018007-thumb-150x150.jpg",
+            "images": [
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/04\/4018007-gall.jpg"
+            ],
+            "type": "simple"
+        },
+        {
+            "id": 2612,
+            "name": "علبة بقلاوة تركي مشكل",
+            "title": "علبة بقلاوة تركي مشكل",
+            "slug": "a-box-of-assorted-turkish-baklava-by-abdel-rahim-koueider",
+            "price": "470",
+            "sale_price": "",
+            "main_image": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/04\/علبة-بقلاوة-تركي-مشكل-1-thumb.jpg",
+            "thumbnail": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/04\/علبة-بقلاوة-تركي-مشكل-1-thumb-150x150.jpg",
+            "images": [
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/04\/علبة-بقلاوة-تركي-مشكل-1-gall.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/04\/علبة-بقلاوة-تركي-مشكل-2-gall.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/04\/علبة-بقلاوة-تركي-مشكل-3-gall.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/04\/علبة-بقلاوة-تركي-مشكل-4-gall.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/04\/4005046-gall-1.jpg"
+            ],
+            "type": "simple"
+        },
+        {
+            "id": 2060,
+            "name": "طبق عيش السرايا",
+            "title": "طبق عيش السرايا",
+            "slug": "aish-al-saraya-by-abdul-rahim-koueider-tray",
+            "price": "150",
+            "sale_price": "",
+            "main_image": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/04\/4004005-thumb.jpg",
+            "thumbnail": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/04\/4004005-thumb-150x150.jpg",
+            "images": [
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/04\/4004005-gall-3.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/03\/4004005-gall-2.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/03\/4004005-gall-1.jpg"
             ],
             "type": "variable"
         },
         {
-            "id": 2989,
-            "name": "Aqua Dress",
-            "title": "Aqua Dress",
-            "slug": "aqua-dress",
-            "price": "3999",
+            "id": 1697,
+            "name": "بلح الشام",
+            "title": "بلح الشام",
+            "slug": "balah-al-sham-by-abd-al-rahim-koueider-weight",
+            "price": "37.5",
             "sale_price": "",
-            "main_image": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5718.jpg",
-            "thumbnail": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5718-150x150.jpg",
+            "main_image": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/02\/بلح-الشام-thumb-.jpg",
+            "thumbnail": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/02\/بلح-الشام-thumb--150x150.jpg",
             "images": [
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5731.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5712.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5707.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5725.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5718.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5735.jpg"
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/02\/gall-بلح-الشام-1.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/02\/gall-بلح-الشام-2.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/02\/gall-بلح-الشام-3.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/03\/4004001-gall-3.jpg"
             ],
             "type": "variable"
         },
         {
-            "id": 2983,
-            "name": "Ary Dress",
-            "title": "Ary Dress",
-            "slug": "ary-dress",
-            "price": "4499",
+            "id": 1698,
+            "name": "ملبن قشطة",
+            "title": "ملبن قشطة",
+            "slug": "malban-with-cream-from-abdel-rahim-koueider-weight",
+            "price": "50",
             "sale_price": "",
-            "main_image": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5606.jpg",
-            "thumbnail": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5606-150x150.jpg",
+            "main_image": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/02\/ملبن-قشطة-thumb-.jpg",
+            "thumbnail": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/02\/ملبن-قشطة-thumb--150x150.jpg",
             "images": [
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5606.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5617.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5619.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5628.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5607.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5622.jpg"
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/02\/gall-ملبن-قشطة-1.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/02\/gall-ملبن-قشطة-2.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/02\/gall-ملبن-قشطة-3.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/03\/4004007-gall-1.jpg"
             ],
             "type": "variable"
         },
         {
-            "id": 2977,
-            "name": "Taura Dress",
-            "title": "Taura Dress",
-            "slug": "taura-dress",
-            "price": "4299",
+            "id": 1699,
+            "name": "حلاوة الجبن",
+            "title": "حلاوة الجبن",
+            "slug": "halawa-el-jibn-by-abdel-rahim-koueider-weight",
+            "price": "60",
             "sale_price": "",
-            "main_image": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5464.jpg",
-            "thumbnail": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5464-150x150.jpg",
+            "main_image": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/02\/حلاوة-الجبن-thumb-.jpg",
+            "thumbnail": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/02\/حلاوة-الجبن-thumb--150x150.jpg",
             "images": [
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5464.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5469.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5473-scaled.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5475-scaled.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5479-scaled.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5483.jpg"
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/02\/حلاوة-الجبن-gall-2.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/02\/حلاوة-الجبن-gall-1.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/02\/حلاوة-الجبن-gall-3.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/04\/4004010-gall-3.jpg"
             ],
             "type": "variable"
         },
         {
-            "id": 2965,
-            "name": "Cancy Dress",
-            "title": "Cancy Dress",
-            "slug": "cancy-dress",
-            "price": "4799",
+            "id": 1700,
+            "name": "عين الست",
+            "title": "عين الست",
+            "slug": "%d8%b9%d9%8a%d9%86-%d8%a7%d9%84%d8%b3%d8%aa",
+            "price": "42.5",
             "sale_price": "",
-            "main_image": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5782.jpg",
-            "thumbnail": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5782-150x150.jpg",
+            "main_image": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/04\/4004011-thumb.jpg",
+            "thumbnail": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/04\/4004011-thumb-150x150.jpg",
             "images": [
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5778.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5793.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5782.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/IMG-4142.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5785.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/IMG-4145.jpg"
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/04\/4004011-gall-3.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/02\/4004011-gall-1.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/02\/4004011-gall-2.jpg"
             ],
             "type": "variable"
         },
         {
-            "id": 2971,
-            "name": "Gem Dress",
-            "title": "Gem Dress",
-            "slug": "gem-dress",
-            "price": "4499",
+            "id": 1693,
+            "name": "شرحات فستق",
+            "title": "شرحات فستق",
+            "slug": "%d8%b4%d8%b1%d8%ad%d8%a7%d8%aa-%d9%81%d8%b3%d8%aa%d9%82",
+            "price": "0",
             "sale_price": "",
-            "main_image": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5543.jpg",
-            "thumbnail": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5543-150x150.jpg",
+            "main_image": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/03\/4003023-thumb.jpg",
+            "thumbnail": "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/03\/4003023-thumb-150x150.jpg",
             "images": [
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5543.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A55542.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5546.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5544.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5549.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5551.jpg"
-            ],
-            "type": "variable"
-        },
-        {
-            "id": 2959,
-            "name": "Leona Dress",
-            "title": "Leona Dress",
-            "slug": "leona-dress",
-            "price": "3999",
-            "sale_price": "",
-            "main_image": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5682.jpg",
-            "thumbnail": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5682-150x150.jpg",
-            "images": [
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5669.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/IMG-4146.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5696.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5674.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5682.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5698.jpg"
-            ],
-            "type": "variable"
-        },
-        {
-            "id": 2953,
-            "name": "Virgie Dress",
-            "title": "Virgie Dress",
-            "slug": "virgie-dress",
-            "price": "3999",
-            "sale_price": "",
-            "main_image": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/03\/018A5575.jpg",
-            "thumbnail": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/03\/018A5575-150x150.jpg",
-            "images": [
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/03\/018A5575.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/03\/018A5584.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/03\/018A5577.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/03\/018A5594.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/03\/018A5578.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/03\/018A5583.jpg"
-            ],
-            "type": "variable"
-        },
-        {
-            "id": 2947,
-            "name": "Librella Dress",
-            "title": "Librella Dress",
-            "slug": "librella-dress",
-            "price": "4299",
-            "sale_price": "",
-            "main_image": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/03\/018A5876.jpg",
-            "thumbnail": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/03\/018A5876-150x150.jpg",
-            "images": [
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/IMG-4139.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/IMG-4138.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5871.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5874.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5877.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5876.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5882.jpg"
-            ],
-            "type": "variable"
-        },
-        {
-            "id": 2945,
-            "name": "Scorpia Dress",
-            "title": "Scorpia Dress",
-            "slug": "scorpia-dress",
-            "price": "3499",
-            "sale_price": "",
-            "main_image": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5499.jpg",
-            "thumbnail": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5499-150x150.jpg",
-            "images": [
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5497.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5499.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5500.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5504.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5508.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5509.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5515.jpg"
-            ],
-            "type": "variable"
-        },
-        {
-            "id": 2939,
-            "name": "Sagitta Dress",
-            "title": "Sagitta Dress",
-            "slug": "sagitta-dress",
-            "price": "4499",
-            "sale_price": "",
-            "main_image": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5818.jpg",
-            "thumbnail": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5818-150x150.jpg",
-            "images": [
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5813.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5818.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5824.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/018A5852.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/IMG-4137.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/IMG-4140.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/IMG-4141.jpg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/02\/IMG-4143.jpg"
-            ],
-            "type": "variable"
-        },
-        {
-            "id": 2724,
-            "name": "Laia Set - Black",
-            "title": "Laia Set - Black",
-            "slug": "laia-set-black",
-            "price": "1599",
-            "sale_price": "",
-            "main_image": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/01\/743CB646-F619-4B8B-AB8E-B6DD45772CDD.jpeg",
-            "thumbnail": "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/01\/743CB646-F619-4B8B-AB8E-B6DD45772CDD-150x150.jpeg",
-            "images": [
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/01\/98D8B99F-9BC2-4A03-BC23-B64C64FBD432.jpeg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/01\/ADC5D8D3-8FD9-4FD9-9F2C-CE67B3378957.jpeg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/01\/947559AF-6384-42BD-871F-0B8839B76283.jpeg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/01\/D6E77B27-1791-4206-B229-6389B52964A4.jpeg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/01\/CEFD8399-2CA6-4207-874E-DC96A4AD3553.jpeg",
-                "https:\/\/www.cloudhosta.com:92\/wp-content\/uploads\/2023\/01\/743CB646-F619-4B8B-AB8E-B6DD45772CDD.jpeg"
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/03\/4003023-gall-3.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/03\/4003023-gall-4.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/02\/4003023-gall-2.jpg",
+                "https:\/\/www.ar-koueider.com\/wp-content\/uploads\/2021\/02\/4003023-gall-1.jpg"
             ],
             "type": "variable"
         }
@@ -276,10 +253,10 @@ export default function ExtraProducts({ categorySlug, pageNumber, title }: Props
     //   const shuffledProducts = shuffleArray(products);
 
     return (
-        <div className="bg-white border-t-2 mt-10">
-            <div className="container mx-auto py-16 px-4 sm:py-24 sm:px-6">
+        <div className="mt-10 bg-white border-t-2">
+            <div className="container px-4 py-16 mx-auto sm:py-24 sm:px-6">
                 <h2 className="text-2xl font-bold tracking-tight text-gray-900">{title ? title : 'Customers also purchased'}</h2>
-                <div className="mt-6 grid grid-cols-1 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-5 xl:gap-x-8">
+                <div className="grid grid-cols-1 mt-6 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-5 xl:gap-x-8">
 
                     {products.sort(() => Math.random() - 0.5)
                         .slice(0, 5)

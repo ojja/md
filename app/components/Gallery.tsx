@@ -83,12 +83,12 @@ export default function Gallery({ galleryImages = [] }: GalleryProps) {
   ];
 
   return (
-    <div className="gallery-slider-wrapper flex">
+    <div className="gallery-slider-wrapper flex max-h-[500px]">
       <Slider
         {...settingsMain}
         asNavFor={nav2}
         ref={slider => (setSlider1(slider))}
-        className="w-10/12 order-1"
+        className="order-1 w-10/12"
       >
         {galleryImages.map(slide => (
           <div className="slick-slide" key={v4}>
@@ -99,7 +99,7 @@ export default function Gallery({ galleryImages = [] }: GalleryProps) {
           </div>
         ))}
       </Slider>
-      <div className="gallery-thumbnail-slider-wrap w-2/12">
+      <div className="w-2/12 gallery-thumbnail-slider-wrap">
         <Slider
           {...settingsThumbs}
           asNavFor={nav1}

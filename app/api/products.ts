@@ -31,18 +31,28 @@ export async function getProducts(name?: string | null) {
   // const products: Product[] = await response.json();
   // return products;
   const url = 'https://www.ar-koueider.com/MitchAPI/category.php';
-  const data = { "attributes": {}, "category": "all-clothing", "price_range": [0, 1000], "products_per_page": 90, "page_number": 1 };
+  const data = { "attributes": {}, "category": "oriental-sweets", "price_range": [0, 1000], "products_per_page": 90, "page_number": 1 };
   const options = {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify(data),
   };
-  const response = await fetch(url, options);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch data with status ${response.status}`);
+  // const response = await fetch(url, options);
+  // if (!response.ok) {
+  //   throw new Error(`Failed to fetch data with status ${response.status}`);
+  // }
+  // const products: Product[] = await response.json();
+  // return products;
+  try {
+    const response = await fetch(url, options);
+    const result: ApiResponse = await response.json();
+    // Extract the products array from the API response
+    const products: Product[] = result;
+    return products;
+  } catch (error) {
+    console.error("Error:", error);
+    return [];
   }
-  const products: Product[] = await response.json();
-  return products;
 }
 
 
@@ -94,6 +104,15 @@ export async function getProducts(name?: string | null) {
 //   const product: Product[] = await response.json();
 //   return product;
 // }
+interface ApiResponse {
+  success: boolean;
+  message: string;
+  data: {
+    products: Product[];
+    // total_products: number;
+    // total_pages: number;
+  };
+}
 export async function getProductBySlug(productSlug: string) {
   const url = 'https://www.ar-koueider.com/MitchAPI/single.php';
   const formData = new FormData();
@@ -102,10 +121,21 @@ export async function getProductBySlug(productSlug: string) {
     method: 'POST',
     body: formData,
   };
-  const response = await fetch(url, options);
-  if (!response.ok) {
-    throw new Error(`Failed to fetch data with status ${response.status}`);
+  // const response = await fetch(url, options);
+  // if (!response.ok) {
+  //   throw new Error(`Failed to fetch data with status ${response.status}`);
+  // }
+  // const product: Product[] = await response.json();
+  // return product;
+
+  try {
+    const response = await fetch(url, options);
+    const result: ApiResponse = await response.json();
+    // Extract the products array from the API response
+    const product: Product[] = result;
+    return product;
+  } catch (error) {
+    console.error("Error:", error);
+    return [];
   }
-  const product: Product[] = await response.json();
-  return product;
 }
