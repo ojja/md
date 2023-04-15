@@ -15,32 +15,26 @@ const navigation = {
       slug: 'juices',
       featured: [
         {
-          name: 'All Categories',
-          href: 'oriental-sweets',
+          name: 'Category 1 > 2',
+          href: 'pants',
           imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-01.jpg',
           imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
         },
         {
           name: 'Category 1 > 2',
-          href: 'basbousa-kunafa',
+          href: 'polo',
           imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg',
           imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-        },
-        {
-          name: 'Category 1 > 3',
-          href: 'ramadaniyat',
-          imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg',
-          imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
-        },
+        }
       ],
       sections: [
         {
           id: 'clothing',
           name: 'Clothing',
           items: [
-            { name: 'ramadaniyat', href: 'ramadaniyat' },
-            { name: 'Mini Dresses', href: 'basbousa-kunafa' },
-            { name: 'Maxi Dresses', href: 'oriental-sweets' },
+            { name: 'Category 2', href: 'dress' },
+            { name: 'Category 3', href: 'shirt' },
+            { name: 'Category 4', href: 'skirt' },
             // { name: 'Shirts', href: 'shirts' },
             // { name: 'Tees', href: 'tees' },
             // { name: 'Jackets', href: 'jackets' },
@@ -51,10 +45,10 @@ const navigation = {
           id: 'accessories',
           name: 'Accessories X',
           items: [
-            { name: 'Watches X', href: 'watches' },
-            { name: 'Fitness Equipment X', href: 'fitness-equipment' },
+            { name: 'Watches X', href: 'top' },
+            { name: 'Fitness Equipment X', href: 'vest' },
             { name: 'Bags X', href: 'bags' },
-            { name: 'Erin Recommends X', href: 'erin-recommends' },
+            { name: 'Erin Recommends X', href: 'shoes' },
           ],
         },
         {

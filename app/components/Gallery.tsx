@@ -83,7 +83,7 @@ export default function Gallery({ galleryImages = [] }: GalleryProps) {
   ];
 
   return (
-    <div className="gallery-slider-wrapper flex max-h-[500px]">
+    <div className="gallery-slider-wrapper flex max-h-[100%]">
       <Slider
         {...settingsMain}
         asNavFor={nav2}

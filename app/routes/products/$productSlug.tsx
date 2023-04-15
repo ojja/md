@@ -115,7 +115,7 @@ export default function ProductSingle() {
                                 <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-4 border-b border-gray-200" />
                             </div>
                             <div className="w-full px-4 mb-16 lg:w-1/2 lg:mb-0">
-                                {/* <Gallery galleryImages={product.images}/> */}
+                                <Gallery galleryImages={product.images}/>
                             </div>
                             <div className="w-full px-4 lg:w-1/2">
                                 <div className="pt-2 mb-6">

@@ -19,7 +19,7 @@ interface Product {
     categorySlug: string,
     pageNumber: number
   ): Promise<Product[]> {
-    const url: string = "https://www.ar-koueider.com/MitchAPI/category.php";
+    const url: string = "https://lecollezioni-eg.com/MitchAPI/category.php";
     const data: any = {
       category: categorySlug,
       products_per_page: 20,
