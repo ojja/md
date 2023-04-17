@@ -23,6 +23,20 @@ const isShoppingCartOpen = persistentAtom<boolean>('isShoppingCartOpen', typeof 
 
 
 export const useShoppingCart = () => {
+    if (typeof window === "undefined") {
+        return {
+            getItemQuantity: () => null,
+            cartQuantity: 0,
+            cartQuantityTotal: 0,
+            cartItems: [],
+            isOpen: false,
+            addToCart: () => null,
+            decreaseCartQuantity: () => null ,
+            removeFromCart: () => null ,
+            openCart: () => null ,
+            closeCart: () => null ,
+        };
+    }
     const cartStore = useStore(shoppingCart);
     const isOpen = useStore(isShoppingCartOpen);
 
