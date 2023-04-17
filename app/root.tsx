@@ -33,12 +33,12 @@ export default function App() {
         <Links />
       </head>
       <body className="oultine-none box-border">
-        {/* <Layout> */}
-        <Outlet />
-        <ScrollRestoration />
-        <Scripts />
-        {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
-        {/* </Layout> */}
+        <Layout>
+          <Outlet />
+          <ScrollRestoration />
+          <Scripts />
+          {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
+        </Layout>
       </body>
     </html>
   );
