@@ -33,27 +33,17 @@ export default function App() {
         <Links />
       </head>
       <body className="oultine-none box-border">
-        <Layout>
+        <NavBar />
+        <main className="relative z-10">
           <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-          {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
-        </Layout>
+        </main>
+        <Footer />
+        <ScrollRestoration />
+        <Scripts />
+        {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
       </body>
-    </html>
+    </html >
   );
-}
-
-
-function Layout({ children }: { children: React.ReactNode }) {
-  // console.log('params',useParams())
-  return (
-    <>
-      <NavBar />
-      <main className="relative z-10">{children}</main>
-      <Footer />
-    </>
-  )
 }
 
 // const error: string = "Error message";
