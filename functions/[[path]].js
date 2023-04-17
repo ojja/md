@@ -23486,7 +23486,7 @@ var require_react_dom_development = __commonJS({
           argsWithFormat.unshift("Warning: " + format), Function.prototype.apply.call(console[level], console, argsWithFormat);
         }
       }
-      var FunctionComponent = 0, ClassComponent = 1, IndeterminateComponent = 2, HostRoot = 3, HostPortal = 4, HostComponent = 5, HostText = 6, Fragment22 = 7, Mode = 8, ContextConsumer = 9, ContextProvider = 10, ForwardRef = 11, Profiler = 12, SuspenseComponent = 13, MemoComponent = 14, SimpleMemoComponent = 15, LazyComponent = 16, IncompleteClassComponent = 17, DehydratedFragment = 18, SuspenseListComponent = 19, ScopeComponent = 21, OffscreenComponent = 22, LegacyHiddenComponent = 23, CacheComponent = 24, TracingMarkerComponent = 25, enableClientRenderFallbackOnTextMismatch = !0, enableNewReconciler = !1, enableLazyContextPropagation = !1, enableLegacyHidden = !1, enableSuspenseAvoidThisFallback = !1, disableCommentsAsDOMContainers = !0, enableCustomElementPropertySupport = !1, warnAboutStringRefs = !1, enableSchedulingProfiler = !0, enableProfilerTimer = !0, enableProfilerCommitHooks = !0, allNativeEvents = /* @__PURE__ */ new Set(), registrationNameDependencies = {}, possibleRegistrationNames = {};
+      var FunctionComponent = 0, ClassComponent = 1, IndeterminateComponent = 2, HostRoot = 3, HostPortal = 4, HostComponent = 5, HostText = 6, Fragment21 = 7, Mode = 8, ContextConsumer = 9, ContextProvider = 10, ForwardRef = 11, Profiler = 12, SuspenseComponent = 13, MemoComponent = 14, SimpleMemoComponent = 15, LazyComponent = 16, IncompleteClassComponent = 17, DehydratedFragment = 18, SuspenseListComponent = 19, ScopeComponent = 21, OffscreenComponent = 22, LegacyHiddenComponent = 23, CacheComponent = 24, TracingMarkerComponent = 25, enableClientRenderFallbackOnTextMismatch = !0, enableNewReconciler = !1, enableLazyContextPropagation = !1, enableLegacyHidden = !1, enableSuspenseAvoidThisFallback = !1, disableCommentsAsDOMContainers = !0, enableCustomElementPropertySupport = !1, warnAboutStringRefs = !1, enableSchedulingProfiler = !0, enableProfilerTimer = !0, enableProfilerCommitHooks = !0, allNativeEvents = /* @__PURE__ */ new Set(), registrationNameDependencies = {}, possibleRegistrationNames = {};
       function registerTwoPhaseEvent(registrationName, dependencies) {
         registerDirectEvent(registrationName, dependencies), registerDirectEvent(registrationName + "Capture", dependencies);
       }
@@ -24257,7 +24257,7 @@ Error generating stack: ` + x5.message + `
             return "DehydratedFragment";
           case ForwardRef:
             return getWrappedName$1(type, type.render, "ForwardRef");
-          case Fragment22:
+          case Fragment21:
             return "Fragment";
           case HostComponent:
             return type;
@@ -30286,7 +30286,7 @@ See https://reactjs.org/link/refs-must-have-owner for more information.`);
           }
         }
         function updateFragment2(returnFiber, current2, fragment, lanes, key) {
-          if (current2 === null || current2.tag !== Fragment22) {
+          if (current2 === null || current2.tag !== Fragment21) {
             var created = createFiberFromFragment(fragment, returnFiber.mode, lanes, key);
             return created.return = returnFiber, created;
           } else {
@@ -30513,7 +30513,7 @@ See https://reactjs.org/link/refs-must-have-owner for more information.`);
             if (child.key === key) {
               var elementType = element.type;
               if (elementType === REACT_FRAGMENT_TYPE) {
-                if (child.tag === Fragment22) {
+                if (child.tag === Fragment21) {
                   deleteRemainingChildren(returnFiber, child.sibling);
                   var existing = useFiber(child, element.props.children);
                   return existing.return = returnFiber, existing._debugSource = element._source, existing._debugOwner = element._owner, existing;
@@ -30675,7 +30675,7 @@ See https://reactjs.org/link/refs-must-have-owner for more information.`);
         }
         return null;
       }
-      var NoFlags$1 = 0, HasEffect = 1, Insertion = 2, Layout2 = 4, Passive$1 = 8, workInProgressSources = [];
+      var NoFlags$1 = 0, HasEffect = 1, Insertion = 2, Layout = 4, Passive$1 = 8, workInProgressSources = [];
       function resetWorkInProgressVersions() {
         for (var i8 = 0; i8 < workInProgressSources.length; i8++) {
           var mutableSource = workInProgressSources[i8];
@@ -31082,10 +31082,10 @@ Incoming: %s`, currentHookNameInDev, "[" + prevDeps.join(", ") + "]", "[" + next
       }
       function mountLayoutEffect(create, deps) {
         var fiberFlags = Update;
-        return fiberFlags |= LayoutStatic, (currentlyRenderingFiber$1.mode & StrictEffectsMode) !== NoMode && (fiberFlags |= MountLayoutDev), mountEffectImpl(fiberFlags, Layout2, create, deps);
+        return fiberFlags |= LayoutStatic, (currentlyRenderingFiber$1.mode & StrictEffectsMode) !== NoMode && (fiberFlags |= MountLayoutDev), mountEffectImpl(fiberFlags, Layout, create, deps);
       }
       function updateLayoutEffect(create, deps) {
-        return updateEffectImpl(Update, Layout2, create, deps);
+        return updateEffectImpl(Update, Layout, create, deps);
       }
       function imperativeHandleEffect(create, ref) {
         if (typeof ref == "function") {
@@ -31105,12 +31105,12 @@ Incoming: %s`, currentHookNameInDev, "[" + prevDeps.join(", ") + "]", "[" + next
       function mountImperativeHandle(ref, create, deps) {
         typeof create != "function" && error("Expected useImperativeHandle() second argument to be a function that creates a handle. Instead received: %s.", create !== null ? typeof create : "null");
         var effectDeps = deps != null ? deps.concat([ref]) : null, fiberFlags = Update;
-        return fiberFlags |= LayoutStatic, (currentlyRenderingFiber$1.mode & StrictEffectsMode) !== NoMode && (fiberFlags |= MountLayoutDev), mountEffectImpl(fiberFlags, Layout2, imperativeHandleEffect.bind(null, create, ref), effectDeps);
+        return fiberFlags |= LayoutStatic, (currentlyRenderingFiber$1.mode & StrictEffectsMode) !== NoMode && (fiberFlags |= MountLayoutDev), mountEffectImpl(fiberFlags, Layout, imperativeHandleEffect.bind(null, create, ref), effectDeps);
       }
       function updateImperativeHandle(ref, create, deps) {
         typeof create != "function" && error("Expected useImperativeHandle() second argument to be a function that creates a handle. Instead received: %s.", create !== null ? typeof create : "null");
         var effectDeps = deps != null ? deps.concat([ref]) : null;
-        return updateEffectImpl(Update, Layout2, imperativeHandleEffect.bind(null, create, ref), effectDeps);
+        return updateEffectImpl(Update, Layout, imperativeHandleEffect.bind(null, create, ref), effectDeps);
       }
       function mountDebugValue(value, formatterFn) {
       }
@@ -33034,7 +33034,7 @@ Check the render method of \`` + ownerName + "`.");
             var type = workInProgress2.type, _unresolvedProps2 = workInProgress2.pendingProps, _resolvedProps2 = workInProgress2.elementType === type ? _unresolvedProps2 : resolveDefaultProps(type, _unresolvedProps2);
             return updateForwardRef(current2, workInProgress2, type, _resolvedProps2, renderLanes2);
           }
-          case Fragment22:
+          case Fragment21:
             return updateFragment(current2, workInProgress2, renderLanes2);
           case Mode:
             return updateMode(current2, workInProgress2, renderLanes2);
@@ -33185,7 +33185,7 @@ Check the render method of \`` + ownerName + "`.");
           case SimpleMemoComponent:
           case FunctionComponent:
           case ForwardRef:
-          case Fragment22:
+          case Fragment21:
           case Mode:
           case Profiler:
           case ContextConsumer:
@@ -33443,7 +33443,7 @@ Check the render method of \`` + ownerName + "`.");
       };
       function safelyCallCommitHookLayoutEffectListMount(current2, nearestMountedAncestor) {
         try {
-          commitHookEffectListMount(Layout2, current2);
+          commitHookEffectListMount(Layout, current2);
         } catch (error2) {
           captureCommitPhaseError(current2, nearestMountedAncestor, error2);
         }
@@ -33573,7 +33573,7 @@ Check the render method of \`` + ownerName + "`.");
           do {
             if ((effect.tag & flags) === flags) {
               var destroy = effect.destroy;
-              effect.destroy = void 0, destroy !== void 0 && ((flags & Passive$1) !== NoFlags$1 ? markComponentPassiveEffectUnmountStarted(finishedWork) : (flags & Layout2) !== NoFlags$1 && markComponentLayoutEffectUnmountStarted(finishedWork), (flags & Insertion) !== NoFlags$1 && setIsRunningInsertionEffect(!0), safelyCallDestroy(finishedWork, nearestMountedAncestor, destroy), (flags & Insertion) !== NoFlags$1 && setIsRunningInsertionEffect(!1), (flags & Passive$1) !== NoFlags$1 ? markComponentPassiveEffectUnmountStopped() : (flags & Layout2) !== NoFlags$1 && markComponentLayoutEffectUnmountStopped());
+              effect.destroy = void 0, destroy !== void 0 && ((flags & Passive$1) !== NoFlags$1 ? markComponentPassiveEffectUnmountStarted(finishedWork) : (flags & Layout) !== NoFlags$1 && markComponentLayoutEffectUnmountStarted(finishedWork), (flags & Insertion) !== NoFlags$1 && setIsRunningInsertionEffect(!0), safelyCallDestroy(finishedWork, nearestMountedAncestor, destroy), (flags & Insertion) !== NoFlags$1 && setIsRunningInsertionEffect(!1), (flags & Passive$1) !== NoFlags$1 ? markComponentPassiveEffectUnmountStopped() : (flags & Layout) !== NoFlags$1 && markComponentLayoutEffectUnmountStopped());
             }
             effect = effect.next;
           } while (effect !== firstEffect);
@@ -33585,14 +33585,14 @@ Check the render method of \`` + ownerName + "`.");
           var firstEffect = lastEffect.next, effect = firstEffect;
           do {
             if ((effect.tag & flags) === flags) {
-              (flags & Passive$1) !== NoFlags$1 ? markComponentPassiveEffectMountStarted(finishedWork) : (flags & Layout2) !== NoFlags$1 && markComponentLayoutEffectMountStarted(finishedWork);
+              (flags & Passive$1) !== NoFlags$1 ? markComponentPassiveEffectMountStarted(finishedWork) : (flags & Layout) !== NoFlags$1 && markComponentLayoutEffectMountStarted(finishedWork);
               var create = effect.create;
-              (flags & Insertion) !== NoFlags$1 && setIsRunningInsertionEffect(!0), effect.destroy = create(), (flags & Insertion) !== NoFlags$1 && setIsRunningInsertionEffect(!1), (flags & Passive$1) !== NoFlags$1 ? markComponentPassiveEffectMountStopped() : (flags & Layout2) !== NoFlags$1 && markComponentLayoutEffectMountStopped();
+              (flags & Insertion) !== NoFlags$1 && setIsRunningInsertionEffect(!0), effect.destroy = create(), (flags & Insertion) !== NoFlags$1 && setIsRunningInsertionEffect(!1), (flags & Passive$1) !== NoFlags$1 ? markComponentPassiveEffectMountStopped() : (flags & Layout) !== NoFlags$1 && markComponentLayoutEffectMountStopped();
               {
                 var destroy = effect.destroy;
                 if (destroy !== void 0 && typeof destroy != "function") {
                   var hookName = void 0;
-                  (effect.tag & Layout2) !== NoFlags ? hookName = "useLayoutEffect" : (effect.tag & Insertion) !== NoFlags ? hookName = "useInsertionEffect" : hookName = "useEffect";
+                  (effect.tag & Layout) !== NoFlags ? hookName = "useLayoutEffect" : (effect.tag & Insertion) !== NoFlags ? hookName = "useInsertionEffect" : hookName = "useEffect";
                   var addendum = void 0;
                   destroy === null ? addendum = " You returned null. If your effect does not require clean up, return undefined (or nothing)." : typeof destroy.then == "function" ? addendum = `
 
@@ -33649,12 +33649,12 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
               if (!offscreenSubtreeWasHidden)
                 if (finishedWork.mode & ProfileMode)
                   try {
-                    startLayoutEffectTimer(), commitHookEffectListMount(Layout2 | HasEffect, finishedWork);
+                    startLayoutEffectTimer(), commitHookEffectListMount(Layout | HasEffect, finishedWork);
                   } finally {
                     recordLayoutEffectDuration(finishedWork);
                   }
                 else
-                  commitHookEffectListMount(Layout2 | HasEffect, finishedWork);
+                  commitHookEffectListMount(Layout | HasEffect, finishedWork);
               break;
             }
             case ClassComponent: {
@@ -34000,7 +34000,7 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
                   var firstEffect = lastEffect.next, effect = firstEffect;
                   do {
                     var _effect = effect, destroy = _effect.destroy, tag = _effect.tag;
-                    destroy !== void 0 && ((tag & Insertion) !== NoFlags$1 ? safelyCallDestroy(deletedFiber, nearestMountedAncestor, destroy) : (tag & Layout2) !== NoFlags$1 && (markComponentLayoutEffectUnmountStarted(deletedFiber), deletedFiber.mode & ProfileMode ? (startLayoutEffectTimer(), safelyCallDestroy(deletedFiber, nearestMountedAncestor, destroy), recordLayoutEffectDuration(deletedFiber)) : safelyCallDestroy(deletedFiber, nearestMountedAncestor, destroy), markComponentLayoutEffectUnmountStopped())), effect = effect.next;
+                    destroy !== void 0 && ((tag & Insertion) !== NoFlags$1 ? safelyCallDestroy(deletedFiber, nearestMountedAncestor, destroy) : (tag & Layout) !== NoFlags$1 && (markComponentLayoutEffectUnmountStarted(deletedFiber), deletedFiber.mode & ProfileMode ? (startLayoutEffectTimer(), safelyCallDestroy(deletedFiber, nearestMountedAncestor, destroy), recordLayoutEffectDuration(deletedFiber)) : safelyCallDestroy(deletedFiber, nearestMountedAncestor, destroy), markComponentLayoutEffectUnmountStopped())), effect = effect.next;
                   } while (effect !== firstEffect);
                 }
               }
@@ -34104,14 +34104,14 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
               }
               if (finishedWork.mode & ProfileMode) {
                 try {
-                  startLayoutEffectTimer(), commitHookEffectListUnmount(Layout2 | HasEffect, finishedWork, finishedWork.return);
+                  startLayoutEffectTimer(), commitHookEffectListUnmount(Layout | HasEffect, finishedWork, finishedWork.return);
                 } catch (error2) {
                   captureCommitPhaseError(finishedWork, finishedWork.return, error2);
                 }
                 recordLayoutEffectDuration(finishedWork);
               } else
                 try {
-                  commitHookEffectListUnmount(Layout2 | HasEffect, finishedWork, finishedWork.return);
+                  commitHookEffectListUnmount(Layout | HasEffect, finishedWork, finishedWork.return);
                 } catch (error2) {
                   captureCommitPhaseError(finishedWork, finishedWork.return, error2);
                 }
@@ -34301,12 +34301,12 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
             case SimpleMemoComponent: {
               if (fiber.mode & ProfileMode)
                 try {
-                  startLayoutEffectTimer(), commitHookEffectListUnmount(Layout2, fiber, fiber.return);
+                  startLayoutEffectTimer(), commitHookEffectListUnmount(Layout, fiber, fiber.return);
                 } finally {
                   recordLayoutEffectDuration(fiber);
                 }
               else
-                commitHookEffectListUnmount(Layout2, fiber, fiber.return);
+                commitHookEffectListUnmount(Layout, fiber, fiber.return);
               break;
             }
             case ClassComponent: {
@@ -34523,7 +34523,7 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
           case ForwardRef:
           case SimpleMemoComponent: {
             try {
-              commitHookEffectListMount(Layout2 | HasEffect, fiber);
+              commitHookEffectListMount(Layout | HasEffect, fiber);
             } catch (error2) {
               captureCommitPhaseError(fiber, fiber.return, error2);
             }
@@ -34560,7 +34560,7 @@ Learn more about data fetching with Hooks: https://reactjs.org/link/hooks-data-f
           case ForwardRef:
           case SimpleMemoComponent: {
             try {
-              commitHookEffectListUnmount(Layout2 | HasEffect, fiber, fiber.return);
+              commitHookEffectListUnmount(Layout | HasEffect, fiber, fiber.return);
             } catch (error2) {
               captureCommitPhaseError(fiber, fiber.return, error2);
             }
@@ -35702,7 +35702,7 @@ Check the render method of \`` + ownerName + "`.");
         return fiber._debugSource = element._source, fiber._debugOwner = element._owner, fiber;
       }
       function createFiberFromFragment(elements, mode, lanes, key) {
-        var fiber = createFiber(Fragment22, elements, key, mode);
+        var fiber = createFiber(Fragment21, elements, key, mode);
         return fiber.lanes = lanes, fiber;
       }
       function createFiberFromProfiler(pendingProps, mode, lanes, key) {
@@ -60961,17 +60961,17 @@ Check this link for more details:
 https://remix.run/pages/gotchas#server-code-in-client-bundles`);
   let error = useRouteError(), {
     CatchBoundary,
-    ErrorBoundary
+    ErrorBoundary: ErrorBoundary2
   } = routeModules[id2];
   if (future2.v2_errorBoundary) {
-    if (id2 === "root" && (ErrorBoundary || (ErrorBoundary = V2_RemixRootDefaultErrorBoundary)), ErrorBoundary)
-      return /* @__PURE__ */ React3.createElement(ErrorBoundary, null);
+    if (id2 === "root" && (ErrorBoundary2 || (ErrorBoundary2 = V2_RemixRootDefaultErrorBoundary)), ErrorBoundary2)
+      return /* @__PURE__ */ React3.createElement(ErrorBoundary2, null);
     throw error;
   }
-  if (id2 === "root" && (CatchBoundary || (CatchBoundary = RemixRootDefaultCatchBoundary), ErrorBoundary || (ErrorBoundary = RemixRootDefaultErrorBoundary)), isRouteErrorResponse(error)) {
+  if (id2 === "root" && (CatchBoundary || (CatchBoundary = RemixRootDefaultCatchBoundary), ErrorBoundary2 || (ErrorBoundary2 = RemixRootDefaultErrorBoundary)), isRouteErrorResponse(error)) {
     let tError = error;
-    if ((tError == null ? void 0 : tError.error) instanceof Error && tError.status !== 404 && ErrorBoundary)
-      return /* @__PURE__ */ React3.createElement(ErrorBoundary, {
+    if ((tError == null ? void 0 : tError.error) instanceof Error && tError.status !== 404 && ErrorBoundary2)
+      return /* @__PURE__ */ React3.createElement(ErrorBoundary2, {
         error: tError.error
       });
     if (CatchBoundary)
@@ -60980,8 +60980,8 @@ https://remix.run/pages/gotchas#server-code-in-client-bundles`);
         catch: error
       });
   }
-  if (error instanceof Error && ErrorBoundary)
-    return /* @__PURE__ */ React3.createElement(ErrorBoundary, {
+  if (error instanceof Error && ErrorBoundary2)
+    return /* @__PURE__ */ React3.createElement(ErrorBoundary2, {
       error
     });
   throw error;
@@ -61636,6 +61636,7 @@ function handleRequest(request, responseStatusCode, responseHeaders, remixContex
 // app/root.tsx
 var root_exports = {};
 __export(root_exports, {
+  ErrorBoundary: () => ErrorBoundary,
   default: () => App,
   links: () => links,
   meta: () => meta
@@ -63926,6 +63927,10 @@ var q5 = D2(Ne3), oe3 = D2(ye3), De3 = D2(He3), tt = Object.assign(q5, { Child: 
 // app/layouts/navbar/index.tsx
 var import_outline2 = __toESM(require_outline());
 
+// app/components/ShoppingCart.tsx
+var import_outline = __toESM(require_outline());
+init_dist2();
+
 // node_modules/nanostores/clean-stores/index.js
 var clean = Symbol("clean");
 
@@ -64145,10 +64150,6 @@ var shoppingCart = persistentAtom("cart", [], {
     closeCart
   };
 }, cartStore_default = useShoppingCart;
-
-// app/components/ShoppingCart.tsx
-var import_outline = __toESM(require_outline());
-init_dist2();
 
 // app/utils/FormatCurrency.js
 var CURRENCY_FORMATTER = new Intl.NumberFormat(void 0, {
@@ -64575,6 +64576,7 @@ var import_jsx_runtime4 = __toESM(require_jsx_runtime());
 function ShoppingCart() {
   let { closeCart, cartItems, removeFromCart, openCart, isOpen } = cartStore_default();
   return console.log("isOpen>", isOpen), setTimeout(() => {
+    closeCart();
   }, 1e3), /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(tt, { show: isOpen, children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(St, { as: "div", className: "relative z-30", onClose: closeCart, children: [
     /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
       tt.Child,
@@ -64842,7 +64844,7 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 function NavBar() {
-  let [open, setOpen] = (0, import_react47.useState)(!1), { closeCart, cartQuantityTotal, openCart } = cartStore_default();
+  let [open, setOpen] = (0, import_react47.useState)(!1);
   return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(import_jsx_runtime6.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "bg-white", children: [
     /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(import_react47.default.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(tt, { show: open, children: /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(St, { as: "div", className: "relative z-40 lg:hidden", onClose: setOpen, children: [
       /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
@@ -64935,7 +64937,6 @@ function NavBar() {
         }
       ) })
     ] }) }) }),
-    closeCart,
     /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(ShoppingCart, {}),
     /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("header", { className: "relative z-20 bg-white", children: [
       /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("p", { className: "flex items-center justify-center h-10 px-4 text-sm font-medium text-white bg-indigo-600 sm:px-6 lg:px-8", children: "Get free delivery on orders over $100" }),
@@ -65138,7 +65139,6 @@ function NavBar() {
             "button",
             {
               className: "flex items-center p-2 -m-2 group",
-              onClick: openCart,
               children: [
                 /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
                   import_outline2.ShoppingBagIcon,
@@ -65147,7 +65147,6 @@ function NavBar() {
                     "aria-hidden": "true"
                   }
                 ),
-                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800", children: cartQuantityTotal }),
                 /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "sr-only", children: "items in cart, view bag" })
               ]
             }
@@ -65170,20 +65169,30 @@ function App() {
       /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Meta, {}),
       /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Links, {})
     ] }),
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("body", { className: "oultine-none box-border", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(Layout, { children: [
-      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Outlet, {}),
+    /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("body", { className: "oultine-none box-border", children: [
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(NavBar, {}),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("main", { className: "relative z-10", children: /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Outlet, {}) }),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Footer, {}),
       /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(ScrollRestoration2, {}),
       /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Scripts, {}),
       process.env.NODE_ENV === "development" ? /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(LiveReload, {}) : null
-    ] }) })
+    ] })
   ] });
 }
-function Layout({ children }) {
-  return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)(import_jsx_runtime7.Fragment, { children: [
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(NavBar, {}),
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("main", { className: "relative z-10", children }),
-    /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Footer, {})
-  ] });
+function ErrorBoundary({ error }) {
+  debugger;
+  if (console.error(error), error)
+    return /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("html", { children: [
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("head", { children: [
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)("title", { children: "Oh no!" }),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Meta, {}),
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Links, {})
+      ] }),
+      /* @__PURE__ */ (0, import_jsx_runtime7.jsxs)("body", { children: [
+        error.message,
+        /* @__PURE__ */ (0, import_jsx_runtime7.jsx)(Scripts, {})
+      ] })
+    ] });
 }
 
 // app/routes/category-page.tsx
@@ -74548,7 +74557,7 @@ function shop() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "8a7e69f1", entry: { module: "/build/entry.client-LQICIALF.js", imports: ["/build/_shared/chunk-HPFL2GWL.js", "/build/_shared/chunk-X4AUN236.js", "/build/_shared/chunk-WAA2JUZB.js", "/build/_shared/chunk-ZP5QWDRS.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-FJUPCE6C.js", imports: ["/build/_shared/chunk-ILFY3APD.js", "/build/_shared/chunk-2ODSIS5P.js", "/build/_shared/chunk-HAM45H6V.js", "/build/_shared/chunk-LMY6NPHT.js", "/build/_shared/chunk-4EW62DST.js", "/build/_shared/chunk-SFI6O5R2.js", "/build/_shared/chunk-Q7T3NQ2Z.js", "/build/_shared/chunk-HJYI5MQW.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/cart": { id: "routes/cart", parentId: "root", path: "cart", index: void 0, caseSensitive: void 0, module: "/build/routes/cart-QIOHSVQY.js", imports: ["/build/_shared/chunk-JJIK72VF.js", "/build/_shared/chunk-37DFPQ7Y.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/category": { id: "routes/category", parentId: "root", path: "category", index: void 0, caseSensitive: void 0, module: "/build/routes/category/index-D3ZLE4K6.js", imports: ["/build/_shared/chunk-F5CGBJK6.js", "/build/_shared/chunk-NN2CIUR5.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/category/index": { id: "routes/category/index", parentId: "root", path: "category", index: !0, caseSensitive: void 0, module: "/build/routes/category/index-D3ZLE4K6.js", imports: ["/build/_shared/chunk-F5CGBJK6.js", "/build/_shared/chunk-NN2CIUR5.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/category-page": { id: "routes/category-page", parentId: "root", path: "category-page", index: void 0, caseSensitive: void 0, module: "/build/routes/category-page-5QTZRXN3.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/category/$catSlug/$subCatSlug": { id: "routes/category/$catSlug/$subCatSlug", parentId: "root", path: "category/:catSlug/:subCatSlug", index: void 0, caseSensitive: void 0, module: "/build/routes/category/$catSlug/$subCatSlug-IN5LZLEW.js", imports: ["/build/_shared/chunk-NN2CIUR5.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/category/$catSlug/index": { id: "routes/category/$catSlug/index", parentId: "root", path: "category/:catSlug", index: !0, caseSensitive: void 0, module: "/build/routes/category/$catSlug/index-NPYUQMVH.js", imports: ["/build/_shared/chunk-F72SJ3FQ.js", "/build/_shared/chunk-37DFPQ7Y.js", "/build/_shared/chunk-NN2CIUR5.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/checkout": { id: "routes/checkout", parentId: "root", path: "checkout", index: void 0, caseSensitive: void 0, module: "/build/routes/checkout-QI7IFSHC.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/forgot": { id: "routes/forgot", parentId: "root", path: "forgot", index: void 0, caseSensitive: void 0, module: "/build/routes/forgot-C3CU6MZT.js", imports: ["/build/_shared/chunk-M44RBXIO.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-ILR3G4AI.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-KV7OCOYV.js", imports: ["/build/_shared/chunk-M44RBXIO.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products": { id: "routes/products", parentId: "root", path: "products", index: void 0, caseSensitive: void 0, module: "/build/routes/products-QCV2VU5O.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products/$productSlug": { id: "routes/products/$productSlug", parentId: "routes/products", path: ":productSlug", index: void 0, caseSensitive: void 0, module: "/build/routes/products/$productSlug-5OWFSTOV.js", imports: ["/build/_shared/chunk-JJIK72VF.js", "/build/_shared/chunk-F72SJ3FQ.js", "/build/_shared/chunk-37DFPQ7Y.js", "/build/_shared/chunk-2ODSIS5P.js", "/build/_shared/chunk-HAM45H6V.js", "/build/_shared/chunk-LMY6NPHT.js", "/build/_shared/chunk-NN2CIUR5.js", "/build/_shared/chunk-SFI6O5R2.js", "/build/_shared/chunk-Q7T3NQ2Z.js", "/build/_shared/chunk-HJYI5MQW.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products/index": { id: "routes/products/index", parentId: "routes/products", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/products/index-DPF3EFNB.js", imports: ["/build/_shared/chunk-SFI6O5R2.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/signup": { id: "routes/signup", parentId: "root", path: "signup", index: void 0, caseSensitive: void 0, module: "/build/routes/signup-KAPLZ27A.js", imports: ["/build/_shared/chunk-M44RBXIO.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/thanks": { id: "routes/thanks", parentId: "root", path: "thanks", index: void 0, caseSensitive: void 0, module: "/build/routes/thanks-BRII5MEK.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, cssBundleHref: void 0, hmr: void 0, url: "/build/manifest-8A7E69F1.js" };
+var assets_manifest_default = { version: "38b91b37", entry: { module: "/build/entry.client-LQICIALF.js", imports: ["/build/_shared/chunk-HPFL2GWL.js", "/build/_shared/chunk-X4AUN236.js", "/build/_shared/chunk-WAA2JUZB.js", "/build/_shared/chunk-ZP5QWDRS.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-FNQTDF4G.js", imports: ["/build/_shared/chunk-ILFY3APD.js", "/build/_shared/chunk-2ODSIS5P.js", "/build/_shared/chunk-HAM45H6V.js", "/build/_shared/chunk-LMY6NPHT.js", "/build/_shared/chunk-4EW62DST.js", "/build/_shared/chunk-SFI6O5R2.js", "/build/_shared/chunk-Q7T3NQ2Z.js", "/build/_shared/chunk-HJYI5MQW.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/cart": { id: "routes/cart", parentId: "root", path: "cart", index: void 0, caseSensitive: void 0, module: "/build/routes/cart-QIOHSVQY.js", imports: ["/build/_shared/chunk-JJIK72VF.js", "/build/_shared/chunk-37DFPQ7Y.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/category": { id: "routes/category", parentId: "root", path: "category", index: void 0, caseSensitive: void 0, module: "/build/routes/category/index-D3ZLE4K6.js", imports: ["/build/_shared/chunk-F5CGBJK6.js", "/build/_shared/chunk-NN2CIUR5.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/category/index": { id: "routes/category/index", parentId: "root", path: "category", index: !0, caseSensitive: void 0, module: "/build/routes/category/index-D3ZLE4K6.js", imports: ["/build/_shared/chunk-F5CGBJK6.js", "/build/_shared/chunk-NN2CIUR5.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/category-page": { id: "routes/category-page", parentId: "root", path: "category-page", index: void 0, caseSensitive: void 0, module: "/build/routes/category-page-5QTZRXN3.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/category/$catSlug/$subCatSlug": { id: "routes/category/$catSlug/$subCatSlug", parentId: "root", path: "category/:catSlug/:subCatSlug", index: void 0, caseSensitive: void 0, module: "/build/routes/category/$catSlug/$subCatSlug-IN5LZLEW.js", imports: ["/build/_shared/chunk-NN2CIUR5.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/category/$catSlug/index": { id: "routes/category/$catSlug/index", parentId: "root", path: "category/:catSlug", index: !0, caseSensitive: void 0, module: "/build/routes/category/$catSlug/index-NPYUQMVH.js", imports: ["/build/_shared/chunk-F72SJ3FQ.js", "/build/_shared/chunk-37DFPQ7Y.js", "/build/_shared/chunk-NN2CIUR5.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/checkout": { id: "routes/checkout", parentId: "root", path: "checkout", index: void 0, caseSensitive: void 0, module: "/build/routes/checkout-QI7IFSHC.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/forgot": { id: "routes/forgot", parentId: "root", path: "forgot", index: void 0, caseSensitive: void 0, module: "/build/routes/forgot-C3CU6MZT.js", imports: ["/build/_shared/chunk-M44RBXIO.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-ILR3G4AI.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-KV7OCOYV.js", imports: ["/build/_shared/chunk-M44RBXIO.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products": { id: "routes/products", parentId: "root", path: "products", index: void 0, caseSensitive: void 0, module: "/build/routes/products-QCV2VU5O.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products/$productSlug": { id: "routes/products/$productSlug", parentId: "routes/products", path: ":productSlug", index: void 0, caseSensitive: void 0, module: "/build/routes/products/$productSlug-5OWFSTOV.js", imports: ["/build/_shared/chunk-JJIK72VF.js", "/build/_shared/chunk-F72SJ3FQ.js", "/build/_shared/chunk-37DFPQ7Y.js", "/build/_shared/chunk-2ODSIS5P.js", "/build/_shared/chunk-HAM45H6V.js", "/build/_shared/chunk-LMY6NPHT.js", "/build/_shared/chunk-NN2CIUR5.js", "/build/_shared/chunk-SFI6O5R2.js", "/build/_shared/chunk-Q7T3NQ2Z.js", "/build/_shared/chunk-HJYI5MQW.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products/index": { id: "routes/products/index", parentId: "routes/products", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/products/index-DPF3EFNB.js", imports: ["/build/_shared/chunk-SFI6O5R2.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/signup": { id: "routes/signup", parentId: "root", path: "signup", index: void 0, caseSensitive: void 0, module: "/build/routes/signup-KAPLZ27A.js", imports: ["/build/_shared/chunk-M44RBXIO.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/thanks": { id: "routes/thanks", parentId: "root", path: "thanks", index: void 0, caseSensitive: void 0, module: "/build/routes/thanks-BRII5MEK.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, cssBundleHref: void 0, hmr: void 0, url: "/build/manifest-38B91B37.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", future = { unstable_cssModules: !1, unstable_cssSideEffectImports: !1, unstable_dev: !1, unstable_postcss: !1, unstable_tailwind: !0, unstable_vanillaExtract: !1, v2_errorBoundary: !1, v2_meta: !1, v2_normalizeFormMethod: !1, v2_routeConvention: !0 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {
