@@ -33,12 +33,12 @@ export default function App() {
         <Links />
       </head>
       <body className="oultine-none box-border">
-        <Layout>
-          <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-          {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
-        </Layout>
+        {/* <Layout> */}
+        <Outlet />
+        <ScrollRestoration />
+        <Scripts />
+        {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
+        {/* </Layout> */}
       </body>
     </html>
   );
@@ -60,23 +60,24 @@ function Layout({ children }: { children: React.ReactNode }) {
 interface Props {
   error: Error | null
 }
-export function ErrorBoundary({ error }: Props) {
-  console.error(error);
-  if (error) {
-    return (
-      <html>
-        <head>
-          <title>Oh no!</title>
-          <Meta />
-          <Links />
-        </head>
-        <body>
-          {/* add the UI you want your users to see */}
-          {/* {error} */}
-          {error.message}
-          <Scripts />
-        </body>
-      </html>
-    )
-  }
-}
+// export function ErrorBoundary({ error }: Props) {
+//   debugger;
+//   console.error(error);
+//   if (error) {
+//     return (
+//       <html>
+//         <head>
+//           <title>Oh no!</title>
+//           <Meta />
+//           <Links />
+//         </head>
+//         <body>
+//           {/* add the UI you want your users to see */}
+//           {/* {error} */}
+//           {error.message}
+//           <Scripts />
+//         </body>
+//       </html>
+//     )
+//   }
+// }

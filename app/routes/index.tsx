@@ -5,7 +5,7 @@ import Testimonials from '~/components/Testimonials';
 import Blog from '~/components/Blog';
 
 
-export default function index() {
+export default function Index() {
   return (
     <div>
       <HeroSection />
