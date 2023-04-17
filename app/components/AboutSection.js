@@ -13,6 +13,7 @@ export default function AboutSection() {
                                     <img
                                         src="https://cdn.tailgrids.com/2.0/image/marketing/images/about/about-01/image-1.jpg"
                                         alt=""
+
                                         className="w-full rounded-2xl"
                                     />
                                 </div>
