@@ -33,7 +33,7 @@ export default function App() {
         <Links />
       </head>
       <body className="oultine-none box-border">
-        <NavBar />
+        {/* <NavBar /> */}
         <main className="relative z-10">
           <Outlet />
         </main>
@@ -50,24 +50,24 @@ export default function App() {
 interface Props {
   error: Error | null
 }
-// export function ErrorBoundary({ error }: Props) {
-//   debugger;
-//   console.error(error);
-//   if (error) {
-//     return (
-//       <html>
-//         <head>
-//           <title>Oh no!</title>
-//           <Meta />
-//           <Links />
-//         </head>
-//         <body>
-//           {/* add the UI you want your users to see */}
-//           {/* {error} */}
-//           {error.message}
-//           <Scripts />
-//         </body>
-//       </html>
-//     )
-//   }
-// }
+export function ErrorBoundary({ error }: Props) {
+  debugger;
+  console.error(error);
+  if (error) {
+    return (
+      <html>
+        <head>
+          <title>Oh no!</title>
+          <Meta />
+          <Links />
+        </head>
+        <body>
+          {/* add the UI you want your users to see */}
+          {/* {error} */}
+          {error.message}
+          <Scripts />
+        </body>
+      </html>
+    )
+  }
+}
