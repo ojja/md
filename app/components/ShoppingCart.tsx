@@ -1,4 +1,4 @@
-import { Fragment, useState } from 'react'
+import { Fragment, useEffect, useState } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
@@ -13,9 +13,11 @@ export default function ShoppingCart() {
 
   const { closeCart, cartItems, removeFromCart, openCart, isOpen } = useShoppingCart();
   console.log('isOpen>', isOpen);
-  setTimeout(() => {
-    closeCart();
-  }, 1000);
+  useEffect(() => {
+    setTimeout(() => {
+      closeCart();
+    }, 1000);
+  }, []);
   return (
     <div>
       <Transition show={isOpen}>

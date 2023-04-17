@@ -4834,7 +4834,7 @@ See https://reactjs.org/link/invalid-hook-call for tips about how to debug and f
         }
         return dispatcher.useContext(Context);
       }
-      function useState15(initialState) {
+      function useState16(initialState) {
         var dispatcher = resolveDispatcher();
         return dispatcher.useState(initialState);
       }
@@ -4846,7 +4846,7 @@ See https://reactjs.org/link/invalid-hook-call for tips about how to debug and f
         var dispatcher = resolveDispatcher();
         return dispatcher.useRef(initialValue);
       }
-      function useEffect10(create, deps) {
+      function useEffect11(create, deps) {
         var dispatcher = resolveDispatcher();
         return dispatcher.useEffect(create, deps);
       }
@@ -5373,7 +5373,7 @@ Check the top-level render call using <` + parentName + ">.");
         toArray,
         only: onlyChild
       };
-      exports.Children = Children2, exports.Component = Component2, exports.Fragment = REACT_FRAGMENT_TYPE, exports.Profiler = REACT_PROFILER_TYPE, exports.PureComponent = PureComponent, exports.StrictMode = REACT_STRICT_MODE_TYPE, exports.Suspense = REACT_SUSPENSE_TYPE, exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals, exports.cloneElement = cloneElement$1, exports.createContext = createContext5, exports.createElement = createElement$1, exports.createFactory = createFactory, exports.createRef = createRef, exports.forwardRef = forwardRef3, exports.isValidElement = isValidElement2, exports.lazy = lazy, exports.memo = memo, exports.startTransition = startTransition, exports.unstable_act = act, exports.useCallback = useCallback5, exports.useContext = useContext7, exports.useDebugValue = useDebugValue2, exports.useDeferredValue = useDeferredValue, exports.useEffect = useEffect10, exports.useId = useId, exports.useImperativeHandle = useImperativeHandle, exports.useInsertionEffect = useInsertionEffect, exports.useLayoutEffect = useLayoutEffect4, exports.useMemo = useMemo6, exports.useReducer = useReducer, exports.useRef = useRef5, exports.useState = useState15, exports.useSyncExternalStore = useSyncExternalStore3, exports.useTransition = useTransition2, exports.version = ReactVersion, typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ < "u" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop == "function" && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(new Error());
+      exports.Children = Children2, exports.Component = Component2, exports.Fragment = REACT_FRAGMENT_TYPE, exports.Profiler = REACT_PROFILER_TYPE, exports.PureComponent = PureComponent, exports.StrictMode = REACT_STRICT_MODE_TYPE, exports.Suspense = REACT_SUSPENSE_TYPE, exports.__SECRET_INTERNALS_DO_NOT_USE_OR_YOU_WILL_BE_FIRED = ReactSharedInternals, exports.cloneElement = cloneElement$1, exports.createContext = createContext5, exports.createElement = createElement$1, exports.createFactory = createFactory, exports.createRef = createRef, exports.forwardRef = forwardRef3, exports.isValidElement = isValidElement2, exports.lazy = lazy, exports.memo = memo, exports.startTransition = startTransition, exports.unstable_act = act, exports.useCallback = useCallback5, exports.useContext = useContext7, exports.useDebugValue = useDebugValue2, exports.useDeferredValue = useDeferredValue, exports.useEffect = useEffect11, exports.useId = useId, exports.useImperativeHandle = useImperativeHandle, exports.useInsertionEffect = useInsertionEffect, exports.useLayoutEffect = useLayoutEffect4, exports.useMemo = useMemo6, exports.useReducer = useReducer, exports.useRef = useRef5, exports.useState = useState16, exports.useSyncExternalStore = useSyncExternalStore3, exports.useTransition = useTransition2, exports.version = ReactVersion, typeof __REACT_DEVTOOLS_GLOBAL_HOOK__ < "u" && typeof __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop == "function" && __REACT_DEVTOOLS_GLOBAL_HOOK__.registerInternalModuleStop(new Error());
     }();
   }
 });
@@ -6747,7 +6747,7 @@ var require_use_sync_external_store_shim_development = __commonJS({
       function is3(x5, y6) {
         return x5 === y6 && (x5 !== 0 || 1 / x5 === 1 / y6) || x5 !== x5 && y6 !== y6;
       }
-      var objectIs = typeof Object.is == "function" ? Object.is : is3, useState15 = React17.useState, useEffect10 = React17.useEffect, useLayoutEffect4 = React17.useLayoutEffect, useDebugValue2 = React17.useDebugValue, didWarnOld18Alpha2 = !1, didWarnUncachedGetSnapshot2 = !1;
+      var objectIs = typeof Object.is == "function" ? Object.is : is3, useState16 = React17.useState, useEffect11 = React17.useEffect, useLayoutEffect4 = React17.useLayoutEffect, useDebugValue2 = React17.useDebugValue, didWarnOld18Alpha2 = !1, didWarnUncachedGetSnapshot2 = !1;
       function useSyncExternalStore3(subscribe, getSnapshot, getServerSnapshot) {
         didWarnOld18Alpha2 || React17.startTransition !== void 0 && (didWarnOld18Alpha2 = !0, error("You are using an outdated, pre-release alpha of React 18 that does not support useSyncExternalStore. The use-sync-external-store shim will not work correctly. Upgrade to a newer pre-release."));
         var value = getSnapshot();
@@ -6755,7 +6755,7 @@ var require_use_sync_external_store_shim_development = __commonJS({
           var cachedValue = getSnapshot();
           objectIs(value, cachedValue) || (error("The result of getSnapshot should be cached to avoid an infinite loop"), didWarnUncachedGetSnapshot2 = !0);
         }
-        var _useState = useState15({
+        var _useState = useState16({
           inst: {
             value,
             getSnapshot
@@ -6765,7 +6765,7 @@ var require_use_sync_external_store_shim_development = __commonJS({
           inst.value = value, inst.getSnapshot = getSnapshot, checkIfSnapshotChanged2(inst) && forceUpdate({
             inst
           });
-        }, [subscribe, value, getSnapshot]), useEffect10(function() {
+        }, [subscribe, value, getSnapshot]), useEffect11(function() {
           checkIfSnapshotChanged2(inst) && forceUpdate({
             inst
           });
@@ -12285,7 +12285,7 @@ Incoming: %s`, currentHookNameInDev, "[" + nextDeps.join(", ") + "]", "[" + prev
       function basicStateReducer(state, action) {
         return typeof action == "function" ? action(state) : action;
       }
-      function useState15(initialState) {
+      function useState16(initialState) {
         return currentHookNameInDev = "useState", useReducer(
           basicStateReducer,
           initialState
@@ -12404,7 +12404,7 @@ Incoming: %s`, currentHookNameInDev, "[" + nextDeps.join(", ") + "]", "[" + prev
         useMemo: useMemo6,
         useReducer,
         useRef: useRef5,
-        useState: useState15,
+        useState: useState16,
         useInsertionEffect: noop,
         useLayoutEffect: useLayoutEffect4,
         useCallback: useCallback5,
@@ -15720,7 +15720,7 @@ Incoming: %s`, currentHookNameInDev, "[" + nextDeps.join(", ") + "]", "[" + prev
       function basicStateReducer(state, action) {
         return typeof action == "function" ? action(state) : action;
       }
-      function useState15(initialState) {
+      function useState16(initialState) {
         return currentHookNameInDev = "useState", useReducer(
           basicStateReducer,
           initialState
@@ -15839,7 +15839,7 @@ Incoming: %s`, currentHookNameInDev, "[" + nextDeps.join(", ") + "]", "[" + prev
         useMemo: useMemo6,
         useReducer,
         useRef: useRef5,
-        useState: useState15,
+        useState: useState16,
         useInsertionEffect: noop,
         useLayoutEffect: useLayoutEffect4,
         useCallback: useCallback5,
@@ -23486,7 +23486,7 @@ var require_react_dom_development = __commonJS({
           argsWithFormat.unshift("Warning: " + format), Function.prototype.apply.call(console[level], console, argsWithFormat);
         }
       }
-      var FunctionComponent = 0, ClassComponent = 1, IndeterminateComponent = 2, HostRoot = 3, HostPortal = 4, HostComponent = 5, HostText = 6, Fragment21 = 7, Mode = 8, ContextConsumer = 9, ContextProvider = 10, ForwardRef = 11, Profiler = 12, SuspenseComponent = 13, MemoComponent = 14, SimpleMemoComponent = 15, LazyComponent = 16, IncompleteClassComponent = 17, DehydratedFragment = 18, SuspenseListComponent = 19, ScopeComponent = 21, OffscreenComponent = 22, LegacyHiddenComponent = 23, CacheComponent = 24, TracingMarkerComponent = 25, enableClientRenderFallbackOnTextMismatch = !0, enableNewReconciler = !1, enableLazyContextPropagation = !1, enableLegacyHidden = !1, enableSuspenseAvoidThisFallback = !1, disableCommentsAsDOMContainers = !0, enableCustomElementPropertySupport = !1, warnAboutStringRefs = !1, enableSchedulingProfiler = !0, enableProfilerTimer = !0, enableProfilerCommitHooks = !0, allNativeEvents = /* @__PURE__ */ new Set(), registrationNameDependencies = {}, possibleRegistrationNames = {};
+      var FunctionComponent = 0, ClassComponent = 1, IndeterminateComponent = 2, HostRoot = 3, HostPortal = 4, HostComponent = 5, HostText = 6, Fragment22 = 7, Mode = 8, ContextConsumer = 9, ContextProvider = 10, ForwardRef = 11, Profiler = 12, SuspenseComponent = 13, MemoComponent = 14, SimpleMemoComponent = 15, LazyComponent = 16, IncompleteClassComponent = 17, DehydratedFragment = 18, SuspenseListComponent = 19, ScopeComponent = 21, OffscreenComponent = 22, LegacyHiddenComponent = 23, CacheComponent = 24, TracingMarkerComponent = 25, enableClientRenderFallbackOnTextMismatch = !0, enableNewReconciler = !1, enableLazyContextPropagation = !1, enableLegacyHidden = !1, enableSuspenseAvoidThisFallback = !1, disableCommentsAsDOMContainers = !0, enableCustomElementPropertySupport = !1, warnAboutStringRefs = !1, enableSchedulingProfiler = !0, enableProfilerTimer = !0, enableProfilerCommitHooks = !0, allNativeEvents = /* @__PURE__ */ new Set(), registrationNameDependencies = {}, possibleRegistrationNames = {};
       function registerTwoPhaseEvent(registrationName, dependencies) {
         registerDirectEvent(registrationName, dependencies), registerDirectEvent(registrationName + "Capture", dependencies);
       }
@@ -24257,7 +24257,7 @@ Error generating stack: ` + x5.message + `
             return "DehydratedFragment";
           case ForwardRef:
             return getWrappedName$1(type, type.render, "ForwardRef");
-          case Fragment21:
+          case Fragment22:
             return "Fragment";
           case HostComponent:
             return type;
@@ -30286,7 +30286,7 @@ See https://reactjs.org/link/refs-must-have-owner for more information.`);
           }
         }
         function updateFragment2(returnFiber, current2, fragment, lanes, key) {
-          if (current2 === null || current2.tag !== Fragment21) {
+          if (current2 === null || current2.tag !== Fragment22) {
             var created = createFiberFromFragment(fragment, returnFiber.mode, lanes, key);
             return created.return = returnFiber, created;
           } else {
@@ -30513,7 +30513,7 @@ See https://reactjs.org/link/refs-must-have-owner for more information.`);
             if (child.key === key) {
               var elementType = element.type;
               if (elementType === REACT_FRAGMENT_TYPE) {
-                if (child.tag === Fragment21) {
+                if (child.tag === Fragment22) {
                   deleteRemainingChildren(returnFiber, child.sibling);
                   var existing = useFiber(child, element.props.children);
                   return existing.return = returnFiber, existing._debugSource = element._source, existing._debugOwner = element._owner, existing;
@@ -33034,7 +33034,7 @@ Check the render method of \`` + ownerName + "`.");
             var type = workInProgress2.type, _unresolvedProps2 = workInProgress2.pendingProps, _resolvedProps2 = workInProgress2.elementType === type ? _unresolvedProps2 : resolveDefaultProps(type, _unresolvedProps2);
             return updateForwardRef(current2, workInProgress2, type, _resolvedProps2, renderLanes2);
           }
-          case Fragment21:
+          case Fragment22:
             return updateFragment(current2, workInProgress2, renderLanes2);
           case Mode:
             return updateMode(current2, workInProgress2, renderLanes2);
@@ -33185,7 +33185,7 @@ Check the render method of \`` + ownerName + "`.");
           case SimpleMemoComponent:
           case FunctionComponent:
           case ForwardRef:
-          case Fragment21:
+          case Fragment22:
           case Mode:
           case Profiler:
           case ContextConsumer:
@@ -35702,7 +35702,7 @@ Check the render method of \`` + ownerName + "`.");
         return fiber._debugSource = element._source, fiber._debugOwner = element._owner, fiber;
       }
       function createFiberFromFragment(elements, mode, lanes, key) {
-        var fiber = createFiber(Fragment21, elements, key, mode);
+        var fiber = createFiber(Fragment22, elements, key, mode);
         return fiber.lanes = lanes, fiber;
       }
       function createFiberFromProfiler(pendingProps, mode, lanes, key) {
@@ -61668,7 +61668,7 @@ function Footer() {
 }
 
 // app/layouts/navbar/index.tsx
-var import_react47 = __toESM(require_react());
+var import_react48 = __toESM(require_react());
 
 // node_modules/@headlessui/react/dist/hooks/use-iso-morphic-effect.js
 var import_react3 = __toESM(require_react(), 1);
@@ -63927,10 +63927,6 @@ var q5 = D2(Ne3), oe3 = D2(ye3), De3 = D2(He3), tt = Object.assign(q5, { Child: 
 // app/layouts/navbar/index.tsx
 var import_outline2 = __toESM(require_outline());
 
-// app/components/ShoppingCart.tsx
-var import_outline = __toESM(require_outline());
-init_dist2();
-
 // node_modules/nanostores/clean-stores/index.js
 var clean = Symbol("clean");
 
@@ -64150,6 +64146,11 @@ var shoppingCart = persistentAtom("cart", [], {
     closeCart
   };
 }, cartStore_default = useShoppingCart;
+
+// app/components/ShoppingCart.tsx
+var import_react44 = __toESM(require_react());
+var import_outline = __toESM(require_outline());
+init_dist2();
 
 // app/utils/FormatCurrency.js
 var CURRENCY_FORMATTER = new Intl.NumberFormat(void 0, {
@@ -64575,9 +64576,11 @@ var import_jsx_runtime3 = __toESM(require_jsx_runtime()), getPriceForAttributes 
 var import_jsx_runtime4 = __toESM(require_jsx_runtime());
 function ShoppingCart() {
   let { closeCart, cartItems, removeFromCart, openCart, isOpen } = cartStore_default();
-  return console.log("isOpen>", isOpen), setTimeout(() => {
-    closeCart();
-  }, 1e3), /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(tt, { show: isOpen, children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(St, { as: "div", className: "relative z-30", onClose: closeCart, children: [
+  return console.log("isOpen>", isOpen), (0, import_react44.useEffect)(() => {
+    setTimeout(() => {
+      closeCart();
+    }, 1e3);
+  }, []), /* @__PURE__ */ (0, import_jsx_runtime4.jsx)("div", { children: /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(tt, { show: isOpen, children: /* @__PURE__ */ (0, import_jsx_runtime4.jsxs)(St, { as: "div", className: "relative z-30", onClose: closeCart, children: [
     /* @__PURE__ */ (0, import_jsx_runtime4.jsx)(
       tt.Child,
       {
@@ -64658,9 +64661,9 @@ function ShoppingCart() {
 }
 
 // app/components/ChangeCountry.tsx
-var import_react46 = __toESM(require_react()), import_jsx_runtime5 = __toESM(require_jsx_runtime());
+var import_react47 = __toESM(require_react()), import_jsx_runtime5 = __toESM(require_jsx_runtime());
 function ChangeCountry() {
-  let [isOpenSize, setIsOpenSize] = (0, import_react46.useState)(!1);
+  let [isOpenSize, setIsOpenSize] = (0, import_react47.useState)(!1);
   function closeModal() {
     setIsOpenSize(!1);
   }
@@ -64669,11 +64672,11 @@ function ChangeCountry() {
   }
   return /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(import_jsx_runtime5.Fragment, { children: [
     /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("button", { type: "button", className: "text-sm font-medium text-indigo-600 hover:text-indigo-500", onClick: openModal, children: "Change Country" }),
-    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(tt, { appear: !0, show: isOpenSize, as: import_react46.Fragment, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(St, { as: "div", className: "relative z-10", onClose: closeModal, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(tt, { appear: !0, show: isOpenSize, as: import_react47.Fragment, children: /* @__PURE__ */ (0, import_jsx_runtime5.jsxs)(St, { as: "div", className: "relative z-10", onClose: closeModal, children: [
       /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
         tt.Child,
         {
-          as: import_react46.Fragment,
+          as: import_react47.Fragment,
           enter: "ease-out duration-300",
           enterFrom: "opacity-0",
           enterTo: "opacity-100",
@@ -64686,7 +64689,7 @@ function ChangeCountry() {
       /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "fixed inset-0 overflow-y-auto", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)("div", { className: "flex items-center justify-center min-h-full p-4 text-center", children: /* @__PURE__ */ (0, import_jsx_runtime5.jsx)(
         tt.Child,
         {
-          as: import_react46.Fragment,
+          as: import_react47.Fragment,
           enter: "ease-out duration-300",
           enterFrom: "opacity-0 scale-95",
           enterTo: "opacity-100 scale-100",
@@ -64844,9 +64847,9 @@ function classNames(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 function NavBar() {
-  let [open, setOpen] = (0, import_react47.useState)(!1);
+  let [open, setOpen] = (0, import_react48.useState)(!1), { cartQuantityTotal, openCart } = cartStore_default();
   return /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(import_jsx_runtime6.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)("div", { className: "bg-white", children: [
-    /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(import_react47.default.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(tt, { show: open, children: /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(St, { as: "div", className: "relative z-40 lg:hidden", onClose: setOpen, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(import_react48.default.Fragment, { children: /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(tt, { show: open, children: /* @__PURE__ */ (0, import_jsx_runtime6.jsxs)(St, { as: "div", className: "relative z-40 lg:hidden", onClose: setOpen, children: [
       /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
         tt.Child,
         {
@@ -65048,7 +65051,7 @@ function NavBar() {
             /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
               tt,
               {
-                as: import_react47.Fragment,
+                as: import_react48.Fragment,
                 enter: "transition ease-out duration-100",
                 enterFrom: "transform opacity-0 scale-95",
                 enterTo: "transform opacity-100 scale-100",
@@ -65087,7 +65090,7 @@ function NavBar() {
             /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
               tt,
               {
-                as: import_react47.Fragment,
+                as: import_react48.Fragment,
                 enter: "transition ease-out duration-100",
                 enterFrom: "transform opacity-0 scale-95",
                 enterTo: "transform opacity-100 scale-100",
@@ -65139,6 +65142,7 @@ function NavBar() {
             "button",
             {
               className: "flex items-center p-2 -m-2 group",
+              onClick: openCart,
               children: [
                 /* @__PURE__ */ (0, import_jsx_runtime6.jsx)(
                   import_outline2.ShoppingBagIcon,
@@ -65147,6 +65151,7 @@ function NavBar() {
                     "aria-hidden": "true"
                   }
                 ),
+                /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800", children: cartQuantityTotal }),
                 /* @__PURE__ */ (0, import_jsx_runtime6.jsx)("span", { className: "sr-only", children: "items in cart, view bag" })
               ]
             }
@@ -65224,7 +65229,7 @@ __export(checkout_exports, {
 });
 
 // node_modules/react-tailwindcss-datepicker/dist/index.esm.js
-var import_dayjs = __toESM(require_dayjs_min()), import_react53 = __toESM(require_react());
+var import_dayjs = __toESM(require_dayjs_min()), import_react54 = __toESM(require_react());
 function _mergeNamespaces(n5, m9) {
   return m9.forEach(function(e6) {
     e6 && typeof e6 != "string" && !Array.isArray(e6) && Object.keys(e6).forEach(function(k2) {
@@ -65492,7 +65497,7 @@ var COLORS = [
     pink: "focus:ring-pink-500/50 focus:bg-pink-100/50",
     rose: "focus:ring-rose-500/50 focus:bg-rose-100/50"
   }
-}, DatepickerContext = (0, import_react53.createContext)({
+}, DatepickerContext = (0, import_react54.createContext)({
   input: void 0,
   primaryColor: "blue",
   configs: void 0,
@@ -66303,45 +66308,45 @@ function loadLanguageModule(language = LANGUAGE) {
 function dateIsValid(date) {
   return date instanceof Date && !isNaN(date.getTime());
 }
-var DateIcon = ({ className = "w-6 h-6" }) => import_react53.default.createElement(
+var DateIcon = ({ className = "w-6 h-6" }) => import_react54.default.createElement(
   "svg",
   { className, xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor" },
-  import_react53.default.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" })
-), CloseIcon = ({ className = "w-6 h-6" }) => import_react53.default.createElement(
+  import_react54.default.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M6.75 3v2.25M17.25 3v2.25M3 18.75V7.5a2.25 2.25 0 012.25-2.25h13.5A2.25 2.25 0 0121 7.5v11.25m-18 0A2.25 2.25 0 005.25 21h13.5A2.25 2.25 0 0021 18.75m-18 0v-7.5A2.25 2.25 0 015.25 9h13.5A2.25 2.25 0 0121 11.25v7.5m-9-6h.008v.008H12v-.008zM12 15h.008v.008H12V15zm0 2.25h.008v.008H12v-.008zM9.75 15h.008v.008H9.75V15zm0 2.25h.008v.008H9.75v-.008zM7.5 15h.008v.008H7.5V15zm0 2.25h.008v.008H7.5v-.008zm6.75-4.5h.008v.008h-.008v-.008zm0 2.25h.008v.008h-.008V15zm0 2.25h.008v.008h-.008v-.008zm2.25-4.5h.008v.008H16.5v-.008zm0 2.25h.008v.008H16.5V15z" })
+), CloseIcon = ({ className = "w-6 h-6" }) => import_react54.default.createElement(
   "svg",
   { className, xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor" },
-  import_react53.default.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M6 18L18 6M6 6l12 12" })
-), ChevronLeftIcon = ({ className = "w-6 h-6" }) => import_react53.default.createElement(
+  import_react54.default.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M6 18L18 6M6 6l12 12" })
+), ChevronLeftIcon = ({ className = "w-6 h-6" }) => import_react54.default.createElement(
   "svg",
   { className, xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor" },
-  import_react53.default.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M15.75 19.5L8.25 12l7.5-7.5" })
-), DoubleChevronLeftIcon = ({ className = "w-6 h-6" }) => import_react53.default.createElement(
+  import_react54.default.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M15.75 19.5L8.25 12l7.5-7.5" })
+), DoubleChevronLeftIcon = ({ className = "w-6 h-6" }) => import_react54.default.createElement(
   "svg",
   { className, xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor" },
-  import_react53.default.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" })
-), ChevronRightIcon = ({ className = "w-6 h-6" }) => import_react53.default.createElement(
+  import_react54.default.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M18.75 19.5l-7.5-7.5 7.5-7.5m-6 15L5.25 12l7.5-7.5" })
+), ChevronRightIcon = ({ className = "w-6 h-6" }) => import_react54.default.createElement(
   "svg",
   { className, xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor" },
-  import_react53.default.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M8.25 4.5l7.5 7.5-7.5 7.5" })
-), DoubleChevronRightIcon = ({ className = "w-6 h-6" }) => import_react53.default.createElement(
+  import_react54.default.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M8.25 4.5l7.5 7.5-7.5 7.5" })
+), DoubleChevronRightIcon = ({ className = "w-6 h-6" }) => import_react54.default.createElement(
   "svg",
   { className, xmlns: "http://www.w3.org/2000/svg", fill: "none", viewBox: "0 0 24 24", strokeWidth: 1.5, stroke: "currentColor" },
-  import_react53.default.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" })
-), Arrow = import_react53.default.forwardRef((props, ref) => import_react53.default.createElement("div", { ref, className: "absolute z-20 h-4 w-4 rotate-45 mt-0.5 ml-[1.2rem] border-l border-t border-gray-300 bg-white dark:bg-slate-800 dark:border-slate-600" })), SecondaryButton = ({ children, onClick, disabled = !1 }) => {
-  let { primaryColor } = (0, import_react53.useContext)(DatepickerContext), getClassName = (0, import_react53.useCallback)(() => `w-full transition-all duration-300 bg-white dark:text-gray-700 font-medium border border-gray-300 px-4 py-2 text-sm rounded-md focus:ring-2 focus:ring-offset-2 hover:bg-gray-50 ${RING_COLOR.focus[primaryColor]}`, [primaryColor]);
-  return import_react53.default.createElement("button", { type: "button", className: getClassName(), onClick, disabled }, children);
+  import_react54.default.createElement("path", { strokeLinecap: "round", strokeLinejoin: "round", d: "M11.25 4.5l7.5 7.5-7.5 7.5m-6-15l7.5 7.5-7.5 7.5" })
+), Arrow = import_react54.default.forwardRef((props, ref) => import_react54.default.createElement("div", { ref, className: "absolute z-20 h-4 w-4 rotate-45 mt-0.5 ml-[1.2rem] border-l border-t border-gray-300 bg-white dark:bg-slate-800 dark:border-slate-600" })), SecondaryButton = ({ children, onClick, disabled = !1 }) => {
+  let { primaryColor } = (0, import_react54.useContext)(DatepickerContext), getClassName = (0, import_react54.useCallback)(() => `w-full transition-all duration-300 bg-white dark:text-gray-700 font-medium border border-gray-300 px-4 py-2 text-sm rounded-md focus:ring-2 focus:ring-offset-2 hover:bg-gray-50 ${RING_COLOR.focus[primaryColor]}`, [primaryColor]);
+  return import_react54.default.createElement("button", { type: "button", className: getClassName(), onClick, disabled }, children);
 }, PrimaryButton = ({ children, onClick, disabled = !1 }) => {
-  let { primaryColor } = (0, import_react53.useContext)(DatepickerContext), bgColor = BG_COLOR[500][primaryColor], borderColor = BORDER_COLOR[500][primaryColor], bgColorHover = BG_COLOR.hover[primaryColor], ringColor = RING_COLOR.focus[primaryColor], getClassName = (0, import_react53.useCallback)(() => `w-full transition-all duration-300 ${bgColor} ${borderColor} text-white font-medium border px-4 py-2 text-sm rounded-md focus:ring-2 focus:ring-offset-2 ${bgColorHover} ${ringColor} ${disabled ? " cursor-no-drop" : ""}`, [bgColor, bgColorHover, borderColor, disabled, ringColor]);
-  return import_react53.default.createElement("button", { type: "button", className: getClassName(), onClick, disabled }, children);
+  let { primaryColor } = (0, import_react54.useContext)(DatepickerContext), bgColor = BG_COLOR[500][primaryColor], borderColor = BORDER_COLOR[500][primaryColor], bgColorHover = BG_COLOR.hover[primaryColor], ringColor = RING_COLOR.focus[primaryColor], getClassName = (0, import_react54.useCallback)(() => `w-full transition-all duration-300 ${bgColor} ${borderColor} text-white font-medium border px-4 py-2 text-sm rounded-md focus:ring-2 focus:ring-offset-2 ${bgColorHover} ${ringColor} ${disabled ? " cursor-no-drop" : ""}`, [bgColor, bgColorHover, borderColor, disabled, ringColor]);
+  return import_react54.default.createElement("button", { type: "button", className: getClassName(), onClick, disabled }, children);
 }, RoundedButton = ({ children, onClick, roundedFull = !1, padding = "py-[0.55rem]" }) => {
-  let { primaryColor } = (0, import_react53.useContext)(DatepickerContext), getClassName = (0, import_react53.useCallback)(() => {
+  let { primaryColor } = (0, import_react54.useContext)(DatepickerContext), getClassName = (0, import_react54.useCallback)(() => {
     let darkClass = "dark:text-white/70 dark:hover:bg-white/10 dark:focus:bg-white/10", defaultClass = roundedFull ? `${darkClass} transition-all duration-300 hover:bg-gray-100 rounded-full p-[0.45rem] focus:ring-1` : `w-full tracking-wide ${darkClass} transition-all duration-300 px-3 ${padding} uppercase hover:bg-gray-100 rounded-md focus:ring-1`, buttonFocusColor = BUTTON_COLOR.focus[primaryColor];
     return `${defaultClass} ${buttonFocusColor}`;
   }, [padding, primaryColor, roundedFull]);
-  return import_react53.default.createElement("button", { type: "button", className: getClassName(), onClick }, children);
+  return import_react54.default.createElement("button", { type: "button", className: getClassName(), onClick }, children);
 }, VerticalDash = () => {
-  let { primaryColor } = (0, import_react53.useContext)(DatepickerContext), bgColor = BG_COLOR[500][primaryColor];
-  return import_react53.default.createElement("div", { className: `bg-blue-500 h-7 w-1 rounded-full hidden md:block ${bgColor}` });
+  let { primaryColor } = (0, import_react54.useContext)(DatepickerContext), bgColor = BG_COLOR[500][primaryColor];
+  return import_react54.default.createElement("div", { className: `bg-blue-500 h-7 w-1 rounded-full hidden md:block ${bgColor}` });
 }, commonjsGlobal = typeof globalThis < "u" ? globalThis : typeof window < "u" ? window : typeof globalThis < "u" ? globalThis : typeof self < "u" ? self : {};
 function getDefaultExportFromCjs(x5) {
   return x5 && x5.__esModule && Object.prototype.hasOwnProperty.call(x5, "default") ? x5.default : x5;
@@ -66369,19 +66374,19 @@ var isBetweenExports = {}, isBetween$1 = {
 var isBetween = isBetweenExports;
 import_dayjs.default.extend(isBetween);
 var Days = ({ calendarData, onClickPreviousDays, onClickDay, onClickNextDays }) => {
-  let { primaryColor, period, changePeriod, dayHover, changeDayHover, minDate, maxDate, disabledDates } = (0, import_react53.useContext)(DatepickerContext), currentDateClass = (0, import_react53.useCallback)((item) => {
+  let { primaryColor, period, changePeriod, dayHover, changeDayHover, minDate, maxDate, disabledDates } = (0, import_react54.useContext)(DatepickerContext), currentDateClass = (0, import_react54.useCallback)((item) => {
     let itemDate = `${calendarData.date.year()}-${calendarData.date.month() + 1}-${item >= 10 ? item : "0" + item}`;
     return formatDate((0, import_dayjs.default)()) === formatDate((0, import_dayjs.default)(itemDate)) ? TEXT_COLOR[500][primaryColor] : "";
-  }, [calendarData.date, primaryColor]), activeDateData = (0, import_react53.useCallback)((day) => {
+  }, [calendarData.date, primaryColor]), activeDateData = (0, import_react54.useCallback)((day) => {
     let fullDay = `${calendarData.date.year()}-${calendarData.date.month() + 1}-${day}`, className = "";
     return (0, import_dayjs.default)(fullDay).isSame(period.start) && (0, import_dayjs.default)(fullDay).isSame(period.end) ? className = ` ${BG_COLOR[500][primaryColor]} text-white font-medium rounded-full` : (0, import_dayjs.default)(fullDay).isSame(period.start) ? className = ` ${BG_COLOR[500][primaryColor]} text-white font-medium ${(0, import_dayjs.default)(fullDay).isSame(dayHover) && !period.end ? "rounded-full" : "rounded-l-full"}` : (0, import_dayjs.default)(fullDay).isSame(period.end) && (className = ` ${BG_COLOR[500][primaryColor]} text-white font-medium ${(0, import_dayjs.default)(fullDay).isSame(dayHover) && !period.start ? "rounded-full" : "rounded-r-full"}`), {
       active: (0, import_dayjs.default)(fullDay).isSame(period.start) || (0, import_dayjs.default)(fullDay).isSame(period.end),
       className
     };
-  }, [calendarData.date, dayHover, period.end, period.start, primaryColor]), hoverClassByDay = (0, import_react53.useCallback)((day) => {
+  }, [calendarData.date, dayHover, period.end, period.start, primaryColor]), hoverClassByDay = (0, import_react54.useCallback)((day) => {
     let className = currentDateClass(day), fullDay = `${calendarData.date.year()}-${calendarData.date.month() + 1}-${day >= 10 ? day : "0" + day}`;
     return period.start && period.end && (0, import_dayjs.default)(fullDay).isBetween(period.start, period.end, "day", "[)") ? ` ${BG_COLOR[100][primaryColor]} ${currentDateClass(day)} dark:bg-white/10` : (dayHover && (period.start && (0, import_dayjs.default)(fullDay).isBetween(period.start, dayHover, "day", "[)") && (className = ` ${BG_COLOR[100][primaryColor]} ${currentDateClass(day)} dark:bg-white/10`), period.end && (0, import_dayjs.default)(fullDay).isBetween(dayHover, period.end, "day", "[)") && (className = ` ${BG_COLOR[100][primaryColor]} ${currentDateClass(day)} dark:bg-white/10`), dayHover === fullDay && (className = ` transition-all duration-500 text-white font-medium ${BG_COLOR[500][primaryColor]} ${period.start ? "rounded-r-full" : "rounded-l-full"}`)), className);
-  }, [calendarData.date, currentDateClass, dayHover, period.end, period.start, primaryColor]), isDateTooEarly = (0, import_react53.useCallback)((day, type) => {
+  }, [calendarData.date, currentDateClass, dayHover, period.end, period.start, primaryColor]), isDateTooEarly = (0, import_react54.useCallback)((day, type) => {
     if (!minDate)
       return !1;
     let newDate = {
@@ -66390,7 +66395,7 @@ var Days = ({ calendarData, onClickPreviousDays, onClickDay, onClickNextDays }) 
       next: nextMonth(calendarData.date)
     }[type], formattedDate = `${newDate.year()}-${newDate.month() + 1}-${day >= 10 ? day : "0" + day}`;
     return (0, import_dayjs.default)(formattedDate).isSame((0, import_dayjs.default)(minDate)) ? !1 : (0, import_dayjs.default)(formattedDate).isBefore((0, import_dayjs.default)(minDate));
-  }, [calendarData.date, minDate]), isDateTooLate = (0, import_react53.useCallback)((day, type) => {
+  }, [calendarData.date, minDate]), isDateTooLate = (0, import_react54.useCallback)((day, type) => {
     if (!maxDate)
       return !1;
     let newDate = {
@@ -66399,7 +66404,7 @@ var Days = ({ calendarData, onClickPreviousDays, onClickDay, onClickNextDays }) 
       next: nextMonth(calendarData.date)
     }[type], formattedDate = `${newDate.year()}-${newDate.month() + 1}-${day >= 10 ? day : "0" + day}`;
     return (0, import_dayjs.default)(formattedDate).isSame(maxDate) ? !1 : (0, import_dayjs.default)(formattedDate).isAfter((0, import_dayjs.default)(maxDate));
-  }, [calendarData.date, maxDate]), isDateDisabled = (0, import_react53.useCallback)((day, type) => {
+  }, [calendarData.date, maxDate]), isDateDisabled = (0, import_react54.useCallback)((day, type) => {
     if (isDateTooEarly(day, type) || isDateTooLate(day, type))
       return !0;
     let newDate = {
@@ -66413,18 +66418,18 @@ var Days = ({ calendarData, onClickPreviousDays, onClickDay, onClickNextDays }) 
     return disabledDates == null || disabledDates.forEach((dateRange) => {
       (0, import_dayjs.default)(formattedDate).isAfter(dateRange.startDate) && (0, import_dayjs.default)(formattedDate).isBefore(dateRange.endDate) && matchingCount++, ((0, import_dayjs.default)(formattedDate).isSame(dateRange.startDate) || (0, import_dayjs.default)(formattedDate).isSame(dateRange.endDate)) && matchingCount++;
     }), matchingCount > 0;
-  }, [calendarData.date, isDateTooEarly, isDateTooLate, disabledDates]), buttonClass = (0, import_react53.useCallback)((day, type) => classNames2("flex items-center justify-center w-12 h-12 lg:w-10 lg:h-10", activeDateData(day).active ? activeDateData(day).className : hoverClassByDay(day), isDateDisabled(day, type) && "line-through"), [activeDateData, hoverClassByDay, isDateDisabled]), checkIfHoverPeriodContainsDisabledPeriod = (0, import_react53.useCallback)((hoverPeriod) => {
+  }, [calendarData.date, isDateTooEarly, isDateTooLate, disabledDates]), buttonClass = (0, import_react54.useCallback)((day, type) => classNames2("flex items-center justify-center w-12 h-12 lg:w-10 lg:h-10", activeDateData(day).active ? activeDateData(day).className : hoverClassByDay(day), isDateDisabled(day, type) && "line-through"), [activeDateData, hoverClassByDay, isDateDisabled]), checkIfHoverPeriodContainsDisabledPeriod = (0, import_react54.useCallback)((hoverPeriod) => {
     if (!Array.isArray(disabledDates))
       return !1;
     for (let i8 = 0; i8 < disabledDates.length; i8++)
       if ((0, import_dayjs.default)(hoverPeriod.start).isBefore(disabledDates[i8].startDate) && (0, import_dayjs.default)(hoverPeriod.end).isAfter(disabledDates[i8].endDate))
         return !0;
     return !1;
-  }, [disabledDates]), getMetaData = (0, import_react53.useCallback)(() => ({
+  }, [disabledDates]), getMetaData = (0, import_react54.useCallback)(() => ({
     previous: previousMonth(calendarData.date),
     current: calendarData.date,
     next: nextMonth(calendarData.date)
-  }), [calendarData.date]), hoverDay = (0, import_react53.useCallback)((day, type) => {
+  }), [calendarData.date]), hoverDay = (0, import_react54.useCallback)((day, type) => {
     let newDate = getMetaData()[type], newHover = `${newDate.year()}-${newDate.month() + 1}-${day >= 10 ? day : "0" + day}`;
     if (period.start && !period.end) {
       let hoverPeriod = { ...period, end: newHover };
@@ -66446,7 +66451,7 @@ var Days = ({ calendarData, onClickPreviousDays, onClickDay, onClickNextDays }) 
     checkIfHoverPeriodContainsDisabledPeriod,
     getMetaData,
     period
-  ]), handleClickDay = (0, import_react53.useCallback)((day, type) => {
+  ]), handleClickDay = (0, import_react54.useCallback)((day, type) => {
     function continueClick() {
       type === "previous" && onClickPreviousDays(day), type === "current" && onClickDay(day), type === "next" && onClickNextDays(day);
     }
@@ -66465,32 +66470,32 @@ var Days = ({ calendarData, onClickPreviousDays, onClickDay, onClickNextDays }) 
     period.end,
     period.start
   ]);
-  return import_react53.default.createElement(
+  return import_react54.default.createElement(
     "div",
     { className: "grid grid-cols-7 gap-y-0.5 my-1" },
-    calendarData.days.previous.map((item, index2) => import_react53.default.createElement("button", { type: "button", key: index2, disabled: isDateDisabled(item, "previous"), className: "flex items-center justify-center text-gray-400 h-12 w-12 lg:w-10 lg:h-10", onClick: () => handleClickDay(item, "previous"), onMouseOver: () => {
+    calendarData.days.previous.map((item, index2) => import_react54.default.createElement("button", { type: "button", key: index2, disabled: isDateDisabled(item, "previous"), className: "flex items-center justify-center text-gray-400 h-12 w-12 lg:w-10 lg:h-10", onClick: () => handleClickDay(item, "previous"), onMouseOver: () => {
       hoverDay(item, "previous");
     } }, item)),
-    calendarData.days.current.map((item, index2) => import_react53.default.createElement("button", { type: "button", key: index2, disabled: isDateDisabled(item, "current"), className: `${buttonClass(item, "current")}`, onClick: () => handleClickDay(item, "current"), onMouseOver: () => {
+    calendarData.days.current.map((item, index2) => import_react54.default.createElement("button", { type: "button", key: index2, disabled: isDateDisabled(item, "current"), className: `${buttonClass(item, "current")}`, onClick: () => handleClickDay(item, "current"), onMouseOver: () => {
       hoverDay(item, "current");
     } }, item)),
-    calendarData.days.next.map((item, index2) => import_react53.default.createElement("button", { type: "button", key: index2, disabled: isDateDisabled(index2, "next"), className: "flex items-center justify-center text-gray-400 h-12 w-12 lg:w-10 lg:h-10", onClick: () => handleClickDay(item, "next"), onMouseOver: () => {
+    calendarData.days.next.map((item, index2) => import_react54.default.createElement("button", { type: "button", key: index2, disabled: isDateDisabled(index2, "next"), className: "flex items-center justify-center text-gray-400 h-12 w-12 lg:w-10 lg:h-10", onClick: () => handleClickDay(item, "next"), onMouseOver: () => {
       hoverDay(item, "next");
     } }, item))
   );
 }, Months = ({ clickMonth }) => {
-  let { i18n } = (0, import_react53.useContext)(DatepickerContext);
-  return loadLanguageModule(i18n), import_react53.default.createElement("div", { className: "w-full grid grid-cols-2 gap-2 mt-2" }, MONTHS.map((item) => import_react53.default.createElement(
+  let { i18n } = (0, import_react54.useContext)(DatepickerContext);
+  return loadLanguageModule(i18n), import_react54.default.createElement("div", { className: "w-full grid grid-cols-2 gap-2 mt-2" }, MONTHS.map((item) => import_react54.default.createElement(
     RoundedButton,
     { key: item, padding: "py-3", onClick: () => {
       clickMonth(item);
     } },
-    import_react53.default.createElement(import_react53.default.Fragment, null, (0, import_dayjs.default)(`2022-${item}-01`).locale(i18n).format("MMM"))
+    import_react54.default.createElement(import_react54.default.Fragment, null, (0, import_dayjs.default)(`2022-${item}-01`).locale(i18n).format("MMM"))
   )));
 }, Week = () => {
-  let { i18n, startWeekOn } = (0, import_react53.useContext)(DatepickerContext);
+  let { i18n, startWeekOn } = (0, import_react54.useContext)(DatepickerContext);
   loadLanguageModule(i18n);
-  let startDateModifier = (0, import_react53.useMemo)(() => {
+  let startDateModifier = (0, import_react54.useMemo)(() => {
     if (startWeekOn)
       switch (startWeekOn) {
         case "mon":
@@ -66512,29 +66517,29 @@ var Days = ({ calendarData, onClickPreviousDays, onClickDay, onClickNextDays }) 
       }
     return 0;
   }, [startWeekOn]);
-  return import_react53.default.createElement("div", { className: "grid grid-cols-7 border-b border-gray-300 dark:border-gray-700 py-2" }, DAYS.map((item) => import_react53.default.createElement("div", { key: item, className: "tracking-wide text-gray-500 text-center" }, ucFirst(shortString((0, import_dayjs.default)(`2022-11-${6 + (item + startDateModifier)}`).locale(i18n).format("ddd"))))));
-}, Years = ({ year, clickYear }) => import_react53.default.createElement("div", { className: "w-full grid grid-cols-2 gap-2 mt-2" }, generateArrayNumber(year, year + 11).map((item, index2) => import_react53.default.createElement(
+  return import_react54.default.createElement("div", { className: "grid grid-cols-7 border-b border-gray-300 dark:border-gray-700 py-2" }, DAYS.map((item) => import_react54.default.createElement("div", { key: item, className: "tracking-wide text-gray-500 text-center" }, ucFirst(shortString((0, import_dayjs.default)(`2022-11-${6 + (item + startDateModifier)}`).locale(i18n).format("ddd"))))));
+}, Years = ({ year, clickYear }) => import_react54.default.createElement("div", { className: "w-full grid grid-cols-2 gap-2 mt-2" }, generateArrayNumber(year, year + 11).map((item, index2) => import_react54.default.createElement(
   RoundedButton,
   { key: index2, padding: "py-3", onClick: () => {
     clickYear(item);
   } },
-  import_react53.default.createElement(import_react53.default.Fragment, null, item)
+  import_react54.default.createElement(import_react54.default.Fragment, null, item)
 ))), Calendar = ({ date, onClickPrevious, onClickNext, changeMonth, changeYear }) => {
-  let { period, changePeriod, changeDayHover, showFooter, changeDatepickerValue, hideDatepicker, asSingle, i18n, startWeekOn, input } = (0, import_react53.useContext)(DatepickerContext);
+  let { period, changePeriod, changeDayHover, showFooter, changeDatepickerValue, hideDatepicker, asSingle, i18n, startWeekOn, input } = (0, import_react54.useContext)(DatepickerContext);
   loadLanguageModule(i18n);
-  let [showMonths, setShowMonths] = (0, import_react53.useState)(!1), [showYears, setShowYears] = (0, import_react53.useState)(!1), [year, setYear] = (0, import_react53.useState)(date.year()), previous = (0, import_react53.useCallback)(() => getLastDaysInMonth(previousMonth(date), getNumberOfDay(getFirstDayInMonth(date).ddd, startWeekOn)), [date, startWeekOn]), current = (0, import_react53.useCallback)(() => getDaysInMonth(formatDate(date)), [date]), next = (0, import_react53.useCallback)(() => getFirstDaysInMonth(previousMonth(date), CALENDAR_SIZE - (previous().length + current().length)), [current, date, previous]), hideMonths = (0, import_react53.useCallback)(() => {
+  let [showMonths, setShowMonths] = (0, import_react54.useState)(!1), [showYears, setShowYears] = (0, import_react54.useState)(!1), [year, setYear] = (0, import_react54.useState)(date.year()), previous = (0, import_react54.useCallback)(() => getLastDaysInMonth(previousMonth(date), getNumberOfDay(getFirstDayInMonth(date).ddd, startWeekOn)), [date, startWeekOn]), current = (0, import_react54.useCallback)(() => getDaysInMonth(formatDate(date)), [date]), next = (0, import_react54.useCallback)(() => getFirstDaysInMonth(previousMonth(date), CALENDAR_SIZE - (previous().length + current().length)), [current, date, previous]), hideMonths = (0, import_react54.useCallback)(() => {
     showMonths && setShowMonths(!1);
-  }, [showMonths]), hideYears = (0, import_react53.useCallback)(() => {
+  }, [showMonths]), hideYears = (0, import_react54.useCallback)(() => {
     showYears && setShowYears(!1);
-  }, [showYears]), clickMonth = (0, import_react53.useCallback)((month) => {
+  }, [showYears]), clickMonth = (0, import_react54.useCallback)((month) => {
     setTimeout(() => {
       changeMonth(month), setShowMonths(!showMonths);
     }, 250);
-  }, [changeMonth, showMonths]), clickYear = (0, import_react53.useCallback)((year2) => {
+  }, [changeMonth, showMonths]), clickYear = (0, import_react54.useCallback)((year2) => {
     setTimeout(() => {
       changeYear(year2), setShowYears(!showYears);
     }, 250);
-  }, [changeYear, showYears]), clickDay = (0, import_react53.useCallback)((day, month = date.month() + 1, year2 = date.year()) => {
+  }, [changeYear, showYears]), clickDay = (0, import_react54.useCallback)((day, month = date.month() + 1, year2 = date.year()) => {
     let fullDay = `${year2}-${month}-${day}`, newStart, newEnd = null;
     function chosePeriod(start, end) {
       let ipt = input == null ? void 0 : input.current;
@@ -66573,17 +66578,17 @@ var Days = ({ calendarData, onClickPreviousDays, onClickDay, onClickNextDays }) 
     period.start,
     showFooter,
     input
-  ]), clickPreviousDays = (0, import_react53.useCallback)((day) => {
+  ]), clickPreviousDays = (0, import_react54.useCallback)((day) => {
     let newDate = previousMonth(date);
     clickDay(day, newDate.month() + 1, newDate.year()), onClickPrevious();
-  }, [clickDay, date, onClickPrevious]), clickNextDays = (0, import_react53.useCallback)((day) => {
+  }, [clickDay, date, onClickPrevious]), clickNextDays = (0, import_react54.useCallback)((day) => {
     let newDate = nextMonth(date);
     clickDay(day, newDate.month() + 1, newDate.year()), onClickNext();
   }, [clickDay, date, onClickNext]);
-  (0, import_react53.useEffect)(() => {
+  (0, import_react54.useEffect)(() => {
     setYear(date.year());
   }, [date]);
-  let calendarData = (0, import_react53.useMemo)(() => ({
+  let calendarData = (0, import_react54.useMemo)(() => ({
     date,
     days: {
       previous: previous(),
@@ -66591,109 +66596,109 @@ var Days = ({ calendarData, onClickPreviousDays, onClickDay, onClickNextDays }) 
       next: next()
     }
   }), [current, date, next, previous]);
-  return import_react53.default.createElement(
+  return import_react54.default.createElement(
     "div",
     { className: "w-full md:w-[297px] md:min-w-[297px]" },
-    import_react53.default.createElement(
+    import_react54.default.createElement(
       "div",
       { className: "flex items-center space-x-1.5 border border-gray-300 dark:border-gray-700 rounded-md px-2 py-1.5" },
-      !showMonths && !showYears && import_react53.default.createElement(
+      !showMonths && !showYears && import_react54.default.createElement(
         "div",
         { className: "flex-none" },
-        import_react53.default.createElement(
+        import_react54.default.createElement(
           RoundedButton,
           { roundedFull: !0, onClick: onClickPrevious },
-          import_react53.default.createElement(ChevronLeftIcon, { className: "h-5 w-5" })
+          import_react54.default.createElement(ChevronLeftIcon, { className: "h-5 w-5" })
         )
       ),
-      showYears && import_react53.default.createElement(
+      showYears && import_react54.default.createElement(
         "div",
         { className: "flex-none" },
-        import_react53.default.createElement(
+        import_react54.default.createElement(
           RoundedButton,
           { roundedFull: !0, onClick: () => {
             setYear(year - 12);
           } },
-          import_react53.default.createElement(DoubleChevronLeftIcon, { className: "h-5 w-5" })
+          import_react54.default.createElement(DoubleChevronLeftIcon, { className: "h-5 w-5" })
         )
       ),
-      import_react53.default.createElement(
+      import_react54.default.createElement(
         "div",
         { className: "flex flex-1 items-center space-x-1.5" },
-        import_react53.default.createElement(
+        import_react54.default.createElement(
           "div",
           { className: "w-1/2" },
-          import_react53.default.createElement(
+          import_react54.default.createElement(
             RoundedButton,
             { onClick: () => {
               setShowMonths(!showMonths), hideYears();
             } },
-            import_react53.default.createElement(import_react53.default.Fragment, null, calendarData.date.locale(i18n).format("MMM"))
+            import_react54.default.createElement(import_react54.default.Fragment, null, calendarData.date.locale(i18n).format("MMM"))
           )
         ),
-        import_react53.default.createElement(
+        import_react54.default.createElement(
           "div",
           { className: "w-1/2" },
-          import_react53.default.createElement(
+          import_react54.default.createElement(
             RoundedButton,
             { onClick: () => {
               setShowYears(!showYears), hideMonths();
             } },
-            import_react53.default.createElement(import_react53.default.Fragment, null, calendarData.date.year())
+            import_react54.default.createElement(import_react54.default.Fragment, null, calendarData.date.year())
           )
         )
       ),
-      showYears && import_react53.default.createElement(
+      showYears && import_react54.default.createElement(
         "div",
         { className: "flex-none" },
-        import_react53.default.createElement(
+        import_react54.default.createElement(
           RoundedButton,
           { roundedFull: !0, onClick: () => {
             setYear(year + 12);
           } },
-          import_react53.default.createElement(DoubleChevronRightIcon, { className: "h-5 w-5" })
+          import_react54.default.createElement(DoubleChevronRightIcon, { className: "h-5 w-5" })
         )
       ),
-      !showMonths && !showYears && import_react53.default.createElement(
+      !showMonths && !showYears && import_react54.default.createElement(
         "div",
         { className: "flex-none" },
-        import_react53.default.createElement(
+        import_react54.default.createElement(
           RoundedButton,
           { roundedFull: !0, onClick: onClickNext },
-          import_react53.default.createElement(ChevronRightIcon, { className: "h-5 w-5" })
+          import_react54.default.createElement(ChevronRightIcon, { className: "h-5 w-5" })
         )
       )
     ),
-    import_react53.default.createElement(
+    import_react54.default.createElement(
       "div",
       { className: "px-0.5 sm:px-2 mt-0.5 min-h-[285px]" },
-      showMonths && import_react53.default.createElement(Months, { clickMonth }),
-      showYears && import_react53.default.createElement(Years, { year, clickYear }),
-      !showMonths && !showYears && import_react53.default.createElement(
-        import_react53.default.Fragment,
+      showMonths && import_react54.default.createElement(Months, { clickMonth }),
+      showYears && import_react54.default.createElement(Years, { year, clickYear }),
+      !showMonths && !showYears && import_react54.default.createElement(
+        import_react54.default.Fragment,
         null,
-        import_react53.default.createElement(Week, null),
-        import_react53.default.createElement(Days, { calendarData, onClickPreviousDays: clickPreviousDays, onClickDay: clickDay, onClickNextDays: clickNextDays })
+        import_react54.default.createElement(Week, null),
+        import_react54.default.createElement(Days, { calendarData, onClickPreviousDays: clickPreviousDays, onClickDay: clickDay, onClickNextDays: clickNextDays })
       )
     )
   );
 }, Footer2 = () => {
   var _a, _b;
-  let { hideDatepicker, period, changeDatepickerValue, configs, classNames: classNames8 } = (0, import_react53.useContext)(DatepickerContext), getClassName = (0, import_react53.useCallback)(() => typeof classNames8 < "u" && typeof (classNames8 == null ? void 0 : classNames8.footer) == "function" ? classNames8.footer() : "flex items-center justify-end pb-2.5 pt-3 border-t border-gray-300 dark:border-gray-700", [classNames8]);
-  return import_react53.default.createElement(
+  let { hideDatepicker, period, changeDatepickerValue, configs, classNames: classNames8 } = (0, import_react54.useContext)(DatepickerContext), getClassName = (0, import_react54.useCallback)(() => typeof classNames8 < "u" && typeof (classNames8 == null ? void 0 : classNames8.footer) == "function" ? classNames8.footer() : "flex items-center justify-end pb-2.5 pt-3 border-t border-gray-300 dark:border-gray-700", [classNames8]);
+  return import_react54.default.createElement(
     "div",
     { className: getClassName() },
-    import_react53.default.createElement(
+    import_react54.default.createElement(
       "div",
       { className: "w-full md:w-auto flex items-center justify-center space-x-3" },
-      import_react53.default.createElement(
+      import_react54.default.createElement(
         SecondaryButton,
         { onClick: () => {
           hideDatepicker();
         } },
-        import_react53.default.createElement(import_react53.default.Fragment, null, (_a = configs == null ? void 0 : configs.footer) != null && _a.cancel ? configs.footer.cancel : "Cancel")
+        import_react54.default.createElement(import_react54.default.Fragment, null, (_a = configs == null ? void 0 : configs.footer) != null && _a.cancel ? configs.footer.cancel : "Cancel")
       ),
-      import_react53.default.createElement(
+      import_react54.default.createElement(
         PrimaryButton,
         { onClick: () => {
           period.start && period.end && (changeDatepickerValue({
@@ -66701,7 +66706,7 @@ var Days = ({ calendarData, onClickPreviousDays, onClickDay, onClickNextDays }) 
             endDate: (0, import_dayjs.default)(period.end).format(DATE_FORMAT)
           }), hideDatepicker());
         }, disabled: !(period.start && period.end) },
-        import_react53.default.createElement(import_react53.default.Fragment, null, (_b = configs == null ? void 0 : configs.footer) != null && _b.apply ? configs.footer.apply : "Apply")
+        import_react54.default.createElement(import_react54.default.Fragment, null, (_b = configs == null ? void 0 : configs.footer) != null && _b.apply ? configs.footer.apply : "Apply")
       )
     )
   );
@@ -66709,29 +66714,29 @@ var Days = ({ calendarData, onClickPreviousDays, onClickDay, onClickNextDays }) 
 (function(PopoverDirectionType2) {
   PopoverDirectionType2.up = "up", PopoverDirectionType2.down = "down";
 })(PopoverDirectionType || (PopoverDirectionType = {}));
-var ToggleButton = (e6) => e6.isEmpty ? import_react53.default.createElement(DateIcon, { className: "h-5 w-5" }) : import_react53.default.createElement(CloseIcon, { className: "h-5 w-5" }), Input = (e6) => {
-  let { primaryColor, period, dayHover, changeDayHover, calendarContainer, arrowContainer, inputText, changeInputText, hideDatepicker, changeDatepickerValue, asSingle, placeholder, separator, disabled, inputClassName, toggleClassName, toggleIcon, readOnly, displayFormat, inputId, inputName, classNames: classNames8, popoverDirection } = (0, import_react53.useContext)(DatepickerContext), buttonRef = (0, import_react53.useRef)(null), inputRef = (0, import_react53.useRef)(null), getClassName = (0, import_react53.useCallback)(() => {
+var ToggleButton = (e6) => e6.isEmpty ? import_react54.default.createElement(DateIcon, { className: "h-5 w-5" }) : import_react54.default.createElement(CloseIcon, { className: "h-5 w-5" }), Input = (e6) => {
+  let { primaryColor, period, dayHover, changeDayHover, calendarContainer, arrowContainer, inputText, changeInputText, hideDatepicker, changeDatepickerValue, asSingle, placeholder, separator, disabled, inputClassName, toggleClassName, toggleIcon, readOnly, displayFormat, inputId, inputName, classNames: classNames8, popoverDirection } = (0, import_react54.useContext)(DatepickerContext), buttonRef = (0, import_react54.useRef)(null), inputRef = (0, import_react54.useRef)(null), getClassName = (0, import_react54.useCallback)(() => {
     let input = inputRef.current;
     if (input && typeof classNames8 < "u" && typeof (classNames8 == null ? void 0 : classNames8.input) == "function")
       return classNames8.input(input);
     let border = BORDER_COLOR.focus[primaryColor], ring = RING_COLOR["second-focus"][primaryColor], defaultInputClassName = `relative transition-all duration-300 py-2.5 pl-4 pr-14 w-full border-gray-300 dark:bg-slate-800 dark:text-white/80 dark:border-slate-600 rounded-lg tracking-wide font-light text-sm placeholder-gray-400 bg-white focus:ring disabled:opacity-40 disabled:cursor-not-allowed ${border} ${ring}`;
     return typeof inputClassName == "function" ? inputClassName(defaultInputClassName) : typeof inputClassName == "string" && inputClassName !== "" ? inputClassName : defaultInputClassName;
-  }, [inputRef, classNames8, primaryColor, inputClassName]), handleInputChange = (0, import_react53.useCallback)((e7) => {
+  }, [inputRef, classNames8, primaryColor, inputClassName]), handleInputChange = (0, import_react54.useCallback)((e7) => {
     let inputValue = e7.target.value, start = `${inputValue.slice(0, 4)}-${inputValue.slice(5, 7)}-${inputValue.slice(8, 10)}`, end = `${inputValue.slice(13, 17)}-${inputValue.slice(18, 20)}-${inputValue.slice(21, inputValue.length)}`, input = inputRef == null ? void 0 : inputRef.current;
     start.length === 10 && end.length === 10 && dateIsValid(new Date(start)) && dateIsValid(new Date(end)) && (0, import_dayjs.default)(start).isBefore(end) && (changeDatepickerValue({
       startDate: start,
       endDate: end
     }, e7.target), changeDayHover((0, import_dayjs.default)(end).add(-1, "day").format(DATE_FORMAT)), hideDatepicker(), input && input.blur()), changeInputText(e7.target.value);
-  }, [changeDatepickerValue, changeDayHover, changeInputText, hideDatepicker]), renderToggleIcon = (0, import_react53.useCallback)((isEmpty) => typeof toggleIcon > "u" ? import_react53.default.createElement(ToggleButton, { isEmpty }) : toggleIcon(isEmpty), [toggleIcon]), getToggleClassName = (0, import_react53.useCallback)(() => {
+  }, [changeDatepickerValue, changeDayHover, changeInputText, hideDatepicker]), renderToggleIcon = (0, import_react54.useCallback)((isEmpty) => typeof toggleIcon > "u" ? import_react54.default.createElement(ToggleButton, { isEmpty }) : toggleIcon(isEmpty), [toggleIcon]), getToggleClassName = (0, import_react54.useCallback)(() => {
     let button = buttonRef.current;
     if (button && typeof classNames8 < "u" && typeof (classNames8 == null ? void 0 : classNames8.toggleButton) == "function")
       return classNames8.toggleButton(button);
     let defaultToggleClassName = "absolute right-0 h-full px-3 text-gray-400 focus:outline-none disabled:opacity-40 disabled:cursor-not-allowed";
     return typeof toggleClassName == "function" ? toggleClassName(defaultToggleClassName) : typeof toggleClassName == "string" && toggleClassName !== "" ? toggleClassName : defaultToggleClassName;
   }, [toggleClassName, buttonRef, classNames8]);
-  return (0, import_react53.useEffect)(() => {
+  return (0, import_react54.useEffect)(() => {
     inputRef && e6.setContextRef && typeof e6.setContextRef == "function" && e6.setContextRef(inputRef);
-  }, [e6, inputRef]), (0, import_react53.useEffect)(() => {
+  }, [e6, inputRef]), (0, import_react54.useEffect)(() => {
     let button = buttonRef == null ? void 0 : buttonRef.current;
     function focusInput(e7) {
       e7.stopPropagation();
@@ -66754,7 +66759,7 @@ var ToggleButton = (e6) => e6.isEmpty ? import_react53.default.createElement(Dat
     period.start,
     readOnly,
     inputRef
-  ]), (0, import_react53.useEffect)(() => {
+  ]), (0, import_react54.useEffect)(() => {
     let div = calendarContainer == null ? void 0 : calendarContainer.current, input = inputRef.current, arrow = arrowContainer == null ? void 0 : arrowContainer.current;
     function showCalendarContainer() {
       if (arrow && div && div.classList.contains("hidden")) {
@@ -66768,11 +66773,11 @@ var ToggleButton = (e6) => e6.isEmpty ? import_react53.default.createElement(Dat
     return div && input && input.addEventListener("focus", showCalendarContainer), () => {
       input && input.removeEventListener("focus", showCalendarContainer);
     };
-  }, [calendarContainer, arrowContainer, popoverDirection]), import_react53.default.createElement(
-    import_react53.default.Fragment,
+  }, [calendarContainer, arrowContainer, popoverDirection]), import_react54.default.createElement(
+    import_react54.default.Fragment,
     null,
-    import_react53.default.createElement("input", { ref: inputRef, type: "text", className: getClassName(), disabled, readOnly, placeholder: placeholder || `${displayFormat}${asSingle ? "" : ` ${separator} ${displayFormat}`}`, value: inputText, id: inputId, name: inputName, autoComplete: "off", role: "presentation", onChange: handleInputChange }),
-    import_react53.default.createElement("button", { type: "button", ref: buttonRef, disabled, className: getToggleClassName() }, renderToggleIcon(inputText == null || !(inputText != null && inputText.length)))
+    import_react54.default.createElement("input", { ref: inputRef, type: "text", className: getClassName(), disabled, readOnly, placeholder: placeholder || `${displayFormat}${asSingle ? "" : ` ${separator} ${displayFormat}`}`, value: inputText, id: inputId, name: inputName, autoComplete: "off", role: "presentation", onChange: handleInputChange }),
+    import_react54.default.createElement("button", { type: "button", ref: buttonRef, disabled, className: getToggleClassName() }, renderToggleIcon(inputText == null || !(inputText != null && inputText.length)))
   );
 }, DEFAULT_SHORTCUTS = {
   today: {
@@ -66821,11 +66826,11 @@ var ToggleButton = (e6) => e6.isEmpty ? import_react53.default.createElement(Dat
       end: formatDate(previousMonth((0, import_dayjs.default)()).endOf("month"))
     }
   }
-}, ItemTemplate = import_react53.default.memo((props) => {
-  let { primaryColor, period, changePeriod, changeInputText, updateFirstDate, dayHover, changeDayHover, hideDatepicker, changeDatepickerValue } = (0, import_react53.useContext)(DatepickerContext), getClassName = (0, import_react53.useCallback)(() => {
+}, ItemTemplate = import_react54.default.memo((props) => {
+  let { primaryColor, period, changePeriod, changeInputText, updateFirstDate, dayHover, changeDayHover, hideDatepicker, changeDatepickerValue } = (0, import_react54.useContext)(DatepickerContext), getClassName = (0, import_react54.useCallback)(() => {
     let textColor = TEXT_COLOR[600][primaryColor], textColorHover = TEXT_COLOR.hover[primaryColor];
     return `whitespace-nowrap w-1/2 md:w-1/3 lg:w-auto transition-all duration-300 hover:bg-gray-100 dark:hover:bg-white/10 p-2 rounded cursor-pointer ${textColor} ${textColorHover}`;
-  }, [primaryColor]), chosePeriod = (0, import_react53.useCallback)((item) => {
+  }, [primaryColor]), chosePeriod = (0, import_react54.useCallback)((item) => {
     dayHover && changeDayHover(null), (period.start || period.end) && changePeriod({
       start: null,
       end: null
@@ -66844,11 +66849,11 @@ var ToggleButton = (e6) => e6.isEmpty ? import_react53.default.createElement(Dat
     period.start,
     updateFirstDate
   ]), children = props == null ? void 0 : props.children;
-  return import_react53.default.createElement("li", { className: getClassName(), onClick: () => {
+  return import_react54.default.createElement("li", { className: getClassName(), onClick: () => {
     chosePeriod(props == null ? void 0 : props.item.period);
   } }, children);
 }), Shortcuts = () => {
-  let { configs } = (0, import_react53.useContext)(DatepickerContext), callPastFunction = (0, import_react53.useCallback)((data, numberValue) => typeof data == "function" ? data(numberValue) : null, []), shortcutOptions = (0, import_react53.useMemo)(() => {
+  let { configs } = (0, import_react54.useContext)(DatepickerContext), callPastFunction = (0, import_react54.useCallback)((data, numberValue) => typeof data == "function" ? data(numberValue) : null, []), shortcutOptions = (0, import_react54.useMemo)(() => {
     let options;
     if ((configs == null ? void 0 : configs.shortcuts) && (configs == null ? void 0 : configs.shortcuts)) {
       let formatConfig = Object.keys(configs.shortcuts).map((item) => {
@@ -66873,23 +66878,23 @@ var ToggleButton = (e6) => e6.isEmpty ? import_react53.default.createElement(Dat
     } else
       options = Object.entries(DEFAULT_SHORTCUTS);
     return options;
-  }, [configs]), printItemText = (0, import_react53.useCallback)((item) => (item == null ? void 0 : item.text) ?? null, []);
-  return shortcutOptions != null && shortcutOptions.length ? import_react53.default.createElement(
+  }, [configs]), printItemText = (0, import_react54.useCallback)((item) => (item == null ? void 0 : item.text) ?? null, []);
+  return shortcutOptions != null && shortcutOptions.length ? import_react54.default.createElement(
     "div",
     { className: "md:border-b mb-3 lg:mb-0 lg:border-r lg:border-b-0 border-gray-300 dark:border-gray-700 pr-1" },
-    import_react53.default.createElement("ul", { className: "w-full tracking-wide flex flex-wrap lg:flex-col pb-1 lg:pb-0" }, shortcutOptions == null ? void 0 : shortcutOptions.map(([key, item], index2) => Array.isArray(item) ? item.map((item2, index3) => import_react53.default.createElement(
+    import_react54.default.createElement("ul", { className: "w-full tracking-wide flex flex-wrap lg:flex-col pb-1 lg:pb-0" }, shortcutOptions == null ? void 0 : shortcutOptions.map(([key, item], index2) => Array.isArray(item) ? item.map((item2, index3) => import_react54.default.createElement(
       ItemTemplate,
       { key: index3, item: item2 },
-      import_react53.default.createElement(import_react53.default.Fragment, null, key === "past" && (configs == null ? void 0 : configs.shortcuts) && key in configs.shortcuts && item2.daysNumber ? callPastFunction(configs.shortcuts[key], item2.daysNumber) : item2.text)
-    )) : import_react53.default.createElement(
+      import_react54.default.createElement(import_react54.default.Fragment, null, key === "past" && (configs == null ? void 0 : configs.shortcuts) && key in configs.shortcuts && item2.daysNumber ? callPastFunction(configs.shortcuts[key], item2.daysNumber) : item2.text)
+    )) : import_react54.default.createElement(
       ItemTemplate,
       { key: index2, item },
-      import_react53.default.createElement(import_react53.default.Fragment, null, (configs == null ? void 0 : configs.shortcuts) && key in configs.shortcuts ? typeof configs.shortcuts[key] == "object" ? printItemText(item) : configs.shortcuts[key] : printItemText(item))
+      import_react54.default.createElement(import_react54.default.Fragment, null, (configs == null ? void 0 : configs.shortcuts) && key in configs.shortcuts ? typeof configs.shortcuts[key] == "object" ? printItemText(item) : configs.shortcuts[key] : printItemText(item))
     )))
   ) : null;
 };
 function useOnClickOutside(ref, handler) {
-  (0, import_react53.useEffect)(() => {
+  (0, import_react54.useEffect)(() => {
     let listener = (event) => {
       !ref.current || ref.current.contains(event.target) || handler(event);
     };
@@ -66899,48 +66904,48 @@ function useOnClickOutside(ref, handler) {
   }, [ref, handler]);
 }
 var Datepicker = ({ primaryColor = "blue", value = null, onChange, useRange = !0, showFooter = !1, showShortcuts = !1, configs = void 0, asSingle = !1, placeholder = null, separator = "~", startFrom = null, i18n = LANGUAGE, disabled = !1, inputClassName = null, containerClassName = null, toggleClassName = null, toggleIcon = void 0, displayFormat = DATE_FORMAT, readOnly = !1, minDate = null, maxDate = null, disabledDates = null, inputId, inputName, startWeekOn = "sun", classNames: classNames8 = void 0, popoverDirection = void 0 }) => {
-  let containerRef = (0, import_react53.useRef)(null), calendarContainerRef = (0, import_react53.useRef)(null), arrowRef = (0, import_react53.useRef)(null), [firstDate, setFirstDate] = (0, import_react53.useState)(startFrom && (0, import_dayjs.default)(startFrom).isValid() ? (0, import_dayjs.default)(startFrom) : (0, import_dayjs.default)()), [secondDate, setSecondDate] = (0, import_react53.useState)(nextMonth(firstDate)), [period, setPeriod] = (0, import_react53.useState)({
+  let containerRef = (0, import_react54.useRef)(null), calendarContainerRef = (0, import_react54.useRef)(null), arrowRef = (0, import_react54.useRef)(null), [firstDate, setFirstDate] = (0, import_react54.useState)(startFrom && (0, import_dayjs.default)(startFrom).isValid() ? (0, import_dayjs.default)(startFrom) : (0, import_dayjs.default)()), [secondDate, setSecondDate] = (0, import_react54.useState)(nextMonth(firstDate)), [period, setPeriod] = (0, import_react54.useState)({
     start: null,
     end: null
-  }), [dayHover, setDayHover] = (0, import_react53.useState)(null), [inputText, setInputText] = (0, import_react53.useState)(""), [inputRef, setInputRef] = (0, import_react53.useState)(import_react53.default.createRef());
+  }), [dayHover, setDayHover] = (0, import_react54.useState)(null), [inputText, setInputText] = (0, import_react54.useState)(""), [inputRef, setInputRef] = (0, import_react54.useState)(import_react54.default.createRef());
   useOnClickOutside(containerRef, () => {
     containerRef.current && hideDatepicker();
   });
-  let hideDatepicker = (0, import_react53.useCallback)(() => {
+  let hideDatepicker = (0, import_react54.useCallback)(() => {
     let div = calendarContainerRef.current, arrow = arrowRef.current;
     arrow && div && div.classList.contains("block") && (div.classList.remove("block"), div.classList.remove("translate-y-0"), div.classList.remove("opacity-1"), div.classList.add("translate-y-4"), div.classList.add("opacity-0"), setTimeout(() => {
       div.classList.remove("bottom-full"), div.classList.add("hidden"), div.classList.add("mb-2.5"), div.classList.add("mt-2.5"), arrow.classList.remove("-bottom-2"), arrow.classList.remove("border-r"), arrow.classList.remove("border-b"), arrow.classList.add("border-l"), arrow.classList.add("border-t");
     }, 300));
-  }, []), firstGotoDate = (0, import_react53.useCallback)((date) => {
+  }, []), firstGotoDate = (0, import_react54.useCallback)((date) => {
     let newDate = (0, import_dayjs.default)(formatDate(date)), reformatDate = (0, import_dayjs.default)(formatDate(secondDate));
     (newDate.isSame(reformatDate) || newDate.isAfter(reformatDate)) && setSecondDate(nextMonth(date)), setFirstDate(date);
-  }, [secondDate]), previousMonthFirst = (0, import_react53.useCallback)(() => {
+  }, [secondDate]), previousMonthFirst = (0, import_react54.useCallback)(() => {
     setFirstDate(previousMonth(firstDate));
-  }, [firstDate]), nextMonthFirst = (0, import_react53.useCallback)(() => {
+  }, [firstDate]), nextMonthFirst = (0, import_react54.useCallback)(() => {
     firstGotoDate(nextMonth(firstDate));
-  }, [firstDate, firstGotoDate]), changeFirstMonth = (0, import_react53.useCallback)((month) => {
+  }, [firstDate, firstGotoDate]), changeFirstMonth = (0, import_react54.useCallback)((month) => {
     firstGotoDate((0, import_dayjs.default)(`${firstDate.year()}-${month < 10 ? "0" : ""}${month}-01`));
-  }, [firstDate, firstGotoDate]), changeFirstYear = (0, import_react53.useCallback)((year) => {
+  }, [firstDate, firstGotoDate]), changeFirstYear = (0, import_react54.useCallback)((year) => {
     firstGotoDate((0, import_dayjs.default)(`${year}-${firstDate.month() + 1}-01`));
-  }, [firstDate, firstGotoDate]), secondGotoDate = (0, import_react53.useCallback)((date) => {
+  }, [firstDate, firstGotoDate]), secondGotoDate = (0, import_react54.useCallback)((date) => {
     let newDate = (0, import_dayjs.default)(formatDate(date, displayFormat)), reformatDate = (0, import_dayjs.default)(formatDate(firstDate, displayFormat));
     (newDate.isSame(reformatDate) || newDate.isBefore(reformatDate)) && setFirstDate(previousMonth(date)), setSecondDate(date);
-  }, [firstDate, displayFormat]), previousMonthSecond = (0, import_react53.useCallback)(() => {
+  }, [firstDate, displayFormat]), previousMonthSecond = (0, import_react54.useCallback)(() => {
     secondGotoDate(previousMonth(secondDate));
-  }, [secondDate, secondGotoDate]), nextMonthSecond = (0, import_react53.useCallback)(() => {
+  }, [secondDate, secondGotoDate]), nextMonthSecond = (0, import_react54.useCallback)(() => {
     setSecondDate(nextMonth(secondDate));
-  }, [secondDate]), changeSecondMonth = (0, import_react53.useCallback)((month) => {
+  }, [secondDate]), changeSecondMonth = (0, import_react54.useCallback)((month) => {
     secondGotoDate((0, import_dayjs.default)(`${secondDate.year()}-${month < 10 ? "0" : ""}${month}-01`));
-  }, [secondDate, secondGotoDate]), changeSecondYear = (0, import_react53.useCallback)((year) => {
+  }, [secondDate, secondGotoDate]), changeSecondYear = (0, import_react54.useCallback)((year) => {
     secondGotoDate((0, import_dayjs.default)(`${year}-${secondDate.month() + 1}-01`));
   }, [secondDate, secondGotoDate]);
-  (0, import_react53.useEffect)(() => {
+  (0, import_react54.useEffect)(() => {
     let container = containerRef.current, calendarContainer = calendarContainerRef.current, arrow = arrowRef.current;
     if (container && calendarContainer && arrow) {
       let detail = container.getBoundingClientRect(), screenCenter = window.innerWidth / 2;
       (detail.right - detail.x) / 2 + detail.x > screenCenter && (arrow.classList.add("right-0"), arrow.classList.add("mr-3.5"), calendarContainer.classList.add("right-0"));
     }
-  }, []), (0, import_react53.useEffect)(() => {
+  }, []), (0, import_react54.useEffect)(() => {
     if (value && value.startDate && value.endDate) {
       let startDate = (0, import_dayjs.default)(value.startDate), endDate = (0, import_dayjs.default)(value.endDate);
       startDate.isValid() && endDate.isValid() && (startDate.isSame(endDate) || startDate.isBefore(endDate)) && (setPeriod({
@@ -66952,10 +66957,10 @@ var Datepicker = ({ primaryColor = "blue", value = null, onChange, useRange = !0
       start: null,
       end: null
     }), setInputText(""));
-  }, [asSingle, value, displayFormat, separator]), (0, import_react53.useEffect)(() => {
+  }, [asSingle, value, displayFormat, separator]), (0, import_react54.useEffect)(() => {
     startFrom && (0, import_dayjs.default)(startFrom).isValid() && ((value == null ? void 0 : value.startDate) != null ? (setFirstDate((0, import_dayjs.default)(value.startDate)), setSecondDate(nextMonth((0, import_dayjs.default)(value.startDate)))) : (setFirstDate((0, import_dayjs.default)(startFrom)), setSecondDate(nextMonth((0, import_dayjs.default)(startFrom)))));
   }, [startFrom, value]);
-  let colorPrimary = (0, import_react53.useMemo)(() => COLORS.includes(primaryColor) ? primaryColor : DEFAULT_COLOR, [primaryColor]), contextValues = (0, import_react53.useMemo)(() => ({
+  let colorPrimary = (0, import_react54.useMemo)(() => COLORS.includes(primaryColor) ? primaryColor : DEFAULT_COLOR, [primaryColor]), contextValues = (0, import_react54.useMemo)(() => ({
     asSingle,
     primaryColor: colorPrimary,
     configs,
@@ -67023,45 +67028,45 @@ var Datepicker = ({ primaryColor = "blue", value = null, onChange, useRange = !0
     classNames8,
     inputRef,
     popoverDirection
-  ]), containerClassNameOverload = (0, import_react53.useMemo)(() => {
+  ]), containerClassNameOverload = (0, import_react54.useMemo)(() => {
     let defaultContainerClassName = "relative w-full text-gray-700";
     return typeof containerClassName == "function" ? containerClassName(defaultContainerClassName) : typeof containerClassName == "string" && containerClassName !== "" ? containerClassName : defaultContainerClassName;
   }, [containerClassName]);
-  return import_react53.default.createElement(
+  return import_react54.default.createElement(
     DatepickerContext.Provider,
     { value: contextValues },
-    import_react53.default.createElement(
+    import_react54.default.createElement(
       "div",
       { className: containerClassNameOverload, ref: containerRef },
-      import_react53.default.createElement(Input, { setContextRef: setInputRef }),
-      import_react53.default.createElement(
+      import_react54.default.createElement(Input, { setContextRef: setInputRef }),
+      import_react54.default.createElement(
         "div",
         { className: "transition-all ease-out duration-300 absolute z-10 mt-[1px] text-sm lg:text-xs 2xl:text-sm translate-y-4 opacity-0 hidden", ref: calendarContainerRef },
-        import_react53.default.createElement(Arrow, { ref: arrowRef }),
-        import_react53.default.createElement(
+        import_react54.default.createElement(Arrow, { ref: arrowRef }),
+        import_react54.default.createElement(
           "div",
           { className: "mt-2.5 shadow-sm border border-gray-300 px-1 py-0.5 bg-white dark:bg-slate-800 dark:text-white dark:border-slate-600 rounded-lg" },
-          import_react53.default.createElement(
+          import_react54.default.createElement(
             "div",
             { className: "flex flex-col lg:flex-row py-2" },
-            showShortcuts && import_react53.default.createElement(Shortcuts, null),
-            import_react53.default.createElement(
+            showShortcuts && import_react54.default.createElement(Shortcuts, null),
+            import_react54.default.createElement(
               "div",
               { className: `flex items-stretch flex-col md:flex-row space-y-4 md:space-y-0 md:space-x-1.5 ${showShortcuts ? "md:pl-2" : "md:pl-1"} pr-2 lg:pr-1` },
-              import_react53.default.createElement(Calendar, { date: firstDate, onClickPrevious: previousMonthFirst, onClickNext: nextMonthFirst, changeMonth: changeFirstMonth, changeYear: changeFirstYear }),
-              useRange && import_react53.default.createElement(
-                import_react53.default.Fragment,
+              import_react54.default.createElement(Calendar, { date: firstDate, onClickPrevious: previousMonthFirst, onClickNext: nextMonthFirst, changeMonth: changeFirstMonth, changeYear: changeFirstYear }),
+              useRange && import_react54.default.createElement(
+                import_react54.default.Fragment,
                 null,
-                import_react53.default.createElement(
+                import_react54.default.createElement(
                   "div",
                   { className: "flex items-center" },
-                  import_react53.default.createElement(VerticalDash, null)
+                  import_react54.default.createElement(VerticalDash, null)
                 ),
-                import_react53.default.createElement(Calendar, { date: secondDate, onClickPrevious: previousMonthSecond, onClickNext: nextMonthSecond, changeMonth: changeSecondMonth, changeYear: changeSecondYear })
+                import_react54.default.createElement(Calendar, { date: secondDate, onClickPrevious: previousMonthSecond, onClickNext: nextMonthSecond, changeMonth: changeSecondMonth, changeYear: changeSecondYear })
               )
             )
           ),
-          showFooter && import_react53.default.createElement(Footer2, null)
+          showFooter && import_react54.default.createElement(Footer2, null)
         )
       )
     )
@@ -70601,19 +70606,19 @@ var zh = zhExports, zh$1 = /* @__PURE__ */ _mergeNamespaces({
 
 // app/routes/checkout.tsx
 var import_moment = __toESM(require_moment());
-var import_react56 = __toESM(require_react());
+var import_react57 = __toESM(require_react());
 
 // node_modules/react-icons/lib/esm/iconBase.js
-var import_react55 = __toESM(require_react());
+var import_react56 = __toESM(require_react());
 
 // node_modules/react-icons/lib/esm/iconContext.js
-var import_react54 = __toESM(require_react()), DefaultContext = {
+var import_react55 = __toESM(require_react()), DefaultContext = {
   color: void 0,
   size: void 0,
   className: void 0,
   style: void 0,
   attr: void 0
-}, IconContext = import_react54.default.createContext && import_react54.default.createContext(DefaultContext);
+}, IconContext = import_react55.default.createContext && import_react55.default.createContext(DefaultContext);
 
 // node_modules/react-icons/lib/esm/iconBase.js
 var __assign = function() {
@@ -70636,14 +70641,14 @@ var __assign = function() {
 };
 function Tree2Element(tree) {
   return tree && tree.map(function(node, i8) {
-    return import_react55.default.createElement(node.tag, __assign({
+    return import_react56.default.createElement(node.tag, __assign({
       key: i8
     }, node.attr), Tree2Element(node.child));
   });
 }
 function GenIcon(data) {
   return function(props) {
-    return import_react55.default.createElement(IconBase, __assign({
+    return import_react56.default.createElement(IconBase, __assign({
       attr: __assign({}, data.attr)
     }, props), Tree2Element(data.child));
   };
@@ -70651,7 +70656,7 @@ function GenIcon(data) {
 function IconBase(props) {
   var elem = function(conf) {
     var attr = props.attr, size = props.size, title = props.title, svgProps = __rest(props, ["attr", "size", "title"]), computedSize = size || conf.size || "1em", className;
-    return conf.className && (className = conf.className), props.className && (className = (className ? className + " " : "") + props.className), import_react55.default.createElement("svg", __assign({
+    return conf.className && (className = conf.className), props.className && (className = (className ? className + " " : "") + props.className), import_react56.default.createElement("svg", __assign({
       stroke: "currentColor",
       fill: "currentColor",
       strokeWidth: "0"
@@ -70663,9 +70668,9 @@ function IconBase(props) {
       height: computedSize,
       width: computedSize,
       xmlns: "http://www.w3.org/2000/svg"
-    }), title && import_react55.default.createElement("title", null, title), props.children);
+    }), title && import_react56.default.createElement("title", null, title), props.children);
   };
-  return IconContext !== void 0 ? import_react55.default.createElement(IconContext.Consumer, null, function(conf) {
+  return IconContext !== void 0 ? import_react56.default.createElement(IconContext.Consumer, null, function(conf) {
     return elem(conf);
   }) : elem(DefaultContext);
 }
@@ -70721,7 +70726,7 @@ function PaymentMethod() {
 // app/routes/checkout.tsx
 var import_jsx_runtime11 = __toESM(require_jsx_runtime());
 function Checkout() {
-  let { closeCart, cartItems, removeFromCart, openCart, isOpen } = cartStore_default(), subTotal = 900, shippingFees = 10, taxFees = Math.round(subTotal * 14 / 100), grandTotal = subTotal + taxFees + shippingFees, [value, setValue] = (0, import_react56.useState)({
+  let { closeCart, cartItems, removeFromCart, openCart, isOpen } = cartStore_default(), subTotal = 900, shippingFees = 10, taxFees = Math.round(subTotal * 14 / 100), grandTotal = subTotal + taxFees + shippingFees, [value, setValue] = (0, import_react57.useState)({
     startDate: null,
     endDate: null
   }), handleValueChange = (newValue) => {
@@ -71367,7 +71372,7 @@ function HeroSection() {
 }
 
 // app/components/AboutSection.js
-var import_react61 = __toESM(require_react());
+var import_react62 = __toESM(require_react());
 init_dist2();
 var import_jsx_runtime18 = __toESM(require_jsx_runtime());
 function AboutSection() {
@@ -72317,7 +72322,7 @@ function HeroTitle() {
 }
 
 // app/components/Testimonials.js
-var import_react62 = __toESM(require_react()), import_jsx_runtime20 = __toESM(require_jsx_runtime());
+var import_react63 = __toESM(require_react()), import_jsx_runtime20 = __toESM(require_jsx_runtime());
 function Testimonials() {
   return /* @__PURE__ */ (0, import_jsx_runtime20.jsx)("section", { className: "py-10 bg-gray-100 sm:py-20", children: /* @__PURE__ */ (0, import_jsx_runtime20.jsxs)("div", { className: "px-4 mx-auto max-w-7xl sm:px-6 lg:px-8", children: [
     /* @__PURE__ */ (0, import_jsx_runtime20.jsx)(
@@ -72399,7 +72404,7 @@ function Testimonials() {
 }
 
 // app/components/Blog.js
-var import_react63 = __toESM(require_react()), import_jsx_runtime21 = __toESM(require_jsx_runtime());
+var import_react64 = __toESM(require_react()), import_jsx_runtime21 = __toESM(require_jsx_runtime());
 function Blog() {
   return /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("section", { className: "pt-20 pb-10 lg:pt-[120px] lg:pb-20", children: /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("div", { className: "container mx-auto", children: [
     /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("div", { className: "-mx-4 flex flex-wrap justify-center", children: /* @__PURE__ */ (0, import_jsx_runtime21.jsx)("div", { className: "w-full px-4", children: /* @__PURE__ */ (0, import_jsx_runtime21.jsxs)("div", { className: "mx-auto mb-[60px] max-w-[510px] text-center lg:mb-20", children: [
@@ -72607,10 +72612,10 @@ __export(cart_exports, {
 var import_solid = __toESM(require_solid());
 
 // app/components/product/ProductWidget.tsx
-var import_react67 = __toESM(require_react()), import_react_lazy_load_image_component = __toESM(require_build());
+var import_react68 = __toESM(require_react()), import_react_lazy_load_image_component = __toESM(require_build());
 
 // app/components/Quickview.tsx
-var import_react64 = __toESM(require_react());
+var import_react65 = __toESM(require_react());
 var import_outline3 = __toESM(require_outline());
 var import_jsx_runtime24 = __toESM(require_jsx_runtime()), product2 = {
   name: "Basic Tee 6-Pack",
@@ -72641,12 +72646,12 @@ function classNames3(...classes) {
   return classes.filter(Boolean).join(" ");
 }
 function Quickview({ openQuick, openModal, product }) {
-  let [selectedColor, setSelectedColor2] = (0, import_react64.useState)(product2.colors[0]), [selectedSize, setSelectedSize2] = (0, import_react64.useState)(product2.sizes[2]);
-  return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "overview", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(tt, { show: openQuick, as: import_react64.Fragment, children: /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)(St, { as: "div", className: "relative z-10", onClose: openModal, children: [
+  let [selectedColor, setSelectedColor2] = (0, import_react65.useState)(product2.colors[0]), [selectedSize, setSelectedSize2] = (0, import_react65.useState)(product2.sizes[2]);
+  return /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "overview", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(tt, { show: openQuick, as: import_react65.Fragment, children: /* @__PURE__ */ (0, import_jsx_runtime24.jsxs)(St, { as: "div", className: "relative z-10", onClose: openModal, children: [
     /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
       tt.Child,
       {
-        as: import_react64.Fragment,
+        as: import_react65.Fragment,
         enter: "ease-out duration-300",
         enterFrom: "opacity-0",
         enterTo: "opacity-100",
@@ -72659,7 +72664,7 @@ function Quickview({ openQuick, openModal, product }) {
     /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "fixed inset-0 z-10 overflow-y-auto", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)("div", { className: "flex items-stretch justify-center min-h-full text-center md:items-center md:px-2 lg:px-4", children: /* @__PURE__ */ (0, import_jsx_runtime24.jsx)(
       tt.Child,
       {
-        as: import_react64.Fragment,
+        as: import_react65.Fragment,
         enter: "ease-out duration-300",
         enterFrom: "opacity-0 translate-y-4 md:translate-y-0 md:scale-95",
         enterTo: "opacity-100 translate-y-0 md:scale-100",
@@ -72855,7 +72860,7 @@ function AddToCartSimple({ className, product, disabled }) {
 // app/components/product/ProductWidget.tsx
 var import_jsx_runtime26 = __toESM(require_jsx_runtime());
 function ProductWidget({ product }) {
-  let [isOpenCart, setIsOpenCart] = (0, import_react67.useState)(!1), [openQuick, setOpenQuick] = (0, import_react67.useState)(!1);
+  let [isOpenCart, setIsOpenCart] = (0, import_react68.useState)(!1), [openQuick, setOpenQuick] = (0, import_react68.useState)(!1);
   function openModal() {
     setOpenQuick(!openQuick);
   }
@@ -73372,10 +73377,10 @@ async function getCategoryProducts(categorySlug, pageNumber) {
 }
 
 // app/routes/category/$catSlug/index.tsx
-var import_solid3 = __toESM(require_solid()), import_react74 = __toESM(require_react());
+var import_solid3 = __toESM(require_solid()), import_react75 = __toESM(require_react());
 
 // app/components/Breadcrumbs.tsx
-var import_solid2 = __toESM(require_solid()), import_react71 = __toESM(require_react());
+var import_solid2 = __toESM(require_solid()), import_react72 = __toESM(require_react());
 init_dist2();
 var import_jsx_runtime30 = __toESM(require_jsx_runtime());
 function classNames4(...classes) {
@@ -73386,7 +73391,7 @@ function Breadcrumbs({ breadcrumbs: breadcrumbs2, className }) {
     "order-first flex space-x-2 text-sm font-semibold items-center capitalize",
     className
   ), children: breadcrumbs2.map(
-    (item, index2, breadcrumbs3) => /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)(import_react71.Fragment, { children: [
+    (item, index2, breadcrumbs3) => /* @__PURE__ */ (0, import_jsx_runtime30.jsxs)(import_react72.Fragment, { children: [
       index2 === 0 ? "" : /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(import_solid2.ChevronRightIcon, { className: "w-4 h-4 select-none text-slate-500" }),
       index2 + 1 === breadcrumbs3.length ? /* @__PURE__ */ (0, import_jsx_runtime30.jsx)("span", { className: "text-slate-600 hover:text-slate-600", children: item.name }) : /* @__PURE__ */ (0, import_jsx_runtime30.jsx)(Link, { to: item.href, className: "text-slate-500 hover:text-slate-600", children: item.name })
     ] }, v4())
@@ -73407,7 +73412,7 @@ var loader3 = async ({ params }) => {
   });
 };
 function CategorySlug() {
-  let { products, categorySlug, pageNumber } = useLoaderData2(), [mobileFiltersOpen, setMobileFiltersOpen] = (0, import_react74.useState)(!1), [grid, setGrid] = (0, import_react74.useState)(!1), sortOptions = [
+  let { products, categorySlug, pageNumber } = useLoaderData2(), [mobileFiltersOpen, setMobileFiltersOpen] = (0, import_react75.useState)(!1), [grid, setGrid] = (0, import_react75.useState)(!1), sortOptions = [
     { name: "Most Popular", href: "#", current: !0 },
     { name: "Best Rating", href: "#", current: !1 },
     { name: "Newest", href: "#", current: !1 },
@@ -73484,7 +73489,7 @@ function CategorySlug() {
           /* @__PURE__ */ (0, import_jsx_runtime31.jsx)(
             tt,
             {
-              as: import_react74.Fragment,
+              as: import_react75.Fragment,
               enter: "transition ease-out duration-100",
               enterFrom: "transform opacity-0 scale-95",
               enterTo: "transform opacity-100 scale-100",
@@ -73607,11 +73612,11 @@ __export(productSlug_exports, {
 });
 
 // app/components/Gallery.tsx
-var import_react75 = __toESM(require_react()), import_react_slick = __toESM(require_lib());
+var import_react76 = __toESM(require_react()), import_react_slick = __toESM(require_lib());
 var import_jsx_runtime32 = __toESM(require_jsx_runtime());
 function Gallery({ galleryImages = [] }) {
-  let [nav1, setNav1] = (0, import_react75.useState)(null), [nav2, setNav2] = (0, import_react75.useState)(null), [slider1, setSlider1] = (0, import_react75.useState)(null), [slider2, setSlider2] = (0, import_react75.useState)(null);
-  (0, import_react75.useEffect)(() => {
+  let [nav1, setNav1] = (0, import_react76.useState)(null), [nav2, setNav2] = (0, import_react76.useState)(null), [slider1, setSlider1] = (0, import_react76.useState)(null), [slider2, setSlider2] = (0, import_react76.useState)(null);
+  (0, import_react76.useEffect)(() => {
     setNav1(slider1), setNav2(slider2);
   }, [slider1, slider2]);
   let settingsMain = {
@@ -74268,9 +74273,9 @@ function Tabs({ product }) {
 }
 
 // app/components/SizeGuide.tsx
-var import_react78 = __toESM(require_react()), import_jsx_runtime36 = __toESM(require_jsx_runtime());
+var import_react79 = __toESM(require_react()), import_jsx_runtime36 = __toESM(require_jsx_runtime());
 function SizeGuide() {
-  let [isOpenSize, setIsOpenSize] = (0, import_react78.useState)(!1);
+  let [isOpenSize, setIsOpenSize] = (0, import_react79.useState)(!1);
   function closeModal() {
     setIsOpenSize(!1);
   }
@@ -74279,11 +74284,11 @@ function SizeGuide() {
   }
   return /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(import_jsx_runtime36.Fragment, { children: [
     /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("button", { type: "button", className: "text-sm font-medium text-indigo-600 hover:text-indigo-500", onClick: openModal, children: "Size guide" }),
-    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(tt, { appear: !0, show: isOpenSize, as: import_react78.Fragment, children: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(St, { as: "div", className: "relative z-10", onClose: closeModal, children: [
+    /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(tt, { appear: !0, show: isOpenSize, as: import_react79.Fragment, children: /* @__PURE__ */ (0, import_jsx_runtime36.jsxs)(St, { as: "div", className: "relative z-10", onClose: closeModal, children: [
       /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(
         tt.Child,
         {
-          as: import_react78.Fragment,
+          as: import_react79.Fragment,
           enter: "ease-out duration-300",
           enterFrom: "opacity-0",
           enterTo: "opacity-100",
@@ -74296,7 +74301,7 @@ function SizeGuide() {
       /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "fixed inset-0 overflow-y-auto", children: /* @__PURE__ */ (0, import_jsx_runtime36.jsx)("div", { className: "flex items-center justify-center min-h-full p-4 text-center", children: /* @__PURE__ */ (0, import_jsx_runtime36.jsx)(
         tt.Child,
         {
-          as: import_react78.Fragment,
+          as: import_react79.Fragment,
           enter: "ease-out duration-300",
           enterFrom: "opacity-0 scale-95",
           enterTo: "opacity-100 scale-100",
@@ -74557,7 +74562,7 @@ function shop() {
 }
 
 // server-assets-manifest:@remix-run/dev/assets-manifest
-var assets_manifest_default = { version: "38b91b37", entry: { module: "/build/entry.client-LQICIALF.js", imports: ["/build/_shared/chunk-HPFL2GWL.js", "/build/_shared/chunk-X4AUN236.js", "/build/_shared/chunk-WAA2JUZB.js", "/build/_shared/chunk-ZP5QWDRS.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-FNQTDF4G.js", imports: ["/build/_shared/chunk-ILFY3APD.js", "/build/_shared/chunk-2ODSIS5P.js", "/build/_shared/chunk-HAM45H6V.js", "/build/_shared/chunk-LMY6NPHT.js", "/build/_shared/chunk-4EW62DST.js", "/build/_shared/chunk-SFI6O5R2.js", "/build/_shared/chunk-Q7T3NQ2Z.js", "/build/_shared/chunk-HJYI5MQW.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/cart": { id: "routes/cart", parentId: "root", path: "cart", index: void 0, caseSensitive: void 0, module: "/build/routes/cart-QIOHSVQY.js", imports: ["/build/_shared/chunk-JJIK72VF.js", "/build/_shared/chunk-37DFPQ7Y.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/category": { id: "routes/category", parentId: "root", path: "category", index: void 0, caseSensitive: void 0, module: "/build/routes/category/index-D3ZLE4K6.js", imports: ["/build/_shared/chunk-F5CGBJK6.js", "/build/_shared/chunk-NN2CIUR5.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/category/index": { id: "routes/category/index", parentId: "root", path: "category", index: !0, caseSensitive: void 0, module: "/build/routes/category/index-D3ZLE4K6.js", imports: ["/build/_shared/chunk-F5CGBJK6.js", "/build/_shared/chunk-NN2CIUR5.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/category-page": { id: "routes/category-page", parentId: "root", path: "category-page", index: void 0, caseSensitive: void 0, module: "/build/routes/category-page-5QTZRXN3.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/category/$catSlug/$subCatSlug": { id: "routes/category/$catSlug/$subCatSlug", parentId: "root", path: "category/:catSlug/:subCatSlug", index: void 0, caseSensitive: void 0, module: "/build/routes/category/$catSlug/$subCatSlug-IN5LZLEW.js", imports: ["/build/_shared/chunk-NN2CIUR5.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/category/$catSlug/index": { id: "routes/category/$catSlug/index", parentId: "root", path: "category/:catSlug", index: !0, caseSensitive: void 0, module: "/build/routes/category/$catSlug/index-NPYUQMVH.js", imports: ["/build/_shared/chunk-F72SJ3FQ.js", "/build/_shared/chunk-37DFPQ7Y.js", "/build/_shared/chunk-NN2CIUR5.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/checkout": { id: "routes/checkout", parentId: "root", path: "checkout", index: void 0, caseSensitive: void 0, module: "/build/routes/checkout-QI7IFSHC.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/forgot": { id: "routes/forgot", parentId: "root", path: "forgot", index: void 0, caseSensitive: void 0, module: "/build/routes/forgot-C3CU6MZT.js", imports: ["/build/_shared/chunk-M44RBXIO.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-ILR3G4AI.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-KV7OCOYV.js", imports: ["/build/_shared/chunk-M44RBXIO.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products": { id: "routes/products", parentId: "root", path: "products", index: void 0, caseSensitive: void 0, module: "/build/routes/products-QCV2VU5O.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products/$productSlug": { id: "routes/products/$productSlug", parentId: "routes/products", path: ":productSlug", index: void 0, caseSensitive: void 0, module: "/build/routes/products/$productSlug-5OWFSTOV.js", imports: ["/build/_shared/chunk-JJIK72VF.js", "/build/_shared/chunk-F72SJ3FQ.js", "/build/_shared/chunk-37DFPQ7Y.js", "/build/_shared/chunk-2ODSIS5P.js", "/build/_shared/chunk-HAM45H6V.js", "/build/_shared/chunk-LMY6NPHT.js", "/build/_shared/chunk-NN2CIUR5.js", "/build/_shared/chunk-SFI6O5R2.js", "/build/_shared/chunk-Q7T3NQ2Z.js", "/build/_shared/chunk-HJYI5MQW.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products/index": { id: "routes/products/index", parentId: "routes/products", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/products/index-DPF3EFNB.js", imports: ["/build/_shared/chunk-SFI6O5R2.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/signup": { id: "routes/signup", parentId: "root", path: "signup", index: void 0, caseSensitive: void 0, module: "/build/routes/signup-KAPLZ27A.js", imports: ["/build/_shared/chunk-M44RBXIO.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/thanks": { id: "routes/thanks", parentId: "root", path: "thanks", index: void 0, caseSensitive: void 0, module: "/build/routes/thanks-BRII5MEK.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, cssBundleHref: void 0, hmr: void 0, url: "/build/manifest-38B91B37.js" };
+var assets_manifest_default = { version: "4a15575c", entry: { module: "/build/entry.client-LQICIALF.js", imports: ["/build/_shared/chunk-HPFL2GWL.js", "/build/_shared/chunk-X4AUN236.js", "/build/_shared/chunk-WAA2JUZB.js", "/build/_shared/chunk-ZP5QWDRS.js"] }, routes: { root: { id: "root", parentId: void 0, path: "", index: void 0, caseSensitive: void 0, module: "/build/root-5CKMIRJQ.js", imports: ["/build/_shared/chunk-ILFY3APD.js", "/build/_shared/chunk-2ODSIS5P.js", "/build/_shared/chunk-HAM45H6V.js", "/build/_shared/chunk-LMY6NPHT.js", "/build/_shared/chunk-4EW62DST.js", "/build/_shared/chunk-SFI6O5R2.js", "/build/_shared/chunk-Q7T3NQ2Z.js", "/build/_shared/chunk-HJYI5MQW.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !0 }, "routes/cart": { id: "routes/cart", parentId: "root", path: "cart", index: void 0, caseSensitive: void 0, module: "/build/routes/cart-QIOHSVQY.js", imports: ["/build/_shared/chunk-JJIK72VF.js", "/build/_shared/chunk-37DFPQ7Y.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/category": { id: "routes/category", parentId: "root", path: "category", index: void 0, caseSensitive: void 0, module: "/build/routes/category/index-D3ZLE4K6.js", imports: ["/build/_shared/chunk-F5CGBJK6.js", "/build/_shared/chunk-NN2CIUR5.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/category/index": { id: "routes/category/index", parentId: "root", path: "category", index: !0, caseSensitive: void 0, module: "/build/routes/category/index-D3ZLE4K6.js", imports: ["/build/_shared/chunk-F5CGBJK6.js", "/build/_shared/chunk-NN2CIUR5.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/category-page": { id: "routes/category-page", parentId: "root", path: "category-page", index: void 0, caseSensitive: void 0, module: "/build/routes/category-page-5QTZRXN3.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/category/$catSlug/$subCatSlug": { id: "routes/category/$catSlug/$subCatSlug", parentId: "root", path: "category/:catSlug/:subCatSlug", index: void 0, caseSensitive: void 0, module: "/build/routes/category/$catSlug/$subCatSlug-IN5LZLEW.js", imports: ["/build/_shared/chunk-NN2CIUR5.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/category/$catSlug/index": { id: "routes/category/$catSlug/index", parentId: "root", path: "category/:catSlug", index: !0, caseSensitive: void 0, module: "/build/routes/category/$catSlug/index-NPYUQMVH.js", imports: ["/build/_shared/chunk-F72SJ3FQ.js", "/build/_shared/chunk-37DFPQ7Y.js", "/build/_shared/chunk-NN2CIUR5.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/checkout": { id: "routes/checkout", parentId: "root", path: "checkout", index: void 0, caseSensitive: void 0, module: "/build/routes/checkout-QI7IFSHC.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/forgot": { id: "routes/forgot", parentId: "root", path: "forgot", index: void 0, caseSensitive: void 0, module: "/build/routes/forgot-C3CU6MZT.js", imports: ["/build/_shared/chunk-M44RBXIO.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/index": { id: "routes/index", parentId: "root", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/index-ILR3G4AI.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/login": { id: "routes/login", parentId: "root", path: "login", index: void 0, caseSensitive: void 0, module: "/build/routes/login-KV7OCOYV.js", imports: ["/build/_shared/chunk-M44RBXIO.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products": { id: "routes/products", parentId: "root", path: "products", index: void 0, caseSensitive: void 0, module: "/build/routes/products-QCV2VU5O.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products/$productSlug": { id: "routes/products/$productSlug", parentId: "routes/products", path: ":productSlug", index: void 0, caseSensitive: void 0, module: "/build/routes/products/$productSlug-5OWFSTOV.js", imports: ["/build/_shared/chunk-JJIK72VF.js", "/build/_shared/chunk-F72SJ3FQ.js", "/build/_shared/chunk-37DFPQ7Y.js", "/build/_shared/chunk-2ODSIS5P.js", "/build/_shared/chunk-HAM45H6V.js", "/build/_shared/chunk-LMY6NPHT.js", "/build/_shared/chunk-NN2CIUR5.js", "/build/_shared/chunk-SFI6O5R2.js", "/build/_shared/chunk-Q7T3NQ2Z.js", "/build/_shared/chunk-HJYI5MQW.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/products/index": { id: "routes/products/index", parentId: "routes/products", path: void 0, index: !0, caseSensitive: void 0, module: "/build/routes/products/index-DPF3EFNB.js", imports: ["/build/_shared/chunk-SFI6O5R2.js"], hasAction: !1, hasLoader: !0, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/signup": { id: "routes/signup", parentId: "root", path: "signup", index: void 0, caseSensitive: void 0, module: "/build/routes/signup-KAPLZ27A.js", imports: ["/build/_shared/chunk-M44RBXIO.js"], hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 }, "routes/thanks": { id: "routes/thanks", parentId: "root", path: "thanks", index: void 0, caseSensitive: void 0, module: "/build/routes/thanks-BRII5MEK.js", imports: void 0, hasAction: !1, hasLoader: !1, hasCatchBoundary: !1, hasErrorBoundary: !1 } }, cssBundleHref: void 0, hmr: void 0, url: "/build/manifest-4A15575C.js" };
 
 // server-entry-module:@remix-run/dev/server-build
 var assetsBuildDirectory = "public/build", future = { unstable_cssModules: !1, unstable_cssSideEffectImports: !1, unstable_dev: !1, unstable_postcss: !1, unstable_tailwind: !0, unstable_vanillaExtract: !1, v2_errorBoundary: !1, v2_meta: !1, v2_normalizeFormMethod: !1, v2_routeConvention: !0 }, publicPath = "/build/", entry = { module: entry_server_exports }, routes = {
