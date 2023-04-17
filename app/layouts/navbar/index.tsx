@@ -133,7 +133,7 @@ function classNames(...classes: string[]) {
 }
 export default function NavBar() {
   const [open, setOpen] = useState(false);
-  const { cartQuantityTotal, openCart } = useShoppingCart();
+  // const { cartQuantityTotal, openCart } = useShoppingCart();
   return (
     <>
       <div className="bg-white">
@@ -546,13 +546,13 @@ export default function NavBar() {
                     <div className="flow-root ml-4 lg:ml-6">
                       <button
                         className="flex items-center p-2 -m-2 group"
-                        onClick={openCart}
+                      // onClick={openCart}
                       >
                         <ShoppingBagIcon
                           className="flex-shrink-0 w-6 h-6 text-gray-400 group-hover:text-gray-500"
                           aria-hidden="true"
                         />
-                        <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{cartQuantityTotal}</span>
+                        {/* <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{cartQuantityTotal}</span> */}
                         <span className="sr-only">items in cart, view bag</span>
                       </button>
                     </div>
