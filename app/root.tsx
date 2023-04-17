@@ -11,12 +11,12 @@ import {
   useParams,
 } from "@remix-run/react";
 import styles from './tailwind.css';
-import styles2 from 'slick-carousel/slick/slick.css';
+// import styles2 from 'slick-carousel/slick/slick.css';
 import Footer from "./layouts/footer";
 import NavBar from "./layouts/navbar";
 
 export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: styles },{ rel: 'stylesheet', href: styles2 }];
+  return [{ rel: 'stylesheet', href: styles }];
 }
 
 export const meta: MetaFunction = () => ({
@@ -49,7 +49,7 @@ function Layout({ children }: { children: React.ReactNode }) {
   // console.log('params',useParams())
   return (
     <>
-      <NavBar/>
+      <NavBar />
       <main className="relative z-10">{children}</main>
       <Footer />
     </>
