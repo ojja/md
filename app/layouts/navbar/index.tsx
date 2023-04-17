@@ -133,7 +133,7 @@ function classNames(...classes: string[]) {
 }
 export default function NavBar() {
   const [open, setOpen] = useState(false);
-  const { closeCart, cartQuantityTotal, openCart } = useShoppingCart();
+  const { cartQuantityTotal, openCart } = useShoppingCart();
   return (
     <>
       <div className="bg-white">
@@ -278,7 +278,6 @@ export default function NavBar() {
             </Dialog>
           </Transition>
         </React.Fragment>
-        {closeCart}
         <ShoppingCart />
         <header className="relative z-20 bg-white">
           <p className="flex items-center justify-center h-10 px-4 text-sm font-medium text-white bg-indigo-600 sm:px-6 lg:px-8">
@@ -452,10 +451,10 @@ export default function NavBar() {
                               <Menu.Item key={v4()}>
                                 {({ active }) => (
                                   <div
-                                  className={classNames(
-                                    active ? 'bg-gray-100' : '',
-                                    'flex justify-center px-4 py-2 text-sm font-medium text-gray-900 w-full cursor-pointer'
-                                  )}
+                                    className={classNames(
+                                      active ? 'bg-gray-100' : '',
+                                      'flex justify-center px-4 py-2 text-sm font-medium text-gray-900 w-full cursor-pointer'
+                                    )}
                                   >
                                     <span className="block ml-3">العربيه</span>
                                   </div>
@@ -509,10 +508,10 @@ export default function NavBar() {
                               <Menu.Item key={v4()}>
                                 {({ active }) => (
                                   <div
-                                  className={classNames(
-                                    active ? 'bg-gray-100' : '',
-                                    'flex justify-center px-4 py-2 text-sm font-medium text-gray-900 w-full cursor-pointer'
-                                  )}
+                                    className={classNames(
+                                      active ? 'bg-gray-100' : '',
+                                      'flex justify-center px-4 py-2 text-sm font-medium text-gray-900 w-full cursor-pointer'
+                                    )}
                                   >
                                     <img
                                       src="/images/eg.svg"
@@ -532,7 +531,7 @@ export default function NavBar() {
 
                     {/* Change Country */}
                     <div className="hidden lg:ml-8 lg:flex">
-                      <ChangeCountry/>
+                      <ChangeCountry />
                     </div>
 
                     {/* Search */}

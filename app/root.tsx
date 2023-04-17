@@ -33,7 +33,7 @@ export default function App() {
         <Links />
       </head>
       <body className="oultine-none box-border">
-        {/* <NavBar /> */}
+        <NavBar />
         <main className="relative z-10">
           <Outlet />
         </main>
