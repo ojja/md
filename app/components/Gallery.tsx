@@ -2,8 +2,8 @@ import React, { useState, useEffect } from 'react';
 import Slider from "react-slick";
 import { v4 } from 'uuid';
 
-import "slick-carousel/slick/slick.css";
-import "slick-carousel/slick/slick-theme.css";
+// import "slick-carousel/slick/slick.css";
+// import "slick-carousel/slick/slick-theme.css";
 interface GalleryProps {
   galleryImages: string[];
 }
@@ -91,7 +91,7 @@ export default function Gallery({ galleryImages = [] }: GalleryProps) {
         className="order-1 w-10/12"
       >
         {galleryImages.map(slide => (
-          <div className="slick-slide" key={v4}>
+          <div className="slick-slide" key={v4()}>
             <img
               className="slick-slide-image"
               src={`${slide}`}
@@ -106,7 +106,7 @@ export default function Gallery({ galleryImages = [] }: GalleryProps) {
           ref={slider => (setSlider2(slider))}
         >
           {galleryImages.map(slide => (
-            <div className="slick-slide" key={v4}>
+            <div className="slick-slide" key={v4()}>
               <img
                 className="slick-slide-image"
                 src={`${slide}`}

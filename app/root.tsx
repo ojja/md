@@ -11,13 +11,14 @@ import {
   useParams,
 } from "@remix-run/react";
 import styles from './tailwind.css';
-import styles2 from 'slick-carousel/slick/slick.css';
-import styles2 from 'slick-carousel/slick/slick-theme.css';
+// import styles2 from 'slick-carousel/slick/slick.css';
+// import styles2 from 'slick-carousel/slick/slick-theme.css';
+// import styles2 from 'slick-carousel/slick/slick.css';
 import Footer from "./layouts/footer";
 import NavBar from "./layouts/navbar";
 
 export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: styles },{ rel: 'stylesheet', href: styles2 }];
+  return [{ rel: 'stylesheet', href: styles }];
 }
 
 export const meta: MetaFunction = () => ({
@@ -34,27 +35,17 @@ export default function App() {
         <Links />
       </head>
       <body className="box-border oultine-none">
-        <Layout>
+        {/* <NavBar /> */}
+        <main className="relative z-10">
           <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-          {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
-        </Layout>
+        </main>
+        <Footer />
+        <ScrollRestoration />
+        <Scripts />
+        {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
       </body>
-    </html>
+    </html >
   );
-}
-
-
-function Layout({ children }: { children: React.ReactNode }) {
-  // console.log('params',useParams())
-  return (
-    <>
-      <NavBar/>
-      <main className="relative z-10">{children}</main>
-      <Footer />
-    </>
-  )
 }
 
 // const error: string = "Error message";
@@ -62,6 +53,7 @@ interface Props {
   error: Error | null
 }
 export function ErrorBoundary({ error }: Props) {
+  // debugger;
   console.error(error);
   if (error) {
     return (
