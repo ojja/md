@@ -1,5 +1,5 @@
-import { json, LoaderFunction } from "@remix-run/node";
-import { useLoaderData } from "@remix-run/react";
+import { json, LoaderFunction } from "@remix-run/cloudflare";
+import { Outlet, useLoaderData } from "@remix-run/react";
 
 export const loader: LoaderFunction = async ({ params }) => {
   return json({ slug: params.subCatSlug, params })
@@ -7,7 +7,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 
 export default function CatSlug() {
   const { slug, params } = useLoaderData();
-  console.log('params Base child inside>',params)
+  console.log('params Base child inside>', params)
   return (
     <div>
       Cat Sl:::::{slug}

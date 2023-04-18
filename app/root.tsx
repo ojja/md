@@ -1,4 +1,4 @@
-import type { LinksFunction, MetaFunction } from "@remix-run/node";
+import type { LinksFunction, MetaFunction } from "@remix-run/cloudflare";
 import {
   Link,
   Links,
@@ -10,8 +10,12 @@ import {
   useLoaderData,
   useParams,
 } from "@remix-run/react";
-import styles from '~/tailwind.css';
-import { NavBar } from "./layouts";
+import styles from './tailwind.css';
+// import styles2 from 'slick-carousel/slick/slick.css';
+// import styles2 from 'slick-carousel/slick/slick-theme.css';
+// import styles2 from 'slick-carousel/slick/slick.css';
+import Footer from "./layouts/footer";
+import NavBar from "./layouts/navbar";
 
 export const links: LinksFunction = () => {
   return [{ rel: 'stylesheet', href: styles }];
@@ -30,51 +34,42 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body>
-        <Layout>
+      <body className="box-border oultine-none">
+        {/* <NavBar /> */}
+        <main className="relative z-10">
           <Outlet />
-          <ScrollRestoration />
-          <Scripts />
-          {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
-        </Layout>
-      </body>
-    </html>
-  );
-}
-
-
-function Layout({ children }) {
-  // console.log('params',useParams())
-  return (
-    <>
-      <div>
-        header
-        {/* <NavBar location={'a'}/> */}
-      </div>
-      <div className=''>{children}</div>
-      <div>
-        footer
-      </div>
-    </>
-  )
-}
-
-
-export function ErrorBoundary({ error }) {
-  // console.error(error);
-  return (
-    <html>
-      <head>
-        <title>Oh no!</title>
-        <Meta />
-        <Links />
-      </head>
-      <body>
-        {/* add the UI you want your users to see */}
-        {/* {error} */}
-        {error.message}
+        </main>
+        <Footer />
+        <ScrollRestoration />
         <Scripts />
+        {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
       </body>
-    </html>
+    </html >
   );
+}
+
+// const error: string = "Error message";
+interface Props {
+  error: Error | null
+}
+export function ErrorBoundary({ error }: Props) {
+  // debugger;
+  console.error(error);
+  if (error) {
+    return (
+      <html>
+        <head>
+          <title>Oh no!</title>
+          <Meta />
+          <Links />
+        </head>
+        <body>
+          {/* add the UI you want your users to see */}
+          {/* {error} */}
+          {error.message}
+          <Scripts />
+        </body>
+      </html>
+    )
+  }
 }

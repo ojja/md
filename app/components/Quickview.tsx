@@ -5,7 +5,8 @@ import { StarIcon } from '@heroicons/react/20/solid'
 import { Link } from '@remix-run/react'
 
 const product2 = {
-  name: 'Basic Tee 6-Pack ',
+  name: 'Basic Tee 6-Pack',
+  title: 'Basic Tee 6-Pack',
   price: '$192',
   rating: 3.9,
   reviewCount: 117,
@@ -34,12 +35,14 @@ function classNames(...classes) {
 }
 export default function Quickview({ openQuick, openModal, product }) {
 
-  const nearestNumberRating = Math.round(product.rating)
+  // const nearestNumberRating = Math.round(product.rating)
+  const nearestNumberRating = 2
   const [selectedColor, setSelectedColor] = useState(product2.colors[0])
   const [selectedSize, setSelectedSize] = useState(product2.sizes[2])
 
   return (
-    <Transition.Root show={openQuick} as={Fragment}>
+    <div className="overview">
+    <Transition show={openQuick} as={Fragment}>
       <Dialog as="div" className="relative z-10" onClose={openModal}>
         <Transition.Child
           as={Fragment}
@@ -211,7 +214,7 @@ export default function Quickview({ openQuick, openModal, product }) {
                             </RadioGroup>
                           </div>
 
-                          <Link  to={`${product.id}`}
+                          <Link to={`/products/${product.slug}`}
                             className="flex items-center justify-center w-full px-8 py-3 mt-6 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
                           >
                             View Product
@@ -226,6 +229,7 @@ export default function Quickview({ openQuick, openModal, product }) {
           </div>
         </div>
       </Dialog>
-    </Transition.Root>
+    </Transition>
+    </div>
   )
 }
