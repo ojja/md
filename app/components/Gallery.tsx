@@ -83,7 +83,7 @@ export default function Gallery({ galleryImages = [] }: GalleryProps) {
   ];
 
   return (
-    <div className="gallery-slider-wrapper flex max-h-[100%]">
+    <div className="gallery-slider-wrapper flex max-h-[900px] overflow-hidden">
       <Slider
         {...settingsMain}
         asNavFor={nav2}
@@ -99,7 +99,7 @@ export default function Gallery({ galleryImages = [] }: GalleryProps) {
           </div>
         ))}
       </Slider>
-      <div className="w-2/12 gallery-thumbnail-slider-wrap">
+      <div className="w-2/12 mr-2 gallery-thumbnail-slider-wrap">
         <Slider
           {...settingsThumbs}
           asNavFor={nav1}

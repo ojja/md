@@ -12,6 +12,7 @@ import {
 } from "@remix-run/react";
 import styles from './tailwind.css';
 import styles2 from 'slick-carousel/slick/slick.css';
+import styles2 from 'slick-carousel/slick/slick-theme.css';
 import Footer from "./layouts/footer";
 import NavBar from "./layouts/navbar";
 
@@ -32,7 +33,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="oultine-none box-border">
+      <body className="box-border oultine-none">
         <Layout>
           <Outlet />
           <ScrollRestoration />

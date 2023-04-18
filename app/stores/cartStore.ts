@@ -15,7 +15,7 @@ const shoppingCart = persistentAtom<CartItem[]>('cart', [], {
     decode: JSON.parse,
 })
 
-const isShoppingCartOpen = persistentAtom<boolean>('isShoppingCartOpen', typeof localStorage !== 'undefined' && localStorage.getItem('isShoppingCartOpen') !== 'true', {
+const isShoppingCartOpen = persistentAtom<boolean>('isShoppingCartOpen', false, {
     listen: false,
     encode: (value) => String(value),
     decode: (value) => Boolean(value),

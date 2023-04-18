@@ -299,14 +299,14 @@ export default function NavBar() {
 
                   {/* Logo */}
                   <div className="flex ml-4 lg:ml-0">
-                    <a href="#">
+                    <Link to="/">
                       <span className="sr-only">Your Company</span>
                       <img
                         className="w-auto h-8"
                         src="/images/logo.svg"
                         alt=""
                       />
-                    </a>
+                    </Link>
                   </div>
 
                   {/* Flyout menus */}

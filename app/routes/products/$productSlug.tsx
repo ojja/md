@@ -85,10 +85,10 @@ export default function ProductSingle() {
     // const [selectedColor, setSelectedColor] = useState(product2.colors[0])
     // const [selectedSize, setSelectedSize] = useState(product2.sizes[2])
 
-    // const [selectedSize, setSelectedSize] = useState(product.attributes?.pa_size[0]);
-    // const [selectedColor, setSelectedColor] = useState(product.attributes?.Color[0]);
-    const selectedSize = false;
-    const selectedColor = false;
+    const [selectedSize, setSelectedSize] = useState(product.attributes?.pa_size[0]);
+    const [selectedColor, setSelectedColor] = useState(product.attributes?.pa_color[0]);
+    // const selectedSize = false;
+    // const selectedColor = false;
 
     // const variations = product.variations?.filter((variation: any) => {
     //     return (
@@ -111,7 +111,7 @@ export default function ProductSingle() {
                 <div className="bg-white">
                     <div className="container px-4 mx-auto">
                         <div className="flex flex-wrap -mx-4">
-                            <div className="w-full px-4">
+                            <div className="w-full px-4 mb-2">
                                 <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-4 border-b border-gray-200" />
                             </div>
                             <div className="w-full px-4 mb-16 lg:w-1/2 lg:mb-0">
@@ -135,7 +135,7 @@ export default function ProductSingle() {
                                 </div>
                                 <div className="mt-10">
 
-                                    {product.attributes?.Color?(
+                                    {product.attributes?.pa_color?(
                                     <div>
                                         {/* Colors */}
                                         <h3 className="text-sm font-medium text-gray-900">Color</h3>
@@ -143,7 +143,7 @@ export default function ProductSingle() {
                                         <RadioGroup value={selectedColor} onChange={setSelectedColor} className="mt-4">
                                             <RadioGroup.Label className="sr-only"> Choose a color </RadioGroup.Label>
                                             <div className="flex items-center space-x-3">
-                                                {product.attributes?.Color.map((color) => (
+                                                {product.attributes?.pa_color.map((color) => (
                                                     <RadioGroup.Option
                                                         key={v4()}
                                                         value={color}
@@ -176,7 +176,7 @@ export default function ProductSingle() {
                                     </div>
                                     ):('')}
                                     {/* Sizes */}
-                                    {product.attributes?.Color?(
+                                    {product.attributes?.pa_size?(
                                     <div className="mt-10">
                                         <div className="flex items-center justify-between">
                                             <h3 className="text-sm font-medium text-gray-900">Size</h3>
@@ -244,8 +244,8 @@ export default function ProductSingle() {
                                                 {
                                                     id: product.id,
                                                     thumbnail: product.main_img,
-                                                    // size: selectedSize,
-                                                    // color: selectedColor,
+                                                    size: selectedSize,
+                                                    color: selectedColor,
                                                     slug: product.slug
                                                 }
                                             }

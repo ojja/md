@@ -1,13 +1,12 @@
-import React from 'react'
 
-export default function Blog() {
+export default function BlogList() {
     return (
-        <section className="pt-20 pb-10 lg:pt-[120px] lg:pb-20">
+        <section className="pb-10 lg:pb-20">
             <div className="container mx-auto">
-                <div className="-mx-4 flex flex-wrap justify-center">
+                <div className="flex flex-wrap justify-center -mx-4">
                     <div className="w-full px-4">
                         <div className="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-20">
-                            <span className="text-primary mb-2 block text-lg font-semibold">
+                            <span className="block mb-2 text-lg font-semibold text-primary">
                                 Our Blogs
                             </span>
                             <h2
@@ -15,38 +14,38 @@ export default function Blog() {
                             >
                                 Our Recent News
                             </h2>
-                            <p className="text-body-color text-base">
+                            <p className="text-base text-body-color">
                                 There are many variations of passages of Lorem Ipsum available but
                                 the majority have suffered alteration in some form.
                             </p>
                         </div>
                     </div>
                 </div>
-                <div className="-mx-4 flex flex-wrap">
+                <div className="flex flex-wrap -mx-4">
                     <div className="w-full px-4 md:w-1/2 lg:w-1/3">
                         <div className="mx-auto mb-10 max-w-[370px]">
                             <div className="mb-8 overflow-hidden rounded">
                                 <img
-                                    src="https://cdn.tailgrids.com/2.0/image/application/images/blogs/blog-01/image-01.jpg"
+                                    src="/images/blog/image-01.jpg"
                                     alt="image"
                                     className="w-full"
                                 />
                             </div>
                             <div>
                                 <span
-                                    className="bg-primary mb-5 inline-block rounded py-1 px-4 text-center text-xs font-semibold leading-loose text-white"
+                                    className="inline-block px-4 py-1 mb-5 text-xs font-semibold leading-loose text-center text-white rounded bg-primary"
                                 >
                                     Dec 22, 2023
                                 </span>
                                 <h3>
                                     <a
                                         href="#"
-                                        className="text-dark hover:text-primary mb-4 inline-block text-xl font-semibold sm:text-2xl lg:text-xl xl:text-2xl"
+                                        className="inline-block mb-4 text-xl font-semibold text-dark hover:text-primary sm:text-2xl lg:text-xl xl:text-2xl"
                                     >
                                         Meet AutoManage, the best AI management tools
                                     </a>
                                 </h3>
-                                <p className="text-body-color text-base">
+                                <p className="text-base text-body-color">
                                     Lorem Ipsum is simply dummy text of the printing and typesetting
                                     industry.
                                 </p>
@@ -57,26 +56,26 @@ export default function Blog() {
                         <div className="mx-auto mb-10 max-w-[370px]">
                             <div className="mb-8 overflow-hidden rounded">
                                 <img
-                                    src="https://cdn.tailgrids.com/2.0/image/application/images/blogs/blog-01/image-02.jpg"
+                                    src="/images/blog/image-02.jpg"
                                     alt="image"
                                     className="w-full"
                                 />
                             </div>
                             <div>
                                 <span
-                                    className="bg-primary mb-5 inline-block rounded py-1 px-4 text-center text-xs font-semibold leading-loose text-white"
+                                    className="inline-block px-4 py-1 mb-5 text-xs font-semibold leading-loose text-center text-white rounded bg-primary"
                                 >
                                     Mar 15, 2023
                                 </span>
                                 <h3>
                                     <a
                                         href="#"
-                                        className="text-dark hover:text-primary mb-4 inline-block text-xl font-semibold sm:text-2xl lg:text-xl xl:text-2xl"
+                                        className="inline-block mb-4 text-xl font-semibold text-dark hover:text-primary sm:text-2xl lg:text-xl xl:text-2xl"
                                     >
                                         How to earn more money as a wellness coach
                                     </a>
                                 </h3>
-                                <p className="text-body-color text-base">
+                                <p className="text-base text-body-color">
                                     Lorem Ipsum is simply dummy text of the printing and typesetting
                                     industry.
                                 </p>
@@ -87,26 +86,26 @@ export default function Blog() {
                         <div className="mx-auto mb-10 max-w-[370px]">
                             <div className="mb-8 overflow-hidden rounded">
                                 <img
-                                    src="https://cdn.tailgrids.com/2.0/image/application/images/blogs/blog-01/image-03.jpg"
+                                    src="/images/blog/image-03.jpg"
                                     alt="image"
                                     className="w-full"
                                 />
                             </div>
                             <div>
                                 <span
-                                    className="bg-primary mb-5 inline-block rounded py-1 px-4 text-center text-xs font-semibold leading-loose text-white"
+                                    className="inline-block px-4 py-1 mb-5 text-xs font-semibold leading-loose text-center text-white rounded bg-primary"
                                 >
                                     Jan 05, 2023
                                 </span>
                                 <h3>
                                     <a
                                         href="#"
-                                        className="text-dark hover:text-primary mb-4 inline-block text-xl font-semibold sm:text-2xl lg:text-xl xl:text-2xl"
+                                        className="inline-block mb-4 text-xl font-semibold text-dark hover:text-primary sm:text-2xl lg:text-xl xl:text-2xl"
                                     >
                                         The no-fuss guide to upselling and cross selling
                                     </a>
                                 </h3>
-                                <p className="text-body-color text-base">
+                                <p className="text-base text-body-color">
                                     Lorem Ipsum is simply dummy text of the printing and typesetting
                                     industry.
                                 </p>
