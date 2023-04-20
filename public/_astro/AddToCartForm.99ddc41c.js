@@ -1,0 +1,1 @@
+import{u,j as p}from"./jsx-runtime.85b9654c.js";import"./index.45a47ed6.js";function i({item:t,children:o}){const{addToCart:r,openCart:a}=u();function n(e){e.preventDefault(),a(),r(t)}return p.jsx("form",{onSubmit:n,children:o})}export{i as default};

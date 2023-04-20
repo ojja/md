@@ -1,0 +1,18 @@
+{
+  "version": 1,
+  "include": [
+    "/*"
+  ],
+  "exclude": [
+    "/_astro/AddToCartForm.99ddc41c.js",
+    "/_astro/CartFlyout.205e5cba.js",
+    "/_astro/CartFlyoutToggle.02ac456a.js",
+    "/_astro/about.ebdf2f87.css",
+    "/_astro/astro.5b0c3446.css",
+    "/_astro/cart.8e1a892c.css",
+    "/_astro/client.38423ee9.js",
+    "/_astro/index.45a47ed6.js",
+    "/_astro/jsx-runtime.85b9654c.js",
+    "/_worker.js"
+  ]
+}

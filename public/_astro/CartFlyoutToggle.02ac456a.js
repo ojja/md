@@ -1,0 +1,1 @@
+import{u as n,j as e}from"./jsx-runtime.85b9654c.js";import"./index.45a47ed6.js";function i(){const{isOpen:t,openCart:o,closeCart:r}=n();return e.jsx("button",{onClick:()=>t?o():r(),children:"Cart"})}export{i as default};
