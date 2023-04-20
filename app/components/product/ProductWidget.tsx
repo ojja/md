@@ -23,7 +23,7 @@ type ProductWidgetProps = {
 
 
 
-export function ProductWidget({product}: ProductWidgetProps) {
+export function ProductWidget({ product }: ProductWidgetProps) {
     const [isOpenCart, setIsOpenCart] = useState(false);
 
     let [openQuick, setOpenQuick] = useState(false)
@@ -39,23 +39,23 @@ export function ProductWidget({product}: ProductWidgetProps) {
     return (
         <>
             <div className="relative flex flex-col group">
-                <div className="relative z-10 w-full overflow-hidden bg-gray-200 rounded-md min-h-80 aspect-w-4 aspect-h-3 group-hover:opacity-75 lg:aspect-none lg:h-80">
+                <div className="relative z-10 w-full overflow-hidden bg-gray-200 rounded-md min-h-80 group-hover:opacity-75 ">
                     {/* <img
                         src={product.image}
                         alt={product.name}
                         className="absolute top-0 bottom-0 left-0 right-0 self-center object-cover object-center w-full h-full m-auto lg:h-full lg:w-full"
                     /> */}
-                    <Link to={`/products/${product.slug}`}>
+                    <Link to={`/products/${product.slug}`} className="block aspect-w-4 aspect-h-3 lg:h-80">
                         <LazyLoadImage
                             alt={product.name}
                             // effect="blur"
-                            src={product.main_image?product.main_image:product.thumbnail}
+                            src={product.main_image ? product.main_image : product.thumbnail}
                             // placeholderSrc={product.image_small}
-                            wrapperClassName="h-full w-full block absolute z-1"
-                            className="absolute top-0 bottom-0 left-0 right-0 self-center object-cover object-center w-full h-full m-auto lg:h-full lg:w-full"
+                            wrapperClassName="z-1"
+                            className="self-center object-cover object-center w-full h-full m-auto lg:h-full lg:w-full"
                         />
                     </Link>
-                    <div className="flex items-end h-full p-4">
+                    <div className="absolute bottom-0 left-0 right-0 flex items-end">
                         <button
                             onClick={openModal}
                             type="button" className="relative w-full px-4 py-2 text-sm text-gray-900 bg-white bg-opacity-75 rounded-md opacity-0 focus:opacity-100 group-hover:opacity-100">
@@ -76,6 +76,8 @@ export function ProductWidget({product}: ProductWidgetProps) {
                     <p className="text-sm font-medium text-gray-900">{FormatCurrency(product.price)}</p>
                 </div>
                 <div className="relative mt-auto z-1">
+                    {product.type !='variable'?
+                    
                     <AddToCartSimple
                         className="inline-flex justify-center rounded-lg text-sm font-semibold py-2.5 px-4 bg-slate-900 text-white hover:bg-slate-700 w-full"
                         // id={product.id}
@@ -89,8 +91,14 @@ export function ProductWidget({product}: ProductWidgetProps) {
                             }
                         }
                     />
+                    :
+                    <button onClick={openModal} className="inline-flex justify-center rounded-lg text-sm font-semibold py-2.5 px-4 bg-slate-900 text-white hover:bg-slate-700 w-full">Quick View</button>
+                    }
                 </div>
-                <Quickview openQuick={openQuick} openModal={openModal} product={product} />
+                {openQuick ?
+                    <Quickview openQuick={openQuick} openModal={openModal} product={product} />
+                    : ''
+                }
             </div>
         </>
     )

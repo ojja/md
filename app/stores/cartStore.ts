@@ -1,5 +1,6 @@
 import { persistentAtom } from '@nanostores/persistent';
 import { useStore } from '@nanostores/react';
+import { useEffect, useState } from 'react';
 export type CartItem = {
     id: number;
     quantity: number;
@@ -7,6 +8,7 @@ export type CartItem = {
     color?: string;
     slug?: string;
     thumbnail?: string;
+    price?: string;
 };
 
 const shoppingCart = persistentAtom<CartItem[]>('cart', [], {
@@ -31,24 +33,38 @@ export const useShoppingCart = () => {
             cartItems: [],
             isOpen: false,
             addToCart: () => null,
-            decreaseCartQuantity: () => null ,
-            removeFromCart: () => null ,
-            openCart: () => null ,
-            closeCart: () => null ,
+            decreaseCartQuantity: () => null,
+            removeFromCart: () => null,
+            openCart: () => null,
+            closeCart: () => null,
         };
     }
     const cartStore = useStore(shoppingCart);
     const isOpen = useStore(isShoppingCartOpen);
 
     const addToCart = (product: CartItem) => {
-        const itemIndex = cartStore.findIndex((item) => item.id === product.id && item.size === product.size && item.color === product.color && item.slug === product.slug && item.thumbnail === product.thumbnail);
+        const itemIndex = cartStore.findIndex((item) =>
+            item.id === product.id &&
+            item.size === product.size &&
+            item.color === product.color &&
+            item.slug === product.slug &&
+            item.price === product.price &&
+            item.thumbnail === product.thumbnail);
 
         if (itemIndex !== -1) {
             const newCartItems = [...cartStore];
             newCartItems[itemIndex].quantity++;
             shoppingCart.set(newCartItems);
         } else {
-            shoppingCart.set([...cartStore, { id: product.id, size: product.size, color: product.color, slug: product.slug, thumbnail: product.thumbnail, quantity: product.quantity ?? 1 }]);
+            shoppingCart.set([...cartStore, {
+                id: product.id,
+                size: product.size,
+                color: product.color,
+                slug: product.slug,
+                thumbnail: product.thumbnail,
+                price: product.price,
+                quantity: product.quantity ?? 1
+            }]);
         }
         return;
     }
@@ -87,6 +103,22 @@ export const useShoppingCart = () => {
     const openCart = () => isShoppingCartOpen.set(true);
     const closeCart = () => isShoppingCartOpen.set(false);
 
+    const [totalPrice, setTotalPrice] = useState(0);
+
+    // Calculate the total price
+    const calculateTotalPrice = () => {
+        let price = 0;
+        cartStore.map(item => {
+            price += item.price * item.quantity;
+        });
+        setTotalPrice(price);
+    }
+
+    // Call calculateTotalPrice when the component mounts
+    useEffect(() => {
+        calculateTotalPrice();
+    }, []);
+
     return {
         getItemQuantity,
         cartQuantity: cartStore?.length ?? 0,
@@ -98,6 +130,7 @@ export const useShoppingCart = () => {
         removeFromCart,
         openCart,
         closeCart,
+        totalPrice,
     };
 };
 

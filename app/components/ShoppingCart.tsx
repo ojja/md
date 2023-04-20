@@ -7,11 +7,12 @@ import FormatCurrency from '../utils/FormatCurrency'
 import storeItems from '../data/items.json';
 import { v4 } from 'uuid';
 import MiniCartItem from './MiniCartItem';
+import MiniCartUpSell from './MiniCartUpSell';
 
 
 export default function ShoppingCart() {
 
-  const { closeCart, cartItems, removeFromCart, openCart, isOpen } = useShoppingCart();
+  const { closeCart, cartItems, removeFromCart, openCart, isOpen, totalPrice } = useShoppingCart();
   console.log('isOpen>', isOpen);
   useEffect(() => {
     setTimeout(() => {
@@ -68,7 +69,7 @@ export default function ShoppingCart() {
                             <div className="flow-root">
                               <ul role="list" className="-my-6 divide-y divide-gray-200">
                                 {cartItems.map((item) => (
-                                  <li key={v4} className="flex py-6">
+                                  <li key={v4()} className="flex py-6">
                                     <MiniCartItem id={item.id} quantity={item.quantity} color={item.color} size={item.size} slug={item.slug} thumbnail={item.thumbnail} removeFromCart={removeFromCart} />
                                   </li>
                                 ))}
@@ -81,21 +82,16 @@ export default function ShoppingCart() {
                           </div>
                         )
                         }
-
+                        <MiniCartUpSell/>
                       </div>
 
-                      <div className="px-4 py-6 border-t border-gray-200 sm:px-6">
+                      <div className="px-4 py-4 border-t border-gray-200 top-shadow">
                         <div className="flex justify-between text-base font-medium text-gray-900">
                           <p>Subtotal</p>
-                          <p>{FormatCurrency(
-                            cartItems.reduce((total, cartItem) => {
-                              const item = storeItems.find((i) => i.id === cartItem.id);
-                              return total + (item?.price || 0) * cartItem.quantity;
-                            }, 0)
-                          )}</p>
+                          <p>{FormatCurrency(totalPrice)}</p>
                         </div>
                         <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-                        <div className="mt-6">
+                        <div className="mt-4">
                           <Link
                             to="/checkout"
                             onClick={closeCart}
@@ -104,7 +100,7 @@ export default function ShoppingCart() {
                             Check Out
                           </Link>
                         </div>
-                        <div className="flex justify-center mt-6 text-sm text-center text-gray-500">
+                        <div className="flex justify-center mt-4 text-sm text-center text-gray-500">
                           <p>
                             {/* or */}
                             <Link

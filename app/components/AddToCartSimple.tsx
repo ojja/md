@@ -14,7 +14,8 @@ export default function AddToCartSimple({ className, product, disabled }: {
         addToCart,
         decreaseCartQuantity,
     } = useShoppingCart();
-    const quantity = getItemQuantity(product);
+    const quantity = getItemQuantity(product)?? 0;
+    //  quantity = getItemQuantity(product);
 
     return (
             <button
@@ -26,8 +27,7 @@ export default function AddToCartSimple({ className, product, disabled }: {
                 {quantity === 0 ? (
                     "Add to Bag"
                 ) : (
-                    <div className="flex">
-                        <TrashIcon className="hidden" />
+                    <div className="flex items-center">
                         <span
                             // type="button"
                             className="p-2 -m-2 text-gray-400 cursor-pointer hover:text-gray-500"
