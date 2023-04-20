@@ -1,13 +1,11 @@
 
 import Datepicker from "react-tailwindcss-datepicker";
-import moment from 'moment';
-import useShoppingCart from "~/stores/cartStore";
-import { getProductBySlug } from "~/api/products";
+// import moment from 'moment';
+import useShoppingCart from "../cartStore";
 import { useEffect, useState } from "react";
-import PaymentMethod from "~/components/PaymentMethod";
-import FormatCurrency from "~/utils/FormatCurrency";
-import MiniCartItem from "~/components/MiniCartItem";
-import { v4 } from 'uuid';
+import PaymentMethod from "./PaymentMethod";
+import FormatCurrency from "../utils/FormatCurrency";
+import MiniCartItem from "./MiniCartItem";
 
 
 export default function Checkout() {
@@ -79,7 +77,7 @@ export default function Checkout() {
                                     <label htmlFor="deliver_tomorrow" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
                                         <div className="block">
                                             <div className="w-full text-lg font-semibold">Tomorrow</div>
-                                            <div className="w-full">{''}{moment().add(1, 'days').format('DD MMMM YYYY').toString()}</div>
+                                            {/* <div className="w-full">{''}{moment().add(1, 'days').format('DD MMMM YYYY').toString()}</div> */}
                                         </div>
                                         <svg aria-hidden="true" className="w-6 h-6 ml-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
                                     </label>
@@ -167,7 +165,7 @@ export default function Checkout() {
                             <h2 className="text-xl capitalize font-semibold">Order summary</h2>
                             <div className="">
                                 {cartItems.map((item) => (
-                                    <li key={v4()} className="flex py-6">
+                                    <li className="flex py-6">
                                         <MiniCartItem id={item.id} quantity={item.quantity} color={item.color} size={item.size} slug={item.slug} thumbnail={item.thumbnail} removeFromCart={removeFromCart} />
                                     </li>
                                 ))}

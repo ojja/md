@@ -1,8 +1,5 @@
-import { json, LoaderFunction } from '@remix-run/cloudflare';
 import React, { useEffect, useState } from 'react'
-import { getProductBySlug } from '~/api/products';
-import useShoppingCart from "~/stores/cartStore";
-import storeItems from '../data/items.json';
+// import { getProductBySlug } from '~/api/products';
 import FormatCurrency from '../utils/FormatCurrency';
 
 // export default function CartItem({ id, quantity }) {
@@ -53,7 +50,7 @@ const MiniCartItem = ({ id, quantity, color, size, slug, thumbnail, removeFromCa
     const [product, setProduct] = useState({});
     useEffect(() => {
         const fetchProduct = async () => {
-            const product = await getProductBySlug(slug);
+            // const product = await getProductBySlug(slug);
             setProduct(product);
         };
         fetchProduct();

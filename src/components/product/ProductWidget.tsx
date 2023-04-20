@@ -1,9 +1,8 @@
 import { useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import useShoppingCart from "~/stores/cartStore";
+import useShoppingCart from "../../cartStore";
 import FormatCurrency from "../../utils/FormatCurrency";
 import 'react-lazy-load-image-component/src/effects/blur.css';
-import { Link } from "@remix-run/react";
 import Quickview from "../Quickview";
 import AddToCartSimple from "../AddToCartSimple";
 
@@ -23,7 +22,7 @@ type ProductWidgetProps = {
 
 
 
-export function ProductWidget({product}: ProductWidgetProps) {
+export function ProductWidget({ product }: ProductWidgetProps) {
     const [isOpenCart, setIsOpenCart] = useState(false);
 
     let [openQuick, setOpenQuick] = useState(false)
@@ -45,16 +44,16 @@ export function ProductWidget({product}: ProductWidgetProps) {
                         alt={product.name}
                         className="absolute top-0 bottom-0 left-0 right-0 self-center object-cover object-center w-full h-full m-auto lg:h-full lg:w-full"
                     /> */}
-                    <Link to={`/products/${product.slug}`}>
+                    <a href={`/products/${product.slug}`}>
                         <LazyLoadImage
                             alt={product.name}
                             // effect="blur"
-                            src={product.main_image?product.main_image:product.thumbnail}
+                            src={product.main_image ? product.main_image : product.thumbnail}
                             // placeholderSrc={product.image_small}
                             wrapperClassName="h-full w-full block absolute z-1"
                             className="absolute top-0 bottom-0 left-0 right-0 self-center object-cover object-center w-full h-full m-auto lg:h-full lg:w-full"
                         />
-                    </Link>
+                    </a>
                     <div className="flex items-end h-full p-4">
                         <button
                             onClick={openModal}

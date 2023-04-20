@@ -1,8 +1,3 @@
-import { json, LoaderFunction } from "@remix-run/cloudflare";
-import { useLoaderData } from "@remix-run/react";
-import { v4 } from "uuid";
-import { getExtraProducts } from "~/api/extraProducts";
-import { getProducts } from "~/api/products";
 import { ProductWidget } from "./product/ProductWidget";
 
 
@@ -25,7 +20,6 @@ import { ProductWidget } from "./product/ProductWidget";
 
 
 //   export const loader: LoaderFunction = async () => {
-//     return getProducts();
 // };
 
 function shuffleArray(array: any[]) {
