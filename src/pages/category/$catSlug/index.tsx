@@ -1,10 +1,8 @@
----
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon, ViewColumnsIcon } from '@heroicons/react/20/solid';
 import { Fragment, useState } from "react";
 import Breadcrumbs from "../../../components/Breadcrumbs";
 import { ProductWidget } from "../../../components/product/ProductWidget";
----
 
 
 function classNames(...classes: string[]) {
