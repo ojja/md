@@ -8,17 +8,35 @@ import {
   Scripts,
   ScrollRestoration,
   useLoaderData,
+  useNavigate,
   useParams,
 } from "@remix-run/react";
 import styles from './tailwind.css';
+import stylesRtl from './tailwind.rtl.css';
+import stylesBase from './base.css';
 // import styles2 from 'slick-carousel/slick/slick.css';
 // import styles2 from 'slick-carousel/slick/slick-theme.css';
 // import styles2 from 'slick-carousel/slick/slick.css';
 import Footer from "./layouts/footer";
 import NavBar from "./layouts/navbar";
+import { useState } from "react";
+
 
 export const links: LinksFunction = () => {
-  return [{ rel: 'stylesheet', href: styles }];
+  const [currentLang, setCurrentLang] = useState('en');
+  const cssLink = currentLang === 'en' ? styles : stylesRtl;
+  const { request } = useParams();
+  console.log('request',request)
+  // const langPrefix = request.path.startsWith('/ar') ? 'rtl' : 'ltr';
+  const langPrefix = 'ltr';
+
+  return [
+    { rel: 'stylesheet', href: styles },
+    { rel: 'stylesheet', href: stylesBase },
+    { rel: 'stylesheet', href: langPrefix === 'rtl' ? stylesRtl : undefined },
+
+    
+  ];
 }
 
 export const meta: MetaFunction = () => ({
@@ -28,14 +46,28 @@ export const meta: MetaFunction = () => ({
 });
 
 export default function App() {
+  const [language, setLanguage] = useState("en");
+  const handleLangChange = () => {
+    setLanguage((prevLanguage) => prevLanguage === "en" ? "ar" : "en");
+  };
+
+  const [isRtl, setIsRtl] = useState(false);
+  const navigate = useNavigate();
+
+  // const handleLangChange = () => {
+  //   setIsRtl((prevIsRtl) => !prevIsRtl);
+  //   // const newUrl = isRtl ? location.pathname.replace("/ar", "") : `/ar${location.pathname}`;
+  //   // navigate(newUrl, { replace: true });
+  // };
   return (
-    <html lang="en">
+    <html lang={language}>
       <head>
         <Meta />
         <Links />
+        {/* <link rel="stylesheet" href={isRtl ? stylesRtl : styles} /> */}
       </head>
       <body className="box-border oultine-none">
-        {/* <NavBar /> */}
+        <NavBar onLangChange={handleLangChange}/>
         <main className="relative z-10">
           <Outlet />
         </main>

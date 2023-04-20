@@ -9,7 +9,7 @@ const handleRequest = createPagesFunctionHandler({
 
 addEventListener(
     "fetch",
-    createEventHandler({ build, mode: process.env.NODE_ENV })
+    createEventHandler({ build, mode: process.env["NODE_ENV"] ?? "production" })
 );
 
 export function onRequest(ctx: EventContext<any, any, any>) {

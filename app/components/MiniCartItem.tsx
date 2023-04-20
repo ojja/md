@@ -40,15 +40,15 @@ interface Product {
     removeFromCart: () => void;
   }
 
-  const getPriceForAttributes = (variations, size, color) => {
-    for (const variation of variations) {
-      const { attributes, price, sale_price } = variation;
-      if (attributes.attribute_size === size && attributes.attribute_color === color) {
-        return sale_price;
-      }
-    }
-    return null; // or some default value if the combination of attributes is not found
-  };
+//   const getPriceForAttributes = (variations, size, color) => {
+//     for (const variation of variations) {
+//       const { attributes, price, sale_price } = variation;
+//       if (attributes.attribute_size === size && attributes.attribute_color === color) {
+//         return sale_price;
+//       }
+//     }
+//     return null; // or some default value if the combination of attributes is not found
+//   };
 
   const MiniCartItem = ({ id, quantity, color, size, slug, thumbnail, removeFromCart }: MiniCartItemProps) => {
       
@@ -61,7 +61,7 @@ interface Product {
         fetchProduct();
       }, [slug]);
       
-      console.log('product>>>>>>>>>>',product)
+    //   console.log('product>>>>>>>>>> Item',product)
     const item = {
         "id": 1,
         "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
@@ -78,10 +78,17 @@ interface Product {
 
 
     const title = product.title;
-    const price = product.variations ? getPriceForAttributes(product.variations, size, color) : product.price ;
+    // const price = product.variations ? getPriceForAttributes(product.variations, size, color) : product.price ;
 
     // const priceV = product.variations ? getPriceForAttributes(product.variations, size, color) : null;
     // console.log("priceV",priceV);
+
+
+    const variation = product?.variations?.find((variation:any) =>
+        variation.attributes.attribute_pa_size === size &&
+        variation.attributes.attribute_pa_color === color
+    );
+    const variationSalePrice = variation ? variation.sale_price : null;
 
     return (
         <>
@@ -100,13 +107,13 @@ interface Product {
                             <Link to={`/products/${slug}`}>{title}</Link>
                             
                         </h3>
-                        <p className="ml-4">{FormatCurrency(price * quantity)}</p>
+                        <p className="ml-4">{FormatCurrency(variationSalePrice * quantity)}</p>
                     </div>
                     <p className="mt-1 text-sm text-gray-500">{color} - {size}</p>
                 </div>
                 <div className="flex items-end justify-between flex-1 text-sm">
                     <div className="flex flex-col">
-                        <p className="text-gray-500">{FormatCurrency(price)}</p>
+                        <p className="text-gray-500">{FormatCurrency(variationSalePrice)}</p>
                         <p className="text-gray-500">Quantity: {quantity}</p>
                     </div>
                     <div className="flex">

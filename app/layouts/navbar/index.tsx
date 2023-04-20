@@ -4,9 +4,10 @@ import { Dialog, Menu, Popover, Tab, Transition } from '@headlessui/react'
 import { Bars3Icon, ChevronDownIcon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import useShoppingCart from '~/stores/cartStore';
 import ShoppingCart from '~/components/ShoppingCart';
-import { Link } from '@remix-run/react';
+import { Link, useNavigate, useSearchParams } from '@remix-run/react';
 import { v4 } from 'uuid';
 import ChangeCountry from '~/components/ChangeCountry';
+import LangSwitcher from '~/components/LangSwitcher';
 
 const navigation = {
   categories: [
@@ -131,9 +132,15 @@ const navigation = {
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
-export default function NavBar() {
+export default function NavBar({onLangChange}) {
   const [open, setOpen] = useState(false);
   const { cartQuantityTotal, openCart } = useShoppingCart();
+
+  const navigate = useNavigate();
+  function handleClick(lang: string) {
+    const newPathname = lang === "ar" ? "/ar" : "/";
+    navigate(newPathname);
+  }
   return (
     <>
       <div className="bg-white">
@@ -282,6 +289,8 @@ export default function NavBar() {
         <header className="relative z-20 bg-white">
           <p className="flex items-center justify-center h-10 px-4 text-sm font-medium text-white bg-indigo-600 sm:px-6 lg:px-8">
             Get free delivery on orders over $100
+            <button onClick={onLangChange}>Switch Language</button>
+            <LangSwitcher onLangChange={onLangChange} />
           </p>
           <div className="container px-4 mx-auto">
             <nav aria-label="Top" className="">
@@ -444,7 +453,7 @@ export default function NavBar() {
                               <Menu.Item key={v4()}>
                                 {({ active }) => (
                                   <div className='flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-gray-100'>
-                                    <span className="block ml-3">English</span>
+                                    <span className="block ml-3"  onClick={() => handleClick("en")}>English</span>
                                   </div>
                                 )}
                               </Menu.Item>
@@ -456,7 +465,7 @@ export default function NavBar() {
                                       'flex justify-center px-4 py-2 text-sm font-medium text-gray-900 w-full cursor-pointer'
                                     )}
                                   >
-                                    <span className="block ml-3">العربيه</span>
+                                    <span className="block ml-3"  onClick={() => handleClick("ar")}>العربيه</span>
                                   </div>
                                 )}
                               </Menu.Item>
