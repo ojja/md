@@ -26,9 +26,9 @@ interface Product {
     title: string;
     price: number;
     // Other properties of the product
-  }
-  
-  interface MiniCartItemProps {
+}
+
+interface MiniCartItemProps {
     title: string;
     product: Product;
     id: number;
@@ -38,7 +38,7 @@ interface Product {
     slug: string;
     thumbnail: string;
     removeFromCart: () => void;
-  }
+}
 
 //   const getPriceForAttributes = (variations, size, color) => {
 //     for (const variation of variations) {
@@ -50,17 +50,20 @@ interface Product {
 //     return null; // or some default value if the combination of attributes is not found
 //   };
 
-  const MiniCartItem = ({ id, quantity, color, size, slug, thumbnail, removeFromCart }: MiniCartItemProps) => {
-      
+const MiniCartItem = ({ id, quantity, color, size, slug, thumbnail, removeFromCart }: MiniCartItemProps) => {
+
     const [product, setProduct] = useState({});
+    const handleRemoveClick = () => {
+        removeFromCart(id);
+    };
     useEffect(() => {
         const fetchProduct = async () => {
-          const product = await getProductBySlug(slug);
-          setProduct(product);
+            const product = await getProductBySlug(slug);
+            setProduct(product);
         };
         fetchProduct();
-      }, [slug]);
-      
+    }, [slug]);
+
     //   console.log('product>>>>>>>>>> Item',product)
     const item = {
         "id": 1,
@@ -84,7 +87,7 @@ interface Product {
     // console.log("priceV",priceV);
 
 
-    const variation = product?.variations?.find((variation:any) =>
+    const variation = product?.variations?.find((variation: any) =>
         variation.attributes.attribute_pa_size === size &&
         variation.attributes.attribute_pa_color === color
     );
@@ -105,7 +108,7 @@ interface Product {
                     <div className="flex justify-between text-base font-medium text-gray-900">
                         <h3>
                             <Link to={`/products/${slug}`}>{title}</Link>
-                            
+
                         </h3>
                         <p className="ml-4">{FormatCurrency(variationSalePrice * quantity)}</p>
                     </div>
@@ -120,7 +123,7 @@ interface Product {
                         <button
                             type="button"
                             className="font-medium text-indigo-600 hover:text-indigo-500"
-                            onClick={() => removeFromCart(id)}
+                            onClick={handleRemoveClick}
                         >
                             Remove
                         </button>

@@ -8,6 +8,7 @@ import { Link, useNavigate, useSearchParams } from '@remix-run/react';
 import { v4 } from 'uuid';
 import ChangeCountry from '~/components/ChangeCountry';
 import LangSwitcher from '~/components/LangSwitcher';
+import Search from '~/components/Search';
 
 const navigation = {
   categories: [
@@ -188,7 +189,7 @@ export default function NavBar({onLangChange}) {
                         <Tab.List className="flex px-4 -mb-px space-x-8">
                           {navigation.categories.map((category) => (
                             <Tab
-                              key={category.name}
+                              key={v4()}
                               className={({ selected }) =>
                                 classNames(
                                   selected ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-900',
@@ -203,10 +204,10 @@ export default function NavBar({onLangChange}) {
                       </div>
                       <Tab.Panels >
                         {navigation.categories.map((category) => (
-                          <Tab.Panel key={category.name} className="px-4 pt-10 pb-8 space-y-10">
+                          <Tab.Panel key={v4()} className="px-4 pt-10 pb-8 space-y-10">
                             <div className="grid grid-cols-2 gap-x-4">
                               {category.featured.map((item) => (
-                                <div key={item.name} className="relative text-sm group">
+                                <div key={v4()} className="relative text-sm group">
                                   <div className="overflow-hidden bg-gray-100 rounded-lg aspect-h-1 aspect-w-1 group-hover:opacity-75">
                                     <img src={item.imageSrc} alt={item.imageAlt} className="object-cover object-center" />
                                   </div>
@@ -221,7 +222,7 @@ export default function NavBar({onLangChange}) {
                               ))}
                             </div>
                             {category.sections.map((section) => (
-                              <div key={section.name}>
+                              <div key={v4()}>
                                 <p id={`${category.id}-${section.id}-heading-mobile`} className="font-medium text-gray-900">
                                   {section.name}
                                 </p>
@@ -231,7 +232,7 @@ export default function NavBar({onLangChange}) {
                                   className="flex flex-col mt-6 space-y-6"
                                 >
                                   {section.items.map((item) => (
-                                    <li key={item.name} className="flow-root">
+                                    <li key={v4()} className="flow-root">
                                       <a href={item.href} className="block p-2 -m-2 text-gray-500">
                                         {item.name}
                                       </a>
@@ -247,7 +248,7 @@ export default function NavBar({onLangChange}) {
 
                     <div className="px-4 py-6 space-y-6 border-t border-gray-200">
                       {navigation.pages.map((page) => (
-                        <div key={page.name} className="flow-root">
+                        <div key={v4()} className="flow-root">
                           <a href={page.href} className="block p-2 -m-2 font-medium text-gray-900">
                             {page.name}
                           </a>
@@ -289,8 +290,9 @@ export default function NavBar({onLangChange}) {
         <header className="relative z-20 bg-white">
           <p className="flex items-center justify-center h-10 px-4 text-sm font-medium text-white bg-indigo-600 sm:px-6 lg:px-8">
             Get free delivery on orders over $100
-            <button onClick={onLangChange}>Switch Language</button>
-            <LangSwitcher onLangChange={onLangChange} />
+            <LangSwitcher 
+              // onLangChange={onLangChange} 
+            />
           </p>
           <div className="container px-4 mx-auto">
             <nav aria-label="Top" className="">
@@ -321,7 +323,7 @@ export default function NavBar({onLangChange}) {
                   <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
                     <div className="flex h-full space-x-8">
                       {navigation.categories.map((category) => (
-                        <Popover key={category.name} className="flex">
+                        <Popover key={v4()} className="flex">
                           {({ open, close }) => (
                             <>
                               <div className="relative flex">
@@ -375,7 +377,7 @@ export default function NavBar({onLangChange}) {
                                         </div>
                                         <div className="grid grid-cols-3 row-start-1 text-sm gap-x-8 gap-y-10">
                                           {category.sections.map((section) => (
-                                            <div key={section.name}>
+                                            <div key={v4()}>
                                               <p id={`${section.name}-heading`} className="font-medium text-gray-900">
                                                 {section.name}
                                               </p>
@@ -385,7 +387,7 @@ export default function NavBar({onLangChange}) {
                                                 className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
                                               >
                                                 {section.items.map((item) => (
-                                                  <li key={item.name} className="flex">
+                                                  <li key={v4()} className="flex">
                                                     <Link to={`/category/${item.href}`} className="hover:text-gray-800" onClick={() => { close() }}>
                                                       {item.name}
                                                     </Link>
@@ -407,7 +409,7 @@ export default function NavBar({onLangChange}) {
 
                       {navigation.pages.map((page) => (
                         <Link
-                          key={page.name}
+                          key={v4()}
                           // to={page.href}
                           to={`/${page.href}`}
                           className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
@@ -545,10 +547,7 @@ export default function NavBar({onLangChange}) {
 
                     {/* Search */}
                     <div className="flex lg:ml-6">
-                      <a href="#" className="p-2 text-gray-400 hover:text-gray-500">
-                        <span className="sr-only">Search</span>
-                        <MagnifyingGlassIcon className="w-6 h-6" aria-hidden="true" />
-                      </a>
+                      <Search/>
                     </div>
 
                     {/* Cart */}

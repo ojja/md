@@ -16,7 +16,9 @@ export default function LangSwitcher() {
     };
   
     return (
-      <button onClick={handleLangChange}>
+      <button 
+        // onClick={handleLangChange}
+      >
         {isRTL ? 'Switch to English' : 'Switch to Arabic'}
       </button>
     );

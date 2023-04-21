@@ -13,11 +13,11 @@ export default function Filters({ filters }) {
                             <path strokeLinecap="round" strokeLinejoin="round" d="M8.25 4.5l7.5 7.5-7.5 7.5" />
                         </svg>
                     }
-                    {index + 1 === breadcrumbs.length ? (
+                    {/* {index + 1 === breadcrumbs.length ? (
                         <span key={v4()} className={'text-slate-600 hover:text-slate-600'}>{item.name}</span>
                     ) : (
                         <Link key={v4()} to={item.href} className={'text-slate-500 hover:text-slate-600'}>{item.name}</Link>
-                    )}
+                    )} */}
                 </>
             )}
         </nav>

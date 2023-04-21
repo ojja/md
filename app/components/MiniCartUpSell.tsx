@@ -4,6 +4,7 @@ import Flickity from "react-flickity-component";
 import Quickview from "./Quickview";
 import { useState } from "react";
 import FormatCurrency from "~/utils/FormatCurrency";
+import { v4 } from 'uuid';
 
 
 export default function MiniCartUpSell() {
@@ -90,7 +91,7 @@ export default function MiniCartUpSell() {
                 <div className="mini_cart_upsell_items">
                     <Flickity options={flickityOptions} className={'flex flex-wrap'}>
                         {products.map((product) => (
-                            <div className="flex items-center w-full p-4 border-b border-gray-300">
+                            <div key={v4()} className="flex items-center w-full p-4 border-b border-gray-300">
                                 <div className="flex-shrink-0 w-24 h-24 overflow-hidden">
                                     <div className="rounded upsell_item_img">
                                         <img src={product.main_image} />

@@ -32,9 +32,10 @@ export function ProductWidget({ product }: ProductWidgetProps) {
     }
 
     let productTitle =
-        product?.name.length > 35
-            ? product.name.slice(0, 35).concat("...")
-            : product.name;
+        // product?.name.length > 35
+        //     ? product.name.slice(0, 35).concat("...")
+        //     : 
+            product.name;
 
     return (
         <>
