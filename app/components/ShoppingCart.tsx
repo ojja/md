@@ -8,6 +8,7 @@ import storeItems from '../data/items.json';
 import { v4 } from 'uuid';
 import MiniCartItem from './MiniCartItem';
 import MiniCartUpSell from './MiniCartUpSell';
+import MiniCartTools from './MiniCartTools';
 
 
 export default function ShoppingCart() {
@@ -48,7 +49,7 @@ export default function ShoppingCart() {
                   leaveTo="translate-x-full"
                 >
                   <Dialog.Panel className="w-screen h-full max-w-md pointer-events-auto">
-                    <div className="flex flex-col h-full overflow-y-scroll bg-white shadow-xl">
+                    <div className="flex flex-col h-full overflow-y-scroll bg-white shadow-xl relative">
                       <div className="flex-1 px-4 py-6 overflow-y-auto sm:px-6">
                         <div className="flex items-start justify-between">
                           <Dialog.Title className="text-lg font-medium text-gray-900">Shopping cart</Dialog.Title>
@@ -80,8 +81,8 @@ export default function ShoppingCart() {
                           <div className='flex mt-auto items-center justify-center h-[100%]'>
                             <p className="mt-0.5 text text-slate-500">Your cart is currently empty.</p>
                           </div>
-                        )
-                        }
+                        )}
+                        <MiniCartTools/>
                         <MiniCartUpSell/>
                       </div>
 

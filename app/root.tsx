@@ -25,8 +25,8 @@ import { useState } from "react";
 export const links: LinksFunction = () => {
   const [currentLang, setCurrentLang] = useState('en');
   const cssLink = currentLang === 'en' ? styles : stylesRtl;
-  const { request } = useParams();
-  console.log('request',request)
+  // const { request } = useParams();
+  // console.log('request',request)
   // const langPrefix = request.path.startsWith('/ar') ? 'rtl' : 'ltr';
   const langPrefix = 'ltr';
 
@@ -47,9 +47,9 @@ export const meta: MetaFunction = () => ({
 
 export default function App() {
   const [language, setLanguage] = useState("en");
-  const handleLangChange = () => {
-    setLanguage((prevLanguage) => prevLanguage === "en" ? "ar" : "en");
-  };
+  // const handleLangChange = () => {
+  //   setLanguage((prevLanguage) => prevLanguage === "en" ? "ar" : "en");
+  // };
 
   const [isRtl, setIsRtl] = useState(false);
   const navigate = useNavigate();
@@ -67,7 +67,9 @@ export default function App() {
         {/* <link rel="stylesheet" href={isRtl ? stylesRtl : styles} /> */}
       </head>
       <body className="box-border oultine-none">
-        <NavBar onLangChange={handleLangChange}/>
+        <NavBar 
+          // onLangChange={handleLangChange}
+        />
         <main className="relative z-10">
           <Outlet />
         </main>

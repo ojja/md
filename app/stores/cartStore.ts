@@ -121,7 +121,8 @@ export const useShoppingCart = () => {
 
     return {
         getItemQuantity,
-        cartQuantity: cartStore?.length ?? 0,
+        // cartQuantity: cartStore?.length ?? 0,
+        cartQuantity: 10,
         cartQuantityTotal: cartStore?.reduce((total, item) => total + item.quantity, 0) ?? 0,
         cartItems: cartStore ?? [],
         isOpen,

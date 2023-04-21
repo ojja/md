@@ -16,11 +16,11 @@ export default function Breadcrumbs({ breadcrumbs, className }) {
                     {index === 0 ? "" :
                         <ChevronRightIcon className='w-4 h-4 select-none text-slate-500' />
                     }
-                    {index + 1 === breadcrumbs.length ? (
+                    {/* {index + 1 === breadcrumbs.length ? (
                         <span className={'text-slate-600 hover:text-slate-600'}>{item.name}</span>
                     ) : (
                         <Link to={item.href} className={'text-slate-500 hover:text-slate-600'}>{item.name}</Link>
-                    )}
+                    )} */}
                 </Fragment>
             )}
         </nav>
