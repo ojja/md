@@ -1,9 +1,10 @@
 import Gallery from "~/components/Gallery";
+import { MetaFunction } from "remix";
 import { Dialog, Disclosure, RadioGroup, Tab, Transition } from '@headlessui/react';
 import { ChevronUpIcon } from '@heroicons/react/20/solid';
 import React, { Fragment, useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { ActionFunction, json, LoaderFunction, MetaFunction, redirect } from "@remix-run/cloudflare";
+import { ActionFunction, json, LoaderFunction, redirect } from "@remix-run/cloudflare";
 import invariant from 'tiny-invariant';
 import { getProductBySlug, Product } from "~/api/products";
 import { useLoaderData } from "@remix-run/react";
@@ -18,6 +19,9 @@ import Stars from "~/components/Stars";
 import SelectColor from "~/components/product/SelectColor";
 import SelectSize from "~/components/product/SelectSize";
 import FormatCurrency from "~/utils/FormatCurrency";
+import Frequently from "~/components/Frequently";
+import useRecentView from "~/stores/wishtList";
+import RecentlyViewedProducts from "~/components/RecentlyViewedProducts";
 
 interface Feature {
     name: string;
@@ -52,6 +56,19 @@ export const loader: LoaderFunction = async ({ params }) => {
     const product = await getProductBySlug(params.productSlug!);
     return json(product);
 };
+
+
+export const meta: MetaFunction = ({data}:any) => {
+    return {
+        title: `Single | ${data.title}`,
+        description: `${data.description}`,
+        'og:title': data.title,
+        'og:description': data.description,
+        'og:image': data.main_img,
+    }
+  }
+
+
 export default function ProductSingle() {
     const product = useLoaderData<typeof loader>();
     const nearestNumberRating = 12
@@ -66,10 +83,19 @@ export default function ProductSingle() {
     let variationPrice = variation? variation.price : null;
     let variationSalePrice = variation? variation.sale_price : null;
 
+    
     useEffect(() => {
         setSelectedSize(product?.attributes?.pa_size[0] || '');
         setSelectedColor(product?.attributes?.pa_color[0] || '');
+          addToRecent(product)
       }, [product]);
+      console.log('product>>',product)
+    
+
+      const {
+        addToRecent,
+    } = useRecentView();
+      
     return (
         <div>
             <section className="pt-12 pb-24 overflow-hidden rounded-b-10xl">
@@ -143,6 +169,7 @@ export default function ProductSingle() {
                                                 }
                                             }
                                         // disabled={!Boolean(selectedSize.inStock)}
+                                        disabled={variationSalePrice===null}
                                         />
                                         <button
                                             type="submit"
@@ -194,6 +221,9 @@ export default function ProductSingle() {
                                     </div>
                                 </div>
                             </div>
+                            <div className="w-full">
+                                <Frequently/>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -207,6 +237,7 @@ export default function ProductSingle() {
                 />
                 <ExtraProducts categorySlug="all-clothing" pageNumber={1} title="Frequency both together" />
                 <ExtraProducts categorySlug="all-clothing" pageNumber={1} title="Recently viewed products" />
+                <RecentlyViewedProducts/>
             </section>
         </div>
     )

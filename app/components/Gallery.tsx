@@ -49,41 +49,9 @@ export default function Gallery({ galleryImages = [] }: GalleryProps) {
     ],
   };
 
-  const slidesData = [
-    {
-      id: 1,
-      img: "https://picsum.photos/800/800?img=1",
-      thumb: "https://picsum.photos/100/100?img=1",
-    },
-    {
-      id: 2,
-      img: "https://picsum.photos/800/800?img=2",
-      thumb: "https://picsum.photos/100/100?img=2",
-    },
-    {
-      id: 3,
-      img: "https://picsum.photos/800/800?img=3",
-      thumb: "https://picsum.photos/100/100?img=3",
-    },
-    {
-      id: 4,
-      img: "https://picsum.photos/800/800?img=4",
-      thumb: "https://picsum.photos/100/100?img=4",
-    },
-    {
-      id: 5,
-      img: "https://picsum.photos/800/800?img=5",
-      thumb: "https://picsum.photos/100/100?img=5",
-    },
-    {
-      id: 6,
-      img: "https://picsum.photos/800/800?img=6",
-      thumb: "https://picsum.photos/100/100?img=6",
-    },
-  ];
 
   return (
-    <div className="gallery-slider-wrapper flex max-h-[900px] overflow-hidden">
+    <div className="flex overflow-hidden gallery-slider-wrapper">
       <Slider
         {...settingsMain}
         asNavFor={nav2}
@@ -99,7 +67,7 @@ export default function Gallery({ galleryImages = [] }: GalleryProps) {
           </div>
         ))}
       </Slider>
-      <div className="w-2/12 mr-2 gallery-thumbnail-slider-wrap">
+      <div className="w-2/12 mr-2 gallery-thumbnail-slider-wrap max-h-[600px]">
         <Slider
           {...settingsThumbs}
           asNavFor={nav1}

@@ -1,3 +1,4 @@
+import { MetaFunction } from "remix";
 import { Link } from "@remix-run/react";
 import AboutSection from "~/components/AboutSection";
 
@@ -9,4 +10,9 @@ export default function About() {
             <AboutSection />
         </div>
     );
+}
+export const meta: MetaFunction = () => {
+    return {
+        title: 'About Page'
+    }
 }

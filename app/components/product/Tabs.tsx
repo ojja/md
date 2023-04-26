@@ -10,20 +10,10 @@ function classNames(...classes) {
 }
 export default function Tabs({ product }: TabsProps) {
     return (
-        <div className="bg-white mt-10 border-t-2 pt-20 ">
+        <div className="pt-20 mt-10 bg-white border-t-2 ">
             <div className="container mx-auto">
                 <Tab.Group as="div" className="flex flex-col" defaultIndex={0}>
                     <Tab.List className="flex flex-wrap -mb-px space-x-1 border-b border-gray-200">
-                        <Tab
-                            className={({ selected }) =>
-                                classNames(
-                                    'p-4 py-2.5 text-sm font-medium leading-5 text-slate-700 focus:outline-none bg-transparent border-b-2 border-transparent transition-colors duration-300',
-                                    selected
-                                        ? 'border-teal-500 hover:border-teal-500 text-teal-500'
-                                        : 'text-blue-100 hover:border-slate-500'
-                                )
-                            }
-                        >Product description</Tab>
                         <Tab
                             className={({ selected }) =>
                                 classNames(
@@ -43,9 +33,22 @@ export default function Tabs({ product }: TabsProps) {
                                         : 'text-blue-100 hover:border-slate-500'
                                 )
                             }
+                        >Product description</Tab>
+                        <Tab
+                            className={({ selected }) =>
+                                classNames(
+                                    'p-4 py-2.5 text-sm font-medium leading-5 text-slate-700 focus:outline-none bg-transparent border-b-2 border-transparent transition-colors duration-300',
+                                    selected
+                                        ? 'border-teal-500 hover:border-teal-500 text-teal-500'
+                                        : 'text-blue-100 hover:border-slate-500'
+                                )
+                            }
                         >Product Data</Tab>
                     </Tab.List>
                     <Tab.Panels>
+                        <Tab.Panel>
+                            <Reviews />
+                        </Tab.Panel>
                         <Tab.Panel>
                             <div className="py-10 lg:col-span-2 lg:col-start-1 lg:pt-6 lg:pb-16 lg:pr-8">
                                 <div>
@@ -65,9 +68,6 @@ export default function Tabs({ product }: TabsProps) {
                                     </div>
                                 </div>
                             </div>
-                        </Tab.Panel>
-                        <Tab.Panel>
-                            <Reviews />
                         </Tab.Panel>
                         <Tab.Panel>
                             <div className="py-10 lg:col-span-2 lg:col-start-1 lg:pt-6 lg:pb-16 lg:pr-8">

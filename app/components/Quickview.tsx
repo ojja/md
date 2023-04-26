@@ -8,32 +8,8 @@ import SelectColor from './product/SelectColor'
 import { getProductBySlug } from '~/api/products'
 import SelectSize from './product/SelectSize'
 import AddToCartSimple from './AddToCartSimple'
+import Loader from './Loader'
 
-const product2 = {
-  name: 'Basic Tee 6-Pack',
-  title: 'Basic Tee 6-Pack',
-  price: '$192',
-  rating: 3.9,
-  reviewCount: 117,
-  href: '#',
-  imageSrc: 'https://tailwindui.com/img/ecommerce-images/product-quick-preview-02-detail.jpg',
-  imageAlt: 'Two each of gray, white, and black shirts arranged on table.',
-  colors: [
-    { name: 'White', class: 'bg-white', selectedClass: 'ring-gray-400' },
-    { name: 'Gray', class: 'bg-gray-200', selectedClass: 'ring-gray-400' },
-    { name: 'Black', class: 'bg-gray-900', selectedClass: 'ring-gray-900' },
-  ],
-  sizes: [
-    { name: 'XXS', inStock: true },
-    { name: 'XS', inStock: true },
-    { name: 'S', inStock: true },
-    { name: 'M', inStock: true },
-    { name: 'L', inStock: true },
-    { name: 'XL', inStock: true },
-    { name: 'XXL', inStock: true },
-    { name: 'XXXL', inStock: false },
-  ],
-}
 
 interface QuickviewProps {
   openQuick: any;
@@ -65,8 +41,8 @@ export default function Quickview({ openQuick, openModal, product }: QuickviewPr
   const [selectedColor, setSelectedColor] = useState(product.attributes?.pa_color[0] || '');
 
 
-  let variation:any = [];
-  let variationSalePrice = 0;
+  // let variation:any = [];
+  // let variationSalePrice = 0;
   const [productData, setProductData] = useState({});
   useEffect(() => {
     const fetchProduct = async () => {
@@ -75,16 +51,18 @@ export default function Quickview({ openQuick, openModal, product }: QuickviewPr
     };
     fetchProduct();
 
-    let variation = product?.variations?.find((variation: any) =>
-    variation.attributes.attribute_pa_size === selectedSize &&
-    variation.attributes.attribute_pa_color === selectedColor
-  );
-  let variationPrice = variation ? variation.price : null;
-  let variationSalePrice = variation ? variation.sale_price : null;
-  console.log('variation inside',variation)
+    // console.log('variation inside',variation)
+    // console.log('variation',variation)
   }, [product.slug]);
-
+  
+  let variation = productData?.variations?.find((variation: any) =>
+  variation.attributes.attribute_pa_size === selectedSize &&
+  variation.attributes.attribute_pa_color === selectedColor
+);
+let variationPrice = variation ? variation.price : null;
+let variationSalePrice = variation ? variation.sale_price : null;
   console.log('product',product)
+  console.log('product productData',productData)
   console.log('variationSalePrice',variationSalePrice)
   console.log('variation',variation)
   console.log('selectedSize',selectedSize)
@@ -162,7 +140,7 @@ export default function Quickview({ openQuick, openModal, product }: QuickviewPr
                           <h3 id="options-heading" className="sr-only">
                             Product options
                           </h3>
-
+                          
                           {/* Colors */}
                           {productData?.attributes?.pa_color ? (
                             <SelectColor
@@ -171,7 +149,7 @@ export default function Quickview({ openQuick, openModal, product }: QuickviewPr
                               onSelectedColorChange={setSelectedColor}
 
                             />
-                          ) : ('')}
+                          ) : (<Loader/>)}
 
                           {/* Sizes */}
                           {productData?.attributes?.pa_size ? (
@@ -180,7 +158,7 @@ export default function Quickview({ openQuick, openModal, product }: QuickviewPr
                               selectedSize={selectedSize}
                               onSelectedSizeChange={setSelectedSize}
                             />
-                          ) : ('')}
+                          ) : <Loader/>}
 
                           <AddToCartSimple
                             className='flex items-center justify-center w-full px-8 py-3 mt-6 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
@@ -194,10 +172,10 @@ export default function Quickview({ openQuick, openModal, product }: QuickviewPr
                                 price: variationSalePrice,
                               }
                             }
-                            disabled={!Boolean(selectedSize.inStock)}
+                            disabled={variationSalePrice===null}
                           />
                           <Link to={`/products/${productData.slug}`}
-                            className="flex justify-center w-auto mt-6 m-auto text-base font-medium text-indigo-600 hover:text-indigo-900 focus:outline-none"
+                            className="flex justify-center w-auto m-auto mt-6 text-base font-medium text-indigo-600 hover:text-indigo-900 focus:outline-none"
                           >
                             View Product
                           </Link>

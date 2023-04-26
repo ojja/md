@@ -4,7 +4,6 @@ import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
 import useShoppingCart from "~/stores/cartStore";
 import FormatCurrency from '../utils/FormatCurrency'
-import storeItems from '../data/items.json';
 import { v4 } from 'uuid';
 import MiniCartItem from './MiniCartItem';
 import MiniCartUpSell from './MiniCartUpSell';
@@ -18,7 +17,7 @@ export default function ShoppingCart() {
   useEffect(() => {
     setTimeout(() => {
       closeCart();
-    }, 1000);
+    }, 10);
   }, []);
   return (
     <div>
@@ -49,7 +48,7 @@ export default function ShoppingCart() {
                   leaveTo="translate-x-full"
                 >
                   <Dialog.Panel className="w-screen h-full max-w-md pointer-events-auto">
-                    <div className="flex flex-col h-full overflow-y-scroll bg-white shadow-xl relative">
+                    <div className="relative flex flex-col h-full overflow-y-scroll bg-white shadow-xl">
                       <div className="flex-1 px-4 py-6 overflow-y-auto sm:px-6">
                         <div className="flex items-start justify-between">
                           <Dialog.Title className="text-lg font-medium text-gray-900">Shopping cart</Dialog.Title>

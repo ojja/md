@@ -3,13 +3,13 @@ import Tooltip from "./Tooltip";
 import Flickity from "react-flickity-component";
 import Quickview from "./Quickview";
 import { useState } from "react";
-import FormatCurrency from "~/utils/FormatCurrency";
+import FormatCurrency from "./../utils/FormatCurrency";
 import { v4 } from 'uuid';
 
 
 export default function MiniCartUpSell() {
     const flickityOptions = {
-        // freeScroll: true
+        initialIndex: 2
     }
     const products = [
         {
@@ -89,7 +89,7 @@ export default function MiniCartUpSell() {
             <div className="overflow-hidden rounded-lg shadow-md mini_cart_upsell">
                 <h4 className="p-3 font-semibold text-center bg-gray-200">You may also like</h4>
                 <div className="mini_cart_upsell_items">
-                    <Flickity options={flickityOptions} className={'flex flex-wrap'}>
+                    {/* <Flickity options={flickityOptions} className={'flex flex-wrap'}>
                         {products.map((product) => (
                             <div key={v4()} className="flex items-center w-full p-4 border-b border-gray-300">
                                 <div className="flex-shrink-0 w-24 h-24 overflow-hidden">
@@ -109,7 +109,7 @@ export default function MiniCartUpSell() {
                                 </div>
                             </div>
                         ))}
-                    </Flickity>
+                    </Flickity> */}
                 </div>
             </div>
         </div>

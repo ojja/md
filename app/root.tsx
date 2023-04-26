@@ -14,8 +14,8 @@ import {
 import styles from './tailwind.css';
 import stylesRtl from './tailwind.rtl.css';
 import stylesBase from './base.css';
-// import styles2 from 'slick-carousel/slick/slick.css';
-// import styles2 from 'slick-carousel/slick/slick-theme.css';
+import stylesSlick from 'slick-carousel/slick/slick.css';
+import stylesSlickTheme from 'slick-carousel/slick/slick-theme.css';
 // import styles2 from 'slick-carousel/slick/slick.css';
 import Footer from "./layouts/footer";
 import NavBar from "./layouts/navbar";
@@ -33,6 +33,8 @@ export const links: LinksFunction = () => {
   return [
     { rel: 'stylesheet', href: styles },
     { rel: 'stylesheet', href: stylesBase },
+    { rel: 'stylesheet', href: stylesSlick },
+    { rel: 'stylesheet', href: stylesSlickTheme },
     { rel: 'stylesheet', href: langPrefix === 'rtl' ? stylesRtl : undefined },
 
     
