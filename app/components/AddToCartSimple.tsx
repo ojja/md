@@ -4,6 +4,9 @@ import useShoppingCart, { CartItem } from "~/stores/cartStore";
 
 
 
+function classNames(...classes: string[]) {
+    return classes.filter(Boolean).join(' ')
+}
 export default function AddToCartSimple({ className, product, disabled }: {
     className?: string;
     product: CartItem;
@@ -22,7 +25,10 @@ export default function AddToCartSimple({ className, product, disabled }: {
                 disabled={disabled}
                 type="submit"
                 onClick={() => addToCart(product)}
-                className={className ?? ""}
+                className={classNames(
+                    disabled ? 'cursor-not-allowed' : '',
+                    className??''
+                )}
             >
                 {quantity === 0 ? (
                     "Add to Bag"

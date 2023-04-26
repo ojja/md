@@ -1,4 +1,5 @@
 import { json, LoaderFunction } from "@remix-run/cloudflare"
+import { MetaFunction } from "remix";
 import { Outlet, useLoaderData, useParams } from "@remix-run/react";
 import { getCategoryProducts } from "~/models/category.server";
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react';
@@ -18,6 +19,12 @@ function classNames(...classes: string[]) {
 type LoaderData = {
   data: Awaited<ReturnType<typeof getCategoryProducts>>;
 };
+
+export const meta: MetaFunction = ({params}) => {
+  return {
+      title: `Category Page | ${params.catSlug}`
+  }
+}
 
 export const loader = async ({ params }: any) => {
   try {
