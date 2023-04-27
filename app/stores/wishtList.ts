@@ -19,6 +19,7 @@ export type Item = {
     name: string;
     slug?: string;
     thumbnail?: string;
+    main_img?: string;
     price?: string;
 };
 
@@ -36,6 +37,7 @@ export const useRecentView = () => {
             item.id === product.id &&
             item.slug === product.slug &&
             item.name === product.name &&
+            item.price === product.price &&
             item.thumbnail === product.main_img);
 
         if (itemIndex !== -1) {
@@ -47,6 +49,7 @@ export const useRecentView = () => {
                 id: product.id,
                 slug: product.slug,
                 name: product.name,
+                price: product.price,
                 thumbnail: product.main_img
             }]);
         }

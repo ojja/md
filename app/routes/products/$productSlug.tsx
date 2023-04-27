@@ -235,8 +235,7 @@ export default function ProductSingle() {
                     // @ts-ignore
                     features={features}
                 />
-                <ExtraProducts categorySlug="all-clothing" pageNumber={1} title="Frequency both together" />
-                <ExtraProducts categorySlug="all-clothing" pageNumber={1} title="Recently viewed products" />
+                <ExtraProducts categorySlug="skirt" pageNumber={1} title="Same Category" />
                 <RecentlyViewedProducts/>
             </section>
         </div>
