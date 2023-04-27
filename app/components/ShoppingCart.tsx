@@ -70,7 +70,15 @@ export default function ShoppingCart() {
                               <ul role="list" className="-my-6 divide-y divide-gray-200">
                                 {cartItems.map((item) => (
                                   <li key={v4()} className="flex py-6">
-                                    <MiniCartItem id={item.id} quantity={item.quantity} color={item.color} size={item.size} slug={item.slug} thumbnail={item.thumbnail} removeFromCart={removeFromCart} />
+                                    <MiniCartItem 
+                                      id={item.id} 
+                                      quantity={item.quantity} 
+                                      color={item.color} 
+                                      size={item.size} 
+                                      slug={item.slug} 
+                                      thumbnail={item.thumbnail} 
+                                      removeFromCart={removeFromCart}
+                                    />
                                   </li>
                                 ))}
                               </ul>

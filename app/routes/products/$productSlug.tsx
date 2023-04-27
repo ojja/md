@@ -89,7 +89,7 @@ export default function ProductSingle() {
         setSelectedColor(product?.attributes?.pa_color[0] || '');
           addToRecent(product)
       }, [product]);
-      console.log('product>>',product)
+    //   console.log('product>>',product)
     
 
       const {
