@@ -108,7 +108,6 @@ const MiniCartItem = ({ id, quantity, color, size, slug, thumbnail, removeFromCa
                     <div className="flex justify-between text-base font-medium text-gray-900">
                         <h3>
                             <Link to={`/products/${slug}`}>{title}</Link>
-
                         </h3>
                         <p className="ml-4">{FormatCurrency(variationSalePrice * quantity)}</p>
                     </div>

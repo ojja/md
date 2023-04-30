@@ -5,7 +5,7 @@ interface TabsProps {
     product: any;
 }
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 export default function Tabs({ product }: TabsProps) {

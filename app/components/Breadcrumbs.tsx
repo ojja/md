@@ -3,7 +3,7 @@ import React, { Fragment } from 'react'
 import { Link, useParams } from 'react-router-dom'
 import { v4 } from 'uuid';
 
-function classNames(...classes) {
+function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 export default function Breadcrumbs({ breadcrumbs, className }) {

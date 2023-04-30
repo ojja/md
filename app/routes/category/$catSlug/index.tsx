@@ -1,7 +1,7 @@
 import { json, LoaderFunction } from "@remix-run/cloudflare"
 import { MetaFunction } from "remix";
 import { Outlet, useLoaderData, useParams } from "@remix-run/react";
-import { getCategoryProducts } from "~/models/category.server";
+import { getCategoryProducts, getFilterProducts } from "~/models/category.server";
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon, ViewColumnsIcon } from '@heroicons/react/20/solid';
 import { Fragment, useState } from "react";
@@ -20,7 +20,7 @@ type LoaderData = {
   data: Awaited<ReturnType<typeof getCategoryProducts>>;
 };
 
-export const meta: MetaFunction = ({params}) => {
+export const meta: MetaFunction = ({params}:any) => {
   return {
       title: `Category Page | ${params.catSlug}`
   }
@@ -31,7 +31,7 @@ export const loader = async ({ params }: any) => {
     const categorySlug = params.catSlug
     const pageNumber = 1
     return json({
-      products: await getCategoryProducts(categorySlug, pageNumber),
+      products: await getFilterProducts(categorySlug, pageNumber),
       categorySlug,
       pageNumber,
     });
@@ -44,20 +44,6 @@ export const loader = async ({ params }: any) => {
 export default function CategorySlug() {
   const { products, categorySlug, pageNumber } = useLoaderData();
 
-  // const handleLoadMore = async () => {
-  //   const nextPageNumber = pageNumber + 1;
-  //   const moreProducts = await getCategoryProducts(categorySlug, nextPageNumber);
-  //   // append the newly fetched products to the existing products array
-  //   const updatedProducts = [...products, ...moreProducts];
-
-  //   // return the updated products array along with the updated page number
-  //   return json({
-  //     products: updatedProducts,
-  //     categorySlug,
-  //     pageNumber: nextPageNumber,
-  //   });
-  // };
-  // console.log('params Base childD>', data)
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [grid, setGrid] = useState(false);
 

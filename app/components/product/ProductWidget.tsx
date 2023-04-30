@@ -73,6 +73,7 @@ export function ProductWidget({ product }: ProductWidgetProps) {
                             </Link>
                         </h3>
                         <p className="mt-1 text-sm text-gray-500">{product.category}</p>
+                        <p className="mt-1 text-sm text-gray-500">{product.id}</p>
                     </div>
                     <p className="text-sm font-medium text-gray-900">{FormatCurrency(product.price)}</p>
                 </div>
