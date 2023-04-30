@@ -104,7 +104,9 @@ export default function AlsoLikeSlider() {
                             <span onClick={openModal} className="flex items-center justify-center w-10 h-10 p-1 text-white bg-indigo-500 rounded-md">
                                 <EyeIcon className="w-6 h-6" />
                             </span>
+                            {openQuick&&
                             <Quickview openQuick={openQuick} openModal={openModal} product={product} />
+                            }
                         </div>
                     </div>
                 ))}
