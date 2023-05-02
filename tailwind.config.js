@@ -3,7 +3,7 @@
 module.exports = {
   // mode: "jit",
   // content: ["./src/**/*.{js,jsx,ts,tsx}", "./public/index.html", "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js"],
-  content: ["./app/**/*.{js,jsx,ts,tsx}"],
+  content: ["./app/**/*.{js,jsx,ts,tsx}", "./node_modules/react-tailwindcss-datepicker/dist/index.esm.js"],
   darkMode: false, // or 'media' or 'class'
   theme: {
     // colors: {

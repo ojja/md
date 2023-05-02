@@ -81,7 +81,7 @@ export function ProductWidget({ product }: ProductWidgetProps) {
                     {product.type !='variable'?
                     
                     <AddToCartSimple
-                        className="inline-flex justify-center rounded-lg text-sm font-semibold py-2.5 px-4 bg-slate-900 text-white hover:bg-slate-700 w-full"
+                        className="inline-flex justify-center w-full px-4 py-2 text-sm font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700"
                         // id={product.id}
                         product={
                             {
@@ -94,7 +94,7 @@ export function ProductWidget({ product }: ProductWidgetProps) {
                         }
                     />
                     :
-                    <button onClick={openModal} className="inline-flex justify-center rounded-lg text-sm font-semibold py-2.5 px-4 bg-slate-900 text-white hover:bg-slate-700 w-full">Quick View</button>
+                    <button onClick={openModal} className="inline-flex justify-center w-full px-4 py-2 text-sm font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700">Quick View</button>
                     }
                 </div>
                 {openQuick ?

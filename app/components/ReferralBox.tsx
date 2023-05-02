@@ -10,7 +10,7 @@ export default function ReferralBox({url}:any) {
             </svg>
             <p className="ml-4">{url}</p>
             <button
-                className="ml-auto inline-flex justify-center rounded-lg text-sm font-semibold py-2.5 px-4 bg-slate-900 text-white hover:bg-slate-700"
+                className="inline-flex justify-center px-4 py-2 ml-auto text-sm font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700"
                 onClick={() => navigator.clipboard.writeText(url)}
             >
                 Copy Link

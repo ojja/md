@@ -20,7 +20,7 @@ export default function addresses() {
       {/*  */}
       <div className="flex justify-between py-5 mb-5 border-b-2 border-gray-200 border-solid">
         <h1 className="text-3xl">Shipping Addresses</h1>
-        <button className="inline-flex items-center px-3 py-2 text-sm font-semibold text-center text-white bg-slate-900 hover:bg-slate-700" onClick={openModal}>
+        <button className="inline-flex items-center justify-center px-10 py-2 text-sm font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700" onClick={openModal}>
           <svg width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-2">
             <path d="M4.84619 0.642883V8.35717" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
             <path d="M0.692383 4.20331H9.00008" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
@@ -50,7 +50,7 @@ export default function addresses() {
         <h1 className="text-3xl">Shipping Addresses</h1>
       </div>
       <p className="text-[#929292] mb-5 text-lg">There’s no shipping addresses</p>
-      <button className="inline-flex items-center px-3 py-2 text-sm font-semibold text-center text-white bg-slate-900 hover:bg-slate-700" onClick={openModal}>
+      <button className="inline-flex items-center justify-center px-10 py-2 text-sm font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700" onClick={openModal}>
         <svg width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-2">
           <path d="M4.84619 0.642883V8.35717" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
           <path d="M0.692383 4.20331H9.00008" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
@@ -91,7 +91,7 @@ export default function addresses() {
                   <div className="space-y-4">
                     <div>
                       <label htmlFor="countries" className="block mb-1 text-xs text-gray-400 ">City</label>
-                      <select id="countries" className="block w-full p-2 text-sm text-gray-900 border border-gray-300 bg-gray-50">
+                      <select id="countries" className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                         <option>Cairo</option>
                         <option>Alexandria</option>
                         <option>Giza</option>
@@ -99,7 +99,7 @@ export default function addresses() {
                     </div>
                     <div>
                       <label htmlFor="area" className="block mb-1 text-xs text-gray-400">Area</label>
-                      <select id="area" className="block w-full p-2 text-sm text-gray-900 border border-gray-300 bg-gray-50">
+                      <select id="area" className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                         <option>New Cairo</option>
                         <option>Alexandria</option>
                         <option>Giza</option>
@@ -107,7 +107,7 @@ export default function addresses() {
                     </div>
                     <div>
                       <label htmlFor="street" className="block mb-1 text-xs text-gray-400">Street & Building No.</label>
-                      <input type="text" id="street" placeholder="22 street name" className="w-full p-2 text-sm text-gray-900 border border-gray-300 bg-gray-50" />
+                      <input type="text" id="street" placeholder="22 street name" className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
                     </div>
 
                     <div>
@@ -143,14 +143,14 @@ export default function addresses() {
                     <div className="space-x-5">
                       <div className="inline-block">
                         <label htmlFor="floor" className="block mb-1 text-xs text-gray-400">Floor</label>
-                        <input type="text" id="floor" placeholder="3" className="w-20 p-2 text-sm text-gray-900 border border-gray-300 bg-gray-50" />
+                        <input type="text" id="floor" placeholder="3" className="w-20 p-2 rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
                       </div>
                       <div className="inline-block">
                         <label htmlFor="Apartment" className="block mb-1 text-xs text-gray-400">Apartment</label>
-                        <input type="text" id="Apartment" placeholder="33" className="w-20 p-2 text-sm text-gray-900 border border-gray-300 bg-gray-50" />
+                        <input type="text" id="Apartment" placeholder="33" className="w-20 p-2 rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
                       </div>
                     </div>
-                    <button className="inline-flex justify-center w-full px-3 py-4 text-sm font-semibold text-center text-white rounded-md bg-slate-900 hover:bg-slate-700" onClick={closeModal}>Add Address</button>
+                    <button className="inline-flex justify-center w-full px-3 py-2 text-sm font-semibold text-center text-white rounded-lg bg-slate-900 hover:bg-slate-700" onClick={closeModal}>Add Address</button>
                   </div>
                 </Dialog.Panel>
               </Transition.Child>

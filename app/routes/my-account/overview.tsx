@@ -63,7 +63,7 @@ export default function overview() {
                 <label className="text-[#6C757D] text-xs">Mobile Number</label>
                 <span className="block text-sm font-bold">01265100657</span>
               </div>
-              <a href="#" className="absolute flex items-center px-3 py-2 text-sm font-semibold text-center text-white bottom-4 right-3 bg-slate-900 hover:bg-slate-700">
+              <a href="#" className="absolute inline-flex items-center justify-center px-3 py-2 text-sm font-semibold text-white rounded-lg bottom-4 right-2 bg-slate-900 hover:bg-slate-700">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-2">
                   <path d="M10.8833 5.20836L13.06 3.0317L10.8833 0.855042L8.70664 3.0317M10.8833 5.20836L3.26499 12.8267L1.25935 12.8267C1.1649 12.8267 1.08833 12.7501 1.08833 12.6557L1.08833 10.65L8.70664 3.0317M10.8833 5.20836L8.70664 3.0317" stroke="white" strokeWidth="1.06884" />
                 </svg>
@@ -92,7 +92,7 @@ export default function overview() {
                 <label className="text-[#6C757D] text-xs">Apartment</label>
                 <span className="block text-sm font-bold">46</span>
               </div>
-              <a href="#" className="absolute flex items-center px-3 py-2 text-sm font-semibold text-center text-white bottom-4 right-3 bg-slate-900 hover:bg-slate-700">
+              <a href="#" className="absolute inline-flex items-center justify-center px-3 py-2 text-sm font-semibold text-white rounded-lg bottom-4 right-2 bg-slate-900 hover:bg-slate-700">
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-2">
                   <path d="M10.8833 5.20836L13.06 3.0317L10.8833 0.855042L8.70664 3.0317M10.8833 5.20836L3.26499 12.8267L1.25935 12.8267C1.1649 12.8267 1.08833 12.7501 1.08833 12.6557L1.08833 10.65L8.70664 3.0317M10.8833 5.20836L8.70664 3.0317" stroke="white" strokeWidth="1.06884" />
                 </svg>
