@@ -20,7 +20,7 @@ export default function wallet() {
           <h1 className="text-3xl">My Wallet</h1>
           <p className="max-w-md mt-2 text-gray-400">Wallet balance are available to be used on your upcoming order, Can’t be refund in cash</p>
         </div>
-        <button className="inline-flex items-center px-5 py-2 text-sm font-semibold text-center text-white bg-slate-900 hover:bg-slate-700" onClick={openAddPoints}>
+        <button className="inline-flex justify-center px-10 py-2 text-sm font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700" onClick={openAddPoints}>
           Charge Wallet
         </button>
 
@@ -67,7 +67,7 @@ export default function wallet() {
                         </svg>
                         Can’t Use Code More Than One Time
                       </p>
-                      <button className="inline-flex justify-center w-full px-3 py-4 text-sm font-semibold text-center text-white rounded-md bg-slate-900 hover:bg-slate-700" onClick={closeAddPoints}>Apply Code</button>
+                      <button className="inline-flex justify-center w-full px-3 py-2 text-sm font-semibold text-center text-white rounded-lg bg-slate-900 hover:bg-slate-700" onClick={closeAddPoints}>Apply Code</button>
                     </div>
                   </Dialog.Panel>
                 </Transition.Child>

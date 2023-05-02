@@ -56,14 +56,14 @@ export default function Checkout() {
     // let today     = Moment();
     return (
         <div className="p-8 mx-auto bg-white">
-            <div className="container mx-auto max-w-7xl px-4 sm:px-6 lg:px-8">
+            <div className="container px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div className="pb-10">
                     <h1 className="text-4xl font-semibold">Checkout</h1>
                 </div>
-                <div className="grid grid-cols-2 sm:grid-cols-3 gap-4">
+                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
                     <div className="col-span-2">
                         <div>
-                            <h2 className="mb-5 text-lg font-medium text-gray-900 dark:text-white">Choose Order Date</h2>
+                            <h2 className="mb-5 text-lg font-medium text-gray-900">Choose Order Date</h2>
                             <ul className="grid w-full gap-6 md:grid-cols-3">
                                 <li>
                                     <input type="radio" id="deliver_today" name="hosting" value="deliver_today" className="hidden peer" required />
@@ -102,8 +102,8 @@ export default function Checkout() {
                                 </li>
                             </ul>
 
-                            <div className="mt-5 pt-5 border-t-2">
-                                <h2 className="mb-5 text-lg font-medium text-gray-900 dark:text-white">Shipping Information</h2>
+                            <div className="pt-5 mt-5 border-t-2">
+                                <h2 className="mb-5 text-lg font-medium text-gray-900">Shipping Information</h2>
 
                                 <div className="grid grid-cols-2 gap-4">
                                     <div>
@@ -137,7 +137,7 @@ export default function Checkout() {
                                     <div>
                                         <label htmlFor="" className="block text-sm font-medium leading-6 text-gray-900"> City </label>
                                         <div className="mt-1">
-                                            <select className="form-select block w-full rounded-md border-0 py-2 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">
+                                            <select className="block w-full py-2 pl-3 pr-20 text-gray-900 border-0 rounded-md form-select ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                                                 <option value="">Cairo</option>
                                                 <option value="">Giza</option>
                                             </select>
@@ -152,20 +152,20 @@ export default function Checkout() {
                                     </div>
                                 </div>
                             </div>
-                            <div className="mt-5 pt-5 border-t-2">
+                            <div className="pt-5 mt-5 border-t-2">
                                 <PaymentMethod />
                                 <div className="flex items-center pt-3 mt-3 border-t-2">
-                                    <input id="default-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded focus:ring-blue-500 dark:focus:ring-blue-600 dark:ring-offset-gray-800 focus:ring-2 dark:bg-gray-700 dark:border-gray-600" />
+                                    <input id="default-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded" />
                                     <label for="default-checkbox" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">I’ve read and accepted all Terms & Conditions</label>
                                 </div>
-                                <Link to="/thanks" className="pointer-events-auto rounded-md bg-indigo-600 py-4 px-3 text-lg text-center text-white hover:bg-indigo-500 uppercase block mt-4">Place Order</Link>
+                                <Link to="/thanks" className="block px-3 py-4 mt-4 text-lg text-center text-white uppercase bg-indigo-600 rounded-md pointer-events-auto hover:bg-indigo-500">Place Order</Link>
                             </div>
                         </div>
                     </div>
 
-                    <div className="col-span-2 sm:col-span-1 pl-5">
-                        <div className="bg-gray-100 p-5">
-                            <h2 className="text-xl capitalize font-semibold">Order summary</h2>
+                    <div className="col-span-2 pl-5 sm:col-span-1">
+                        <div className="p-5 bg-gray-100">
+                            <h2 className="text-xl font-semibold capitalize">Order summary</h2>
                             <div className="">
                             {cartItems.map((item) => (
                                 <li key={v4()} className="flex py-6">
@@ -187,7 +187,7 @@ export default function Checkout() {
                                     <span className="text-gray-600">{FormatCurrency(taxFees)}</span>
                                 </div>
                                 <div className="flex justify-between py-5">
-                                    <span className="font-bold font-lg text-gray-900">Order Total</span>
+                                    <span className="font-bold text-gray-900 font-lg">Order Total</span>
                                     <span className="font-bold text-gray-600">{FormatCurrency(grandTotal)}</span>
                                 </div>
                             </div>
