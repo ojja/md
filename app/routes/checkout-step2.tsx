@@ -47,7 +47,7 @@ export default function Checkout() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
                                     </svg>
                                     <div className="-m-1">
-                                        <a href="#" className="p-1 ml-2"> Personal Information </a>
+                                        <Link to="/checkout-step1" className="p-1 ml-2"> Personal Information </Link>
                                     </div>
                                 </div>
                             </li>

@@ -36,7 +36,8 @@ export function ProductWidget({ product }: ProductWidgetProps) {
         //     ? product.name.slice(0, 35).concat("...")
         //     : 
             product.name;
-
+    
+    let imageSrc = product.main_image ? product.main_image : product.thumbnail
     return (
         <>
             <div className="relative flex flex-col group">
@@ -47,14 +48,18 @@ export function ProductWidget({ product }: ProductWidgetProps) {
                         className="absolute top-0 bottom-0 left-0 right-0 self-center object-cover object-center w-full h-full m-auto lg:h-full lg:w-full"
                     /> */}
                     <Link to={`/products/${product.slug}`} className="block aspect-w-4 aspect-h-3 lg:h-80">
+                        {imageSrc?
                         <LazyLoadImage
                             alt={product.name}
                             // effect="blur"
-                            src={product.main_image ? product.main_image : product.thumbnail}
+                            src={imageSrc}
                             // placeholderSrc={product.image_small}
                             wrapperClassName="z-1"
                             className="self-center object-cover object-center w-full h-full m-auto lg:h-full lg:w-full"
                         />
+                        :
+                        ''
+                        }
                     </Link>
                     <div className="absolute bottom-0 left-0 right-0 flex items-end">
                         <button

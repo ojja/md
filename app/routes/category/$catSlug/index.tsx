@@ -1,6 +1,6 @@
 import { json, LoaderFunction } from "@remix-run/cloudflare"
 import { MetaFunction } from "remix";
-import { Outlet, useLoaderData, useParams } from "@remix-run/react";
+import { Link, Outlet, useLoaderData, useParams } from "@remix-run/react";
 import { getCategoryProducts, getFilterProducts } from "~/models/category.server";
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react';
 import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon, ViewColumnsIcon } from '@heroicons/react/20/solid';
@@ -26,14 +26,19 @@ export const meta: MetaFunction = ({params}:any) => {
   }
 }
 
-export const loader = async ({ params }: any) => {
+export const loader = async ({ params, request }: any) => {
   try {
-    const categorySlug = params.catSlug
-    const pageNumber = 1
+    const categorySlug = params.catSlug;
+    const pageNumber = parseInt(request.url.split('?')[1]?.split('=')[1] ?? '1', 8); // Extract pageNumber from the query string, default to 1
+    const pageSize = 8;
+    const products = await getCategoryProducts(categorySlug, pageNumber, pageSize);
+
     return json({
-      products: await getFilterProducts(categorySlug, pageNumber),
+      products,
       categorySlug,
       pageNumber,
+      // hasNextPage: products.length === pageSize * pageNumber,
+      hasNextPage: true,
     });
   } catch (error) {
     console.error(error);
@@ -42,7 +47,7 @@ export const loader = async ({ params }: any) => {
 };
 
 export default function CategorySlug() {
-  const { products, categorySlug, pageNumber } = useLoaderData();
+  const { products, categorySlug, pageNumber, hasNextPage } = useLoaderData();
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [grid, setGrid] = useState(false);
@@ -100,6 +105,21 @@ export default function CategorySlug() {
       ],
     },
   ]
+  const loadMore = () => {
+    if (hasNextPage) {
+      return (
+        <Link to={`/category/${categorySlug}?pageNumber=${pageNumber + 1}`} replace>
+          Load More
+        </Link>
+      );
+    } else {
+      return null;
+    }
+  };
+
+  console.log('hasNextPage > C',hasNextPage)
+  console.log('pageNumber > C',pageNumber)
+  
   return (
     <div className="bg-white">
       <main className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -211,6 +231,7 @@ export default function CategorySlug() {
                     <ProductWidget product={productData} key={v4()} />
                   ))}
                 </div>
+                {loadMore()}
                 <div className="flex items-center justify-center mt-10 loadmore">
                   <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 inline-flex items-center justify-center whitespace-nowrap">
                     Load More
