@@ -63,7 +63,7 @@ export default function Checkout() {
                     </nav>
                     <div className="flex flex-col-reverse items-start md:flex-row">
                         <CartSummary/>
-                        <div className="max-w-4xl p-4 m-auto bg-white border rounded-md">
+                        <div className="w-full max-w-4xl p-4 m-auto bg-white border rounded-md">
                             <div className="">
                                 <h2 className="mb-5 text-lg font-medium text-gray-900">Shipping Information</h2>
                                 <ShippingInfo/>
