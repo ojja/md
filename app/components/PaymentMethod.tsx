@@ -6,13 +6,13 @@ export default function PaymentMethod() {
 
     return (
         <>
-            <h3 className='mb-2 text-lg font-medium text-gray-900 dark:text-white'>
+            <h3 className='mb-2 text-lg font-medium text-gray-900'>
                 Payment Method
             </h3>
             <ul className=''>
                 <li className='py-2'>
                     <label htmlFor="Credit_Card" className='block text-gray-900 peer-checked:text-blue-600'>
-                        <div className="flex flex-col relative pl-3 py-1">
+                        <div className="relative flex flex-col py-1 pl-3">
                             <input type="radio" name="payment_method" id="Credit_Card" className='hidden peer' defaultChecked />
                             <div className='invisible peer-checked:visible absolute left-0 top-1 mt-0.5'>
                                 <RiRadioButtonLine className='peer-checked:bg-gray-700' />
@@ -21,7 +21,7 @@ export default function PaymentMethod() {
                                 <RiCheckboxBlankCircleLine className='peer-checked:bg-gray-700' />
                             </div>
                             <span className='block ml-2 text-sm font-medium'>Credit Card</span>
-                            <div className="grid grid-cols-2 gap-4 h-0 peer-checked:h-auto overflow-hidden peer-checked:p-2">
+                            <div className="grid h-0 grid-cols-2 gap-4 overflow-hidden peer-checked:h-auto peer-checked:p-2">
                                 <div className="col-span-2 ok">
                                     <label for="" className="block text-sm font-medium leading-6 text-gray-900"> Card number </label>
                                     <div className="mt-1">
@@ -55,7 +55,7 @@ export default function PaymentMethod() {
                 </li>
                 <li className='py-2 border-t-2 border-dashed'>
                     <label htmlFor="Cash" className='block text-gray-900 peer-checked:text-blue-600'>
-                        <div className='flex items-center relative pl-3 py-1'>
+                        <div className='relative flex items-center py-1 pl-3'>
                             <input type="radio" name="payment_method" id="Cash" className='hidden peer' />
                             <div className='invisible peer-checked:visible absolute left-0 top-1 mt-0.5'>
                                 <RiRadioButtonLine className='peer-checked:bg-gray-700' />

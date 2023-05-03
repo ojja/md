@@ -75,13 +75,6 @@ export default function ShippingOptions() {
         </div>
       ) : (
         <div className="grid grid-cols-4 gap-4 mt-5">
-          <div className="col-span-4">
-            <label htmlFor="" className="block text-sm font-medium leading-6 text-gray-900"> Street name </label>
-            <div className="mt-1">
-              {/* <textarea placeholder="" className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" /> */}
-              <input type="text" placeholder="" className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
-            </div>
-          </div>
 
           <div className="col-span-2">
             <label htmlFor="" className="block text-sm font-medium leading-6 text-gray-900"> City </label>
@@ -112,6 +105,13 @@ export default function ShippingOptions() {
                 <option value="">Heliopolis 2</option>
                 <option value="">Heliopolis 3</option>
               </select>
+            </div>
+          </div>
+          <div className="col-span-4">
+            <label htmlFor="" className="block text-sm font-medium leading-6 text-gray-900"> Street name </label>
+            <div className="mt-1">
+              {/* <textarea placeholder="" className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" /> */}
+              <input type="text" placeholder="" className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
             </div>
           </div>
           <div className="col-span-4">

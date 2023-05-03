@@ -15,7 +15,7 @@ export default function TimeSlot() {
         <div>
             <ul className="grid w-full gap-6 md:grid-cols-2">
                 <li>
-                    <input type="radio" id="deliver_today" name="hosting" value="deliver_today" className="hidden peer" required defaultChecked/>
+                    <input type="radio" id="deliver_today" name="hosting" value="deliver_today" className="hidden peer" required/>
                     <label htmlFor="deliver_today" className="inline-flex items-center justify-between w-full h-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100">
                         <div className="block">
                             <div className="w-full text-lg font-semibold">Today</div>
@@ -25,10 +25,10 @@ export default function TimeSlot() {
                     </label>
                 </li>
                 <li>
-                    <input type="radio" id="deliver_date" name="hosting" value="deliver_date" className="hidden peer" />
+                    <input type="radio" id="deliver_date" name="hosting" value="deliver_date" className="hidden peer" defaultChecked/>
                     <label htmlFor="deliver_date" className="inline-flex items-center justify-between w-full h-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100">
                         <div className="block">
-                            <div className="w-full text-lg font-semibold">Specific Date</div>
+                            <div className="w-full text-lg font-semibold">Choose Date</div>
                             <Datepicker
                                 useRange={false}
                                 asSingle={true}

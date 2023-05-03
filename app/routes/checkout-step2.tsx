@@ -47,7 +47,7 @@ export default function Checkout() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
                                     </svg>
                                     <div className="-m-1">
-                                        <Link to="/checkout-step1" className="p-1 ml-2"> Personal Information </Link>
+                                        <Link to="/checkout-step1" className="p-1 ml-2"> Order Details </Link>
                                     </div>
                                 </div>
                             </li>
@@ -80,7 +80,7 @@ export default function Checkout() {
                             <PaymentMethod />
                             <div className="flex items-center pt-3 mt-3 border-t-2">
                                 <input id="default-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded" />
-                                <label htmlFor="default-checkbox" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">I’ve read and accepted all Terms & Conditions</label>
+                                <label htmlFor="default-checkbox" className="ml-2 text-sm font-medium text-gray-900">I’ve read and accepted all Terms & Conditions</label>
                             </div>
                             <Button
                                 name="Place Order"
