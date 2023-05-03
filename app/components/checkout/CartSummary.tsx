@@ -16,9 +16,9 @@ const products = [
   
 export default function CartSummary() {
     return (
-        <div className="mt-10 mr-0 md:mt-0 md:mr-5 w-full md:w-[250px]">
+        <div className="mt-10 mr-0 md:mt-0 md:mr-5 w-full md:w-[380px]">
             {/* Order summary */}
-            <div className="min-w-[250px]">
+            <div className="min-w-[380px]">
 
                 <div className="bg-white border border-gray-200 rounded-lg shadow-sm">
                     <h2 className="pt-6 pl-4 text-lg font-medium text-gray-900 sm:pl-6">Order summary</h2>

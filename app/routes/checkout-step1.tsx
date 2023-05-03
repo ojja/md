@@ -33,7 +33,7 @@ export default function Checkout() {
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
                                     </svg>
                                     <div className="-m-1">
-                                        <a href="#" className="p-1 ml-2 font-semibold text-gray-700"> Personal Information </a>
+                                        <a href="#" className="p-1 ml-2 font-semibold text-gray-700"> Order Details </a>
                                     </div>
                                 </div>
                             </li>
