@@ -24,8 +24,8 @@ import { useState } from "react";
 
 
 export const links: LinksFunction = () => {
-  const [currentLang, setCurrentLang] = useState('en');
-  const cssLink = currentLang === 'en' ? styles : stylesRtl;
+  // const [currentLang, setCurrentLang] = useState('en');
+  // const cssLink = currentLang === 'en' ? styles : stylesRtl;
   // const { request } = useParams();
   // console.log('request',request)
   // const langPrefix = request.path.startsWith('/ar') ? 'rtl' : 'ltr';

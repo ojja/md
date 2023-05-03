@@ -4,11 +4,12 @@ import { Dialog, Menu, Popover, Tab, Transition } from '@headlessui/react'
 import { Bars3Icon, ChevronDownIcon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
 import useShoppingCart from '~/stores/cartStore';
 import ShoppingCart from '~/components/ShoppingCart';
-import { Link, useNavigate, useSearchParams } from '@remix-run/react';
+import { Link, useLocation, useNavigate, useSearchParams } from '@remix-run/react';
 import { v4 } from 'uuid';
 import ChangeCountry from '~/components/ChangeCountry';
 import LangSwitcher from '~/components/LangSwitcher';
 import Search from '~/components/Search';
+
 
 const navigation = {
   categories: [
@@ -133,7 +134,7 @@ const navigation = {
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
-export default function NavBar({onLangChange}) {
+export default function NavBar({ onLangChange }) {
   const [open, setOpen] = useState(false);
   const { cartQuantityTotal, openCart } = useShoppingCart();
 
@@ -142,6 +143,8 @@ export default function NavBar({onLangChange}) {
     const newPathname = lang === "ar" ? "/ar" : "/";
     navigate(newPathname);
   }
+  const location = useLocation();
+  const isCheckoutPage = location.pathname === "/checkout-step1" || location.pathname === "/checkout-step2" || location.pathname === "/checkout";
   return (
     <>
       <div className="bg-white">
@@ -288,12 +291,14 @@ export default function NavBar({onLangChange}) {
         </React.Fragment>
         <ShoppingCart />
         <header className="relative z-20 bg-white">
-          <p className="flex items-center justify-center h-10 px-4 text-sm font-medium text-white bg-indigo-600 sm:px-6 lg:px-8">
-            Get free delivery on orders over $100
-            <LangSwitcher 
+          {isCheckoutPage ? null : (
+            <p className="flex items-center justify-center h-10 px-4 text-sm font-medium text-white bg-indigo-600 sm:px-6 lg:px-8">
+              Get free delivery on orders over $100
+              <LangSwitcher
               // onLangChange={onLangChange} 
-            />
-          </p>
+              />
+            </p>
+          )}
           <div className="container px-4 mx-auto">
             <nav aria-label="Top" className="">
               <div className="border-b border-gray-200">
@@ -310,7 +315,6 @@ export default function NavBar({onLangChange}) {
                   {/* Logo */}
                   <div className="flex ml-4 lg:ml-0">
                     <Link to="/">
-                      <span className="sr-only">Your Company</span>
                       <img
                         className="w-auto h-8"
                         src="/images/logo.svg"
@@ -320,106 +324,107 @@ export default function NavBar({onLangChange}) {
                   </div>
 
                   {/* Flyout menus */}
-                  <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
-                    <div className="flex h-full space-x-8">
-                      {navigation.categories.map((category) => (
-                        <Popover key={v4()} className="flex">
-                          {({ open, close }) => (
-                            <>
-                              <div className="relative flex">
-                                <Popover.Button
-                                  className={classNames(
-                                    open
-                                      ? 'border-indigo-600 text-indigo-600'
-                                      : 'border-transparent text-gray-700 hover:text-gray-800',
-                                    'relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out outline-none'
-                                  )}
+                  {isCheckoutPage ? null : (
+                    <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
+                      <div className="flex h-full space-x-8">
+                        {navigation.categories.map((category) => (
+                          <Popover key={v4()} className="flex">
+                            {({ open, close }) => (
+                              <>
+                                <div className="relative flex">
+                                  <Popover.Button
+                                    className={classNames(
+                                      open
+                                        ? 'border-indigo-600 text-indigo-600'
+                                        : 'border-transparent text-gray-700 hover:text-gray-800',
+                                      'relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out outline-none'
+                                    )}
+                                  >
+                                    {category.name}
+                                  </Popover.Button>
+                                </div>
+
+                                <Transition
+
+                                  enter="transition ease-out duration-200"
+                                  enterFrom="opacity-0"
+                                  enterTo="opacity-100"
+                                  leave="transition ease-in duration-150"
+                                  leaveFrom="opacity-100"
+                                  leaveTo="opacity-0"
                                 >
-                                  {category.name}
-                                </Popover.Button>
-                              </div>
+                                  <Popover.Panel className="absolute inset-x-0 text-sm text-gray-500 top-full">
+                                    {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
+                                    <div className="absolute inset-0 bg-white shadow top-1/2" aria-hidden="true" />
 
-                              <Transition
-
-                                enter="transition ease-out duration-200"
-                                enterFrom="opacity-0"
-                                enterTo="opacity-100"
-                                leave="transition ease-in duration-150"
-                                leaveFrom="opacity-100"
-                                leaveTo="opacity-0"
-                              >
-                                <Popover.Panel className="absolute inset-x-0 text-sm text-gray-500 top-full">
-                                  {/* Presentational element used to render the bottom shadow, if we put the shadow on the actual panel it pokes out the top, so we use this shorter element to hide the top of the shadow */}
-                                  <div className="absolute inset-0 bg-white shadow top-1/2" aria-hidden="true" />
-
-                                  <div className="relative bg-white">
-                                    <div className="px-8 mx-auto max-w-7xl">
-                                      <div className="grid grid-cols-2 py-16 gap-x-8 gap-y-10">
-                                        <div className="grid grid-cols-2 col-start-2 gap-x-8">
-                                          {category.featured.map((item) => (
-                                            <div key={item.name} className="relative text-base group sm:text-sm">
-                                              <div className="overflow-hidden bg-gray-100 rounded-lg aspect-h-1 aspect-w-1 group-hover:opacity-75">
-                                                <img
-                                                  src={item.imageSrc}
-                                                  alt={item.imageAlt}
-                                                  className="object-cover object-center"
-                                                />
+                                    <div className="relative bg-white">
+                                      <div className="px-8 mx-auto max-w-7xl">
+                                        <div className="grid grid-cols-2 py-16 gap-x-8 gap-y-10">
+                                          <div className="grid grid-cols-2 col-start-2 gap-x-8">
+                                            {category.featured.map((item) => (
+                                              <div key={item.name} className="relative text-base group sm:text-sm">
+                                                <div className="overflow-hidden bg-gray-100 rounded-lg aspect-h-1 aspect-w-1 group-hover:opacity-75">
+                                                  <img
+                                                    src={item.imageSrc}
+                                                    alt={item.imageAlt}
+                                                    className="object-cover object-center"
+                                                  />
+                                                </div>
+                                                <Link to={`/category/${item.href}`} onClick={() => { close() }} className="block mt-6 font-medium text-gray-900">
+                                                  <span className="absolute inset-0 z-10" aria-hidden="true" />
+                                                  {item.name}
+                                                </Link>
+                                                <p aria-hidden="true" className="mt-1">
+                                                  Shop now
+                                                </p>
                                               </div>
-                                              <Link to={`/category/${item.href}`} onClick={() => { close() }} className="block mt-6 font-medium text-gray-900">
-                                                <span className="absolute inset-0 z-10" aria-hidden="true" />
-                                                {item.name}
-                                              </Link>
-                                              <p aria-hidden="true" className="mt-1">
-                                                Shop now
-                                              </p>
-                                            </div>
-                                          ))}
-                                        </div>
-                                        <div className="grid grid-cols-3 row-start-1 text-sm gap-x-8 gap-y-10">
-                                          {category.sections.map((section) => (
-                                            <div key={v4()}>
-                                              <p id={`${section.name}-heading`} className="font-medium text-gray-900">
-                                                {section.name}
-                                              </p>
-                                              <ul
-                                                role="list"
-                                                aria-labelledby={`${section.name}-heading`}
-                                                className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
-                                              >
-                                                {section.items.map((item) => (
-                                                  <li key={v4()} className="flex">
-                                                    <Link to={`/category/${item.href}`} className="hover:text-gray-800" onClick={() => { close() }}>
-                                                      {item.name}
-                                                    </Link>
-                                                  </li>
-                                                ))}
-                                              </ul>
-                                            </div>
-                                          ))}
+                                            ))}
+                                          </div>
+                                          <div className="grid grid-cols-3 row-start-1 text-sm gap-x-8 gap-y-10">
+                                            {category.sections.map((section) => (
+                                              <div key={v4()}>
+                                                <p id={`${section.name}-heading`} className="font-medium text-gray-900">
+                                                  {section.name}
+                                                </p>
+                                                <ul
+                                                  role="list"
+                                                  aria-labelledby={`${section.name}-heading`}
+                                                  className="mt-6 space-y-6 sm:mt-4 sm:space-y-4"
+                                                >
+                                                  {section.items.map((item) => (
+                                                    <li key={v4()} className="flex">
+                                                      <Link to={`/category/${item.href}`} className="hover:text-gray-800" onClick={() => { close() }}>
+                                                        {item.name}
+                                                      </Link>
+                                                    </li>
+                                                  ))}
+                                                </ul>
+                                              </div>
+                                            ))}
+                                          </div>
                                         </div>
                                       </div>
                                     </div>
-                                  </div>
-                                </Popover.Panel>
-                              </Transition>
-                            </>
-                          )}
-                        </Popover>
-                      ))}
+                                  </Popover.Panel>
+                                </Transition>
+                              </>
+                            )}
+                          </Popover>
+                        ))}
 
-                      {navigation.pages.map((page) => (
-                        <Link
-                          key={v4()}
-                          // to={page.href}
-                          to={`/${page.href}`}
-                          className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
-                        >
-                          {page.name}
-                        </Link>
-                      ))}
-                    </div>
-                  </Popover.Group>
-
+                        {navigation.pages.map((page) => (
+                          <Link
+                            key={v4()}
+                            // to={page.href}
+                            to={`/${page.href}`}
+                            className="flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                          >
+                            {page.name}
+                          </Link>
+                        ))}
+                      </div>
+                    </Popover.Group>
+                  )}
                   <div className="flex items-center ml-auto">
                     <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
                       <Link to="/login" className="text-sm font-medium text-gray-700 hover:text-gray-800">
@@ -455,7 +460,7 @@ export default function NavBar({onLangChange}) {
                               <Menu.Item key={v4()}>
                                 {({ active }) => (
                                   <div className='flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-gray-100'>
-                                    <span className="block ml-3"  onClick={() => handleClick("en")}>English</span>
+                                    <span className="block ml-3" onClick={() => handleClick("en")}>English</span>
                                   </div>
                                 )}
                               </Menu.Item>
@@ -467,7 +472,7 @@ export default function NavBar({onLangChange}) {
                                       'flex justify-center px-4 py-2 text-sm font-medium text-gray-900 w-full cursor-pointer'
                                     )}
                                   >
-                                    <span className="block ml-3"  onClick={() => handleClick("ar")}>العربيه</span>
+                                    <span className="block ml-3" onClick={() => handleClick("ar")}>العربيه</span>
                                   </div>
                                 )}
                               </Menu.Item>
@@ -479,90 +484,105 @@ export default function NavBar({onLangChange}) {
 
 
                     {/* Change Currncy */}
-                    <div className="hidden lg:ml-8 lg:flex">
-                      <Menu as="div" className="relative z-20 inline-block text-left">
-                        <div>
-                          <Menu.Button className="inline-flex items-center justify-center text-sm font-medium text-gray-700 group hover:text-gray-900">
-                            <img
-                              src="/images/en.svg"
-                              alt=""
-                              className="flex-shrink-0 block w-5 h-auto"
-                            />
-                            <span className="block ml-3 text-sm font-medium">USD</span>
-                            <span className="sr-only">, change currency</span>
-                          </Menu.Button>
-                        </div>
+                    {isCheckoutPage ? null : (
+                      <div className="hidden lg:ml-8 lg:flex">
+                        <Menu as="div" className="relative z-20 inline-block text-left">
+                          <div>
+                            <Menu.Button className="inline-flex items-center justify-center text-sm font-medium text-gray-700 group hover:text-gray-900">
+                              <img
+                                src="/images/en.svg"
+                                alt=""
+                                className="flex-shrink-0 block w-5 h-auto"
+                              />
+                              <span className="block ml-3 text-sm font-medium">USD</span>
+                              <span className="sr-only">, change currency</span>
+                            </Menu.Button>
+                          </div>
 
-                        <Transition
-                          as={Fragment}
-                          enter="transition ease-out duration-100"
-                          enterFrom="transform opacity-0 scale-95"
-                          enterTo="transform opacity-100 scale-100"
-                          leave="transition ease-in duration-75"
-                          leaveFrom="transform opacity-100 scale-100"
-                          leaveTo="transform opacity-0 scale-95"
-                        >
-                          <Menu.Items className="absolute right-0 z-10 w-40 mt-2 origin-top-right bg-white rounded-md shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            <div className="py-1">
-                              <Menu.Item key={v4()}>
-                                {({ active }) => (
-                                  <div className='flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-gray-100'>
-                                    <img
-                                      src="/images/en.svg"
-                                      alt=""
-                                      className="flex-shrink-0 block w-5 h-auto"
-                                    />
-                                    <span className="block ml-3">USD</span>
-                                  </div>
-                                )}
-                              </Menu.Item>
-                              <Menu.Item key={v4()}>
-                                {({ active }) => (
-                                  <div
-                                    className={classNames(
-                                      active ? 'bg-gray-100' : '',
-                                      'flex justify-center px-4 py-2 text-sm font-medium text-gray-900 w-full cursor-pointer'
-                                    )}
-                                  >
-                                    <img
-                                      src="/images/eg.svg"
-                                      alt=""
-                                      className="flex-shrink-0 block w-5 h-auto"
-                                    />
-                                    <span className="block ml-3">EGP</span>
-                                  </div>
-                                )}
-                              </Menu.Item>
-                            </div>
-                          </Menu.Items>
-                        </Transition>
-                      </Menu>
-                    </div>
-
+                          <Transition
+                            as={Fragment}
+                            enter="transition ease-out duration-100"
+                            enterFrom="transform opacity-0 scale-95"
+                            enterTo="transform opacity-100 scale-100"
+                            leave="transition ease-in duration-75"
+                            leaveFrom="transform opacity-100 scale-100"
+                            leaveTo="transform opacity-0 scale-95"
+                          >
+                            <Menu.Items className="absolute right-0 z-10 w-40 mt-2 origin-top-right bg-white rounded-md shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
+                              <div className="py-1">
+                                <Menu.Item key={v4()}>
+                                  {({ active }) => (
+                                    <div className='flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-gray-100'>
+                                      <img
+                                        src="/images/en.svg"
+                                        alt=""
+                                        className="flex-shrink-0 block w-5 h-auto"
+                                      />
+                                      <span className="block ml-3">USD</span>
+                                    </div>
+                                  )}
+                                </Menu.Item>
+                                <Menu.Item key={v4()}>
+                                  {({ active }) => (
+                                    <div
+                                      className={classNames(
+                                        active ? 'bg-gray-100' : '',
+                                        'flex justify-center px-4 py-2 text-sm font-medium text-gray-900 w-full cursor-pointer'
+                                      )}
+                                    >
+                                      <img
+                                        src="/images/eg.svg"
+                                        alt=""
+                                        className="flex-shrink-0 block w-5 h-auto"
+                                      />
+                                      <span className="block ml-3">EGP</span>
+                                    </div>
+                                  )}
+                                </Menu.Item>
+                              </div>
+                            </Menu.Items>
+                          </Transition>
+                        </Menu>
+                      </div>
+                    )}
 
                     {/* Change Country */}
-                    <div className="hidden lg:ml-8 lg:flex">
-                      <ChangeCountry />
-                    </div>
+                    {isCheckoutPage ? null : (
+                      <div className="hidden lg:ml-8 lg:flex">
+                        <ChangeCountry />
+                      </div>
+                    )}
 
                     {/* Search */}
-                    <div className="flex lg:ml-6">
-                      <Search/>
-                    </div>
+                    {isCheckoutPage ? null : (
+                      <div className="flex lg:ml-6">
+                        <Search />
+                      </div>
+                    )}
 
                     {/* Cart */}
                     <div className="flow-root ml-4 lg:ml-6">
-                      <button
-                        className="flex items-center p-2 -m-2 group"
-                        onClick={openCart}
-                      >
-                        <ShoppingBagIcon
-                          className="flex-shrink-0 w-6 h-6 text-gray-400 group-hover:text-gray-500"
-                          aria-hidden="true"
-                        />
-                        <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{cartQuantityTotal}</span>
-                        <span className="sr-only">items in cart, view bag</span>
-                      </button>
+                      {isCheckoutPage ? (
+                        <Link to="/cart" className="flex items-center p-2 -m-2 group">
+                          <ShoppingBagIcon
+                            className="flex-shrink-0 w-6 h-6 text-gray-400 group-hover:text-gray-500"
+                            aria-hidden="true"
+                          />
+                          <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{cartQuantityTotal}</span>
+                        </Link>
+                      ) : (
+                        <button
+                          className="flex items-center p-2 -m-2 group"
+                          onClick={openCart}
+                        >
+                          <ShoppingBagIcon
+                            className="flex-shrink-0 w-6 h-6 text-gray-400 group-hover:text-gray-500"
+                            aria-hidden="true"
+                          />
+                          <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{cartQuantityTotal}</span>
+                          <span className="sr-only">items in cart, view bag</span>
+                        </button>
+                      )}
                     </div>
                   </div>
                 </div>
