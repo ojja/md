@@ -25,7 +25,7 @@ export default function forgot() {
                     <input
                       type="submit"
                       value="Send Email to Reast"
-                      className="w-full px-5 py-3 text-base text-white transition bg-indigo-500 border rounded-md cursor-pointer border-indigo hover:bg-opacity-90"
+                      className="w-full px-5 py-3 text-base text-white transition bg-primary-500 border rounded-md cursor-pointer border-primary hover:bg-opacity-90"
                     />
                   </div>
                 </form>

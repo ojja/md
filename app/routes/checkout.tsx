@@ -67,7 +67,7 @@ export default function Checkout() {
                             <ul className="grid w-full gap-6 md:grid-cols-3">
                                 <li>
                                     <input type="radio" id="deliver_today" name="hosting" value="deliver_today" className="hidden peer" required />
-                                    <label htmlFor="deliver_today" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                    <label htmlFor="deliver_today" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer  peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100">
                                         <div className="block">
                                             <div className="w-full text-lg font-semibold">Today</div>
                                             <div className="w-full">Within 60min</div>
@@ -77,7 +77,7 @@ export default function Checkout() {
                                 </li>
                                 <li>
                                     <input type="radio" id="deliver_tomorrow" name="hosting" value="deliver_tomorrow" className="hidden peer" />
-                                    <label htmlFor="deliver_tomorrow" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                    <label htmlFor="deliver_tomorrow" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer  peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100">
                                         <div className="block">
                                             <div className="w-full text-lg font-semibold">Tomorrow</div>
                                             <div className="w-full">{''}{moment().add(1, 'days').format('DD MMMM YYYY').toString()}</div>
@@ -87,7 +87,7 @@ export default function Checkout() {
                                 </li>
                                 <li>
                                     <input type="radio" id="deliver_date" name="hosting" value="deliver_date" className="hidden peer" />
-                                    <label htmlFor="deliver_date" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer dark:hover:text-gray-300 dark:border-gray-700 dark:peer-checked:text-blue-500 peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100 dark:text-gray-400 dark:bg-gray-800 dark:hover:bg-gray-700">
+                                    <label htmlFor="deliver_date" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer  peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100">
                                         <div className="block">
                                             <div className="w-full text-lg font-semibold">Tomorrow</div>
                                             <Datepicker
@@ -156,9 +156,9 @@ export default function Checkout() {
                                 <PaymentMethod />
                                 <div className="flex items-center pt-3 mt-3 border-t-2">
                                     <input id="default-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded" />
-                                    <label for="default-checkbox" className="ml-2 text-sm font-medium text-gray-900 dark:text-gray-300">I’ve read and accepted all Terms & Conditions</label>
+                                    <label for="default-checkbox" className="ml-2 text-sm font-medium text-gray-900">I’ve read and accepted all Terms & Conditions</label>
                                 </div>
-                                <Link to="/thanks" className="block px-3 py-4 mt-4 text-lg text-center text-white uppercase bg-indigo-600 rounded-md pointer-events-auto hover:bg-indigo-500">Place Order</Link>
+                                <Link to="/thanks" className="block px-3 py-4 mt-4 text-lg text-center text-white uppercase bg-primary-600 rounded-md pointer-events-auto hover:bg-primary-500">Place Order</Link>
                             </div>
                         </div>
                     </div>

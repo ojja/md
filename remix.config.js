@@ -17,10 +17,6 @@ withEsbuildOverride((option, { isServer }) => {
     option.define = {
       global: "globalThis",
     };
-    // option.plugins = [
-    //   GlobalsPolyfills({ buffer: true }),
-    //   ...option.plugins,
-    // ];
   }
 
   return option;
@@ -40,15 +36,10 @@ module.exports = {
   } : {}),
   serverDependenciesToBundle: "all",
   future: {
-    // unstable_cssSideEffectImports: false,
-    // unstable_postcss: true,
-    // unstable_cssModules: true,
     unstable_tailwind: true,
-    // unstable_postcss: true,
     v2_routeConvention: true,
   },
   routes(defineRoutes) {
-    // uses the v1 convention, works in v1.15+ and v2
     return createRoutesFromFolders(defineRoutes);
   },
 };

@@ -25,7 +25,7 @@ const navigation = {
           imageAlt: 'Models sitting back to back, wearing Basic Tee in black and bone.',
         },
         {
-          name: 'Category 1 > 2',
+          name: 'Category 3 > 2',
           href: 'polo',
           imageSrc: 'https://tailwindui.com/img/ecommerce-images/mega-menu-category-02.jpg',
           imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
@@ -134,7 +134,7 @@ const navigation = {
 function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
-export default function NavBar({ onLangChange }) {
+export default function NavBar({ }) {
   const [open, setOpen] = useState(false);
   const { cartQuantityTotal, openCart } = useShoppingCart();
 
@@ -195,7 +195,7 @@ export default function NavBar({ onLangChange }) {
                               key={v4()}
                               className={({ selected }) =>
                                 classNames(
-                                  selected ? 'border-indigo-600 text-indigo-600' : 'border-transparent text-gray-900',
+                                  selected ? 'border-primary-600 text-primary-600' : 'border-transparent text-gray-900',
                                   'flex-1 whitespace-nowrap border-b-2 px-1 py-4 text-base font-medium'
                                 )
                               }
@@ -292,7 +292,7 @@ export default function NavBar({ onLangChange }) {
         <ShoppingCart />
         <header className="relative z-20 bg-white">
           {isCheckoutPage ? null : (
-            <p className="flex items-center justify-center h-10 px-4 text-sm font-medium text-white bg-indigo-600 sm:px-6 lg:px-8">
+            <p className="flex items-center justify-center h-10 px-4 text-sm font-medium text-white bg-primary-600 sm:px-6 lg:px-8">
               Get free delivery on orders over $100
               <LangSwitcher
               // onLangChange={onLangChange} 
@@ -335,7 +335,7 @@ export default function NavBar({ onLangChange }) {
                                   <Popover.Button
                                     className={classNames(
                                       open
-                                        ? 'border-indigo-600 text-indigo-600'
+                                        ? 'border-primary-600 text-primary-600'
                                         : 'border-transparent text-gray-700 hover:text-gray-800',
                                       'relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out outline-none'
                                     )}
@@ -362,7 +362,7 @@ export default function NavBar({ onLangChange }) {
                                         <div className="grid grid-cols-2 py-16 gap-x-8 gap-y-10">
                                           <div className="grid grid-cols-2 col-start-2 gap-x-8">
                                             {category.featured.map((item) => (
-                                              <div key={item.name} className="relative text-base group sm:text-sm">
+                                              <div key={v4()} className="relative text-base group sm:text-sm">
                                                 <div className="overflow-hidden bg-gray-100 rounded-lg aspect-h-1 aspect-w-1 group-hover:opacity-75">
                                                   <img
                                                     src={item.imageSrc}

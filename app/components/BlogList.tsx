@@ -1,16 +1,16 @@
 
 export default function BlogList() {
     return (
-        <section className="pb-10 lg:pb-20">
+        <section className="py-10 lg:py-20">
             <div className="container mx-auto">
                 <div className="flex flex-wrap justify-center -mx-4">
                     <div className="w-full px-4">
                         <div className="mx-auto mb-[60px] max-w-[510px] text-center lg:mb-20">
-                            <span className="block mb-2 text-lg font-semibold text-primary">
+                            <span className="block mb-2 text-lg font-semibold text-primary-400">
                                 Our Blogs
                             </span>
                             <h2
-                                className="text-dark mb-4 text-3xl font-bold sm:text-4xl md:text-[40px]"
+                                className=" mb-4 text-3xl font-bold sm:text-4xl md:text-[40px]"
                             >
                                 Our Recent News
                             </h2>
@@ -33,14 +33,14 @@ export default function BlogList() {
                             </div>
                             <div>
                                 <span
-                                    className="inline-block px-4 py-1 mb-5 text-xs font-semibold leading-loose text-center text-white rounded bg-primary"
+                                    className="inline-block px-4 py-1 mb-5 text-xs font-semibold leading-loose text-center text-white rounded bg-primary-400"
                                 >
                                     Dec 22, 2023
                                 </span>
                                 <h3>
                                     <a
                                         href="#"
-                                        className="inline-block mb-4 text-xl font-semibold text-dark hover:text-primary sm:text-2xl lg:text-xl xl:text-2xl"
+                                        className="inline-block mb-4 text-xl font-semibold  hover:text-primary-400 sm:text-2xl lg:text-xl xl:text-2xl"
                                     >
                                         Meet AutoManage, the best AI management tools
                                     </a>
@@ -63,14 +63,14 @@ export default function BlogList() {
                             </div>
                             <div>
                                 <span
-                                    className="inline-block px-4 py-1 mb-5 text-xs font-semibold leading-loose text-center text-white rounded bg-primary"
+                                    className="inline-block px-4 py-1 mb-5 text-xs font-semibold leading-loose text-center text-white rounded bg-primary-400"
                                 >
                                     Mar 15, 2023
                                 </span>
                                 <h3>
                                     <a
                                         href="#"
-                                        className="inline-block mb-4 text-xl font-semibold text-dark hover:text-primary sm:text-2xl lg:text-xl xl:text-2xl"
+                                        className="inline-block mb-4 text-xl font-semibold  hover:text-primary-400 sm:text-2xl lg:text-xl xl:text-2xl"
                                     >
                                         How to earn more money as a wellness coach
                                     </a>
@@ -93,14 +93,14 @@ export default function BlogList() {
                             </div>
                             <div>
                                 <span
-                                    className="inline-block px-4 py-1 mb-5 text-xs font-semibold leading-loose text-center text-white rounded bg-primary"
+                                    className="inline-block px-4 py-1 mb-5 text-xs font-semibold leading-loose text-center text-white rounded bg-primary-400"
                                 >
                                     Jan 05, 2023
                                 </span>
                                 <h3>
                                     <a
                                         href="#"
-                                        className="inline-block mb-4 text-xl font-semibold text-dark hover:text-primary sm:text-2xl lg:text-xl xl:text-2xl"
+                                        className="inline-block mb-4 text-xl font-semibold  hover:text-primary-400 sm:text-2xl lg:text-xl xl:text-2xl"
                                     >
                                         The no-fuss guide to upselling and cross selling
                                     </a>

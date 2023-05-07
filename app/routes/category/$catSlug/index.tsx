@@ -1,5 +1,5 @@
-import { json, LoaderFunction } from "@remix-run/cloudflare"
-import { MetaFunction } from "remix";
+// import { json, LoaderFunction } from "@remix-run/cloudflare"
+import { json, MetaFunction } from "@remix-run/node";
 import { Link, Outlet, useLoaderData, useParams } from "@remix-run/react";
 import { getCategoryProducts, getFilterProducts } from "~/models/category.server";
 import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react';
@@ -9,6 +9,8 @@ import { v4 } from 'uuid';
 import Breadcrumbs from "~/components/Breadcrumbs";
 import { ProductWidget } from "~/components/product/ProductWidget";
 import Sort from "~/components/Sort";
+import { ProductWidgetWithVariation } from "~/components/product/ProductWidgetWithVariation";
+import { Site_Title } from "~/config";
 
 
 
@@ -16,38 +18,56 @@ function classNames(...classes: string[]) {
   return classes.filter(Boolean).join(' ')
 }
 
-type LoaderData = {
-  data: Awaited<ReturnType<typeof getCategoryProducts>>;
-};
-
-export const meta: MetaFunction = ({params}:any) => {
+export const meta: MetaFunction = ({ params }: any) => {
   return {
-      title: `Category Page | ${params.catSlug}`
+    title: `Category Page | ${params.catSlug} - ${Site_Title}`
   }
 }
 
-export const loader = async ({ params, request }: any) => {
-  try {
-    const categorySlug = params.catSlug;
-    const pageNumber = parseInt(request.url.split('?')[1]?.split('=')[1] ?? '1', 8); // Extract pageNumber from the query string, default to 1
-    const pageSize = 8;
-    const products = await getCategoryProducts(categorySlug, pageNumber, pageSize);
+// export const loader = async ({ params, request }: any) => {
+//   try {
+//     const categorySlug = params.catSlug;
+//     const pageNumber = parseInt(request.url.split('?')[1]?.split('=')[1] ?? '1', 8); // Extract pageNumber from the query string, default to 1
+//     const pageSize = 8;
+//     const products = await getCategoryProducts(categorySlug, pageNumber, pageSize);
 
-    return json({
-      products,
-      categorySlug,
-      pageNumber,
-      // hasNextPage: products.length === pageSize * pageNumber,
-      hasNextPage: true,
-    });
-  } catch (error) {
-    console.error(error);
-    return json({ error: 'An error occurred while fetching data.' }, { status: 500 });
+//     return json({
+//       products,
+//       categorySlug,
+//       pageNumber,
+//       // hasNextPage: products.length === pageSize * pageNumber,
+//       hasNextPage: true,
+//     });
+//   } catch (error) {
+//     console.error(error);
+//     return json({ error: 'An error occurred while fetching data.' }, { status: 500 });
+//   }
+// };
+
+
+export const loader = async ({ params }: any) => {
+  const categorySlug = params.catSlug;
+  const pageNumber = 1;
+  const perPage = 20;
+  let products = [];
+  let hasNextPage = false;
+  try {
+    //@ts-ignore no product type defined
+    products = await getCategoryProducts(categorySlug, pageNumber, perPage);
+    hasNextPage = products.length === perPage;
+  } catch (e) {
+    console.log('error', e);
   }
+  return json({
+    products,
+    categorySlug,
+    pageNumber,
+    hasNextPage,
+  });
 };
 
 export default function CategorySlug() {
-  const { products, categorySlug, pageNumber, hasNextPage } = useLoaderData();
+  // const { products, categorySlug, pageNumber, hasNextPage } = useLoaderData();
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [grid, setGrid] = useState(false);
@@ -105,21 +125,15 @@ export default function CategorySlug() {
       ],
     },
   ]
-  const loadMore = () => {
-    if (hasNextPage) {
-      return (
-        <Link to={`/category/${categorySlug}?pageNumber=${pageNumber + 1}`} replace>
-          Load More
-        </Link>
-      );
-    } else {
-      return null;
-    }
-  };
+
+  const { products: initialProducts, categorySlug, hasNextPage } = useLoaderData();
+  const [pageNumber, setPageNumber] = useState(1);
+  const [products, setProducts] = useState(initialProducts);
 
   console.log('hasNextPage > C',hasNextPage)
   console.log('pageNumber > C',pageNumber)
-  
+  console.log('products...',products)
+
   return (
     <div className="bg-white">
       <main className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -201,7 +215,7 @@ export default function CategorySlug() {
                                   defaultValue={option.value}
                                   type="checkbox"
                                   defaultChecked={option.checked}
-                                  className="w-4 h-4 text-indigo-600 border-gray-300 rounded cursor-pointer focus:ring-indigo-500"
+                                  className="w-4 h-4 text-primary-600 border-gray-300 rounded cursor-pointer focus:ring-primary-500"
                                 />
                                 <label
                                   htmlFor={`filter-${section.id}-${optionIdx}`}
@@ -228,10 +242,13 @@ export default function CategorySlug() {
                 >
 
                   {products.map((productData: any) => (
+                    <>
                     <ProductWidget product={productData} key={v4()} />
+                    <ProductWidgetWithVariation product={productData} key={v4()} />
+                    </>
                   ))}
                 </div>
-                {loadMore()}
+                
                 <div className="flex items-center justify-center mt-10 loadmore">
                   <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 inline-flex items-center justify-center whitespace-nowrap">
                     Load More

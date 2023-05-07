@@ -38,6 +38,8 @@ export function ProductWidget({ product }: ProductWidgetProps) {
             product.name;
     
     let imageSrc = product.main_image ? product.main_image : product.thumbnail
+
+    // console.log('product',product)
     return (
         <>
             <div className="relative flex flex-col group">
@@ -47,7 +49,8 @@ export function ProductWidget({ product }: ProductWidgetProps) {
                         alt={product.name}
                         className="absolute top-0 bottom-0 left-0 right-0 self-center object-cover object-center w-full h-full m-auto lg:h-full lg:w-full"
                     /> */}
-                    <Link to={`/products/${product.slug}`} className="block aspect-w-4 aspect-h-3 lg:h-80">
+                    {/* <span>{product.slug}</span> */}
+                    <Link to={`/products/${product.slug}`} className={`block aspect-w-4 aspect-h-3 lg:h-80 ${product.slug?product.slug:'pointer-events-none'}`}>
                         {imageSrc?
                         <LazyLoadImage
                             alt={product.name}
@@ -73,7 +76,7 @@ export function ProductWidget({ product }: ProductWidgetProps) {
                     <div>
                         <h3 className="text-sm text-gray-700">
                             <Link to={`/products/${product.slug}`} prefetch="intent">
-                                <span aria-hidden="true" className="absolute inset-0 z-1" />
+                                <span aria-hidden="true" className={`absolute inset-0 z-1 ${product.slug?'':'pointer-events-none'}`} />
                                 {productTitle}
                             </Link>
                         </h3>
@@ -82,7 +85,7 @@ export function ProductWidget({ product }: ProductWidgetProps) {
                     </div>
                     <p className="text-sm font-medium text-gray-900">{FormatCurrency(product.price)}</p>
                 </div>
-                <div className="relative mt-auto z-1">
+                <div className="relative z-1">
                     {product.type !='variable'?
                     
                     <AddToCartSimple

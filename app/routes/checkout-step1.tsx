@@ -88,3 +88,11 @@ export default function Checkout() {
         </div>
     );
 }
+
+
+import type { MetaFunction } from "@remix-run/node";
+export const meta: MetaFunction = () => {
+    return {
+        title: 'Checkout'
+    }
+}

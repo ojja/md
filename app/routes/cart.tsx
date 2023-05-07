@@ -239,8 +239,8 @@ export default function Cart() {
                                     <span className="font-bold text-gray-900 font-lg">Order Total</span>
                                     <span className="font-bold text-gray-600">10.00 EGP</span>
                                 </div>
-                                <Link to="/checkout" className="px-3 py-2 text-lg text-center text-white bg-indigo-600 rounded-md pointer-events-auto hover:bg-indigo-500">Checkout</Link>
-                                <Link to="/checkout-step1" className="px-3 py-2 text-lg text-center text-white bg-indigo-600 rounded-md pointer-events-auto hover:bg-indigo-500">Checkout2</Link>
+                                <Link to="/checkout" className="px-3 py-2 text-lg text-center text-white bg-primary-600 rounded-md pointer-events-auto hover:bg-primary-500">Checkout</Link>
+                                <Link to="/checkout-step1" className="px-3 py-2 text-lg text-center text-white bg-primary-600 rounded-md pointer-events-auto hover:bg-primary-500">Checkout2</Link>
                             </div>
                         </div>
                     </div>

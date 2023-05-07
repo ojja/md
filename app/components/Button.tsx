@@ -15,7 +15,7 @@ export default function Button({ name, style = "solid", onClick, width = "auto",
                         style === 'solid-red' ? 'text-white border border-transparent bg-red-600 hover:bg-red-800' : '',
                         width === 'auto' ? 'inline-flex ' : '',
                         width === 'full' ? 'flex w-full' : '',
-                        'items-center justify-center px-10 py-2 text-sm font-medium  rounded-lg shadow-sm  sm:flex-grow-0',
+                        'items-center justify-center px-10 py-2 font-medium  rounded-lg shadow-sm  sm:flex-grow-0',
                         extraclass ? extraclass : '',
                     )}
                 >
@@ -30,7 +30,7 @@ export default function Button({ name, style = "solid", onClick, width = "auto",
                         style === 'solid-red' ? 'text-white border border-transparent bg-red-600 hover:bg-red-800' : '',
                         width === 'auto' ? 'inline-flex ' : '',
                         width === 'full' ? 'flex w-full' : '',
-                        'items-center justify-center px-10 py-2 text-sm font-medium  rounded-lg shadow-sm  sm:flex-grow-0',
+                        'items-center justify-center px-10 py-2 font-medium  rounded-lg shadow-sm  sm:flex-grow-0',
                         extraclass ? extraclass : '',
                     )}
                     type="button"

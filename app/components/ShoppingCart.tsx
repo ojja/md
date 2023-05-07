@@ -103,7 +103,7 @@ export default function ShoppingCart() {
                           <Link
                             to="/checkout"
                             onClick={closeCart}
-                            className="flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md shadow-sm hover:bg-indigo-700"
+                            className="flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-primary-600 border border-transparent rounded-md shadow-sm hover:bg-primary-700"
                           >
                             Check Out
                           </Link>
@@ -113,7 +113,7 @@ export default function ShoppingCart() {
                             {/* or */}
                             <Link
                               to="/cart"
-                              className="ml-2 font-medium text-indigo-600 hover:text-indigo-500"
+                              className="ml-2 font-medium text-primary-600 hover:text-primary-500"
                               onClick={closeCart}
                             >
                               View Cart

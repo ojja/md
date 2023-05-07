@@ -86,7 +86,7 @@ export default function Checkout() {
                                 name="Place Order"
                                 width="full"
                                 href="/thanks"
-                                extraclass="mt-5 leading-8 text-2xl uppercase"
+                                extraclass="mt-5 leading-8 uppercase"
                             />
                         </div>
                     </div>
@@ -94,4 +94,11 @@ export default function Checkout() {
             </div>
         </div>
     );
+}
+
+import type { MetaFunction } from "@remix-run/node";
+export const meta: MetaFunction = () => {
+    return {
+        title: 'Checkout'
+    }
 }

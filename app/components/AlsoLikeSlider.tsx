@@ -101,7 +101,7 @@ export default function AlsoLikeSlider() {
                             <span className="text-gray-500">{FormatCurrency(product.price)}</span>
                         </div>
                         <div className="">
-                            <span onClick={openModal} className="flex items-center justify-center w-10 h-10 p-1 text-white bg-indigo-500 rounded-md">
+                            <span onClick={openModal} className="flex items-center justify-center w-10 h-10 p-1 text-white bg-primary-400 rounded-md">
                                 <EyeIcon className="w-6 h-6" />
                             </span>
                             {openQuick&&

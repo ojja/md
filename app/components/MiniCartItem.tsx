@@ -121,7 +121,7 @@ const MiniCartItem = ({ id, quantity, color, size, slug, thumbnail, removeFromCa
                     <div className="flex">
                         <button
                             type="button"
-                            className="font-medium text-indigo-600 hover:text-indigo-500"
+                            className="font-medium text-primary-600 hover:text-primary-500"
                             onClick={handleRemoveClick}
                         >
                             Remove

@@ -98,7 +98,7 @@ export default function ShippingOptions() {
           </div>
 
           <div>
-            <label htmlFor="" className="block text-sm font-medium leading-6 text-gray-900">Areas</label>
+            <label htmlFor="" className="block text-sm font-medium leading-6 text-gray-900">Area</label>
             <div className="mt-1">
               <select className="block w-full py-2 pl-3 pr-20 text-gray-900 border-0 rounded-md form-select ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">
                 <option value="">Heliopolis 1</option>
