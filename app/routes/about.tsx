@@ -1,6 +1,6 @@
-import { MetaFunction } from "remix";
-import { Link } from "@remix-run/react";
+import type { MetaFunction } from "@remix-run/node";
 import AboutSection from "~/components/AboutSection";
+import { Site_Title } from "~/config";
 
 export default function About() {
 
@@ -13,6 +13,6 @@ export default function About() {
 }
 export const meta: MetaFunction = () => {
     return {
-        title: 'About Page'
+        title: `About Page - ${Site_Title}`
     }
 }

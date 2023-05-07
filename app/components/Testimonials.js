@@ -6,7 +6,7 @@ export default function Testimonials() {
         <section className="py-10 bg-gray-100 sm:py-20">
             <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <h2
-                    className="text-dark mb-10 text-3xl font-bold sm:text-4xl md:text-[40px] text-center"
+                    className=" mb-10 text-3xl font-bold sm:text-4xl md:text-[40px] text-center"
                 >
                     Our Fans
                 </h2>

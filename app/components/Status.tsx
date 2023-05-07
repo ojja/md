@@ -22,7 +22,7 @@ export default function Status({ name, color }: any) {
                 color === 'green' ? 'text-green-900' : '',
                 color === 'gray' ? 'text-gray-900' : '',
                 color === 'red' ? 'text-red-900' : '',
-                'relative inline-block px-3 py-1 font-semibold leading-tight'
+                'relative inline-block px-3 py-1 font-semibold leading-tight text-sm'
             )}
         >
             <span

@@ -29,7 +29,6 @@ export default function SelectColor({ colors, selectedColor, onSelectedColorChan
         <div>
             {/* Colors */}
             <h3 className="text-sm font-medium text-gray-900">Color</h3>
-            <span className={`bg-green bg-yellow bg-orange bg-red bg-purple bg-black bg-white bg-pink hidden`}></span>
             <RadioGroup value={selectedColor} onChange={onSelectedColorChange} className="mt-4">
                 <RadioGroup.Label className="sr-only"> Choose a color </RadioGroup.Label>
                 <div className="flex items-center space-x-3">

@@ -127,7 +127,7 @@ export default function MobileFilter() {
                                                                     defaultValue={option.value}
                                                                     type="checkbox"
                                                                     defaultChecked={option.checked}
-                                                                    className="w-4 h-4 text-indigo-600 border-gray-300 rounded focus:ring-indigo-500"
+                                                                    className="w-4 h-4 text-primary-600 border-gray-300 rounded focus:ring-primary-500"
                                                                 />
                                                                 <label
                                                                     htmlFor={`filter-mobile-${section.id}-${optionIdx}`}

@@ -13,7 +13,7 @@ export default function SizeGuide() {
     }
     return (
         <>
-            <button type="button" className="text-sm font-medium text-indigo-600 hover:text-indigo-500" onClick={openModal}>
+            <button type="button" className="text-sm font-medium text-primary-600 hover:text-primary-500" onClick={openModal}>
                 Size guide
             </button>
             <Transition appear show={isOpenSize} as={Fragment}>

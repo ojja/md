@@ -161,7 +161,7 @@ let variationSalePrice = variation ? variation.sale_price : null;
                           ) : <Loader/>}
 
                           <AddToCartSimple
-                            className='flex items-center justify-center w-full px-8 py-3 mt-6 text-base font-medium text-white bg-indigo-600 border border-transparent rounded-md hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2'
+                            className='flex items-center justify-center w-full px-8 py-3 mt-6 text-base font-medium text-white bg-primary-600 border border-transparent rounded-md hover:bg-primary-700 focus:outline-none focus:ring-2 focus:ring-primary-500 focus:ring-offset-2'
                             product={
                               {
                                 id: productData.id,
@@ -175,7 +175,7 @@ let variationSalePrice = variation ? variation.sale_price : null;
                             disabled={variationSalePrice===null}
                           />
                           <Link to={`/products/${productData.slug}`}
-                            className="flex justify-center w-auto m-auto mt-6 text-base font-medium text-indigo-600 hover:text-indigo-900 focus:outline-none"
+                            className="flex justify-center w-auto m-auto mt-6 text-base font-medium text-primary-600 hover:text-primary-900 focus:outline-none"
                           >
                             View Product
                           </Link>
