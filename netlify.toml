@@ -1,5 +1,5 @@
 [build]
-  command = "remix build && test -f _app_redirects && cp _app_redirects public/_redirects || echo '_app_redirects not found, skipping copy'"
+  functions = "functions/"
 publish = "public"
 
 [dev]
