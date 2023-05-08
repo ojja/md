@@ -208,7 +208,7 @@ export default function ExtraProducts({ categorySlug, pageNumber, title }: Props
     //   const shuffledProducts = shuffleArray(products);
 
     return (
-        <div className="mt-10 bg-white border-t-2">
+        <div className="mt-10 border-t-2">
             <div className="container px-4 py-16 mx-auto sm:py-24 sm:px-6">
                 <h2 className="text-2xl font-bold tracking-tight text-gray-900">{title ? title : 'Customers also purchased'}</h2>
                 <div className="grid grid-cols-1 mt-6 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-5 xl:gap-x-8">

@@ -196,6 +196,7 @@ export default function Thanks() {
                         </div>
                         <CartSummary thanks />
                     </div>
+                    <ExtraProducts categorySlug="skirt" pageNumber={1} title="Shop More" />
 
                 </div>
             </section>
@@ -206,6 +207,7 @@ export default function Thanks() {
 import { MetaFunction } from "@remix-run/node";
 import { Site_Title } from "~/config";
 import { Link } from "react-router-dom";
+import ExtraProducts from "~/components/ExtraProducts";
 export const meta: MetaFunction = () => {
     return {
         title: `Thank You - ${Site_Title}`
