@@ -1,7 +1,9 @@
 import { Link } from "@remix-run/react";
+import { useTranslation } from 'react-i18next';
 
 
 export default function AboutSection() {
+    const { t } = useTranslation();
     return (
         <section className="overflow-hidden pt-20 pb-12 lg:pt-[120px] lg:pb-[90px]">
             <div className="container mx-auto">
@@ -608,7 +610,7 @@ export default function AboutSection() {
                     <div className="w-full px-4 lg:w-1/2 xl:w-5/12">
                         <div className="mt-10 lg:mt-0">
                             <span className="block mb-2 text-lg font-semibold text-primary-400">
-                                Why Choose Us
+                                {t('about.title')}
                             </span>
                             <h2 className="mb-8 text-3xl font-bold sm:text-4xl">
                                 Make your customers happy by giving services.

@@ -17,28 +17,20 @@ import stylesRtl from './tailwind.rtl.css';
 import stylesBase from './base.css';
 import stylesSlick from 'slick-carousel/slick/slick.css';
 import stylesSlickTheme from 'slick-carousel/slick/slick-theme.css';
-// import styles2 from 'slick-carousel/slick/slick.css';
 import Footer from "./layouts/footer";
 import NavBar from "./layouts/navbar";
 import { useState } from "react";
+import i18n from 'i18next';
+import { useTranslation } from 'react-i18next';
+import LanguageSwitcher from "./components/LanguageSwitcher";
 
 
 export const links: LinksFunction = () => {
-  // const [currentLang, setCurrentLang] = useState('en');
-  // const cssLink = currentLang === 'en' ? styles : stylesRtl;
-  // const { request } = useParams();
-  // console.log('request',request)
-  // const langPrefix = request.path.startsWith('/ar') ? 'rtl' : 'ltr';
-  const langPrefix = 'ltr';
-
   return [
     { rel: 'stylesheet', href: stylesBase },
-    { rel: 'stylesheet', href: styles },
+    // { rel: 'stylesheet', href: styles },
     { rel: 'stylesheet', href: stylesSlick },
-    { rel: 'stylesheet', href: stylesSlickTheme },
-    { rel: 'stylesheet', href: langPrefix === 'rtl' ? stylesRtl : undefined },
-
-
+    { rel: 'stylesheet', href: stylesSlickTheme }
   ];
 }
 
@@ -48,30 +40,24 @@ export const meta: MetaFunction = () => ({
   viewport: "width=device-width,initial-scale=1",
 });
 
+
 export default function App() {
-  const [language, setLanguage] = useState("en");
-  // const handleLangChange = () => {
-  //   setLanguage((prevLanguage) => prevLanguage === "en" ? "ar" : "en");
-  // };
+  const [language, setLanguage] = useState(i18n.language);
+
+  const { t } = useTranslation();
 
   const [isRtl, setIsRtl] = useState(false);
-  const navigate = useNavigate();
+  console.log('i18n.language',i18n.language)
 
-  // const handleLangChange = () => {
-  //   setIsRtl((prevIsRtl) => !prevIsRtl);
-  //   // const newUrl = isRtl ? location.pathname.replace("/ar", "") : `/ar${location.pathname}`;
-  //   // navigate(newUrl, { replace: true });
-  // };
   return (
-    <html lang={language}>
+    <html lang={language} dir={i18n.language==="ar" ? 'rtl' : 'ltr'}>
       <head>
         <Meta />
         <Links />
-        {/* <link rel="stylesheet" href={isRtl ? stylesRtl : styles} /> */}
+        <link rel="stylesheet" href={i18n.language==="ar" ? stylesRtl : styles} />
       </head>
       <body className="box-border oultine-none">
         <NavBar
-        // onLangChange={handleLangChange}
         />
         <main className="relative z-10">
           <Outlet />

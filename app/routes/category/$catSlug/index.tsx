@@ -11,6 +11,7 @@ import { ProductWidget } from "~/components/product/ProductWidget";
 import Sort from "~/components/Sort";
 import { ProductWidgetWithVariation } from "~/components/product/ProductWidgetWithVariation";
 import { Site_Title } from "~/config";
+import { useTranslation } from "react-i18next";
 
 
 
@@ -47,7 +48,7 @@ export const meta: MetaFunction = ({ params }: any) => {
 
 export const loader = async ({ params }: any) => {
   const categorySlug = params.catSlug;
-  const pageNumber = 1;
+  const pageNumber = 3;
   const perPage = 20;
   let products = [];
   let hasNextPage = false;
@@ -67,6 +68,7 @@ export const loader = async ({ params }: any) => {
 };
 
 export default function CategorySlug() {
+  const { t } = useTranslation();
   // const { products, categorySlug, pageNumber, hasNextPage } = useLoaderData();
 
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
@@ -139,7 +141,7 @@ export default function CategorySlug() {
       <main className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className='pt-5 '>
           <div className="flex flex-col flex-wrap items-baseline justify-between pt-2 pb-6 mb-4 border-b border-gray-200 md:flex-row">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900">New Arrivals in {categorySlug}</h1>
+            <h1 className="text-4xl font-bold tracking-tight text-gray-900"> {t('comman.quick_view')} {t('comman.in')} {categorySlug}</h1>
 
             <div className="flex items-center self-end mt-3 md:mt-0">
 
@@ -215,7 +217,7 @@ export default function CategorySlug() {
                                   defaultValue={option.value}
                                   type="checkbox"
                                   defaultChecked={option.checked}
-                                  className="w-4 h-4 text-primary-600 border-gray-300 rounded cursor-pointer focus:ring-primary-500"
+                                  className="w-4 h-4 border-gray-300 rounded cursor-pointer text-primary-600 focus:ring-primary-500"
                                 />
                                 <label
                                   htmlFor={`filter-${section.id}-${optionIdx}`}

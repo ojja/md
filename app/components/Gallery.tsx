@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import Slider from "react-slick";
 import { v4 } from 'uuid';
+import i18n from 'i18next';
 
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
@@ -9,6 +10,8 @@ interface GalleryProps {
 }
 
 export default function Gallery({ galleryImages = [] }: GalleryProps) {
+  const [language, setLanguage] = useState(i18n.language);
+
   const [nav1, setNav1] = useState(null);
   const [nav2, setNav2] = useState(null);
   const [slider1, setSlider1] = useState(null);
@@ -24,7 +27,8 @@ export default function Gallery({ galleryImages = [] }: GalleryProps) {
     slidesToScroll: 1,
     arrows: false,
     fade: true,
-    asNavFor: nav2
+    asNavFor: nav2,
+    rtl: i18n.language==="ar" ? true : false
   };
 
   const settingsThumbs = {
@@ -49,14 +53,17 @@ export default function Gallery({ galleryImages = [] }: GalleryProps) {
     ],
   };
 
-
+console.log("GALLLERY",i18n.language)
   return (
-    <div className="flex overflow-hidden gallery-slider-wrapper">
+    <div className="flex overflow-hidden gallery-slider-wrapper" data-lang={language}
+    // dir={i18n.language==="ar" ? 'rtl' : 'ltr'}
+    >
       <Slider
         {...settingsMain}
         asNavFor={nav2}
         ref={slider => (setSlider1(slider))}
         className="order-1 w-10/12"
+        style={{direction:i18n.language==="ar" ? 'rtl' : 'ltr'}}
       >
         {galleryImages.map(slide => (
           <div className="slick-slide" key={v4()}>

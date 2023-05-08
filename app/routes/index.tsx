@@ -3,7 +3,7 @@ import AboutSection from '~/components/AboutSection';
 import HeroTitle from '~/components/HeroTitle';
 import Testimonials from '~/components/Testimonials';
 import BlogList from '~/components/BlogList';
-import type { MetaFunction } from "@remix-run/node";
+import { json, LoaderFunction, MetaFunction, redirect } from "@remix-run/node";
 import { Site_Title } from '~/config';
 
 export default function Index() {

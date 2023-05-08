@@ -1,0 +1,25 @@
+{
+    "home": {
+      "title": "Welcome to my homepage",
+      "description": "This is the description of my homepage"
+    },
+    "blog": {
+      "title": "My Blog",
+      "description": "This is the description of my blog"
+    },
+    "about": {
+      "title": "About Me",
+      "description": "This is the description of me"
+    },
+    "languageSwitcher": {
+      "en": "English",
+      "ar": "العربية"
+    },
+    "comman":{
+      "topBannerText":"Get free delivery on orders over $100",
+      "quick_view":"Quick View",
+      "new_arrivals":"New Arrivals",
+      "in": "in"
+    }
+  }
+  

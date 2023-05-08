@@ -6,6 +6,7 @@ import 'react-lazy-load-image-component/src/effects/blur.css';
 import { Link } from "@remix-run/react";
 import Quickview from "../Quickview";
 import AddToCartSimple from "../AddToCartSimple";
+import { useTranslation } from "react-i18next";
 
 type Product = {
     id: number,
@@ -24,6 +25,7 @@ type ProductWidgetProps = {
 
 
 export function ProductWidget({ product }: ProductWidgetProps) {
+    const { t } = useTranslation();
     const [isOpenCart, setIsOpenCart] = useState(false);
 
     let [openQuick, setOpenQuick] = useState(false)
@@ -68,7 +70,7 @@ export function ProductWidget({ product }: ProductWidgetProps) {
                         <button
                             onClick={openModal}
                             type="button" className="relative w-full px-4 py-2 text-sm text-gray-900 bg-white bg-opacity-75 rounded-md opacity-0 focus:opacity-100 group-hover:opacity-100">
-                            Quick View
+                            {t('comman.quick_view')}
                         </button>
                     </div>
                 </div>
@@ -102,7 +104,7 @@ export function ProductWidget({ product }: ProductWidgetProps) {
                         }
                     />
                     :
-                    <button onClick={openModal} className="inline-flex justify-center w-full px-4 py-2 text-sm font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700">Quick View</button>
+                    <button onClick={openModal} className="inline-flex justify-center w-full px-4 py-2 text-sm font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700">{t('comman.quick_view')}</button>
                     }
                 </div>
                 {openQuick ?
