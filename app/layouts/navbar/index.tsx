@@ -7,8 +7,10 @@ import ShoppingCart from '~/components/ShoppingCart';
 import { Link, useLocation, useNavigate, useSearchParams } from '@remix-run/react';
 import { v4 } from 'uuid';
 import ChangeCountry from '~/components/ChangeCountry';
-import LangSwitcher from '~/components/LangSwitcher';
 import Search from '~/components/Search';
+import LanguageSwitcher from '~/components/LanguageSwitcher';
+import ChangeLanguage from '~/components/ChangeLanguage';
+import { useTranslation } from 'react-i18next';
 
 
 const navigation = {
@@ -138,13 +140,12 @@ export default function NavBar({ }) {
   const [open, setOpen] = useState(false);
   const { cartQuantityTotal, openCart } = useShoppingCart();
 
-  const navigate = useNavigate();
-  function handleClick(lang: string) {
-    const newPathname = lang === "ar" ? "/ar" : "/";
-    navigate(newPathname);
-  }
   const location = useLocation();
   const isCheckoutPage = location.pathname === "/checkout-step1" || location.pathname === "/checkout-step2" || location.pathname === "/checkout";
+
+
+  const { t } = useTranslation();
+
   return (
     <>
       <div className="bg-white">
@@ -293,10 +294,9 @@ export default function NavBar({ }) {
         <header className="relative z-20 bg-white">
           {isCheckoutPage ? null : (
             <p className="flex items-center justify-center h-10 px-4 text-sm font-medium text-white bg-primary-600 sm:px-6 lg:px-8">
-              Get free delivery on orders over $100
-              <LangSwitcher
-              // onLangChange={onLangChange} 
-              />
+              {t('comman.topBannerText')}
+              {/* <LanguageSwitcher
+              /> */}
             </p>
           )}
           <div className="container px-4 mx-auto">
@@ -431,56 +431,13 @@ export default function NavBar({ }) {
                         Login
                       </Link>
                       <span className="w-px h-6 bg-gray-200" aria-hidden="true" />
-                      <Link to="/signup" className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                        Sign Up
+                      <Link to="/my-account" className="text-sm font-medium text-gray-700 hover:text-gray-800">
+                        My Account
                       </Link>
                     </div>
 
                     {/* Change language */}
-                    <div className="hidden lg:ml-8 lg:flex">
-                      <Menu as="div" className="relative z-20 inline-block text-left">
-                        <div>
-                          <Menu.Button className="inline-flex items-center justify-center text-sm font-medium text-gray-700 group hover:text-gray-900">
-                            <span className="block ml-3 text-sm font-medium">English</span>
-                            <span className="sr-only">, change language</span>
-                          </Menu.Button>
-                        </div>
-
-                        <Transition
-                          as={Fragment}
-                          enter="transition ease-out duration-100"
-                          enterFrom="transform opacity-0 scale-95"
-                          enterTo="transform opacity-100 scale-100"
-                          leave="transition ease-in duration-75"
-                          leaveFrom="transform opacity-100 scale-100"
-                          leaveTo="transform opacity-0 scale-95"
-                        >
-                          <Menu.Items className="absolute right-0 z-10 w-40 mt-2 origin-top-right bg-white rounded-md shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
-                            <div className="py-1">
-                              <Menu.Item key={v4()}>
-                                {({ active }) => (
-                                  <div className='flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-gray-100'>
-                                    <span className="block ml-3" onClick={() => handleClick("en")}>English</span>
-                                  </div>
-                                )}
-                              </Menu.Item>
-                              <Menu.Item key={v4()}>
-                                {({ active }) => (
-                                  <div
-                                    className={classNames(
-                                      active ? 'bg-gray-100' : '',
-                                      'flex justify-center px-4 py-2 text-sm font-medium text-gray-900 w-full cursor-pointer'
-                                    )}
-                                  >
-                                    <span className="block ml-3" onClick={() => handleClick("ar")}>العربيه</span>
-                                  </div>
-                                )}
-                              </Menu.Item>
-                            </div>
-                          </Menu.Items>
-                        </Transition>
-                      </Menu>
-                    </div>
+                    <ChangeLanguage/>
 
 
                     {/* Change Currncy */}

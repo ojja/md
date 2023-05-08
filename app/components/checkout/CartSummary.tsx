@@ -1,28 +1,39 @@
 import { TrashIcon } from "@heroicons/react/24/outline"
+import { v4 } from "uuid";
+import useShoppingCart from "~/stores/cartStore";
+import MiniCartItem from "../MiniCartItem";
 
 const products = [
     {
-      id: 1,
-      title: 'Basic Tee',
-      href: '#',
-      price: '$32.00',
-      color: 'Black',
-      size: 'Large',
-      imageSrc: 'https://tailwindui.com/img/ecommerce-images/checkout-page-02-product-01.jpg',
-      imageAlt: "Front of men's Basic Tee in black.",
+        id: 1,
+        title: 'Basic Tee',
+        href: '#',
+        price: '$32.00',
+        color: 'Black',
+        size: 'Large',
+        imageSrc: 'https://tailwindui.com/img/ecommerce-images/checkout-page-02-product-01.jpg',
+        imageAlt: "Front of men's Basic Tee in black.",
     },
     // More products...
-  ]
-  
-export default function CartSummary() {
+]
+
+export default function CartSummary({thanks}:any) {
+    const { cartItems } = useShoppingCart();
+
     return (
-        <div className="mt-10 mr-0 md:mt-0 md:mr-5 w-full md:w-[380px]">
+        <div className={`mt-10 ml-0 md:mt-0 md:ml-5 w-full ${thanks?'md:w-[500px]':'md:w-[380px]'}`}>
             {/* Order summary */}
-            <div className="min-w-[380px]">
+            <div className={`${thanks?'min-w-[500px]':'min-w-[380px]'}`}>
 
                 <div className="bg-white border border-gray-200 rounded-lg shadow-sm">
-                    <h2 className="pt-6 pl-4 text-lg font-medium text-gray-900 sm:pl-6">Order summary</h2>
-                    <ul role="list" className="divide-y divide-gray-200">
+                    <h2 className="pt-6 pl-4 text-lg font-medium text-gray-900 sm:pl-6">
+                        {thanks?
+                        'Order summary'
+                        :
+                        'Order Number #36543'
+                        }
+                    </h2>
+                    {/* <ul role="list" className="divide-y divide-gray-200">
                         {products.map((product) => (
                             <li key={product.id} className="flex px-4 py-6 sm:px-6">
                                 <div className="flex-shrink-0">
@@ -76,6 +87,21 @@ export default function CartSummary() {
                                         </div>
                                     </div>
                                 </div>
+                            </li>
+                        ))}
+                    </ul> */}
+                    <ul role="list" className="divide-y divide-gray-200">
+                        {cartItems.map((item) => (
+                            <li key={v4()} className="flex px-4 py-6 sm:px-6">
+                                <MiniCartItem
+                                    id={item.id}
+                                    quantity={item.quantity}
+                                    color={item.color}
+                                    size={item.size}
+                                    slug={item.slug}
+                                    thumbnail={item.thumbnail}
+                                    removeFromCart=''
+                                />
                             </li>
                         ))}
                     </ul>

@@ -1,0 +1,25 @@
+{
+    "home": {
+      "title": "اهلا بكم في صفحتي الرئيسية",
+      "description": "هذا هو وصف صفحتي الرئيسية"
+    },
+    "blog": {
+      "title": "مدونتي",
+      "description": "هذا هو وصف مدونتي"
+    },
+    "about": {
+      "title": "من نحن",
+      "description": "هذا وصف عني"
+    },
+    "languageSwitcher": {
+      "en": "English",
+      "ar": "العربية"
+    },
+    "comman":{
+      "topBannerText":"احصل على توصيل مجاني للطلبات التي تزيد عن 100 دولار",
+      "quick_view":"نظرة سريعه",
+      "new_arrivals":"وصل حديثًا",
+      "in":"في"
+    }
+  }
+  

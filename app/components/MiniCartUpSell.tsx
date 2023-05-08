@@ -4,7 +4,6 @@ import Flickity from "react-flickity-component";
 import Quickview from "./Quickview";
 import { useState } from "react";
 import FormatCurrency from "~/utils/FormatCurrency";
-import { v4 } from 'uuid';
 import AlsoLikeSlider from "./AlsoLikeSlider";
 
 

@@ -7,6 +7,7 @@ import { Link } from "@remix-run/react";
 import Quickview from "../Quickview";
 import AddToCartSimple from "../AddToCartSimple";
 import { getProductBySlug } from "~/api/products";
+import { useTranslation } from "react-i18next";
 
 type Product = {
     id: number,
@@ -27,6 +28,7 @@ type ProductWidgetWithVariationProps = {
 
 
 export function ProductWidgetWithVariation({ product }: ProductWidgetWithVariationProps) {
+    const { t } = useTranslation();
     const [isOpenCart, setIsOpenCart] = useState(false);
 
     let [openQuick, setOpenQuick] = useState(false)
@@ -102,7 +104,7 @@ export function ProductWidgetWithVariation({ product }: ProductWidgetWithVariati
                         <button
                             onClick={openModal}
                             type="button" className="relative w-full px-4 py-2 text-sm text-gray-900 bg-white bg-opacity-75 rounded-md opacity-0 focus:opacity-100 group-hover:opacity-100">
-                            Quick View
+                            {t('comman.quick_view')}
                         </button>
                     </div>
                 </div>
@@ -123,7 +125,7 @@ export function ProductWidgetWithVariation({ product }: ProductWidgetWithVariati
                 <div className="relative mt-auto z-1">
                     {productData?.attributes?.pa_size ? (
                         <div>
-                            <ul className="flex space-x-2 py-4">
+                            <ul className="flex py-4 space-x-2">
                                 {sizesList.map((size: any, index) => (
                                     <li key={`${product.id}_size_${index}_of_${size}`}>
                                         <input
@@ -164,7 +166,7 @@ export function ProductWidgetWithVariation({ product }: ProductWidgetWithVariati
                             }
                         />
                         :
-                        <button onClick={openModal} className="inline-flex justify-center w-full px-4 py-2 text-sm font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700">Quick View</button>
+                        <button onClick={openModal} className="inline-flex justify-center w-full px-4 py-2 text-sm font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700">{t('comman.quick_view')}</button>
                     }
                 </div>
                 {openQuick ?

@@ -118,15 +118,16 @@ const MiniCartItem = ({ id, quantity, color, size, slug, thumbnail, removeFromCa
                         <p className="text-gray-500">{FormatCurrency(variationSalePrice)}</p>
                         <p className="text-gray-500">Quantity: {quantity}</p>
                     </div>
-                    <div className="flex">
-                        <button
-                            type="button"
-                            className="font-medium text-primary-600 hover:text-primary-500"
-                            onClick={handleRemoveClick}
-                        >
-                            Remove
-                        </button>
-                    </div>
+                    {removeFromCart ?
+                        <div className="flex">
+                            <button
+                                type="button"
+                                className="font-medium text-primary-600 hover:text-primary-500"
+                                onClick={handleRemoveClick}
+                            >
+                                Remove
+                            </button>
+                        </div> : ''}
                 </div>
             </div>
         </>

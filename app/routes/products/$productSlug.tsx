@@ -58,7 +58,7 @@ export const loader: LoaderFunction = async ({ params }) => {
 };
 
 
-export const meta: MetaFunction = ({data}:any) => {
+export const meta: MetaFunction = ({ data }: any) => {
     return {
         title: `Single | ${data.title}`,
         description: `${data.description}`,
@@ -66,7 +66,7 @@ export const meta: MetaFunction = ({data}:any) => {
         'og:description': data.description,
         'og:image': data.main_img,
     }
-  }
+}
 
 
 export default function ProductSingle() {
@@ -80,22 +80,22 @@ export default function ProductSingle() {
         variation.attributes.attribute_pa_size === selectedSize &&
         variation.attributes.attribute_pa_color === selectedColor
     );
-    let variationPrice = variation? variation.price : null;
-    let variationSalePrice = variation? variation.sale_price : null;
+    let variationPrice = variation ? variation.price : null;
+    let variationSalePrice = variation ? variation.sale_price : null;
 
-    
+
     useEffect(() => {
         setSelectedSize(product?.attributes?.pa_size[0] || '');
         setSelectedColor(product?.attributes?.pa_color[0] || '');
-          addToRecent(product)
-      }, [product]);
+        addToRecent(product)
+    }, [product]);
     //   console.log('product>>',product)
-    
 
-      const {
+
+    const {
         addToRecent,
     } = useRecentView();
-      
+
     return (
         <div>
             <section className="pt-12 pb-24 overflow-hidden rounded-b-10xl">
@@ -112,6 +112,7 @@ export default function ProductSingle() {
                             </div>
                             <div className="w-full px-4 lg:w-1/2">
                                 <div className="pt-2 mb-6">
+                                    <span className="hidden bg-orange-500 bg-purple-500 bg-pink-500 bg-of-white-500 bg-olive-500 bg-golden-500 bg-navy-500"></span>
                                     <span className="text-xs tracking-wider text-gray-400">NEED CATEGORY </span>
                                     <span className="text-xs tracking-wider text-gray-400">{product.availability}</span>
                                     <h1 className="mt-2 mb-4 text-5xl font-medium md:text-4xl font-heading">{product.title}</h1>
@@ -168,8 +169,8 @@ export default function ProductSingle() {
                                                     price: variationSalePrice,
                                                 }
                                             }
-                                        // disabled={!Boolean(selectedSize.inStock)}
-                                        disabled={variationSalePrice===null}
+                                            // disabled={!Boolean(selectedSize.inStock)}
+                                            disabled={variationSalePrice === null}
                                         />
                                         <button
                                             type="submit"
@@ -222,7 +223,7 @@ export default function ProductSingle() {
                                 </div>
                             </div>
                             <div className="w-full">
-                                <Frequently/>
+                                <Frequently />
                             </div>
                         </div>
                     </div>
@@ -236,7 +237,7 @@ export default function ProductSingle() {
                     features={features}
                 />
                 <ExtraProducts categorySlug="skirt" pageNumber={1} title="Same Category" />
-                <RecentlyViewedProducts/>
+                <RecentlyViewedProducts />
             </section>
         </div>
     )

@@ -5,7 +5,8 @@ import CartSummary from "~/components/checkout/CartSummary";
 import ShippingInfo from "~/components/checkout/ShippingInfo";
 import ShippingOptions from "~/components/ShippingOptions";
 import TimeSlot from '~/components/TimeSlot';
-
+import type { MetaFunction } from "@remix-run/node";
+import { Site_Title } from "~/config";
 
 export default function Checkout() {
 
@@ -62,8 +63,7 @@ export default function Checkout() {
                         </ol>
                     </nav>
                     <div className="flex flex-col-reverse items-start md:flex-row">
-                        <CartSummary/>
-                        <div className="w-full max-w-4xl p-4 m-auto bg-white border rounded-md">
+                        <div className="w-full max-w-4xl p-4 bg-white border rounded-md">
                             <div className="">
                                 <h2 className="mb-5 text-lg font-medium text-gray-900">Shipping Information</h2>
                                 <ShippingInfo/>
@@ -82,6 +82,7 @@ export default function Checkout() {
                                 />
                             </div>
                         </div>
+                        <CartSummary/>
                     </div>
                 </div>
             </div>
@@ -90,9 +91,8 @@ export default function Checkout() {
 }
 
 
-import type { MetaFunction } from "@remix-run/node";
 export const meta: MetaFunction = () => {
     return {
-        title: 'Checkout'
+        title: `Checkout - ${Site_Title}`
     }
 }

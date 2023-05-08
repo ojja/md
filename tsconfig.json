@@ -15,6 +15,10 @@
     "paths": {
       "~/*": ["./app/*"]
     },
+    "types": [
+      "@remix-run/data"
+    ],
+    "typeRoots": ["node_modules/@types", "node_modules/@remix-run"],
 
     // Remix takes care of building everything in `remix build`.
     "noEmit": true

@@ -96,6 +96,18 @@ module.exports = {
       'pink': {
         500: '#ec4899',
       },
+      'golden': {
+        500: '#ec4899',
+      },
+      'of-white': {
+        500: '#FAF9F6',
+      },
+      'olive': {
+        500: '#808000',
+      },
+      'navy': {
+        500: '#000080',
+      },
     },
     extend: {},
     // maxWidth: {

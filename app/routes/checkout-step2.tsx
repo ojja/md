@@ -1,28 +1,14 @@
 
-import Datepicker from "react-tailwindcss-datepicker";
-import moment from 'moment';
-import useShoppingCart from "~/stores/cartStore";
-import { getProductBySlug } from "~/api/products";
-import { useEffect, useState } from "react";
+import {  useState } from "react";
 import PaymentMethod from "~/components/PaymentMethod";
 import { Link } from "@remix-run/react";
-import FormatCurrency from "~/utils/FormatCurrency";
-import MiniCartItem from "~/components/MiniCartItem";
-import { v4 } from 'uuid';
 import Button from "~/components/Button";
-
+import type { MetaFunction } from "@remix-run/node";
+import CartSummary from "~/components/checkout/CartSummary";
+import { Site_Title } from "~/config";
 
 export default function Checkout() {
 
-    const [value, setValue] = useState({
-        startDate: null,
-        endDate: null
-    });
-
-    const handleValueChange = (newValue: any) => {
-        console.log("newValue:", newValue);
-        setValue(newValue);
-    }
     return (
         <div className="p-8 mx-auto bg-white">
             <div className="container px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -75,20 +61,23 @@ export default function Checkout() {
                             </li>
                         </ol>
                     </nav>
-                    <div className="max-w-4xl p-4 m-auto bg-white border rounded-md">
-                        <div className="">
-                            <PaymentMethod />
-                            <div className="flex items-center pt-3 mt-3 border-t-2">
-                                <input id="default-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded" />
-                                <label htmlFor="default-checkbox" className="ml-2 text-sm font-medium text-gray-900">I’ve read and accepted all Terms & Conditions</label>
+                    <div className="flex flex-col-reverse items-start md:flex-row">
+                        <div className="w-full max-w-4xl p-4 bg-white border rounded-md">
+                            <div className="">
+                                <PaymentMethod />
+                                <div className="flex items-center pt-3 mt-3 border-t-2">
+                                    <input id="default-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded" />
+                                    <label htmlFor="default-checkbox" className="ml-2 text-sm font-medium text-gray-900">I’ve read and accepted all Terms & Conditions</label>
+                                </div>
+                                <Button
+                                    name="Place Order"
+                                    width="full"
+                                    href="/thanks"
+                                    extraclass="mt-5 leading-8 uppercase"
+                                />
                             </div>
-                            <Button
-                                name="Place Order"
-                                width="full"
-                                href="/thanks"
-                                extraclass="mt-5 leading-8 uppercase"
-                            />
                         </div>
+                        <CartSummary />
                     </div>
                 </div>
             </div>
@@ -96,9 +85,8 @@ export default function Checkout() {
     );
 }
 
-import type { MetaFunction } from "@remix-run/node";
 export const meta: MetaFunction = () => {
     return {
-        title: 'Checkout'
+        title: `Checkout - ${Site_Title}`
     }
 }
