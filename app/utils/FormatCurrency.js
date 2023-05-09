@@ -6,9 +6,8 @@ const CURRENCY_FORMATTER = new Intl.NumberFormat(undefined, {
     return CURRENCY_FORMATTER.format(number);
   };
   
-  export default FormatCurrency;
+export default FormatCurrency;
   
-
 
 
 
