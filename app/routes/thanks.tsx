@@ -1,5 +1,17 @@
 import CartSummary from "~/components/checkout/CartSummary"
 
+
+import { MetaFunction } from "@remix-run/node";
+import { Site_Title } from "~/config";
+import { Link } from "react-router-dom";
+import ExtraProducts from "~/components/ExtraProducts";
+import TrackingSteps from "~/components/TrackingSteps";
+export const meta: MetaFunction = () => {
+    return {
+        title: `Thank You - ${Site_Title}`
+    }
+}
+
 /* This example requires Tailwind CSS v2.0+ */
 const products = [
     {
@@ -24,6 +36,9 @@ export default function Thanks() {
                         <h1 className="mb-2 text-4xl font-semibold tracking-wide uppercase text-primary-600">Thank you!</h1>
                         <h3 className="text-base font-semibold tracking-wide text-gray-900">Your request has been submitted successfully</h3>
                         <p className="mt-2 text-base text-gray-500 max-w-[500px]">If you have questions about your order, you can email us at info@comapny.com or call us at 16689</p>
+                    </div>
+                    <div className="mb-10">
+                        <TrackingSteps step={2}/>
                     </div>
                     <div className="flex flex-col-reverse items-start md:flex-row ">
                         <div className="w-full mx-auto">
@@ -54,6 +69,10 @@ export default function Thanks() {
                                     <h2 className="pt-10 text-xl font-medium text-gray-900 border-t border-gray-200">Shipping Details</h2>
                                     <dl className="py-5 text-sm">
                                         <dd className="mt-2 space-y-2 text-gray-700">
+                                            <div className="block w-1/3 mb-2">
+                                                <label className="text-sm text-gray-500">Delivery Expected</label>
+                                                <span className="block text-base font-bold">23rd March 2023</span>
+                                            </div>
                                             <div className="inline-block w-1/3 mb-2">
                                                 <label className="text-sm text-gray-500">City</label>
                                                 <span className="block text-base font-bold">Cairo</span>
@@ -81,7 +100,7 @@ export default function Thanks() {
                                         </dd>
                                     </dl>
                                     <div className="pt-10 border-t border-gray-200">
-                                        <a href="/my-account/orders/single" className="inline-block px-4 py-2 text-sm font-semibold text-center text-white rounded-lg whitespace-nowrap bg-slate-900 hover:bg-slate-700">Order status</a>
+                                        <Link to="/my-account/orders/single" className="inline-block px-4 py-2 text-sm font-semibold text-center text-white rounded-lg whitespace-nowrap bg-slate-900 hover:bg-slate-700">Order Details</Link>
                                     </div>
                                 </div>
                                 <h2 className="sr-only">Your order</h2>
@@ -202,14 +221,4 @@ export default function Thanks() {
             </section>
         </div>
     )
-}
-
-import { MetaFunction } from "@remix-run/node";
-import { Site_Title } from "~/config";
-import { Link } from "react-router-dom";
-import ExtraProducts from "~/components/ExtraProducts";
-export const meta: MetaFunction = () => {
-    return {
-        title: `Thank You - ${Site_Title}`
-    }
 }
