@@ -79,15 +79,19 @@ const filters = [
         ],
     },
 ]
-export default function Filters({ filterdProducts = [], selectedCategories = [], setSelectedCategories }: any) {
+export default function Filters({
+    filteredProducts = [],
+    selectedCategories = [],
+    handleSelectedCategoriesChange,
+    handleMinPriceChange,
+    handleMaxPriceChange,
+}: any) {
     const handleCategoryChange = (categoryValue) => {
-        setSelectedCategories((prevSelectedCategories) => {
-            if (prevSelectedCategories.includes(categoryValue)) {
-                return prevSelectedCategories.filter((selectedCategory) => selectedCategory !== categoryValue);
-            } else {
-                return [...prevSelectedCategories, categoryValue];
-            }
-        });
+        const updatedCategories = selectedCategories.includes(categoryValue)
+            ? selectedCategories.filter((selectedCategory) => selectedCategory !== categoryValue)
+            : [...selectedCategories, categoryValue];
+
+        handleSelectedCategoriesChange(updatedCategories);
     };
 
     return (
@@ -147,11 +151,40 @@ export default function Filters({ filterdProducts = [], selectedCategories = [],
                         </>
                     )}
                 </Disclosure>
-                <ul>
-                    {filterdProducts.map((item: any) => (
-                        <li>{item.id}</li>
+
+                {/* <Disclosure as="div" key={v4()} className="py-6 border-b border-gray-200" defaultOpen>
+                    {({ open }) => (
+                        <>
+                            <h3 className="flow-root -my-3">
+                                <Disclosure.Button className="flex items-center justify-between w-full py-3 text-sm text-gray-400 bg-white hover:text-gray-500">
+                                    <span className="font-medium text-gray-900">Price Range</span>
+                                    <span className="flex items-center ml-6">
+                                        {open ? (
+                                            <MinusIcon className="w-5 h-5" aria-hidden="true" />
+                                        ) : (
+                                            <PlusIcon className="w-5 h-5" aria-hidden="true" />
+                                        )}
+                                    </span>
+                                </Disclosure.Button>
+                            </h3>
+                            <Disclosure.Panel className="pt-6">
+                                <div className="space-y-4">
+                                    <div>
+                                        <input type="number" name="minPrice" onChange={handleMinPriceChange} />
+                                    </div>
+                                    <div>
+                                        <input type="number" name="maxPrice" onChange={handleMaxPriceChange} />
+                                    </div>
+                                </div>
+                            </Disclosure.Panel>
+                        </>
+                    )}
+                </Disclosure> */}
+                {/* <ul>
+                    {filteredProducts.map((item: any) => (
+                        <li key={v4()}>{item.id}</li>
                     ))}
-                </ul>
+                </ul> */}
 
                 {filters.map((section) => (
                     <Disclosure as="div" key={v4()} className="py-6 border-b border-gray-200">
