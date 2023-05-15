@@ -19,10 +19,13 @@ import stylesSlick from 'slick-carousel/slick/slick.css';
 import stylesSlickTheme from 'slick-carousel/slick/slick-theme.css';
 import Footer from "./layouts/footer";
 import NavBar from "./layouts/navbar";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from "./components/LanguageSwitcher";
+import { initFacebookPixel } from './fb-pixel';
+import { FB_PIXELCODE } from "./config";
+
 
 
 export const links: LinksFunction = () => {
@@ -47,14 +50,31 @@ export default function App() {
   const { t } = useTranslation();
 
   const [isRtl, setIsRtl] = useState(false);
-  console.log('i18n.language',i18n.language)
+  console.log('i18n.language', i18n.language)
+  if (typeof window !== "undefined") {
+    initFacebookPixel(FB_PIXELCODE);
+  }
+  
+  // useEffect(() => {
+  //   !function(f,b,e,v,n,t,s)
+  //   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
+  //   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
+  //   if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
+  //   n.queue=[];t=b.createElement(e);t.async=!0;
+  //   t.src=v;s=b.getElementsByTagName(e)[0];
+  //   s.parentNode.insertBefore(t,s)}(window, document,'script',
+  //   'https://connect.facebook.net/en_US/fbevents.js');
+  //   fbq('init', '6517989738225028');
+  //   fbq('track', 'PageView');
+  // }, []);
+
 
   return (
-    <html lang={language} dir={i18n.language==="ar" ? 'rtl' : 'ltr'}>
+    <html lang={language} dir={i18n.language === "ar" ? 'rtl' : 'ltr'}>
       <head>
         <Meta />
         <Links />
-        <link rel="stylesheet" href={i18n.language==="ar" ? stylesRtl : styles} />
+        <link rel="stylesheet" href={i18n.language === "ar" ? stylesRtl : styles} />
       </head>
       <body className="box-border oultine-none">
         <NavBar

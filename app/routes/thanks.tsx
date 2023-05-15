@@ -12,21 +12,6 @@ export const meta: MetaFunction = () => {
     }
 }
 
-/* This example requires Tailwind CSS v2.0+ */
-const products = [
-    {
-        id: 1,
-        name: 'Cold Brew Bottle',
-        description:
-            'This glass bottle comes with a mesh insert for steeping tea or cold-brewing coffee. Pour from any angle and remove the top for easy cleaning.',
-        href: '#',
-        quantity: 1,
-        price: '$32.00',
-        imageSrc: 'https://tailwindui.com/img/ecommerce-images/confirmation-page-05-product-01.jpg',
-        imageAlt: 'Glass bottle with black plastic pour top and mesh insert.',
-    },
-]
-
 export default function Thanks() {
     return (
         <div className="bg-white">
@@ -38,7 +23,7 @@ export default function Thanks() {
                         <p className="mt-2 text-base text-gray-500 max-w-[500px]">If you have questions about your order, you can email us at info@comapny.com or call us at 16689</p>
                     </div>
                     <div className="mb-10">
-                        <TrackingSteps step={2}/>
+                        <TrackingSteps step={2} />
                     </div>
                     <div className="flex flex-col-reverse items-start md:flex-row ">
                         <div className="w-full mx-auto">
@@ -103,113 +88,30 @@ export default function Thanks() {
                                         <Link to="/my-account/orders/single" className="inline-block px-4 py-2 text-sm font-semibold text-center text-white rounded-lg whitespace-nowrap bg-slate-900 hover:bg-slate-700">Order Details</Link>
                                     </div>
                                 </div>
-                                <h2 className="sr-only">Your order</h2>
+                            </div>
 
-                                <h3 className="sr-only">Items</h3>
-                                <div className="hidden">
-                                    {products.map((product) => (
-                                        <div key={product.id} className="flex py-10 space-x-6 border-b border-gray-200">
-                                            <img
-                                                src={product.imageSrc}
-                                                alt={product.imageAlt}
-                                                className="flex-none object-cover object-center w-20 h-20 bg-gray-100 rounded-lg sm:w-40 sm:h-40"
-                                            />
-                                            <div className="flex flex-col flex-auto">
-                                                <div>
-                                                    <h4 className="font-medium text-gray-900">
-                                                        <a href={product.href}>{product.name}</a>
-                                                    </h4>
-                                                    <p className="mt-2 text-sm text-gray-600">{product.description}</p>
-                                                </div>
-                                                <div className="flex items-end flex-1 mt-6">
-                                                    <dl className="flex space-x-4 text-sm divide-x divide-gray-200 sm:space-x-6">
-                                                        <div className="flex">
-                                                            <dt className="font-medium text-gray-900">Quantity</dt>
-                                                            <dd className="ml-2 text-gray-700">{product.quantity}</dd>
-                                                        </div>
-                                                        <div className="flex pl-4 sm:pl-6">
-                                                            <dt className="font-medium text-gray-900">Price</dt>
-                                                            <dd className="ml-2 text-gray-700">{product.price}</dd>
-                                                        </div>
-                                                    </dl>
-                                                </div>
-                                            </div>
-                                        </div>
-                                    ))}
-
-                                    <div className="sm:ml-40 sm:pl-6">
-                                        <h3 className="sr-only">Your information</h3>
-
-                                        <h4 className="sr-only">Addresses</h4>
-                                        <dl className="grid grid-cols-2 py-10 text-sm gap-x-6">
-                                            <div>
-                                                <dt className="font-medium text-gray-900">Shipping address</dt>
-                                                <dd className="mt-2 text-gray-700">
-                                                    <address className="not-italic">
-                                                        <span className="block">Kristin Watson</span>
-                                                        <span className="block">7363 Cynthia Pass</span>
-                                                        <span className="block">Toronto, ON N3Y 4H8</span>
-                                                    </address>
-                                                </dd>
-                                            </div>
-                                            <div>
-                                                <dt className="font-medium text-gray-900">Billing address</dt>
-                                                <dd className="mt-2 text-gray-700">
-                                                    <address className="not-italic">
-                                                        <span className="block">Kristin Watson</span>
-                                                        <span className="block">7363 Cynthia Pass</span>
-                                                        <span className="block">Toronto, ON N3Y 4H8</span>
-                                                    </address>
-                                                </dd>
-                                            </div>
-                                        </dl>
-
-                                        <h4 className="sr-only">Payment</h4>
-                                        <dl className="grid grid-cols-2 py-10 text-sm border-t border-gray-200 gap-x-6">
-                                            <div>
-                                                <dt className="font-medium text-gray-900">Payment method</dt>
-                                                <dd className="mt-2 text-gray-700">
-                                                    <p>Apple Pay</p>
-                                                    <p>Mastercard</p>
-                                                    <p>
-                                                        <span aria-hidden="true">•••• </span>
-                                                        <span className="sr-only">Ending in </span>1545
-                                                    </p>
-                                                </dd>
-                                            </div>
-                                            <div>
-                                                <dt className="font-medium text-gray-900">Shipping method</dt>
-                                                <dd className="mt-2 text-gray-700">
-                                                    <p>DHL</p>
-                                                    <p>Takes up to 3 working days</p>
-                                                </dd>
-                                            </div>
-                                        </dl>
-
-                                        <h3 className="sr-only">Summary</h3>
-
-                                        <dl className="pt-10 space-y-6 text-sm border-t border-gray-200">
-                                            <div className="flex justify-between">
-                                                <dt className="font-medium text-gray-900">Subtotal</dt>
-                                                <dd className="text-gray-700">$36.00</dd>
-                                            </div>
-                                            <div className="flex justify-between">
-                                                <dt className="flex font-medium text-gray-900">
-                                                    Discount
-                                                    <span className="rounded-full bg-gray-200 text-xs text-gray-600 py-0.5 px-2 ml-2">STUDENT50</span>
-                                                </dt>
-                                                <dd className="text-gray-700">-$18.00 (50%)</dd>
-                                            </div>
-                                            <div className="flex justify-between">
-                                                <dt className="font-medium text-gray-900">Shipping</dt>
-                                                <dd className="text-gray-700">$5.00</dd>
-                                            </div>
-                                            <div className="flex justify-between">
-                                                <dt className="font-medium text-gray-900">Total</dt>
-                                                <dd className="text-gray-900">$23.00</dd>
-                                            </div>
-                                        </dl>
+                            <div className="bg-red-100">
+                                <div className="flex p-10">
+                                    <div className="flex flex-col">
+                                        <h3 className="text-[#CA4323] text-2xl font-bold mb-1">Congratulations!</h3>
+                                        <p className="text-sm font-semibold leading-6 text-gray-800">
+                                            You’ve earned
+                                            <strong>5768 rewards points </strong>
+                                            for your purchase today, and these points will be credited to your account immediately.
+                                        </p>
                                     </div>
+                                    <div className="w-1/5">
+                                        <img src="/images/thanks_gift.png" alt="img alt" />
+                                    </div>
+                                </div>
+                                <div className="p-10 border-t border-gray-300">
+                                    <p className="text-xs font-semibold text-gray-400">Enter a password below to create a Nine Crimes account. Keep track of orders, add products to your wishlist, and have exclusive access to promotions all the time.</p>
+                                    <form id="create_account" action="#" method="post">
+                                        <div className="form">
+                                            <input id="account_password" type="password" name="password" required />
+                                            <button type="submit" className="button_form">Create Account</button>
+                                        </div>
+                                    </form>
                                 </div>
                             </div>
                         </div>

@@ -69,7 +69,7 @@ export default function CartSummary({ thanks }: any) {
                         {thanks ?
                             <div>
                                 <p>You have earn <strong className="text-green-500">48</strong> Points!</p>
-                                <Link to="/track-order" className="block px-4 py-3 mt-2 font-semibold text-center text-white rounded-lg whitespace-nowrap bg-slate-900 hover:bg-slate-700">Track you order</Link>
+                                {/* <Link to="/track-order" className="block px-4 py-3 mt-2 font-semibold text-center text-white rounded-lg whitespace-nowrap bg-slate-900 hover:bg-slate-700">Track you order</Link> */}
                             </div>
                             : ''}
                     </dl>

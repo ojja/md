@@ -2274,6 +2274,10 @@ video {
   padding: 0.25rem;
 }
 
+.p-10 {
+  padding: 2.5rem;
+}
+
 .p-2 {
   padding: 0.5rem;
 }
@@ -2748,6 +2752,11 @@ video {
 .text-\[\#929292\] {
   --tw-text-opacity: 1;
   color: rgb(146 146 146 / var(--tw-text-opacity));
+}
+
+.text-\[\#CA4323\] {
+  --tw-text-opacity: 1;
+  color: rgb(202 67 35 / var(--tw-text-opacity));
 }
 
 .text-\[\#F44336\] {
@@ -3841,10 +3850,6 @@ video {
 
   .sm\:ml-16 {
     margin-left: 4rem;
-  }
-
-  .sm\:ml-40 {
-    margin-left: 10rem;
   }
 
   .sm\:ml-6 {

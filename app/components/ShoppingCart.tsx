@@ -8,23 +8,27 @@ import { v4 } from 'uuid';
 import MiniCartItem from './MiniCartItem';
 import MiniCartUpSell from './MiniCartUpSell';
 import MiniCartTools from './MiniCartTools';
+import i18next from 'i18next';
 
 
 export default function ShoppingCart() {
 
   const { closeCart, cartItems, removeFromCart, openCart, isOpen, totalPrice } = useShoppingCart();
-  console.log('isOpen>', isOpen);
+  // console.log('isOpen>', isOpen);
   useEffect(() => {
     setTimeout(() => {
       closeCart();
     }, 10);
   }, []);
+
+  console.log('i18n.language CART',i18next.language)
+
   return (
     <div>
-      <Transition show={isOpen}>
+      <Transition appear show={isOpen} as={Fragment}>
         <Dialog as="div" className="relative z-30" onClose={closeCart}>
           <Transition.Child
-
+            as={Fragment}
             enter="ease-in-out duration-500"
             enterFrom="opacity-0"
             enterTo="opacity-100"
@@ -41,11 +45,12 @@ export default function ShoppingCart() {
                 <Transition.Child
 
                   enter="transform transition ease-in-out duration-500 sm:duration-700"
-                  enterFrom="translate-x-full"
+                  // enterFrom="-translate-x-full"
+                  enterFrom={`${i18next.language==='en'?'translate-x-full':'-translate-x-full'}`}
                   enterTo="translate-x-0"
                   leave="transform transition ease-in-out duration-500 sm:duration-700"
                   leaveFrom="translate-x-0"
-                  leaveTo="translate-x-full"
+                  leaveTo={`${i18next.language==='en'?'translate-x-full':'-translate-x-full'}`}
                 >
                   <Dialog.Panel className="w-screen h-full max-w-md pointer-events-auto">
                     <div className="relative flex flex-col h-full overflow-y-scroll bg-white shadow-xl">
@@ -103,7 +108,7 @@ export default function ShoppingCart() {
                           <Link
                             to="/checkout"
                             onClick={closeCart}
-                            className="flex items-center justify-center px-6 py-3 text-base font-medium text-white bg-primary-600 border border-transparent rounded-md shadow-sm hover:bg-primary-700"
+                            className="flex items-center justify-center px-6 py-3 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-primary-600 hover:bg-primary-700"
                           >
                             Check Out
                           </Link>
