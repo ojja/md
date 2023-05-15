@@ -15,11 +15,13 @@
       "en": "English",
       "ar": "العربية"
     },
-    "comman":{
+    "common":{
       "topBannerText":"احصل على توصيل مجاني للطلبات التي تزيد عن 100 دولار",
       "quick_view":"نظرة سريعه",
       "new_arrivals":"وصل حديثًا",
-      "in":"في"
+      "in":"في",
+      "login":"",
+      "my_account":"حسابي"
     }
   }
   

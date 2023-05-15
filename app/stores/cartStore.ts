@@ -1,6 +1,7 @@
 import { persistentAtom } from '@nanostores/persistent';
 import { useStore } from '@nanostores/react';
 import { useEffect, useState } from 'react';
+import { trackAddToCart } from '~/fb-pixel';
 export type CartItem = {
     id: number;
     quantity: number;
@@ -43,6 +44,7 @@ export const useShoppingCart = () => {
     const isOpen = useStore(isShoppingCartOpen);
 
     const addToCart = (product: CartItem) => {
+        
         const itemIndex = cartStore.findIndex((item) =>
             item.id === product.id &&
             item.size === product.size &&

@@ -1,17 +1,16 @@
 // import { json, LoaderFunction } from "@remix-run/cloudflare"
 import { json, MetaFunction } from "@remix-run/node";
-import { Link, Outlet, useLoaderData, useParams } from "@remix-run/react";
+import { useLoaderData } from "@remix-run/react";
 import { getCategoryProducts, getFilterProducts } from "~/models/category.server";
-import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react';
-import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon, ViewColumnsIcon } from '@heroicons/react/20/solid';
-import { Fragment, useState } from "react";
+import { useState } from "react";
 import { v4 } from 'uuid';
 import Breadcrumbs from "~/components/Breadcrumbs";
 import { ProductWidget } from "~/components/product/ProductWidget";
-import Sort from "~/components/Sort";
 import { ProductWidgetWithVariation } from "~/components/product/ProductWidgetWithVariation";
 import { Site_Title } from "~/config";
 import { useTranslation } from "react-i18next";
+import ShopListTop from "~/components/ShopListTop";
+import Filters from "~/components/Filters";
 
 
 
@@ -25,36 +24,17 @@ export const meta: MetaFunction = ({ params }: any) => {
   }
 }
 
-// export const loader = async ({ params, request }: any) => {
-//   try {
-//     const categorySlug = params.catSlug;
-//     const pageNumber = parseInt(request.url.split('?')[1]?.split('=')[1] ?? '1', 8); // Extract pageNumber from the query string, default to 1
-//     const pageSize = 8;
-//     const products = await getCategoryProducts(categorySlug, pageNumber, pageSize);
-
-//     return json({
-//       products,
-//       categorySlug,
-//       pageNumber,
-//       // hasNextPage: products.length === pageSize * pageNumber,
-//       hasNextPage: true,
-//     });
-//   } catch (error) {
-//     console.error(error);
-//     return json({ error: 'An error occurred while fetching data.' }, { status: 500 });
-//   }
-// };
-
-
 export const loader = async ({ params }: any) => {
   const categorySlug = params.catSlug;
-  const pageNumber = 3;
+  const pageNumber = 1;
   const perPage = 20;
   let products = [];
+  let filterdProducts = [];
   let hasNextPage = false;
   try {
     //@ts-ignore no product type defined
     products = await getCategoryProducts(categorySlug, pageNumber, perPage);
+    filterdProducts = await getFilterProducts(categorySlug, pageNumber, perPage);
     hasNextPage = products.length === perPage;
   } catch (e) {
     console.log('error', e);
@@ -62,25 +42,14 @@ export const loader = async ({ params }: any) => {
   return json({
     products,
     categorySlug,
-    pageNumber,
-    hasNextPage,
+    filterdProducts
   });
 };
 
 export default function CategorySlug() {
   const { t } = useTranslation();
-  // const { products, categorySlug, pageNumber, hasNextPage } = useLoaderData();
-
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [grid, setGrid] = useState(false);
-
-  const subCategories = [
-    { name: 'Totes', href: '#', current: false },
-    { name: 'Backpacks', href: '#', current: true },
-    { name: 'Travel Bags', href: '#', current: false },
-    { name: 'Hip Bags', href: '#', current: false },
-    { name: 'Laptop Sleeves', href: '#', current: false },
-  ]
   const cat = 'Category';
   const breadcrumbs = {
     pages: [
@@ -90,150 +59,21 @@ export default function CategorySlug() {
       { name: cat, href: '#' }
     ]
   }
-  const filters = [
-    {
-      id: 'color',
-      name: 'Color',
-      options: [
-        { value: 'white', label: 'White', checked: false },
-        { value: 'beige', label: 'Beige', checked: false },
-        { value: 'blue', label: 'Blue', checked: true },
-        { value: 'brown', label: 'Brown', checked: false },
-        { value: 'green', label: 'Green', checked: false },
-        { value: 'purple', label: 'Purple', checked: false },
-      ],
-    },
-    {
-      id: 'category',
-      name: 'Category',
-      options: [
-        { value: 'new-arrivals', label: 'New Arrivals', checked: false },
-        { value: 'sale', label: 'Sale', checked: false },
-        { value: 'travel', label: 'Travel', checked: true },
-        { value: 'organization', label: 'Organization', checked: false },
-        { value: 'accessories', label: 'Accessories', checked: false },
-      ],
-    },
-    {
-      id: 'size',
-      name: 'Size',
-      options: [
-        { value: '2l', label: '2L', checked: false },
-        { value: '6l', label: '6L', checked: false },
-        { value: '12l', label: '12L', checked: false },
-        { value: '18l', label: '18L', checked: false },
-        { value: '20l', label: '20L', checked: false },
-        { value: '40l', label: '40L', checked: true },
-      ],
-    },
-  ]
 
-  const { products: initialProducts, categorySlug, hasNextPage } = useLoaderData();
+
+  const { products: initialProducts, categorySlug, filterdProducts } = useLoaderData();
   const [pageNumber, setPageNumber] = useState(1);
   const [products, setProducts] = useState(initialProducts);
-
-  console.log('hasNextPage > C',hasNextPage)
-  console.log('pageNumber > C',pageNumber)
-  console.log('products...',products)
 
   return (
     <div className="bg-white">
       <main className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className='pt-5 '>
-          <div className="flex flex-col flex-wrap items-baseline justify-between pt-2 pb-6 mb-4 border-b border-gray-200 md:flex-row">
-            <h1 className="text-4xl font-bold tracking-tight text-gray-900"> {t('comman.quick_view')} {t('comman.in')} {categorySlug}</h1>
-
-            <div className="flex items-center self-end mt-3 md:mt-0">
-
-              <Sort />
-
-              <button type="button" className={classNames(
-                grid ? 'text-gray-500' : 'text-gray-400',
-                "-m-2 ml-2 p-2 hover:text-gray-500"
-              )} onClick={() => setGrid(true)}>
-                <span className="sr-only">View grid</span>
-                <Squares2X2Icon className="w-5 h-5" aria-hidden="true" />
-              </button>
-              <button type="button" className={classNames(
-                grid ? 'text-gray-400' : 'text-gray-500',
-                "-m-2 ml-2 p-2 hover:text-gray-500"
-              )} onClick={() => setGrid(false)}>
-                <span className="sr-only">View Columns</span>
-                <ViewColumnsIcon className="w-5 h-5" aria-hidden="true" />
-              </button>
-              <button
-                type="button"
-                className="p-2 ml-4 -m-2 text-gray-400 hover:text-gray-500 sm:ml-6 lg:hidden"
-                onClick={() => setMobileFiltersOpen(true)}
-              >
-                <span className="sr-only">Filters</span>
-                <FunnelIcon className="w-5 h-5" aria-hidden="true" />
-              </button>
-            </div>
-          </div>
+          <ShopListTop grid={grid} setGrid={setGrid} setMobileFiltersOpen={setMobileFiltersOpen} />
           <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-4 border-b border-gray-200" />
           <section aria-labelledby="products-heading" className="pt-6 pb-24">
-            <h2 id="products-heading" className="sr-only">
-              Products
-            </h2>
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-              {/* Filters */}
-              <form className="hidden lg:block">
-                <h3 className="sr-only">Categories</h3>
-                <ul role="list" className="pb-6 space-y-4 border-b border-gray-200">
-                  {subCategories.map((category) => (
-                    <li key={v4()}>
-                      <a href={category.href} className={classNames(
-                        category.current ? 'text-blue-600' : 'text-gray-500',
-                        'font-medium text-base'
-                      )}>{category.name}</a>
-                    </li>
-                  ))}
-                </ul>
-
-                {filters.map((section) => (
-                  <Disclosure as="div" key={v4()} className="py-6 border-b border-gray-200">
-                    {({ open }) => (
-                      <>
-                        <h3 className="flow-root -my-3">
-                          <Disclosure.Button className="flex items-center justify-between w-full py-3 text-sm text-gray-400 bg-white hover:text-gray-500">
-                            <span className="font-medium text-gray-900">{section.name}</span>
-                            <span className="flex items-center ml-6">
-                              {open ? (
-                                <MinusIcon className="w-5 h-5" aria-hidden="true" />
-                              ) : (
-                                <PlusIcon className="w-5 h-5" aria-hidden="true" />
-                              )}
-                            </span>
-                          </Disclosure.Button>
-                        </h3>
-                        <Disclosure.Panel className="pt-6">
-                          <div className="space-y-4">
-                            {section.options.map((option, optionIdx) => (
-                              <div key={v4()} className="flex items-center">
-                                <input
-                                  id={`filter-${section.id}-${optionIdx}`}
-                                  name={`${section.id}[]`}
-                                  defaultValue={option.value}
-                                  type="checkbox"
-                                  defaultChecked={option.checked}
-                                  className="w-4 h-4 border-gray-300 rounded cursor-pointer text-primary-600 focus:ring-primary-500"
-                                />
-                                <label
-                                  htmlFor={`filter-${section.id}-${optionIdx}`}
-                                  className="ml-3 text-sm text-gray-600 cursor-pointer"
-                                >
-                                  {option.label}
-                                </label>
-                              </div>
-                            ))}
-                          </div>
-                        </Disclosure.Panel>
-                      </>
-                    )}
-                  </Disclosure>
-                ))}
-              </form>
+              <Filters filterdProducts={filterdProducts}/>
 
               {/* Product grid */}
               <div className="relative z-10 lg:col-span-3">
@@ -245,12 +85,12 @@ export default function CategorySlug() {
 
                   {products.map((productData: any) => (
                     <>
-                    <ProductWidget product={productData} key={v4()} />
-                    <ProductWidgetWithVariation product={productData} key={v4()} />
+                      <ProductWidget product={productData} key={v4()} />
+                      {/* <ProductWidgetWithVariation product={productData} key={v4()} /> */}
                     </>
                   ))}
                 </div>
-                
+
                 <div className="flex items-center justify-center mt-10 loadmore">
                   <button type="button" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 inline-flex items-center justify-center whitespace-nowrap">
                     Load More

@@ -6,3 +6,4 @@ export const Config ={
 export const API_ENDPOINT = "https://lecollezioni-eg.com/MitchAPI";
 
 export const Site_Title = "MD PWA";
+export const FB_PIXELCODE = "6517989738225028";

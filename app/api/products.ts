@@ -1,4 +1,5 @@
 import { json } from "@remix-run/cloudflare";
+import { API_ENDPOINT } from "~/config";
 import { woo } from "~/lib/woocommerce";
 
 export type Product = {
@@ -137,5 +138,32 @@ export async function getProductBySlug(productSlug: string) {
   } catch (error) {
     console.error("Error:", error);
     return [];
+  }
+}
+
+
+
+
+
+export async function getNewFilterProducts(categorySlug: any, pageNumber: number, perPage: number, minPrice: number = 0, maxPrice: number = 1000000): Promise<unknown> {
+  const url: string = `${API_ENDPOINT}/filter.php`;
+  const params = new URLSearchParams({
+    category: categorySlug,
+    price_range: `${minPrice},${maxPrice}`,
+    products_per_page: perPage.toString(),
+    page: pageNumber.toString()
+  });
+  const apiUrl = `${url}?${params}`;
+
+  try {
+    const response = await fetch(apiUrl);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error('Error:', error);
+    throw error;
   }
 }
