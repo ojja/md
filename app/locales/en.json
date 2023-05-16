@@ -15,11 +15,13 @@
       "en": "English",
       "ar": "العربية"
     },
-    "comman":{
+    "common":{
       "topBannerText":"Get free delivery on orders over $100",
       "quick_view":"Quick View",
       "new_arrivals":"New Arrivals",
-      "in": "in"
+      "in": "in",
+      "login":"",
+      "my_account":"My Account"
     }
   }
   

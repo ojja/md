@@ -3,6 +3,7 @@ import { Link } from "@remix-run/react";
 import { Fragment, useState } from "react";
 import Button from "~/components/Button";
 import Status from "~/components/Status";
+import TrackingSteps from "~/components/TrackingSteps";
 import FormatCurrency from "~/utils/FormatCurrency";
 
 const product = {
@@ -79,56 +80,7 @@ export default function ordersSingle() {
                 </div>
 
                 {/* proccess */}
-                <div className="flex">
-                    <div className="relative flex w-1/4 pt-20">
-                        <div className="absolute inset-0 flex items-center justify-end">
-                            <span className="block w-1/2 h-[1px] bg-black"></span>
-                        </div>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="11" cy="11" r="11" fill="black" />
-                                <path d="M16.5 7.85712L8.9375 14.9285L5.5 11.7143" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </div>
-                        <div className="w-full text-center">Order Placed</div>
-                    </div>
-                    <div className="relative flex w-1/4 pt-20">
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <span className="block w-full h-[1px] bg-black"></span>
-                        </div>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="11" cy="11" r="11" fill="black" />
-                                <path d="M16.5 7.85712L8.9375 14.9285L5.5 11.7143" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </div>
-                        <div className="w-full text-center">Order Preparing</div>
-                    </div>
-                    <div className="relative flex w-1/4 pt-20">
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <span className="block w-full h-[1px] bg-black"></span>
-                        </div>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="11" cy="11" r="11" fill="black" />
-                                <path d="M16.5 7.85712L8.9375 14.9285L5.5 11.7143" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </div>
-                        <div className="w-full text-center">Order Fulfilled</div>
-                    </div>
-                    <div className="relative flex w-1/4 pt-20">
-                        <div className="absolute inset-0 flex items-center justify-start">
-                            <span className="block w-1/2 h-[1px] bg-black"></span>
-                        </div>
-                        <div className="absolute inset-0 flex items-center justify-center">
-                            <svg width="22" height="22" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
-                                <circle cx="11" cy="11" r="11" fill="black" />
-                                <path d="M16.5 7.85712L8.9375 14.9285L5.5 11.7143" stroke="white" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
-                            </svg>
-                        </div>
-                        <div className="w-full text-center">Order Delivered</div>
-                    </div>
-                </div>
+                <TrackingSteps/>
 
                 {/* Items */}
                 <div className="items-list section">
