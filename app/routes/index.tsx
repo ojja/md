@@ -10,7 +10,7 @@ export default function Index() {
   return (
     <div>
       <HeroSection />
-      <AboutSection />
+      {/* <AboutSection /> */}
       <HeroTitle />
       <Testimonials />
       <BlogList />

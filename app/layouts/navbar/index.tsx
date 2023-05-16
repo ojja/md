@@ -293,7 +293,7 @@ export default function NavBar({ }) {
         <ShoppingCart />
         <header className="relative z-20 bg-white">
           {isCheckoutPage ? null : (
-            <p className="flex items-center justify-center h-10 px-4 text-sm font-medium text-white bg-primary-600 sm:px-6 lg:px-8">
+            <p className="flex items-center justify-center h-10 px-4 text-sm font-medium text-black bg-offwhite-500 sm:px-6 lg:px-8">
               {t('comman.topBannerText')}
               {/* <LanguageSwitcher
               /> */}

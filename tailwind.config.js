@@ -108,6 +108,9 @@ module.exports = {
       'navy': {
         500: '#000080',
       },
+      'offwhite': {
+        500: '#E8DFD0',
+      },
     },
     extend: {},
     // maxWidth: {
