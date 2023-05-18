@@ -20,8 +20,9 @@
       "quick_view":"Quick View",
       "new_arrivals":"New Arrivals",
       "in": "in",
-      "login":"",
-      "my_account":"My Account"
+      "login":" Login",
+      "my_account":"My Account",
+      "change_country":"Change Country "
     }
   }
   

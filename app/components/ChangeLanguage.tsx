@@ -19,7 +19,7 @@ export default function ChangeLanguage() {
         console.log('newPathname', newPathname)
     }
     return (
-        <div className="hidden lg:ml-8 lg:flex">
+        <div className="hidden lg:flex">
             <Menu as="div" className="relative z-20 inline-block text-left">
                 <div>
                     <Menu.Button className="inline-flex items-center justify-center text-sm font-medium text-gray-700 group hover:text-gray-900">

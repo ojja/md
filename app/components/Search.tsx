@@ -14,9 +14,9 @@ export default function Search() {
     }
     return (
         <>
-            <span className="p-2 text-gray-400 hover:text-gray-500 cursor-pointer" onClick={openModal}>
+            <span className="p-2 text-white hover:bg-green-300 cursor-pointer  bg-green-200 rounded-full transition-all duration-400" onClick={openModal}>
                 <span className="sr-only">Search</span>
-                <MagnifyingGlassIcon className="w-6 h-6" aria-hidden="true" />
+                <MagnifyingGlassIcon className=" w-4 h-4" aria-hidden="true" />
             </span>
             <Transition appear show={isSearch} as={Fragment}>
                 <Dialog as="div" className="relative z-10" onClose={closeModal}>

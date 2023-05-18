@@ -1,0 +1,50 @@
+import { Link } from "@remix-run/react";
+import { useState } from "react";
+import { useTranslation } from 'react-i18next';
+
+export default function ToggleSection() {
+    const [showContent, setShowContent] = useState<number | null>(null); // Explicitly define the type as number or null
+
+    const handleToggle = (index: number) => {
+        setShowContent(prevIndex => (prevIndex === index ? null : index));
+    };
+
+    const missions = [
+        {
+            title: "نحن نعيش ونستهلك ونتنفس منتجات عضوية ",
+            description: "استنادًا إلى التزامنا المستمر بتقديم طعام عضوي 100٪ ومن مصادر أخلاقية ومستدامة؛ يعتمد نجاحنا على الحصول على مواد خام عالية الجودة من جميع أنحاء العالم. واليوم، تقدم أبو عوف أكثر من 400 منتج عضوي ممتاز إلى مناطق مختلفة في جميع أنحاء العالم.",
+        },
+        {
+            title: "في كل مرة تختار أبو عوف فإنك تختار مستقبلاً أكثر صحة لها",
+            description: "نستثمر باستمرار مبالغ كبيرة من رأس مال الشركة حتى نتمكن من الاستمرار في تقديم خدمة متميزة وجودة فائقة ودعم عملاء احترافي، كما نستثمر في المعرفة المهارات جديدة لتطوير منتجاتنا وعمليات التحميص. حيث نسعى جاهدين للبقاء دائمًا على مستوى توقعات عملائنا.",
+        },
+        {
+            title: "جذورنا تمتد عميقًا لنقدم جودة عالية",
+            description: "مسؤولياتنا كشركة تقع على رأس قائمة أولوياتنا، فجزء من مسؤولياتنا هو جعل مهمتنا هي توفير قهوة ومكسرات ومنتجات غذائية صحية ذات جودة عالية مع تأثير بيئي منخفض. من الفكرة وحتى الاستهلاك ننقل الحب والرعاية إلى منتجاتنا وخدماتنا، فنعتني بالطبيعة والبيئة وجميع الأشخاص المشاركين في تقديم منتجاتنا إليك.",
+        },
+    ];
+    return (
+        <div className="list mt-6">
+        {missions.map((mission, index) => (
+            <div className="single bg-green-300  rounded-3xl mb-3 md:py-8 md:px-7 py-3 px-4" key={index}>
+                <h4
+                    className="text-black font-bold md:text-2xl text-base cursor-pointer after:w-1 after:h-2 after:absolute flex items-center justify-between"
+                    onClick={() => handleToggle(index)} // Pass the index to handleToggle
+                >
+                    <span className=" inline-block rtl:pr-5 ltr:pl-5">
+                        {mission.title}
+                    </span>
+                    {showContent === index ? <svg className="md:w-6 h-0.5 w-4" viewBox="0 0 24 2" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M24.0007 3.20435e-05H13.0002L11.0005 0L0 3.20435e-05V2.00087H11.0005L13.0002 2.00083L24.0007 2.00087V3.20435e-05Z" fill="#126E49" />
+                    </svg> : <svg className="md:w-6 md:h-6 w-4 h-4" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path d="M24.0007 11.0003H13.0002V0.000976562H11.0005V11.0003H0V13.0011H11.0005V24.0005H13.0002V13.0011H24.0007V11.0003Z" fill="#126E49" />
+                    </svg>}
+                </h4>
+                <p className={`slide-up ${showContent === index ? 'slide-up-active' : '' && index == 0 ? 'slide-up-active' : ''} md:mt-8 mt-3 text-gray-50 font-medium md:text-xl text-sm`}>
+                    {mission.description}
+                </p>
+            </div>
+        ))}
+    </div>
+    )
+}

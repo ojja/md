@@ -11,6 +11,7 @@ export default function Index() {
     <div>
       <HeroSection />
       {/* <AboutSection /> */}
+      
       <HeroTitle />
       <Testimonials />
       <BlogList />

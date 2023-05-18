@@ -1,9 +1,13 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
+import { useTranslation } from 'react-i18next';
+
 import FormatCurrency from "~/utils/FormatCurrency";
 
 
 export default function ChangeCountry() {
+    const { t, i18n } = useTranslation();
+
     let [isOpenSize, setIsOpenSize] = useState(false)
 
     function closeModal() {
@@ -26,8 +30,8 @@ export default function ChangeCountry() {
 
     return (
         <>
-            <button type="button" className="text-sm font-medium text-primary-600 hover:text-primary-500" onClick={openModal}>
-                Change Country
+            <button type="button" className="text-sm font-medium text-white hover:text-primary-500" onClick={openModal}>
+               {t('common.change_country')}
             </button>
             <Transition appear show={isOpenSize} as={Fragment}>
                 <Dialog as="div" className="relative z-10" onClose={closeModal}>

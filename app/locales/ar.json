@@ -20,8 +20,9 @@
       "quick_view":"نظرة سريعه",
       "new_arrivals":"وصل حديثًا",
       "in":"في",
-      "login":"",
-      "my_account":"حسابي"
+      "login":"دخول",
+      "my_account":"حسابي",
+      "change_country":"تغير البلد"
     }
   }
   

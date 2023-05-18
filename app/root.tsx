@@ -54,7 +54,7 @@ export default function App() {
   if (typeof window !== "undefined") {
     initFacebookPixel(FB_PIXELCODE);
   }
-  
+
   // useEffect(() => {
   //   !function(f,b,e,v,n,t,s)
   //   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
@@ -73,10 +73,13 @@ export default function App() {
     <html lang={language} dir={i18n.language === "ar" ? 'rtl' : 'ltr'}>
       <head>
         <Meta />
-        <Links />
         <link rel="stylesheet" href={i18n.language === "ar" ? stylesRtl : styles} />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
+        <Links />
+
       </head>
-      <body className="box-border oultine-none">
+      <body className={`box-border oultine-none ${i18n.language === "ar" ? 'font-sans-ar' : 'font-sans-en'}`} >
         <NavBar
         />
         <main className="relative z-10">

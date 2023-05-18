@@ -180,7 +180,7 @@ export default function NavBar({ }) {
                     <div className="flex px-4 pt-5 pb-2">
                       <button
                         type="button"
-                        className="inline-flex items-center justify-center p-2 -m-2 text-gray-400 rounded-md"
+                        className="inline-flex items-center justify-center p-2 -m-2  text-white rounded-md"
                         onClick={() => setOpen(false)}
                       >
                         <span className="sr-only">Close menu</span>
@@ -297,19 +297,113 @@ export default function NavBar({ }) {
         </React.Fragment>
         <header className="relative z-20 bg-white">
           {isCheckoutPage ? null : (
-            <p className="flex items-center justify-center h-10 px-4 text-sm font-medium text-white bg-primary-600 sm:px-6 lg:px-8">
-              {t('common.topBannerText')}
-              {/* <LanguageSwitcher
-              /> */}
-            </p>
+            // <p className="flex items-center justify-center h-10 px-4 text-sm font-medium text-white bg-offwhite-500 sm:px-6 lg:px-8">
+            //   {t('common.topBannerText')}
+            //   {/* <LanguageSwitcher
+            //   /> */}
+            // </p>
+            <div className=' bg-offwhite-500 py-15 '>
+              <div className="details flex lg:justify-between justify-center container m-auto px-4">
+                <div className="menu flex gap-x-7">
+                  <ChangeLanguage />
+                  {/* Change Currncy */}
+                  {isCheckoutPage ? null : (
+                    <div className="hidden lg:flex">
+                      <Menu as="div" className="relative z-20 inline-block text-left">
+                        <div>
+                          <Menu.Button className="flex items-center justify-center text-sm font-medium text-gray-700 group hover:text-gray-900">
+                            <img
+                              src="/images/en.svg"
+                              alt=""
+                              className="flex-shrink-0 block w-5 h-auto"
+                            />
+                            <span className="block ml-3 text-sm font-medium">USD</span>
+                            <span className="sr-only">, change currency</span>
+                          </Menu.Button>
+                        </div>
+
+                        <Transition
+                          as={Fragment}
+                          enter="transition ease-out duration-100"
+                          enterFrom="transform opacity-0 scale-95"
+                          enterTo="transform opacity-100 scale-100"
+                          leave="transition ease-in duration-75"
+                          leaveFrom="transform opacity-100 scale-100"
+                          leaveTo="transform opacity-0 scale-95"
+                        >
+                          <Menu.Items className="absolute right-0 z-10 w-40 mt-2 origin-top-right bg-white rounded-md shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
+                            <div className="py-1">
+                              <Menu.Item key={v4()}>
+                                {({ active }) => (
+                                  <div className='flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-gray-100'>
+                                    <img
+                                      src="/images/en.svg"
+                                      alt=""
+                                      className="flex-shrink-0 block w-5 h-auto"
+                                    />
+                                    <span className="block ml-3">USD</span>
+                                  </div>
+                                )}
+                              </Menu.Item>
+                              <Menu.Item key={v4()}>
+                                {({ active }) => (
+                                  <div
+                                    className={classNames(
+                                      active ? 'bg-gray-100' : '',
+                                      'flex justify-center px-4 py-2 text-sm font-medium text-gray-900 w-full cursor-pointer'
+                                    )}
+                                  >
+                                    <img
+                                      src="/images/eg.svg"
+                                      alt=""
+                                      className="flex-shrink-0 block w-5 h-auto"
+                                    />
+                                    <span className="block ml-3">EGP</span>
+                                  </div>
+                                )}
+                              </Menu.Item>
+                            </div>
+                          </Menu.Items>
+                        </Transition>
+                      </Menu>
+                    </div>
+                  )}
+
+                  {navigation.pages.map((page) => (
+                    <Link
+                      key={v4()}
+                      // to={page.href}
+                      to={`/${page.href}`}
+                      className="hidden lg:flex items-center text-sm font-medium text-gray-700 hover:text-gray-800"
+                    >
+                      {page.name}
+                    </Link>
+                  ))}
+
+
+
+                </div>
+                <div className="image hidden lg:block">
+                  <img src="/images/paymentmethods.png" alt="" />
+                </div>
+                <div className="message">
+                  <p className=' text-brown-500 md:text-base text-xs'>  {t('common.topBannerText')}</p>
+                </div>
+
+
+
+
+              </div>
+
+            </div>
           )}
-          <div className="container px-4 mx-auto">
-            <nav aria-label="Top" className="">
-              <div className="border-b border-gray-200">
+          <div className=" bg-green-900 px-4">
+            <nav aria-label="Top" className="container mx-auto">
+              <div className="border-b border-green-100">
                 <div className="flex items-center h-16">
                   <button
                     type="button"
-                    className="p-2 text-gray-400 bg-white rounded-md lg:hidden"
+                    className="p-2  text-white rounded-md lg:hidden"
                     onClick={() => setOpen(true)}
                   >
                     <span className="sr-only">Open menu</span>
@@ -317,19 +411,85 @@ export default function NavBar({ }) {
                   </button>
 
                   {/* Logo */}
-                  <div className="flex ml-4 lg:ml-0">
+                  <div className="flex ml-4 lg:ml-0 items-center gap-x-2">
                     <Link to="/">
                       <img
-                        className="w-auto h-8"
-                        src="/images/logo.svg"
+                        className="w-auto"
+                        src="/images/logo.png"
                         alt=""
                       />
                     </Link>
+                    {/* Change Country */}
+                    {isCheckoutPage ? null : (
+                      <div className="hidden lg:flex">
+                        <ChangeCountry />
+                      </div>
+                    )}
+
                   </div>
 
+                  <div className="flex items-center ml-auto">
+                    <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+                      <Link to="/login" className="text-sm font-medium text-white hover:text-gray-800">
+                        {t('common.login')}
+                      </Link>
+                      {/* <span className="w-px h-6 bg-gray-200" aria-hidden="true" /> */}
+                      <Link to="/my-account" className="text-sm font-medium text-white hover:text-gray-800">
+                        {t('common.my_account')}
+                      </Link>
+                    </div>
+
+                    {/* Change language */}
+
+
+
+
+
+                    {/* Search */}
+                    {isCheckoutPage ? null : (
+                      <div className="flex lg:ml-6">
+                        <Search />
+                      </div>
+                    )}
+
+                    {/* Cart */}
+                    <div className="flex items-center justify-center ml-4 lg:ml-6 bg-yellow-400 rounded-full relative w-10 h-10">
+                      {isCheckoutPage ? (
+                        <Link to="/cart" className="flex items-center p-2 -m-2 group">
+                          {/* <ShoppingBagIcon
+                            className="flex-shrink-0 w-6 h-6  text-white group-hover:text-gray-500"
+                            aria-hidden="true"
+                          /> */}
+                          <svg className=' w-6 h-6' viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clipRule="evenodd" d="M34.3785 4.22593L27.0655 10.6906H35V16.223C35 18.0585 33.9168 19.6344 32.3551 20.2746L31.3405 30.0934C31.1125 32.3194 29.3254 34 27.184 34H8.78243C6.6411 34 4.85839 32.3194 4.63031 30.0934L3.62809 20.2737C2.06643 19.6335 1 18.0585 1 16.223V10.6906H19.295C18.0966 11.7051 17.8474 11.9346 17.4614 12.2902C17.1822 12.5474 16.8314 12.8705 15.9981 13.6043H3.78689V16.223C3.78689 16.9705 4.32102 17.5882 5.0411 17.6592L6.16594 17.7715L7.39663 29.7827C7.47282 30.5248 8.06882 31.0863 8.78243 31.0863H27.1841C27.8977 31.0863 28.4957 30.5248 28.5719 29.7827L29.8047 17.7706L30.9421 17.6588C31.6623 17.5876 32.2131 16.9705 32.2131 16.223V13.6043H23.7689C22.7128 14.5375 21.8758 15.2832 21.207 15.8789L21.2066 15.8793C18.9571 17.8833 18.6112 18.1914 18.2327 18.2388C18.164 18.2474 18.0941 18.2474 18.0116 18.2473H18.0034C17.0792 18.2473 16.4064 17.3212 16.6651 16.3837L16.668 16.3732L16.668 16.3732C16.6863 16.3068 16.7019 16.2501 16.7226 16.1953C16.8435 15.8746 17.1358 15.6186 19.1382 13.8649L19.1382 13.8649L19.1385 13.8647C19.8498 13.2418 20.7768 12.4299 21.9886 11.359L21.9885 11.3591L24.512 9.12899C25.927 7.87856 27.8359 6.19179 32.5789 2L34.3785 4.22593ZM16.6065 20.597H19.3934V28.7553H16.6065V20.597ZM22.1803 20.597V28.7553H24.9672V20.597H22.1803ZM13.8197 20.597V28.7553H11.0328V20.597H13.8197Z" fill="#163300" />
+                          </svg>
+
+                          <span className="ml-2 text-sm font-medium text-black bg-white  group-hover:text-gray-800 absolute rounded-full w-5 h-5 -top-1">{cartQuantityTotal}</span>
+                        </Link>
+                      ) : (
+                        <button
+                          className=""
+                          onClick={openCart}
+                        >
+                          <svg className=' w-6 h-6' viewBox="0 0 36 36" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" clipRule="evenodd" d="M34.3785 4.22593L27.0655 10.6906H35V16.223C35 18.0585 33.9168 19.6344 32.3551 20.2746L31.3405 30.0934C31.1125 32.3194 29.3254 34 27.184 34H8.78243C6.6411 34 4.85839 32.3194 4.63031 30.0934L3.62809 20.2737C2.06643 19.6335 1 18.0585 1 16.223V10.6906H19.295C18.0966 11.7051 17.8474 11.9346 17.4614 12.2902C17.1822 12.5474 16.8314 12.8705 15.9981 13.6043H3.78689V16.223C3.78689 16.9705 4.32102 17.5882 5.0411 17.6592L6.16594 17.7715L7.39663 29.7827C7.47282 30.5248 8.06882 31.0863 8.78243 31.0863H27.1841C27.8977 31.0863 28.4957 30.5248 28.5719 29.7827L29.8047 17.7706L30.9421 17.6588C31.6623 17.5876 32.2131 16.9705 32.2131 16.223V13.6043H23.7689C22.7128 14.5375 21.8758 15.2832 21.207 15.8789L21.2066 15.8793C18.9571 17.8833 18.6112 18.1914 18.2327 18.2388C18.164 18.2474 18.0941 18.2474 18.0116 18.2473H18.0034C17.0792 18.2473 16.4064 17.3212 16.6651 16.3837L16.668 16.3732L16.668 16.3732C16.6863 16.3068 16.7019 16.2501 16.7226 16.1953C16.8435 15.8746 17.1358 15.6186 19.1382 13.8649L19.1382 13.8649L19.1385 13.8647C19.8498 13.2418 20.7768 12.4299 21.9886 11.359L21.9885 11.3591L24.512 9.12899C25.927 7.87856 27.8359 6.19179 32.5789 2L34.3785 4.22593ZM16.6065 20.597H19.3934V28.7553H16.6065V20.597ZM22.1803 20.597V28.7553H24.9672V20.597H22.1803ZM13.8197 20.597V28.7553H11.0328V20.597H13.8197Z" fill="#163300" />
+                          </svg>
+                          <span className="ml-2 text-sm font-medium text-black bg-white  group-hover:text-gray-800 absolute -top-1 w-5 h-5 rounded-full
+                          ">{cartQuantityTotal}</span>
+                          <span className="sr-only">items in cart, view bag</span>
+                        </button>
+                      )}
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </nav>
+            <nav aria-label="Bottom" className="container mx-auto py-4">
+              <div className="">
+                <div className="flex items-center">
                   {/* Flyout menus */}
                   {isCheckoutPage ? null : (
-                    <Popover.Group className="hidden lg:ml-8 lg:block lg:self-stretch">
+                    <Popover.Group className="hidden lg:block lg:self-stretch">
                       <div className="flex h-full space-x-8">
                         {navigation.categories.map((category) => (
                           <Popover key={v4()} className="flex">
@@ -340,7 +500,7 @@ export default function NavBar({ }) {
                                     className={classNames(
                                       open
                                         ? 'border-primary-600 text-primary-600'
-                                        : 'border-transparent text-gray-700 hover:text-gray-800',
+                                        : 'border-transparent text-white hover:text-gray-800',
                                       'relative z-10 -mb-px flex items-center border-b-2 pt-px text-sm font-medium transition-colors duration-200 ease-out outline-none'
                                     )}
                                   >
@@ -416,7 +576,7 @@ export default function NavBar({ }) {
                           </Popover>
                         ))}
 
-                        {navigation.pages.map((page) => (
+                        {/* {navigation.pages.map((page) => (
                           <Link
                             key={v4()}
                             // to={page.href}
@@ -425,127 +585,11 @@ export default function NavBar({ }) {
                           >
                             {page.name}
                           </Link>
-                        ))}
+                        ))} */}
                       </div>
                     </Popover.Group>
                   )}
-                  <div className="flex items-center ml-auto">
-                    <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                      <Link to="/login" className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                        Login
-                      </Link>
-                      <span className="w-px h-6 bg-gray-200" aria-hidden="true" />
-                      <Link to="/my-account" className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                        {t('common.my_account')}
-                      </Link>
-                    </div>
 
-                    {/* Change language */}
-                    <ChangeLanguage/>
-
-
-                    {/* Change Currncy */}
-                    {isCheckoutPage ? null : (
-                      <div className="hidden lg:ml-8 lg:flex">
-                        <Menu as="div" className="relative z-20 inline-block text-left">
-                          <div>
-                            <Menu.Button className="inline-flex items-center justify-center text-sm font-medium text-gray-700 group hover:text-gray-900">
-                              <img
-                                src="/images/en.svg"
-                                alt=""
-                                className="flex-shrink-0 block w-5 h-auto"
-                              />
-                              <span className="block ml-3 text-sm font-medium">USD</span>
-                              <span className="sr-only">, change currency</span>
-                            </Menu.Button>
-                          </div>
-
-                          <Transition
-                            as={Fragment}
-                            enter="transition ease-out duration-100"
-                            enterFrom="transform opacity-0 scale-95"
-                            enterTo="transform opacity-100 scale-100"
-                            leave="transition ease-in duration-75"
-                            leaveFrom="transform opacity-100 scale-100"
-                            leaveTo="transform opacity-0 scale-95"
-                          >
-                            <Menu.Items className="absolute right-0 z-10 w-40 mt-2 origin-top-right bg-white rounded-md shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
-                              <div className="py-1">
-                                <Menu.Item key={v4()}>
-                                  {({ active }) => (
-                                    <div className='flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-gray-100'>
-                                      <img
-                                        src="/images/en.svg"
-                                        alt=""
-                                        className="flex-shrink-0 block w-5 h-auto"
-                                      />
-                                      <span className="block ml-3">USD</span>
-                                    </div>
-                                  )}
-                                </Menu.Item>
-                                <Menu.Item key={v4()}>
-                                  {({ active }) => (
-                                    <div
-                                      className={classNames(
-                                        active ? 'bg-gray-100' : '',
-                                        'flex justify-center px-4 py-2 text-sm font-medium text-gray-900 w-full cursor-pointer'
-                                      )}
-                                    >
-                                      <img
-                                        src="/images/eg.svg"
-                                        alt=""
-                                        className="flex-shrink-0 block w-5 h-auto"
-                                      />
-                                      <span className="block ml-3">EGP</span>
-                                    </div>
-                                  )}
-                                </Menu.Item>
-                              </div>
-                            </Menu.Items>
-                          </Transition>
-                        </Menu>
-                      </div>
-                    )}
-
-                    {/* Change Country */}
-                    {isCheckoutPage ? null : (
-                      <div className="hidden lg:ml-8 lg:flex">
-                        <ChangeCountry />
-                      </div>
-                    )}
-
-                    {/* Search */}
-                    {isCheckoutPage ? null : (
-                      <div className="flex lg:ml-6">
-                        <Search />
-                      </div>
-                    )}
-
-                    {/* Cart */}
-                    <div className="flow-root ml-4 lg:ml-6">
-                      {isCheckoutPage ? (
-                        <Link to="/cart" className="flex items-center p-2 -m-2 group">
-                          <ShoppingBagIcon
-                            className="flex-shrink-0 w-6 h-6 text-gray-400 group-hover:text-gray-500"
-                            aria-hidden="true"
-                          />
-                          <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{cartQuantityTotal}</span>
-                        </Link>
-                      ) : (
-                        <button
-                          className="flex items-center p-2 -m-2 group"
-                          onClick={openCart}
-                        >
-                          <ShoppingBagIcon
-                            className="flex-shrink-0 w-6 h-6 text-gray-400 group-hover:text-gray-500"
-                            aria-hidden="true"
-                          />
-                          <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{cartQuantityTotal}</span>
-                          <span className="sr-only">items in cart, view bag</span>
-                        </button>
-                      )}
-                    </div>
-                  </div>
                 </div>
               </div>
             </nav>

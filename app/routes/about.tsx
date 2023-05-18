@@ -6,7 +6,7 @@ export default function About() {
 
 
     return (
-        <div className="flex flex-col items-center py-20 space-y-2">
+        <div className="flex flex-col items-center space-y-2">
             <AboutSection />
         </div>
     );
