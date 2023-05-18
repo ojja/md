@@ -1,3 +1,5 @@
+import { API_ENDPOINT } from "~/config";
+
 interface Product {
     id: number;
     name: string;
@@ -19,7 +21,7 @@ interface Product {
     categorySlug: string,
     pageNumber: number
   ): Promise<Product[]> {
-    const url: string = "https://lecollezioni-eg.com/MitchAPI/category.php";
+    const url: string = `${API_ENDPOINT}/category.php`;
     const data: any = {
       category: categorySlug,
       products_per_page: 20,

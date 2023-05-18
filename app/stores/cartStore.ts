@@ -20,11 +20,19 @@ const shoppingCart = persistentAtom<CartItem[]>('cart', [], {
 
 const isShoppingCartOpen = persistentAtom<boolean>('isShoppingCartOpen', false, {
     listen: false,
+    defaultValue: false, // set the default value to false
     encode: (value) => String(value),
     decode: (value) => Boolean(value),
 });
 
 
+const calculateTotalPrice = (cartItems: CartItem[]) => {
+    let price = 0;
+    cartItems.forEach((item) => {
+        price += (parseFloat(item.price) || 0) * item.quantity;
+    });
+    return price;
+};
 export const useShoppingCart = () => {
     if (typeof window === "undefined") {
         return {
@@ -41,14 +49,15 @@ export const useShoppingCart = () => {
         };
     }
     const cartStore = useStore(shoppingCart);
-    const isOpen = useStore(isShoppingCartOpen);
+    const isOpen = useStore(isShoppingCartOpen, false);
+
 
     const addToCart = (product: CartItem) => {
-        
+
         const itemIndex = cartStore.findIndex((item) =>
             item.id === product.id &&
-            item.size === product.size &&
-            item.color === product.color &&
+            // item.size === product.size &&
+            // item.color === product.color &&
             item.slug === product.slug &&
             item.price === product.price &&
             item.thumbnail === product.thumbnail);
@@ -60,8 +69,8 @@ export const useShoppingCart = () => {
         } else {
             shoppingCart.set([...cartStore, {
                 id: product.id,
-                size: product.size,
-                color: product.color,
+                // size: product.size,
+                // color: product.color,
                 slug: product.slug,
                 thumbnail: product.thumbnail,
                 price: product.price,
@@ -72,7 +81,11 @@ export const useShoppingCart = () => {
     }
 
     const decreaseCartQuantity = (product: CartItem) => {
-        const itemIndex = cartStore.findIndex((item) => item.id === product.id && item.size === product.size && item.color === product.color);
+        const itemIndex = cartStore.findIndex((item) =>
+            item.id === product.id
+            // && item.size === product.size
+            // && item.color === product.color
+        );
 
         if (itemIndex !== -1) {
             const newCartItems = [...cartStore];
@@ -98,28 +111,23 @@ export const useShoppingCart = () => {
     }
 
     const getItemQuantity = (product: CartItem) => {
-        return cartStore.find((item) => item.id === product.id && item.size === product.size && item.color === product.color)?.quantity ?? 0;
-
+        return cartStore.find((item) => item.id === product.id)?.quantity ?? 0;
     };
 
-    const openCart = () => isShoppingCartOpen.set(true);
+    const openCart = () => {
+        console.log('Opening cart');
+        isShoppingCartOpen.set(true);
+    };
     const closeCart = () => isShoppingCartOpen.set(false);
 
     const [totalPrice, setTotalPrice] = useState(0);
 
-    // Calculate the total price
-    const calculateTotalPrice = () => {
-        let price = 0;
-        cartStore.map(item => {
-            price += item.price * item.quantity;
-        });
-        setTotalPrice(price);
-    }
+
 
     // Call calculateTotalPrice when the component mounts
     useEffect(() => {
-        calculateTotalPrice();
-    }, []);
+        setTotalPrice(calculateTotalPrice(cartStore));
+    }, [cartStore]);
 
     return {
         getItemQuantity,

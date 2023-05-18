@@ -168,7 +168,24 @@ export default function shop() {
         setMaxPrice(event.target.value);
         debouncedFetchProducts();
     };
-
+    const categories = [
+        { value: 't-shirt', label: 'T SHIRT', checked: false },
+        { value: 'bag', label: 'BAG', checked: false },
+        { value: 'trousers', label: 'trousers', checked: false },
+        { value: 'sweatshirt', label: 'sweatshirt', checked: false },
+        { value: 'shoes', label: 'shoes', checked: false },
+        { value: 'sneakers', label: 'sneakers', checked: false },
+        { value: 'dress', label: 'dress', checked: false },
+        { value: 'jacket', label: 'jacket', checked: false },
+        { value: 'wallet', label: 'wallet', checked: false },
+        { value: 'sweater', label: 'sweater', checked: false },
+        { value: 'shirt', label: 'shirt', checked: false },
+        { value: 'shorts', label: 'shorts', checked: false },
+        { value: 'leggings', label: 'leggings', checked: false },
+        { value: 'top', label: 'top', checked: false },
+        { value: 'belt', label: 'belt', checked: false },
+        { value: 'polo-shirt', label: 'polo shirt', checked: false },
+    ]
     // console.log('products>>', products);
     return (
         <div className="bg-white">
@@ -188,6 +205,7 @@ export default function shop() {
                                 handleMinPriceChange={handleMinPriceChange}
                                 handleMaxPriceChange={handleMaxPriceChange}
                                 handleSelectedCategoriesChange={handleSelectedCategoriesChange}
+                                categories={categories}
                             />
                             {/* Product grid */}
                             <div className="relative z-10 lg:col-span-3">
@@ -197,7 +215,7 @@ export default function shop() {
                                 )}
                                 >
                                     {isLoading ? (
-                                        <div className="absolute z-20 inset-0 bg-gray-200 bg-opacity-75 flex items-start justify-center pt-20">
+                                        <div className="absolute inset-0 z-20 flex items-start justify-center pt-20 bg-gray-200 bg-opacity-75">
                                             <Loader />
                                         </div>
                                     ) : ('')}

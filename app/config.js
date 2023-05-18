@@ -3,7 +3,8 @@ export const Config ={
     "Test":"Z_TEST",
 }
 
-export const API_ENDPOINT = "https://lecollezioni-eg.com/MitchAPI";
+// export const API_ENDPOINT = "https://lecollezioni-eg.com/MitchAPI";
+export const API_ENDPOINT = "https://cloudhosta.com:63/MitchAPI";
 
 export const Site_Title = "MD PWA";
 export const FB_PIXELCODE = "6517989738225028";

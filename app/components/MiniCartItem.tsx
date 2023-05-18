@@ -50,7 +50,7 @@ interface MiniCartItemProps {
 //     return null; // or some default value if the combination of attributes is not found
 //   };
 
-const MiniCartItem = ({ id, quantity, color, size, slug, thumbnail, removeFromCart }: MiniCartItemProps) => {
+const MiniCartItem = ({ id, quantity, color, size, slug, thumbnail, removeFromCart, price }: MiniCartItemProps) => {
 
     const [product, setProduct] = useState({});
     const handleRemoveClick = () => {
@@ -65,19 +65,6 @@ const MiniCartItem = ({ id, quantity, color, size, slug, thumbnail, removeFromCa
     }, [slug]);
 
     //   console.log('product>>>>>>>>>> Item',product)
-    const item = {
-        "id": 1,
-        "title": "Fjallraven - Foldsack No. 1 Backpack, Fits 15 Laptops",
-        "price": 109.95,
-        "description": "Your perfect pack for everyday use and walks in the forest. Stash your laptop (up to 15 inches) in the padded sleeve, your everyday",
-        "category": "men's clothing",
-        "image": "https://picsum.photos/202/320?random=1",
-        "image_small": "https://picsum.photos/20/30?random=1",
-        "rating": {
-            "rate": 3.9,
-            "count": 120
-        }
-    }
 
 
     const title = product.title;
@@ -86,12 +73,23 @@ const MiniCartItem = ({ id, quantity, color, size, slug, thumbnail, removeFromCa
     // const priceV = product.variations ? getPriceForAttributes(product.variations, size, color) : null;
     // console.log("priceV",priceV);
 
+    const variationId = id;
+    const variation = product?.variations?.find(variation => variation.id === variationId);
 
-    const variation = product?.variations?.find((variation: any) =>
-        variation.attributes.attribute_pa_size === size &&
-        variation.attributes.attribute_pa_color === color
-    );
-    const variationSalePrice = variation ? variation.sale_price : null;
+    // const variation = product?.variations?.find((variation: any) =>
+    //     variation.attributes.attribute_pa_size === size &&
+    //     variation.attributes.attribute_pa_color === color
+    // );
+    const variationSalePrice = price;
+
+    if (variation) {
+        const { price, sale_price } = variation;
+        console.log('Price:', price);
+        console.log('Sale Price:', sale_price);
+    } else {
+        console.log('Variation not found.');
+    }
+
 
     return (
         <>
@@ -109,13 +107,21 @@ const MiniCartItem = ({ id, quantity, color, size, slug, thumbnail, removeFromCa
                         <h3>
                             <Link to={`/products/${slug}`}>{title}</Link>
                         </h3>
-                        <p className="ml-4">{FormatCurrency(variationSalePrice * quantity)}</p>
+                        <div>
+                            <p className="ml-4">{FormatCurrency(variationSalePrice * quantity)}</p>
+                        </div>
                     </div>
                     <p className="mt-1 text-sm text-gray-500">{color} - {size}</p>
                 </div>
                 <div className="flex items-end justify-between flex-1 text-sm">
                     <div className="flex flex-col">
-                        <p className="text-gray-500">{FormatCurrency(variationSalePrice)}</p>
+                    {sale_price !== null && sale_price != price ? (
+                        <p className="text-gray-500">{FormatCurrency(price)}</p>
+                        ) : (
+                            <p className="text-2xl text-gray-900">
+                                {FormatCurrency(price)}
+                            </p>
+                        )}
                         <p className="text-gray-500">Quantity: {quantity}</p>
                     </div>
                     {removeFromCart ?
