@@ -13,24 +13,24 @@ const subCategories = [
     { name: 'Hip Bags', href: '#', current: false },
     { name: 'Laptop Sleeves', href: '#', current: false },
 ]
-const categories = [
-    { value: 't-shirt', label: 'T SHIRT', checked: false },
-    { value: 'bag', label: 'BAG', checked: false },
-    { value: 'trousers', label: 'trousers', checked: false },
-    { value: 'sweatshirt', label: 'sweatshirt', checked: false },
-    { value: 'shoes', label: 'shoes', checked: false },
-    { value: 'sneakers', label: 'sneakers', checked: false },
-    { value: 'dress', label: 'dress', checked: false },
-    { value: 'jacket', label: 'jacket', checked: false },
-    { value: 'wallet', label: 'wallet', checked: false },
-    { value: 'sweater', label: 'sweater', checked: false },
-    { value: 'shirt', label: 'shirt', checked: false },
-    { value: 'shorts', label: 'shorts', checked: false },
-    { value: 'leggings', label: 'leggings', checked: false },
-    { value: 'top', label: 'top', checked: false },
-    { value: 'belt', label: 'belt', checked: false },
-    { value: 'polo-shirt', label: 'polo shirt', checked: false },
-]
+// const categories = [
+//     { value: 't-shirt', label: 'T SHIRT', checked: false },
+//     { value: 'bag', label: 'BAG', checked: false },
+//     { value: 'trousers', label: 'trousers', checked: false },
+//     { value: 'sweatshirt', label: 'sweatshirt', checked: false },
+//     { value: 'shoes', label: 'shoes', checked: false },
+//     { value: 'sneakers', label: 'sneakers', checked: false },
+//     { value: 'dress', label: 'dress', checked: false },
+//     { value: 'jacket', label: 'jacket', checked: false },
+//     { value: 'wallet', label: 'wallet', checked: false },
+//     { value: 'sweater', label: 'sweater', checked: false },
+//     { value: 'shirt', label: 'shirt', checked: false },
+//     { value: 'shorts', label: 'shorts', checked: false },
+//     { value: 'leggings', label: 'leggings', checked: false },
+//     { value: 'top', label: 'top', checked: false },
+//     { value: 'belt', label: 'belt', checked: false },
+//     { value: 'polo-shirt', label: 'polo shirt', checked: false },
+// ]
 const filters = [
     {
         id: 'color',
@@ -42,28 +42,6 @@ const filters = [
             { value: 'brown', label: 'Brown', checked: false },
             { value: 'green', label: 'Green', checked: false },
             { value: 'purple', label: 'Purple', checked: false },
-        ],
-    },
-    {
-        id: 'category',
-        name: 'Category',
-        options: [
-            { value: 't-shirt', label: 'T SHIRT', checked: false },
-            { value: 'bag', label: 'BAG', checked: false },
-            { value: 'trousers', label: 'Travel', checked: false },
-            { value: 'sweatshirt', label: 'Organization', checked: false },
-            { value: 'shoes', label: 'shoes', checked: false },
-            { value: 'sneakers', label: 'sneakers', checked: false },
-            { value: 'dress', label: 'dress', checked: false },
-            { value: 'jacket', label: 'jacket', checked: false },
-            { value: 'wallet', label: 'wallet', checked: false },
-            { value: 'sweater', label: 'sweater', checked: false },
-            { value: 'shirt', label: 'shirt', checked: false },
-            { value: 'shorts', label: 'shorts', checked: false },
-            { value: 'leggings', label: 'leggings', checked: false },
-            { value: 'top', label: 'top', checked: false },
-            { value: 'belt', label: 'belt', checked: false },
-            { value: 'polo-shirt', label: 'polo shirt', checked: false },
         ],
     },
     {
@@ -79,13 +57,7 @@ const filters = [
         ],
     },
 ]
-export default function Filters({
-    filteredProducts = [],
-    selectedCategories = [],
-    handleSelectedCategoriesChange,
-    handleMinPriceChange,
-    handleMaxPriceChange,
-}: any) {
+export default function Filters({ filteredProducts = [], selectedCategories = [], handleSelectedCategoriesChange, handleMinPriceChange, handleMaxPriceChange, categories = [] }: any) {
     const handleCategoryChange = (categoryValue) => {
         const updatedCategories = selectedCategories.includes(categoryValue)
             ? selectedCategories.filter((selectedCategory) => selectedCategory !== categoryValue)
@@ -109,6 +81,7 @@ export default function Filters({
                         </li>
                     ))}
                 </ul>
+                {categories.length>0?(
                 <Disclosure as="div" key={v4()} className="py-6 border-b border-gray-200" defaultOpen>
                     {({ open }) => (
                         <>
@@ -151,7 +124,7 @@ export default function Filters({
                         </>
                     )}
                 </Disclosure>
-
+                ):('')}
                 {/* <Disclosure as="div" key={v4()} className="py-6 border-b border-gray-200" defaultOpen>
                     {({ open }) => (
                         <>

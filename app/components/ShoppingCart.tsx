@@ -14,14 +14,12 @@ import i18next from 'i18next';
 export default function ShoppingCart() {
 
   const { closeCart, cartItems, removeFromCart, openCart, isOpen, totalPrice } = useShoppingCart();
-  // console.log('isOpen>', isOpen);
-  useEffect(() => {
-    setTimeout(() => {
-      closeCart();
-    }, 10);
-  }, []);
-
-  console.log('i18n.language CART',i18next.language)
+  console.log('isOpen>', isOpen);
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     closeCart();
+  //   }, 10);
+  // }, []);
 
   return (
     <div>
@@ -76,10 +74,11 @@ export default function ShoppingCart() {
                                 {cartItems.map((item) => (
                                   <li key={v4()} className="flex py-6">
                                     <MiniCartItem 
-                                      id={item.id} 
+                                      id={item.id}
+                                      price={item.price}
                                       quantity={item.quantity} 
-                                      color={item.color} 
-                                      size={item.size} 
+                                      // color={item.color} 
+                                      // size={item.size} 
                                       slug={item.slug} 
                                       thumbnail={item.thumbnail} 
                                       removeFromCart={removeFromCart}

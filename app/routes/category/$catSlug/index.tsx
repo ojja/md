@@ -29,20 +29,15 @@ export const loader = async ({ params }: any) => {
   const pageNumber = 1;
   const perPage = 20;
   let products = [];
-  let filterdProducts = [];
-  let hasNextPage = false;
   try {
     //@ts-ignore no product type defined
     products = await getCategoryProducts(categorySlug, pageNumber, perPage);
-    filterdProducts = await getFilterProducts(categorySlug, pageNumber, perPage);
-    hasNextPage = products.length === perPage;
   } catch (e) {
     console.log('error', e);
   }
   return json({
     products,
     categorySlug,
-    filterdProducts
   });
 };
 
@@ -61,8 +56,7 @@ export default function CategorySlug() {
   }
 
 
-  const { products: initialProducts, categorySlug, filterdProducts } = useLoaderData();
-  const [pageNumber, setPageNumber] = useState(1);
+  const { products: initialProducts } = useLoaderData();
   const [products, setProducts] = useState(initialProducts);
 
   return (
@@ -73,7 +67,7 @@ export default function CategorySlug() {
           <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-4 border-b border-gray-200" />
           <section aria-labelledby="products-heading" className="pt-6 pb-24">
             <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-              <Filters filterdProducts={filterdProducts}/>
+              <Filters />
 
               {/* Product grid */}
               <div className="relative z-10 lg:col-span-3">

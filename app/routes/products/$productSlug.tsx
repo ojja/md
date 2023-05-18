@@ -1,5 +1,5 @@
 import Gallery from "~/components/Gallery";
-import { MetaFunction } from "remix";
+import { MetaFunction, useRequest } from "remix";
 import { Dialog, Disclosure, RadioGroup, Tab, Transition } from '@headlessui/react';
 import { ChevronUpIcon } from '@heroicons/react/20/solid';
 import React, { Fragment, useEffect, useState } from "react";
@@ -36,14 +36,6 @@ const features: Feature[] = [
     { name: 'Considerations', description: 'Made from natural materials. Grain and color vary with each item.' },
 ]
 
-const breadcrumbs = {
-    pages: [
-        { name: 'Home', href: '/' },
-        { name: 'Woman', href: '#' },
-        { name: 'Parent Category', href: '#' },
-        { name: 'all-clothing', href: '#' }
-    ]
-}
 
 function classNames(...classes: any[]) {
     return classes.filter(Boolean).join(' ')
@@ -70,36 +62,104 @@ export const meta: MetaFunction = ({ data }: any) => {
 
 
 export default function ProductSingle() {
+    // debugger;
     const product = useLoaderData<typeof loader>();
     const nearestNumberRating = 12
-
-    const [selectedSize, setSelectedSize] = useState(product.attributes?.pa_size[0] || '');
-    const [selectedColor, setSelectedColor] = useState(product.attributes?.pa_color[0] || '');
+    const [selectedSize, setSelectedSize] = useState(product.attributes?.pa_size?.[0] || '');
+    const [selectedColor, setSelectedColor] = useState(product.attributes?.pa_color?.[0] || '');
 
     let variation = product?.variations?.find((variation: any) =>
         variation.attributes.attribute_pa_size === selectedSize &&
         variation.attributes.attribute_pa_color === selectedColor
     );
-    let variationPrice = variation ? variation.price : null;
-    let variationSalePrice = variation ? variation.sale_price : null;
+    // let variationPrice = variation ? variation.price : null;
+    // let variationSalePrice = variation ? variation.sale_price : null;
 
 
     useEffect(() => {
-        setSelectedSize(product?.attributes?.pa_size[0] || '');
-        setSelectedColor(product?.attributes?.pa_color[0] || '');
+        setSelectedSize(product?.attributes?.pa_size?.[0] || '');
+        setSelectedColor(product?.attributes?.pa_color?.[0] || '');
         addToRecent(product)
     }, [product]);
-    //   console.log('product>>',product)
+    console.log('product>>', product)
+
+    let itemID;
+    let variationPrice;
+    let variationSalePrice;
+
+if (product.type === "simple") {
+	itemID = product.id;
+} else if (product.type === "variable") {
+	let variation = product?.variations?.find((variation:any) =>
+		variation.attributes.attribute_pa_size === selectedSize
+	);
+	
+	if (variation) {
+		itemID = variation.id;
+
+        variationPrice = variation ? variation.price : null;
+        variationSalePrice = variation ? variation.sale_price : null;
+	} else {
+		// Handle case when variation is not found
+	}
+}
+console.log('itemID',itemID);
 
 
     const {
         addToRecent,
     } = useRecentView();
 
+    const breadcrumbs = {
+        pages: [
+            { name: 'Home', href: '/' },
+            { name: product.gender?product.gender:'All Products', href: '/products' },
+            { name: product.category_name, href: `/category/${product.category_slug}` },
+            { name: product.name, href: '#' }
+        ]
+    }
+
+    // Generate the JSON-LD structured data
+    const generateStructuredData = () => {
+        // Define the schema data for the single product
+        const schemaData = {
+            '@context': 'http://schema.org',
+            '@type': 'Product',
+            name: product.title,
+            image: product.main_img,
+            description: product.description,
+            sku: product.sku,
+            condition: 'new',
+            gender: product.gender,
+            brand: {
+                '@type': 'Brand',
+                name: 'LA',
+            },
+            offers: {
+                '@type': 'Offer',
+                price: variationPrice,
+                priceCurrency: 'EGP',
+                availability: product.availability,
+                // url: currentUrl,
+            },
+            aggregateRating: {
+                '@type': 'AggregateRating',
+                ratingValue: 4.5,
+                reviewCount: 89,
+            },
+        };
+
+        return JSON.stringify(schemaData);
+    };
+
     return (
         <div>
             <section className="pt-12 pb-24 overflow-hidden rounded-b-10xl">
-
+                {/* Add the JSON-LD script tag with the structured data */}
+                <script
+                    type="application/ld+json"
+                    dangerouslySetInnerHTML={{ __html: generateStructuredData() }}
+                />
                 {/* Product Intro */}
                 <div className="bg-white">
                     <div className="container px-4 mx-auto">
@@ -113,8 +173,7 @@ export default function ProductSingle() {
                             <div className="w-full px-4 lg:w-1/2">
                                 <div className="pt-2 mb-6">
                                     <span className="hidden bg-orange-500 bg-purple-500 bg-pink-500 bg-of-white-500 bg-olive-500 bg-golden-500 bg-navy-500"></span>
-                                    <span className="text-xs tracking-wider text-gray-400">NEED CATEGORY </span>
-                                    <span className="text-xs tracking-wider text-gray-400">{product.availability}</span>
+                                    <span className="text-xs tracking-wider text-gray-400">{product.sku}</span>
                                     <h1 className="mt-2 mb-4 text-5xl font-medium md:text-4xl font-heading">{product.title}</h1>
                                     <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">{product.category}</h2>
                                     <h3 id="information-heading" className="sr-only">
@@ -156,15 +215,16 @@ export default function ProductSingle() {
                                         />
                                     ) : ('')}
                                     <span className="pt-3 text-xs">{`${selectedSize} - ${selectedColor}`}</span>
+                                    <span className="block text-xs tracking-wider text-gray-400">{product.availability}</span>
                                     <div className="flex mt-10 space-x-4">
                                         <AddToCartSimple
                                             className="inline-flex justify-center w-full px-8 py-3 text-base font-medium text-white border-2 border-solid rounded-lg bg-slate-900 border-slate-900 hover:bg-slate-700 hover:border-slate-700"
                                             product={
                                                 {
-                                                    id: product.id,
+                                                    id: itemID,
                                                     thumbnail: product.main_img,
-                                                    size: selectedSize,
-                                                    color: selectedColor,
+                                                    // size: selectedSize,
+                                                    // color: selectedColor,
                                                     slug: product.slug,
                                                     price: variationSalePrice,
                                                 }
@@ -174,6 +234,7 @@ export default function ProductSingle() {
                                         />
                                         <button
                                             type="submit"
+                                            disabled
                                             className="items-center justify-center w-1/2 px-8 py-3 text-base font-medium capitalize border-2 border-solid rounded-md border-slate-600 text-slate hover:bg-slate-600 hover:text-white focus:outline-none"
                                         >
                                             Direct checkout

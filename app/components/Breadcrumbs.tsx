@@ -12,15 +12,15 @@ export default function Breadcrumbs({ breadcrumbs, className }) {
             "order-first flex space-x-2 text-sm font-semibold items-center capitalize", className
         )}>
             {breadcrumbs.map((item, index, breadcrumbs) =>
-                <Fragment key={v4()}>
+                <Fragment key={index}>
                     {index === 0 ? "" :
                         <ChevronRightIcon className='w-4 h-4 select-none text-slate-500' />
                     }
-                    {/* {index + 1 === breadcrumbs.length ? (
+                    {index + 1 === breadcrumbs.length ? (
                         <span className={'text-slate-600 hover:text-slate-600'}>{item.name}</span>
                     ) : (
                         <Link to={item.href} className={'text-slate-500 hover:text-slate-600'}>{item.name}</Link>
-                    )} */}
+                    )}
                 </Fragment>
             )}
         </nav>
