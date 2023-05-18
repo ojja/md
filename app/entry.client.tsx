@@ -20,7 +20,7 @@ i18n.use(initReactI18next)
     },
     lng: 'en',
     fallbackLng: 'en',
-    debug: true,
+    debug: false,
     interpolation: {
       escapeValue: false,
     },

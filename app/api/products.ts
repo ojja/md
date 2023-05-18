@@ -31,7 +31,7 @@ export async function getProducts(name?: string | null) {
   // console.log('products>>>>>>>>>>>',response.json())
   // const products: Product[] = await response.json();
   // return products;
-  const url = 'https://lecollezioni-eg.com/MitchAPI/category.php';
+  const url = `${API_ENDPOINT}/category.php`;
   const data = { "attributes": {}, "category": "dress", "price_range": [0, 1000], "products_per_page": 90, "page_number": 1 };
   const options = {
     method: 'POST',
@@ -115,7 +115,7 @@ interface ApiResponse {
   };
 }
 export async function getProductBySlug(productSlug: string) {
-  const url = 'https://lecollezioni-eg.com/MitchAPI/single.php';
+  const url = `${API_ENDPOINT}/single.php`;
   const formData = new FormData();
   formData.append('slug', productSlug);
   const options = {

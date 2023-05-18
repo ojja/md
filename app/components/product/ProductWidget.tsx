@@ -41,7 +41,7 @@ export function ProductWidget({ product }: ProductWidgetProps) {
     
     let imageSrc = product.main_image ? product.main_image : product.thumbnail
 
-    // console.log('product',product)
+    console.log('product',product)
     return (
         <>
             <div className="relative flex flex-col group">
@@ -96,7 +96,7 @@ export function ProductWidget({ product }: ProductWidgetProps) {
                         product={
                             {
                                 id: product.id,
-                                thumbnail: product.thumbnail,
+                                thumbnail: imageSrc,
                                 // size: selectedSize,
                                 // color: selectedColor,
                                 slug: product.slug
