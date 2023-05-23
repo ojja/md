@@ -171,6 +171,7 @@ const getCart = () => {
             'Content-Type': 'application/json',
             'Connection': 'keep-alive',
         },
+        credentials: 'include',
     })
         .then((response) => {
             if (response.ok) {
