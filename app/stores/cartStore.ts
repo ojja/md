@@ -75,7 +75,7 @@ const callAddToCart = (product: CartItem) => {
         
                 // Set the modified cookie in document.cookie
                 // document.cookie = setCookieHeader;
-        
+                getCart();
                 return response.json();
             } else {
                 throw new Error('Failed to add item to cart');
@@ -223,7 +223,7 @@ export const useShoppingCart = () => {
             console.log('already exists', newCartItems[itemIndex].quantity)
             // setQty(product, newCartItems[itemIndex].quantity);
             callAddToCart(product);
-            getCart();
+            
         } else {
             shoppingCart.set([...cartStore, {
                 id: product.id,
@@ -233,7 +233,6 @@ export const useShoppingCart = () => {
                 quantity: product.quantity ?? 1
             }]);
             callAddToCart(product);
-            getCart();
         }
         return;
     }
