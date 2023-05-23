@@ -7,21 +7,6 @@ import { trackAddToCart } from '~/fb-pixel';
 import { json } from 'remix';
 import axios from 'axios';
 
-async function handleRequest(request) {
-    const response = await fetch(request);
-
-    // Access the headers object from the response
-    const headers = json(response.headers);
-
-    // Retrieve the cookie value from the headers
-    const cookieValue = headers.get('Set-Cookie');
-
-    // Do something with the cookie value
-    console.log(cookieValue);
-
-    return response;
-}
-
 export type CartItem = {
     id: number;
     quantity: number;
@@ -52,6 +37,17 @@ const calculateTotalPrice = (cartItems: CartItem[]) => {
     });
     return price;
 };
+// Helper function to get the value of a cookie by name
+function getCookie(name) {
+    const cookies = document.cookie.split('; ');
+    for (let i = 0; i < cookies.length; i++) {
+      const cookie = cookies[i].split('=');
+      if (cookie[0] === name) {
+        return cookie[1];
+      }
+    }
+    return '';
+  }
 const callAddToCart = (product: CartItem) => {
     const apiUrl = `${API_ENDPOINT}/cart/add.php`;
     const requestData = {
@@ -64,19 +60,22 @@ const callAddToCart = (product: CartItem) => {
             'Accept': 'application/json',
             'Connection': 'keep-alive',
         },
-        credentials: 'same-origin',
+        credentials: 'include',
         method: 'POST',
         body: JSON.stringify(requestData),
     })
         .then((response) => {
             if (response.ok) {
-                // const headers = response.headers;
-
-                // Retrieve the cookie value from the headers
-                const cookieValue = response.headers.get('Set-Cookie');
-
-                // Do something with the cookie value
-                console.log('cookieValue', cookieValue);
+                // debugger;
+                // document.cookie = 'woocommerce_cart_hash=' + getCookie('woocommerce_cart_hash') + '; path=/; SameSite=None; Secure';
+                // const setCookieHeader = response.headers.get('Set-Cookie');
+        
+                // Modify the cookie value to set SameSite attribute to None
+                // const modifiedCookie = setCookieHeader.replace(/samesite=(strict|lax);/gi, 'samesite=None; Secure;');
+        
+                // Set the modified cookie in document.cookie
+                // document.cookie = setCookieHeader;
+        
                 return response.json();
             } else {
                 throw new Error('Failed to add item to cart');
