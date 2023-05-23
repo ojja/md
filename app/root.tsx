@@ -50,7 +50,7 @@ export default function App() {
   const { t } = useTranslation();
 
   const [isRtl, setIsRtl] = useState(false);
-  console.log('i18n.language', i18n.language)
+  console.log('Root i18n.language ', i18n.language)
   if (typeof window !== "undefined") {
     initFacebookPixel(FB_PIXELCODE);
   }

@@ -20,7 +20,14 @@ export default function ShoppingCart() {
   //     closeCart();
   //   }, 10);
   // }, []);
-
+  const isClientRender = typeof window !== 'undefined';
+  useEffect(() => {
+    if (isClientRender) {
+      // Hydrate the cart on the client side after rendering
+      closeCart();
+      // You can perform any necessary client-side initialization here
+    }
+  }, [isClientRender]);
   return (
     <div>
       <Transition appear show={isOpen} as={Fragment}>

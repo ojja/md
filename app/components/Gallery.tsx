@@ -52,8 +52,6 @@ export default function Gallery({ galleryImages = [] }: GalleryProps) {
       },
     ],
   };
-
-console.log("GALLLERY",i18n.language)
   return (
     <div className="flex overflow-hidden gallery-slider-wrapper" data-lang={language}
     // dir={i18n.language==="ar" ? 'rtl' : 'ltr'}

@@ -1,15 +1,28 @@
-// import { createEventHandler } from "@remix-run/cloudflare-workers";
-// import * as build from "@remix-run/dev/server-build";
+const express = require('express');
+const { createRequestHandler } = require('@remix-run/express');
+const { default: build } = require('@remix-run/dev/server-build');
 
-// addEventListener(
-//   "fetch",
-//   createEventHandler({ build, mode: process.env.NODE_ENV })
-// );
+const app = express();
 
-import { createRequestHandler } from "@remix-run/netlify";
-import * as build from "@remix-run/dev/server-build";
+app.all(
+  '*',
+  createRequestHandler({
+    build,
+    getLoadContext() {
+      // Define any context needed for server rendering here
+      // For example, you might set up a database connection or load user data
+      return {};
+    },
+    getRootLoader() {
+      // Define the root component loader here
+      // This is the entry point for your server-rendered React components
+      return require('./app/root.loader').default;
+    },
+  })
+);
 
-export const handler = createRequestHandler({
-  build,
-  mode: process.env.NODE_ENV,
+const port = process.env.PORT || 3000;
+
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
 });
