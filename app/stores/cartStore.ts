@@ -129,11 +129,13 @@ const setQty = (product: CartItem, qty: any) => {
         qty: qty,
     };
     fetch(apiUrl, {
-        method: 'POST',
         headers: {
             'Content-Type': 'application/json',
+            'Accept': 'application/json',
             'Connection': 'keep-alive',
         },
+        credentials: 'include',
+        method: 'POST',
         body: JSON.stringify(requestData),
     })
         .then((response) => {
