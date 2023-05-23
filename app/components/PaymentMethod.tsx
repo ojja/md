@@ -1,5 +1,6 @@
 
 import { RiRadioButtonLine, RiCheckboxBlankCircleLine } from "react-icons/ri";
+import PaymentForm from "./PaymentForm";
 
 
 export default function PaymentMethod() {
@@ -9,6 +10,7 @@ export default function PaymentMethod() {
             <h3 className='mb-2 text-lg font-medium text-gray-900'>
                 Payment Method
             </h3>
+            <PaymentForm/>
             <ul className=''>
                 <li className='py-2'>
                     <label htmlFor="Credit_Card" className='block text-gray-900 peer-checked:text-blue-600'>

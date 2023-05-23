@@ -2578,6 +2578,10 @@ video {
   padding-right: 5rem;
 }
 
+.pr-4 {
+  padding-right: 1rem;
+}
+
 .pr-7 {
   padding-right: 1.75rem;
 }
@@ -2632,6 +2636,10 @@ video {
 
 .text-center {
   text-align: center;
+}
+
+.text-right {
+  text-align: right;
 }
 
 .align-middle {

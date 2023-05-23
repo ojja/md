@@ -1,7 +1,27 @@
 import { persistentAtom } from '@nanostores/persistent';
 import { useStore } from '@nanostores/react';
 import { useEffect, useState } from 'react';
+import { useBeforeUnload } from 'remix';
+import { API_ENDPOINT } from '~/config';
 import { trackAddToCart } from '~/fb-pixel';
+import { json } from 'remix';
+import axios from 'axios';
+
+async function handleRequest(request) {
+    const response = await fetch(request);
+
+    // Access the headers object from the response
+    const headers = json(response.headers);
+
+    // Retrieve the cookie value from the headers
+    const cookieValue = headers.get('Set-Cookie');
+
+    // Do something with the cookie value
+    console.log(cookieValue);
+
+    return response;
+}
+
 export type CartItem = {
     id: number;
     quantity: number;
@@ -22,9 +42,8 @@ const isShoppingCartOpen = persistentAtom<boolean>('isShoppingCartOpen', false, 
     listen: false,
     defaultValue: false, // set the default value to false
     encode: (value) => String(value),
-    decode: (value) => Boolean(value),
+    decode: (value) => value === null || value === undefined ? false : Boolean(value),
 });
-
 
 const calculateTotalPrice = (cartItems: CartItem[]) => {
     let price = 0;
@@ -33,6 +52,141 @@ const calculateTotalPrice = (cartItems: CartItem[]) => {
     });
     return price;
 };
+const callAddToCart = (product: CartItem) => {
+    const apiUrl = `${API_ENDPOINT}/cart/add.php`;
+    const requestData = {
+        product_id: product.id,
+        qty: product.quantity ?? 1,
+    };
+    fetch(apiUrl, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Connection': 'keep-alive',
+        },
+        credentials: 'same-origin',
+        method: 'POST',
+        body: JSON.stringify(requestData),
+    })
+        .then((response) => {
+            if (response.ok) {
+                // const headers = response.headers;
+
+                // Retrieve the cookie value from the headers
+                const cookieValue = response.headers.get('Set-Cookie');
+
+                // Do something with the cookie value
+                console.log('cookieValue', cookieValue);
+                return response.json();
+            } else {
+                throw new Error('Failed to add item to cart');
+            }
+        })
+        .then((data) => {
+            // Handle the response data
+            console.log('API response:', data);
+        })
+        .catch((error) => {
+            // Handle network or parsing error
+            console.error('Error:', error);
+        });
+}
+
+// const callAddToCart = async (product) => {
+//     const apiUrl = `${API_ENDPOINT}/cart/add.php`;
+//     const requestData = {
+//         product_id: product.id,
+//         qty: product.quantity ?? 1,
+//     };
+
+//     try {
+//         const response = await axios.post(apiUrl, requestData, {
+//             headers: {
+//                 'Content-Type': 'application/json',
+//                 'Accept': 'application/json',
+//             },
+//             withCredentials: true, // Include cookies in the request
+//         });
+
+//         // Continue processing the response data as needed
+//         console.log('API response:', response.data);
+//         const status = response.data.status;
+//         const cart = response.data.cart;
+//         const total = response.data.total;
+//         console.log('Status:', status);
+//         console.log('Cart:', cart);
+//         console.log('Total:', total);
+//     } catch (error) {
+//         console.error('Error:', error);
+//     }
+// };
+
+
+
+const setQty = (product: CartItem, qty: any) => {
+    const apiUrl = `${API_ENDPOINT}/cart/setQty.php`;
+    const requestData = {
+        product_id: product.id,
+        qty: qty,
+    };
+    fetch(apiUrl, {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json',
+            'Connection': 'keep-alive',
+        },
+        body: JSON.stringify(requestData),
+    })
+        .then((response) => {
+            if (response.ok) {
+
+                return response.json();
+            } else {
+                throw new Error('Failed to update quantity in cart');
+            }
+        })
+        .then((data) => {
+            // Handle the response data
+            console.log('API response:', data);
+
+            const cart = data.cart;
+            const total = data.total;
+
+            // Further processing based on the retrieved values
+            console.log('Cart:', cart);
+            console.log('Total:', total);
+        })
+        .catch((error) => {
+            // Handle network or parsing error
+            console.error('Error:', error);
+        });
+}
+const getCart = () => {
+    console.log('getCart');
+    const apiUrl = `${API_ENDPOINT}/cart/get.php`;
+    fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Connection': 'keep-alive',
+        },
+    })
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Failed to update quantity in cart');
+            }
+        })
+        .then((data) => {
+            // Handle the response data
+            console.log('getCart API response:', data);
+        })
+        .catch((error) => {
+            // Handle network or parsing error
+            console.error('Error:', error);
+        });
+}
 export const useShoppingCart = () => {
     if (typeof window === "undefined") {
         return {
@@ -53,29 +207,31 @@ export const useShoppingCart = () => {
 
 
     const addToCart = (product: CartItem) => {
-
         const itemIndex = cartStore.findIndex((item) =>
             item.id === product.id &&
-            // item.size === product.size &&
-            // item.color === product.color &&
             item.slug === product.slug &&
             item.price === product.price &&
             item.thumbnail === product.thumbnail);
 
         if (itemIndex !== -1) {
+            console.log('already exists')
             const newCartItems = [...cartStore];
             newCartItems[itemIndex].quantity++;
             shoppingCart.set(newCartItems);
+            console.log('already exists', newCartItems[itemIndex].quantity)
+            // setQty(product, newCartItems[itemIndex].quantity);
+            callAddToCart(product);
+            getCart();
         } else {
             shoppingCart.set([...cartStore, {
                 id: product.id,
-                // size: product.size,
-                // color: product.color,
                 slug: product.slug,
                 thumbnail: product.thumbnail,
                 price: product.price,
                 quantity: product.quantity ?? 1
             }]);
+            callAddToCart(product);
+            getCart();
         }
         return;
     }
@@ -111,15 +267,18 @@ export const useShoppingCart = () => {
     }
 
     const getItemQuantity = (product: CartItem) => {
-        return cartStore.find((item) => item.id === product.id)?.quantity ?? 0;
+        return cartStore?.find((item) => item.id === product.id)?.quantity ?? 0;
     };
 
     const openCart = () => {
         console.log('Opening cart');
         isShoppingCartOpen.set(true);
     };
-    const closeCart = () => isShoppingCartOpen.set(false);
 
+    const closeCart = () => {
+        console.log('closeCart cart');
+        isShoppingCartOpen.set(false);
+    };
     const [totalPrice, setTotalPrice] = useState(0);
 
 

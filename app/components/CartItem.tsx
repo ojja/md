@@ -34,14 +34,14 @@ interface CartItemProps {
     // product: Product;
     id: number;
     quantity: number;
-    color: any;
-    size: any;
+    color?: any;
+    size?: any;
     slug: any;
     thumbnail: any;
     removeFromCart: (itemId: number) => void;
     // decreaseCartQuantity: (itemId: number) => void;
 }
-const CartItem = ({ id, quantity, color, size, slug, thumbnail, removeFromCart, decreaseCartQuantity, addToCart }: CartItemProps) => {
+const CartItem = ({ id, quantity, slug, thumbnail, removeFromCart, decreaseCartQuantity, addToCart }: CartItemProps) => {
 
     const [product, setProduct] = useState({});
     const handleRemoveClick = () => {
@@ -61,22 +61,29 @@ const CartItem = ({ id, quantity, color, size, slug, thumbnail, removeFromCart, 
     // const price = product.variations ? getPriceForAttributes(product.variations, size, color) : product.price ;
 
     // const priceV = product.variations ? getPriceForAttributes(product.variations, size, color) : null;
-    // console.log("priceV",priceV);
+    // console.log("product", product);
 
+    const variationId = id;
+    const variation = product?.variations?.find(variation => variation.id === variationId);
 
-    const variation = product?.variations?.find((variation: any) =>
-        variation.attributes.attribute_pa_size === size &&
-        variation.attributes.attribute_pa_color === color
-    );
-    const variationSalePrice = variation ? variation.sale_price : null;
+    let salePrice = null;
+    let productPrice = null;
+    let color = null;
+    let size = null;
+    if (variation) {
+        productPrice = variation.price;
+        salePrice = variation.sale_price;
+        color = variation.attributes?.attribute_pa_color
+        size = variation.attributes?.attribute_pa_size
+    }
 
     const productData = {
         id: product.id,
         thumbnail: product.main_img,
-        size: size,
-        color: color,
+        // size: size,
+        // color: color,
         slug: product.slug,
-        price: variationSalePrice,
+        price: salePrice,
     }
 
     const handleDecrease = () => {
@@ -104,17 +111,16 @@ const CartItem = ({ id, quantity, color, size, slug, thumbnail, removeFromCart, 
                         {/* <span className="text-sm font-light text-slate-400">Categories-1</span> */}
                     </div>
                 </div>
-                <div className="flex items-center justify-center ml-auto">
+                <div className="flex items-start justify-center ml-auto">
                     <div className="flex pr-8">
                         <button
                             type="button"
                             onClick={handleDecrease}
-                            // onClick={(e) => { handleDecrease; e.stopPropagation() }}
                             className="p-2 -m-2 text-gray-400 cursor-pointer hover:text-gray-500"
                         >
                             <MinusIcon className="w-4 h-4" aria-hidden="true" />
                         </button>
-                        <input type="text" className="w-8 h-6 px-0 mx-2 text-xs text-center text-gray-600 bg-gray-100 border rounded focus:outline-none" value={quantity!} readOnly/>
+                        <input type="text" className="w-8 h-6 px-0 mx-2 text-xs text-center text-gray-600 bg-gray-100 border rounded focus:outline-none" value={quantity!} readOnly />
                         {/* <span className="w-8 h-6 mx-2 text-xs leading-6 text-center text-gray-600 bg-gray-100 border rounded focus:outline-none" >{quantity}</span> */}
 
                         <button
@@ -125,8 +131,18 @@ const CartItem = ({ id, quantity, color, size, slug, thumbnail, removeFromCart, 
                             <PlusIcon className="w-4 h-4" aria-hidden="true" />
                         </button>
                     </div>
-                    <div className="pr-8">
-                        <span className="text-sm font-medium">{FormatCurrency(variationSalePrice)}</span>
+                    <div className="pr-4 text-right">
+                        {/* <span className="text-sm font-medium">{FormatCurrency(productPrice)}</span> */}
+                        {salePrice !== null && salePrice != productPrice ? (
+                            <p className="text-xl text-gray-900 flex flex-col-reverse">
+                                <span className="align-middle">{FormatCurrency(salePrice)}</span>
+                                <del className="ml-2 text-base text-red-400 line-through align-middle">{FormatCurrency(productPrice)}</del>
+                            </p>
+                        ) : (
+                            <p className="text-xl text-gray-900">
+                                {FormatCurrency(productPrice)}
+                            </p>
+                        )}
                     </div>
                 </div>
                 <div className="flex items-center justify-center">

@@ -10,6 +10,7 @@ import { initReactI18next } from 'react-i18next';
 import en from "./locales/en.json";
 import ar from "./locales/ar.json";
 import App from "./root";
+import { StrictMode } from "react";
 
 // Configure i18n
 i18n.use(initReactI18next)
@@ -30,9 +31,9 @@ i18n.use(initReactI18next)
 const Root = () => {
   return (
     <I18nextProvider i18n={i18n}>
-      <div>
+      <StrictMode>
         <App />
-      </div>
+      </StrictMode>
     </I18nextProvider>
   );
 };
