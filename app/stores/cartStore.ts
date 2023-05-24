@@ -237,6 +237,7 @@ export const useShoppingCart = () => {
             removeFromCart: () => null,
             openCart: () => null,
             closeCart: () => null,
+            refreshCart: () => null,
         };
     }
     const cartStore = useStore(shoppingCart);
@@ -318,6 +319,9 @@ export const useShoppingCart = () => {
         console.log('closeCart cart');
         isShoppingCartOpen.set(false);
     };
+    const refreshCart = () => {
+        console.log('refresh cart');
+    };
     const [totalPrice, setTotalPrice] = useState(0);
 
 
@@ -339,6 +343,7 @@ export const useShoppingCart = () => {
         removeFromCart,
         openCart,
         closeCart,
+        refreshCart,
         totalPrice,
     };
 };

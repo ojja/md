@@ -139,7 +139,7 @@ function classNames(...classes: string[]) {
 }
 export default function NavBar({ }) {
   const [open, setOpen] = useState(false);
-  const { cartQuantityTotal, openCart } = useShoppingCart();
+  const { cartQuantityTotal, openCart, refreshCart } = useShoppingCart();
 
   const location = useLocation();
   const isCheckoutPage = location.pathname === "/checkout-step1" || location.pathname === "/checkout-step2" || location.pathname === "/checkout";
@@ -431,6 +431,9 @@ export default function NavBar({ }) {
                   )}
                   <div className="flex items-center ml-auto">
                     <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+                      <span className="text-sm font-medium text-gray-700 hover:text-gray-800" onClick={refreshCart}>
+                        refreshCart
+                      </span>
                       <Link to="/login" className="text-sm font-medium text-gray-700 hover:text-gray-800">
                         Login
                       </Link>
