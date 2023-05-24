@@ -272,7 +272,7 @@ export const useShoppingCart = () => {
             // && item.size === product.size
             // && item.color === product.color
         );
-        const qty = cartStore?.find((item) => item.id === product.id)?.quantity ?? 0;
+        const qty = cartStore?.find((item) => item.id === product.id)?.quantity ?? 1;
         if (itemIndex !== -1) {
             const newCartItems = [...cartStore];
             if (newCartItems[itemIndex].quantity <= 1) {
