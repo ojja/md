@@ -60,15 +60,16 @@ const callAddToCart = (product: CartItem) => {
             'Accept': 'application/json',
             'Connection': 'keep-alive',
         },
-        credentials: 'include',
-        // credentials: 'same-origin',
+        // credentials: 'include',
+        credentials: 'same-origin',
         method: 'POST',
-        mode: 'no-cors',
+        // mode: 'no-cors',
         body: JSON.stringify(requestData),
     })
         .then((response) => {
             if (response.ok) {
-                debugger;
+                // debugger;
+                console.log('called Add API');
                 getCart();
                 return response.json();
             } else {
