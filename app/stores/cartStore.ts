@@ -184,13 +184,6 @@ const setQty = (product: CartItem, qty: any) => {
         .then((data) => {
             // Handle the response data
             console.log('API response setQty:', data);
-
-            const cart = data.cart;
-            const total = data.total;
-
-            // Further processing based on the retrieved values
-            console.log('Cart:', cart);
-            console.log('Total:', total);
         })
         .catch((error) => {
             // Handle network or parsing error
@@ -279,7 +272,7 @@ export const useShoppingCart = () => {
             // && item.size === product.size
             // && item.color === product.color
         );
-
+        const qty = cartStore?.find((item) => item.id === product.id)?.quantity ?? 0;
         if (itemIndex !== -1) {
             const newCartItems = [...cartStore];
             if (newCartItems[itemIndex].quantity <= 1) {
@@ -288,6 +281,8 @@ export const useShoppingCart = () => {
                 newCartItems[itemIndex].quantity--;
                 shoppingCart.set(newCartItems);
                 console.log('decreaseCartQuantity');
+                console.log('decreaseCartQuantity NUM',newCartItems[itemIndex].quantity--);
+                console.log('decreaseCartQuantity NUM 2',qty);
                 setQty(product, newCartItems[itemIndex].quantity--);
                 return;
             }
