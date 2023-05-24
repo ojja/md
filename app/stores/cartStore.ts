@@ -321,6 +321,7 @@ export const useShoppingCart = () => {
     };
     const refreshCart = () => {
         console.log('refresh cart');
+        getCart();
     };
     const [totalPrice, setTotalPrice] = useState(0);
 
