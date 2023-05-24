@@ -274,6 +274,7 @@ export const useShoppingCart = () => {
         );
         const qty = cartStore?.find((item) => item.id === product.id)?.quantity ?? 1;
         if (itemIndex !== -1) {
+            debugger;
             const newCartItems = [...cartStore];
             if (newCartItems[itemIndex].quantity <= 1) {
                 return removeFromCart(product.id);
