@@ -282,9 +282,10 @@ export const useShoppingCart = () => {
                 newCartItems[itemIndex].quantity--;
                 shoppingCart.set(newCartItems);
                 console.log('decreaseCartQuantity');
-                console.log('decreaseCartQuantity NUM',newCartItems[itemIndex].quantity--);
-                console.log('decreaseCartQuantity 2 NUM',newCartItems[itemIndex].quantity--);
+                // console.log('decreaseCartQuantity NUM',newCartItems[itemIndex].quantity--);
+                // console.log('decreaseCartQuantity 2 NUM',newCartItems[itemIndex].quantity--);
                 console.log('decreaseCartQuantity QTY',qty);
+                console.log('decreaseCartQuantity QTY sloud',qty-1);
                 setQty(product, newCartItems[itemIndex].quantity--);
                 return;
             }
