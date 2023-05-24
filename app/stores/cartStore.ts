@@ -61,23 +61,18 @@ const callAddToCart = (product: CartItem) => {
             'Connection': 'keep-alive',
         },
         credentials: 'include',
+        // credentials: 'same-origin',
         method: 'POST',
+        mode: 'no-cors',
         body: JSON.stringify(requestData),
     })
         .then((response) => {
             if (response.ok) {
-                // debugger;
-                // document.cookie = 'woocommerce_cart_hash=' + getCookie('woocommerce_cart_hash') + '; path=/; SameSite=None; Secure';
-                // const setCookieHeader = response.headers.get('Set-Cookie');
-        
-                // Modify the cookie value to set SameSite attribute to None
-                // const modifiedCookie = setCookieHeader.replace(/samesite=(strict|lax);/gi, 'samesite=None; Secure;');
-        
-                // Set the modified cookie in document.cookie
-                // document.cookie = setCookieHeader;
+                debugger;
                 getCart();
                 return response.json();
             } else {
+                getCart();
                 throw new Error('Failed to add item to cart');
             }
         })
