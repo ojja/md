@@ -286,7 +286,7 @@ export const useShoppingCart = () => {
                 // console.log('decreaseCartQuantity 2 NUM',newCartItems[itemIndex].quantity--);
                 console.log('decreaseCartQuantity QTY',qty);
                 console.log('decreaseCartQuantity QTY sloud',qty-1);
-                setQty(product, newCartItems[itemIndex].quantity--);
+                setQty(product, qty-1);
                 return;
             }
         }
