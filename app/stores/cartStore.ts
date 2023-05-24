@@ -283,6 +283,7 @@ export const useShoppingCart = () => {
                 shoppingCart.set(newCartItems);
                 console.log('decreaseCartQuantity');
                 console.log('decreaseCartQuantity NUM',newCartItems[itemIndex].quantity--);
+                console.log('decreaseCartQuantity 2 NUM',newCartItems[itemIndex].quantity--);
                 console.log('decreaseCartQuantity QTY',qty);
                 setQty(product, newCartItems[itemIndex].quantity--);
                 return;
