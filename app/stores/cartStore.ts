@@ -69,12 +69,49 @@ const callAddToCart = (product: CartItem) => {
         .then((response) => {
             if (response.ok) {
                 // debugger;
-                console.log('called Add API');
+                console.log('called Add API success');
                 getCart();
                 return response.json();
             } else {
                 getCart();
                 throw new Error('Failed to add item to cart');
+            }
+        })
+        .then((data) => {
+            // Handle the response data
+            console.log('API response:', data);
+        })
+        .catch((error) => {
+            // Handle network or parsing error
+            console.error('Error:', error);
+        });
+}
+const callRemoveItemCart = (itemId: number) => {
+    const apiUrl = `${API_ENDPOINT}/cart/remove.php`;
+    const requestData = {
+        product_id: itemId,
+    };
+    fetch(apiUrl, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Connection': 'keep-alive',
+        },
+        credentials: 'include',
+        // credentials: 'same-origin',
+        method: 'POST',
+        // mode: 'no-cors',
+        body: JSON.stringify(requestData),
+    })
+        .then((response) => {
+            if (response.ok) {
+                // debugger;
+                console.log('called remove API success');
+                getCart();
+                return response.json();
+            } else {
+                getCart();
+                throw new Error('Failed to remove item to cart');
             }
         })
         .then((data) => {
@@ -136,15 +173,17 @@ const setQty = (product: CartItem, qty: any) => {
     })
         .then((response) => {
             if (response.ok) {
-
+                console.log('called setQty API success');
+                getCart();
                 return response.json();
             } else {
+                getCart();
                 throw new Error('Failed to update quantity in cart');
             }
         })
         .then((data) => {
             // Handle the response data
-            console.log('API response:', data);
+            console.log('API response setQty:', data);
 
             const cart = data.cart;
             const total = data.total;
@@ -217,7 +256,7 @@ export const useShoppingCart = () => {
             newCartItems[itemIndex].quantity++;
             shoppingCart.set(newCartItems);
             console.log('already exists', newCartItems[itemIndex].quantity)
-            // setQty(product, newCartItems[itemIndex].quantity);
+            setQty(product, newCartItems[itemIndex].quantity);
             callAddToCart(product);
             
         } else {
@@ -247,6 +286,8 @@ export const useShoppingCart = () => {
             } else {
                 newCartItems[itemIndex].quantity--;
                 shoppingCart.set(newCartItems);
+                console.log('already exists', newCartItems[itemIndex].quantity--);
+                setQty(product, newCartItems[itemIndex].quantity--);
                 return;
             }
         }
@@ -259,6 +300,7 @@ export const useShoppingCart = () => {
             const newCartItems = [...cartStore];
             newCartItems.splice(itemIndex, 1);
             shoppingCart.set(newCartItems);
+            callRemoveItemCart(itemId)
         }
         return;
     }
