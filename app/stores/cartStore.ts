@@ -287,7 +287,7 @@ export const useShoppingCart = () => {
             } else {
                 newCartItems[itemIndex].quantity--;
                 shoppingCart.set(newCartItems);
-                console.log('already exists', newCartItems[itemIndex].quantity--);
+                console.log('decreaseCartQuantity');
                 setQty(product, newCartItems[itemIndex].quantity--);
                 return;
             }
@@ -301,6 +301,7 @@ export const useShoppingCart = () => {
             const newCartItems = [...cartStore];
             newCartItems.splice(itemIndex, 1);
             shoppingCart.set(newCartItems);
+            console.log('removeFromCart');
             callRemoveItemCart(itemId)
         }
         return;
