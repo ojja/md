@@ -274,18 +274,18 @@ export const useShoppingCart = () => {
         );
         const qty = cartStore?.find((item) => item.id === product.id)?.quantity ?? 1;
         if (itemIndex !== -1) {
-            debugger;
+            // debugger;
             const newCartItems = [...cartStore];
             if (newCartItems[itemIndex].quantity <= 1) {
                 return removeFromCart(product.id);
             } else {
                 newCartItems[itemIndex].quantity--;
                 shoppingCart.set(newCartItems);
-                console.log('decreaseCartQuantity');
+                // console.log('decreaseCartQuantity');
                 // console.log('decreaseCartQuantity NUM',newCartItems[itemIndex].quantity--);
                 // console.log('decreaseCartQuantity 2 NUM',newCartItems[itemIndex].quantity--);
-                console.log('decreaseCartQuantity QTY',qty);
-                console.log('decreaseCartQuantity QTY sloud',qty-1);
+                // console.log('decreaseCartQuantity QTY',qty);
+                // console.log('decreaseCartQuantity QTY sloud',qty-1);
                 setQty(product, qty-1);
                 return;
             }
