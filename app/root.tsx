@@ -65,7 +65,7 @@ export default function App() {
   //   s.parentNode.insertBefore(t,s)}(window, document,'script',
   //   'https://connect.facebook.net/en_US/fbevents.js');
   //   fbq('init', '6517989738225028');
-  //   fbq('track', 'PageView');
+  //   fbq('track', 'PageView');s
   // }, []);
 
 
@@ -85,7 +85,7 @@ export default function App() {
         <Footer />
         <ScrollRestoration />
         <Scripts />
-        {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
+        {/* {process.env.NODE_ENV === 'development' ? <LiveReload /> : null} */}
       </body>
     </html >
   );
