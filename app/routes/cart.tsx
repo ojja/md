@@ -1,5 +1,6 @@
 import { MinusIcon, PlusIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import { Link } from "@remix-run/react";
+import { useState } from "react";
 import { MetaFunction } from "remix";
 import CartItem from "~/components/CartItem";
 import ExtraProducts from "~/components/ExtraProducts";
@@ -16,7 +17,8 @@ export const meta: MetaFunction = () => {
 }
 export default function Cart() {
     const { cartItems, removeFromCart, decreaseCartQuantity, addToCart, totalPrice } = useShoppingCart();
-    console.log('cartItems', cartItems)
+    // console.log('cartItems', cartItems)
+    const [openCoupon, setOpenCoupon] = useState(false);
     return (
         <div className="p-8 mx-auto bg-white">
             <div className="container px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
@@ -61,12 +63,14 @@ export default function Cart() {
                                         <span className="text-gray-600">10.00 EGP</span>
                                     </div>
                                     <div className="flex flex-wrap justify-between py-3 border-b border-black-300">
-                                        <span className="font-light text-blue-500 underline cursor-pointer">Do you have a discount coupon?</span>
+                                        {openCoupon?
+                                        <span className="font-light text-blue-500 underline cursor-pointer" onClick={() => setOpenCoupon(true)}>Do you have a discount coupon?</span>
+                                        :
                                         <form action="" method="post" className="flex flex-wrap w-full">
                                             <button
                                                 type="button"
                                                 className="p-2 -m-2 text-gray-400 hover:text-gray-500"
-                                            // onClick={closeCart}
+                                                onClick={() => setOpenCoupon(false)}
                                             >
                                                 <span className="sr-only">Close coupon</span>
                                                 <XMarkIcon className="w-6 h-6" aria-hidden="true" />
@@ -76,6 +80,7 @@ export default function Cart() {
                                                 <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-r text-sm w-full sm:w-auto px-5 py-2.5 text-center " name="apply_coupon" value="Apply coupon">Apply</button>
                                             </div>
                                         </form>
+                                        }
                                     </div>
                                     <div className="flex justify-between py-5">
                                         <span className="font-bold text-gray-900 font-lg">Order Total</span>
