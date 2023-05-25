@@ -71,7 +71,8 @@ export default function Cart() {
                                                 onSubmit={(event) => {
                                                     event.preventDefault(); // Prevent default form submission behavior
                                                     const form = event.target as HTMLFormElement; // Cast event.target to HTMLFormElement
-                                                    const couponCode = form.querySelector('input[name="coupon_code"]') as HTMLInputElement; // Get the coupon code from the input field
+                                                    const couponCodeInput = form.querySelector('input[name="coupon_code"]') as HTMLInputElement; // Cast the selected element to HTMLInputElement
+                                                    const couponCode = couponCodeInput.value; // Get the coupon code from the input field
                                                     addCoupon(couponCode); // Call the addCoupon function with the coupon code
                                                 }}
                                             >
