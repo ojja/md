@@ -17,10 +17,10 @@ export const meta: MetaFunction = () => {
     }
 }
 export default function Cart() {
-    const { cartItems, removeFromCart, decreaseCartQuantity, addToCart, totalPrice, addCoupon } = useShoppingCart();
+    const { cartItems, removeFromCart, decreaseCartQuantity, addToCart, totalPrice, addCoupon, totalAPI, totalDiscountAPI } = useShoppingCart();
     // console.log('cartItems', cartItems)
-    // console.log('totalAPI', totalAPI)
-    // console.log('totalDiscountAPI', totalDiscountAPI)
+    console.log('totalAPI', totalAPI)
+    console.log('totalDiscountAPI', totalDiscountAPI)
     const [openCoupon, setOpenCoupon] = useState(false);
 
     return (

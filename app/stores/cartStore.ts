@@ -351,8 +351,8 @@ export const useShoppingCart = () => {
         refreshCart,
         addCoupon,
         totalPrice,
-        // totalAPI,
-        // totalDiscountAPI,
+        totalAPI,
+        totalDiscountAPI,
     };
 };
 
