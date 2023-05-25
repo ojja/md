@@ -190,7 +190,7 @@ const setQty = (product: CartItem, qty: any) => {
             console.error('Error:', error);
         });
 }
-const addCouponAPI = (couponCode: any) => {
+const addCouponAPI = (couponCode: string) => {
     const apiUrl = `${API_ENDPOINT}/cart/coupon.php`;
     const requestData = {
         coupon: couponCode,
