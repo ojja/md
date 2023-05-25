@@ -240,8 +240,8 @@ const getCart = () => {
         .then((data: any) => {
             // Handle the response data
             console.log('getCart API response:', data);
-            setTotalAPI(data.total);
-            setTotalDiscountAPI(data.total_discount);
+            // setTotalAPI(data.total);
+            // setTotalDiscountAPI(data.total_discount);
         })
         .catch((error) => {
             // Handle network or parsing error
