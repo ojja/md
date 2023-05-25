@@ -38,16 +38,8 @@ const calculateTotalPrice = (cartItems: CartItem[]) => {
     return price;
 };
 
-const setTotalAPI = (total) => {
-    // Set the total value in the component's state
-};
 
-const setTotalDiscountAPI = (totalDiscount) => {
-    // Set the total discount value in the component's state
-};
-
-
-export const getCart = (setTotalAPI: (total: number) => void, setTotalDiscountAPI: (totalDiscount: number) => void) => {
+export const getCart = () => {
     console.log('getCart Main Fun');
     const apiUrl = `${API_ENDPOINT}/cart/get.php`;
     fetch(apiUrl, {
@@ -68,16 +60,12 @@ export const getCart = (setTotalAPI: (total: number) => void, setTotalDiscountAP
         .then((data: any) => {
             console.log('getCart API response:', data);
             const { total, total_discount }: any = data;
-
-            setTotalAPI(total);
-            setTotalDiscountAPI(total_discount);
+            return { total, total_discount };
         })
         .catch((error) => {
             console.error('Error:', error);
         });
 };
-
-
 const callAddToCart = (product: CartItem) => {
     const apiUrl = `${API_ENDPOINT}/cart/add.php`;
     const requestData = {
@@ -157,8 +145,6 @@ const callRemoveItemCart = (itemId: number) => {
             console.error('Error:', error);
         });
 }
-
-
 const setQty = (product: CartItem, qty: any) => {
     const apiUrl = `${API_ENDPOINT}/cart/setQty.php`;
     const requestData = {
@@ -251,6 +237,9 @@ export const useShoppingCart = () => {
             closeCart: () => null,
             refreshCart: () => null,
             addCoupon: () => null,
+            totalPrice: 0,
+            totalAPI: 0,
+            totalDiscountAPI: 0,
         };
     }
     const cartStore = useStore(shoppingCart);
@@ -334,7 +323,7 @@ export const useShoppingCart = () => {
     };
     const refreshCart = () => {
         console.log('refresh cart new');
-        getCart(setTotalAPI, setTotalDiscountAPI);
+        // getCart(setTotalAPI, setTotalDiscountAPI);
     };
     const addCoupon = (couponCode: any) => {
         console.log('addCoupon NEW', couponCode);
@@ -344,6 +333,18 @@ export const useShoppingCart = () => {
     // Call calculateTotalPrice when the component mounts
     useEffect(() => {
         setTotalPrice(calculateTotalPrice(cartStore));
+    }, [cartStore]);
+
+    useEffect(() => {
+        getCart()
+            .then(({ total, total_discount }) => {
+                setTotalAPI(total);
+                setTotalDiscountAPI(total_discount);
+            })
+            .catch((error) => {
+                // Handle the error if necessary
+                console.error('Error:', error);
+            });
     }, [cartStore]);
 
     return {
