@@ -68,24 +68,31 @@ export default function Cart() {
                                         <span className="font-light text-gray-600">Tax estimate</span>
                                         <span className="text-gray-600">10.00 EGP</span>
                                     </div>
-                                    <div className="flex flex-wrap justify-between py-3 border-b border-black-300">
-                                        {openCoupon ?
-                                            <div className="w-full">
-                                                <button
-                                                    type="button"
-                                                    className="p-2 -m-2 text-gray-400 hover:text-gray-500"
-                                                    onClick={() => setOpenCoupon(false)}
-                                                >
-                                                    <span className="sr-only">Close coupon</span>
-                                                    <XMarkIcon className="w-6 h-6" aria-hidden="true" />
-                                                </button>
-                                                <CouponForm />
-                                            </div>
+                                    {totalDiscountAPI > 0 ?
+                                        < div className="flex justify-between py-3 border-b border-black-300">
+                                            <span className="font-light text-gray-600">Discount</span>
+                                            <span className="text-gray-600">{FormatCurrency(totalDiscountAPI)}</span>
+                                        </div>
+                                        :
+                                        <div className="flex flex-wrap justify-between py-3 border-b border-black-300">
+                                            {openCoupon ?
+                                                <div className="w-full">
+                                                    <button
+                                                        type="button"
+                                                        className="p-2 -m-2 text-gray-400 hover:text-gray-500"
+                                                        onClick={() => setOpenCoupon(false)}
+                                                    >
+                                                        <span className="sr-only">Close coupon</span>
+                                                        <XMarkIcon className="w-6 h-6" aria-hidden="true" />
+                                                    </button>
+                                                    <CouponForm />
+                                                </div>
 
-                                            :
-                                            <span className="font-light text-blue-500 underline cursor-pointer" onClick={() => setOpenCoupon(true)}>Do you have a discount coupon?</span>
-                                        }
-                                    </div>
+                                                :
+                                                <span className="font-light text-blue-500 underline cursor-pointer" onClick={() => setOpenCoupon(true)}>Do you have a discount coupon?</span>
+                                            }
+                                        </div>
+                                    }
                                     <div className="flex justify-between py-5">
                                         <span className="font-bold text-gray-900 font-lg">Order Total</span>
                                         <span className="font-bold text-gray-600">10.00 EGP</span>
@@ -104,6 +111,6 @@ export default function Cart() {
                 )}
                 <ExtraProducts categorySlug="oriental-sweets" pageNumber={1} title="" />
             </div>
-        </div>
+        </div >
     )
 }
