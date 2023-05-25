@@ -60,7 +60,8 @@ export const getCart = () => {
             .then((data) => {
                 console.log('getCart API response:', data);
                 const { total, total_discount } = data;
-                resolve({ total, total_discount });
+                // resolve({ total, total_discount });
+                resolve({ total: parseFloat(total), total_discount });
             })
             .catch((error) => {
                 reject(error);
