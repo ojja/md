@@ -354,6 +354,7 @@ export const useShoppingCart = (totalAPI: any, totalDiscountAPI: any) => {
 
     // Call getCart when the component mounts
     useEffect(() => {
+        console.log('call getCart in useeffect')
         getCart();
     }, []);
 
