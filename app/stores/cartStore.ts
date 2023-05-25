@@ -190,41 +190,43 @@ const setQty = (product: CartItem, qty: any) => {
             console.error('Error:', error);
         });
 }
-const addCouponAPI = (couponCode: string) => {
-    const apiUrl = `${API_ENDPOINT}/cart/coupon.php`;
-    const requestData = {
+const addCouponAPI = (couponCode:any) => {
+    return new Promise((resolve, reject) => {
+      const apiUrl = `${API_ENDPOINT}/cart/coupon.php`;
+      const requestData = {
         coupon: couponCode,
-    };
-    fetch(apiUrl, {
+      };
+      fetch(apiUrl, {
         headers: {
-            'Content-Type': 'application/json',
-            'Accept': 'application/json',
-            'Connection': 'keep-alive',
+          'Content-Type': 'application/json',
+          'Accept': 'application/json',
+          'Connection': 'keep-alive',
         },
         credentials: 'include',
         method: 'POST',
         body: JSON.stringify(requestData),
-    })
+      })
         .then((response) => {
-            if (response.ok) {
-                // debugger
-                console.log('called coupon API success');
-                getCart();
-                return response.json();
-            } else {
-                getCart();
-                throw new Error('Failed to update coupon in cart');
-            }
+          if (response.ok) {
+            console.log('Called coupon API success');
+            getCart();
+            return response.json();
+          } else {
+            getCart();
+            throw new Error('Failed to update coupon in cart');
+          }
         })
         .then((data) => {
-            // Handle the response data
-            console.log('API response coupon:', data);
+          console.log('API response coupon:', data);
+          resolve(data); // Resolve the promise with the response data
         })
         .catch((error) => {
-            // Handle network or parsing error
-            console.error('Error:', error);
+          console.error('Error:', error);
+          reject(error); // Reject the promise with the error
         });
-}
+    });
+  };
+  
 const getCart = () => {
     console.log('getCart');
     const apiUrl = `${API_ENDPOINT}/cart/get.php`;
