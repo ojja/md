@@ -25,10 +25,10 @@ export default function CouponForm() {
             method="post"
             className="flex flex-wrap w-full"
             onSubmit={(event) => {
-                event.preventDefault(); // Prevent default form submission behavior
-                const form = event.target as HTMLFormElement; // Cast event.target to HTMLFormElement
-                const couponCodeInput = form.querySelector('input[name="coupon_code"]') as HTMLInputElement; // Cast the selected element to HTMLInputElement
-                const couponCode = couponCodeInput.value; // Get the coupon code from the input field
+                event.preventDefault();
+                const form = event.target as HTMLFormElement;
+                const couponCodeInput = form.querySelector('input[name="coupon_code"]') as HTMLInputElement;
+                const couponCode = couponCodeInput.value;
                 handleCouponApplication(couponCode);
             }}
         >
@@ -36,7 +36,7 @@ export default function CouponForm() {
                 <input
                     type="text"
                     name="coupon_code"
-                    className="p-2 border border-gray-300 rounded-l outline-none bg-gray-50"
+                    className="w-full p-2 border border-gray-300 rounded-l outline-none bg-gray-50"
                     id="coupon_code"
                     placeholder="Enter Coupon Code"
                 />
@@ -48,8 +48,15 @@ export default function CouponForm() {
                 >
                     Apply
                 </button>
-                <p>{couponMsg}</p>
             </div>
+            {couponMsg && (
+                <p
+                    className={`flex p-2 text-sm rounded-lg w-full mt-2 ${couponMsg.includes('success') ? 'text-green-800 bg-green-100' : 'text-red-800 bg-red-100'
+                        }`}
+                >
+                    {couponMsg}
+                </p>
+            )}
         </form>
     )
 }
