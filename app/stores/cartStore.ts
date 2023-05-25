@@ -217,8 +217,8 @@ const addCouponAPI = (couponCode: any) => {
     });
 };
 
-const [totalAPI, setTotalAPI] = useState(0);
-const [totalDiscountAPI, setTotalDiscountAPI] = useState(0);
+const [totalAPI, setTotalAPI] = useState('');
+const [totalDiscountAPI, setTotalDiscountAPI] = useState('');
 const getCart = () => {
     console.log('getCart');
     const apiUrl = `${API_ENDPOINT}/cart/get.php`;
