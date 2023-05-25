@@ -1,27 +1,21 @@
-import React from 'react'
+import { useState } from 'react'
 import useShoppingCart from '~/stores/cartStore';
 
 export default function CouponForm() {
     const { addCoupon } = useShoppingCart();
+    const [couponMsg, setSouponMsg] = useState('');
     const handleCouponApplication = async (couponCode: any) => {
         try {
-            const response = await addCoupon(couponCode);
-            debugger;
+            const response = await addCoupon(couponCode) as { status: string };
             if (response.status === 'success') {
-                // Handle success scenario
-                console.log('Coupon applied successfully');
-                // Perform actions for success, such as updating the UI or performing further operations
+                setSouponMsg('Coupon applied successfully')
             } else if (response.status === 'failed') {
-                // Handle failure scenario
-                console.log('Coupon application failed');
-                // Perform actions for failure, such as displaying an error message or taking appropriate steps
+                setSouponMsg('Coupon application failed')
             } else {
-                // Handle other statuses if needed
-                console.log('Unknown response status');
+                setSouponMsg('Unknown response status')
             }
         } catch (error) {
-            // Handle network or parsing error
-            console.error('Error:', error);
+            setSouponMsg('Error' + error)
         }
     };
     return (
@@ -54,6 +48,7 @@ export default function CouponForm() {
                 >
                     Apply
                 </button>
+                <p>{couponMsg}</p>
             </div>
         </form>
     )
