@@ -58,20 +58,20 @@ export default function Cart() {
                                 <div className="flex flex-col">
                                     <div className="flex justify-between py-3 border-b border-black-300">
                                         <span className="font-light text-gray-600">Subtotal</span>
-                                        <span className="text-gray-600">{FormatCurrency(totalPrice)}</span>
+                                        <span className="text-gray-600">{FormatCurrency(totalAPI+totalDiscountAPI)}</span>
                                     </div>
                                     <div className="flex justify-between py-3 border-b border-black-300">
                                         <span className="font-light text-gray-600">Shipping estimate</span>
-                                        <span className="text-gray-600">25.00 EGP</span>
+                                        <span className="text-gray-600">{FormatCurrency(0)}</span>
                                     </div>
-                                    <div className="flex justify-between py-3 border-b border-black-300">
+                                    {/* <div className="flex justify-between py-3 border-b border-black-300">
                                         <span className="font-light text-gray-600">Tax estimate</span>
                                         <span className="text-gray-600">10.00 EGP</span>
-                                    </div>
+                                    </div> */}
                                     {totalDiscountAPI > 0 ?
                                         < div className="flex justify-between py-3 border-b border-black-300">
                                             <span className="font-light text-gray-600">Discount</span>
-                                            <span className="text-gray-600">{FormatCurrency(totalDiscountAPI)}</span>
+                                            <span className="text-red-400">-{FormatCurrency(totalDiscountAPI)}</span>
                                         </div>
                                         :
                                         <div className="flex flex-wrap justify-between py-3 border-b border-black-300">
@@ -95,7 +95,7 @@ export default function Cart() {
                                     }
                                     <div className="flex justify-between py-5">
                                         <span className="font-bold text-gray-900 font-lg">Order Total</span>
-                                        <span className="font-bold text-gray-600">10.00 EGP</span>
+                                        <span className="font-bold text-gray-600">{FormatCurrency(totalDiscountAPI)}</span>
                                     </div>
                                     <Link to="/checkout" className="px-3 py-2 text-lg text-center text-white rounded-md pointer-events-auto bg-primary-600 hover:bg-primary-500">Checkout</Link>
                                     <Link to="/checkout-step1" className="px-3 py-2 text-lg text-center text-white rounded-md pointer-events-auto bg-primary-600 hover:bg-primary-500">Checkout2</Link>
