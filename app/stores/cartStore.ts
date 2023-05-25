@@ -217,8 +217,8 @@ const addCouponAPI = (couponCode: any) => {
     });
 };
 
-const [totalAPI, setTotalAPI] = useState('');
-const [totalDiscountAPI, setTotalDiscountAPI] = useState('');
+// const [totalAPI, setTotalAPI] = useState('');
+// const [totalDiscountAPI, setTotalDiscountAPI] = useState('');
 const getCart = () => {
     console.log('getCart');
     const apiUrl = `${API_ENDPOINT}/cart/get.php`;
@@ -248,7 +248,7 @@ const getCart = () => {
             console.error('Error:', error);
         });
 }
-export const useShoppingCart = (totalAPI: any, totalDiscountAPI: any) => {
+export const useShoppingCart = () => {
     if (typeof window === "undefined") {
         return {
             getItemQuantity: () => null,
@@ -379,8 +379,8 @@ export const useShoppingCart = (totalAPI: any, totalDiscountAPI: any) => {
         refreshCart,
         addCoupon,
         totalPrice,
-        totalAPI,
-        totalDiscountAPI,
+        // totalAPI,
+        // totalDiscountAPI,
     };
 };
 
