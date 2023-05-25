@@ -111,7 +111,7 @@ const callAddToCart = (product: CartItem) => {
             // Handle the response data
             console.log('API response:', data);
             const { total, total_discount }: any = data;
-            getCart(setTotalAPI, setTotalDiscountAPI)(total, total_discount);
+            // getCart(setTotalAPI, setTotalDiscountAPI)(total, total_discount);
         })
         .catch((error) => {
             // Handle network or parsing error
@@ -150,7 +150,7 @@ const callRemoveItemCart = (itemId: number) => {
             // Handle the response data
             console.log('API response:', data);
             const { total, total_discount }: any = data;
-            getCart(setTotalAPI, setTotalDiscountAPI)(total, total_discount);
+            // getCart(setTotalAPI, setTotalDiscountAPI)(total, total_discount);
         })
         .catch((error) => {
             // Handle network or parsing error
@@ -189,7 +189,7 @@ const setQty = (product: CartItem, qty: any) => {
             // Handle the response data
             console.log('API response setQty:', data);
             const { total, total_discount }: any = data;
-            getCart(setTotalAPI, setTotalDiscountAPI)(total, total_discount);
+            // getCart(setTotalAPI, setTotalDiscountAPI)(total, total_discount);
 
         })
         .catch((error) => {
@@ -227,7 +227,7 @@ const addCouponAPI = (couponCode: any) => {
                 console.log('API response coupon:', data);
                 resolve(data); // Resolve the promise with the response data
                 const { total, total_discount }: any = data;
-                getCart(setTotalAPI, setTotalDiscountAPI)(total, total_discount);
+                // getCart(setTotalAPI, setTotalDiscountAPI)(total, total_discount);
 
             })
             .catch((error) => {
