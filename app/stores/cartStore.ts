@@ -60,16 +60,18 @@ const callAddToCart = (product: CartItem) => {
             if (response.ok) {
                 // debugger;
                 console.log('called Add API success');
-                getCart();
+
                 return response.json();
             } else {
-                getCart();
+                // getCart();
                 throw new Error('Failed to add item to cart');
             }
         })
         .then((data) => {
             // Handle the response data
             console.log('API response:', data);
+            const { total, total_discount }:any = data;
+            getCart(total, total_discount);
         })
         .catch((error) => {
             // Handle network or parsing error
@@ -97,52 +99,24 @@ const callRemoveItemCart = (itemId: number) => {
             if (response.ok) {
                 // debugger;
                 console.log('called remove API success');
-                getCart();
+                // getCart();
                 return response.json();
             } else {
-                getCart();
+                // getCart();
                 throw new Error('Failed to remove item to cart');
             }
         })
         .then((data) => {
             // Handle the response data
             console.log('API response:', data);
+            const { total, total_discount }:any = data;
+            getCart(total, total_discount);
         })
         .catch((error) => {
             // Handle network or parsing error
             console.error('Error:', error);
         });
 }
-
-// const callAddToCart = async (product) => {
-//     const apiUrl = `${API_ENDPOINT}/cart/add.php`;
-//     const requestData = {
-//         product_id: product.id,
-//         qty: product.quantity ?? 1,
-//     };
-
-//     try {
-//         const response = await axios.post(apiUrl, requestData, {
-//             headers: {
-//                 'Content-Type': 'application/json',
-//                 'Accept': 'application/json',
-//             },
-//             withCredentials: true, // Include cookies in the request
-//         });
-
-//         // Continue processing the response data as needed
-//         console.log('API response:', response.data);
-//         const status = response.data.status;
-//         const cart = response.data.cart;
-//         const total = response.data.total;
-//         console.log('Status:', status);
-//         console.log('Cart:', cart);
-//         console.log('Total:', total);
-//     } catch (error) {
-//         console.error('Error:', error);
-//     }
-// };
-
 
 
 const setQty = (product: CartItem, qty: any) => {
@@ -164,16 +138,18 @@ const setQty = (product: CartItem, qty: any) => {
         .then((response) => {
             if (response.ok) {
                 console.log('called setQty API success');
-                getCart();
+                // getCart();
                 return response.json();
             } else {
-                getCart();
+                // getCart();
                 throw new Error('Failed to update quantity in cart');
             }
         })
         .then((data) => {
             // Handle the response data
             console.log('API response setQty:', data);
+            const { total, total_discount }:any = data;
+            getCart(total, total_discount);
         })
         .catch((error) => {
             // Handle network or parsing error
@@ -199,16 +175,18 @@ const addCouponAPI = (couponCode: any) => {
             .then((response) => {
                 if (response.ok) {
                     console.log('Called coupon API success');
-                    getCart();
+                    // getCart();
                     return response.json();
                 } else {
-                    getCart();
+                    // getCart();
                     throw new Error('Failed to update coupon in cart');
                 }
             })
             .then((data) => {
                 console.log('API response coupon:', data);
                 resolve(data); // Resolve the promise with the response data
+                const { total, total_discount }:any = data;
+                getCart(total, total_discount);
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -217,9 +195,7 @@ const addCouponAPI = (couponCode: any) => {
     });
 };
 
-// const [totalAPI, setTotalAPI] = useState('');
-// const [totalDiscountAPI, setTotalDiscountAPI] = useState('');
-const getCart = () => {
+const getCart = (setTotalAPI: any, setTotalDiscountAPI: any) => {
     console.log('getCart');
     const apiUrl = `${API_ENDPOINT}/cart/get.php`;
     fetch(apiUrl, {
@@ -238,16 +214,18 @@ const getCart = () => {
             }
         })
         .then((data: any) => {
-            // Handle the response data
             console.log('getCart API response:', data);
-            // setTotalAPI(data.total);
-            // setTotalDiscountAPI(data.total_discount);
+            const { total, total_discount }:any = data;
+
+            setTotalAPI(total);
+            setTotalDiscountAPI(total_discount);
+
+            // shoppingCart.set(data.cartItems);
         })
         .catch((error) => {
-            // Handle network or parsing error
             console.error('Error:', error);
         });
-}
+};
 export const useShoppingCart = () => {
     if (typeof window === "undefined") {
         return {
@@ -267,6 +245,8 @@ export const useShoppingCart = () => {
     }
     const cartStore = useStore(shoppingCart);
     const isOpen = useStore(isShoppingCartOpen, false);
+    const [totalAPI, setTotalAPI] = useState(0);
+    const [totalDiscountAPI, setTotalDiscountAPI] = useState(0);
 
 
     const addToCart = (product: CartItem) => {
@@ -344,21 +324,13 @@ export const useShoppingCart = () => {
     };
     const refreshCart = () => {
         console.log('refresh cart');
-        getCart();
+        getCart(setTotalAPI, setTotalDiscountAPI);
     };
     const addCoupon = (couponCode: any) => {
         console.log('addCoupon NEW', couponCode);
         return addCouponAPI(couponCode);
     };
     const [totalPrice, setTotalPrice] = useState(0);
-
-    // Call getCart when the component mounts
-    useEffect(() => {
-        console.log('call getCart in useeffect')
-        // getCart();
-    }, []);
-
-
     // Call calculateTotalPrice when the component mounts
     useEffect(() => {
         setTotalPrice(calculateTotalPrice(cartStore));
