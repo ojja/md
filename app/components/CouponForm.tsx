@@ -9,6 +9,7 @@ export default function CouponForm() {
 
             if (response.status === 'success') {
                 // Handle success scenario
+                debugger;
                 console.log('Coupon applied successfully');
                 // Perform actions for success, such as updating the UI or performing further operations
             } else if (response.status === 'failed') {
