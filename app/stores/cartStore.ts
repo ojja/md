@@ -237,7 +237,7 @@ const getCart = () => {
                 throw new Error('Failed to update quantity in cart');
             }
         })
-        .then((data) => {
+        .then((data: any) => {
             // Handle the response data
             console.log('getCart API response:', data);
             setTotalAPI(data.total);
@@ -355,7 +355,7 @@ export const useShoppingCart = (totalAPI: any, totalDiscountAPI: any) => {
     // Call getCart when the component mounts
     useEffect(() => {
         console.log('call getCart in useeffect')
-        getCart();
+        // getCart();
     }, []);
 
 
