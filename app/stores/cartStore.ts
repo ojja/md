@@ -40,32 +40,34 @@ const calculateTotalPrice = (cartItems: CartItem[]) => {
 
 
 export const getCart = () => {
-    console.log('getCart Main Fun');
-    const apiUrl = `${API_ENDPOINT}/cart/get.php`;
-    fetch(apiUrl, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Connection': 'keep-alive',
-        },
-        credentials: 'include',
-    })
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Failed to update quantity in cart');
-            }
+    return new Promise((resolve, reject) => {
+        const apiUrl = `${API_ENDPOINT}/cart/get.php`;
+        fetch(apiUrl, {
+            method: 'GET',
+            headers: {
+                'Content-Type': 'application/json',
+                'Connection': 'keep-alive',
+            },
+            credentials: 'include',
         })
-        .then((data: any) => {
-            console.log('getCart API response:', data);
-            const { total, total_discount }: any = data;
-            return { total, total_discount };
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
+            .then((response) => {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Failed to update quantity in cart');
+                }
+            })
+            .then((data) => {
+                console.log('getCart API response:', data);
+                const { total, total_discount } = data;
+                resolve({ total, total_discount });
+            })
+            .catch((error) => {
+                reject(error);
+            });
+    });
 };
+
 const callAddToCart = (product: CartItem) => {
     const apiUrl = `${API_ENDPOINT}/cart/add.php`;
     const requestData = {
