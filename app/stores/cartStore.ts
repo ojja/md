@@ -40,12 +40,44 @@ const calculateTotalPrice = (cartItems: CartItem[]) => {
 
 const setTotalAPI = (total) => {
     // Set the total value in the component's state
-  };
-  
-  const setTotalDiscountAPI = (totalDiscount) => {
+};
+
+const setTotalDiscountAPI = (totalDiscount) => {
     // Set the total discount value in the component's state
-  };
-  
+};
+
+
+const getCart = (setTotalAPI: any, setTotalDiscountAPI: any) => {
+    console.log('getCart Main Fun');
+    const apiUrl = `${API_ENDPOINT}/cart/get.php`;
+    fetch(apiUrl, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Connection': 'keep-alive',
+        },
+        credentials: 'include',
+    })
+        .then((response) => {
+            if (response.ok) {
+                return response.json();
+            } else {
+                throw new Error('Failed to update quantity in cart');
+            }
+        })
+        .then((data: any) => {
+            console.log('getCart API response:', data);
+            const { total, total_discount }: any = data;
+
+            setTotalAPI(total);
+            setTotalDiscountAPI(total_discount);
+
+            // shoppingCart.set(data.cartItems);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+};
 const callAddToCart = (product: CartItem) => {
     const apiUrl = `${API_ENDPOINT}/cart/add.php`;
     const requestData = {
@@ -78,7 +110,7 @@ const callAddToCart = (product: CartItem) => {
         .then((data) => {
             // Handle the response data
             console.log('API response:', data);
-            const { total, total_discount }:any = data;
+            const { total, total_discount }: any = data;
             getCart(setTotalAPI, setTotalDiscountAPI)(total, total_discount);
         })
         .catch((error) => {
@@ -117,7 +149,7 @@ const callRemoveItemCart = (itemId: number) => {
         .then((data) => {
             // Handle the response data
             console.log('API response:', data);
-            const { total, total_discount }:any = data;
+            const { total, total_discount }: any = data;
             getCart(setTotalAPI, setTotalDiscountAPI)(total, total_discount);
         })
         .catch((error) => {
@@ -156,7 +188,7 @@ const setQty = (product: CartItem, qty: any) => {
         .then((data) => {
             // Handle the response data
             console.log('API response setQty:', data);
-            const { total, total_discount }:any = data;
+            const { total, total_discount }: any = data;
             getCart(setTotalAPI, setTotalDiscountAPI)(total, total_discount);
 
         })
@@ -194,7 +226,7 @@ const addCouponAPI = (couponCode: any) => {
             .then((data) => {
                 console.log('API response coupon:', data);
                 resolve(data); // Resolve the promise with the response data
-                const { total, total_discount }:any = data;
+                const { total, total_discount }: any = data;
                 getCart(setTotalAPI, setTotalDiscountAPI)(total, total_discount);
 
             })
@@ -203,38 +235,6 @@ const addCouponAPI = (couponCode: any) => {
                 reject(error); // Reject the promise with the error
             });
     });
-};
-
-const getCart = (setTotalAPI: any, setTotalDiscountAPI: any) => {
-    console.log('getCart');
-    const apiUrl = `${API_ENDPOINT}/cart/get.php`;
-    fetch(apiUrl, {
-        method: 'GET',
-        headers: {
-            'Content-Type': 'application/json',
-            'Connection': 'keep-alive',
-        },
-        credentials: 'include',
-    })
-        .then((response) => {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Failed to update quantity in cart');
-            }
-        })
-        .then((data: any) => {
-            console.log('getCart API response:', data);
-            const { total, total_discount }:any = data;
-
-            setTotalAPI(total);
-            setTotalDiscountAPI(total_discount);
-
-            // shoppingCart.set(data.cartItems);
-        })
-        .catch((error) => {
-            console.error('Error:', error);
-        });
 };
 export const useShoppingCart = () => {
     if (typeof window === "undefined") {
