@@ -64,8 +64,6 @@ export default function Cart() {
                                     </div>
                                     <div className="flex flex-wrap justify-between py-3 border-b border-black-300">
                                         {openCoupon?
-                                        <span className="font-light text-blue-500 underline cursor-pointer" onClick={() => setOpenCoupon(true)}>Do you have a discount coupon?</span>
-                                        :
                                         <form action="" method="post" className="flex flex-wrap w-full">
                                             <button
                                                 type="button"
@@ -80,6 +78,8 @@ export default function Cart() {
                                                 <button type="submit" className="text-white bg-blue-700 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 font-medium rounded-r text-sm w-full sm:w-auto px-5 py-2.5 text-center " name="apply_coupon" value="Apply coupon">Apply</button>
                                             </div>
                                         </form>
+                                        :
+                                        <span className="font-light text-blue-500 underline cursor-pointer" onClick={() => setOpenCoupon(true)}>Do you have a discount coupon?</span>
                                         }
                                     </div>
                                     <div className="flex justify-between py-5">
