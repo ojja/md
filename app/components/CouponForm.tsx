@@ -35,7 +35,7 @@ export default function CouponForm() {
                 const form = event.target as HTMLFormElement; // Cast event.target to HTMLFormElement
                 const couponCodeInput = form.querySelector('input[name="coupon_code"]') as HTMLInputElement; // Cast the selected element to HTMLInputElement
                 const couponCode = couponCodeInput.value; // Get the coupon code from the input field
-                addCoupon(couponCode); // Call the addCoupon function with the coupon code
+                handleCouponApplication(couponCode);
             }}
         >
             <div className="flex w-full mt-2 coupon">
