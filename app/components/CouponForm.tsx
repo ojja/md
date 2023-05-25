@@ -4,18 +4,27 @@ import useShoppingCart from '~/stores/cartStore';
 export default function CouponForm() {
     const { addCoupon } = useShoppingCart();
     const [couponMsg, setSouponMsg] = useState('');
-    const handleCouponApplication = async (couponCode: any) => {
+    const [couponCode, setCouponCode] = useState('');
+
+    const handleCouponApplication = async (event: React.FormEvent) => {
+        event.preventDefault();
+
+        if (couponCode.trim() === '') {
+            setSouponMsg('Coupon code is required');
+            return;
+        }
+
         try {
             const response = await addCoupon(couponCode) as { status: string };
             if (response.status === 'success') {
-                setSouponMsg('Coupon applied successfully')
+                setSouponMsg('Coupon applied successfully');
             } else if (response.status === 'failed') {
-                setSouponMsg('Coupon application failed')
+                setSouponMsg('Coupon application failed');
             } else {
-                setSouponMsg('Unknown response status')
+                setSouponMsg('Unknown response status');
             }
         } catch (error) {
-            setSouponMsg('Error' + error)
+            setSouponMsg('Error: ' + error);
         }
     };
     return (
@@ -24,13 +33,7 @@ export default function CouponForm() {
             action=""
             method="post"
             className="flex flex-wrap w-full"
-            onSubmit={(event) => {
-                event.preventDefault();
-                const form = event.target as HTMLFormElement;
-                const couponCodeInput = form.querySelector('input[name="coupon_code"]') as HTMLInputElement;
-                const couponCode = couponCodeInput.value;
-                handleCouponApplication(couponCode);
-            }}
+            onSubmit={handleCouponApplication}
         >
             <div className="flex w-full mt-2 coupon">
                 <input
@@ -39,6 +42,9 @@ export default function CouponForm() {
                     className="w-full p-2 border border-gray-300 rounded-l outline-none bg-gray-50"
                     id="coupon_code"
                     placeholder="Enter Coupon Code"
+                    value={couponCode}
+                    onChange={(event) => setCouponCode(event.target.value)}
+
                 />
                 <button
                     type="submit"

@@ -66,8 +66,7 @@ export default function Cart() {
                                     </div>
                                     <div className="flex flex-wrap justify-between py-3 border-b border-black-300">
                                         {openCoupon ?
-                                            <div>
-
+                                            <div className="w-full">
                                                 <button
                                                     type="button"
                                                     className="p-2 -m-2 text-gray-400 hover:text-gray-500"
