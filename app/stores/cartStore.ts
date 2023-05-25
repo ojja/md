@@ -353,9 +353,8 @@ export const useShoppingCart = () => {
         getCart();
     };
     const addCoupon = (couponCode: any) => {
-        console.log('addCoupon', couponCode);
-        addCouponAPI(couponCode);
-
+        console.log('addCoupon NEW', couponCode);
+        return addCouponAPI(couponCode);
     };
     const [totalPrice, setTotalPrice] = useState(0);
 
