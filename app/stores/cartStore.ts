@@ -41,13 +41,13 @@ const calculateTotalPrice = (cartItems: CartItem[]) => {
 function getCookie(name) {
     const cookies = document.cookie.split('; ');
     for (let i = 0; i < cookies.length; i++) {
-      const cookie = cookies[i].split('=');
-      if (cookie[0] === name) {
-        return cookie[1];
-      }
+        const cookie = cookies[i].split('=');
+        if (cookie[0] === name) {
+            return cookie[1];
+        }
     }
     return '';
-  }
+}
 const callAddToCart = (product: CartItem) => {
     const apiUrl = `${API_ENDPOINT}/cart/add.php`;
     const requestData = {
@@ -190,6 +190,40 @@ const setQty = (product: CartItem, qty: any) => {
             console.error('Error:', error);
         });
 }
+const addCouponAPI = (couponCode: any) => {
+    const apiUrl = `${API_ENDPOINT}/cart/coupon.php`;
+    const requestData = {
+        coupon: couponCode,
+    };
+    fetch(apiUrl, {
+        headers: {
+            'Content-Type': 'application/json',
+            'Accept': 'application/json',
+            'Connection': 'keep-alive',
+        },
+        credentials: 'include',
+        method: 'POST',
+        body: JSON.stringify(requestData),
+    })
+        .then((response) => {
+            if (response.ok) {
+                console.log('called coupon API success');
+                getCart();
+                return response.json();
+            } else {
+                getCart();
+                throw new Error('Failed to update coupon in cart');
+            }
+        })
+        .then((data) => {
+            // Handle the response data
+            console.log('API response coupon:', data);
+        })
+        .catch((error) => {
+            // Handle network or parsing error
+            console.error('Error:', error);
+        });
+}
 const getCart = () => {
     console.log('getCart');
     const apiUrl = `${API_ENDPOINT}/cart/get.php`;
@@ -231,6 +265,7 @@ export const useShoppingCart = () => {
             openCart: () => null,
             closeCart: () => null,
             refreshCart: () => null,
+            addCoupon: () => null,
         };
     }
     const cartStore = useStore(shoppingCart);
@@ -252,7 +287,7 @@ export const useShoppingCart = () => {
             console.log('already exists', newCartItems[itemIndex].quantity)
             setQty(product, newCartItems[itemIndex].quantity);
             callAddToCart(product);
-            
+
         } else {
             shoppingCart.set([...cartStore, {
                 id: product.id,
@@ -269,24 +304,16 @@ export const useShoppingCart = () => {
     const decreaseCartQuantity = (product: CartItem) => {
         const itemIndex = cartStore.findIndex((item) =>
             item.id === product.id
-            // && item.size === product.size
-            // && item.color === product.color
         );
         const qty = cartStore?.find((item) => item.id === product.id)?.quantity ?? 1;
         if (itemIndex !== -1) {
-            // debugger;
             const newCartItems = [...cartStore];
             if (newCartItems[itemIndex].quantity <= 1) {
                 return removeFromCart(product.id);
             } else {
                 newCartItems[itemIndex].quantity--;
                 shoppingCart.set(newCartItems);
-                // console.log('decreaseCartQuantity');
-                // console.log('decreaseCartQuantity NUM',newCartItems[itemIndex].quantity--);
-                // console.log('decreaseCartQuantity 2 NUM',newCartItems[itemIndex].quantity--);
-                // console.log('decreaseCartQuantity QTY',qty);
-                // console.log('decreaseCartQuantity QTY sloud',qty-1);
-                setQty(product, qty-1);
+                setQty(product, qty - 1);
                 return;
             }
         }
@@ -322,6 +349,11 @@ export const useShoppingCart = () => {
         console.log('refresh cart');
         getCart();
     };
+    const addCoupon = (couponCode: any) => {
+        console.log('addCoupon', couponCode);
+        addCouponAPI(couponCode);
+
+    };
     const [totalPrice, setTotalPrice] = useState(0);
 
 
@@ -344,6 +376,7 @@ export const useShoppingCart = () => {
         openCart,
         closeCart,
         refreshCart,
+        addCoupon,
         totalPrice,
     };
 };
