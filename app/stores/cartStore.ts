@@ -38,6 +38,14 @@ const calculateTotalPrice = (cartItems: CartItem[]) => {
     return price;
 };
 
+const setTotalAPI = (total) => {
+    // Set the total value in the component's state
+  };
+  
+  const setTotalDiscountAPI = (totalDiscount) => {
+    // Set the total discount value in the component's state
+  };
+  
 const callAddToCart = (product: CartItem) => {
     const apiUrl = `${API_ENDPOINT}/cart/add.php`;
     const requestData = {
