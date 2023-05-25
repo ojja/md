@@ -95,7 +95,7 @@ export default function Cart() {
                                     }
                                     <div className="flex justify-between py-5">
                                         <span className="font-bold text-gray-900 font-lg">Order Total</span>
-                                        <span className="font-bold text-gray-600">{FormatCurrency(totalDiscountAPI)}</span>
+                                        <span className="font-bold text-gray-600">{FormatCurrency(totalAPI)}</span>
                                     </div>
                                     <Link to="/checkout" className="px-3 py-2 text-lg text-center text-white rounded-md pointer-events-auto bg-primary-600 hover:bg-primary-500">Checkout</Link>
                                     <Link to="/checkout-step1" className="px-3 py-2 text-lg text-center text-white rounded-md pointer-events-auto bg-primary-600 hover:bg-primary-500">Checkout2</Link>
