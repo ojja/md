@@ -47,7 +47,7 @@ const setTotalDiscountAPI = (totalDiscount) => {
 };
 
 
-const getCart = (setTotalAPI: any, setTotalDiscountAPI: any) => {
+export const getCart = (setTotalAPI: any, setTotalDiscountAPI: any) => {
     console.log('getCart Main Fun');
     const apiUrl = `${API_ENDPOINT}/cart/get.php`;
     fetch(apiUrl, {
