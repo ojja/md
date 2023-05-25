@@ -37,17 +37,7 @@ const calculateTotalPrice = (cartItems: CartItem[]) => {
     });
     return price;
 };
-// Helper function to get the value of a cookie by name
-function getCookie(name) {
-    const cookies = document.cookie.split('; ');
-    for (let i = 0; i < cookies.length; i++) {
-        const cookie = cookies[i].split('=');
-        if (cookie[0] === name) {
-            return cookie[1];
-        }
-    }
-    return '';
-}
+
 const callAddToCart = (product: CartItem) => {
     const apiUrl = `${API_ENDPOINT}/cart/add.php`;
     const requestData = {
@@ -190,43 +180,45 @@ const setQty = (product: CartItem, qty: any) => {
             console.error('Error:', error);
         });
 }
-const addCouponAPI = (couponCode:any) => {
+const addCouponAPI = (couponCode: any) => {
     return new Promise((resolve, reject) => {
-      const apiUrl = `${API_ENDPOINT}/cart/coupon.php`;
-      const requestData = {
-        coupon: couponCode,
-      };
-      fetch(apiUrl, {
-        headers: {
-          'Content-Type': 'application/json',
-          'Accept': 'application/json',
-          'Connection': 'keep-alive',
-        },
-        credentials: 'include',
-        method: 'POST',
-        body: JSON.stringify(requestData),
-      })
-        .then((response) => {
-          if (response.ok) {
-            console.log('Called coupon API success');
-            getCart();
-            return response.json();
-          } else {
-            getCart();
-            throw new Error('Failed to update coupon in cart');
-          }
+        const apiUrl = `${API_ENDPOINT}/cart/coupon.php`;
+        const requestData = {
+            coupon: couponCode,
+        };
+        fetch(apiUrl, {
+            headers: {
+                'Content-Type': 'application/json',
+                'Accept': 'application/json',
+                'Connection': 'keep-alive',
+            },
+            credentials: 'include',
+            method: 'POST',
+            body: JSON.stringify(requestData),
         })
-        .then((data) => {
-          console.log('API response coupon:', data);
-          resolve(data); // Resolve the promise with the response data
-        })
-        .catch((error) => {
-          console.error('Error:', error);
-          reject(error); // Reject the promise with the error
-        });
+            .then((response) => {
+                if (response.ok) {
+                    console.log('Called coupon API success');
+                    getCart();
+                    return response.json();
+                } else {
+                    getCart();
+                    throw new Error('Failed to update coupon in cart');
+                }
+            })
+            .then((data) => {
+                console.log('API response coupon:', data);
+                resolve(data); // Resolve the promise with the response data
+            })
+            .catch((error) => {
+                console.error('Error:', error);
+                reject(error); // Reject the promise with the error
+            });
     });
-  };
-  
+};
+
+const [totalAPI, setTotalAPI] = useState(0);
+const [totalDiscountAPI, setTotalDiscountAPI] = useState(0);
 const getCart = () => {
     console.log('getCart');
     const apiUrl = `${API_ENDPOINT}/cart/get.php`;
@@ -248,13 +240,15 @@ const getCart = () => {
         .then((data) => {
             // Handle the response data
             console.log('getCart API response:', data);
+            setTotalAPI(data.total);
+            setTotalDiscountAPI(data.total_discount);
         })
         .catch((error) => {
             // Handle network or parsing error
             console.error('Error:', error);
         });
 }
-export const useShoppingCart = () => {
+export const useShoppingCart = (totalAPI: any, totalDiscountAPI: any) => {
     if (typeof window === "undefined") {
         return {
             getItemQuantity: () => null,
@@ -358,6 +352,10 @@ export const useShoppingCart = () => {
     };
     const [totalPrice, setTotalPrice] = useState(0);
 
+    // Call getCart when the component mounts
+    useEffect(() => {
+        getCart();
+    }, []);
 
 
     // Call calculateTotalPrice when the component mounts
@@ -380,6 +378,8 @@ export const useShoppingCart = () => {
         refreshCart,
         addCoupon,
         totalPrice,
+        totalAPI,
+        totalDiscountAPI,
     };
 };
 

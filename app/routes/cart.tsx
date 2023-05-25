@@ -17,8 +17,10 @@ export const meta: MetaFunction = () => {
     }
 }
 export default function Cart() {
-    const { cartItems, removeFromCart, decreaseCartQuantity, addToCart, totalPrice, addCoupon } = useShoppingCart();
+    const { cartItems, removeFromCart, decreaseCartQuantity, addToCart, totalPrice, addCoupon, totalAPI, totalDiscountAPI } = useShoppingCart();
     // console.log('cartItems', cartItems)
+    console.log('totalAPI', totalAPI)
+    console.log('totalDiscountAPI', totalDiscountAPI)
     const [openCoupon, setOpenCoupon] = useState(false);
 
     return (
@@ -75,7 +77,7 @@ export default function Cart() {
                                                     <span className="sr-only">Close coupon</span>
                                                     <XMarkIcon className="w-6 h-6" aria-hidden="true" />
                                                 </button>
-                                                <CouponForm/>
+                                                <CouponForm />
                                             </div>
 
                                             :
