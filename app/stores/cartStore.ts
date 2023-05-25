@@ -47,7 +47,7 @@ const setTotalDiscountAPI = (totalDiscount) => {
 };
 
 
-export const getCart = (setTotalAPI: any, setTotalDiscountAPI: any) => {
+export const getCart = (setTotalAPI: (total: number) => void, setTotalDiscountAPI: (totalDiscount: number) => void) => {
     console.log('getCart Main Fun');
     const apiUrl = `${API_ENDPOINT}/cart/get.php`;
     fetch(apiUrl, {
@@ -71,13 +71,13 @@ export const getCart = (setTotalAPI: any, setTotalDiscountAPI: any) => {
 
             setTotalAPI(total);
             setTotalDiscountAPI(total_discount);
-
-            // shoppingCart.set(data.cartItems);
         })
         .catch((error) => {
             console.error('Error:', error);
         });
 };
+
+
 const callAddToCart = (product: CartItem) => {
     const apiUrl = `${API_ENDPOINT}/cart/add.php`;
     const requestData = {
@@ -333,7 +333,7 @@ export const useShoppingCart = () => {
         isShoppingCartOpen.set(false);
     };
     const refreshCart = () => {
-        console.log('refresh cart');
+        console.log('refresh cart new');
         getCart(setTotalAPI, setTotalDiscountAPI);
     };
     const addCoupon = (couponCode: any) => {
