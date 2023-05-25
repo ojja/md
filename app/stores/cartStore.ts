@@ -207,6 +207,7 @@ const addCouponAPI = (couponCode: string) => {
     })
         .then((response) => {
             if (response.ok) {
+                debugger
                 console.log('called coupon API success');
                 getCart();
                 return response.json();
