@@ -1,200 +1,176 @@
 
-import Datepicker from "react-tailwindcss-datepicker";
-import moment from 'moment';
-import useShoppingCart from "~/stores/cartStore";
-import { getProductBySlug } from "~/api/products";
-import { useEffect, useState } from "react";
-import PaymentMethod from "~/components/PaymentMethod";
 import { Link } from "@remix-run/react";
-import FormatCurrency from "~/utils/FormatCurrency";
-import MiniCartItem from "~/components/MiniCartItem";
-import { v4 } from 'uuid';
-
+import Button from "~/components/Button";
+import CartSummary from "~/components/checkout/CartSummary";
+import ShippingInfo from "~/components/checkout/ShippingInfo";
+import ShippingOptions from "~/components/ShippingOptions";
+import TimeSlot from '~/components/TimeSlot';
+import type { MetaFunction } from "@remix-run/node";
+import { Site_Title } from "~/config";
+import { useState } from "react";
 
 export default function Checkout() {
-
-    const { closeCart, cartItems, removeFromCart, openCart,isOpen } = useShoppingCart();
-
-    // const {
-    //     cartItems,
-    //     getItemQuantity,
-    // } = useShoppingCart();
-    // const [product, setProduct] = useState({});
-    // useEffect(() => {
-    //     const fetchProduct = async () => {
-    //       const product = await getProductBySlug(slug);
-    //       setProduct(product);
-    //     };
-    //     fetchProduct();
-    //   }, [slug]);
-      
-    //   console.log('product>>>>>>>>>>',product)
-
-    const subTotal = 900;
-    // const subTotal = cartItems.reduce((total, cartItem) => {
-    //     const item = storeItems.find((i) => i.id === cartItem.id);
-    //     return total + (item?.price || 0) * cartItem.quantity;
-    // }, 0);
-
-    const shippingFees = 10;
-    const taxFees = Math.round((subTotal * 14) / 100)
-    const grandTotal = subTotal + taxFees + shippingFees
-
-
-    const [value, setValue] = useState({
-        startDate: null,
-        endDate: null
+    const [formData, setFormData] = useState({
+        firstName: '',
+        lastName: '',
+        phoneNumber: '',
+        emailAddress: '',
     });
 
-    const handleValueChange = (newValue) => {
-        console.log("newValue:", newValue);
-        setValue(newValue);
-    }
+    const handleChange = (e) => {
+        setFormData((prevData) => ({
+            ...prevData,
+            [e.target.name]: e.target.value,
+        }));
+    };
 
-    // var currentDate = new Date();
-    // var dateTomorrow = Moment().add("days", 1);
-    // let today     = Moment();
+    const handleSubmit = async (e) => {
+        e.preventDefault();
+
+        const requestBody = {
+            api_key: 'r@U*uQ@R5%3#4Rm4uR09x6uvax%l',
+            api_secret: 'z7IrTvl$O*C57UHI4J#vrJ02A7nL',
+            billing_address: [
+                {
+                    first_name: formData.firstName,
+                    last_name: formData.lastName,
+                    email: formData.emailAddress,
+                    phone: formData.phoneNumber,
+                    address: '9th District behind el tawheed wl noor',
+                    city: 'Nasr City',
+                    state: 'Cairo',
+                },
+            ],
+            products: [
+                {
+                    product_id: 80,
+                    quantity: 2,
+                },
+                {
+                    product_id: 79,
+                    quantity: 3,
+                },
+            ],
+            shipping_fees: '120',
+            coupon_code: 'mitchcoupon',
+        };
+
+        try {
+            const response = await fetch('https://cloudhosta.com:68/MitchAPI/checkout.php', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    Accept: 'application/json',
+                    Connection: 'keep-alive',
+                },
+                credentials: 'include',
+                mode: 'cors',
+                body: JSON.stringify(requestBody),
+            });
+
+            if (response.ok) {
+                // API call successful, handle the response
+                // For example, display a success message or redirect to a success page
+                console.log('API call successful');
+            } else {
+                // API call failed, handle the error
+                // For example, display an error message
+                console.log('API call failed');
+            }
+        } catch (error) {
+            // Error occurred while making the API call, handle the error
+            console.log('An error occurred', error);
+        }
+    };
+
+
     return (
         <div className="p-8 mx-auto bg-white">
             <div className="container px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div className="pb-10">
                     <h1 className="text-4xl font-semibold">Checkout</h1>
                 </div>
-                <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-                    <div className="col-span-2">
-                        <div>
-                            <h2 className="mb-5 text-lg font-medium text-gray-900">Choose Order Date</h2>
-                            <ul className="grid w-full gap-6 md:grid-cols-3">
-                                <li>
-                                    <input type="radio" id="deliver_today" name="hosting" value="deliver_today" className="hidden peer" required />
-                                    <label htmlFor="deliver_today" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer  peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100">
-                                        <div className="block">
-                                            <div className="w-full text-lg font-semibold">Today</div>
-                                            <div className="w-full">Within 60min</div>
-                                        </div>
-                                        <svg aria-hidden="true" className="w-6 h-6 ml-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
-                                    </label>
-                                </li>
-                                <li>
-                                    <input type="radio" id="deliver_tomorrow" name="hosting" value="deliver_tomorrow" className="hidden peer" />
-                                    <label htmlFor="deliver_tomorrow" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer  peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100">
-                                        <div className="block">
-                                            <div className="w-full text-lg font-semibold">Tomorrow</div>
-                                            <div className="w-full">{''}{moment().add(1, 'days').format('DD MMMM YYYY').toString()}</div>
-                                        </div>
-                                        <svg aria-hidden="true" className="w-6 h-6 ml-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
-                                    </label>
-                                </li>
-                                <li>
-                                    <input type="radio" id="deliver_date" name="hosting" value="deliver_date" className="hidden peer" />
-                                    <label htmlFor="deliver_date" className="inline-flex items-center justify-between w-full p-5 text-gray-500 bg-white border border-gray-200 rounded-lg cursor-pointer  peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100">
-                                        <div className="block">
-                                            <div className="w-full text-lg font-semibold">Tomorrow</div>
-                                            <Datepicker
-                                                useRange={false}
-                                                asSingle={true}
-                                                value={value}
-                                                onChange={handleValueChange}
-                                            />
-                                        </div>
-                                        <svg aria-hidden="true" className="w-6 h-6 ml-3" fill="currentColor" viewBox="0 0 20 20" xmlns="http://www.w3.org/2000/svg"><path fillRule="evenodd" d="M12.293 5.293a1 1 0 011.414 0l4 4a1 1 0 010 1.414l-4 4a1 1 0 01-1.414-1.414L14.586 11H3a1 1 0 110-2h11.586l-2.293-2.293a1 1 0 010-1.414z" clipRule="evenodd"></path></svg>
-                                    </label>
-                                </li>
-                            </ul>
+                <div>
+                    <nav className="flex justify-center mb-5">
+                        <ol role="list" className="flex flex-wrap items-center text-gray-400 gap-y-2 gap-x-2 sm:gap-y-0">
+                            <li>
+                                <div className="-m-1">
+                                    <Link to="/cart" className="flex items-center p-1 leading-3">
+                                        Cart
+                                        <span className="inline-flex items-center justify-center w-5 h-5 ml-1 text-sm font-bold text-white bg-gray-500 rounded-full"> 4 </span>
+                                    </Link>
+                                </div>
+                            </li>
 
-                            <div className="pt-5 mt-5 border-t-2">
+                            <li>
+                                <div className="flex items-center">
+                                    <svg className="w-4 h-4 shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                    <div className="-m-1">
+                                        <a href="#" className="p-1 ml-2 font-semibold text-gray-700"> Order Details </a>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div className="flex items-center">
+                                    <svg className="w-4 h-4 shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                    <div className="-m-1">
+                                        <a href="#" className="p-1 ml-2"> Payment Method </a>
+                                    </div>
+                                </div>
+                            </li>
+
+                            <li>
+                                <div className="flex items-center">
+                                    <svg className="w-4 h-4 shrink-0" fill="none" xmlns="http://www.w3.org/2000/svg" stroke="currentColor" viewBox="0 0 20 20" aria-hidden="true">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7"></path>
+                                    </svg>
+                                    <div className="-m-1">
+                                        <a href="#" className="p-1 ml-2" aria-current="page"> Confirmation </a>
+                                    </div>
+                                </div>
+                            </li>
+                        </ol>
+                    </nav>
+                    <div className="flex flex-col-reverse items-start md:flex-row">
+                        <div className="w-full max-w-4xl p-4 bg-white border rounded-md">
+                            <div className="">
                                 <h2 className="mb-5 text-lg font-medium text-gray-900">Shipping Information</h2>
 
-                                <div className="grid grid-cols-2 gap-4">
-                                    <div>
-                                        <label htmlFor="" className="block text-sm font-medium leading-6 text-gray-900"> First name </label>
-                                        <div className="mt-1">
-                                            <input type="text" placeholder="" className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
-                                        </div>
-                                    </div>
+                                <ShippingInfo formData={formData} handleChange={handleChange} />
 
-                                    <div>
-                                        <label htmlFor="" className="block text-sm font-medium leading-6 text-gray-900"> Last name </label>
-                                        <div className="mt-1">
-                                            <input type="text" placeholder="" className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
-                                        </div>
-                                    </div>
+                                <h2 className="pt-5 mt-5 mb-5 text-lg font-medium text-gray-900 border-t-2">Choose Order Date</h2>
+                                <TimeSlot />
 
-                                    <div className="col-span-2">
-                                        <label htmlFor="" className="block text-sm font-medium leading-6 text-gray-900"> Phone number </label>
-                                        <div className="mt-1">
-                                            <input type="text" placeholder="" className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
-                                        </div>
-                                    </div>
+                                <h2 className="pt-5 mt-5 mb-5 text-lg font-medium text-gray-900 border-t-2">Shipping Method</h2>
+                                <ShippingOptions />
+                                <button type="submit" onClick={handleSubmit} className="btn-primary">
+                                    Submit
+                                </button>
 
-                                    <div className="col-span-2">
-                                        <label htmlFor="" className="block text-sm font-medium leading-6 text-gray-900"> Address </label>
-                                        <div className="mt-1">
-                                            <textarea placeholder="" className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor="" className="block text-sm font-medium leading-6 text-gray-900"> City </label>
-                                        <div className="mt-1">
-                                            <select className="block w-full py-2 pl-3 pr-20 text-gray-900 border-0 rounded-md form-select ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">
-                                                <option value="">Cairo</option>
-                                                <option value="">Giza</option>
-                                            </select>
-                                        </div>
-                                    </div>
-
-                                    <div>
-                                        <label htmlFor="" className="block text-sm font-medium leading-6 text-gray-900"> City </label>
-                                        <div className="mt-1">
-                                            <input type="text" placeholder="Nasr City" className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                            <div className="pt-5 mt-5 border-t-2">
-                                <PaymentMethod />
-                                <div className="flex items-center pt-3 mt-3 border-t-2">
-                                    <input id="default-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded" />
-                                    <label for="default-checkbox" className="ml-2 text-sm font-medium text-gray-900">I’ve read and accepted all Terms & Conditions</label>
-                                </div>
-                                <Link to="/thanks" className="block px-3 py-4 mt-4 text-lg text-center text-white uppercase bg-primary-600 rounded-md pointer-events-auto hover:bg-primary-500">Place Order</Link>
+                                <Button
+                                    name="Next Step"
+                                    width="full"
+                                    href="/checkout-step2"
+                                    extraclass="mt-5 leading-5"
+                                />
                             </div>
                         </div>
-                    </div>
-
-                    <div className="col-span-2 pl-5 sm:col-span-1">
-                        <div className="p-5 bg-gray-100">
-                            <h2 className="text-xl font-semibold capitalize">Order summary</h2>
-                            <div className="">
-                            {cartItems.map((item) => (
-                                <li key={v4()} className="flex py-6">
-                                  <MiniCartItem id={item.id} quantity={item.quantity} color={item.color} size={item.size} slug={item.slug} thumbnail={item.thumbnail} removeFromCart={removeFromCart} />
-                                </li>
-                              ))}
-                            </div>
-                            <div className="flex flex-col">
-                                <div className="flex justify-between py-3 border-b border-black-300">
-                                    <span className="font-light text-gray-600">Subtotal</span>
-                                    <span className="text-gray-600">{FormatCurrency(subTotal)}</span>
-                                </div>
-                                <div className="flex justify-between py-3 border-b border-black-300">
-                                    <span className="font-light text-gray-600">Shipping estimate</span>
-                                    <span className="text-gray-600">{shippingFees > 0 ? FormatCurrency(shippingFees) : 'Free'}</span>
-                                </div>
-                                <div className="flex justify-between py-3 border-b border-black-300">
-                                    <span className="font-light text-gray-600">Tax estimate</span>
-                                    <span className="text-gray-600">{FormatCurrency(taxFees)}</span>
-                                </div>
-                                <div className="flex justify-between py-5">
-                                    <span className="font-bold text-gray-900 font-lg">Order Total</span>
-                                    <span className="font-bold text-gray-600">{FormatCurrency(grandTotal)}</span>
-                                </div>
-                            </div>
-                        </div>
+                        <CartSummary />
                     </div>
                 </div>
             </div>
         </div>
     );
+}
+
+
+export const meta: MetaFunction = () => {
+    return {
+        title: `Checkout - ${Site_Title}`
+    }
 }
