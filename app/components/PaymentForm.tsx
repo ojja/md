@@ -107,10 +107,10 @@ const PaymentForm = () => {
             console.log("3-D Secure authentication failed.");
           }
         },
-        order: {
-          amount: 100.06, // Replace with your order amount
-          currency: "EGP" // Replace with your currency
-        },
+        // order: {
+        //   amount: 100.06, // Replace with your order amount
+        //   currency: "EGP" // Replace with your currency
+        // },
         interaction: {
           displayControl: {
             formatCard: "EMBOSSED",
