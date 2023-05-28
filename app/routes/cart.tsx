@@ -70,7 +70,7 @@ export default function Cart() {
                                     </div> */}
                                     {totalDiscountAPI > 0 ?
                                         < div className="flex justify-between py-3 border-b border-black-300">
-                                            <span className="font-light text-gray-600">Discount</span>
+                                            <span className="font-light text-red-400">Discount</span>
                                             <span className="text-red-400">-{FormatCurrency(totalDiscountAPI)}</span>
                                         </div>
                                         :

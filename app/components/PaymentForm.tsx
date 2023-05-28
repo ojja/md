@@ -1,9 +1,44 @@
 import React, { useEffect } from 'react';
+import { API_ENDPOINT } from '~/config';
 
 const PaymentForm = () => {
+  const callPay = async (sessionID: any) => {
+    const apiUrl = `${API_ENDPOINT}/payment/pay.php`;
+    const orderData = {
+      amount: 100.06,
+      currency: 'EGP',
+    };
+    const requestData = {
+      sessionID: sessionID,
+      orderData: orderData,
+    };
+    try {
+      const response = await fetch(apiUrl, {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Connection: 'keep-alive',
+        },
+        credentials: 'include',
+        method: 'POST',
+        body: JSON.stringify(requestData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('API response PAY:', data);
+        // Continue processing the response data here
+      } else {
+        throw new Error('Failed to call PAY API');
+      }
+    } catch (error) {
+      // Handle network or parsing error
+      console.error('Error:', error);
+    }
+  }
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = 'https://test-gateway.mastercard.com/form/version/71/merchant/TOKENIZATION/session.js?debug=true';
+    script.src = 'https://test-nbe.gateway.mastercard.com/form/version/71/merchant/TESTEGPTEST/session.js';
     document.head.appendChild(script);
 
     script.onload = () => {
@@ -36,6 +71,7 @@ const PaymentForm = () => {
                 if (response.sourceOfFunds.provided.card.scheme === 'MASTERCARD') {
                   console.log("The user entered a Mastercard credit card.");
                 }
+                callPay(response.session.id);
               } else if ("fields_in_error" === response.status) {
                 console.log("Session update failed with field errors.");
                 if (response.errors.cardNumber) {
@@ -60,26 +96,7 @@ const PaymentForm = () => {
               console.log("Session update failed: " + response);
             }
           },
-        //   authentication: function (response) {
-        //     // Handle 3-D Secure authentication response
-        //     if (response.type === 'ACS') {
-        //       // Display the 3-D Secure authentication form
-        //       // You can create a form with the provided `response.html` and submit it to the `response.url`
-        //       console.log('3-D Secure authentication required');
-        //       console.log('HTML form:', response.html);
-        //       console.log('ACS URL:', response.url);
-        //     } else if (response.type === 'FRICTIONLESS') {
-        //       // 3-D Secure authentication successful, continue with the payment
-        //       console.log('3-D Secure authentication successful');
-        //       console.log('Payment authorized:', response.authenticated);
-        //       console.log('Cardholder verification:', response.cavv);
-        //     } else if (response.type === 'FAILURE') {
-        //       // 3-D Secure authentication failed
-        //       console.log('3-D Secure authentication failed');
-        //       console.log('Failure reason:', response.failureReason);
-        //     }
-        //   }
-        authenticationSuccessful: function (response) {
+          authenticationSuccessful: function (response) {
             // Handle successful authentication
             console.log("3-D Secure authentication successful.");
             // Perform additional actions or submit the form
@@ -91,7 +108,7 @@ const PaymentForm = () => {
           }
         },
         order: {
-          amount: 1000, // Replace with your order amount
+          amount: 100.06, // Replace with your order amount
           currency: "EGP" // Replace with your currency
         },
         interaction: {
