@@ -6,6 +6,7 @@ import HistorySection from "./about/history";
 import ValuesSection from "./about/values";
 import ToggleSection from "./about/toggleSection";
 import Breadcrumbs from "./Breadcrumbs";
+import i18next from "i18next";
 
 
 export default function AboutSection() {
@@ -94,8 +95,8 @@ export default function AboutSection() {
     ];
     const breadcrumbs = {
         pages: [
-            { name: 'Home', href: '/' },
-            { name: 'About', href: '#' },
+            { name:t('home.name'), href: '/' },
+            { name: t('about.name'), href: '#' },
         ]
     }
     
@@ -104,39 +105,36 @@ export default function AboutSection() {
         <section className=" w-full">
             <div className="hero bg-green-300 pt-4 pb-16">
                 <div className="details container mx-auto md:px-24 px-4">
+                <span className="hidden line-clamp-3 line-clamp-5 w-2/3"></span>
                 <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-4 border-b border-gray-200" />
                     <img src="/images/about/about-hero.png" alt="" />
                     <TextEllipsis
                         width='w-2/3'
-                        title="نحن نغير مفهوم الأكل الصحي في جميع أنحاء العالم"
-                        content="تأسست شركة أبو عوف في عام 2010 وأصبحت من أشهر الأسماء في الأسواق لتقديم منتجات القهوة الطبيعية عالية الجودة والمكسرات وزبد المكسرات والأطعمة الصحية والفاكهة المجففة.. وأكثر فلكل مُنتَج حكايته الخاصة؛ وبسبب اهتمامنا المستمر بالتفاصيل، فإن كل خطوة في عملية الإنتاج في أبو عوف تُدار بعناية لضمان إنتاج منتجات عالية الجودة يتم توصيلها بحب وملئها بالمكونات المغذية من الطبيعة الأم نعطي الأولوية لابتكار المنتجات ونأخذ في الاعتبار اتجاهات السوق ورغبات العملاء وتغيُّر الأذواق، كما نشجع دائمًا نمط الحياة الصحي؛ لأن هدفنا ليس فقط تغذية الجسم، بل تغذية العقل والروح أيضًا، وذلك من خلال مجموعة متنوعة من الأعشاب والمنتجات العضوية المختلفة. نأمل في حكي قصة التغيير الذي يمكنك إحداثه في العالم عندما تقوم بتغيير عادات الأكل الخاصة بك إلى عادات صحية وممتعة ولذيذة."
-                    />
+                        title= {t('about.hero_title')}
+                        content=  {t('about.hero_content')}     />
                 </div>
             </div>
             <HistorySection />
             <ValuesSection />
-            <div className="container mx-auto md:py-16 md:px-0 py-6 px-4">
+            <div className="container mx-auto md:py-16 py-6 md:px-24 px-4">
                 <div className="flex items-center flex-col md:flex-row ">
                     <div className="image md:w-1/2 w-full md:mr-9 mb-4 md:mb-0 ">
                         <img src="/images/about/image13.png" alt="" className="rounded-3xl" />
                     </div>
                     <div className="text md:w-1/2 w-full md:ml-9">
-                        <h3 className="text-green-400 font-bold md:text-5xl md:mb-6 mb-3 text-xl">المهمة والرؤية</h3>
-                        <p className="text-gray-50 font-semibold md:leading-9 md:text-2xl text-sm">"أبو عوف تم تأسيسها برؤية لتغيير مستقبل الغذاء. فمن قال أن الغذاء الصحي لا يمكن أن يكون لذيذًا؟"</p>
+                        <h3 className="text-green-400 font-bold md:text-5xl md:mb-6 mb-3 text-xl"> {t('about.mission_title')}</h3>
+                        <p className="text-gray-50 font-semibold md:leading-9 md:text-2xl text-sm">{t('about.mission_content')}</p>
                         <ToggleSection />
                     </div>
 
                 </div>
                 <div className="flex items-center flex-col-reverse md:flex-row  md:mt-40 mt-6">
                     <div className="text md:w-1/2 w-full md:mr-9 ">
-                        <h3 className="text-green-400 font-bold md:text-5xl md:mb-6 mb-3 text-xl">أبو عوف حاليًا </h3>
+                        <h3 className="text-green-400 font-bold md:text-5xl md:mb-6 mb-3 text-xl">{t('about.now')} </h3>
                         <TextEllipsis
                             lineClampNumber={5}
                             textAlign="text-start"
-                            content="لدينا الآن أكثر من 150 فرعًا في مصر ويمكن العثور على منتجاتنا في معظم محلات السوبر ماركت الكبرى في مثل كارفور ومترو وأولاد رجب وبنده وأوسكار وسعودي وهايبر وان وسبينس
-                            كما نقوم بتوريد العديد من منتجاتنا إلى مجموعة من أفخم سلاسل الفنادق مثل سانت ريجيس وفور سيزونز وجي دبليو ماريوت وماريوت ولو ميريديان وريتز كارلتون وويستن، بالإضافة إلى شركة السوق الحرة وشركة مصر للطيران التي نمدها بمنتجاتنا لأكثر من 10 سنوات.
-                            أخيرًا وليس آخرًا، ونظرًا لأننا نريد التأكد من أنك دائمًا مستيقظ ولديك كمية جيدة من الطاقة على الطريق، لذا نقدم قهوة أبو عوف التركية الخاصة في 55 محطة وقود ويمكن أيضًا العثور على شاي بالنكهات في 20 محطة
-                            نتأكد من تلبية ذوق كل عميل ونوفر مجموعة متنوعة من المنتجات التي لا غنى عنها للاستهلاك اليومي من المأكولات والمشروبات، مثل القهوة والشاي والعسل ... إلخ. فـ'أبو عوف' هو العلامة التجارية المفضلة في سوق الوجبات الخفيفة الصحية واللذيذة، حيث ونوفر وصولاً سهلاً إلى طعام صحي ونشجع أسلوب حياة صحي."
+                            content={t('about.now_content')}
                         />
                     </div>
                     <div className="image md:w-1/2 w-full md:ml-9 mb-4 md:mb-0 ">
