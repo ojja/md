@@ -50,7 +50,7 @@ export default function App() {
   const { t } = useTranslation();
 
   const [isRtl, setIsRtl] = useState(false);
-  console.log('i18n.language', i18n.language)
+  console.log('Root i18n.language ', i18n.language)
   if (typeof window !== "undefined") {
     initFacebookPixel(FB_PIXELCODE);
   }
@@ -65,7 +65,7 @@ export default function App() {
   //   s.parentNode.insertBefore(t,s)}(window, document,'script',
   //   'https://connect.facebook.net/en_US/fbevents.js');
   //   fbq('init', '6517989738225028');
-  //   fbq('track', 'PageView');
+  //   fbq('track', 'PageView');s
   // }, []);
 
 
@@ -130,13 +130,14 @@ export function CatchBoundary() {
         <title>Oops!</title>
         <Meta />
         <Links />
+        <link rel="stylesheet" href={i18n.language === "ar" ? stylesRtl : styles} />
       </head>
       <body className="h-full">
         <main
           className="min-h-full bg-center bg-cover sm:bg-center"
           style={{
             backgroundImage:
-              'url("https://images.unsplash.com/photo-1545972154-9bb223aac798?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=3050&q=80&exp=8&con=-15&sat=-75")',
+              'url("/images/404.jpg")',
           }}
         >
           <div className="px-4 py-16 mx-auto text-center max-w-7xl sm:px-6 sm:py-24 lg:px-8 lg:py-48">

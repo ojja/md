@@ -50,7 +50,7 @@ interface MiniCartItemProps {
 //     return null; // or some default value if the combination of attributes is not found
 //   };
 
-const MiniCartItem = ({ id, quantity, color, size, slug, thumbnail, removeFromCart, price }: MiniCartItemProps) => {
+const MiniCartItem = ({ id, quantity, slug, thumbnail, removeFromCart, price }: MiniCartItemProps) => {
 
     const [product, setProduct] = useState({});
     const handleRemoveClick = () => {
@@ -76,20 +76,16 @@ const MiniCartItem = ({ id, quantity, color, size, slug, thumbnail, removeFromCa
     const variationId = id;
     const variation = product?.variations?.find(variation => variation.id === variationId);
 
-    // const variation = product?.variations?.find((variation: any) =>
-    //     variation.attributes.attribute_pa_size === size &&
-    //     variation.attributes.attribute_pa_color === color
-    // );
-    const variationSalePrice = price;
-
+    let salePrice = null;
+    let productPrice = null;
+    let color = null;
+    let size = null;
     if (variation) {
-        const { price, sale_price } = variation;
-        console.log('Price:', price);
-        console.log('Sale Price:', sale_price);
-    } else {
-        console.log('Variation not found.');
+        productPrice = variation.price;
+        salePrice = variation.sale_price;
+        color = variation.attributes?.attribute_pa_color
+        size = variation.attributes?.attribute_pa_size
     }
-
 
     return (
         <>
@@ -108,17 +104,20 @@ const MiniCartItem = ({ id, quantity, color, size, slug, thumbnail, removeFromCa
                             <Link to={`/products/${slug}`}>{title}</Link>
                         </h3>
                         <div>
-                            <p className="ml-4">{FormatCurrency(variationSalePrice * quantity)}</p>
+                            <p className="ml-4">{FormatCurrency(salePrice * quantity)}</p>
                         </div>
                     </div>
                     <p className="mt-1 text-sm text-gray-500">{color} - {size}</p>
                 </div>
-                <div className="flex items-end justify-between flex-1 text-sm">
+                <div className="flex items-end justify-between flex-1 text-sm text-gray-500">
                     <div className="flex flex-col">
-                    {sale_price !== null && sale_price != price ? (
-                        <p className="text-gray-500">{FormatCurrency(price)}</p>
+                        {salePrice !== null && salePrice != productPrice ? (
+                            <p className="">
+                                <span className="align-middle">{FormatCurrency(salePrice)}</span>
+                                <del className="ml-2 text-xs text-red-400 line-through align-middle">{FormatCurrency(productPrice)}</del>
+                            </p>
                         ) : (
-                            <p className="text-2xl text-gray-900">
+                            <p className="">
                                 {FormatCurrency(price)}
                             </p>
                         )}

@@ -5,7 +5,7 @@ export default function RecentlyViewedProducts() {
     const {
         recentItems,
     } = useRecentView();
-    console.log('recentItems', recentItems)
+    // console.log('recentItems', recentItems)
     return (
         <div className="mt-10 bg-white border-t-2">
             <div className="container px-4 py-16 mx-auto sm:py-24 sm:px-6">

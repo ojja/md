@@ -22,6 +22,7 @@ import FormatCurrency from "~/utils/FormatCurrency";
 import Frequently from "~/components/Frequently";
 import useRecentView from "~/stores/wishtList";
 import RecentlyViewedProducts from "~/components/RecentlyViewedProducts";
+import Accordion from "~/components/Accordion";
 
 interface Feature {
     name: string;
@@ -81,29 +82,30 @@ export default function ProductSingle() {
         setSelectedColor(product?.attributes?.pa_color?.[0] || '');
         addToRecent(product)
     }, [product]);
-    console.log('product>>', product)
+    console.log('product>>', product.id)
 
     let itemID;
     let variationPrice;
     let variationSalePrice;
 
-if (product.type === "simple") {
-	itemID = product.id;
-} else if (product.type === "variable") {
-	let variation = product?.variations?.find((variation:any) =>
-		variation.attributes.attribute_pa_size === selectedSize
-	);
-	
-	if (variation) {
-		itemID = variation.id;
+    if (product.type === "simple") {
+        itemID = product.id;
+    } else if (product.type === "variable") {
+        let variation = product?.variations?.find((variation: any) =>
+            variation.attributes.attribute_pa_size === selectedSize &&
+            variation.attributes.attribute_pa_color === selectedColor
+        );
 
-        variationPrice = variation ? variation.price : null;
-        variationSalePrice = variation ? variation.sale_price : null;
-	} else {
-		// Handle case when variation is not found
-	}
-}
-console.log('itemID',itemID);
+        if (variation) {
+            itemID = variation.id;
+
+            variationPrice = variation ? variation.price : null;
+            variationSalePrice = variation ? variation.sale_price : null;
+        } else {
+            // Handle case when variation is not found
+        }
+    }
+    console.log('itemID', itemID);
 
 
     const {
@@ -113,7 +115,7 @@ console.log('itemID',itemID);
     const breadcrumbs = {
         pages: [
             { name: 'Home', href: '/' },
-            { name: product.gender?product.gender:'All Products', href: '/products' },
+            { name: product.gender ? product.gender : 'All Products', href: '/products' },
             { name: product.category_name, href: `/category/${product.category_slug}` },
             { name: product.name, href: '#' }
         ]
@@ -172,7 +174,7 @@ console.log('itemID',itemID);
                             </div>
                             <div className="w-full px-4 lg:w-1/2">
                                 <div className="pt-2 mb-6">
-                                    <span className="hidden bg-orange-500 bg-purple-500 bg-pink-500 bg-of-white-500 bg-olive-500 bg-golden-500 bg-navy-500"></span>
+                                    <span className="hidden h-full min-h-full bg-orange-500 bg-purple-500 bg-pink-500 bg-center bg-cover bg-of-white-500 bg-olive-500 bg-golden-500 bg-navy-500 sm:bg-center"></span>
                                     <span className="text-xs tracking-wider text-gray-400">{product.sku}</span>
                                     <h1 className="mt-2 mb-4 text-5xl font-medium md:text-4xl font-heading">{product.title}</h1>
                                     <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">{product.category}</h2>
@@ -214,7 +216,7 @@ console.log('itemID',itemID);
                                             onSelectedSizeChange={setSelectedSize}
                                         />
                                     ) : ('')}
-                                    <span className="pt-3 text-xs">{`${selectedSize} - ${selectedColor}`}</span>
+                                    <span className="pt-3 text-xs">{`${selectedSize} - ${selectedColor} - ${itemID}`}</span>
                                     <span className="block text-xs tracking-wider text-gray-400">{product.availability}</span>
                                     <div className="flex mt-10 space-x-4">
                                         <AddToCartSimple
@@ -246,39 +248,16 @@ console.log('itemID',itemID);
                                 <div>
                                     <div className="w-full mt-8">
                                         <div className="w-full mx-auto bg-white rounded-2xl">
-                                            <Disclosure as="div">
-                                                {({ open }) => (
-                                                    <>
-                                                        <Disclosure.Button className="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75">
-                                                            <span>What is your refund policy?</span>
-                                                            <ChevronUpIcon
-                                                                className={`${open ? 'rotate-180 transform' : ''
-                                                                    } h-5 w-5 text-gray-500`}
-                                                            />
-                                                        </Disclosure.Button>
-                                                        <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-                                                            If you're unhappy with your purchase for any reason, email us
-                                                            within 90 days and we'll refund you in full, no questions asked.
-                                                        </Disclosure.Panel>
-                                                    </>
-                                                )}
-                                            </Disclosure>
-                                            <Disclosure as="div" className="mt-2">
-                                                {({ open }) => (
-                                                    <>
-                                                        <Disclosure.Button className="flex justify-between w-full px-4 py-2 text-sm font-medium text-left text-gray-900 bg-gray-100 rounded-lg hover:bg-gray-200 focus:outline-none focus-visible:ring focus-visible:ring-gray-500 focus-visible:ring-opacity-75">
-                                                            <span>Do you offer technical support?</span>
-                                                            <ChevronUpIcon
-                                                                className={`${open ? 'rotate-180 transform' : ''
-                                                                    } h-5 w-5 text-gray-500`}
-                                                            />
-                                                        </Disclosure.Button>
-                                                        <Disclosure.Panel className="px-4 pt-4 pb-2 text-sm text-gray-500">
-                                                            No.
-                                                        </Disclosure.Panel>
-                                                    </>
-                                                )}
-                                            </Disclosure>
+                                            <Accordion
+                                                title="What is your refund policy?"
+                                                description="If you're unhappy with your purchase for any reason, email us within 90 days and we'll refund you in full, no questions asked."
+                                            />
+                                            <div className="mt-2">
+                                                <Accordion
+                                                    title="Do you offer technical support?"
+                                                    description="No."
+                                                />
+                                            </div>
                                         </div>
                                     </div>
                                 </div>

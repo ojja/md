@@ -139,7 +139,7 @@ function classNames(...classes: string[]) {
 }
 export default function NavBar({ }) {
   const [open, setOpen] = useState(false);
-  const { cartQuantityTotal, openCart } = useShoppingCart();
+  const { cartQuantityTotal, openCart, refreshCart } = useShoppingCart();
 
   const location = useLocation();
   const isCheckoutPage = location.pathname === "/checkout-step1" || location.pathname === "/checkout-step2" || location.pathname === "/checkout";
@@ -292,9 +292,9 @@ export default function NavBar({ }) {
           </Transition>
         </React.Fragment>
 
-        <React.Fragment>
-          <ShoppingCart />
-        </React.Fragment>
+        <div>
+          {typeof window !== 'undefined' && <ShoppingCart />}
+        </div>
         <header className="relative z-20 bg-white">
           {isCheckoutPage ? null : (
             // <p className="flex items-center justify-center h-10 px-4 text-sm font-medium text-white bg-offwhite-500 sm:px-6 lg:px-8">
@@ -589,6 +589,93 @@ export default function NavBar({ }) {
                       </div>
                     </Popover.Group>
                   )}
+                  <div className="flex items-center ml-auto">
+                    <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
+                      <span className="text-sm font-medium text-gray-700 hover:text-gray-800" onClick={refreshCart}>
+                        refreshCart
+                      </span>
+                      <Link to="/login" className="text-sm font-medium text-gray-700 hover:text-gray-800">
+                        Login
+                      </Link>
+                      <span className="w-px h-6 bg-gray-200" aria-hidden="true" />
+                      <Link to="/my-account" className="text-sm font-medium text-gray-700 hover:text-gray-800">
+                        {t('common.my_account')}
+                      </Link>
+                    </div>
+
+                    {/* Change language */}
+                    <ChangeLanguage/>
+
+
+                    {/* Change Currncy */}
+                    {isCheckoutPage ? null : (
+                      <div className="hidden lg:ml-8 lg:flex">
+                        <Menu as="div" className="relative z-20 inline-block text-left">
+                          <div>
+                            <Menu.Button className="inline-flex items-center justify-center text-sm font-medium text-gray-700 group hover:text-gray-900">
+                              <img
+                                src="/images/en.svg"
+                                alt=""
+                                className="flex-shrink-0 block w-5 h-auto"
+                              />
+                              <span className="block ml-3 text-sm font-medium">USD</span>
+                              <span className="sr-only">, change currency</span>
+                            </Menu.Button>
+                          </div>
+
+                          <Transition
+                            as={Fragment}
+                            enter="transition ease-out duration-100"
+                            enterFrom="transform opacity-0 scale-95"
+                            enterTo="transform opacity-100 scale-100"
+                            leave="transition ease-in duration-75"
+                            leaveFrom="transform opacity-100 scale-100"
+                            leaveTo="transform opacity-0 scale-95"
+                          >
+                            <Menu.Items className="absolute right-0 z-10 w-40 mt-2 origin-top-right bg-white rounded-md shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
+                              <div className="py-1">
+                                <Menu.Item key={v4()}>
+                                  {({ active }) => (
+                                    <div className='flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-gray-100'>
+                                      <img
+                                        src="/images/en.svg"
+                                        alt=""
+                                        className="flex-shrink-0 block w-5 h-auto"
+                                      />
+                                      <span className="block ml-3">USD</span>
+                                    </div>
+                                  )}
+                                </Menu.Item>
+                                <Menu.Item key={v4()}>
+                                  {({ active }) => (
+                                    <div
+                                      className={classNames(
+                                        active ? 'bg-gray-100' : '',
+                                        'flex justify-center px-4 py-2 text-sm font-medium text-gray-900 w-full cursor-pointer'
+                                      )}
+                                    >
+                                      <img
+                                        src="/images/eg.svg"
+                                        alt=""
+                                        className="flex-shrink-0 block w-5 h-auto"
+                                      />
+                                      <span className="block ml-3">EGP</span>
+                                    </div>
+                                  )}
+                                </Menu.Item>
+                              </div>
+                            </Menu.Items>
+                          </Transition>
+                        </Menu>
+                      </div>
+                    )}
+
+                    {/* Change Country */}
+                    {isCheckoutPage ? null : (
+                      <div className="hidden lg:ml-8 lg:flex">
+                        <ChangeCountry />
+                      </div>
+                    )}
 
                 </div>
               </div>
