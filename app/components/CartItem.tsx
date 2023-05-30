@@ -37,6 +37,7 @@ interface CartItemProps {
     color?: any;
     size?: any;
     slug: any;
+    type: any;
     thumbnail: any;
     removeFromCart: (itemId: number) => void;
     // decreaseCartQuantity: (itemId: number) => void;
@@ -76,9 +77,8 @@ const CartItem = ({ id, quantity, slug, thumbnail, removeFromCart, decreaseCartQ
         color = variation.attributes?.attribute_pa_color
         size = variation.attributes?.attribute_pa_size
     }
-
     const productData = {
-        id: product.id,
+        id: id,
         thumbnail: product.main_img,
         // size: size,
         // color: color,
@@ -134,7 +134,7 @@ const CartItem = ({ id, quantity, slug, thumbnail, removeFromCart, decreaseCartQ
                     <div className="pr-4 text-right">
                         {/* <span className="text-sm font-medium">{FormatCurrency(productPrice)}</span> */}
                         {salePrice !== null && salePrice != productPrice ? (
-                            <p className="text-xl text-gray-900 flex flex-col-reverse">
+                            <p className="flex flex-col-reverse text-xl text-gray-900">
                                 <span className="align-middle">{FormatCurrency(salePrice)}</span>
                                 <del className="ml-2 text-base text-red-400 line-through align-middle">{FormatCurrency(productPrice)}</del>
                             </p>

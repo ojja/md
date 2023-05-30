@@ -1,9 +1,82 @@
-import React, { useEffect } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
+import { API_ENDPOINT } from '~/config';
 
 const PaymentForm = () => {
+  const [htmlContent, setHtmlContent] = useState('');
+  const [responseData, setResponseData] = useState(null);
+
+  const iframeRef = useRef(null); // Ref for the iframe element
+
+  const callPay = async (sessionID: any) => {
+    const apiUrl = `${API_ENDPOINT}/payment/pay.php`;
+    const orderData = {
+      amount: 100.06,
+      currency: 'EGP',
+    };
+    const requestData = {
+      sessionID: sessionID,
+      orderData: orderData,
+    };
+    try {
+      const response = await fetch(apiUrl, {
+        headers: {
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
+          Connection: 'keep-alive',
+        },
+        credentials: 'include',
+        method: 'POST',
+        body: JSON.stringify(requestData),
+      });
+
+      if (response.ok) {
+        const data = await response.json();
+        console.log('API response PAY:', data);
+        // Continue processing the response data here
+        setHtmlContent(data.html);
+        setTimeout(() => {
+          executeScript('authenticate-payer-script');
+          accessIframeElements();
+        }, 2000);
+        setResponseData(data.obj);
+
+      } else {
+        throw new Error('Failed to call PAY API');
+      }
+    } catch (error) {
+      // Handle network or parsing error
+      console.error('Error:', error);
+    }
+  }
+  const executeScript = (scriptId) => {
+    const script = document.getElementById(scriptId);
+    if (script) {
+      eval(script.innerText); // Execute the script using eval()
+    }
+  };
+  const accessIframeElements = () => {
+    const iframe = iframeRef.current;
+    if (iframe) {
+      const iframeContent = iframe.contentWindow.document;
+
+      // Access elements inside the iframe and perform actions
+      const form = iframeContent.getElementById('threedsChallengeRedirectForm');
+      if (form) {
+        form.submit();
+      }
+    }
+  };
+  const parseResponseData = () => {
+    if (responseData) {
+      const jsonData = JSON.parse(responseData);
+      console.log('Parsed response data:', jsonData);
+      // Perform actions with the parsed data
+      // Example: Access specific values using jsonData.propertyName
+    }
+  };
   useEffect(() => {
     const script = document.createElement('script');
-    script.src = 'https://test-gateway.mastercard.com/form/version/71/merchant/TOKENIZATION/session.js?debug=true';
+    script.src = 'https://test-nbe.gateway.mastercard.com/form/version/71/merchant/TESTEGPTEST/session.js';
     document.head.appendChild(script);
 
     script.onload = () => {
@@ -36,6 +109,7 @@ const PaymentForm = () => {
                 if (response.sourceOfFunds.provided.card.scheme === 'MASTERCARD') {
                   console.log("The user entered a Mastercard credit card.");
                 }
+                callPay(response.session.id);
               } else if ("fields_in_error" === response.status) {
                 console.log("Session update failed with field errors.");
                 if (response.errors.cardNumber) {
@@ -60,26 +134,7 @@ const PaymentForm = () => {
               console.log("Session update failed: " + response);
             }
           },
-        //   authentication: function (response) {
-        //     // Handle 3-D Secure authentication response
-        //     if (response.type === 'ACS') {
-        //       // Display the 3-D Secure authentication form
-        //       // You can create a form with the provided `response.html` and submit it to the `response.url`
-        //       console.log('3-D Secure authentication required');
-        //       console.log('HTML form:', response.html);
-        //       console.log('ACS URL:', response.url);
-        //     } else if (response.type === 'FRICTIONLESS') {
-        //       // 3-D Secure authentication successful, continue with the payment
-        //       console.log('3-D Secure authentication successful');
-        //       console.log('Payment authorized:', response.authenticated);
-        //       console.log('Cardholder verification:', response.cavv);
-        //     } else if (response.type === 'FAILURE') {
-        //       // 3-D Secure authentication failed
-        //       console.log('3-D Secure authentication failed');
-        //       console.log('Failure reason:', response.failureReason);
-        //     }
-        //   }
-        authenticationSuccessful: function (response) {
+          authenticationSuccessful: function (response) {
             // Handle successful authentication
             console.log("3-D Secure authentication successful.");
             // Perform additional actions or submit the form
@@ -90,10 +145,10 @@ const PaymentForm = () => {
             console.log("3-D Secure authentication failed.");
           }
         },
-        order: {
-          amount: 1000, // Replace with your order amount
-          currency: "EGP" // Replace with your currency
-        },
+        // order: {
+        //   amount: 100.06, // Replace with your order amount
+        //   currency: "EGP" // Replace with your currency
+        // },
         interaction: {
           displayControl: {
             formatCard: "EMBOSSED",
@@ -132,6 +187,16 @@ const PaymentForm = () => {
   return (
     <div>
       <div>Please enter your payment details:</div>
+      <span>5123450000000008</span>
+      <iframe
+        id="challengeFrame"
+        name="challengeFrame"
+        ref={iframeRef}
+        width="100%"
+        height="400"
+        title="3D Secure Challenge Frame"
+      />
+      <div className='hidden' dangerouslySetInnerHTML={{ __html: htmlContent }} />
       <h3>Credit Card</h3>
       <div>
         Card Number: <input type="text" id="card-number" className="input-field" title="card number" aria-label="enter your card number" value="" tabIndex="1" readOnly />

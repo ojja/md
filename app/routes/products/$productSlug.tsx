@@ -174,7 +174,7 @@ export default function ProductSingle() {
                             </div>
                             <div className="w-full px-4 lg:w-1/2">
                                 <div className="pt-2 mb-6">
-                                    <span className="hidden bg-orange-500 bg-purple-500 bg-pink-500 bg-of-white-500 bg-olive-500 bg-golden-500 bg-navy-500"></span>
+                                    <span className="hidden h-full min-h-full bg-orange-500 bg-purple-500 bg-pink-500 bg-center bg-cover bg-of-white-500 bg-olive-500 bg-golden-500 bg-navy-500 sm:bg-center"></span>
                                     <span className="text-xs tracking-wider text-gray-400">{product.sku}</span>
                                     <h1 className="mt-2 mb-4 text-5xl font-medium md:text-4xl font-heading">{product.title}</h1>
                                     <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">{product.category}</h2>

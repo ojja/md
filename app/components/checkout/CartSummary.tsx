@@ -28,20 +28,17 @@ export default function CartSummary({ thanks }: any) {
 
                 <div className="bg-white border border-gray-200 rounded-lg shadow-sm">
                     <h2 className="pt-6 pl-4 text-lg font-medium text-gray-900 sm:pl-6">
-                        {thanks ?
-                            'Order summary'
-                            :
-                            'Order Number #36543'
-                        }
+                        Order summary
                     </h2>
                     <ul role="list" className="divide-y divide-gray-200">
                         {cartItems.map((item) => (
                             <li key={v4()} className="flex px-4 py-6 sm:px-6">
                                 <MiniCartItem
                                     id={item.id}
+                                    price={item.price}
                                     quantity={item.quantity}
-                                    color={item.color}
-                                    size={item.size}
+                                    // color={item.color} 
+                                    // size={item.size} 
                                     slug={item.slug}
                                     thumbnail={item.thumbnail}
                                     removeFromCart=''

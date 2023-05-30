@@ -25,6 +25,7 @@ withEsbuildOverride((option, { isServer }) => {
 /** @type {import('@remix-run/dev').AppConfig}*/
 module.exports = {
   devServerBroadcastDelay: 1000,
+  devServerPort: 3002,
   ...(process.env.NODE_ENV === "production" ? {
     serverBuildTarget: "cloudflare-pages",
     serverConditions: ["worker"],
