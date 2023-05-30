@@ -224,6 +224,9 @@ select {
   -webkit-print-color-adjust: exact;
   color-adjust: exact
 }
+[dir="rtl"] select {
+  background-position: left .5rem center; /* Style for RTL direction */
+}
 
 [multiple] {
   background-image: initial;

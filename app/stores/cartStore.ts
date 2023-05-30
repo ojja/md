@@ -60,7 +60,6 @@ export const getCart = () => {
             .then((data) => {
                 console.log('getCart API response:', data);
                 const { total, total_discount } = data;
-                // resolve({ total, total_discount });
                 resolve({ total: parseFloat(total), total_discount });
             })
             .catch((error) => {
@@ -94,7 +93,6 @@ const callAddToCart = (product: CartItem) => {
 
                 return response.json();
             } else {
-                // getCart();
                 throw new Error('Failed to add item to cart');
             }
         })
@@ -102,7 +100,6 @@ const callAddToCart = (product: CartItem) => {
             // Handle the response data
             console.log('API response:', data);
             const { total, total_discount }: any = data;
-            // getCart(setTotalAPI, setTotalDiscountAPI)(total, total_discount);
         })
         .catch((error) => {
             // Handle network or parsing error
@@ -130,10 +127,8 @@ const callRemoveItemCart = (itemId: number) => {
             if (response.ok) {
                 // debugger;
                 console.log('called remove API success');
-                // getCart();
                 return response.json();
             } else {
-                // getCart();
                 throw new Error('Failed to remove item to cart');
             }
         })
@@ -141,7 +136,6 @@ const callRemoveItemCart = (itemId: number) => {
             // Handle the response data
             console.log('API response:', data);
             const { total, total_discount }: any = data;
-            // getCart(setTotalAPI, setTotalDiscountAPI)(total, total_discount);
         })
         .catch((error) => {
             // Handle network or parsing error
@@ -167,10 +161,8 @@ const setQty = (product: CartItem, qty: any) => {
         .then((response) => {
             if (response.ok) {
                 console.log('called setQty API success');
-                // getCart();
                 return response.json();
             } else {
-                // getCart();
                 throw new Error('Failed to update quantity in cart');
             }
         })
@@ -178,8 +170,6 @@ const setQty = (product: CartItem, qty: any) => {
             // Handle the response data
             console.log('API response setQty:', data);
             const { total, total_discount }: any = data;
-            // getCart(setTotalAPI, setTotalDiscountAPI)(total, total_discount);
-
         })
         .catch((error) => {
             // Handle network or parsing error
@@ -205,10 +195,8 @@ const addCouponAPI = (couponCode: any) => {
             .then((response) => {
                 if (response.ok) {
                     console.log('Called coupon API success');
-                    // getCart();
                     return response.json();
                 } else {
-                    // getCart();
                     throw new Error('Failed to update coupon in cart');
                 }
             })
@@ -216,8 +204,6 @@ const addCouponAPI = (couponCode: any) => {
                 console.log('API response coupon:', data);
                 resolve(data); // Resolve the promise with the response data
                 const { total, total_discount }: any = data;
-                // getCart(setTotalAPI, setTotalDiscountAPI)(total, total_discount);
-
             })
             .catch((error) => {
                 console.error('Error:', error);
@@ -243,6 +229,7 @@ export const useShoppingCart = () => {
             totalPrice: 0,
             totalAPI: 0,
             totalDiscountAPI: 0,
+            resetCart: () => null,
         };
     }
     const cartStore = useStore(shoppingCart);
@@ -250,6 +237,10 @@ export const useShoppingCart = () => {
     const [totalAPI, setTotalAPI] = useState(0);
     const [totalDiscountAPI, setTotalDiscountAPI] = useState(0);
 
+    const resetCart = () => {
+        console.log('resetCart')
+        shoppingCart.set([]);
+    };
 
     const addToCart = (product: CartItem) => {
         const itemIndex = cartStore.findIndex((item) =>
@@ -326,7 +317,6 @@ export const useShoppingCart = () => {
     };
     const refreshCart = () => {
         console.log('refresh cart new');
-        // getCart(setTotalAPI, setTotalDiscountAPI);
     };
     const addCoupon = (couponCode: any) => {
         console.log('addCoupon NEW', couponCode);
@@ -345,7 +335,6 @@ export const useShoppingCart = () => {
                 setTotalDiscountAPI(total_discount);
             })
             .catch((error) => {
-                // Handle the error if necessary
                 console.error('Error:', error);
             });
     }, [cartStore]);
@@ -367,6 +356,7 @@ export const useShoppingCart = () => {
         totalPrice,
         totalAPI,
         totalDiscountAPI,
+        resetCart
     };
 };
 

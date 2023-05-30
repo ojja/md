@@ -1,11 +1,13 @@
 import CartSummary from "~/components/checkout/CartSummary"
-
-
-import { MetaFunction } from "@remix-run/node";
+import { LoaderArgs, MetaFunction } from "@remix-run/node";
 import { Site_Title } from "~/config";
-import { Link } from "react-router-dom";
 import ExtraProducts from "~/components/ExtraProducts";
 import TrackingSteps from "~/components/TrackingSteps";
+import {
+    Link,
+    useSearchParams,
+  } from "@remix-run/react";
+  
 export const meta: MetaFunction = () => {
     return {
         title: `Thank You - ${Site_Title}`
@@ -13,6 +15,9 @@ export const meta: MetaFunction = () => {
 }
 
 export default function Thanks() {
+    const [searchParams] = useSearchParams();
+    // console.log('params',params)
+    const orderID = searchParams.get('orderID');
     return (
         <div className="bg-white">
             <section className="bg-[#F4F7FF]">
@@ -115,7 +120,7 @@ export default function Thanks() {
                                 </div>
                             </div>
                         </div>
-                        <CartSummary thanks />
+                        <CartSummary thanks={orderID} />
                     </div>
                     <ExtraProducts categorySlug="skirt" pageNumber={1} title="Shop More" />
 

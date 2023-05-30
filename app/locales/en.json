@@ -1,27 +1,65 @@
 {
-    "home": {
-      "title": "Welcome to my homepage",
-      "description": "This is the description of my homepage"
-    },
-    "blog": {
-      "title": "My Blog",
-      "description": "This is the description of my blog"
-    },
-    "about": {
-      "title": "About Me",
-      "description": "This is the description of me"
-    },
-    "languageSwitcher": {
-      "en": "English",
-      "ar": "العربية"
-    },
-    "common":{
-      "topBannerText":"Get free delivery on orders over $100",
-      "quick_view":"Quick View",
-      "new_arrivals":"New Arrivals",
-      "in": "in",
-      "login":"",
-      "my_account":"My Account"
-    }
+  "home": {
+    "title": "Welcome to my homepage",
+    "description": "This is the description of my homepage"
+  },
+  "blog": {
+    "title": "My Blog",
+    "description": "This is the description of my blog"
+  },
+  "about": {
+    "title": "About Me",
+    "description": "This is the description of me"
+  },
+  "languageSwitcher": {
+    "en": "English",
+    "ar": "العربية"
+  },
+  "checkout": {
+    "checkout": "Checkout",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "phone_number": "Phone number",
+    "email_address": "Email Address",
+    "shipping_information": "Shipping Information",
+    "choose_order_date": "Choose Order Date",
+    "shipping_method": "Shipping Method",
+    "area": "Area",
+    "neighborhood": "Neighborhood",
+    "select_neighborhood": "Select Neighborhood",
+    "ship_to_me": "Ship to me",
+    "pick_from_branch": "Pick from store",
+    "choose_branch": "Choose Store",
+    "city": "City",
+    "street_name": "Street name",
+    "select_area": "Select Area",
+    "property_type": "Property Type",
+    "apartment": "apartment",
+    "villa": "villa",
+    "building_no": "Building No.",
+    "floor": "Floor",
+    "today": "Today",
+    "terms": "I’ve read and accepted all Terms & Conditions",
+    "within_60_min": "Within 60 min",
+    "choose_date": "Choose Date"
+  },
+  "common": {
+    "topBannerText": "Get free delivery on orders over $100",
+    "quick_view": "Quick View",
+    "new_arrivals": "New Arrivals",
+    "in": "in",
+    "login": "",
+    "next_step": "Next Step (Complete Payment)",
+    "branch": "Branch",
+    "my_account": "My Account",
+    "submit": "Submit"
+  },
+  "cities": {
+    "cairo": "Cairo",
+    "alexandria": "Alexandria",
+    "giza": "Giza",
+    "sharm_el_sheikh": "Sharm El Sheikh",
+    "luxor": "Luxor",
+    "aswan": "Aswan"
   }
-  
+}

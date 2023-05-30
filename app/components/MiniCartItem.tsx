@@ -1,25 +1,7 @@
-import { json, LoaderFunction } from '@remix-run/cloudflare';
-import { Link, useLoaderData } from '@remix-run/react';
-import React, { useEffect, useState } from 'react'
-import invariant from 'tiny-invariant';
+import { Link } from '@remix-run/react';
+import { memo, useEffect, useState } from 'react'
 import { getProductBySlug } from '~/api/products';
-import useShoppingCart from "~/stores/cartStore";
-import storeItems from '../data/items.json';
 import FormatCurrency from '../utils/FormatCurrency';
-
-// export default function CartItem({ id, quantity }) {
-// const { removeFromCart } = useShoppingCart();
-
-// interface MiniCartItemProps {
-//     id: string;
-//     quantity: number;
-//     color: string;
-//     size: string;
-//     slug: string;
-//     thumbnail: string;
-//     removeFromCart: () => void;
-//   }
-
 
 interface Product {
     id: number;
@@ -40,15 +22,6 @@ interface MiniCartItemProps {
     removeFromCart: () => void;
 }
 
-//   const getPriceForAttributes = (variations, size, color) => {
-//     for (const variation of variations) {
-//       const { attributes, price, sale_price } = variation;
-//       if (attributes.attribute_size === size && attributes.attribute_color === color) {
-//         return sale_price;
-//       }
-//     }
-//     return null; // or some default value if the combination of attributes is not found
-//   };
 
 const MiniCartItem = ({ id, quantity, slug, thumbnail, removeFromCart, price }: MiniCartItemProps) => {
 
@@ -57,6 +30,7 @@ const MiniCartItem = ({ id, quantity, slug, thumbnail, removeFromCart, price }: 
         removeFromCart(id);
     };
     useEffect(() => {
+        console.log("FETCHING")
         const fetchProduct = async () => {
             const product = await getProductBySlug(slug);
             setProduct(product);
@@ -64,14 +38,8 @@ const MiniCartItem = ({ id, quantity, slug, thumbnail, removeFromCart, price }: 
         fetchProduct();
     }, [slug]);
 
-    //   console.log('product>>>>>>>>>> Item',product)
-
 
     const title = product.title;
-    // const price = product.variations ? getPriceForAttributes(product.variations, size, color) : product.price ;
-
-    // const priceV = product.variations ? getPriceForAttributes(product.variations, size, color) : null;
-    // console.log("priceV",priceV);
 
     const variationId = id;
     const variation = product?.variations?.find(variation => variation.id === variationId);
@@ -138,4 +106,4 @@ const MiniCartItem = ({ id, quantity, slug, thumbnail, removeFromCart, price }: 
         </>
     );
 };
-export default MiniCartItem;
+export default memo(MiniCartItem);

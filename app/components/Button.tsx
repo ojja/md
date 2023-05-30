@@ -3,7 +3,12 @@ import { Link } from "@remix-run/react"
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
-export default function Button({ name, style = "solid", onClick, width = "auto", href, extraclass }: any) {
+export default function Button({ name, style = "solid", onClick, width = "auto", href, extraclass, type = "button" }: any) {
+    const handleClick = () => {
+        if (onClick) {
+            onClick();
+        }
+    };
     return (
         <>
             {href ?
@@ -33,8 +38,8 @@ export default function Button({ name, style = "solid", onClick, width = "auto",
                         'items-center justify-center px-10 py-2 font-medium  rounded-lg shadow-sm  sm:flex-grow-0',
                         extraclass ? extraclass : '',
                     )}
-                    type="button"
-                    onClick={onClick}
+                    type={type}
+                    onClick={handleClick}
                 >
                     {name}
                 </button>
