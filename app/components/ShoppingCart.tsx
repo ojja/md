@@ -1,4 +1,4 @@
-import { Fragment, useEffect, useState } from 'react'
+import { Fragment, useEffect, memo } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
@@ -11,7 +11,7 @@ import MiniCartTools from './MiniCartTools';
 import i18next from 'i18next';
 
 
-export default function ShoppingCart() {
+const ShoppingCart = () => {
 
   const { closeCart, cartItems, removeFromCart, openCart, isOpen, totalPrice } = useShoppingCart();
   console.log('isOpen>', isOpen);
@@ -51,11 +51,11 @@ export default function ShoppingCart() {
 
                   enter="transform transition ease-in-out duration-500 sm:duration-700"
                   // enterFrom="-translate-x-full"
-                  enterFrom={`${i18next.language==='en'?'translate-x-full':'-translate-x-full'}`}
+                  enterFrom={`${i18next.language === 'en' ? 'translate-x-full' : '-translate-x-full'}`}
                   enterTo="translate-x-0"
                   leave="transform transition ease-in-out duration-500 sm:duration-700"
                   leaveFrom="translate-x-0"
-                  leaveTo={`${i18next.language==='en'?'translate-x-full':'-translate-x-full'}`}
+                  leaveTo={`${i18next.language === 'en' ? 'translate-x-full' : '-translate-x-full'}`}
                 >
                   <Dialog.Panel className="w-screen h-full max-w-md pointer-events-auto">
                     <div className="relative flex flex-col h-full overflow-y-scroll bg-white shadow-xl">
@@ -80,14 +80,14 @@ export default function ShoppingCart() {
                               <ul role="list" className="-my-6 divide-y divide-gray-200">
                                 {cartItems.map((item) => (
                                   <li key={v4()} className="flex py-6">
-                                    <MiniCartItem 
+                                    <MiniCartItem
                                       id={item.id}
                                       price={item.price}
-                                      quantity={item.quantity} 
+                                      quantity={item.quantity}
                                       // color={item.color} 
                                       // size={item.size} 
-                                      slug={item.slug} 
-                                      thumbnail={item.thumbnail} 
+                                      slug={item.slug}
+                                      thumbnail={item.thumbnail}
                                       removeFromCart={removeFromCart}
                                     />
                                   </li>
@@ -100,8 +100,8 @@ export default function ShoppingCart() {
                             <p className="mt-0.5 text text-slate-500">Your cart is currently empty.</p>
                           </div>
                         )}
-                        <MiniCartTools/>
-                        <MiniCartUpSell/>
+                        <MiniCartTools />
+                        <MiniCartUpSell />
                       </div>
 
                       <div className="px-4 py-4 border-t border-gray-200 top-shadow">
@@ -144,3 +144,4 @@ export default function ShoppingCart() {
     </div>
   )
 }
+export default memo(ShoppingCart)

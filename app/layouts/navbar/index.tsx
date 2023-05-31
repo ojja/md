@@ -11,6 +11,7 @@ import Search from '~/components/Search';
 import LanguageSwitcher from '~/components/LanguageSwitcher';
 import ChangeLanguage from '~/components/ChangeLanguage';
 import { useTranslation } from 'react-i18next';
+import NoInternetConnection from '~/components/NoInternetConnection';
 
 
 const navigation = {
@@ -150,6 +151,7 @@ export default function NavBar({ }) {
   return (
     <>
       <div className="bg-white">
+        <NoInternetConnection />
         <React.Fragment>
           {/* Mobile menu */}
           <Transition show={open} >
@@ -293,7 +295,9 @@ export default function NavBar({ }) {
         </React.Fragment>
 
         <div>
-          {typeof window !== 'undefined' && <ShoppingCart />}
+          {isCheckoutPage ? null : (
+            typeof window !== 'undefined' && <ShoppingCart />
+          )}
         </div>
         <header className="relative z-20 bg-white">
           {isCheckoutPage ? null : (
@@ -604,7 +608,7 @@ export default function NavBar({ }) {
                     </div>
 
                     {/* Change language */}
-                    <ChangeLanguage/>
+                    <ChangeLanguage />
 
 
                     {/* Change Currncy */}

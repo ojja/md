@@ -156,7 +156,7 @@ export default function Checkout() {
                                 <PaymentMethod />
                                 <div className="flex items-center pt-3 mt-3 border-t-2">
                                     <input id="default-checkbox" type="checkbox" value="" className="w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded" />
-                                    <label for="default-checkbox" className="ml-2 text-sm font-medium text-gray-900">I’ve read and accepted all Terms & Conditions</label>
+                                    <label htmlFor="default-checkbox" className="ml-2 text-sm font-medium text-gray-900">I’ve read and accepted all Terms & Conditions</label>
                                 </div>
                                 <Link to="/thanks" className="block px-3 py-4 mt-4 text-lg text-center text-white uppercase bg-primary-600 rounded-md pointer-events-auto hover:bg-primary-500">Place Order</Link>
                             </div>

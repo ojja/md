@@ -19,8 +19,8 @@ export const meta: MetaFunction = () => {
 export default function Cart() {
     const { cartItems, removeFromCart, decreaseCartQuantity, addToCart, totalPrice, addCoupon, totalAPI, totalDiscountAPI } = useShoppingCart();
     // console.log('cartItems', cartItems)
-    console.log('totalAPI', totalAPI)
-    console.log('totalDiscountAPI', totalDiscountAPI)
+    // console.log('totalAPI', totalAPI)
+    // console.log('totalDiscountAPI', totalDiscountAPI)
     const [openCoupon, setOpenCoupon] = useState(false);
 
     return (
@@ -69,7 +69,7 @@ export default function Cart() {
                                         <span className="text-gray-600">10.00 EGP</span>
                                     </div> */}
                                     {totalDiscountAPI > 0 ?
-                                        < div className="flex justify-between py-3 border-b border-black-300">
+                                        <div className="flex justify-between py-3 border-b border-black-300">
                                             <span className="font-light text-red-400">Discount</span>
                                             <span className="text-red-400">-{FormatCurrency(totalDiscountAPI)}</span>
                                         </div>
@@ -98,7 +98,6 @@ export default function Cart() {
                                         <span className="font-bold text-gray-600">{FormatCurrency(totalAPI)}</span>
                                     </div>
                                     <Link to="/checkout" className="px-3 py-2 text-lg text-center text-white rounded-md pointer-events-auto bg-primary-600 hover:bg-primary-500">Checkout</Link>
-                                    {/* <Link to="/checkout-step1" className="px-3 py-2 text-lg text-center text-white rounded-md pointer-events-auto bg-primary-600 hover:bg-primary-500">Checkout2</Link> */}
                                 </div>
                             </div>
                         </div>

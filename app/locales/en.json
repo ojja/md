@@ -25,17 +25,6 @@
       "en": "English",
       "ar": "العربية"
     },
-    "common":{
-      "topBannerText":"Get free delivery on orders over $100",
-      "quick_view":"Quick View",
-      "new_arrivals":"New Arrivals",
-      "in": "in",
-      "login":" Login",
-      "my_account":"My Account",
-      "change_country":"Change Country ",
-      "learn_more":"Learn More",
-      "learn_less":" Less"
-    },
     "footer": {
       "faqs_title":"Do you have any questions? everything you need is here..",
       "faqs_para":"If you have any questions or want to ask any questions, you will find everything here",
@@ -50,6 +39,55 @@
     "faq":{
       "faqs_name":"FAQs",
       "faqs_title":"Frequently Asked Questions"
-    }
+    },
+  "checkout": {
+    "checkout": "Checkout",
+    "first_name": "First name",
+    "last_name": "Last name",
+    "phone_number": "Phone number",
+    "email_address": "Email Address",
+    "shipping_information": "Shipping Information",
+    "choose_order_date": "Choose Order Date",
+    "shipping_method": "Shipping Method",
+    "area": "Area",
+    "neighborhood": "Neighborhood",
+    "select_neighborhood": "Select Neighborhood",
+    "ship_to_me": "Ship to me",
+    "pick_from_branch": "Pick from store",
+    "choose_branch": "Choose Store",
+    "city": "City",
+    "street_name": "Street name",
+    "select_area": "Select Area",
+    "property_type": "Property Type",
+    "apartment": "apartment",
+    "villa": "villa",
+    "building_no": "Building No.",
+    "floor": "Floor",
+    "today": "Today",
+    "terms": "I’ve read and accepted all Terms & Conditions",
+    "within_60_min": "Within 60 min",
+    "choose_date": "Choose Date"
+  },
+  "common": {
+    "topBannerText": "Get free delivery on orders over $100",
+    "quick_view": "Quick View",
+    "new_arrivals": "New Arrivals",
+    "in": "in",
+    "next_step": "Next Step (Complete Payment)",
+    "branch": "Branch",
+    "submit": "Submit",
+    "login":" Login",
+    "my_account":"My Account",
+    "change_country":"Change Country ",
+    "learn_more":"Learn More",
+    "learn_less":" Less"
+  },
+  "cities": {
+    "cairo": "Cairo",
+    "alexandria": "Alexandria",
+    "giza": "Giza",
+    "sharm_el_sheikh": "Sharm El Sheikh",
+    "luxor": "Luxor",
+    "aswan": "Aswan"
   }
-  
+}
