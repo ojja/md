@@ -149,8 +149,8 @@ export default function MenuMobile() {
 
         <div className="md:hidden w-full block mb-5">
             <dl className="mt-6 space-y-6 divide-y divide-green-700">
-                {menuDetails.menu.map((menu) => (
-                    <Disclosure as="div" className="pt-6">
+                {menuDetails.menu.map((menu,index) => (
+                    <Disclosure as="div" className="pt-6" key={index}>
                         {({ open }) => (
                             <>
                                 <dt className="text-lg">

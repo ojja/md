@@ -357,7 +357,7 @@ textarea {
 input::-moz-placeholder, textarea::-moz-placeholder {
   opacity: 1;
   /* 1 */
-  color: #9ca3af;
+  color:  #868685;
   /* 2 */
 }
 
@@ -365,7 +365,7 @@ input::placeholder,
 textarea::placeholder {
   opacity: 1;
   /* 1 */
-  color: #9ca3af;
+  color:  #868685;
   /* 2 */
 }
 
@@ -1205,6 +1205,10 @@ video {
   height: 100%;
 }
 
+.h-\[18px\] {
+  height: 18px;
+}
+
 .h-\[1px\] {
   height: 1px;
 }
@@ -1440,6 +1444,10 @@ video {
 
 .max-w-md {
   max-width: 28rem;
+}
+
+.max-w-screen-2xl {
+  max-width: 1536px;
 }
 
 .max-w-screen-md {
@@ -1713,6 +1721,11 @@ video {
        column-gap: 0.5rem;
 }
 
+.gap-x-3 {
+  -moz-column-gap: 0.75rem;
+       column-gap: 0.75rem;
+}
+
 .gap-x-4 {
   -moz-column-gap: 1rem;
        column-gap: 1rem;
@@ -1941,6 +1954,10 @@ video {
 
 .rounded-md {
   border-radius: 0.375rem;
+}
+
+.rounded-sm {
+  border-radius: 0.125rem;
 }
 
 .rounded-xl {
@@ -2238,6 +2255,11 @@ video {
   background-color: rgb(6 43 28 / var(--tw-bg-opacity));
 }
 
+.bg-green-800 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(213 218 209 / var(--tw-bg-opacity));
+}
+
 .bg-green-900 {
   --tw-bg-opacity: 1;
   background-color: rgb(24 80 57 / var(--tw-bg-opacity));
@@ -2350,6 +2372,11 @@ video {
 .bg-yellow-500 {
   --tw-bg-opacity: 1;
   background-color: rgb(234 179 8 / var(--tw-bg-opacity));
+}
+
+.bg-yellow-910 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(237 200 67 / var(--tw-bg-opacity));
 }
 
 .bg-opacity-25 {
@@ -2760,6 +2787,10 @@ video {
   text-align: center;
 }
 
+.text-right {
+  text-align: left;
+}
+
 .text-start {
   text-align: start;
 }
@@ -2992,6 +3023,11 @@ video {
   color: rgb(116 116 116 / var(--tw-text-opacity));
 }
 
+.text-gray-400 {
+  --tw-text-opacity: 1;
+  color: rgb(134 134 133 / var(--tw-text-opacity));
+}
+
 .text-gray-50 {
   --tw-text-opacity: 1;
   color: rgb(119 119 119 / var(--tw-text-opacity));
@@ -3015,6 +3051,11 @@ video {
 .text-green-600 {
   --tw-text-opacity: 1;
   color: rgb(52 104 83 / var(--tw-text-opacity));
+}
+
+.text-green-800 {
+  --tw-text-opacity: 1;
+  color: rgb(213 218 209 / var(--tw-text-opacity));
 }
 
 .text-green-900 {
@@ -3151,6 +3192,16 @@ video {
 .placeholder-\[\#ACB6BE\]::placeholder {
   --tw-placeholder-opacity: 1;
   color: rgb(172 182 190 / var(--tw-placeholder-opacity));
+}
+
+.placeholder-gray-400::-moz-placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgb(134 134 133 / var(--tw-placeholder-opacity));
+}
+
+.placeholder-gray-400::placeholder {
+  --tw-placeholder-opacity: 1;
+  color: rgb(134 134 133 / var(--tw-placeholder-opacity));
 }
 
 .opacity-0 {
@@ -3367,6 +3418,16 @@ video {
   }
 }
 
+.placeholder\:text-gray-400::-moz-placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(134 134 133 / var(--tw-text-opacity));
+}
+
+.placeholder\:text-gray-400::placeholder {
+  --tw-text-opacity: 1;
+  color: rgb(134 134 133 / var(--tw-text-opacity));
+}
+
 .after\:absolute::after {
   content: var(--tw-content);
   position: absolute;
@@ -3443,11 +3504,6 @@ video {
   background-color: rgb(119 119 119 / var(--tw-bg-opacity));
 }
 
-.hover\:bg-green-300:hover {
-  --tw-bg-opacity: 1;
-  background-color: rgb(237 239 235 / var(--tw-bg-opacity));
-}
-
 .hover\:bg-green-400:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(18 110 73 / var(--tw-bg-opacity));
@@ -3456,6 +3512,11 @@ video {
 .hover\:bg-green-600:hover {
   --tw-bg-opacity: 1;
   background-color: rgb(52 104 83 / var(--tw-bg-opacity));
+}
+
+.hover\:bg-green-800:hover {
+  --tw-bg-opacity: 1;
+  background-color: rgb(213 218 209 / var(--tw-bg-opacity));
 }
 
 .hover\:bg-primary-500:hover {
@@ -3853,8 +3914,24 @@ video {
   color: rgb(37 99 235 / var(--tw-text-opacity));
 }
 
+:is([dir="ltr"] .ltr\:-ml-0) {
+  margin-right: -0px;
+}
+
+:is([dir="ltr"] .ltr\:-ml-0\.5) {
+  margin-right: -0.125rem;
+}
+
 :is([dir="ltr"] .ltr\:text-start) {
   text-align: start;
+}
+
+:is([dir="rtl"] .rtl\:-mr-0) {
+  margin-left: -0px;
+}
+
+:is([dir="rtl"] .rtl\:-mr-0\.5) {
+  margin-left: -0.125rem;
 }
 
 :is([dir="rtl"] .rtl\:text-end) {
@@ -4691,6 +4768,10 @@ video {
 
   .lg\:ml-6 {
     margin-right: 1.5rem;
+  }
+
+  .lg\:ml-8 {
+    margin-right: 2rem;
   }
 
   .lg\:block {

@@ -71,17 +71,17 @@ export default function Filters({ filteredProducts = [], selectedCategories = []
             {/* Filters */}
             <div className="hidden lg:block">
                 <h3 className="sr-only">Categories</h3>
-                <ul role="list" className="pb-6 space-y-4 border-b border-gray-200">
+                <ul role="list" className="pb-6  flex items-center gap-3">
                     {subCategories.map((category) => (
                         <li key={v4()}>
                             <a href={category.href} className={classNames(
-                                category.current ? 'text-blue-600' : 'text-gray-500',
-                                'font-medium text-base'
+                                category.current ? ' bg-green-800' : ' bg-green-300',
+                                'font-medium text-base text-green-200 p-2.5 rounded-100 hover:bg-green-800'
                             )}>{category.name}</a>
                         </li>
                     ))}
                 </ul>
-                {categories.length>0?(
+                {/* {categories.length>0?(
                 <Disclosure as="div" key={v4()} className="py-6 border-b border-gray-200" defaultOpen>
                     {({ open }) => (
                         <>
@@ -124,7 +124,7 @@ export default function Filters({ filteredProducts = [], selectedCategories = []
                         </>
                     )}
                 </Disclosure>
-                ):('')}
+                ):('')} */}
                 {/* <Disclosure as="div" key={v4()} className="py-6 border-b border-gray-200" defaultOpen>
                     {({ open }) => (
                         <>
@@ -159,7 +159,7 @@ export default function Filters({ filteredProducts = [], selectedCategories = []
                     ))}
                 </ul> */}
 
-                {filters.map((section) => (
+                {/* {filters.map((section) => (
                     <Disclosure as="div" key={v4()} className="py-6 border-b border-gray-200">
                         {({ open }) => (
                             <>
@@ -200,7 +200,7 @@ export default function Filters({ filteredProducts = [], selectedCategories = []
                             </>
                         )}
                     </Disclosure>
-                ))}
+                ))} */}
             </div>
         </div>
     )

@@ -144,8 +144,8 @@ export default function MenuDesktop() {
     return (
 
         <div className="md:flex w-3/4 ltr:md:mr-24 rtl:md:ml-24 hidden ">
-            {menuDetails.menu.map((menu) => (
-                <div className=" w-1/3">
+            {menuDetails.menu.map((menu,index) => (
+                <div className=" w-1/3" key={index}>
 
                     <><h4 className=" text-green-600 md:text-base font-bold mb-5">
                         {i18next.language === "ar" ?

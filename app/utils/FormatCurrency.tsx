@@ -1,13 +1,35 @@
 const CURRENCY_FORMATTER = new Intl.NumberFormat(undefined, {
-    currency: "EGP",
-    style: "currency",
-  });
-  const FormatCurrency = (number) => {
-    return CURRENCY_FORMATTER.format(number);
-  };
-  
+  currency: "EGP",
+  style: "currency",
+});
+const CURRENCY_FORMATTER2 = new Intl.NumberFormat(undefined, {
+  currency: "EGP",
+  style: "currency",
+});
+
+ const FormatCurrency = (number) => {
+  const parsedNumber = parseFloat(number);
+
+  const formattedCurrency = CURRENCY_FORMATTER.format(parsedNumber);
+  const currencySymbol = formattedCurrency.match(/[^\d.,]/g).join("");
+  const [wholeNumber, decimalPart] = formattedCurrency.match(/\d+/g);
+
+  return (
+    <>
+    <span className="currency text-sm font-normal">{currencySymbol}</span>
+    <span className="whole-number text-2xl font-semibold ltr:-ml-0.5 rtl:-mr-0.5">{wholeNumber}</span>
+    <span className="decimal-part text-sm font-normal">{decimalPart}</span>
+  </>);
+};
+
 export default FormatCurrency;
-  
+
+export const FormatCurrency2 = (number) => {
+  const parsedNumber = parseFloat(number);
+  return CURRENCY_FORMATTER2.format(parsedNumber);  
+};
+
+
 
 
 

@@ -11,6 +11,7 @@ import { Site_Title } from "~/config";
 import { useTranslation } from "react-i18next";
 import ShopListTop from "~/components/ShopListTop";
 import Filters from "~/components/Filters";
+import Sort from "~/components/Sort";
 
 
 
@@ -32,6 +33,7 @@ export const loader = async ({ params }: any) => {
   try {
     //@ts-ignore no product type defined
     products = await getCategoryProducts(categorySlug, pageNumber, perPage);
+    console.log('products', products)
   } catch (e) {
     console.log('error', e);
   }
@@ -58,26 +60,33 @@ export default function CategorySlug() {
 
   const { products: initialProducts } = useLoaderData();
   const [products, setProducts] = useState(initialProducts);
+  console.log('products in', products)
 
   return (
     <div className="bg-white">
-      <main className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <main className="px-4 mx-auto max-w-screen-2xl sm:px-6 lg:px-8">
         <div className='pt-5 '>
-          <ShopListTop grid={grid} setGrid={setGrid} setMobileFiltersOpen={setMobileFiltersOpen} />
-          <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-4 border-b border-gray-200" />
+          <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-4" />
+          <ShopListTop grid={grid} setGrid={setGrid} setMobileFiltersOpen={setMobileFiltersOpen} title='' />
           <section aria-labelledby="products-heading" className="pt-6 pb-24">
-            <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
-              <Filters />
+            {/* <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4"> */}
+            <div className="">
+
+              <div className="top  flex justify-between">
+                <Filters />
+                <Sort />
+              </div>
+
 
               {/* Product grid */}
-              <div className="relative z-10 lg:col-span-3">
+              <div className="relative z-10 lg:col-span-3 ">
                 <div className={classNames(
                   grid ? 'sm:grid-cols-1 lg:grid-cols-2' : 'sm:grid-cols-2 lg:grid-cols-4',
                   'grid grid-cols-1 gap-y-10 gap-x-6 xl:gap-x-8 mt-6'
                 )}
                 >
 
-                  {products.map((productData: any) => (
+                  {products?.map((productData: any) => (
                     <>
                       <ProductWidget product={productData} key={v4()} />
                       {/* <ProductWidgetWithVariation product={productData} key={v4()} /> */}

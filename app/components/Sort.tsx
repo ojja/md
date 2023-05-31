@@ -16,12 +16,12 @@ function classNames(...classes: string[]) {
 }
 export default function Sort() {
     return (
-        <Menu as="div" className="relative z-20 inline-block text-left">
+        <Menu as="div" className="relative z-20 inline-block text-left border-2 border-green-200 py-2.5 px-5 rounded-100">
             <div>
-                <Menu.Button className="inline-flex justify-center text-sm font-medium text-gray-700 group hover:text-gray-900">
+                <Menu.Button className="inline-flex justify-center text-sm font-medium text-gray-700 group hover:text-gray-900 rounded-100">
                     Sort
                     <ChevronDownIcon
-                        className="flex-shrink-0 w-5 h-5 ml-1 -mr-1 text-gray-400 group-hover:text-gray-500"
+                        className="flex-shrink-0 w-5 h-5 ml-4 -mr-1 text-green-200 group-hover:text-gray-500"
                         aria-hidden="true"
                     />
                 </Menu.Button>

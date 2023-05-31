@@ -15,7 +15,7 @@ export default function ShopListTop({ grid, setGrid, setMobileFiltersOpen, title
     const { t } = useTranslation();
     return (
         <div>
-            <div className="flex flex-col flex-wrap items-baseline justify-between pt-2 pb-6 mb-4 border-b border-gray-200 md:flex-row">
+            <div className="flex flex-col flex-wrap items-baseline justify-between pt-2 pb-6 mb-4 md:flex-row">
                 {title ?
                     <h1 className="text-4xl font-bold tracking-tight text-gray-900">{title}</h1>
                     :
@@ -23,7 +23,7 @@ export default function ShopListTop({ grid, setGrid, setMobileFiltersOpen, title
                 }
                 <div className="flex items-center self-end mt-3 md:mt-0">
 
-                    <Sort />
+                    {/* <Sort /> */}
 
                     <button type="button" className={classNames(
                         grid ? 'text-gray-500' : 'text-gray-400',
