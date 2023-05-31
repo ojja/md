@@ -102,6 +102,7 @@ export function ProductWidget({ product }: ProductWidgetProps) {
                         {/* <p className="mt-1 text-sm text-gray-500">{product.category}</p> */}
                         {/* <p className="mt-1 text-sm text-gray-500">{product.id}</p> */}
                     </div>
+                    
                     {(product.sale_price ? (
                         <div className="flex items-center gap-x-3">
                             <p className=" bg-yellow-910 px-1 h-[18px] w-fit flex rounded-sm">{FormatCurrency(product.sale_price)}</p>
