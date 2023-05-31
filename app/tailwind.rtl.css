@@ -646,6 +646,10 @@ video {
   position: relative;
 }
 
+.-inset-4 {
+  inset: -1rem;
+}
+
 .-inset-px {
   inset: -1px;
 }

@@ -3,8 +3,10 @@ const CURRENCY_FORMATTER = new Intl.NumberFormat(undefined, {
     style: "currency",
   });
   const FormatCurrency = (number) => {
-    return CURRENCY_FORMATTER.format(number);
+    const parsedNumber = parseFloat(number);
+    return CURRENCY_FORMATTER.format(parsedNumber);  
   };
+  
   
 export default FormatCurrency;
   
