@@ -888,6 +888,11 @@ video {
   margin-right: 1.25rem;
 }
 
+.mx-7 {
+  margin-left: 1.75rem;
+  margin-right: 1.75rem;
+}
+
 .mx-auto {
   margin-left: auto;
   margin-right: auto;
@@ -1037,6 +1042,10 @@ video {
 
 .mt-10 {
   margin-top: 2.5rem;
+}
+
+.mt-14 {
+  margin-top: 3.5rem;
 }
 
 .mt-16 {
@@ -2075,6 +2084,11 @@ video {
 .border-gray-300 {
   --tw-border-opacity: 1;
   border-color: rgb(116 116 116 / var(--tw-border-opacity));
+}
+
+.border-gray-400 {
+  --tw-border-opacity: 1;
+  border-color: rgb(134 134 133 / var(--tw-border-opacity));
 }
 
 .border-green-100 {

@@ -11,12 +11,16 @@
 import React, { useEffect, useState } from "react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import useShoppingCart from "~/stores/cartStore";
-import FormatCurrency, { FormatCurrency2} from "../../utils/FormatCurrency";
+import FormatCurrency, { FormatCurrency2 } from "../../utils/FormatCurrency";
 import "react-lazy-load-image-component/src/effects/blur.css";
 import { Link } from "@remix-run/react";
 import Quickview from "../Quickview";
 import AddToCartSimple from "../AddToCartSimple";
 import { useTranslation } from "react-i18next";
+import { HeartIcon } from "@heroicons/react/20/solid";
+import Heart from "../icons/Heart";
+import { useRecentView } from "~/stores/recentView";
+// import useFavoriteIcon from "~/stores/wishList";
 
 type Product = {
     [x: string]: string;
@@ -25,20 +29,23 @@ type Product = {
     price: number,
     main_image: string,
     thumbnail: string,
-    slug: string
+    slug: string,
     sale_price: number
 }
 
 type ProductWidgetProps = {
     product: Product,
     key: any
+    isItemInWishlist: boolean; // Add prop for isItemInWishlist
+
 }
 
 
+// const { refreshWish } = useFavoriteIcon();
 
 
 
-export function ProductWidget({ product }: ProductWidgetProps) {
+export function ProductWidget({ product, isItemInWishlist }: ProductWidgetProps) {
     const { t } = useTranslation();
     const [isOpenCart, setIsOpenCart] = useState(false);
 
@@ -46,18 +53,44 @@ export function ProductWidget({ product }: ProductWidgetProps) {
     function openModal() {
         setOpenQuick(!openQuick)
     }
-   
 
-    let productTitle =
-        // product?.name.length > 35
-        //     ? product.name.slice(0, 35).concat("...")
-        //     : 
-        product.name;
 
-   
+    let productTitle = product.name;
     let imageSrc = product.main_image ? product.main_image : product.thumbnail
 
-    console.log('product', product)
+    // console.log('product', product)
+    // const {
+    //     addToRecent,
+    //     recentItems,
+    //     addToFavorites,
+    //     favoriteItems,
+    //     addToWishlist,
+    //     wishlistItems,
+    //   } = useRecentView();
+    const {
+        recentItems,
+        addToFavorites,
+        favoriteItems,
+        addToWishlist,
+        wishlistItems
+    } = useRecentView();
+
+    const isFavorite = favoriteItems?.some((item) => item.id === product.id);
+    const isWishlist = wishlistItems?.some((item) => item.id === product.id);
+
+    const handleRecentClick = () => {
+        addToRecent(product);
+    };
+
+    const handleFavoriteClick = () => {
+        addToFavorites(product);
+    };
+
+    const handleWishlistClick = () => {
+        addToWishlist(product);
+        console.log('addeddddd');
+    };
+
     return (
         <>
             <div className="relative flex flex-col group border-2 border-gray-100 rounded-3xl overflow-hidden pb-5">
@@ -102,32 +135,41 @@ export function ProductWidget({ product }: ProductWidgetProps) {
                         {/* <p className="mt-1 text-sm text-gray-500">{product.category}</p> */}
                         {/* <p className="mt-1 text-sm text-gray-500">{product.id}</p> */}
                     </div>
-                    
+
                     {(product.sale_price ? (
                         <div className="flex items-center gap-x-3">
                             <p className=" bg-yellow-910 px-1 h-[18px] w-fit flex rounded-sm">{FormatCurrency(product.sale_price)}</p>
                             <del className=" text-sm text-gray-50 font-normal w-fit">{FormatCurrency2(product.price)}</del>
                         </div>
-                    ) :   <p className=" bg-yellow-910 px-1 h-[18px] w-fit flex  rounded-sm">{FormatCurrency(product.price)}</p>
+                    ) : <p className=" bg-yellow-910 px-1 h-[18px] w-fit flex  rounded-sm">{FormatCurrency(product.price)}</p>
 
                     )}
                 </div>
-                <div className="relative z-1 mx-5">
+                <div className="relative z-1 mx-5 flex items-center justify-between mt-14 gap-x-3">
                     {product.type != 'variable' ?
-
-                        <AddToCartSimple
-                            className="inline-flex justify-center w-full px-4 py-2 text-sm font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700"
-                            // id={product.id}
-                            product={
-                                {
-                                    id: product.id,
-                                    thumbnail: imageSrc,
-                                    // size: selectedSize,
-                                    // color: selectedColor,
-                                    slug: product.slug
+                        <>
+                            <AddToCartSimple
+                                className=" w-full"
+                                // id={product.id}
+                                product={
+                                    {
+                                        id: product.id,
+                                        thumbnail: imageSrc,
+                                        // size: selectedSize,
+                                        // color: selectedColor,
+                                        slug: product.slug
+                                    }
                                 }
-                            }
-                        />
+                            />
+                            <button
+                                className={`w-12 h-12 rounded-full bg-green-300 flex justify-center items-center ${isItemInWishlist ? 'text-red-500' : ''}`}
+                                onClick={handleWishlistClick}>
+                                <span>
+                                    <Heart />
+                                </span>
+                            </button>
+                        </>
+
                         :
                         <button onClick={openModal} className="inline-flex justify-center w-full px-4 py-2 text-sm font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700">{t('common.quick_view')}</button>
                     }

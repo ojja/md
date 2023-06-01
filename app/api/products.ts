@@ -118,9 +118,16 @@ export async function getProductBySlug(productSlug: string) {
   const url = `${API_ENDPOINT}/single.php`;
   const formData = new FormData();
   formData.append('slug', productSlug);
+  // const options = {
+  //   method: 'POST',
+  //   data: {'slug': productSlug}},
+  // };
+
+  const data = { "slug": productSlug };
   const options = {
     method: 'POST',
-    body: formData,
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(data),
   };
   // const response = await fetch(url, options);
   // if (!response.ok) {

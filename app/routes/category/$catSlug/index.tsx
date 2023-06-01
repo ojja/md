@@ -60,7 +60,7 @@ export default function CategorySlug() {
 
   const { products: initialProducts } = useLoaderData();
   const [products, setProducts] = useState(initialProducts);
-  console.log('products in', products)
+  // console.log('products in', products)
 
   return (
     <div className="bg-white">
