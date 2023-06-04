@@ -20,6 +20,9 @@ import { useTranslation } from "react-i18next";
 import { HeartIcon } from "@heroicons/react/20/solid";
 import Heart from "../icons/Heart";
 import { useRecentView } from "~/stores/recentView";
+import WishListProducts from "../AddWishList";
+import wishlist from "~/routes/my-account/wishlist";
+import FavoriteHeart from "../icons/favorite-icon";
 // import useFavoriteIcon from "~/stores/wishList";
 
 type Product = {
@@ -37,6 +40,7 @@ type ProductWidgetProps = {
     product: Product,
     key: any
     isItemInWishlist: boolean; // Add prop for isItemInWishlist
+    width:any,
 
 }
 
@@ -45,7 +49,7 @@ type ProductWidgetProps = {
 
 
 
-export function ProductWidget({ product, isItemInWishlist }: ProductWidgetProps) {
+export function ProductWidget({ product, isItemInWishlist , width }: ProductWidgetProps) {
     const { t } = useTranslation();
     const [isOpenCart, setIsOpenCart] = useState(false);
 
@@ -88,12 +92,12 @@ export function ProductWidget({ product, isItemInWishlist }: ProductWidgetProps)
 
     const handleWishlistClick = () => {
         addToWishlist(product);
-        console.log('addeddddd');
+        // console.log('addeddddd');
     };
 
     return (
         <>
-            <div className="relative flex flex-col group border-2 border-gray-100 rounded-3xl overflow-hidden pb-5">
+            <div className={`relative flex flex-col group border-2 border-gray-100 rounded-3xl overflow-hidden pb-5 ${width}`}>
                 <div className="relative z-10 w-full overflow-hidden bg-gray-200 rounded-md min-h-80 group-hover:opacity-75 ">
                     {/* <img
                         src={product.image}
@@ -149,7 +153,7 @@ export function ProductWidget({ product, isItemInWishlist }: ProductWidgetProps)
                     {product.type != 'variable' ?
                         <>
                             <AddToCartSimple
-                                className=" w-full"
+                                className=" w-3/4"
                                 // id={product.id}
                                 product={
                                     {
@@ -162,10 +166,15 @@ export function ProductWidget({ product, isItemInWishlist }: ProductWidgetProps)
                                 }
                             />
                             <button
-                                className={`w-12 h-12 rounded-full bg-green-300 flex justify-center items-center ${isItemInWishlist ? 'text-red-500' : ''}`}
+                                className={`w-12 h-12 rounded-full bg-green-300 flex justify-center items-center`}
                                 onClick={handleWishlistClick}>
                                 <span>
-                                    <Heart />
+                                    {(isWishlist ?
+                                       <FavoriteHeart/>
+                                        :
+                                        <Heart />
+
+                                    )}
                                 </span>
                             </button>
                         </>
