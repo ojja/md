@@ -1,4 +1,4 @@
-import useRecentView from "~/stores/wishtList";
+import { useRecentView } from "~/stores/allstores";
 import { ProductWidget } from "./product/ProductWidget";
 
 export default function RecentlyViewedProducts() {

@@ -7,6 +7,10 @@ import { Link } from "@remix-run/react";
 import Quickview from "../Quickview";
 import AddToCartSimple from "../AddToCartSimple";
 import { useTranslation } from "react-i18next";
+import FavoriteHeart from "../icons/favorite-icon";
+import Heart from "../icons/Heart";
+import { useRecentView } from "~/stores/allstores";
+
 
 type Product = {
     id: number,
@@ -19,12 +23,13 @@ type Product = {
 
 type ProductWidgetProps = {
     product: Product,
-    key: any
+    key: any,
+    isItemInWishlist: boolean; // Add prop for isItemInWishlist
 }
 
 
 
-export function ProductWidget({ product }: ProductWidgetProps) {
+export function ProductWidget({ product ,  isItemInWishlist}: ProductWidgetProps) {
     const { t } = useTranslation();
     const [isOpenCart, setIsOpenCart] = useState(false);
 
@@ -42,6 +47,30 @@ export function ProductWidget({ product }: ProductWidgetProps) {
     let imageSrc = product.main_image ? product.main_image : product.thumbnail
 
     // console.log('product',product)
+    const {
+        recentItems,
+        addToFavorites,
+        favoriteItems,
+        addToWishlist,
+        wishlistItems
+    } = useRecentView();
+
+    const isFavorite = favoriteItems?.some((item) => item.id === product.id);
+    const isWishlist = wishlistItems?.some((item) => item.id === product.id);
+
+    const handleRecentClick = () => {
+        addToRecent(product);
+    };
+
+    const handleFavoriteClick = () => {
+        addToFavorites(product);
+    };
+
+    const handleWishlistClick = () => {
+        addToWishlist(product);
+        // console.log('addeddddd');
+    };
+
     return (
         <>
             <div className="relative flex flex-col group">
@@ -52,6 +81,18 @@ export function ProductWidget({ product }: ProductWidgetProps) {
                         className="absolute top-0 bottom-0 left-0 right-0 self-center object-cover object-center w-full h-full m-auto lg:h-full lg:w-full"
                     /> */}
                     {/* <span>{product.slug}</span> */}
+                    <button
+                    className={`w-12 h-12 rounded-full bg-green-300 flex justify-center items-center absolute top-0 z-10 right-0`}
+                    onClick={handleWishlistClick}>
+                    <span>
+                        {(isWishlist ?
+                           <FavoriteHeart/>
+                            :
+                            <Heart />
+
+                        )}
+                    </span>
+                </button>
                     <Link to={`/products/${product.slug}`} className={`block aspect-w-4 aspect-h-3 lg:h-80 ${product.slug?product.slug:'pointer-events-none'}`}>
                         {imageSrc?
                         <LazyLoadImage
@@ -89,7 +130,6 @@ export function ProductWidget({ product }: ProductWidgetProps) {
                 </div>
                 <div className="relative z-1">
                     {product.type !='variable'?
-                    
                     <AddToCartSimple
                         className="inline-flex justify-center w-full px-4 py-2 text-sm font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700"
                         // id={product.id}
@@ -103,6 +143,7 @@ export function ProductWidget({ product }: ProductWidgetProps) {
                             }
                         }
                     />
+                 
                     :
                     <button onClick={openModal} className="inline-flex justify-center w-full px-4 py-2 text-sm font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700">{t('common.quick_view')}</button>
                     }
