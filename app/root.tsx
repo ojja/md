@@ -30,8 +30,10 @@ import { FB_PIXELCODE } from "./config";
 
 export const links: LinksFunction = () => {
   return [
+    { rel: 'preload', as: 'style', href: stylesBase },
+    { rel: 'preload', as: 'style', href: stylesSlick },
+    { rel: 'preload', as: 'style', href: stylesSlickTheme },
     { rel: 'stylesheet', href: stylesBase },
-    // { rel: 'stylesheet', href: styles },
     { rel: 'stylesheet', href: stylesSlick },
     { rel: 'stylesheet', href: stylesSlickTheme }
   ];
@@ -54,19 +56,6 @@ export default function App() {
   if (typeof window !== "undefined") {
     initFacebookPixel(FB_PIXELCODE);
   }
-
-  // useEffect(() => {
-  //   !function(f,b,e,v,n,t,s)
-  //   {if(f.fbq)return;n=f.fbq=function(){n.callMethod?
-  //   n.callMethod.apply(n,arguments):n.queue.push(arguments)};
-  //   if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';
-  //   n.queue=[];t=b.createElement(e);t.async=!0;
-  //   t.src=v;s=b.getElementsByTagName(e)[0];
-  //   s.parentNode.insertBefore(t,s)}(window, document,'script',
-  //   'https://connect.facebook.net/en_US/fbevents.js');
-  //   fbq('init', '6517989738225028');
-  //   fbq('track', 'PageView');s
-  // }, []);
 
 
   return (
