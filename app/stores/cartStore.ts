@@ -340,6 +340,7 @@ export const useShoppingCart = () => {
 
   useEffect(() => {
     if (window.location.hostname !== "localhost") {
+        console.log('before call getCart')
       getCart()
         .then(({ total, total_discount }) => {
           setTotalAPI(total);
