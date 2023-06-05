@@ -58,6 +58,7 @@ export default function App() {
   if (typeof window !== "undefined") {
     initFacebookPixel(FB_PIXELCODE);
   }
+  
   console.log('NODE_ENV',process.env.NODE_ENV);
 
 
