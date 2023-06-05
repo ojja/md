@@ -2,10 +2,13 @@ const express = require('express');
 const spdy = require('spdy');
 const { createRequestHandler } = require('@remix-run/express');
 const { default: build } = require('@remix-run/dev/server-build');
+import path from 'path';
 
 const app = express();
-app.use(express.static('public', { maxAge: '1y', immutable: true }));
-
+app.use(express.static(path.join(__dirname, 'public'), {
+  maxAge: '1y', // Set cache max age to 1 year
+  immutable: true, // Enable immutability for cache optimization
+}));
 app.all(
   '*',
   createRequestHandler({
@@ -19,7 +22,7 @@ app.all(
   })
 );
 
-const port = process.env.PORT || 3002;
+const port = process.env.PORT || 3000;
 
 const options = {
   key: /* path to your SSL/TLS private key file */,
