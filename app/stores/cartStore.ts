@@ -59,7 +59,6 @@ export const getCart = () => {
         }
       })
       .then((data) => {
-        // console.log('getCart API response:', data);
         const { total, total_discount } = data;
         resolve({ total: parseFloat(total), total_discount });
       })
@@ -350,7 +349,7 @@ export const useShoppingCart = () => {
           console.error("Error:", error);
         });
     }
-  }, [cartStore]);
+  }, []);
 
   return {
     getItemQuantity,
