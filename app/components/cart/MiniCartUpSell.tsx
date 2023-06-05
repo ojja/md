@@ -1,10 +1,4 @@
-import { EyeIcon } from "@heroicons/react/20/solid";
-import Tooltip from "./Tooltip";
-import Flickity from "react-flickity-component";
-import Quickview from "./Quickview";
-import { useState } from "react";
-import FormatCurrency from "~/utils/FormatCurrency";
-import AlsoLikeSlider from "./AlsoLikeSlider";
+import AlsoLikeSlider from "../AlsoLikeSlider";
 
 
 export default function MiniCartUpSell() {

@@ -1,4 +1,4 @@
-import React, { Fragment, useState } from 'react';
+import React, { Fragment, useEffect, useState } from 'react';
 
 import { Dialog, Menu, Popover, Tab, Transition } from '@headlessui/react'
 import { Bars3Icon, ChevronDownIcon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
@@ -12,6 +12,8 @@ import LanguageSwitcher from '~/components/LanguageSwitcher';
 import ChangeLanguage from '~/components/ChangeLanguage';
 import { useTranslation } from 'react-i18next';
 import NoInternetConnection from '~/components/NoInternetConnection';
+import { useStickyBox } from "react-sticky-box";
+import StickyDiv from '~/components/StickyDiv';
 
 
 const navigation = {
@@ -144,9 +146,21 @@ export default function NavBar({ }) {
 
   const location = useLocation();
   const isCheckoutPage = location.pathname === "/checkout-step1" || location.pathname === "/checkout-step2" || location.pathname === "/checkout";
+  const isLocalhost = false;
 
 
   const { t } = useTranslation();
+  const [isAnimating, setIsAnimating] = useState(false);
+  useEffect(() => {
+    setIsAnimating(true);
+    const animationTimeout = setTimeout(() => {
+      setIsAnimating(false);
+    }, 820); // Duration of the shake animation in milliseconds
+
+    return () => {
+      clearTimeout(animationTimeout);
+    };
+  }, [cartQuantityTotal]); // Run the effect whenever cartQuantityTotal changes
 
   return (
     <>
@@ -435,9 +449,11 @@ export default function NavBar({ }) {
                   )}
                   <div className="flex items-center ml-auto">
                     <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                      <span className="text-sm font-medium text-gray-700 hover:text-gray-800" onClick={refreshCart}>
-                        refreshCart
-                      </span>
+                      {isLocalhost && (
+                        <span className="text-sm font-medium text-gray-700 hover:text-gray-800" onClick={refreshCart}>
+                          refreshCart
+                        </span>
+                      )}
                       <Link to="/login" className="text-sm font-medium text-gray-700 hover:text-gray-800">
                         Login
                       </Link>
@@ -539,17 +555,19 @@ export default function NavBar({ }) {
                           <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{cartQuantityTotal}</span>
                         </Link>
                       ) : (
-                        <button
-                          className="flex items-center p-2 -m-2 group"
-                          onClick={openCart}
-                        >
-                          <ShoppingBagIcon
-                            className="flex-shrink-0 w-6 h-6 text-gray-400 group-hover:text-gray-500"
-                            aria-hidden="true"
-                          />
-                          <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{cartQuantityTotal}</span>
-                          <span className="sr-only">items in cart, view bag</span>
-                        </button>
+                        <StickyDiv>
+                          <button
+                            className={`flex items-center p-2 -m-2 bg-white rounded-full group ${isAnimating ? 'shake-animation' : ''}`}
+                            onClick={openCart}
+                          >
+                            <ShoppingBagIcon
+                              className="flex-shrink-0 w-6 h-6 text-gray-400 group-hover:text-gray-500"
+                              aria-hidden="true"
+                            />
+                            <span className="ml-2 text-sm font-medium text-gray-700 group-hover:text-gray-800">{cartQuantityTotal}</span>
+                            <span className="sr-only">items in cart, view bag</span>
+                          </button>
+                        </StickyDiv>
                       )}
                     </div>
                   </div>

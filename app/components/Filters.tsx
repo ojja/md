@@ -70,8 +70,7 @@ export default function Filters({ filteredProducts = [], selectedCategories = []
         <div>
             {/* Filters */}
             <div className="hidden lg:block">
-                <h3 className="sr-only">Categories</h3>
-                <ul role="list" className="pb-6 space-y-4 border-b border-gray-200">
+                {/* <ul role="list" className="pb-6 space-y-4 border-b border-gray-200">
                     {subCategories.map((category) => (
                         <li key={v4()}>
                             <a href={category.href} className={classNames(
@@ -80,7 +79,7 @@ export default function Filters({ filteredProducts = [], selectedCategories = []
                             )}>{category.name}</a>
                         </li>
                     ))}
-                </ul>
+                </ul> */}
                 {categories.length>0?(
                 <Disclosure as="div" key={v4()} className="py-6 border-b border-gray-200" defaultOpen>
                     {({ open }) => (

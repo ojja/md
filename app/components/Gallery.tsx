@@ -28,7 +28,7 @@ export default function Gallery({ galleryImages = [] }: GalleryProps) {
     arrows: false,
     fade: true,
     asNavFor: nav2,
-    rtl: i18n.language==="ar" ? true : false
+    rtl: i18n.language === "ar" ? true : false
   };
 
   const settingsThumbs = {
@@ -52,16 +52,19 @@ export default function Gallery({ galleryImages = [] }: GalleryProps) {
       },
     ],
   };
+
+  if (galleryImages.length === 0) {
+    galleryImages = ['/images/empty.jpg'];
+  }
+  
   return (
-    <div className="flex overflow-hidden gallery-slider-wrapper" data-lang={language}
-    // dir={i18n.language==="ar" ? 'rtl' : 'ltr'}
-    >
+    <div className="flex overflow-hidden gallery-slider-wrapper" data-lang={language}>
       <Slider
         {...settingsMain}
         asNavFor={nav2}
         ref={slider => (setSlider1(slider))}
         className="order-1 w-10/12"
-        style={{direction:i18n.language==="ar" ? 'rtl' : 'ltr'}}
+        style={{ direction: i18n.language === "ar" ? 'rtl' : 'ltr' }}
       >
         {galleryImages.map(slide => (
           <div className="slick-slide" key={v4()}>
