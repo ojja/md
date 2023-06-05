@@ -19,7 +19,7 @@ app.all(
   })
 );
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3002;
 
 const options = {
   key: /* path to your SSL/TLS private key file */,
