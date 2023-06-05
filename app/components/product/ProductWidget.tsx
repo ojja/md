@@ -82,7 +82,7 @@ export function ProductWidget({ product ,  isItemInWishlist}: ProductWidgetProps
                     /> */}
                     {/* <span>{product.slug}</span> */}
                     <button
-                    className={`w-12 h-12 rounded-full bg-green-300 flex justify-center items-center absolute top-0 z-10 right-0`}
+                    className={`w-12 h-12 flex justify-center items-center absolute top-0 z-10 right-0`}
                     onClick={handleWishlistClick}>
                     <span>
                         {(isWishlist ?
