@@ -43,4 +43,7 @@ module.exports = {
   routes(defineRoutes) {
     return createRoutesFromFolders(defineRoutes);
   },
+  headers: {
+    'Content-Security-Policy': "frame-ancestors 'self' https://mtf.gateway.mastercard.com",
+  },
 };

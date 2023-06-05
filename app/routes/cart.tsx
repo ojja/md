@@ -2,12 +2,12 @@ import { MinusIcon, PlusIcon, XMarkIcon } from "@heroicons/react/20/solid";
 import { Link } from "@remix-run/react";
 import { useState } from "react";
 import { MetaFunction } from "remix";
-import CartItem from "~/components/CartItem";
+import CartItem from "~/components/cart/CartItem";
 import CouponForm from "~/components/CouponForm";
 import ExtraProducts from "~/components/ExtraProducts";
 import { Site_Title } from "~/config";
 import useShoppingCart from "~/stores/cartStore";
-import FormatCurrency from "~/utils/FormatCurrency";
+import { FormatCurrency } from "~/utils/FormatCurrency";
 
 
 
@@ -108,7 +108,7 @@ export default function Cart() {
                         <Link to='/products' className="inline-flex justify-center px-4 py-2 mt-5 text-sm font-semibold text-white capitalize rounded-lg bg-slate-900 hover:bg-slate-700">continue shopping</Link>
                     </div>
                 )}
-                <ExtraProducts categorySlug="oriental-sweets" pageNumber={1} title="" />
+                <ExtraProducts categorySlug="dress" count={5} title="Up Selling" />
             </div>
         </div >
     )

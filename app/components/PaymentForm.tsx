@@ -1,12 +1,9 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { API_ENDPOINT } from '~/config';
+import ThreedsChallengeRedirectComponent from './payments/ThreedsChallengeRedirectComponent';
 
 const PaymentForm = () => {
-  const [htmlContent, setHtmlContent] = useState('');
-  const [responseData, setResponseData] = useState(null);
-
-  const iframeRef = useRef(null); // Ref for the iframe element
-
+  const [response, setResponse] = useState(null);
   const callPay = async (sessionID: any) => {
     const apiUrl = `${API_ENDPOINT}/payment/pay.php`;
     const orderData = {
@@ -32,14 +29,7 @@ const PaymentForm = () => {
       if (response.ok) {
         const data = await response.json();
         console.log('API response PAY:', data);
-        // Continue processing the response data here
-        setHtmlContent(data.html);
-        setTimeout(() => {
-          executeScript('authenticate-payer-script');
-          accessIframeElements();
-        }, 2000);
-        setResponseData(data.obj);
-
+        setResponse(data);
       } else {
         throw new Error('Failed to call PAY API');
       }
@@ -48,32 +38,6 @@ const PaymentForm = () => {
       console.error('Error:', error);
     }
   }
-  const executeScript = (scriptId) => {
-    const script = document.getElementById(scriptId);
-    if (script) {
-      eval(script.innerText); // Execute the script using eval()
-    }
-  };
-  const accessIframeElements = () => {
-    const iframe = iframeRef.current;
-    if (iframe) {
-      const iframeContent = iframe.contentWindow.document;
-
-      // Access elements inside the iframe and perform actions
-      const form = iframeContent.getElementById('threedsChallengeRedirectForm');
-      if (form) {
-        form.submit();
-      }
-    }
-  };
-  const parseResponseData = () => {
-    if (responseData) {
-      const jsonData = JSON.parse(responseData);
-      console.log('Parsed response data:', jsonData);
-      // Perform actions with the parsed data
-      // Example: Access specific values using jsonData.propertyName
-    }
-  };
   useEffect(() => {
     const script = document.createElement('script');
     script.src = 'https://test-nbe.gateway.mastercard.com/form/version/71/merchant/TESTEGPTEST/session.js';
@@ -188,15 +152,7 @@ const PaymentForm = () => {
     <div>
       <div>Please enter your payment details:</div>
       <span>5123450000000008</span>
-      <iframe
-        id="challengeFrame"
-        name="challengeFrame"
-        ref={iframeRef}
-        width="100%"
-        height="400"
-        title="3D Secure Challenge Frame"
-      />
-      <div className='hidden' dangerouslySetInnerHTML={{ __html: htmlContent }} />
+      <ThreedsChallengeRedirectComponent response={response} />
       <h3>Credit Card</h3>
       <div>
         Card Number: <input type="text" id="card-number" className="input-field" title="card number" aria-label="enter your card number" value="" tabIndex="1" readOnly />
@@ -214,7 +170,7 @@ const PaymentForm = () => {
         Cardholder Name:<input type="text" id="cardholder-name" className="input-field" title="cardholder name" aria-label="enter name on card" value="" tabIndex="5" readOnly />
       </div>
       <div>
-        <button id="payButton" onClick={pay}>Pay Now</button>
+        <button id="payButton" type='button' onClick={pay}>Pay Now</button>
       </div>
     </div>
   );

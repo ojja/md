@@ -1,5 +1,5 @@
 import { EyeIcon, PencilSquareIcon } from "@heroicons/react/20/solid";
-import Tooltip from "./Tooltip";
+import Tooltip from "../Tooltip";
 import { useState } from "react";
 import { TagIcon, XMarkIcon } from "@heroicons/react/24/outline";
 

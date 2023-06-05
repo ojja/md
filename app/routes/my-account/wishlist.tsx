@@ -1,7 +1,8 @@
 import { Link } from "@remix-run/react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { MetaFunction } from "remix";
-import FormatCurrency from "~/utils/FormatCurrency";
+import WishListProducts from "~/components/AddWishList";
+import { FormatCurrency } from "~/utils/FormatCurrency";
 export default function wishlist() {
   const fakeProducts = [
     {
@@ -71,6 +72,7 @@ export default function wishlist() {
   ]
   return (
     <div>
+      <WishListProducts />
       <div className="flex items-center justify-between py-5 pb-5 border-b-2 border-gray-200 border-solid">
         <h1 className="text-3xl">My Wishtlist</h1>
       </div>

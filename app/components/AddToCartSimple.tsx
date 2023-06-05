@@ -45,7 +45,7 @@ export default function AddToCartSimple({ className, product, disabled }: {
                     >
                         {quantity! === 1 ? <TrashIcon className="w-4 h-4 text-gray-500" /> : <MinusIcon className="w-4 h-4" aria-hidden="true" />}
                     </span>
-                    <input type="text" className="w-8 h-6 p-0 mx-2 text-xs text-center text-gray-600 bg-gray-100 border rounded select-none focus:outline-none" value={quantity!} readOnly />
+                    <input type="text" className="w-8 h-5 p-0 mx-2 text-xs text-center text-gray-600 bg-gray-100 border rounded select-none focus:outline-none" value={quantity!} readOnly />
                     <span
                         // type="button"
                         className={`-m-2 p-2 text-gray-400 hover:text-gray-500 cursor-pointer ${quantity! > 9 ? "pointer-events-none" : ''}`}

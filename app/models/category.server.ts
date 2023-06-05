@@ -46,7 +46,7 @@ export async function getFilterProducts(categorySlug: any, pageNumber: number, p
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const result = await response.json();
-    console.log('result', result);
+    // console.log('result', result);
     return result;
   } catch (error) {
     console.error('Error:', error);
