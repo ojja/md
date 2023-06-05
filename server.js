@@ -3,6 +3,7 @@ const { createRequestHandler } = require('@remix-run/express');
 const { default: build } = require('@remix-run/dev/server-build');
 
 const app = express();
+app.use(express.static('public', { maxAge: '1y', immutable: true }));
 
 app.all(
   '*',
