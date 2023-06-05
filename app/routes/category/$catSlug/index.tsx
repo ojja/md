@@ -2,7 +2,7 @@
 import { json, MetaFunction } from "@remix-run/node";
 import { useLoaderData } from "@remix-run/react";
 import { getCategoryProducts, getFilterProducts } from "~/models/category.server";
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { v4 } from 'uuid';
 import Breadcrumbs from "~/components/Breadcrumbs";
 import { ProductWidget } from "~/components/product/ProductWidget";
@@ -45,6 +45,7 @@ export const loader = async ({ params }: any) => {
 };
 
 export default function CategorySlug() {
+  const { products: initialProducts, categorySlug } = useLoaderData();
   const { t } = useTranslation();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [grid, setGrid] = useState(false);
@@ -60,7 +61,6 @@ export default function CategorySlug() {
   const [isLoading, setIsLoading] = useState(false);
   const [isLoadMoreEnabled, setIsLoadMoreEnabled] = useState(true);
 
-  const { products: initialProducts, categorySlug } = useLoaderData();
   const [products, setProducts] = useState(initialProducts);
   const [pageNumber, setPageNumber] = useState(1);
   const [minPrice, setMinPrice] = useState(0);
@@ -76,6 +76,13 @@ export default function CategorySlug() {
     setIsLoading(true);
     fetchProducts(false, selectedCategories, option);
   };
+  useEffect(() => {
+    setProducts(initialProducts);
+    setIsLoading(false); 
+    setIsLoadMoreEnabled(true);
+    setPageNumber(1);
+    setSelectedCategories([categorySlug]);
+  }, [initialProducts]);
 
   const fetchProducts = async (appendData = false, selectedCategories: any, selectedSortOption: any) => {
     const { criteria, arrangement } = selectedSortOption;
@@ -144,7 +151,6 @@ export default function CategorySlug() {
       if (Array.isArray(newData)) {
         setProducts((prevProducts) => [...prevProducts, ...newData]);
         if (newData.length < 20) {
-          // Disable the button if newData count is less than 20
           setIsLoadMoreEnabled(false);
         }
         setPageNumber((prevPageNumber) => prevPageNumber + 1);
@@ -159,7 +165,7 @@ export default function CategorySlug() {
   };
 
   return (
-    <div className="bg-white">
+    <div className="bg-white" key={categorySlug}>
       <main className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className='pt-5 '>
           {/* <ShopListTop grid={grid} setGrid={setGrid} setMobileFiltersOpen={setMobileFiltersOpen} /> */}
