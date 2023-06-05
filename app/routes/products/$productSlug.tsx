@@ -20,7 +20,7 @@ import SelectColor from "~/components/product/SelectColor";
 import SelectSize from "~/components/product/SelectSize";
 import FormatCurrency from "~/utils/FormatCurrency";
 import Frequently from "~/components/Frequently";
-import useRecentView from "~/stores/wishtList";
+import { useRecentView } from "~/stores/allstores";
 import RecentlyViewedProducts from "~/components/RecentlyViewedProducts";
 import Accordion from "~/components/Accordion";
 
