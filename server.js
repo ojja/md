@@ -1,5 +1,4 @@
 const express = require('express');
-const spdy = require('spdy');
 const { createRequestHandler } = require('@remix-run/express');
 const { default: build } = require('@remix-run/dev/server-build');
 import path from 'path';
@@ -22,15 +21,8 @@ app.all(
   })
 );
 
-const port = process.env.PORT || 3000;
+const port = process.env.PORT || 3002;
 
-const options = {
-  key: /* path to your SSL/TLS private key file */,
-  cert: /* path to your SSL/TLS certificate file */,
-};
-
-spdy
-  .createServer(options, app)
-  .listen(port, () => {
-    console.log(`Server listening on port ${port}`);
-  });
+app.listen(port, () => {
+  console.log(`Server listening on port ${port}`);
+});
