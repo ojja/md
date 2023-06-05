@@ -12,8 +12,8 @@ import {
   useNavigate,
   useParams,
 } from "@remix-run/react";
-import styles from './tailwind.css';
-import stylesRtl from './tailwind.rtl.css';
+import styles from './tailwind.[hash].css';
+import stylesRtl from './tailwind.rtl.[hash].css';
 import stylesBase from './base.css';
 import stylesSlick from 'slick-carousel/slick/slick.css';
 import stylesSlickTheme from 'slick-carousel/slick/slick-theme.css';
@@ -33,9 +33,11 @@ export const links: LinksFunction = () => {
     { rel: 'preload', as: 'style', href: stylesBase },
     { rel: 'preload', as: 'style', href: stylesSlick },
     { rel: 'preload', as: 'style', href: stylesSlickTheme },
-    { rel: 'stylesheet', href: stylesBase },
-    { rel: 'stylesheet', href: stylesSlick },
-    { rel: 'stylesheet', href: stylesSlickTheme }
+    // { rel: 'preload', as: 'style', href: stylesSlickTheme },
+    // { rel: 'preload', as: 'style', href: stylesSlickTheme },
+    // { rel: 'stylesheet', href: stylesBase },
+    // { rel: 'stylesheet', href: stylesSlick },
+    // { rel: 'stylesheet', href: stylesSlickTheme }
   ];
 }
 
@@ -56,6 +58,24 @@ export default function App() {
   if (typeof window !== "undefined") {
     initFacebookPixel(FB_PIXELCODE);
   }
+  useEffect(() => {
+    // Dynamically add the main CSS file after the page has loaded
+    const link = document.createElement("link");
+    link.rel = "stylesheet";
+    link.href = i18n.language === "ar" ? stylesRtl : styles;
+    link.setAttribute("media", "print");
+    document.head.appendChild(link);
+
+    // Set the media attribute to "all" after a delay to allow the print CSS to load first
+    setTimeout(() => {
+      link.setAttribute("media", "all");
+    }, 3000);
+
+    // Cleanup the added link when the component is unmounted
+    return () => {
+      document.head.removeChild(link);
+    };
+  }, [i18n.language]);
 
 
   return (
@@ -63,7 +83,7 @@ export default function App() {
       <head>
         <Meta />
         <Links />
-        <link rel="stylesheet" href={i18n.language === "ar" ? stylesRtl : styles} />
+        {/* <link rel="stylesheet" href={i18n.language === "ar" ? stylesRtl : styles} /> */}
       </head>
       <body className="box-border oultine-none">
         <NavBar
