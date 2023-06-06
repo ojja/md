@@ -257,7 +257,7 @@ export default function Checkout() {
                 const rect = element.getBoundingClientRect();
                 const offset = window.pageYOffset + rect.top - 100;
                 window.scrollTo({ top: offset, behavior: 'smooth' });
-            }else{
+            } else {
                 const parent = document.querySelector('.checkout-form') as HTMLElement;
                 const rect = parent.getBoundingClientRect();
                 const offset = window.pageYOffset + rect.top - 100;
@@ -338,9 +338,9 @@ export default function Checkout() {
                                 <div className="relative w-full max-w-4xl p-4 bg-white border rounded-md">
                                     <form onSubmit={handleSubmit} className="checkout-form">
                                         {stepOne ?
-                                            <div className="step-one relative">
+                                            <div className="relative step-one">
                                                 {isLoading ? (
-                                                    <div className="absolute -inset-4 z-20 flex items-start justify-center pt-20 bg-gray-200 bg-opacity-75">
+                                                    <div className="absolute z-20 flex items-start justify-center pt-20 bg-gray-200 bg-opacity-75 -inset-4">
                                                         <Loader />
                                                     </div>
                                                 ) : ('')}
@@ -387,7 +387,7 @@ export default function Checkout() {
 
                                     </form>
                                 </div>
-                                <CartSummary rate={formData.shipping_fee}/>
+                                <CartSummary rate={formData.shipping_fee} />
                             </div>
                         </>
                     ) : (

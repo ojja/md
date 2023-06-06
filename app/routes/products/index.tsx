@@ -10,8 +10,8 @@ import { useTranslation } from "react-i18next";
 import Filters from "~/components/Filters";
 import { getFilterProducts } from "~/models/category.server";
 import { API_ENDPOINT, Site_Title } from "~/config";
-import { getNewFilterProducts } from "~/api/products";
 import Loader from "~/components/Loader";
+import Sort from "~/components/Sort";
 
 
 function classNames(...classes: string[]) {
@@ -72,6 +72,13 @@ export default function shop() {
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(500000);
     const [isLoading, setIsLoading] = useState(false);
+    const [selectedSortOption, setSelectedSortOption] = useState(null);
+
+    const handleSortOptionChange = (option: any) => {
+        setSelectedSortOption(option);
+        setIsLoading(true);
+        fetchProducts(false, selectedCategories, option);
+    };
 
     console.log('selectedCategories', selectedCategories);
     const debounce = (func: (...args: any[]) => void, delay: number) => {
@@ -85,8 +92,10 @@ export default function shop() {
     };
 
 
-    const fetchProducts = async (appendData = false, selectedCategories: any) => {
+    const fetchProducts = async (appendData = false, selectedCategories: any, selectedSortOption: any) => {
         console.log('selectedCategories Before try', selectedCategories)
+        console.log('selectedSortOption Before try', selectedSortOption)
+        const { criteria, arrangement } = selectedSortOption;
         try {
             setIsLoading(true);
             const options = {
@@ -97,6 +106,10 @@ export default function shop() {
                     price_range: [minPrice, maxPrice],
                     products_per_page: 20,
                     page: pageNumber,
+                    sort: {
+                        criteria,
+                        arrangement,
+                    },
                 }),
             };
 
@@ -133,6 +146,11 @@ export default function shop() {
                     price_range: [minPrice, maxPrice],
                     products_per_page: 20,
                     page: pageNumber + 1,
+                    // sort: selectedSortOption,
+                    // sort: {
+                    //     criteria: 'date',
+                    //     arrangement: 'ASC',
+                    // },
                 }),
             };
 
@@ -150,41 +168,34 @@ export default function shop() {
     };
 
     let handleSelectedCategoriesChange = (selectedCategories: any) => {
-        // Update selectedCategories state and call fetchProducts with appendData set to false
-        // debugger;
         setSelectedCategories(selectedCategories);
         setIsLoading(true);
-        debouncedFetchProducts(false, selectedCategories);
+        fetchProducts(false, selectedCategories, selectedSortOption);
     };
 
     const handleMinPriceChange = (event: any) => {
-        // Update minPrice state and call fetchProducts with appendData set to false
         setMinPrice(event.target.value);
         debouncedFetchProducts();
     };
 
     const handleMaxPriceChange = (event: any) => {
-        // Update maxPrice state and call fetchProducts with appendData set to false
         setMaxPrice(event.target.value);
         debouncedFetchProducts();
     };
     const categories = [
-        { value: 't-shirt', label: 'T SHIRT', checked: false },
-        { value: 'bag', label: 'BAG', checked: false },
-        { value: 'trousers', label: 'trousers', checked: false },
-        { value: 'sweatshirt', label: 'sweatshirt', checked: false },
-        { value: 'shoes', label: 'shoes', checked: false },
-        { value: 'sneakers', label: 'sneakers', checked: false },
-        { value: 'dress', label: 'dress', checked: false },
-        { value: 'jacket', label: 'jacket', checked: false },
-        { value: 'wallet', label: 'wallet', checked: false },
-        { value: 'sweater', label: 'sweater', checked: false },
+        { value: 'clothing', label: 'Clothing', checked: false },
+        { value: 'dress', label: 'Dress', checked: false },
         { value: 'shirt', label: 'shirt', checked: false },
-        { value: 'shorts', label: 'shorts', checked: false },
-        { value: 'leggings', label: 'leggings', checked: false },
-        { value: 'top', label: 'top', checked: false },
-        { value: 'belt', label: 'belt', checked: false },
-        { value: 'polo-shirt', label: 'polo shirt', checked: false },
+        { value: 'skirt', label: 'skirt', checked: false },
+        { value: 'shoes', label: 'shoes', checked: false },
+        { value: 'trousers', label: 'trousers', checked: false },
+        { value: 'food', label: 'food', checked: false },
+        { value: 'coffee', label: 'coffee', checked: false },
+        { value: 'espresso', label: 'espresso', checked: false },
+        { value: 'french-coffee', label: 'french-coffee', checked: false },
+        { value: 'turkish-coffee', label: 'turkish-coffee', checked: false },
+        { value: 'nuts', label: 'nuts', checked: false },
+        { value: 'raw-nuts', label: 'raw-nuts', checked: false },
     ]
     // console.log('products>>', products);
     return (
@@ -192,10 +203,10 @@ export default function shop() {
             <main className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div className='pt-5 '>
                     {/* <span>{products.length}</span> */}
-                    <ShopListTop grid={grid} setGrid={setGrid} setMobileFiltersOpen={setMobileFiltersOpen} title={'Shop All'} />
+                    <ShopListTop grid={grid} setGrid={setGrid} setMobileFiltersOpen={setMobileFiltersOpen} title={'Shop All'} handleSortOptionChange={handleSortOptionChange} />
                     {/* <input type="number" name="minPrice" onChange={handleMinPriceChange} />
                     <input type="number" name="maxPrice" onChange={handleMaxPriceChange} /> */}
-                    <button onClick={fetchProducts}>Reload Data</button>
+                    {/* <button onClick={fetchProducts}>Reload Data</button> */}
                     <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-4 border-b border-gray-200" />
                     <section aria-labelledby="products-heading" className="pt-6 pb-24">
                         <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4">
@@ -222,7 +233,6 @@ export default function shop() {
                                     {products && products.map((productData: any) => (
                                         <React.Fragment key={v4()}>
                                             <ProductWidget product={productData} />
-                                            {/* <ProductWidgetWithVariation product={productData} key={v4()} /> */}
                                         </React.Fragment>
                                     ))}
                                 </div>

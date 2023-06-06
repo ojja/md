@@ -1,25 +1,47 @@
-import { Dialog, Disclosure, Menu, Transition } from '@headlessui/react';
-import { ChevronDownIcon, FunnelIcon, MinusIcon, PlusIcon, Squares2X2Icon, ViewColumnsIcon } from '@heroicons/react/20/solid';
+import { Menu, Transition } from '@headlessui/react';
+import { ChevronDownIcon } from '@heroicons/react/20/solid';
 import { Fragment, useState } from "react";
 import { v4 } from 'uuid';
 
-const sortOptions = [
-    { name: 'Most Popular', href: '#', current: true },
-    { name: 'Best Rating', href: '#', current: false },
-    { name: 'Newest', href: '#', current: false },
-    { name: 'Price: Low to High', href: '#', current: false },
-    { name: 'Price: High to Low', href: '#', current: false },
-]
 
 function classNames(...classes: string[]) {
-    return classes.filter(Boolean).join(' ')
+    return classes.filter(Boolean).join(' ');
 }
-export default function Sort() {
+
+export default function Sort({ onSortOptionChange }: any) {
+    const sortOptions = [
+        { name: 'Newest', criteria: 'date', arrangement: 'ASC', current: true },
+        { name: 'Oldest', criteria: 'date', arrangement: 'DESC', current: false },
+        { name: 'Price: Low to High', criteria: 'price', arrangement: 'ASC', current: false },
+        { name: 'Price: High to Low', criteria: 'price', arrangement: 'DESC', current: false },
+    ];
+    const [selectedSortOption, setSelectedSortOption] = useState(sortOptions.find(option => option.current));
+
+    const handleSortOptionClick = (option: any) => {
+        setSelectedSortOption((prevOption) => {
+            const updatedOptions = sortOptions.map((sortOption) => {
+                return {
+                    ...sortOption,
+                    current: sortOption === option,
+                };
+            });
+            onSortOptionChange(option);
+            return updatedOptions.find((sortOption) => sortOption.current);
+        });
+    };
+
+
+    console.log('sortOptions', sortOptions)
     return (
         <Menu as="div" className="relative z-20 inline-block text-left border-2 border-green-200 py-2.5 px-5 rounded-100">
             <div>
+<<<<<<< HEAD
                 <Menu.Button className="inline-flex justify-center text-sm font-medium text-gray-700 group hover:text-gray-900 rounded-100">
                     Sort
+=======
+                <Menu.Button className="inline-flex justify-center text-sm font-medium text-gray-700 group hover:text-gray-900">
+                    {selectedSortOption.name}
+>>>>>>> 7e98d824f97fc37b18e00bbb81b3205e6845279a
                     <ChevronDownIcon
                         className="flex-shrink-0 w-5 h-5 ml-4 -mr-1 text-green-200 group-hover:text-gray-500"
                         aria-hidden="true"
@@ -41,16 +63,16 @@ export default function Sort() {
                         {sortOptions.map((option) => (
                             <Menu.Item key={v4()}>
                                 {({ active }) => (
-                                    <a
-                                        href={option.href}
+                                    <span
                                         className={classNames(
                                             option.current ? 'font-medium text-gray-900' : 'text-gray-500',
                                             active ? 'bg-gray-100' : '',
-                                            'block px-4 py-2 text-sm'
+                                            'block px-4 py-2 text-sm cursor-pointer'
                                         )}
+                                        onClick={() => handleSortOptionClick(option)}
                                     >
                                         {option.name}
-                                    </a>
+                                    </span>
                                 )}
                             </Menu.Item>
                         ))}
@@ -58,5 +80,5 @@ export default function Sort() {
                 </Menu.Items>
             </Transition>
         </Menu>
-    )
+    );
 }

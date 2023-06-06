@@ -6,8 +6,8 @@ import { getProductBySlug } from "~/api/products";
 import { useEffect, useState } from "react";
 import PaymentMethod from "~/components/PaymentMethod";
 import { Link } from "@remix-run/react";
-import FormatCurrency from "~/utils/FormatCurrency";
-import MiniCartItem from "~/components/MiniCartItem";
+import { FormatCurrency } from "~/utils/FormatCurrency";
+import MiniCartItem from "~/components/cart/MiniCartItem";
 import { v4 } from 'uuid';
 
 

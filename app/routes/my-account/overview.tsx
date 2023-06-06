@@ -3,7 +3,7 @@ import Msg from "~/components/Msg";
 import OrdersTable from "~/components/OrdersTable";
 import ReferralBox from "~/components/ReferralBox";
 import Status from "~/components/Status";
-import FormatCurrency from "~/utils/FormatCurrency";
+import { FormatCurrency } from "~/utils/FormatCurrency";
 
 export default function overview() {
   return (

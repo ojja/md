@@ -9,7 +9,7 @@ function classNames(...classes: string[]) {
 export const loader = async ({ params }: any) => {
     const categorySlug = params.catSlug;
 }
-export default function ShopListTop({ grid, setGrid, setMobileFiltersOpen, title }) {
+export default function ShopListTop({ grid, setGrid, setMobileFiltersOpen, title, handleSortOptionChange }: any) {
     const { categorySlug } = useLoaderData();
 
     const { t } = useTranslation();
@@ -23,7 +23,7 @@ export default function ShopListTop({ grid, setGrid, setMobileFiltersOpen, title
                 }
                 <div className="flex items-center self-end mt-3 md:mt-0">
 
-                    {/* <Sort /> */}
+                    <Sort onSortOptionChange={handleSortOptionChange} />
 
                     <button type="button" className={classNames(
                         grid ? 'text-gray-500' : 'text-gray-400',

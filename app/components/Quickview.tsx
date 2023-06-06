@@ -61,12 +61,12 @@ export default function Quickview({ openQuick, openModal, product }: QuickviewPr
 );
 let variationPrice = variation ? variation.price : null;
 let variationSalePrice = variation ? variation.sale_price : null;
-  console.log('product',product)
-  console.log('product productData',productData)
-  console.log('variationSalePrice',variationSalePrice)
-  console.log('variation',variation)
-  console.log('selectedSize',selectedSize)
-  console.log('selectedColor',selectedColor)
+  // console.log('product',product)
+  // console.log('product productData',productData)
+  // console.log('variationSalePrice',variationSalePrice)
+  // console.log('variation',variation)
+  // console.log('selectedSize',selectedSize)
+  // console.log('selectedColor',selectedColor)
   return (
     <div className="overview">
       <Transition show={openQuick} as={Fragment}>
