@@ -59,7 +59,6 @@ export const getCart = () => {
         }
       })
       .then((data) => {
-        // console.log('getCart API response:', data);
         const { total, total_discount } = data;
         resolve({ total: parseFloat(total), total_discount });
       })
@@ -245,7 +244,7 @@ export const useShoppingCart = () => {
 
   const addToCart = (product: CartItem) => {
     console.log("addingToCart");
-    console.log("addingToCart",cartStore);
+    console.log("addingToCart", cartStore);
     // debugger;
     const itemIndex = cartStore.findIndex(
       (item) =>
@@ -264,7 +263,7 @@ export const useShoppingCart = () => {
       setQty(product, newCartItems[itemIndex].quantity);
       callAddToCart(product);
     } else {
-        console.log("Not exists");
+      console.log("Not exists");
       shoppingCart.set([
         ...cartStore,
         {
@@ -275,7 +274,7 @@ export const useShoppingCart = () => {
           quantity: product.quantity ?? 1,
         },
       ]);
-      console.log("before call API addingToCart",cartStore);
+      console.log("before call API addingToCart", cartStore);
       callAddToCart(product);
     }
     return;
@@ -326,7 +325,7 @@ export const useShoppingCart = () => {
   };
   const refreshCart = () => {
     console.log("refresh cart new");
-    console.log("refreshCart cartStore>",cartStore);
+    console.log("refreshCart cartStore>", cartStore);
   };
   const addCoupon = (couponCode: any) => {
     console.log("addCoupon NEW", couponCode);
@@ -339,7 +338,9 @@ export const useShoppingCart = () => {
   }, [cartStore]);
 
   useEffect(() => {
-    if (window.location.hostname !== "localhost") {
+    if (window.location.hostname !== "localhost" && cartStore.length > 0) {
+      console.log("before call getCart");
+
       getCart()
         .then(({ total, total_discount }) => {
           setTotalAPI(total);
@@ -349,7 +350,7 @@ export const useShoppingCart = () => {
           console.error("Error:", error);
         });
     }
-  }, [cartStore]);
+  }, []);
 
   return {
     getItemQuantity,

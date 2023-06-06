@@ -72,8 +72,11 @@ export default function shop() {
     const [minPrice, setMinPrice] = useState(0);
     const [maxPrice, setMaxPrice] = useState(500000);
     const [isLoading, setIsLoading] = useState(false);
-    const [selectedSortOption, setSelectedSortOption] = useState(null);
-
+    const [isLoadMoreEnabled, setIsLoadMoreEnabled] = useState(true);
+    const [selectedSortOption, setSelectedSortOption] = useState({
+        criteria: "date",
+        arrangement: "DESC",
+    });
     const handleSortOptionChange = (option: any) => {
         setSelectedSortOption(option);
         setIsLoading(true);
@@ -136,6 +139,7 @@ export default function shop() {
     };
     const debouncedFetchProducts = debounce(fetchProducts, 2000);
     const handleLoadMore = async () => {
+        const { criteria, arrangement } = selectedSortOption;
         setIsLoading(true);
         try {
             const options = {
@@ -146,11 +150,10 @@ export default function shop() {
                     price_range: [minPrice, maxPrice],
                     products_per_page: 20,
                     page: pageNumber + 1,
-                    // sort: selectedSortOption,
-                    // sort: {
-                    //     criteria: 'date',
-                    //     arrangement: 'ASC',
-                    // },
+                    sort: {
+                        criteria,
+                        arrangement,
+                    },
                 }),
             };
 
@@ -160,6 +163,9 @@ export default function shop() {
             );
             const newData = await response.json();
             setProducts((prevProducts) => [...prevProducts, ...newData]);
+            if (newData.length < 20) {
+                setIsLoadMoreEnabled(false);
+            }
             setPageNumber((prevPageNumber) => prevPageNumber + 1);
             setIsLoading(false);
         } catch (error) {
@@ -236,20 +242,21 @@ export default function shop() {
                                         </React.Fragment>
                                     ))}
                                 </div>
+                                {isLoadMoreEnabled &&
+                                    <div className="flex items-center justify-center mt-10 loadmore">
 
-                                <div className="flex items-center justify-center mt-10 loadmore">
-
-                                    <button onClick={handleLoadMore} date-num={pageNumber} type="button" className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 inline-flex items-center justify-center whitespace-nowrap">
-                                        {!isLoading ? (
-                                            'Load More'
-                                        ) : (
-                                            <>
-                                                <Loader extraclass={'w-4 h-4 mr-2'} />
-                                                Loading...
-                                            </>
-                                        )}
-                                    </button>
-                                </div>
+                                        <button onClick={handleLoadMore} date-num={pageNumber} type="button" className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 inline-flex items-center justify-center whitespace-nowrap">
+                                            {!isLoading ? (
+                                                'Load More'
+                                            ) : (
+                                                <>
+                                                    <Loader extraclass={'w-4 h-4 mr-2'} />
+                                                    Loading...
+                                                </>
+                                            )}
+                                        </button>
+                                    </div>
+                                }
                             </div>
                         </div>
                     </section>
