@@ -12,6 +12,7 @@ import LanguageSwitcher from '~/components/LanguageSwitcher';
 import ChangeLanguage from '~/components/ChangeLanguage';
 import { useTranslation } from 'react-i18next';
 import NoInternetConnection from '~/components/NoInternetConnection';
+import { useStickyBox } from "react-sticky-box";
 import StickyDiv from '~/components/StickyDiv';
 
 
@@ -729,8 +730,8 @@ export default function NavBar({ }) {
                         </StickyDiv>
                       )}
                     </div>
+                  </div>
                 </div>
-              </div>
               </div>
             </nav>
           </div>

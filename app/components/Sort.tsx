@@ -10,8 +10,8 @@ function classNames(...classes: string[]) {
 
 export default function Sort({ onSortOptionChange }: any) {
     const sortOptions = [
-        { name: 'Newest', criteria: 'date', arrangement: 'ASC', current: true },
-        { name: 'Oldest', criteria: 'date', arrangement: 'DESC', current: false },
+        { name: 'Newest', criteria: 'date', arrangement: 'DESC', current: true },
+        { name: 'Oldest', criteria: 'date', arrangement: 'ASC', current: false },
         { name: 'Price: Low to High', criteria: 'price', arrangement: 'ASC', current: false },
         { name: 'Price: High to Low', criteria: 'price', arrangement: 'DESC', current: false },
     ];
