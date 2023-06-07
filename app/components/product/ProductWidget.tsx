@@ -19,7 +19,7 @@ import AddToCartSimple from "../AddToCartSimple";
 import { useTranslation } from "react-i18next";
 import { HeartIcon } from "@heroicons/react/20/solid";
 import Heart from "../icons/Heart";
-import { useRecentView } from "~/stores/recentView";
+import { useRecentView } from "~/stores/allstores";
 import WishListProducts from "../AddWishList";
 import wishlist from "~/routes/my-account/wishlist";
 import FavoriteHeart from "../icons/favorite-icon";
@@ -40,7 +40,7 @@ type ProductWidgetProps = {
     product: Product,
     key: any
     isItemInWishlist: boolean; // Add prop for isItemInWishlist
-    width:any,
+    // width:any,
 
 }
 
@@ -49,7 +49,7 @@ type ProductWidgetProps = {
 
 
 
-export function ProductWidget({ product, isItemInWishlist , width }: ProductWidgetProps) {
+export function ProductWidget({ product, isItemInWishlist}: ProductWidgetProps) {
     const { t } = useTranslation();
     const [isOpenCart, setIsOpenCart] = useState(false);
 
@@ -97,7 +97,7 @@ export function ProductWidget({ product, isItemInWishlist , width }: ProductWidg
 
     return (
         <>
-            <div className={`relative flex flex-col group border-2 border-gray-100 rounded-3xl overflow-hidden pb-5 ${width}`}>
+            <div className={`relative flex flex-col group border-2 border-gray-100 rounded-3xl overflow-hidden pb-5`}>
                 <div className="relative z-10 w-full overflow-hidden bg-gray-200 rounded-md min-h-80 group-hover:opacity-75 ">
                     {/* <img
                         src={product.image}

@@ -1,5 +1,5 @@
 // import useFavoriteIcon from "~/stores/wishList";
-import { useRecentView } from "~/stores/recentView";
+import { useRecentView } from "~/stores/allstores";
 import { ProductWidget } from "./product/ProductWidget";
 
 export default function WishListProducts() {
