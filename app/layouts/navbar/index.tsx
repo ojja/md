@@ -513,6 +513,7 @@ export default function NavBar({ }) {
                           <span className="ml-2 text-sm font-medium text-black bg-white  group-hover:text-gray-800 absolute rounded-full w-5 h-5 -top-1">{cartQuantityTotal}</span>
                         </Link>
                       ) : (
+                        
                         <StickyDiv>
                           <button
                             className={` flex items-center justify-center ml-4 lg:ml-6 bg-yellow-400 rounded-full relative w-10 h-10 ${isAnimating ? 'shake-animation' : ''}`} style={{ boxShadow: '0px 5px 10px rgba(135, 109, 14, 0.3)' }}
