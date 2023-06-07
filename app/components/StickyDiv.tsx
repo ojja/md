@@ -33,7 +33,7 @@ const StickyDiv = ({ children }) => {
     <div
       ref={stickyRef}
       className={`${isSticky ? 'fixed top-5' : ''}`}
-      style={{ right: initialRight, boxShadow: isSticky ? '0 6px 13px 0 rgba(0,0,0,.4)' : 'none' }}
+      style={{ right: initialRight }}
 
     >
       {children}

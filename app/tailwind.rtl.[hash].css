@@ -4005,6 +4005,10 @@ video {
   color: rgb(37 99 235 / var(--tw-text-opacity));
 }
 
+:is([dir="ltr"] .ltr\:-right-2) {
+  left: -0.5rem;
+}
+
 :is([dir="ltr"] .ltr\:left-2) {
   right: 0.5rem;
 }
@@ -4019,6 +4023,10 @@ video {
 
 :is([dir="ltr"] .ltr\:text-start) {
   text-align: start;
+}
+
+:is([dir="rtl"] .rtl\:-left-2) {
+  right: -0.5rem;
 }
 
 :is([dir="rtl"] .rtl\:right-2) {
