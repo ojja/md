@@ -18,11 +18,14 @@ import Breadcrumbs from "~/components/Breadcrumbs";
 import Stars from "~/components/Stars";
 import SelectColor from "~/components/product/SelectColor";
 import SelectSize from "~/components/product/SelectSize";
-import FormatCurrency from "~/utils/FormatCurrency";
+import FormatCurrency  from "~/utils/FormatCurrency";
 import Frequently from "~/components/Frequently";
 import { useRecentView } from "~/stores/allstores";
 import RecentlyViewedProducts from "~/components/RecentlyViewedProducts";
 import Accordion from "~/components/Accordion";
+import { getSelectedCurrency } from "~/utils/currencyUtils";
+import FavoriteHeart from "~/components/icons/favorite-icon";
+import Heart from "~/components/icons/Heart";
 
 interface Feature {
     name: string;
@@ -76,42 +79,44 @@ export default function ProductSingle() {
     // let variationPrice = variation ? variation.price : null;
     // let variationSalePrice = variation ? variation.sale_price : null;
 
+    console.log('Selected currency:', getSelectedCurrency());
 
     useEffect(() => {
         setSelectedSize(product?.attributes?.pa_size?.[0] || '');
         setSelectedColor(product?.attributes?.pa_color?.[0] || '');
         addToRecent(product)
     }, [product]);
-    console.log('product>>', product.id)
-
     let itemID;
-    let variationPrice;
-    let variationSalePrice;
+    let salePrice = null;
+    let productPrice = null;
+    let color = null;
+    let size = null;
 
     if (product.type === "simple") {
         itemID = product.id;
+        productPrice = product.price;
+        salePrice = product.sale_price;
     } else if (product.type === "variable") {
-        let variation = product?.variations?.find((variation: any) =>
-            variation.attributes.attribute_pa_size === selectedSize &&
-            variation.attributes.attribute_pa_color === selectedColor
-        );
-
-        if (variation) {
-            itemID = variation.id;
-
-            variationPrice = variation ? variation.price : null;
-            variationSalePrice = variation ? variation.sale_price : null;
-        } else {
-            // Handle case when variation is not found
-        }
+        productPrice = variation.price;
+        // productPrice = 212;
+        salePrice = variation.sale_price;
+        // salePrice = 200;
+        color = variation.attributes?.attribute_pa_color
+        size = variation.attributes?.attribute_pa_size
+        itemID = variation.id
     }
-    console.log('itemID', itemID);
 
 
     const {
         addToRecent,
+        addToWishlist,
+        wishlistItems
     } = useRecentView();
+    const isWishlist = wishlistItems?.some((item) => item.id === product.id);
 
+    const handleWishlistClick = () => {
+        addToWishlist(product);
+    };
     const breadcrumbs = {
         pages: [
             { name: 'Home', href: '/' },
@@ -139,7 +144,7 @@ export default function ProductSingle() {
             },
             offers: {
                 '@type': 'Offer',
-                price: variationPrice,
+                price: 90,
                 priceCurrency: 'EGP',
                 availability: product.availability,
                 // url: currentUrl,
@@ -154,6 +159,12 @@ export default function ProductSingle() {
         return JSON.stringify(schemaData);
     };
 
+    // console.log('product>>', product)
+    // console.log('itemID', itemID);
+    // console.log('productPrice', productPrice)
+    // console.log('salePrice', salePrice)
+    // console.log('variationId',variationId)
+    // console.log('variation',variation)
     return (
         <div>
             <section className="pt-12 pb-24 overflow-hidden rounded-b-10xl">
@@ -172,23 +183,36 @@ export default function ProductSingle() {
                             <div className="w-full px-4 mb-16 lg:w-1/2 lg:mb-0">
                                 <Gallery galleryImages={product.images} />
                             </div>
-                            <div className="w-full px-4 lg:w-1/2">
+                            <div className="relative w-full px-4 lg:w-1/2">
+
+                                <button
+                                    className={`w-8 h-8 rounded-full bg-primary-400 absolute top-2 right-2 z-10 flex justify-center items-center`}
+                                    onClick={handleWishlistClick}>
+                                    <span>
+                                        {(isWishlist ?
+                                            <FavoriteHeart />
+                                            :
+                                            <Heart />
+
+                                        )}
+                                    </span>
+                                </button>
                                 <div className="pt-2 mb-6">
                                     <span className="hidden h-full min-h-full bg-orange-500 bg-purple-500 bg-pink-500 bg-center bg-cover bg-of-white-500 bg-olive-500 bg-golden-500 bg-navy-500 sm:bg-center"></span>
                                     <span className="text-xs tracking-wider text-gray-400">{product.sku}</span>
-                                    <h1 className="mt-2 mb-4 text-5xl font-medium md:text-4xl font-heading">{product.title}</h1>
+                                    <h1 className="mt-2 mb-4 text-5xl font-medium capitalize md:text-4xl font-heading">{product.title}</h1>
                                     <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">{product.category}</h2>
                                     <h3 id="information-heading" className="sr-only">
                                         Product information
                                     </h3>
-                                    {variationSalePrice !== null && variationSalePrice != variationPrice ? (
+                                    {salePrice && salePrice !== productPrice ? (
                                         <p className="text-2xl text-gray-900">
-                                            <span className="align-middle">{FormatCurrency(variationSalePrice)}</span>
-                                            <del className="ml-2 text-base text-red-400 line-through align-middle">{FormatCurrency(variationPrice)}</del>
+                                            <span className="align-middle">{FormatCurrency(salePrice, getSelectedCurrency())}</span>
+                                            <del className="ml-2 text-base text-red-400 line-through align-middle">{FormatCurrency(productPrice, getSelectedCurrency())}</del>
                                         </p>
                                     ) : (
                                         <p className="text-2xl text-gray-900">
-                                            {FormatCurrency(variationPrice)}
+                                            {FormatCurrency(productPrice, getSelectedCurrency())}
                                         </p>
                                     )}
                                 </div>
@@ -216,7 +240,7 @@ export default function ProductSingle() {
                                             onSelectedSizeChange={setSelectedSize}
                                         />
                                     ) : ('')}
-                                    <span className="pt-3 text-xs">{`${selectedSize} - ${selectedColor} - ${itemID}`}</span>
+                                    <span className="pt-3 text-xs">{`${selectedSize} - ${selectedColor} - ID ${itemID}`}</span>
                                     <span className="block text-xs tracking-wider text-gray-400">{product.availability}</span>
                                     <div className="flex mt-10 space-x-4">
                                         <AddToCartSimple
@@ -228,11 +252,11 @@ export default function ProductSingle() {
                                                     // size: selectedSize,
                                                     // color: selectedColor,
                                                     slug: product.slug,
-                                                    price: variationSalePrice,
+                                                    price: salePrice,
                                                 }
                                             }
                                             // disabled={!Boolean(selectedSize.inStock)}
-                                            disabled={variationSalePrice === null}
+                                            disabled={salePrice === null}
                                         />
                                         <button
                                             type="submit"
@@ -271,13 +295,13 @@ export default function ProductSingle() {
 
                 <Tabs product={{ description: product.description }} />
 
+                <ExtraProducts categorySlug="skirt" count={5} title="Same Category" />
+                <RecentlyViewedProducts />
 
                 <ProductSpecifications
                     // @ts-ignore
                     features={features}
                 />
-                <ExtraProducts categorySlug="skirt" pageNumber={1} title="Same Category" />
-                <RecentlyViewedProducts />
             </section>
         </div>
     )

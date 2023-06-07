@@ -3,18 +3,19 @@ import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Link } from 'react-router-dom'
 import useShoppingCart from "~/stores/cartStore";
-import FormatCurrency from '../utils/FormatCurrency'
 import { v4 } from 'uuid';
-import MiniCartItem from './MiniCartItem';
-import MiniCartUpSell from './MiniCartUpSell';
-import MiniCartTools from './MiniCartTools';
+import MiniCartItem from './cart/MiniCartItem';
+import MiniCartUpSell from './cart/MiniCartUpSell';
+import MiniCartTools from './cart/MiniCartTools';
 import i18next from 'i18next';
+import FormatCurrency from '~/utils/FormatCurrency';
+import MiniCartItemLoader from './cart/MiniCartItemLoader';
 
 
 const ShoppingCart = () => {
 
   const { closeCart, cartItems, removeFromCart, openCart, isOpen, totalPrice } = useShoppingCart();
-  console.log('isOpen>', isOpen);
+  // console.log('isOpen>', isOpen);
   // useEffect(() => {
   //   setTimeout(() => {
   //     closeCart();
@@ -61,7 +62,9 @@ const ShoppingCart = () => {
                     <div className="relative flex flex-col h-full overflow-y-scroll bg-white shadow-xl">
                       <div className="flex-1 px-4 py-6 overflow-y-auto sm:px-6">
                         <div className="flex items-start justify-between">
-                          <Dialog.Title className="text-lg font-medium text-gray-900">Shopping cart</Dialog.Title>
+                          {cartItems.length > 0 && (
+                            <Dialog.Title className="text-lg font-medium text-gray-900">Shopping cart</Dialog.Title>
+                          )}
                           <div className="flex items-center ml-3 h-7">
                             <button
                               type="button"
@@ -80,6 +83,7 @@ const ShoppingCart = () => {
                               <ul role="list" className="-my-6 divide-y divide-gray-200">
                                 {cartItems.map((item) => (
                                   <li key={v4()} className="flex py-6">
+
                                     <MiniCartItem
                                       id={item.id}
                                       price={item.price}
@@ -96,43 +100,48 @@ const ShoppingCart = () => {
                             </div>
                           </div>
                         ) : (
-                          <div className='flex mt-auto items-center justify-center h-[100%]'>
+                          <div className='flex mt-auto items-center justify-center h-[90%]'>
                             <p className="mt-0.5 text text-slate-500">Your cart is currently empty.</p>
                           </div>
                         )}
-                        <MiniCartTools />
-                        <MiniCartUpSell />
+                        {cartItems.length > 0 && (
+                          <>
+                            <MiniCartTools />
+                            <MiniCartUpSell />
+                          </>
+                        )}
                       </div>
-
-                      <div className="px-4 py-4 border-t border-gray-200 top-shadow">
-                        <div className="flex justify-between text-base font-medium text-gray-900">
-                          <p>Subtotal</p>
-                          <p>{FormatCurrency(totalPrice)}</p>
-                        </div>
-                        <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
-                        <div className="mt-4">
-                          <Link
-                            to="/checkout"
-                            onClick={closeCart}
-                            className="flex items-center justify-center px-6 py-3 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-primary-600 hover:bg-primary-700"
-                          >
-                            Check Out
-                          </Link>
-                        </div>
-                        <div className="flex justify-center mt-4 text-sm text-center text-gray-500">
-                          <p>
-                            {/* or */}
+                      {cartItems.length > 0 && (
+                        <div className="px-4 py-4 border-t border-gray-200 top-shadow">
+                          <div className="flex justify-between text-base font-medium text-gray-900">
+                            <p>Subtotal</p>
+                            <p>{FormatCurrency(totalPrice)}</p>
+                          </div>
+                          <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+                          <div className="mt-4">
                             <Link
-                              to="/cart"
-                              className="ml-2 font-medium text-primary-600 hover:text-primary-500"
+                              to="/checkout"
                               onClick={closeCart}
+                              className="flex items-center justify-center px-6 py-3 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-primary-600 hover:bg-primary-700"
                             >
-                              View Cart
-                              <span aria-hidden="true"> &rarr;</span>
+                              Check Out
                             </Link>
-                          </p>
+                          </div>
+                          <div className="flex justify-center mt-4 text-sm text-center text-gray-500">
+                            <p>
+                              {/* or */}
+                              <Link
+                                to="/cart"
+                                className="ml-2 font-medium text-primary-600 hover:text-primary-500"
+                                onClick={closeCart}
+                              >
+                                View Cart
+                                <span aria-hidden="true"> &rarr;</span>
+                              </Link>
+                            </p>
+                          </div>
                         </div>
-                      </div>
+                      )}
                     </div>
                   </Dialog.Panel>
                 </Transition.Child>

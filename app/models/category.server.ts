@@ -30,7 +30,11 @@ export async function getFilterProducts(categorySlug: any, pageNumber: number, p
     category: categorySlug,
     price_range: [minPrice, maxPrice],
     products_per_page: perPage,
-    page: pageNumber
+    page: pageNumber,
+    "sort": {
+      "criteria": "date",
+      "arrangement": "DESC"
+    }
   };
   const options: RequestInit = {
     method: 'POST',
@@ -46,7 +50,6 @@ export async function getFilterProducts(categorySlug: any, pageNumber: number, p
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const result = await response.json();
-    // console.log('result', result);
     return result;
   } catch (error) {
     console.error('Error:', error);

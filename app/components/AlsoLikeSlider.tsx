@@ -1,10 +1,17 @@
-import { EyeIcon } from "@heroicons/react/24/outline";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Flickity from "react-flickity-component";
+import { useInView } from "react-intersection-observer";
 import { v4 } from 'uuid';
-import FormatCurrency from "~/utils/FormatCurrency";
-import Quickview from "./Quickview";
+import { getExtraProducts } from "~/api/extraProducts";
+import Loader from "./Loader";
+import SmallWidget from "./product/SmallWidget";
 
+interface Product {
+    id: number;
+    name: string;
+    price: number;
+    image: string;
+}
 export default function AlsoLikeSlider() {
     const flickityOptions = {
         initialIndex: 2
@@ -78,39 +85,53 @@ export default function AlsoLikeSlider() {
             "type": "variable"
         }
     ];
-    let [openQuick, setOpenQuick] = useState(false)
-    function openModal() {
-        setOpenQuick(!openQuick)
-    }
+    const [extraProducts, setExtraProducts] = useState<Product[]>([]);
+    const [loading, setLoading] = useState(true);
+    const [ref, inView] = useInView({
+        triggerOnce: true,
+    });
+
+    const categorySlug = 'clothing';
+    const count = 5
+    useEffect(() => {
+        console.log('FETCHING')
+        if (inView) {
+            console.log('FETCHING 1 if')
+            const fetchData = async () => {
+                setLoading(true);
+                try {
+                    const products = await getExtraProducts(categorySlug, count);
+                    setExtraProducts(prevProducts => [...prevProducts, ...products]);
+                } catch (error) {
+                    console.error('Error fetching extra products:', error);
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            fetchData();
+        } else {
+            console.log('FETCHING 1 else')
+        }
+    }, [categorySlug, count, inView]);
+
     return (
-        <div>
-            <Flickity 
-                options={flickityOptions} 
-                className={'flex flex-wrap'}
-                reloadOnUpdate
-            >
-                {products.map((product) => (
-                    <div key={v4()} className="flex items-center w-full p-4 border-b border-gray-300">
-                        <div className="flex-shrink-0 w-24 h-24 overflow-hidden">
-                            <div className="rounded upsell_item_img">
-                                <img src={product.main_image} />
-                            </div>
-                        </div>
-                        <div className="flex flex-col flex-1 ml-4">
-                            <a className="">{product.title}</a>
-                            <span className="text-gray-500">{FormatCurrency(product.price)}</span>
-                        </div>
-                        <div className="">
-                            <span onClick={openModal} className="flex items-center justify-center w-10 h-10 p-1 text-white bg-primary-400 rounded-md">
-                                <EyeIcon className="w-6 h-6" />
-                            </span>
-                            {openQuick&&
-                            <Quickview openQuick={openQuick} openModal={openModal} product={product} />
-                            }
-                        </div>
-                    </div>
-                ))}
-            </Flickity>
+        <div ref={ref} className="relative">
+            {loading ? (
+                <div className="absolute inset-0 z-20 flex items-start justify-center pt-20 bg-gray-200 bg-opacity-75">
+                    <Loader />
+                </div>
+            ) :
+                <Flickity
+                    options={flickityOptions}
+                    className={'flex flex-wrap'}
+                    reloadOnUpdate
+                >
+                    {extraProducts.map((product) => (
+                        <SmallWidget key={v4()} product={product} />
+                    ))}
+                </Flickity>
+            }
         </div>
     )
 }
