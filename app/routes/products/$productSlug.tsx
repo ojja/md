@@ -258,6 +258,7 @@ export default function ProductSingle() {
                                             // disabled={!Boolean(selectedSize.inStock)}
                                             disabled={salePrice === null}
                                         />
+                                        
                                         <button
                                             type="submit"
                                             disabled
