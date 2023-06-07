@@ -133,7 +133,7 @@ export function CatchBoundary() {
               'url("/images/404.jpg")',
           }}
         >
-          <div className="px-4 py-16 mx-auto text-center max-w-7xl sm:px-6 sm:py-24 lg:px-8 lg:py-48">
+          <div className="px-4 py-16 mx-auto text-center max-w-[1400px] sm:px-6 sm:py-24 lg:px-8 lg:py-48">
             <p className="text-sm font-semibold tracking-wide text-black text-opacity-50 uppercase">{caught.status} {caught.statusText}</p>
             <h1 className="mt-2 text-4xl font-extrabold tracking-tight text-white sm:text-5xl">
               Uh oh! I think you’re lost.

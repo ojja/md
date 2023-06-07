@@ -21,7 +21,7 @@ export default function ShopListTop({ grid, setGrid, setMobileFiltersOpen, title
                     :
                     <h1 className="text-4xl font-bold tracking-tight text-gray-900"> {t('common.new_arrivals')} {t('common.in')} {categorySlug}</h1>
                 }
-                <div className="flex items-center self-end mt-3 md:mt-0">
+                {/* <div className="flex items-center self-end mt-3 md:mt-0">
 
                     <Sort onSortOptionChange={handleSortOptionChange} />
 
@@ -47,7 +47,7 @@ export default function ShopListTop({ grid, setGrid, setMobileFiltersOpen, title
                         <span className="sr-only">Filters</span>
                         <FunnelIcon className="w-5 h-5" aria-hidden="true" />
                     </button>
-                </div>
+                </div> */}
             </div>
         </div>
     )

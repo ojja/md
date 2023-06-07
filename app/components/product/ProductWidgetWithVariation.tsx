@@ -142,7 +142,7 @@ export function ProductWidgetWithVariation({ product }: ProductWidgetWithVariati
                                             className="inline-flex items-center justify-between w-full h-full px-2 text-gray-500 bg-white border border-gray-200 rounded cursor-pointer peer-checked:border-blue-600 peer-checked:text-blue-600 hover:text-gray-600 hover:bg-gray-100"
                                         >
                                             <div className="block">
-                                                <div className="w-full font-semibold">{size}</div>
+                                                {/* <div className="w-full font-semibold">{size}</div> */}
                                             </div>
                                         </label>
                                     </li>
