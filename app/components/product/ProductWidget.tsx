@@ -19,7 +19,7 @@ import AddToCartSimple from "../AddToCartSimple";
 import { useTranslation } from "react-i18next";
 import { HeartIcon } from "@heroicons/react/20/solid";
 import Heart from "../icons/Heart";
-import { useRecentView } from "~/stores/recentView";
+import { useRecentView } from "~/stores/allstores";
 import WishListProducts from "../AddWishList";
 import wishlist from "~/routes/my-account/wishlist";
 import FavoriteHeart from "../icons/favorite-icon";
@@ -40,14 +40,14 @@ type ProductWidgetProps = {
     product: Product,
     key: any
     isItemInWishlist: boolean; // Add prop for isItemInWishlist
-    width:any,
+    // width:any,
 
 }
 
 
 // const { refreshWish } = useFavoriteIcon();
 
-import FormatCurrency  from "~/utils/FormatCurrency";
+import FormatCurrency from "~/utils/FormatCurrency";
 import ProgressiveImage from "../ProgressiveImage";
 import useRecentView from "~/stores/wishtList";
 import FavoriteHeart from "../icons/favorite-icon";
@@ -72,7 +72,7 @@ type ProductWidgetProps = {
 };
 
 
-export function ProductWidget({ product, isItemInWishlist , width }: ProductWidgetProps) {
+export function ProductWidget({ product, isItemInWishlist }: ProductWidgetProps) {
     const { t } = useTranslation();
     const [isOpenCart, setIsOpenCart] = useState(false);
 
@@ -122,7 +122,7 @@ export function ProductWidget({ product, isItemInWishlist , width }: ProductWidg
     }
     return (
         <>
-            <div className={`relative flex flex-col group border-2 border-gray-100 rounded-3xl overflow-hidden pb-5 ${width}`}>
+            <div className={`relative flex flex-col group border-2 border-gray-100 rounded-3xl overflow-hidden pb-5`}>
                 <div className="relative z-10 w-full overflow-hidden bg-gray-200 rounded-md min-h-80 group-hover:opacity-75 ">
                     <Link to={
                         `/products/${product?.slug
@@ -142,18 +142,18 @@ export function ProductWidget({ product, isItemInWishlist , width }: ProductWidg
                                 </span>
                             )
                         } </Link>
-                    <div className="absolute bottom-0 left-0 right-0 flex items-end">
+                    {/* <div className="absolute bottom-0 left-0 right-0 flex items-end">
                         <button onClick={openModal}
                             type="button"
                             className="relative w-full px-4 py-2 text-sm text-gray-900 bg-white bg-opacity-75 rounded-md opacity-0 focus:opacity-100 group-hover:opacity-100">
                             {
                                 t("common.quick_view")
                             } </button>
-                    </div>
+                    </div> */}
                 </div>
-                <div className="flex justify-between mt-4 mb-4">
+                <div className=" mt-4 mb-4 px-5">
                     <div>
-                        <h3 className="text-sm text-gray-700">
+                        <h3 className="md:text-xl text-sm text-black">
                             <Link to={
                                 `/products/${product?.slug
                                 }`
@@ -165,56 +165,68 @@ export function ProductWidget({ product, isItemInWishlist , width }: ProductWidg
                                         }`
                                     } /> {productTitle} </Link>
                         </h3>
-                        <p className="mt-1 text-sm text-gray-500">
+                        {/* <p className="mt-1 text-sm text-gray-500">
                             {
                                 product?.category
-                            }</p>
-                        <p className="mt-1 text-sm text-gray-500">
+                            }</p> */}
+                        {/* <p className="mt-1 text-sm text-gray-500">
                             {
                                 product?.id
-                            }</p>
+                            }</p> */}
                     </div>
-                    <p className="text-sm font-medium text-gray-900">
-                        {
-                            FormatCurrency(product?.price ? product.price : 0)
-                        } </p>
-                        
-                </div>
-                <div className="relative z-1">
-                    {
-                        product?.type != "variable" ? (
-                            <AddToCartSimple className="inline-flex justify-center w-full px-4 py-2 text-sm font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700"
-                                product={
-                                    {
-                                        id: product.id,
-                                        thumbnail: imageSrc,
-                                        slug: product.slug,
-                                        price: salePrice,
-                                    }
-                                }
-                                disabled={salePrice === null}
-                            />
-                        ) : (
-                            <button onClick={openModal}
-                                className="inline-flex justify-center w-full px-4 py-2 text-sm font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700">
-                                {
-                                    t("common.quick_view")
-                                } </button>
-                        )
-                    }
-                </div>
-                <button
-                    className={`w-8 h-8 rounded-full bg-primary-400 absolute top-2 right-2 z-10 flex justify-center items-center`}
-                    onClick={handleWishlistClick}>
-                    <span>
-                        {(isWishlist ?
-                            <FavoriteHeart />
-                            :
-                            <Heart />
+                    <div className="flex items-end gap-x-3">
+                        <p className=" w-fit bg-yellow-910 rounded h-[18px] flex rtl:flex-row-reverse gap-x-[2px] px-1 mt-5">
+                            {
+                                FormatCurrency(product?.price ? product.price : 0)
+                            } </p>
 
-                        )}
-                    </span>
-                </button>
+                        <p className=" text-gray-400 text-sm line-through ">
+                            {
+                                FormatCurrency2(product?.sale_price ? product.sale_price : 0)
+                            } </p>
+                    </div>
+
+                </div>
+                <div className="flex justify-between px-5 items-center gap-x-3 mt-[50px]">
+                    <div className="relative z-1  w-4/5">
+                        {
+                            product?.type != "variable" ? (
+                                <AddToCartSimple className="inline-flex justify-center w-full text-sm font-semibold text-white rounded-lg"
+                                    product={
+                                        {
+                                            id: product.id,
+                                            thumbnail: imageSrc,
+                                            slug: product.slug,
+                                            price: salePrice,
+                                        }
+                                    }
+                                    disabled={salePrice === null}
+                                />
+                            )
+                                : (
+                                    <button onClick={openModal}
+                                        className="inline-flex justify-center w-full text-sm font-semibold text-white rounded-lg">
+                                        {
+                                            t("common.quick_view")
+                                        } </button>
+                                    
+                                )
+                        }
+                    </div>
+                    <button
+                        className={` md:w-12 md:h-12 h-9 w-9 md:relative absolute md:top-0 top-2 md:rtl:right-0 md:ltr:left-0 rtl:right-2 ltr:left-2  rounded-full z-10 flex justify-center items-center overflow-hidden md:overflow-auto`}
+                        onClick={handleWishlistClick}>
+                        <span>
+                            {(isWishlist ?
+                                <FavoriteHeart />
+                                :
+                                <Heart />
+
+                            )}
+                        </span>
+                    </button>
+                </div>
+
                 {
                     openQuick ? (
                         <Quickview openQuick={openQuick}

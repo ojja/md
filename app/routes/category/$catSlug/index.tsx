@@ -168,19 +168,20 @@ export default function CategorySlug() {
 
   return (
     <div className="bg-white" key={categorySlug}>
-      <main className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+      <main className="px-4 mx-auto max-w-[1400px] sm:px-6 lg:px-8">
         <div className='pt-5 '>
+        <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-4" />
+
           {/* <ShopListTop grid={grid} setGrid={setGrid} setMobileFiltersOpen={setMobileFiltersOpen} /> */}
           <ShopListTop grid={grid} setGrid={setGrid} setMobileFiltersOpen={setMobileFiltersOpen} handleSortOptionChange={handleSortOptionChange} />
 
-          <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-4 border-b border-gray-200" />
           <section aria-labelledby="products-heading" className="pt-6 pb-24">
             {/* <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4"> */}
             <div className="">
 
-              <div className="top  flex justify-between">
+              <div className="top  flex justify-between ">
                 <Filters />
-                <Sort />
+                <Sort onSortOptionChange={handleSortOptionChange} />
               </div>
 
 
@@ -205,7 +206,7 @@ export default function CategorySlug() {
                 </div>
                 {isLoadMoreEnabled &&
                   <div className="flex items-center justify-center mt-10 loadmore">
-                    <button onClick={handleLoadMore} date-num={pageNumber} type="button" className="text-white bg-blue-700 hover:bg-blue-800 font-medium rounded text-sm px-5 py-2.5 text-center mr-2 inline-flex items-center justify-center whitespace-nowrap">
+                    <button onClick={handleLoadMore} date-num={pageNumber} type="button" className="text-green-500 hover:bg-green-500 hover:text-white font-semibold border-2 border-green-500 rounded-full text-sm px-5 py-2.5 text-center mr-2 inline-flex items-center justify-center whitespace-nowrap">
                       {!isLoading ? (
                         'Load More'
                       ) : (

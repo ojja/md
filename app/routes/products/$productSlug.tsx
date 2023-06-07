@@ -18,9 +18,9 @@ import Breadcrumbs from "~/components/Breadcrumbs";
 import Stars from "~/components/Stars";
 import SelectColor from "~/components/product/SelectColor";
 import SelectSize from "~/components/product/SelectSize";
-import FormatCurrency  from "~/utils/FormatCurrency";
+import FormatCurrency, { FormatCurrency2 } from "~/utils/FormatCurrency";
 import Frequently from "~/components/Frequently";
-import { useRecentView } from "~/stores/recentView";
+import { useRecentView } from "~/stores/allstores";
 import RecentlyViewedProducts from "~/components/RecentlyViewedProducts";
 import Accordion from "~/components/Accordion";
 import { getSelectedCurrency } from "~/utils/currencyUtils";
@@ -122,7 +122,7 @@ export default function ProductSingle() {
             { name: 'Home', href: '/' },
             { name: product.gender ? product.gender : 'All Products', href: '/products' },
             { name: product.category_name, href: `/category/${product.category_slug}` },
-            { name: product.name, href: '#' }
+            { name: product.title, href: '#' }
         ]
     }
 
@@ -136,6 +136,7 @@ export default function ProductSingle() {
             image: product.main_img,
             description: product.description,
             sku: product.sku,
+            cat: product.category,
             condition: 'new',
             gender: product.gender,
             brand: {
@@ -178,15 +179,15 @@ export default function ProductSingle() {
                     <div className="container px-4 mx-auto">
                         <div className="flex flex-wrap -mx-4">
                             <div className="w-full px-4 mb-2">
-                                <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-4 border-b border-gray-200" />
+                                <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-4 " />
                             </div>
                             <div className="w-full px-4 mb-16 lg:w-1/2 lg:mb-0">
                                 <Gallery galleryImages={product.images} />
                             </div>
-                            <div className="relative w-full px-4 lg:w-1/2">
+                            <div className="relative w-full px-9 lg:w-1/2 bg-white shadow-lg rounded-3xl" style={{ boxShadow: '0px 20px 66px rgba(0, 0, 0, 0.2)' }}>
 
                                 <button
-                                    className={`w-8 h-8 rounded-full bg-primary-400 absolute top-2 right-2 z-10 flex justify-center items-center`}
+                                    className={`w-8 h-8 rounded-full bg-primary-400 absolute top-9 right-9 z-10 flex justify-center items-center`}
                                     onClick={handleWishlistClick}>
                                     <span>
                                         {(isWishlist ?
@@ -197,30 +198,34 @@ export default function ProductSingle() {
                                         )}
                                     </span>
                                 </button>
-                                <div className="pt-2 mb-6">
+                                <div className=" pt-9 mb-6">
                                     <span className="hidden h-full min-h-full bg-orange-500 bg-purple-500 bg-pink-500 bg-center bg-cover bg-of-white-500 bg-olive-500 bg-golden-500 bg-navy-500 sm:bg-center"></span>
-                                    <span className="text-xs tracking-wider text-gray-400">{product.sku}</span>
-                                    <h1 className="mt-2 mb-4 text-5xl font-medium capitalize md:text-4xl font-heading">{product.title}</h1>
-                                    <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">{product.category}</h2>
+                                    <span className="text-xs tracking-wider text-gray-50">{product.sku}</span>
+                                    <span className=" text-xl tracking-wider text-gray-50">{product.category_name}</span>
+
+                                    <h1 className="mt-2 mb-4 text-5xl font-medium capitalize md:text-5xl font-heading">{product.title}</h1>
+                                    {/* <h2 className="text-2xl font-bold text-gray-900 sm:pr-12">{product.category}</h2> */}
+                                    {/* Reviews */}
+                                    <Stars nearestNumberRating={nearestNumberRating} />
+                                    <div className="mt-6">
+                                        <div className="text-[#999999] text-xl" dangerouslySetInnerHTML={{ __html: product.description }} />
+                                    </div>
                                     <h3 id="information-heading" className="sr-only">
                                         Product information
                                     </h3>
                                     {salePrice && salePrice !== productPrice ? (
-                                        <p className="text-2xl text-gray-900">
-                                            <span className="align-middle">{FormatCurrency(salePrice, getSelectedCurrency())}</span>
-                                            <del className="ml-2 text-base text-red-400 line-through align-middle">{FormatCurrency(productPrice, getSelectedCurrency())}</del>
+                                        <p className="flex items-end  gap-x-3">
+                                            <span className=" w-fit bg-yellow-910 rounded h-[18px] flex rtl:flex-row-reverse gap-x-[2px] px-1 mt-5 text-5xl">{FormatCurrency(salePrice, getSelectedCurrency())}</span>
+                                            <del className="text-gray-400 text-sm line-through ">{FormatCurrency2(productPrice, getSelectedCurrency())}</del>
                                         </p>
                                     ) : (
-                                        <p className="text-2xl text-gray-900">
+                                        <p className=" w-fit bg-yellow-910 rounded h-[18px] flex rtl:flex-row-reverse gap-x-[2px] px-1 mt-5">
                                             {FormatCurrency(productPrice, getSelectedCurrency())}
                                         </p>
                                     )}
                                 </div>
-                                {/* Reviews */}
-                                <Stars nearestNumberRating={nearestNumberRating} />
-                                <div className="mt-6">
-                                    <div className="leading-relaxed text-gray-500" dangerouslySetInnerHTML={{ __html: product.description }} />
-                                </div>
+
+
                                 <div className="mt-10">
 
                                     {product.attributes?.pa_color ? (
@@ -242,9 +247,9 @@ export default function ProductSingle() {
                                     ) : ('')}
                                     <span className="pt-3 text-xs">{`${selectedSize} - ${selectedColor} - ID ${itemID}`}</span>
                                     <span className="block text-xs tracking-wider text-gray-400">{product.availability}</span>
-                                    <div className="flex mt-10 space-x-4">
+                                    <div className=" mt-10 ">
                                         <AddToCartSimple
-                                            className="inline-flex justify-center w-full px-8 py-3 text-base font-medium text-white border-2 border-solid rounded-lg bg-slate-900 border-slate-900 hover:bg-slate-700 hover:border-slate-700"
+                                            className="inline-flex justify-center w-full py-3 text-center text-xl font-medium text-white"
                                             product={
                                                 {
                                                     id: itemID,
@@ -257,13 +262,14 @@ export default function ProductSingle() {
                                             }
                                             // disabled={!Boolean(selectedSize.inStock)}
                                             disabled={salePrice === null}
+                                            singleProductView={true}
                                         />
                                         
 
                                         <button
                                             type="submit"
                                             disabled
-                                            className="items-center justify-center w-1/2 px-8 py-3 text-base font-medium capitalize border-2 border-solid rounded-md border-slate-600 text-slate hover:bg-slate-600 hover:text-white focus:outline-none"
+                                            className="items-center justify-center w-full py-3 text-center text-xl font-medium capitalize border-2 border-solid rounded-md border-slate-600 text-slate hover:bg-slate-600 hover:text-white focus:outline-none"
                                         >
                                             Direct checkout
                                         </button>

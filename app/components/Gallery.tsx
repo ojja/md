@@ -16,6 +16,8 @@ export default function Gallery({ galleryImages = [] }: GalleryProps) {
   const [nav2, setNav2] = useState(null);
   const [slider1, setSlider1] = useState(null);
   const [slider2, setSlider2] = useState(null);
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+
 
   useEffect(() => {
     setNav1(slider1);
@@ -56,18 +58,18 @@ export default function Gallery({ galleryImages = [] }: GalleryProps) {
   if (galleryImages.length === 0) {
     galleryImages = ['/images/empty.jpg'];
   }
-  
+
   return (
     <div className="flex overflow-hidden gallery-slider-wrapper" data-lang={language}>
       <Slider
         {...settingsMain}
         asNavFor={nav2}
         ref={slider => (setSlider1(slider))}
-        className="order-1 w-10/12"
+        className="order-1 w-10/12   rounded-3xl overflow-hidden h-fit"
         style={{ direction: i18n.language === "ar" ? 'rtl' : 'ltr' }}
       >
         {galleryImages.map(slide => (
-          <div className="slick-slide" key={v4()}>
+          <div className="slick-slide " key={v4()}>
             <img
               className="slick-slide-image"
               src={`${slide}`}
@@ -80,9 +82,10 @@ export default function Gallery({ galleryImages = [] }: GalleryProps) {
           {...settingsThumbs}
           asNavFor={nav1}
           ref={slider => (setSlider2(slider))}
+          beforeChange={(oldIndex, newIndex) => setActiveSlideIndex(newIndex)}
         >
-          {galleryImages.map(slide => (
-            <div className="slick-slide" key={v4()}>
+          {galleryImages.map((slide, index) => (
+            <div className={`slick-slide rounded-xl overflow-hidden ${activeSlideIndex === index ? 'border-green-500 border-4' : 'border-2'}`} key={v4()} style={{ borderColor: `${activeSlideIndex === index ? 'green' : '#E8DFD0'} !important` }}>
               <img
                 className="slick-slide-image"
                 src={`${slide}`}

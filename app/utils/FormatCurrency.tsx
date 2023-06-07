@@ -23,6 +23,21 @@ const CURRENCY_FORMATTER2 = new Intl.NumberFormat(undefined, {
 };
 
 export default FormatCurrency;
+// const FormatCurrency = (number: string | number, currencyClass: string[] | undefined, wholeNumberClass: undefined, decimalPartClass: undefined) => {
+//   const parsedNumber = parseFloat(number);
+
+//   const formattedCurrency = CURRENCY_FORMATTER.format(parsedNumber);
+//   const currencySymbol = formattedCurrency.match(/[^\d.,]/g).join("");
+//   const [wholeNumber, decimalPart] = formattedCurrency.match(/\d+/g);
+
+//   return (
+//     <>
+//   <span className={`currency  ${currencyClass}`}>{currencySymbol}</span>
+//       <span className={`whole-number text-2xl font-semibold ltr:-ml-0.5 rtl:-mr-0.5 ${wholeNumberClass}`}>{wholeNumber}</span>
+//       <span className={`decimal-part  ${decimalPartClass}`}>{decimalPart}</span>
+//     </>
+//   );
+// };
 
 export const FormatCurrency2 = (number) => {
   const parsedNumber = parseFloat(number);
