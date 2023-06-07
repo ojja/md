@@ -2,7 +2,7 @@ import { Link } from "@remix-run/react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
 import { MetaFunction } from "remix";
 import WishListProducts from "~/components/AddWishList";
-import { FormatCurrency } from "~/utils/FormatCurrency";
+import FormatCurrency  from "~/utils/FormatCurrency";
 export default function wishlist() {
   const fakeProducts = [
     {

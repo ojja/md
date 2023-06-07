@@ -2,7 +2,7 @@ import { MinusIcon, PlusIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from '@remix-run/react';
 import { useEffect, useState } from 'react'
 import { getProductBySlug } from '~/api/products';
-import { FormatCurrency } from '~/utils/FormatCurrency';
+import FormatCurrency from '~/utils/FormatCurrency';
 import CartItemLoader from './CartItemLoader';
 
 interface CartItemProps {

@@ -123,7 +123,7 @@ export default function Filters({ filteredProducts = [], selectedCategories = []
                         </>
                     )}
                 </Disclosure>
-                ):('')} */}
+                ):('')}
                 {/* <Disclosure as="div" key={v4()} className="py-6 border-b border-gray-200" defaultOpen>
                     {({ open }) => (
                         <>

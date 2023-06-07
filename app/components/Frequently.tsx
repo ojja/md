@@ -1,6 +1,6 @@
 import { PlusIcon } from "@heroicons/react/24/outline";
 import React, { useState } from "react";
-import { FormatCurrency } from "~/utils/FormatCurrency";
+import FormatCurrency  from "~/utils/FormatCurrency";
 import { v4 } from 'uuid';
 export default function Frequently() {
     const [selectedProducts, setSelectedProducts] = useState([

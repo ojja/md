@@ -47,7 +47,7 @@ type ProductWidgetProps = {
 
 // const { refreshWish } = useFavoriteIcon();
 
-import { FormatCurrency } from "~/utils/FormatCurrency";
+import FormatCurrency  from "~/utils/FormatCurrency";
 import ProgressiveImage from "../ProgressiveImage";
 import useRecentView from "~/stores/wishtList";
 import FavoriteHeart from "../icons/favorite-icon";

@@ -36,14 +36,15 @@ const navigation = {
           imageAlt: 'Close up of Basic Tee fall bundle with off-white, ochre, olive, and black tees.',
         }
       ],
+      
       sections: [
         {
           id: 'clothing',
           name: 'Clothing',
           items: [
-            { name: 'Category 2', href: 'dress' },
-            { name: 'Category 3', href: 'shirt' },
-            { name: 'Category 4', href: 'skirt' },
+            { name: 'Category 2', href: 'food' },
+            { name: 'Category 3', href: 'coffee' },
+            { name: 'Category 4', href: 'espresso' },
             { name: 'Category Trousers', href: 'trousers' },
             // { name: 'Shirts', href: 'shirts' },
             // { name: 'Tees', href: 'tees' },

@@ -4,7 +4,7 @@ import { Fragment, useState } from "react";
 import Button from "~/components/Button";
 import Status from "~/components/Status";
 import TrackingSteps from "~/components/TrackingSteps";
-import { FormatCurrency } from "~/utils/FormatCurrency";
+import FormatCurrency  from "~/utils/FormatCurrency";
 
 const product = {
     id: 1,

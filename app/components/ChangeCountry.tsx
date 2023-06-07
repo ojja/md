@@ -1,8 +1,9 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import { FormatCurrency } from "~/utils/FormatCurrency";
+import FormatCurrency  from "~/utils/FormatCurrency";
+import { useTranslation } from 'react-i18next';
 import { getSelectedCurrency, setSelectedCurrency } from "~/utils/currencyUtils";
-// import { FormatCurrency } from "~/utils/FormatCurrency";
+// import FormatCurrency  from "~/utils/FormatCurrency";
 
 
 export default function ChangeCountry() {

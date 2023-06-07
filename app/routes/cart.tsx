@@ -7,7 +7,7 @@ import CouponForm from "~/components/CouponForm";
 import ExtraProducts from "~/components/ExtraProducts";
 import { Site_Title } from "~/config";
 import useShoppingCart from "~/stores/cartStore";
-import { FormatCurrency } from "~/utils/FormatCurrency";
+import FormatCurrency  from "~/utils/FormatCurrency";
 
 
 

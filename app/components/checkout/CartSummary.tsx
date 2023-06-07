@@ -1,7 +1,7 @@
 import { memo } from 'react';
 import { v4 } from "uuid";
 import useShoppingCart from "~/stores/cartStore";
-import { FormatCurrency } from "~/utils/FormatCurrency";
+import FormatCurrency  from "~/utils/FormatCurrency";
 import MiniCartItem from "../cart/MiniCartItem";
 
 const CartSummary = ({ thanks, rate }: any) => {

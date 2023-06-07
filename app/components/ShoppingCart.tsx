@@ -8,7 +8,7 @@ import MiniCartItem from './cart/MiniCartItem';
 import MiniCartUpSell from './cart/MiniCartUpSell';
 import MiniCartTools from './cart/MiniCartTools';
 import i18next from 'i18next';
-import { FormatCurrency } from '~/utils/FormatCurrency';
+import FormatCurrency from '~/utils/FormatCurrency';
 import MiniCartItemLoader from './cart/MiniCartItemLoader';
 
 

@@ -1,7 +1,7 @@
 import { Link } from '@remix-run/react';
 import { memo, useEffect, useState } from 'react'
 import { getProductBySlug } from '~/api/products';
-import { FormatCurrency } from '~/utils/FormatCurrency';
+import FormatCurrency from '~/utils/FormatCurrency';
 import MiniCartItemLoader from './MiniCartItemLoader';
 
 interface Product {

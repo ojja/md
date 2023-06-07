@@ -18,7 +18,7 @@ import Breadcrumbs from "~/components/Breadcrumbs";
 import Stars from "~/components/Stars";
 import SelectColor from "~/components/product/SelectColor";
 import SelectSize from "~/components/product/SelectSize";
-import { FormatCurrency } from "~/utils/FormatCurrency";
+import FormatCurrency  from "~/utils/FormatCurrency";
 import Frequently from "~/components/Frequently";
 import { useRecentView } from "~/stores/recentView";
 import RecentlyViewedProducts from "~/components/RecentlyViewedProducts";
