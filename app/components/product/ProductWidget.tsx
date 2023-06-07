@@ -178,6 +178,7 @@ export function ProductWidget({ product, isItemInWishlist , width }: ProductWidg
                         {
                             FormatCurrency(product?.price ? product.price : 0)
                         } </p>
+                        
                 </div>
                 <div className="relative z-1">
                     {

@@ -43,6 +43,7 @@ export default function AddToCartSimple({ className, product, disabled }: {
 
             )
 
+            
 
                 : (
                     <div className="flex justify-start items-center">

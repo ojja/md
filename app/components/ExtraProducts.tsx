@@ -44,6 +44,7 @@ export default function ExtraProducts({ categorySlug, count, title }: Props) {
         }
     }, [categorySlug, count, inView]);
 
+    
     return (
         <div className="mt-10 border-t-2" ref={ref}>
             <div className="container px-4 py-16 mx-auto sm:py-24 sm:px-6">

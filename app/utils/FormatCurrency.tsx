@@ -33,6 +33,7 @@ export const FormatCurrency2 = (number) => {
 
 
 
+
   // const CURRENCY_SYMBOLS = {
   //   USD: "$",
   //   EGP: "EGP",

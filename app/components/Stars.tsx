@@ -16,4 +16,5 @@ export default function Stars({nearestNumberRating}:any) {
             </div>
         </div>
     )
+    
 }
