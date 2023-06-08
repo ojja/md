@@ -26,6 +26,10 @@ import Accordion from "~/components/Accordion";
 import { getSelectedCurrency } from "~/utils/currencyUtils";
 import FavoriteHeart from "~/components/icons/favorite-icon";
 import Heart from "~/components/icons/Heart";
+import { useTranslation } from "react-i18next";
+import i18next from "i18next";
+import TabsNew from "~/components/product/TabsNew";
+
 
 interface Feature {
     name: string;
@@ -66,6 +70,8 @@ export const meta: MetaFunction = ({ data }: any) => {
 
 
 export default function ProductSingle() {
+    const { t } = useTranslation();
+
     // debugger;
     const product = useLoaderData<typeof loader>();
     const nearestNumberRating = 12
@@ -177,14 +183,15 @@ export default function ProductSingle() {
                 {/* Product Intro */}
                 <div className="bg-white">
                     <div className="container px-4 mx-auto">
-                        <div className="flex flex-wrap -mx-4">
+                        <div className="flex flex-wrap -mx-4 md:ltr:pr-28 md:rtl:pl-28">
                             <div className="w-full px-4 mb-2">
                                 <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-4 " />
                             </div>
-                            <div className="w-full px-4 mb-16 lg:w-1/2 lg:mb-0">
+                            <div className="w-full  md:ltr:pr-16 md:rtl:pl-16 mb-16 lg:w-1/2 lg:mb-0">
                                 <Gallery galleryImages={product.images} />
+                                <Frequently />
                             </div>
-                            <div className="relative w-full px-9 lg:w-1/2 bg-white shadow-lg rounded-3xl" style={{ boxShadow: '0px 20px 66px rgba(0, 0, 0, 0.2)' }}>
+                            <div className="relative w-full px-9 lg:w-1/2 bg-white shadow-lg rounded-3xl " style={{ boxShadow: '0px 20px 66px rgba(0, 0, 0, 0.2)' }}>
 
                                 <button
                                     className={`w-8 h-8 rounded-full bg-primary-400 absolute top-9 right-9 z-10 flex justify-center items-center`}
@@ -210,18 +217,17 @@ export default function ProductSingle() {
                                     <div className="mt-6">
                                         <div className="text-[#999999] text-xl" dangerouslySetInnerHTML={{ __html: product.description }} />
                                     </div>
-                                    <h3 id="information-heading" className="sr-only">
+                                    <h3 id="information-heading" className="sr-only ">
                                         Product information
                                     </h3>
                                     {salePrice && salePrice !== productPrice ? (
                                         <p className="flex items-end  gap-x-3">
-                                            <span className=" w-fit bg-yellow-910 rounded h-[18px] flex rtl:flex-row-reverse gap-x-[2px] px-1 mt-5 text-5xl">{FormatCurrency(salePrice, getSelectedCurrency())}</span>
+                                            <span className=" w-fit bg-yellow-910 rounded h-[26px] flex rtl:flex-row-reverse gap-x-[2px] px-1 mt-5 text-5xl">{FormatCurrency(salePrice, getSelectedCurrency(), ["text-xl font-normal", " text-5xl font-semibold ltr:-ml-0.5 rtl:-mr-0.5", "text-xl font-normal"])}</span>
                                             <del className="text-gray-400 text-sm line-through ">{FormatCurrency2(productPrice, getSelectedCurrency())}</del>
                                         </p>
                                     ) : (
-                                        <p className=" w-fit bg-yellow-910 rounded h-[18px] flex rtl:flex-row-reverse gap-x-[2px] px-1 mt-5">
-                                            {FormatCurrency(productPrice, getSelectedCurrency())}
-                                        </p>
+                                        <p className=" w-fit bg-yellow-910 rounded h-[26px] flex rtl:flex-row-reverse gap-x-[2px] px-1 mt-5 text-5xl">{FormatCurrency(salePrice, getSelectedCurrency(), ["text-xl font-normal", " text-5xl font-semibold ltr:-ml-0.5 rtl:-mr-0.5", "text-xl font-normal"])}</p>
+
                                     )}
                                 </div>
 
@@ -249,7 +255,7 @@ export default function ProductSingle() {
                                     <span className="block text-xs tracking-wider text-gray-400">{product.availability}</span>
                                     <div className=" mt-10 ">
                                         <AddToCartSimple
-                                            className="inline-flex justify-center w-full py-3 text-center text-xl font-medium text-white"
+                                            className="inline-flex justify-center w-full py-3 text-center text-xl font-medium text-white "
                                             product={
                                                 {
                                                     id: itemID,
@@ -264,22 +270,25 @@ export default function ProductSingle() {
                                             disabled={salePrice === null}
                                             singleProductView={true}
                                         />
-                                        
+
 
                                         <button
                                             type="submit"
                                             disabled
-                                            className="items-center justify-center w-full py-3 text-center text-xl font-medium capitalize border-2 border-solid rounded-md border-slate-600 text-slate hover:bg-slate-600 hover:text-white focus:outline-none"
+                                            className="items-center justify-center w-full py-3 text-center text-xl font-medium capitalize border-2 border-solid rounded-100 w-full border-green-500 text-slate focus:outline-none cursor-pointer"
                                         >
-                                            Direct checkout
+
+                                            {i18next.language === "ar" ?
+                                                ' أشتري حالاً ' : ' Direct checkout '
+                                            }
                                         </button>
                                     </div>
                                 </div>
 
 
                                 <div>
-                                    <div className="w-full mt-8">
-                                        <div className="w-full mx-auto bg-white rounded-2xl">
+                                    <div className="w-full">
+                                        {/* <div className="w-full mx-auto bg-white rounded-2xl">
                                             <Accordion
                                                 title="What is your refund policy?"
                                                 description="If you're unhappy with your purchase for any reason, email us within 90 days and we'll refund you in full, no questions asked."
@@ -290,12 +299,12 @@ export default function ProductSingle() {
                                                     description="No."
                                                 />
                                             </div>
-                                        </div>
+                                        </div> */}
+                                        <TabsNew product={{ description: product.description }}/>
                                     </div>
                                 </div>
                             </div>
                             <div className="w-full">
-                                <Frequently />
                             </div>
                         </div>
                     </div>

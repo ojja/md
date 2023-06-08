@@ -77,7 +77,7 @@ export default function Gallery({ galleryImages = [] }: GalleryProps) {
           </div>
         ))}
       </Slider>
-      <div className="w-2/12 mr-2 gallery-thumbnail-slider-wrap max-h-[600px]">
+      <div className="w-2/12 mr-2 gallery-thumbnail-slider-wrap max-h-[500px]">
         <Slider
           {...settingsThumbs}
           asNavFor={nav1}

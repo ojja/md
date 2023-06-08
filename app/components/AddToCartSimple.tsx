@@ -1,7 +1,10 @@
 import { MinusIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
+import { useTranslation } from "react-i18next";
 import { trackAddToCart } from "~/fb-pixel";
 import useShoppingCart, { CartItem } from "~/stores/cartStore";
 // import { TrashIcon } from "@heroicons/24/outline";
+import i18next from "i18next";
+
 
 
 
@@ -9,11 +12,14 @@ function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
 }
 export default function AddToCartSimple({ className, product, disabled, singleProductView, }: {
+    
     className?: string;
     product: CartItem;
     disabled: boolean;
     singleProductView?: boolean;
 }) {
+    const { t } = useTranslation();
+
     const {
         getItemQuantity,
         addToCart,
@@ -40,7 +46,11 @@ export default function AddToCartSimple({ className, product, disabled, singlePr
                     <div className={` px-4 font-semibold text-white bg-green-200 ${singleProductView ? 'justify-center py-[18px]' : 'justify-between py-2.5'} text-xl rounded-100 w-full flex items-center `}>
 
 
-                        <p> Add to Bag </p>
+                        <p> 
+                        {i18next.language === "ar" ?
+                    'اضف الى السلة' : '  Add to Cart '
+                }
+                          </p>
                         {!singleProductView && (
                             <PlusIcon className="w-6 h-6 text-white" aria-hidden="true" />
                         )}
