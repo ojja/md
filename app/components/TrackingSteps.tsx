@@ -32,10 +32,22 @@ function Step({ title, lineClass, check, currentStep, stepNumber }: StepProps) {
 export default function TrackingSteps({ step }: { step: number }) {
     return (
         <div className="flex">
-            <Step title="Order Placed" lineClass="end" check={step >= 1} currentStep={step} stepNumber={1} />
-            <Step title="Order Preparing" lineClass="center" check={step >= 2} currentStep={step} stepNumber={2} />
-            <Step title="Order Fulfilled" lineClass="center" check={step > 2} currentStep={step} stepNumber={3} />
-            <Step title="Order Delivered" lineClass="start" check={step > 3} currentStep={step} stepNumber={4} />
+            {step === -1 ? (
+                <p className="text-red-400 m-auto">Your Order has been cancelled</p>
+            ) : step === 5 ? (
+                <p className="text-red-400 m-auto">Your Order has refunded</p>
+            ) : step === 6 ? (
+                <p className="text-red-400 m-auto">Your Order has failed</p>
+            ) : step === 7 ? (
+                ''
+            ) : (
+                <>
+                    <Step title="Order Placed" lineClass="end" check={step >= 1} currentStep={step} stepNumber={1} />
+                    <Step title="Order Preparing" lineClass="center" check={step >= 2} currentStep={step} stepNumber={2} />
+                    <Step title="Order Fulfilled" lineClass="center" check={step > 2} currentStep={step} stepNumber={3} />
+                    <Step title="Order Delivered" lineClass="start" check={step > 3} currentStep={step} stepNumber={4} />
+                </>
+            )}
         </div>
     );
 }

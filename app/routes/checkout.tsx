@@ -11,6 +11,7 @@ import { useTranslation } from "react-i18next";
 import PaymentMethod from "~/components/PaymentMethod";
 import Loader from "~/components/Loader";
 import useShoppingCart from "~/stores/cartStore";
+import ThreedsChallengeRedirectComponent from "~/components/payments/ThreedsChallengeRedirectComponent";
 
 export default function Checkout() {
     const { t, i18n } = useTranslation();
@@ -18,10 +19,10 @@ export default function Checkout() {
 
     const [stepOne, setStepOne] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
-
-    const products = Object.values(cartItems).map((item) => ({
-        product_id: item.id,
-        quantity: item.quantity,
+    const [responseCreditCard, setResponseCreditCard] = useState<any>(null);
+    const items = Object.values(cartItems).map((item) => ({
+        itemID: item.id,
+        qty: item.quantity,
     }));
     const [formData, setFormData] = useState({
         firstName: '',
@@ -29,7 +30,7 @@ export default function Checkout() {
         phoneNumber: '',
         emailAddress: '',
         street: '',
-        city: 'egy',
+        country: 'EG',
         neighborhood: '',
         area: '',
         building_no: '',
@@ -41,14 +42,17 @@ export default function Checkout() {
         pick_from_branch: '',
         order_date: '',
         shipping_fee: 0,
+        payment_method: 'COD',
+        sessionId: '',
     });
+
     const [errors, setErrors] = useState({
         firstName: '',
         lastName: '',
         phoneNumber: '',
         emailAddress: '',
         street: '',
-        city: '',
+        country: '',
         neighborhood: '',
         area: '',
         building_no: '',
@@ -88,7 +92,7 @@ export default function Checkout() {
             phoneNumber: '',
             emailAddress: '',
             street: '',
-            city: '',
+            country: '',
             neighborhood: '',
             area: '',
             building_no: '',
@@ -134,8 +138,8 @@ export default function Checkout() {
                 newErrors.street = i18n.language === 'ar' ? 'يجب ادخال اسم الشارع' : 'Street is required';
                 isValid = false;
             }
-            if (formData.city.trim() === '') {
-                newErrors.city = i18n.language === 'ar' ? 'يجب ادخال المدينة' : 'City is required';
+            if (formData.country.trim() === '') {
+                newErrors.country = i18n.language === 'ar' ? 'يجب ادخال المدينة' : 'country is required';
                 isValid = false;
             }
             if (formData.neighborhood.trim() === '') {
@@ -189,32 +193,54 @@ export default function Checkout() {
 
 
     const handleSubmit = async (e: any) => {
-        e.preventDefault();
+        e && e.preventDefault();
         setIsLoading(true);
         const apiUrl = `${API_ENDPOINT}/checkout.php`;
         const requestBody = {
-            api_key: 'r@U*uQ@R5%3#4Rm4uR09x6uvax%l',
-            api_secret: 'z7IrTvl$O*C57UHI4J#vrJ02A7nL',
-            billing_address: [
-                {
-                    first_name: formData.firstName,
-                    last_name: formData.lastName,
-                    email: formData.emailAddress,
-                    phone: formData.phoneNumber,
-                    address: formData.street,
-                    city: formData.area,
-                    state: formData.neighborhood,
-                    building_no: formData.building_no,
-                    floor_no: formData.floor_no,
-                    apartment_no: formData.apartment_no,
-                    property_type: formData.property_type,
-                    shipping_method: formData.shipping_method,
-                },
-            ],
-            products,
-            shipping_fees: formData.shipping_fee,
-            coupon_code: 'mitchcoupon',
+            billing:
+            {
+                first_name: formData.firstName,
+                last_name: formData.lastName,
+                email: formData.emailAddress,
+                phone: formData.phoneNumber,
+                address_1: formData.street,
+                area: formData.area,
+                gov: formData.neighborhood,
+                country: formData.country,
+                building_no: formData.building_no,
+                floor_no: formData.floor_no,
+                apartment_no: formData.apartment_no,
+                property_type: formData.property_type,
+                shipping_method: formData.shipping_method,
+            },
+            items,
+            shipping: {
+                rate: formData.shipping_fee
+            },
+            // coupon_code: 'mitchcoupon',
+            order: {
+                customerID: 0
+            },
+
         };
+        if (formData.payment_method === 'COD') {
+            requestBody.payment = {
+                method: 'COD',
+                orderData: {
+                    amount: 150,
+                    currency: 'EGP',
+                },
+            };
+        } else if (formData.payment_method === 'CC') {
+            requestBody.payment = {
+                method: 'CC',
+                orderData: {
+                    amount: 150,
+                    currency: 'EGP',
+                },
+                sessionID: formData.sessionId,
+            };
+        }
         if (validateForm()) {
             try {
                 setIsLoading(true);
@@ -235,6 +261,8 @@ export default function Checkout() {
                             resetCart();
                             window.location.href = thanksURL;
                         }, 2000);
+                    } else if (responseData.status === 'success' && responseData.hasOwnProperty('html')) {
+                        setResponseCreditCard(responseData);
                     } else {
                         console.log('API call failed');
                     }
@@ -246,6 +274,7 @@ export default function Checkout() {
             }
         } else {
             console.log('Form is invalid');
+            console.log('formData >> ', formData);
             // setIsLoading(false);
         }
     };
@@ -289,6 +318,7 @@ export default function Checkout() {
         setTimeout(() => {
             console.log('EFfext set load')
             setIsLoading(false);
+            console.log('data', formData)
         }, 1000);
     }, []);
     return (
@@ -362,7 +392,8 @@ export default function Checkout() {
                                             </div>
                                             :
                                             <div className="step-two">
-                                                <PaymentMethod />
+                                                <ThreedsChallengeRedirectComponent response={responseCreditCard} />
+                                                <PaymentMethod formData={formData} handleChange={handleChange} errors={errors} handleSubmit={handleSubmit} />
                                                 <div className="flex items-center pt-3 mt-3 border-t-2">
                                                     <input
                                                         id="default-checkbox"
