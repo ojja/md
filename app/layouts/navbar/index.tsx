@@ -314,7 +314,7 @@ export default function NavBar({ }) {
             typeof window !== 'undefined' && <ShoppingCart />
           )}
         </div>
-        <header className="relative z-20 bg-white">
+        <header className="relative z-[11] bg-white">
           {isCheckoutPage ? null : (
             // <p className="flex items-center justify-center h-10 px-4 text-sm font-medium text-white bg-offwhite-500 sm:px-6 lg:px-8">
             //   {t('common.topBannerText')}
@@ -328,7 +328,7 @@ export default function NavBar({ }) {
                   {/* Change Currncy */}
                   {isCheckoutPage ? null : (
                     <div className="hidden lg:flex">
-                      <Menu as="div" className="relative z-20 inline-block text-left">
+                      <Menu as="div" className="relative z-[] inline-block text-left">
                         <div>
                           <Menu.Button className="flex items-center justify-center text-sm font-medium text-gray-700 group hover:text-gray-900">
                             <img
@@ -660,7 +660,7 @@ export default function NavBar({ }) {
                     {/* Change Currncy */}
                     {isCheckoutPage ? null : (
                       <div className="hidden lg:ml-8 lg:flex">
-                        <Menu as="div" className="relative z-20 inline-block text-left">
+                        <Menu as="div" className="relative z-[] inline-block text-left">
                           <div>
                             <Menu.Button className="inline-flex items-center justify-center text-sm font-medium text-gray-700 group hover:text-gray-900">
                               <img

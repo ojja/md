@@ -34,7 +34,7 @@ export default function Frequently() {
     const areItemsSelected = selectedProducts.some((product) => product.selected);
 
     return (
-        <div className="pt-12 border-t-2 border-gray-100">
+        <div className="pt-12 border-t-2 border-gray-100  mt-12">
             <h2 className=" mb-12 md:text-3xl  font-bold  text-black">
                 {i18next.language === "ar" ?
                     'عادة ما يتم شراؤه معًا: أضف هذه العناصر' : 'Usually Bought Together: Add These Items'
@@ -88,7 +88,7 @@ export default function Frequently() {
                                 checked={product.selected}
                                 onChange={() => handleCheckboxChange(index)}
                             />
-                            <div className="rtl:md:mr-4 ltr:md:ml-4">
+                            <div className="md:ml-4">
                                 <label htmlFor={`product-${index}`} className=" text-base font-semibold">
                                     {product.title}{" "}
 

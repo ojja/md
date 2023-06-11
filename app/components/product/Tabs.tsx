@@ -10,7 +10,7 @@ function classNames(...classes: string[]) {
 }
 export default function Tabs({ product }: TabsProps) {
     return (
-        <div className="pt-20 mt-10 bg-white border-t-2 ">
+        <div className="pt-20 bg-white ">
             <div className="container mx-auto">
                 <Tab.Group as="div" className="flex flex-col" defaultIndex={0}>
                     <Tab.List className="flex flex-wrap -mb-px space-x-1 border-b border-gray-200">

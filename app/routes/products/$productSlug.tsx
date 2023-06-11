@@ -29,6 +29,7 @@ import Heart from "~/components/icons/Heart";
 import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import TabsNew from "~/components/product/TabsNew";
+import Branches from "~/components/product/branch";
 
 
 interface Feature {
@@ -71,6 +72,7 @@ export const meta: MetaFunction = ({ data }: any) => {
 
 export default function ProductSingle() {
     const { t } = useTranslation();
+    const [open, setOpen] = useState(false);
 
     // debugger;
     const product = useLoaderData<typeof loader>();
@@ -187,7 +189,7 @@ export default function ProductSingle() {
                             <div className="w-full px-4 mb-2">
                                 <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-4 " />
                             </div>
-                            <div className="w-full  md:ltr:pr-16 md:rtl:pl-16 mb-16 lg:w-1/2 lg:mb-0">
+                            <div className="w-full  md:pr-16  mb-16 lg:w-1/2 lg:mb-0">
                                 <Gallery galleryImages={product.images} />
                                 <Frequently />
                             </div>
@@ -251,8 +253,8 @@ export default function ProductSingle() {
                                             onSelectedSizeChange={setSelectedSize}
                                         />
                                     ) : ('')}
-                                    <span className="pt-3 text-xs">{`${selectedSize} - ${selectedColor} - ID ${itemID}`}</span>
-                                    <span className="block text-xs tracking-wider text-gray-400">{product.availability}</span>
+                                    {/* <span className="pt-3 text-xs">{`${selectedSize} - ${selectedColor} - ID ${itemID}`}</span> */}
+                                    {/* <span className="block text-xs tracking-wider text-gray-400">{product.availability}</span> */}
                                     <div className=" mt-10 ">
                                         <AddToCartSimple
                                             className="inline-flex justify-center w-full py-3 text-center text-xl font-medium text-white "
@@ -288,24 +290,56 @@ export default function ProductSingle() {
 
                                 <div>
                                     <div className="w-full">
-                                        {/* <div className="w-full mx-auto bg-white rounded-2xl">
-                                            <Accordion
-                                                title="What is your refund policy?"
-                                                description="If you're unhappy with your purchase for any reason, email us within 90 days and we'll refund you in full, no questions asked."
-                                            />
-                                            <div className="mt-2">
-                                                <Accordion
-                                                    title="Do you offer technical support?"
-                                                    description="No."
-                                                />
+                                        <Branches />
+                                        <TabsNew product={{ description: product.description }} />
+                                    </div>
+                                    <div className="w-full">
+                                        <button
+                                            className=' text-black text-xl font-semibold rounded-100 border-2 border-gray-400 px-5 py-2.5 mb-9 transition-all duration-300 ease hover:text-white hover:bg-gray-400'
+                                            onClick={() => setOpen(true)}
+                                        >
+                                            القيم الغذائية
+                                        </button>
+                                        <>
+                                            <div className={classNames(
+                                                open
+                                                    ? 'translate-x-0'
+                                                    // : '-translate-x-full',
+                                                    : `${i18next.language === 'en' ? 'translate-x-full' : '-translate-x-full'} invisible`,
+                                                'fixed md:w-[600px] w-full bg-green-300 top-0 right-0 left-auto transform transition ease-in-out duration-500 pt-5 pb-32 h-full z-10'
+                                            )} style={{ boxShadow: ' 0px 20px 66px rgba(0, 0, 0, 0.2)' }}>
+
+                                                <div className="flex justify-between items-center px-5 border-b border-[#C6C6C6] pb-5">
+                                                    <button
+                                                        className=' rounded-full border-2 border-gray-400 p-3'
+                                                        onClick={() => setOpen(false)}
+                                                    >
+                                                        <svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                            <path d="M16.3575 4.92969L15.3575 3.92969L10.1433 9.14385L4.92834 3.92969L3.92834 4.92969L9.14334 10.1439L3.92834 15.358L4.92834 16.358L10.1433 11.1439L15.3575 16.358L16.3575 15.358L11.1425 10.1439L16.3575 4.92969Z" fill="#163300" />
+                                                        </svg>
+
+                                                    </button>
+                                                    <h4 className=" text-[32px] font-semibold">
+                                                        القيم الغذائية
+                                                    </h4>
+                                                </div>
+                                                <div className=" pt-5">
+                                                    <img src="/images/list.png" alt="" className="m-auto" />
+                                                </div>
                                             </div>
-                                        </div> */}
-                                        <TabsNew product={{ description: product.description }}/>
+                                            <div onClick={() => setOpen(false)}
+                                                className={classNames(
+                                                    open
+                                                        ? 'pointer-events-auto visible opacity-100'
+                                                        // : '-translate-x-full',
+                                                        : 'pointer-events-none invisible opacity-0',
+                                                    'fixed top-0 right-0 w-full h-full bg-black bg-opacity-50 transition-all duration-300 ease-linear'
+                                                )}></div>
+                                        </>
                                     </div>
                                 </div>
                             </div>
-                            <div className="w-full">
-                            </div>
+
                         </div>
                     </div>
                 </div>
