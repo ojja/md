@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import LoginForm from "~/components/account/LoginForm";
 import Loader from "~/components/Loader";
 import { API_ENDPOINT } from "~/config";
+import { checkLoginStatus } from "~/utils/authUtils";
 
 
 export default function login() {
@@ -136,30 +137,9 @@ export default function login() {
     }
   };
 
-  const checkLoginStatus = async () => {
-    try {
-      const response = await fetch('https://cloudhosta.com:68/MitchAPI/my-account/isLogged.php',{
-        credentials: 'include'
-      });
-      if (response.ok) {
-        const responseData = await response.json();
-        // Check the response data to determine if the user is logged in
-        if (responseData.status === 'logged_in') {
-          // User is logged in
-          console.log('User is logged in');
-        } else {
-          // User is not logged in
-          console.log('User is not logged in');
-        }
-      } else {
-        // Handle non-200 status code
-        console.log('Request failed with status:', response.status);
-      }
-    } catch (error) {
-      // Handle network errors or other exceptions
-      console.log('An error occurred:', error);
-    }
-  };
+  // Call checkLoginStatus when the page loads to check the initial login status
+  checkLoginStatus();
+
   useEffect(() => {
     setTimeout(() => {
       console.log('EFfext set load')
