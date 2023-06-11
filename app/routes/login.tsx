@@ -113,7 +113,7 @@ export default function login() {
                 general: responseData.msg
               }));
             } else if (responseData.msg_code === 'login_success') {
-              console.log('Success Login');
+              console.log('Success Login //');
               checkLoginStatus();
               navigate('/dashboard');
             } else {
