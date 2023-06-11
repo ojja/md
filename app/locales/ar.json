@@ -48,11 +48,15 @@
     "quick_view": "نظرة سريعه",
     "new_arrivals": "وصل حديثًا",
     "in": "في",
-    "login": "",
+    "login": "تسجيل الدخول",
+    "password": "كلمه السر",
+    "login_label": "اسم المستخدم / البريد الإلكتروني",
+    "login_label_placeholder": "example@example.com / اسم المستخدم",
     "next_step": "الخطوة التالية (اتمام الدفع)",
     "branch": "فرع",
     "my_account": "حسابي",
-    "submit": "إرسال"
+    "submit": "إرسال",
+    "sign_in": "تسجيل الدخول"
   },
   "cities": {
     "cairo": "القاهرة",

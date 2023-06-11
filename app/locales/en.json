@@ -48,11 +48,15 @@
     "quick_view": "Quick View",
     "new_arrivals": "New Arrivals",
     "in": "in",
-    "login": "",
+    "login": "Login",
+    "password": "Password",
+    "login_label": "E-mail / Username",
+    "login_label_placeholder": "example@example.com / username",
     "next_step": "Next Step (Complete Payment)",
     "branch": "Branch",
     "my_account": "My Account",
-    "submit": "Submit"
+    "submit": "Submit",
+    "sign_in": "Sign In"
   },
   "cities": {
     "cairo": "Cairo",

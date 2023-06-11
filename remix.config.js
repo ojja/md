@@ -26,15 +26,6 @@ withEsbuildOverride((option, { isServer }) => {
 module.exports = {
   devServerBroadcastDelay: 1000,
   devServerPort: 3002,
-  ...(process.env.NODE_ENV === "production" ? {
-    serverBuildTarget: "cloudflare-pages",
-    serverConditions: ["worker"],
-    serverMainFields: ["browser", "module", "main"],
-    serverModuleFormat: "esm",
-    serverPlatform: "neutral",
-    serverMinify: false,
-    server: "./server.ts",
-  } : {}),
   serverDependenciesToBundle: "all",
   future: {
     unstable_tailwind: true,
@@ -48,6 +39,6 @@ module.exports = {
   },
   developmentServer: {
     compress: true, // Enable compression for served assets
-    // Other development server options
+    port: 3000, // Specify the port for the development server
   },
 };

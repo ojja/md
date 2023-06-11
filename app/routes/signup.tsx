@@ -1,7 +1,14 @@
-import { Link } from "@remix-run/react";
+import { Link, useLoaderData } from "@remix-run/react";
 import Dots from "~/components/Dots";
 
-export default function signup() {
+export default function signup({context}) {
+  const routeData = useLoaderData();
+
+  // Check if the user is logged in
+  // const isLoggedIn = routeData.isLoggedIn;
+  console.log('routeData>>',routeData)
+  console.log('context>>',context)
+
   return (
     <div>
       <section className="bg-[#F4F7FF] py-20 lg:py-[120px]">
@@ -31,7 +38,7 @@ export default function signup() {
                     <input
                       type="submit"
                       value="Sign In"
-                      className="w-full px-5 py-3 text-base text-white transition bg-primary-500 border rounded-md cursor-pointer border-primary hover:bg-opacity-90"
+                      className="w-full px-5 py-3 text-base text-white transition border rounded-md cursor-pointer bg-primary-500 border-primary hover:bg-opacity-90"
                     />
                   </div>
                 </form>
@@ -39,7 +46,7 @@ export default function signup() {
                 <ul className="flex justify-between mb-12 -mx-2">
                   <li className="w-full px-2">
                     <a
-                      href="javascript:void(0)"
+                      href="#"
                       className="flex h-11 items-center justify-center rounded-md bg-[#4064AC] hover:bg-opacity-90"
                     >
                       <img src="/images/fb.svg" />
@@ -47,7 +54,7 @@ export default function signup() {
                   </li>
                   <li className="w-full px-2">
                     <a
-                      href="javascript:void(0)"
+                      href="#"
                       className="flex h-11 items-center justify-center rounded-md bg-[#1C9CEA] hover:bg-opacity-90"
                     >
                       <img src="/images/tw.svg" />
@@ -55,7 +62,7 @@ export default function signup() {
                   </li>
                   <li className="w-full px-2">
                     <a
-                      href="javascript:void(0)"
+                      href="#"
                       className="flex h-11 items-center justify-center rounded-md bg-[#D64937] hover:bg-opacity-90"
                     >
                       <img src="/images/tw.svg" />

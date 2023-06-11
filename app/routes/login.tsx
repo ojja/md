@@ -1,78 +1,184 @@
-import { Link } from "react-router-dom";
-import Dots from "~/components/Dots";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
+import LoginForm from "~/components/account/LoginForm";
+import Loader from "~/components/Loader";
+import { API_ENDPOINT } from "~/config";
+
 
 export default function login() {
+  const { t, i18n } = useTranslation();
+  const [isLoading, setIsLoading] = useState(true);
+  const [formData, setFormData] = useState({
+    username: '',
+    password: '',
+    remember: 0,
+  });
+  const [errors, setErrors] = useState({
+    username: '',
+    password: '',
+    general: ''
+  });
+
+  const scrollToFirst = () => {
+    setTimeout(() => {
+      const element = document.querySelector('.border-red-500') as HTMLElement;
+      if (element) {
+        const rect = element.getBoundingClientRect();
+        const offset = window.pageYOffset + rect.top - 100;
+        window.scrollTo({ top: offset, behavior: 'smooth' });
+      } else {
+        const parent = document.querySelector('.login-form') as HTMLElement;
+        if (parent) {
+          const rect = parent.getBoundingClientRect();
+          const offset = window.pageYOffset + rect.top - 100;
+          window.scrollTo({ top: offset, behavior: 'smooth' });
+        } else {
+          const bodyRect = document.body.getBoundingClientRect();
+          const offset = window.pageYOffset + bodyRect.top - 100;
+          window.scrollTo({ top: offset, behavior: 'smooth' });
+        }
+      }
+    }, 500);
+  };
+
+
+  const validateForm = () => {
+    let isValid = true;
+    const newErrors = {
+      username: '',
+      password: '',
+      general: ''
+    };
+
+    if (formData.username.trim() === '') {
+      newErrors.username = i18n.language === 'ar' ? 'يجب ادخال الاسم ' : 'username is required';
+      isValid = false;
+    }
+
+    if (formData.password.trim() === '') {
+      newErrors.password = i18n.language === 'ar' ? 'يجب ادخال كلمه السر' : 'password is required';
+      isValid = false;
+    }
+    setErrors(newErrors);
+    scrollToFirst();
+    console.log('calling validateForm');
+    return isValid;
+  };
+
+  const handleChange = (e: any, inputType: string) => {
+    let value = e.target.value;
+
+    if (inputType === 'checkbox') {
+      value = e.target.checked;
+    }
+
+    setFormData((prevData) => ({
+      ...prevData,
+      [e.target.name]: value,
+    }));
+  };
+
+  const handleSubmit = async (e: any) => {
+    e && e.preventDefault();
+    setIsLoading(true);
+    const apiUrl = `${API_ENDPOINT}/my-account/login.php`;
+    const requestBody = {
+      username: formData.username,
+      password: formData.password,
+      remember: formData.remember
+    };
+
+
+    if (validateForm()) {
+      try {
+        setIsLoading(true);
+        const response = await fetch(apiUrl, {
+          method: 'POST',
+          body: JSON.stringify(requestBody),
+          credentials: 'include'
+        });
+
+        if (response.ok) {
+          const responseData: any = await response.json();
+          console.log('responseData', responseData)
+          console.log('API call successful');
+          if (responseData.status === 'success' && responseData.msg) {
+            if (responseData.msg_code === 'login_error') {
+              setErrors(prevErrors => ({
+                ...prevErrors,
+                general: responseData.msg
+              }));
+            } else if (responseData.msg_code === 'login_success') {
+              console.log('Success Login');
+              checkLoginStatus();
+            } else {
+              setErrors(prevErrors => ({
+                ...prevErrors,
+                general: 'An error occurred.'
+              }));
+            }
+            setIsLoading(false);
+          } else {
+            console.log('API call failed');
+            setIsLoading(false);
+          }
+        } else {
+          console.log('API call failed');
+          setIsLoading(false);
+        }
+      } catch (error) {
+        console.log('An error occurred', error);
+      }
+    } else {
+      console.log('Form is invalid');
+      console.log('formData >> ', formData);
+      setIsLoading(false);
+    }
+  };
+
+  const checkLoginStatus = async () => {
+    try {
+      const response = await fetch('https://cloudhosta.com:68/MitchAPI/my-account/isLogged.php',{
+        credentials: 'include'
+      });
+      if (response.ok) {
+        const responseData = await response.json();
+        // Check the response data to determine if the user is logged in
+        if (responseData.status === 'logged_in') {
+          // User is logged in
+          console.log('User is logged in');
+        } else {
+          // User is not logged in
+          console.log('User is not logged in');
+        }
+      } else {
+        // Handle non-200 status code
+        console.log('Request failed with status:', response.status);
+      }
+    } catch (error) {
+      // Handle network errors or other exceptions
+      console.log('An error occurred:', error);
+    }
+  };
+  useEffect(() => {
+    setTimeout(() => {
+      console.log('EFfext set load')
+      setIsLoading(false);
+      console.log('data', formData)
+    }, 1000);
+  }, []);
   return (
     <div>
-      <section className="bg-[#F4F7FF] py-20 lg:py-[120px]">
+      <section className="p-8 mx-auto bg-gray-200">
         <div className="container mx-auto">
           <div className="flex flex-wrap -mx-4">
-            <div className="w-full px-4">
-              <div
-                className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white py-16 px-10 text-center sm:px-12 md:px-[60px]"
-              >
-                <h1 className="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900">Login</h1>
-                <form>
-                  <div className="mb-6">
-                    <input
-                      type="text"
-                      placeholder="Email"
-                      className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
-                    />
-                  </div>
-                  <div className="mb-6">
-                    <input
-                      type="password"
-                      placeholder="Password"
-                      className="bordder-[#E9EDF4] w-full rounded-md border bg-[#FCFDFE] py-3 px-5 text-base text-body-color placeholder-[#ACB6BE] outline-none focus:border-primary focus-visible:shadow-none"
-                    />
-                  </div>
-                  <div className="mb-10">
-                    <input
-                      type="submit"
-                      value="Sign In"
-                      className="w-full px-5 py-3 text-base text-white transition bg-primary-500 border rounded-md cursor-pointer border-primary hover:bg-opacity-90"
-                    />
-                  </div>
-                </form>
-                <p className="mb-6 text-base text-[#adadad]">Connect With</p>
-                <ul className="flex justify-between mb-12 -mx-2">
-                  <li className="w-full px-2">
-                    <a
-                      href="javascript:void(0)"
-                      className="flex h-11 items-center justify-center rounded-md bg-[#4064AC] hover:bg-opacity-90"
-                    >
-                      <img src="/images/fb.svg" />
-                    </a>
-                  </li>
-                  <li className="w-full px-2">
-                    <a
-                      href="javascript:void(0)"
-                      className="flex h-11 items-center justify-center rounded-md bg-[#1C9CEA] hover:bg-opacity-90"
-                    >
-                      <img src="/images/tw.svg" />
-                    </a>
-                  </li>
-                  <li className="w-full px-2">
-                    <a
-                      href="javascript:void(0)"
-                      className="flex h-11 items-center justify-center rounded-md bg-[#D64937] hover:bg-opacity-90"
-                    >
-                      <img src="/images/tw.svg" />
-                    </a>
-                  </li>
-                </ul>
-                <Link
-                  to="/forgot"
-                  className="mb-2 inline-block text-base text-[#adadad] hover:text-primary hover:underline"
-                >
-                  Forget Password?
-                </Link>
-                <p className="text-base text-[#adadad]">
-                  Not a member yet? <Link to="/signup" className="text-primary hover:underline" > Sign Up </Link>
-                </p>
-                <Dots />
-              </div>
+            <div className="relative w-full px-4">
+              {isLoading ? (
+                <div className="absolute z-20 flex items-start justify-center pt-20 bg-gray-200 bg-opacity-75 -inset-4">
+                  <Loader />
+                </div>
+              ) : ('')}
+              <LoginForm formData={formData} handleChange={handleChange} errors={errors} handleSubmit={handleSubmit} />
             </div>
           </div>
         </div>
