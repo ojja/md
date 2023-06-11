@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { API_ENDPOINT } from '~/config';
 import ThreedsChallengeRedirectComponent from './payments/ThreedsChallengeRedirectComponent';
 
-const PaymentForm = ({ handleChange,handleSubmit }) => {
+const PaymentForm = ({ handleChange, handleSubmit }) => {
   const [response, setResponse] = useState(null);
   const callPay = async (sessionID: any) => {
     const apiUrl = `${API_ENDPOINT}/payment/pay.php`;
@@ -159,6 +159,7 @@ const PaymentForm = ({ handleChange,handleSubmit }) => {
 
   return (
     <div>
+      
       <div>Please enter your payment details:</div>
       <span>5123450000000008</span>
       {/* <ThreedsChallengeRedirectComponent response={response} /> */}

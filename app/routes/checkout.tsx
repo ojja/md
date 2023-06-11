@@ -12,6 +12,7 @@ import PaymentMethod from "~/components/PaymentMethod";
 import Loader from "~/components/Loader";
 import useShoppingCart from "~/stores/cartStore";
 import ThreedsChallengeRedirectComponent from "~/components/payments/ThreedsChallengeRedirectComponent";
+import Popup from "~/components/Popup";
 
 export default function Checkout() {
     const { t, i18n } = useTranslation();
@@ -20,6 +21,7 @@ export default function Checkout() {
     const [stepOne, setStepOne] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
     const [responseCreditCard, setResponseCreditCard] = useState<any>(null);
+    const [isOTP, setIsOTP] = useState(false);
     const items = Object.values(cartItems).map((item) => ({
         itemID: item.id,
         qty: item.quantity,
@@ -262,6 +264,7 @@ export default function Checkout() {
                             window.location.href = thanksURL;
                         }, 2000);
                     } else if (responseData.status === 'success' && responseData.hasOwnProperty('html')) {
+                        setIsOTP(true);
                         setResponseCreditCard(responseData);
                     } else {
                         console.log('API call failed');
@@ -392,7 +395,11 @@ export default function Checkout() {
                                             </div>
                                             :
                                             <div className="step-two">
-                                                <ThreedsChallengeRedirectComponent response={responseCreditCard} />
+                                                {isOTP && (
+                                                    <Popup isOpen={isOTP}>
+                                                        <ThreedsChallengeRedirectComponent response={responseCreditCard} />
+                                                    </Popup>
+                                                )}
                                                 <PaymentMethod formData={formData} handleChange={handleChange} errors={errors} handleSubmit={handleSubmit} />
                                                 <div className="flex items-center pt-3 mt-3 border-t-2">
                                                     <input
