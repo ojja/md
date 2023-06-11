@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import { API_ENDPOINT } from '~/config';
 import ThreedsChallengeRedirectComponent from './payments/ThreedsChallengeRedirectComponent';
 
-const PaymentForm = () => {
+const PaymentForm = ({ handleChange, handleSubmit }) => {
   const [response, setResponse] = useState(null);
   const callPay = async (sessionID: any) => {
     const apiUrl = `${API_ENDPOINT}/payment/pay.php`;
@@ -28,7 +28,6 @@ const PaymentForm = () => {
 
       if (response.ok) {
         const data = await response.json();
-        console.log('API response PAY:', data);
         setResponse(data);
       } else {
         throw new Error('Failed to call PAY API');
@@ -73,7 +72,17 @@ const PaymentForm = () => {
                 if (response.sourceOfFunds.provided.card.scheme === 'MASTERCARD') {
                   console.log("The user entered a Mastercard credit card.");
                 }
-                callPay(response.session.id);
+                // callPay(response.session.id);
+                // Set the response.session.id in formData
+                // handleChange('sessionId', response.session.id);
+                handleChange({
+                  target: {
+                    name: "sessionId",
+                    value: response.session.id,
+                  },
+                });
+                handleSubmit();
+
               } else if ("fields_in_error" === response.status) {
                 console.log("Session update failed with field errors.");
                 if (response.errors.cardNumber) {
@@ -150,9 +159,10 @@ const PaymentForm = () => {
 
   return (
     <div>
+      
       <div>Please enter your payment details:</div>
       <span>5123450000000008</span>
-      <ThreedsChallengeRedirectComponent response={response} />
+      {/* <ThreedsChallengeRedirectComponent response={response} /> */}
       <h3>Credit Card</h3>
       <div>
         Card Number: <input type="text" id="card-number" className="input-field" title="card number" aria-label="enter your card number" value="" tabIndex="1" readOnly />

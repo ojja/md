@@ -97,13 +97,17 @@ export default function ProductSingle() {
         productPrice = product.price;
         salePrice = product.sale_price;
     } else if (product.type === "variable") {
-        productPrice = variation.price;
+        variation = product?.variations?.find((variation: any) =>
+            variation.attributes.attribute_pa_size === selectedSize &&
+            variation.attributes.attribute_pa_color === selectedColor
+        );
+        productPrice = variation?.price ? variation.price : 0;
         // productPrice = 212;
-        salePrice = variation.sale_price;
+        salePrice = variation?.sale_price;
         // salePrice = 200;
-        color = variation.attributes?.attribute_pa_color
-        size = variation.attributes?.attribute_pa_size
-        itemID = variation.id
+        color = variation?.attributes?.attribute_pa_color
+        size = variation?.attributes?.attribute_pa_size
+        itemID = variation?.id
     }
 
 

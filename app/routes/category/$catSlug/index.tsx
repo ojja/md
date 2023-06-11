@@ -74,17 +74,22 @@ export default function CategorySlug() {
   const handleSortOptionChange = (option: any) => {
     setSelectedSortOption(option);
     setIsLoading(true);
-    fetchProducts(false, selectedCategories, option);
+    setPageNumber(1);
+    setIsLoadMoreEnabled(true);
+    setTimeout(() => {
+      console.log('after set', pageNumber)
+      fetchProducts(false, selectedCategories, option, 1);
+    }, 500);
   };
   useEffect(() => {
     setProducts(initialProducts);
-    setIsLoading(false); 
+    setIsLoading(false);
     setIsLoadMoreEnabled(true);
     setPageNumber(1);
     setSelectedCategories([categorySlug]);
   }, [initialProducts]);
 
-  const fetchProducts = async (appendData = false, selectedCategories: any, selectedSortOption: any) => {
+  const fetchProducts = async (appendData = false, selectedCategories: any, selectedSortOption: any, setNumber: number) => {
     const { criteria, arrangement } = selectedSortOption;
     setIsLoading(true);
     try {
@@ -95,7 +100,7 @@ export default function CategorySlug() {
           category: selectedCategories,
           price_range: [minPrice, maxPrice],
           products_per_page: 20,
-          page: pageNumber,
+          page: setNumber ? setNumber : pageNumber,
           sort: {
             criteria,
             arrangement,

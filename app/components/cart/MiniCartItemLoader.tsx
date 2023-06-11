@@ -2,7 +2,7 @@
 export default function MiniCartItemLoader() {
     return (
         <div className="flex items-start justify-between w-full animate-pulse">
-            <div className="flex items-start">
+            <div className="flex items-start w-4/5">
                 <div>
                     <div className="flex items-center justify-center w-24 h-24 mr-5 bg-gray-300 rounded-md">
                         <span className="flex items-center justify-center">
@@ -10,19 +10,19 @@ export default function MiniCartItemLoader() {
                         </span>
                     </div>
                 </div>
-                <div className="flex flex-col">
-                    <div className="w-48 h-3 mb-4 bg-gray-200 rounded-full"></div>
+                <div className="flex flex-col w-full mr-3">
+                    <div className="w-full h-3 mb-4 bg-gray-200 rounded-full"></div>
                     <span className="flex my-1 text-xs font-light text-gray-400 capitalize">
-                        <div className="w-20 h-2 mr-2 bg-gray-200 rounded-full"></div>
-                        <div className="w-20 h-2 bg-gray-200 rounded-full"></div>
+                        <div className="w-1/2 h-2 mr-2 bg-gray-200 rounded-full"></div>
+                        <div className="w-1/2 h-2 bg-gray-200 rounded-full"></div>
                     </span>
                     <span className="flex my-1 text-xs font-light text-gray-400 capitalize">
-                        <div className="w-20 h-2 mr-2 bg-gray-200 rounded-full"></div>
-                        <div className="w-20 h-2 bg-gray-200 rounded-full"></div>
+                        <div className="w-1/2 h-2 mr-2 bg-gray-200 rounded-full"></div>
+                        <div className="w-1/2 h-2 bg-gray-200 rounded-full"></div>
                     </span>
                 </div>
             </div>
-            <div className="flex items-start justify-center ml-auto">
+            <div className="flex items-start justify-center ml-auto w-1/5">
                 <div className="w-20 h-3 mb-4 bg-gray-200 rounded-full" />
             </div>
         </div>

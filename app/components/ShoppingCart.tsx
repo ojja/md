@@ -81,6 +81,10 @@ const ShoppingCart = () => {
                           <div className="mt-8">
                             <div className="flow-root">
                               <ul role="list" className="-my-6 divide-y divide-gray-200">
+
+                                <li className="flex py-6">
+                                  <MiniCartItemLoader />
+                                </li>
                                 {cartItems.map((item) => (
                                   <li key={v4()} className="flex py-6">
 

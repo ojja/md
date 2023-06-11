@@ -3,6 +3,7 @@ import { v4 } from "uuid";
 import useShoppingCart from "~/stores/cartStore";
 import { FormatCurrency } from "~/utils/FormatCurrency";
 import MiniCartItem from "../cart/MiniCartItem";
+import MiniCartItemLoader from '../cart/MiniCartItemLoader';
 
 const CartSummary = ({ thanks, rate }: any) => {
     const { cartItems, totalAPI, totalDiscountAPI, totalPrice } = useShoppingCart();
@@ -18,9 +19,12 @@ const CartSummary = ({ thanks, rate }: any) => {
 
                 <div className="bg-white border border-gray-200 rounded-lg shadow-sm">
                     <h2 className="pt-6 pl-4 text-lg font-medium text-gray-900 sm:pl-6">
-                        Order summary {thanks?`#${thanks}`:''}
+                        Order summary {thanks ? `#${thanks}` : ''}
                     </h2>
                     <ul role="list" className="divide-y divide-gray-200">
+                        <li className="flex px-4 py-6 sm:px-6">
+                            <MiniCartItemLoader />
+                        </li>
                         {cartItems.map((item) => (
                             <li key={item.id} className="flex px-4 py-6 sm:px-6">
                                 <MiniCartItem
