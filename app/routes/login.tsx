@@ -4,10 +4,13 @@ import LoginForm from "~/components/account/LoginForm";
 import Loader from "~/components/Loader";
 import { API_ENDPOINT } from "~/config";
 import { checkLoginStatus } from "~/utils/authUtils";
+import { useNavigate } from 'remix';
 
 
 export default function login() {
   const { t, i18n } = useTranslation();
+  const navigate = useNavigate();
+
   const [isLoading, setIsLoading] = useState(true);
   const [formData, setFormData] = useState({
     username: '',
@@ -112,6 +115,7 @@ export default function login() {
             } else if (responseData.msg_code === 'login_success') {
               console.log('Success Login');
               checkLoginStatus();
+              navigate('/dashboard');
             } else {
               setErrors(prevErrors => ({
                 ...prevErrors,
