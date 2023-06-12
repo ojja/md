@@ -74,7 +74,7 @@ export default function App() {
         <script type="text/javascript" src="https://js.createsend1.com/javascript/copypastesubscribeformlogic.js"></script>
 
       </head>
-      <body className={`box-border oultine-none ${i18n.language === "ar" ? 'font-sans-ar' : 'font-sans-en'}`} >
+      <body className={`box-border oultine-none ${i18n.language === "ar" ? 'font-sans-ar rtl' : 'font-sans-en ltr'}`} >
         <NavBar
         />
         <main className="relative z-10">

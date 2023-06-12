@@ -65,7 +65,7 @@ export default function Frequently() {
 
                     </div>
                     {areItemsSelected ? (
-                        <button className="items-center flex justify-between px-5  py-2.5  text-xl font-semibold capitalize border-2 border-solid rounded-100 w-[290px] whitespace-nowrap border-gray-400 focus:outline-none">
+                        <button className="items-center flex justify-between px-5  py-2.5 text-sm font-semibold capitalize border-2 border-solid rounded-100 w-[260px] whitespace-nowrap border-gray-400 focus:outline-none">
                             Add Selected to Cart
                             <PlusIcon className=" w-4 h-4 text-green-500" aria-hidden="true" />
 

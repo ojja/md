@@ -30,6 +30,7 @@ import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import TabsNew from "~/components/product/TabsNew";
 import Branches from "~/components/product/branch";
+import Gallery2 from "~/components/Gallery_new";
 
 
 interface Feature {
@@ -191,6 +192,7 @@ export default function ProductSingle() {
                             </div>
                             <div className="w-full  md:pr-16  mb-16 lg:w-1/2 lg:mb-0">
                                 <Gallery galleryImages={product.images} />
+                                {/* <Gallery2 galleryImages={product.images} /> */}
                                 <Frequently />
                             </div>
                             <div className="relative w-full px-9 lg:w-1/2 bg-white shadow-lg rounded-3xl " style={{ boxShadow: '0px 20px 66px rgba(0, 0, 0, 0.2)' }}>
@@ -207,6 +209,7 @@ export default function ProductSingle() {
                                         )}
                                     </span>
                                 </button>
+                                
                                 <div className=" pt-9 mb-6">
                                     <span className="hidden h-full min-h-full bg-orange-500 bg-purple-500 bg-pink-500 bg-center bg-cover bg-of-white-500 bg-olive-500 bg-golden-500 bg-navy-500 sm:bg-center"></span>
                                     <span className="text-xs tracking-wider text-gray-50">{product.sku}</span>
@@ -222,6 +225,23 @@ export default function ProductSingle() {
                                     <h3 id="information-heading" className="sr-only ">
                                         Product information
                                     </h3>
+                                    {/* {product.attributes?.pa_color ? (
+                                        <SelectColor
+                                            colors={product.attributes?.pa_color || []}
+                                            selectedColor={selectedColor}
+                                            onSelectedColorChange={setSelectedColor}
+
+                                        />
+                                    ) : ('')} */}
+
+                                    {/* Sizes */}
+                                    {product.attributes?.pa_size ? (
+                                        <SelectSize
+                                            sizes={product.attributes?.pa_size || []}
+                                            selectedSize={selectedSize}
+                                            onSelectedSizeChange={setSelectedSize}
+                                        />
+                                    ) : ('')}
                                     {salePrice && salePrice !== productPrice ? (
                                         <p className="flex items-end  gap-x-3">
                                             <span className=" w-fit bg-yellow-910 rounded h-[26px] flex rtl:flex-row-reverse gap-x-[2px] px-1 mt-5 text-5xl">{FormatCurrency(salePrice, getSelectedCurrency(), ["text-xl font-normal", " text-5xl font-semibold ltr:-ml-0.5 rtl:-mr-0.5", "text-xl font-normal"])}</span>
@@ -236,23 +256,6 @@ export default function ProductSingle() {
 
                                 <div className="mt-10">
 
-                                    {product.attributes?.pa_color ? (
-                                        <SelectColor
-                                            colors={product.attributes?.pa_color || []}
-                                            selectedColor={selectedColor}
-                                            onSelectedColorChange={setSelectedColor}
-
-                                        />
-                                    ) : ('')}
-
-                                    {/* Sizes */}
-                                    {product.attributes?.pa_size ? (
-                                        <SelectSize
-                                            sizes={product.attributes?.pa_size || []}
-                                            selectedSize={selectedSize}
-                                            onSelectedSizeChange={setSelectedSize}
-                                        />
-                                    ) : ('')}
                                     {/* <span className="pt-3 text-xs">{`${selectedSize} - ${selectedColor} - ID ${itemID}`}</span> */}
                                     {/* <span className="block text-xs tracking-wider text-gray-400">{product.availability}</span> */}
                                     <div className=" mt-10 ">
