@@ -3,8 +3,8 @@ import { useTranslation } from "react-i18next";
 import LoginForm from "~/components/account/LoginForm";
 import Loader from "~/components/Loader";
 import { API_ENDPOINT } from "~/config";
-import { checkLoginStatus } from "~/utils/authUtils";
-import { useNavigate } from 'remix';
+import { useNavigate } from "@remix-run/react";
+import Cookies from "js-cookie";
 
 
 export default function login() {
@@ -15,7 +15,7 @@ export default function login() {
   const [formData, setFormData] = useState({
     username: '',
     password: '',
-    remember: 0,
+    remember: 1,
   });
   const [errors, setErrors] = useState({
     username: '',
@@ -82,6 +82,15 @@ export default function login() {
     }));
   };
 
+
+  const handleLoginSuccess = (user_id) => {
+    // Store user ID in a cookie
+    Cookies.set('user_id', user_id);
+
+    // Redirect to the dashboard or any other authorized page
+    navigate('/my-account');
+  };
+
   const handleSubmit = async (e: any) => {
     e && e.preventDefault();
     setIsLoading(true);
@@ -103,6 +112,10 @@ export default function login() {
         });
 
         if (response.ok) {
+          // Access cookies from the response headers
+          const setCookieHeader = response.headers.get('set-cookie');
+          console.log('set-cookie:', setCookieHeader);
+          
           const responseData: any = await response.json();
           console.log('responseData', responseData)
           console.log('API call successful');
@@ -113,9 +126,8 @@ export default function login() {
                 general: responseData.msg
               }));
             } else if (responseData.msg_code === 'login_success') {
-              console.log('Success Login //');
-              checkLoginStatus();
-              navigate('/dashboard');
+              console.log('Success Login');
+              handleLoginSuccess(responseData.user_id);
             } else {
               setErrors(prevErrors => ({
                 ...prevErrors,
@@ -141,16 +153,24 @@ export default function login() {
     }
   };
 
-  // Call checkLoginStatus when the page loads to check the initial login status
-  checkLoginStatus();
-
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     console.log('EFfext set load')
+  //     setIsLoading(false);
+  //     console.log('data', formData)
+  //   }, 1000);
+  // }, []);
   useEffect(() => {
-    setTimeout(() => {
-      console.log('EFfext set load')
-      setIsLoading(false);
-      console.log('data', formData)
-    }, 1000);
+    setIsLoading(false);
+    // Check if the user is already logged in based on the cookie
+    const user_id = Cookies.get('user_id');
+    if (user_id) {
+      // Redirect to the dashboard or any other authorized page
+      navigate('/my-account');
+      return;
+    }
   }, []);
+  
   return (
     <div>
       <section className="p-8 mx-auto bg-gray-200">

@@ -56,6 +56,8 @@
     "branch": "Branch",
     "my_account": "My Account",
     "submit": "Submit",
+    "forgot_btn": "Send Email to Reset",
+    "view_details": "View Details",
     "sign_in": "Sign In"
   },
   "cities": {

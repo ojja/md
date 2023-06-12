@@ -1,10 +1,77 @@
+import { useNavigate } from "@remix-run/react";
 import { Dialog, Transition } from "@headlessui/react";
-import { Fragment, useState } from "react";
+import { Fragment, useEffect, useState } from "react";
 import { RiCheckboxBlankCircleLine, RiRadioButtonLine } from "react-icons/ri";
 import { MetaFunction } from "remix";
 import Button from "~/components/Button";
+import Cookies from "js-cookie";
+import { fetchUserInfo, updateProfile } from "~/utils/account";
+import Msg from "~/components/Msg";
+import SelectInput from "~/components/SelectInput";
 
 export default function profile() {
+  const [userId, setUserId] = useState('');
+  const [message, setMessage] = useState('');
+  const [userInfo, setUserInfo] = useState({
+    first_name: '',
+    last_name: '',
+    email: '',
+    phone: '',
+    birth_day: '',
+    birth_month: '',
+    birth_year: '',
+    gender: '',
+    avatar_url: '',
+  });
+  const navigate = useNavigate();
+
+  useEffect(() => {
+    // setIsLoading(false);
+    // Check if the user is already logged in based on the cookie
+    const user_id = Cookies.get('user_id');
+    if (!user_id) {
+      // Redirect to the dashboard or any other authorized page
+      navigate('/login');
+      return;
+    }
+    setUserId(user_id);
+    const getUserInfo = async () => {
+      const userInfo = await fetchUserInfo(Number(user_id));
+      if (userInfo) {
+        setUserInfo(userInfo);
+      } else {
+        // Handle the case when fetching user information fails
+        // You can display an error message or redirect the user
+      }
+    };
+
+    getUserInfo();
+  }, []);
+
+  const handleSubmit = async (e: any) => {
+    e && e.preventDefault();
+    try {
+      const updatedUserInfo = await updateProfile(userInfo, userId);
+      console.log('before IF')
+      console.log('before msg', message)
+      setMessage('Profile updated successfully');
+      window.scrollTo({
+        top: 0,
+        behavior: 'smooth',
+      });
+      if (updatedUserInfo) {
+        setUserInfo(updatedUserInfo);
+      } else {
+        // Handle the case when updatedUserInfo is undefined
+        // You can display an error message or handle it as appropriate
+      }
+    } catch (error) {
+      // Handle the case when updating user information fails
+      // You can display an error message or redirect the user
+    }
+  };
+
+
   let [isOpenPassword, setIsOpenPassword] = useState(false)
 
   function closePassword() {
@@ -28,101 +95,145 @@ export default function profile() {
   };
   return (
     <div>
+      {message && <Msg color="green" message={message} />}
       <div className="flex items-center justify-between py-5 pb-5 border-b-2 border-gray-200 border-solid">
         <h1 className="text-3xl">Account Info.</h1>
       </div>
-      <div className="grid grid-cols-2 gap-4 py-4 pb-5 border-b-2 border-gray-200 border-solid lg:max-w-xl">
-        <div>
-          <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> First name </label>
-          <div className="mt-1">
-            <input type="text" placeholder="" className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" name="first_name" />
-          </div>
-        </div>
 
-        <div>
-          <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> Last name </label>
-          <div className="mt-1">
-            <input type="text" placeholder="" className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
-          </div>
-        </div>
+      <form onSubmit={handleSubmit}>
+        <div className="grid grid-cols-2 gap-4 py-4 pb-5 border-b-2 border-gray-200 border-solid lg:max-w-xl">
+          <div>
+            <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> First name </label>
+            <div className="mt-1">
+              <input
+                type="text"
+                placeholder=""
+                className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                name="first_name"
+                value={userInfo.first_name}
+                onChange={(e) => setUserInfo({ ...userInfo, first_name: e.target.value })}
 
-        <div className="col-span-2">
-          <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> Email Address </label>
-          <div className="mt-1">
-            <input type="email" className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
+              />
+            </div>
           </div>
-        </div>
 
-        <div className="col-span-2">
-          <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> Phone number </label>
-          <div className="mt-1">
-            <input type="text" placeholder="" className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6" />
+          <div>
+            <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> Last name </label>
+            <div className="mt-1">
+              <input
+                type="text"
+                placeholder=""
+                className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                name="last_name"
+                value={userInfo.last_name}
+                onChange={(e) => setUserInfo({ ...userInfo, last_name: e.target.value })}
+              />
+            </div>
           </div>
-        </div>
 
-        <div className="col-span-2">
-          <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> Birth Date </label>
-          <div className="mt-1 space-x-3">
-            <select className="inline-block rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">
-              <option>Day</option>
-              <option>01</option>
-              <option>02</option>
-              <option>03</option>
-              <option>04</option>
-              <option>05</option>
-            </select>
-            <select className="inline-block rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">
-              <option>Month</option>
-              <option>01</option>
-              <option>02</option>
-              <option>03</option>
-              <option>04</option>
-            </select>
-            <select className="inline-block rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6">
-              <option>Year</option>
-              <option>01</option>
-              <option>02</option>
-              <option>03</option>
-              <option>04</option>
-            </select>
+          <div className="col-span-2">
+            <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> Email Address </label>
+            <div className="mt-1">
+              <input
+                type="email"
+                className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                name="email"
+                value={userInfo.email}
+                onChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
+                readOnly
+              />
+            </div>
           </div>
-        </div>
 
-        <div className="col-span-2">
-          <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize">Gender</label>
-          <div className="mt-1 space-x-4">
-            <label htmlFor="Male" className='inline-block text-lg text-gray-900 cursor-pointer'>
-              <div className='relative flex items-center py-1 pl-3'>
-                <input type="radio" name="payment_method" id="Male" className='hidden peer' checked />
-                <div className='invisible peer-checked:visible absolute left-0 top-1 mt-0.5'>
-                  <RiRadioButtonLine className='peer-checked:bg-gray-700' />
+          <div className="col-span-2">
+            <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> Phone number </label>
+            <div className="mt-1">
+              <input
+                type="text"
+                placeholder=""
+                className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                name="phone"
+                value={userInfo.phone}
+                onChange={(e) => setUserInfo({ ...userInfo, phone: e.target.value })}
+              />
+            </div>
+          </div>
+
+          <div className="col-span-2">
+            <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> Birth Date </label>
+            <div className="mt-1 space-x-3">
+              <SelectInput
+                value={userInfo.birth_day}
+                options={['Day', ...Array.from({ length: 31 }, (_, index) => (index + 1).toString().padStart(2, '0'))]}
+                onChange={(value) => setUserInfo({ ...userInfo, birth_day: value })}
+              />
+
+              <SelectInput
+                value={userInfo.birth_month}
+                options={['Month', ...Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0'))]}
+                onChange={(value) => setUserInfo({ ...userInfo, birth_month: value })}
+              />
+              <SelectInput
+                value={userInfo.birth_year}
+                options={['Year', ...Array.from({ length: 74 }, (_, i) => String(2023 - i))]}
+                onChange={(value) => setUserInfo({ ...userInfo, birth_year: value })}
+              />
+            </div>
+          </div>
+
+          <div className="col-span-2">
+            <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize">Gender</label>
+            <div className="mt-1 space-x-4">
+              <label htmlFor="Male" className='inline-block text-lg text-gray-900 cursor-pointer'>
+                <div className='relative flex items-center py-1 pl-3'>
+                  <input
+                    type="radio"
+                    name="gender"
+                    id="Male"
+                    className='hidden peer'
+                    checked={userInfo.gender === 'M'}
+                    onChange={() => setUserInfo({ ...userInfo, gender: 'M' })}
+                  />
+                  <div className='invisible peer-checked:visible absolute left-0 top-1 mt-0.5'>
+                    <RiRadioButtonLine className='peer-checked:bg-gray-700' />
+                  </div>
+                  <div className='visible peer-checked:invisible absolute left-0 top-1 mt-0.5'>
+                    <RiCheckboxBlankCircleLine className='peer-checked:bg-gray-700' />
+                  </div>
+                  <span className='ml-2 text-base font-medium'>Male</span>
                 </div>
-                <div className='visible peer-checked:invisible absolute left-0 top-1 mt-0.5'>
-                  <RiCheckboxBlankCircleLine className='peer-checked:bg-gray-700' />
+              </label>
+              <label htmlFor="Female" className='inline-block text-lg text-gray-900 cursor-pointer'>
+                <div className='relative flex items-center py-1 pl-3'>
+                  <input
+                    type="radio"
+                    name="gender"
+                    id="Female"
+                    className='hidden peer'
+                    checked={userInfo.gender === 'F'}
+                    onChange={() => setUserInfo({ ...userInfo, gender: 'F' })}
+                  />
+                  <div className='invisible peer-checked:visible absolute left-0 top-1 mt-0.5'>
+                    <RiRadioButtonLine className='peer-checked:bg-gray-700' />
+                  </div>
+                  <div className='visible peer-checked:invisible absolute left-0 top-1 mt-0.5'>
+                    <RiCheckboxBlankCircleLine className='peer-checked:bg-gray-700' />
+                  </div>
+                  <span className='ml-2 text-base font-medium'>Female</span>
                 </div>
-                <span className='ml-2 text-base font-medium'>Male</span>
-              </div>
-            </label>
-            <label htmlFor="Female" className='inline-block text-lg text-gray-900 cursor-pointer'>
-              <div className='relative flex items-center py-1 pl-3'>
-                <input type="radio" name="payment_method" id="Female" className='hidden peer' />
-                <div className='invisible peer-checked:visible absolute left-0 top-1 mt-0.5'>
-                  <RiRadioButtonLine className='peer-checked:bg-gray-700' />
-                </div>
-                <div className='visible peer-checked:invisible absolute left-0 top-1 mt-0.5'>
-                  <RiCheckboxBlankCircleLine className='peer-checked:bg-gray-700' />
-                </div>
-                <span className='ml-2 text-base font-medium'>Female</span>
-              </div>
-            </label>
+              </label>
+            </div>
           </div>
-        </div>
 
-        <Button
-          name="Save Changes"
-        />
-      </div>
+
+          <Button
+            name="Save Changes"
+            type="submit"
+          />
+        </div>
+      </form>
       <button className="mt-3 font-semibold underline" onClick={openPassword}>Change Password</button>
+
       <Transition appear show={isOpenPassword} as={Fragment}>
         <Dialog as="div" className="relative z-30" onClose={closePassword}>
           <Transition.Child
