@@ -39,7 +39,7 @@ const CURRENCY_FORMATTER2 = new Intl.NumberFormat(undefined, {
 
 // export default FormatCurrency;
 
-const FormatCurrency = (number, currencySymbol = [], tailwindClasses = []) => {
+const FormatCurrency = (number, currencySymbol = "", tailwindClasses = ["", "", ""]) => {
   const parsedNumber = parseFloat(number);
 
   const formattedCurrency = CURRENCY_FORMATTER.format(parsedNumber);
@@ -54,9 +54,10 @@ const FormatCurrency = (number, currencySymbol = [], tailwindClasses = []) => {
   );
 };
 
+
 export default FormatCurrency;
 
-export const FormatCurrency2 = (number: string | number) => {
+export const FormatCurrency2 = (number) => {
   const parsedNumber = parseFloat(number);
   return CURRENCY_FORMATTER2.format(parsedNumber);  
 };

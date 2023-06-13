@@ -1,19 +1,17 @@
 import React, { useState, useEffect } from 'react';
 import { useInView } from 'react-intersection-observer';
-import { getExtraProducts } from '~/api/extraProducts';
 import ProductLoader from './product/ProductLoader';
 import { ProductWidget } from './product/ProductWidget';
 import Slider from 'react-slick';
 import i18n from 'i18next';
-
 import "slick-carousel/slick/slick.css";
 import "slick-carousel/slick/slick-theme.css";
+import { getUpSellingProducts } from '~/api/upselling';
 
 interface Props {
-    categorySlug: string;
+    productID: number;
     title: string;
-    count: number;
-}
+  }
 
 interface Product {
     id: number;
@@ -24,8 +22,8 @@ interface Product {
 
 const PRODUCT_LOADERS_COUNT = 5;
 
-export default function ExtraProducts({ categorySlug, count, title }: Props) {
-    const [extraProducts, setExtraProducts] = useState<Product[]>([]);
+export default function upSellingProducts({ productID, title }: Props) {
+    const [upSellingProducts, setupSellingProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [ref, inView] = useInView({
         triggerOnce: true,
@@ -36,18 +34,21 @@ export default function ExtraProducts({ categorySlug, count, title }: Props) {
             const fetchData = async () => {
                 setLoading(true);
                 try {
-                    const products = await getExtraProducts(categorySlug, count);
-                    setExtraProducts((prevProducts) => [...prevProducts, ...products]);
+                    const products = await getUpSellingProducts(productID);
+                    console.log('here',products)
+                    if (Array.isArray(products)) { // Add this check
+
+                    setupSellingProducts((prevProducts) => [...prevProducts, ...products]);
+                    }
                 } catch (error) {
                     console.error('Error fetching extra products:', error);
                 } finally {
                     setLoading(false);
                 }
             };
-
             fetchData();
         }
-    }, [categorySlug, count, inView]);
+    }, [productID, inView]);
 
 
     const CustomPrevArrow = (props: any) => {
@@ -125,7 +126,7 @@ export default function ExtraProducts({ categorySlug, count, title }: Props) {
                     </div>
                 ) : (
                     <Slider {...sliderSettings} className=''>
-                    {extraProducts.map((productData: any) => (
+                    {upSellingProducts.map((productData: any) => (
                       <div key={productData.id} className='px-3'>
                         <ProductWidget product={productData} key={undefined} isItemInWishlist={false} />
                       </div>

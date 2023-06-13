@@ -2,26 +2,71 @@ import React, { useEffect } from 'react';
 import i18next from "i18next";
 import { useTranslation } from 'react-i18next';
 const CampaignMonitorForm = () => {
+  // useEffect(() => {
+  //   // Load Campaign Monitor scripts
+  //   const webfontScript = document.createElement('div');
+  //   webfontScript.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
+  //   webfontScript.async = true;
+
+  //   const formLogicScript = document.createElement('div');
+  //   formLogicScript.src = 'https://js.createsend1.com/javascript/copypastesubscribeformlogic.js';
+  //   formLogicScript.async = true;
+
+  //   document.body.appendChild(webfontScript);
+  //   document.body.appendChild(formLogicScript);
+
+  //   // Clean up function
+  //   return () => {
+  //     // Remove Campaign Monitor scripts
+  //     document.body.removeChild(webfontScript);
+  //     document.body.removeChild(formLogicScript);
+  //   };
+  // }, []);
+  // useEffect(() => {
+  //   // Load Campaign Monitor scripts
+  //   const scriptContainer = document.createElement('div');
+  //   scriptContainer.id = 'script-container';
+  
+  //   const webfontScript = document.createElement('script');
+  //   webfontScript.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
+  //   webfontScript.async = true;
+  
+  //   const formLogicScript = document.createElement('script');
+  //   formLogicScript.src = 'https://js.createsend1.com/javascript/copypastesubscribeformlogic.js';
+  //   formLogicScript.async = true;
+  
+  //   scriptContainer.appendChild(webfontScript);
+  //   scriptContainer.appendChild(formLogicScript);
+  //   document.body.appendChild(scriptContainer);
+  
+  //   // Clean up function
+  //   return () => {
+  //     // Remove the script container
+  //     document.body.removeChild(scriptContainer);
+  //   };
+  // }, []);
   useEffect(() => {
     // Load Campaign Monitor scripts
     const webfontScript = document.createElement('script');
     webfontScript.src = 'https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js';
     webfontScript.async = true;
-
+  
     const formLogicScript = document.createElement('script');
     formLogicScript.src = 'https://js.createsend1.com/javascript/copypastesubscribeformlogic.js';
     formLogicScript.async = true;
-
+  
     document.body.appendChild(webfontScript);
     document.body.appendChild(formLogicScript);
-
+  
     // Clean up function
     return () => {
       // Remove Campaign Monitor scripts
-      document.body.removeChild(webfontScript);
-      document.body.removeChild(formLogicScript);
+      webfontScript.parentElement.removeChild(webfontScript);
+      formLogicScript.parentElement.removeChild(formLogicScript);
     };
   }, []);
+  
+  
   const { t } = useTranslation();
 
   return (

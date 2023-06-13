@@ -256,7 +256,7 @@ select {
 }
 
 [dir="rtl"] select {
-  background-position: left .5rem center;
+  background-position: left 0.5rem center;
   /* Style for RTL direction */
 }
 
@@ -399,7 +399,6 @@ select {
 }
 
 @keyframes shake {
-
   10%,
   90% {
     transform: translate3d(-1px, 0, 0);
@@ -422,7 +421,21 @@ select {
   }
 }
 
-
 body.rtl .gallery .slick-track {
   float: right;
+}
+
+/* slick style */
+.product-list .slick-slider .slick-arrow {
+  z-index: 1111;
+}
+
+.product-list .slick-slider .slick-arrow.slick-prev {
+  right: 12px !important;
+}
+.product-list .slick-slider .slick-arrow.slick-next {
+  left:-12px !important;
+}
+.product-list .slick-slider .slick-arrow::before {
+  display: none;
 }

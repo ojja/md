@@ -30,7 +30,7 @@ import { useTranslation } from "react-i18next";
 import i18next from "i18next";
 import TabsNew from "~/components/product/TabsNew";
 import Branches from "~/components/product/branch";
-import Gallery2 from "~/components/Gallery_new";
+import UpSellingProducts from "~/components/UpSellingProducts";
 
 
 interface Feature {
@@ -349,13 +349,15 @@ export default function ProductSingle() {
 
                 <Tabs product={{ description: product.description }} />
 
-                <ExtraProducts categorySlug="skirt" count={5} title="Same Category" />
-                <RecentlyViewedProducts />
+                <ExtraProducts categorySlug={product.category_slug} count={5} title="منتجات مشابهة" />
+                
+                <UpSellingProducts productID={product.id} title="تسوق اكتر من أبو عوف " />
+                {/* <RecentlyViewedProducts /> */}
 
-                <ProductSpecifications
+                {/* <ProductSpecifications
                     // @ts-ignore
                     features={features}
-                />
+                /> */}
             </section>
         </div>
     )
