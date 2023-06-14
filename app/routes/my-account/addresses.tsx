@@ -1,8 +1,14 @@
 import { Dialog, Menu, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import { MetaFunction } from "remix";
 import SingleAddress from "~/components/SingleAddress";
 import { RiRadioButtonLine, RiCheckboxBlankCircleLine } from "react-icons/ri";
+import { Site_Title } from "~/config";
+
+export const meta = () => {
+  return {
+    title: `My Addresses - My Account | ${Site_Title}`
+  }
+}
 
 
 export default function addresses() {
@@ -160,11 +166,4 @@ export default function addresses() {
       </Transition>
     </div>
   )
-}
-
-
-export const meta: MetaFunction = () => {
-  return {
-    title: 'My Addresses - My Account | Sitename'
-  }
 }

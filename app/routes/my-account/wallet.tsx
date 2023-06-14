@@ -1,7 +1,14 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import { MetaFunction } from "remix";
+import { Site_Title } from "~/config";
 import { FormatCurrency } from "~/utils/FormatCurrency";
+
+
+export const meta = () => {
+  return {
+      title: `My Wallet | ${Site_Title}`
+  }
+}
 
 export default function wallet() {
   let [isOpenAddPoints, setIsOpenAddPoints] = useState(false)
@@ -179,11 +186,4 @@ export default function wallet() {
       </div>
     </div>
   )
-}
-
-
-export const meta: MetaFunction = () => {
-  return {
-    title: 'My Wallet - Account | Sitename'
-  }
 }

@@ -108,12 +108,14 @@ const PaymentForm = ({ handleChange, handleSubmit }) => {
             }
           },
           authenticationSuccessful: function (response) {
+            debugger;
             // Handle successful authentication
             console.log("3-D Secure authentication successful.");
             // Perform additional actions or submit the form
             // For example: document.querySelector("#paymentForm").submit();
           },
           authenticationFailed: function (response) {
+            debugger;
             // Handle failed authentication
             console.log("3-D Secure authentication failed.");
           }
@@ -159,7 +161,68 @@ const PaymentForm = ({ handleChange, handleSubmit }) => {
 
   return (
     <div>
-      
+      {/* <div className="grid grid-cols-2 gap-4">
+        <div className="col-span-2 ok">
+          <label htmlFor="card-number" className="block text-sm font-medium leading-6 text-gray-900"> Card number </label>
+          <div className="mt-1">
+            <input
+              type="text"
+              id="card-number"
+              placeholder="XXXX XXXX XXXX XXXX"
+              className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+              value=""
+              tabIndex="1"
+              readOnly
+            />
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="" className="block text-sm font-medium leading-6 text-gray-900"> Expiry date </label>
+          <div className="mt-1">
+            <div>
+              <input
+                type="text"
+                name=""
+                id="expiry-month"
+                placeholder="MM"
+                className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                value=""
+                tabIndex="2"
+                readOnly
+              />
+            </div>
+            <div>
+              <input
+                type="text"
+                name=""
+                id="expiry-year"
+                placeholder="YY"
+                className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+                value=""
+                tabIndex="3"
+                readOnly
+              />
+            </div>
+          </div>
+        </div>
+
+        <div>
+          <label htmlFor="" className="block text-sm font-medium leading-6 text-gray-900"> CSV </label>
+          <div className="mt-1">
+            <input
+              type="text"
+              name=""
+              id=""
+              placeholder="XXX"
+              className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
+              value=""
+              tabIndex="4"
+              readOnly
+            />
+          </div>
+        </div>
+      </div> */}
       <div>Please enter your payment details:</div>
       <span>5123450000000008</span>
       {/* <ThreedsChallengeRedirectComponent response={response} /> */}

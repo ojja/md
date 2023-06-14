@@ -14,6 +14,7 @@ import { useTranslation } from 'react-i18next';
 import NoInternetConnection from '~/components/NoInternetConnection';
 import { useStickyBox } from "react-sticky-box";
 import StickyDiv from '~/components/StickyDiv';
+import Cookies from "js-cookie";
 
 
 const navigation = {
@@ -142,11 +143,11 @@ function classNames(...classes: string[]) {
 }
 export default function NavBar({ }) {
   const [open, setOpen] = useState(false);
-  const { cartQuantityTotal, openCart, refreshCart } = useShoppingCart();
+  const { cartQuantityTotal, openCart } = useShoppingCart();
 
   const location = useLocation();
   const isCheckoutPage = location.pathname === "/checkout-step1" || location.pathname === "/checkout-step2" || location.pathname === "/checkout";
-  const isLocalhost = false;
+  const user_id = Cookies.get('user_id');
 
 
   const { t } = useTranslation();
@@ -449,18 +450,20 @@ export default function NavBar({ }) {
                   )}
                   <div className="flex items-center ml-auto">
                     <div className="hidden lg:flex lg:flex-1 lg:items-center lg:justify-end lg:space-x-6">
-                      {isLocalhost && (
-                        <span className="text-sm font-medium text-gray-700 hover:text-gray-800" onClick={refreshCart}>
-                          refreshCart
-                        </span>
-                      )}
-                      <Link to="/login" className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                        Login
-                      </Link>
+                      {user_id ?
+                        <Link to="/my-account" className="text-sm font-medium text-gray-700 hover:text-gray-800">
+                          {t('common.my_account')}
+                        </Link>
+                        :
+                        <Link to="/login" className="text-sm font-medium text-gray-700 hover:text-gray-800">
+                          {t('common.login')}
+                        </Link>
+                      }
                       <span className="w-px h-6 bg-gray-200" aria-hidden="true" />
-                      <Link to="/my-account" className="text-sm font-medium text-gray-700 hover:text-gray-800">
-                        {t('common.my_account')}
-                      </Link>
+                      {/* Change Country */}
+                      {isCheckoutPage ? null : (
+                        <ChangeCountry />
+                      )}
                     </div>
 
                     {/* Change language */}
@@ -530,12 +533,6 @@ export default function NavBar({ }) {
                       </div>
                     )}
 
-                    {/* Change Country */}
-                    {isCheckoutPage ? null : (
-                      <div className="hidden lg:ml-8 lg:flex">
-                        <ChangeCountry />
-                      </div>
-                    )}
 
                     {/* Search */}
                     {isCheckoutPage ? null : (

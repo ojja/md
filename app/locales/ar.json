@@ -48,11 +48,18 @@
     "quick_view": "نظرة سريعه",
     "new_arrivals": "وصل حديثًا",
     "in": "في",
-    "login": "",
+    "login": "تسجيل الدخول",
+    "password": "كلمه السر",
+    "login_label": "اسم المستخدم / البريد الإلكتروني",
+    "login_label_placeholder": "example@example.com / اسم المستخدم",
     "next_step": "الخطوة التالية (اتمام الدفع)",
     "branch": "فرع",
     "my_account": "حسابي",
-    "submit": "إرسال"
+    "submit": "إرسال",
+    "forgot_btn": "إرسال بريد إلكتروني لإعادة التعيين",
+    "view_details": "عرض التفاصيل",
+    "remember_me": "تذكرني",
+    "sign_in": "تسجيل الدخول"
   },
   "cities": {
     "cairo": "القاهرة",
@@ -61,5 +68,13 @@
     "sharm_el_sheikh": "شرم الشيخ",
     "luxor": "الأقصر",
     "aswan": "أسوان"
+  },
+  "fields": {
+    "username_required": "يجب إدخال اسم المستخدم",
+    "first_name_required": "يجب إدخال الاسم الأول",
+    "last_name_required": "يجب إدخال اسم العائلة",
+    "password_required": "يجب إدخال كلمة المرور",
+    "password_length": "يجب أن تكون كلمة المرور على الأقل 5 أحرف",
+    "password_pattern": "يجب أن تحتوي كلمة المرور على حرف كبير وحرف صغير ورقم"
   }
 }

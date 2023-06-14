@@ -41,6 +41,7 @@ const calculateTotalPrice = (cartItems: CartItem[]) => {
 };
 
 export const getCart = () => {
+  console.log("called getCart 1");
   return new Promise((resolve, reject) => {
     const apiUrl = `${API_ENDPOINT}/cart/get.php`;
     fetch(apiUrl, {
@@ -49,10 +50,14 @@ export const getCart = () => {
         "Content-Type": "application/json",
         Connection: "keep-alive",
       },
-      credentials: "include",
+      // credentials: "include",
+      // credentials: 'same-origin',
+      // credentials: "omit",
+      // mode: "no-cors",
     })
       .then((response) => {
         if (response.ok) {
+          console.log("response get CART", response);
           return response.json();
         } else {
           throw new Error("Failed to update quantity in cart");
@@ -78,10 +83,10 @@ const callAddToCart = (product: CartItem) => {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Connection: "keep-alive",
+      // Connection: "keep-alive",
     },
-    credentials: "include",
-    // credentials: 'same-origin',
+    // credentials: "include",
+    credentials: "same-origin",
     method: "POST",
     // mode: 'no-cors',
     body: JSON.stringify(requestData),
@@ -89,7 +94,8 @@ const callAddToCart = (product: CartItem) => {
     .then((response) => {
       if (response.ok) {
         // debugger;
-        console.log("called Add API success");
+        console.log("called Add API success new");
+        getCart();
 
         return response.json();
       } else {
@@ -117,8 +123,8 @@ const callRemoveItemCart = (itemId: number) => {
       Accept: "application/json",
       Connection: "keep-alive",
     },
-    credentials: "include",
-    // credentials: 'same-origin',
+    // credentials: "include",
+    credentials: "same-origin",
     method: "POST",
     // mode: 'no-cors',
     body: JSON.stringify(requestData),
@@ -152,9 +158,9 @@ const setQty = (product: CartItem, qty: any) => {
     headers: {
       "Content-Type": "application/json",
       Accept: "application/json",
-      Connection: "keep-alive",
+      // Connection: "keep-alive",
     },
-    credentials: "include",
+    // credentials: "include",
     method: "POST",
     body: JSON.stringify(requestData),
   })
@@ -188,7 +194,7 @@ const addCouponAPI = (couponCode: any) => {
         Accept: "application/json",
         Connection: "keep-alive",
       },
-      credentials: "include",
+      // credentials: "include",
       method: "POST",
       body: JSON.stringify(requestData),
     })
@@ -338,18 +344,14 @@ export const useShoppingCart = () => {
   }, [cartStore]);
 
   useEffect(() => {
-    if (window.location.hostname !== "localhost" && cartStore.length > 0) {
-      console.log("before call getCart");
-
-      getCart()
-        .then(({ total, total_discount }) => {
-          setTotalAPI(total);
-          setTotalDiscountAPI(total_discount);
-        })
-        .catch((error) => {
-          console.error("Error:", error);
-        });
-    }
+    getCart()
+      .then(({ total, total_discount }) => {
+        setTotalAPI(total);
+        setTotalDiscountAPI(total_discount);
+      })
+      .catch((error) => {
+        console.error("Error:", error);
+      });
   }, []);
 
   return {

@@ -1,6 +1,6 @@
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
+import { Link } from '@remix-run/react';
 import React, { Fragment } from 'react'
-import { Link, useParams } from 'react-router-dom'
 import { v4 } from 'uuid';
 
 function classNames(...classes: string[]) {
