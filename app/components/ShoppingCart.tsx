@@ -8,13 +8,13 @@ import MiniCartItem from './cart/MiniCartItem';
 import MiniCartUpSell from './cart/MiniCartUpSell';
 import MiniCartTools from './cart/MiniCartTools';
 import i18next from 'i18next';
-import FormatCurrency from '~/utils/FormatCurrency';
+import FormatCurrency, { FormatCurrency2 } from '~/utils/FormatCurrency';
 import MiniCartItemLoader from './cart/MiniCartItemLoader';
 
 
 const ShoppingCart = () => {
 
-  const { closeCart, cartItems, removeFromCart, openCart, isOpen, totalPrice } = useShoppingCart();
+  const { closeCart, cartItems, removeFromCart, openCart,decreaseCartQuantity, addToCart,isOpen, totalPrice } = useShoppingCart();
   // console.log('isOpen>', isOpen);
   // useEffect(() => {
   //   setTimeout(() => {
@@ -47,7 +47,7 @@ const ShoppingCart = () => {
 
           <div className="fixed inset-0 overflow-hidden">
             <div className="absolute inset-0 overflow-hidden">
-              <div className="fixed inset-y-0 right-0 flex max-w-md pointer-events-none">
+              <div className="fixed inset-y-0 right-0 flex md:max-w-[600px] pointer-events-none">
                 <Transition.Child
 
                   enter="transform transition ease-in-out duration-500 sm:duration-700"
@@ -58,17 +58,17 @@ const ShoppingCart = () => {
                   leaveFrom="translate-x-0"
                   leaveTo={`${i18next.language === 'en' ? 'translate-x-full' : '-translate-x-full'}`}
                 >
-                  <Dialog.Panel className="w-screen h-full max-w-md pointer-events-auto">
+                  <Dialog.Panel className="w-screen h-full max-w-[600px] pointer-events-auto">
                     <div className="relative flex flex-col h-full overflow-y-scroll bg-white shadow-xl">
-                      <div className="flex-1 px-4 py-6 overflow-y-auto sm:px-6">
-                        <div className="flex items-start justify-between">
+                      <div className="flex-1  py-5 overflow-y-auto">
+                        <div className="flex items-start justify-between px-5 pb-5 border-b border-[#C6C6C6]">
                           {cartItems.length > 0 && (
-                            <Dialog.Title className="text-lg font-medium text-gray-900">Shopping cart</Dialog.Title>
+                            <Dialog.Title className="t text-3xl font-bold text-black">سلة التسوق</Dialog.Title>
                           )}
                           <div className="flex items-center ml-3 h-7">
                             <button
                               type="button"
-                              className="p-2 -m-2 text-gray-400 outline-none hover:text-gray-500"
+                              className="p-2 -m-2 text-gray-400 outline-none hover:text-gray-500 rounded-100 border-2 border-gray-400"
                               onClick={closeCart}
                             >
                               <span className="sr-only">Close panel</span>
@@ -78,9 +78,9 @@ const ShoppingCart = () => {
                         </div>
 
                         {cartItems.length > 0 ? (
-                          <div className="mt-8">
+                          <div className="mt-8 md:px-10 px-4">
                             <div className="flow-root">
-                              <ul role="list" className="-my-6 divide-y divide-gray-200">
+                              <ul role="list" className="-my-6 ">
                                 {cartItems.map((item) => (
                                   <li key={v4()} className="flex py-6">
 
@@ -93,6 +93,8 @@ const ShoppingCart = () => {
                                       slug={item.slug}
                                       thumbnail={item.thumbnail}
                                       removeFromCart={removeFromCart}
+                                      decreaseCartQuantity={decreaseCartQuantity}
+                                      addToCart={addToCart}
                                     />
                                   </li>
                                 ))}
@@ -115,14 +117,14 @@ const ShoppingCart = () => {
                         <div className="px-4 py-4 border-t border-gray-200 top-shadow">
                           <div className="flex justify-between text-base font-medium text-gray-900">
                             <p>Subtotal</p>
-                            <p>{FormatCurrency(totalPrice)}</p>
+                            <p>{FormatCurrency2(totalPrice)}</p>
                           </div>
                           <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
                           <div className="mt-4">
                             <Link
                               to="/checkout"
                               onClick={closeCart}
-                              className="flex items-center justify-center px-6 py-3 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-primary-600 hover:bg-primary-700"
+                              className="flex items-center justify-center px-6 py-3 md:text-xl text-base font-semibold text-white border border-transparent rounded-100 shadow-sm bg-green-200 "
                             >
                               Check Out
                             </Link>
@@ -150,6 +152,8 @@ const ShoppingCart = () => {
           </div>
         </Dialog>
       </Transition>
+      <div className='pointer-events-auto visible opacity-100 pointer-events-none invisible opacity-0 fixed top-0 right-0 w-full h-full bg-black bg-opacity-50 transition-all duration-300 ease-linear'
+      ></div>
     </div>
   )
 }

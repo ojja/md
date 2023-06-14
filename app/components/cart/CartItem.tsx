@@ -77,7 +77,7 @@ const CartItem = ({ id, quantity, slug, thumbnail, removeFromCart, decreaseCartQ
                 <CartItemLoader />
                 :
                 <div className="flex items-start justify-between pb-6 mb-6 border-b border-black-300">
-                    <div className="flex items-start">
+                    <div className="flex justify-between text-base font-medium text-gray-900">
                         <div>
                             <Link to={`/products/${slug}`} className="flex items-center justify-center w-48 h-48 mr-5 bg-gray-100 rounded-md">
                                 <img src={thumbnail} className="max-w-[80%] max-h-[80%]" alt={slug} />
@@ -94,24 +94,26 @@ const CartItem = ({ id, quantity, slug, thumbnail, removeFromCart, decreaseCartQ
                         </div>
                     </div>
                     <div className="flex items-start justify-center ml-auto">
-                        <div className="flex pr-8">
-                            <button
-                                type="button"
-                                onClick={handleDecrease}
-                                className="p-2 -m-2 text-gray-400 cursor-pointer hover:text-gray-500"
-                            >
-                                <MinusIcon className="w-4 h-4" aria-hidden="true" />
-                            </button>
-                            <input type="text" className="w-8 h-6 px-0 mx-2 text-xs text-center text-gray-600 bg-gray-100 border rounded focus:outline-none" value={quantity!} readOnly />
-                            {/* <span className="w-8 h-6 mx-2 text-xs leading-6 text-center text-gray-600 bg-gray-100 border rounded focus:outline-none" >{quantity}</span> */}
+                        <div className="flex justify-start items-center">
 
                             <button
+                                // type="button"
+                                className={`w-10 h-10 border-2 border-gray-400  rounded-full cursor-pointer flex items-center justify-center ${quantity! > 9 ? "pointer-events-none" : ''}`}
                                 type="button"
                                 onClick={handleAddToCart}
-                                className="p-2 -m-2 text-gray-400 cursor-pointer hover:text-gray-500"
                             >
-                                <PlusIcon className="w-4 h-4" aria-hidden="true" />
+                                <PlusIcon className="w-6 h-6 text-green-200" aria-hidden="true" />
                             </button>
+                            <input type="text" className=" w-10 p-0 text-xl  border-none font-semibold text-center text-green-200  select-none focus:outline-none" value={quantity!} readOnly />
+                            <button
+                                onClick={handleDecrease}
+                                type="button"
+                                className="w-10 h-10 border-2 border-gray-400  rounded-full cursor-pointer flex items-center justify-center"
+                            >
+
+                                <MinusIcon className="w-6 h-6 text-green-200" aria-hidden="true" />
+                            </button>
+
                         </div>
                         <div className="pr-4 text-right">
                             {/* <span className="text-sm font-medium">{FormatCurrency(productPrice)}</span> */}

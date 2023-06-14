@@ -1,8 +1,10 @@
 import { Link } from '@remix-run/react';
 import { memo, useEffect, useState } from 'react'
 import { getProductBySlug } from '~/api/products';
-import FormatCurrency from '~/utils/FormatCurrency';
+import FormatCurrency, { FormatCurrency2 } from '~/utils/FormatCurrency';
 import MiniCartItemLoader from './MiniCartItemLoader';
+import { MinusIcon, PlusIcon, TrashIcon } from "@heroicons/react/24/outline";
+
 
 interface Product {
     id: number;
@@ -19,12 +21,13 @@ interface MiniCartItemProps {
     color: string;
     size: string;
     slug: string;
+    main_image: string;
     thumbnail: string;
     removeFromCart: () => void;
 }
 
 
-const MiniCartItem = ({ id, quantity, slug, thumbnail, removeFromCart, price }: MiniCartItemProps) => {
+const MiniCartItem = ({ id, quantity, slug, thumbnail, removeFromCart, price, decreaseCartQuantity, addToCart }: MiniCartItemProps) => {
 
     const [product, setProduct] = useState({});
     const [loading, setLoading] = useState(true);
@@ -62,6 +65,18 @@ const MiniCartItem = ({ id, quantity, slug, thumbnail, removeFromCart, price }: 
         productPrice = product.price;
         salePrice = product.sale_price;
     }
+    const productData = {
+        id: id,
+        thumbnail: product.main_img,
+        slug: product.slug,
+        price: salePrice,
+    }
+    const handleDecrease = () => {
+        decreaseCartQuantity(productData);
+    };
+    const handleAddToCart = () => {
+        addToCart(productData);
+    };
 
     return (
         <>
@@ -69,7 +84,7 @@ const MiniCartItem = ({ id, quantity, slug, thumbnail, removeFromCart, price }: 
                 <MiniCartItemLoader />
                 :
                 <>
-                    <div className="flex-shrink-0 w-24 h-24 overflow-hidden border border-gray-200 rounded-md">
+                    <div className="flex-shrink-0 w-24 h-24 overflow-hidden rounded-md">
                         <img
                             src={thumbnail}
                             alt={slug}
@@ -81,33 +96,51 @@ const MiniCartItem = ({ id, quantity, slug, thumbnail, removeFromCart, price }: 
                         <div>
                             <div className="flex justify-between text-base font-medium text-gray-900">
                                 <h3>
-                                    <Link to={`/products/${slug}`}>{title}</Link>
+                                    <Link className=" text-xl font-semibold text-black" to={`/products/${slug}`}>{title}</Link>
                                 </h3>
                                 <div>
-                                    <p className="ml-4">{FormatCurrency(salePrice * quantity)}</p>
+                                    {salePrice !== null && salePrice != productPrice ? (
+                                        <>
+                                            <p className="ml-4 text-gray-400 text-sm line-through text-end">{FormatCurrency2(productPrice * quantity)}</p>
+                                            <p className="ml-4  w-fit bg-yellow-910 rounded h-[18px] flex rtl:flex-row-reverse gap-x-[2px] px-1 text-5xl">{FormatCurrency(salePrice * quantity, 'EGP', ["text-sm font-normal", "text-2xl font-semibold ltr:-ml-0.5 rtl:-mr-0.5", "text-sm font-normal"])}</p>
+                                        </>
+                                    ) : (
+                                        <p className="ml-4  w-fit bg-yellow-910 rounded h-[18px] flex rtl:flex-row-reverse gap-x-[2px] px-1 text-5xl">{FormatCurrency(price, 'EGP', ["text-sm font-normal", "text-2xl font-semibold ltr:-ml-0.5 rtl:-mr-0.5", "text-sm font-normal"])}</p>
+
+                                    )}
+
                                 </div>
+
                             </div>
                             {variation ?
-                                <p className="mt-1 text-sm text-gray-500">{color} - {size}</p>
+                                <p className=" text-gray-50 text-base font-semibold">{color} - {size}</p>
                                 :
                                 ""
                             }
                         </div>
                         <div className="flex items-end justify-between flex-1 text-sm text-gray-500">
-                            <div className="flex flex-col">
-                                {salePrice !== null && salePrice != productPrice ? (
-                                    <p className="">
-                                        <span className="align-middle">{FormatCurrency(salePrice)}</span>
-                                        <del className="ml-2 text-xs text-red-400 line-through align-middle">{FormatCurrency(productPrice)}</del>
-                                    </p>
-                                ) : (
-                                    <p className="">
-                                        {FormatCurrency(price)}
-                                    </p>
-                                )}
-                                <p className="text-gray-500">Quantity: {quantity}</p>
+                            <div className="flex justify-start items-center">
+
+                                <button
+                                    // type="button"
+                                    className={`w-10 h-10 border-2 border-gray-400  rounded-full cursor-pointer flex items-center justify-center ${quantity! > 9 ? "pointer-events-none" : ''}`}
+                                    type="button"
+                                    onClick={handleAddToCart}
+                                >
+                                    <PlusIcon className="w-6 h-6 text-green-200" aria-hidden="true" />
+                                </button>
+                                <input type="text" className=" w-10 p-0 text-xl  border-none font-semibold text-center text-green-200  select-none focus:outline-none" value={quantity!} readOnly />
+                                <button
+                                    onClick={handleDecrease}
+                                    type="button"
+                                    className="w-10 h-10 border-2 border-gray-400  rounded-full cursor-pointer flex items-center justify-center"
+                                >
+
+                                    <MinusIcon className="w-6 h-6 text-green-200" aria-hidden="true" />
+                                </button>
+                              
                             </div>
-                            {removeFromCart ?
+                            {/* {removeFromCart ?
                                 <div className="flex">
                                     <button
                                         type="button"
@@ -116,7 +149,7 @@ const MiniCartItem = ({ id, quantity, slug, thumbnail, removeFromCart, price }: 
                                     >
                                         Remove
                                     </button>
-                                </div> : ''}
+                                </div> : ''} */}
                         </div>
                     </div>
                 </>

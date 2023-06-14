@@ -512,6 +512,7 @@ export default function NavBar({ }) {
                           </svg>
                           <span className="ml-2 text-sm font-medium text-black bg-white  group-hover:text-gray-800 absolute rounded-full w-5 h-5 -top-1">{cartQuantityTotal}</span>
                         </Link>
+                        
                       ) : (
                         
                         <StickyDiv>

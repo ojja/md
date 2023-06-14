@@ -186,7 +186,7 @@ export default function ProductSingle() {
                 {/* Product Intro */}
                 <div className="bg-white">
                     <div className="container px-4 mx-auto">
-                        <div className="flex flex-wrap -mx-4 md:ltr:pr-28 md:rtl:pl-28">
+                        <div className="flex flex-wrap -mx-4 ">
                             <div className="w-full px-4 mb-2">
                                 <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-4 " />
                             </div>
@@ -350,8 +350,7 @@ export default function ProductSingle() {
                 <Tabs product={{ description: product.description }} />
 
                 <ExtraProducts categorySlug={product.category_slug} count={5} title="منتجات مشابهة" />
-                
-                <UpSellingProducts productID={product.id} title="تسوق اكتر من أبو عوف " />
+                <UpSellingProducts productID={product.id} title="تسوق اكتر من أبو عوف " isEmpty={false} />
                 {/* <RecentlyViewedProducts /> */}
 
                 {/* <ProductSpecifications

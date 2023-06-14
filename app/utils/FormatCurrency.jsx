@@ -40,11 +40,14 @@ const CURRENCY_FORMATTER2 = new Intl.NumberFormat(undefined, {
 // export default FormatCurrency;
 
 const FormatCurrency = (number, currencySymbol = "", tailwindClasses = ["", "", ""]) => {
+  // Rest of the code
   const parsedNumber = parseFloat(number);
 
   const formattedCurrency = CURRENCY_FORMATTER.format(parsedNumber);
-  const [wholeNumber, decimalPart] = formattedCurrency.match(/\d+/g);
-
+  const matchResult = formattedCurrency.match(/\d+/g);
+  const wholeNumber = matchResult ? matchResult[0] : ""; // Provide a default value if matchResult is null
+  const decimalPart = matchResult ? matchResult[1] : ""; // Provide a default value if matchResult is null
+  
   return (
     <>
       <span className={`currency ${tailwindClasses[0]}`}>{currencySymbol}</span>

@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
+import i18next from 'i18next';
 
 const StickyDiv = ({ children }) => {
   const [isSticky, setIsSticky] = useState(false);
@@ -33,7 +34,10 @@ const StickyDiv = ({ children }) => {
     <div
       ref={stickyRef}
       className={`${isSticky ? 'fixed top-5' : ''}`}
-      style={{ right: initialRight }}
+      // style={{i18next.language === 'en' ? right: initialRight : left: initialRight }}
+      style={{
+        [i18next.language === 'en' ? 'right' : 'left']: initialRight,
+      }}
 
     >
       {children}

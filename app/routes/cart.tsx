@@ -27,14 +27,14 @@ export default function Cart() {
         <div className="p-8 mx-auto bg-white">
             <div className="container px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div className="pb-10">
-                    <h1 className="text-4xl font-semibold">Shoping Cart</h1>
-                    <span>totalAPI{totalAPI}</span>
-                    <span>totalDiscountAPI{totalDiscountAPI}</span>
+                    <h1 className="text-4xl font-semibold">سلة التسوق</h1>
+                    {/* <span>totalAPI{totalAPI}</span>
+                    <span>totalDiscountAPI{totalDiscountAPI}</span> */}
                 </div>
                 {cartItems.length > 0 ? (
                     <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
                         <div className="col-span-2">
-                            <div className="pt-6 border-t border-black-300">
+                            <div className="pt-6">
                                 {cartItems.map((item, index) => (
                                     <CartItem
                                         key={index}
