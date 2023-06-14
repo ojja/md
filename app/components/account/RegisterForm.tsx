@@ -6,10 +6,13 @@ import SelectInput from "~/components/SelectInput";
 import { RiCheckboxBlankCircleLine, RiRadioButtonLine } from "react-icons/ri";
 import Button from "~/components/Button";
 import Loader from "~/components/Loader";
+import { useForm } from 'react-hook-form';
 
 
 export default function RegisterForm() {
     const { t, i18n } = useTranslation();
+    const { register, handleSubmit, formState: { errors: formErrors } } = useForm();
+
     const [isSend, setIsSend] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [formData, setFormData] = useState({
@@ -124,99 +127,119 @@ export default function RegisterForm() {
         return isValid;
     };
 
-    const handleSubmit = async (e: React.FormEvent) => {
-        setIsLoading(true);
-        console.log('handle')
-        e.preventDefault();
-        if (validateForm()) {
-            try {
-                const response = await register({ formData });
-                console.log('response', response)
-                setIsLoading(false);
-                if (response && response.status === "error") {
-                    setErrors((prevErrors) => ({
-                        ...prevErrors,
-                        response: response.msg,
-                    }));
-                } else if (response && response.status === "success") {
-                    console.log("Password reset email sent successfully");
-                }
-            } catch (error) {
-                setIsLoading(false);
-                console.log("An error occurred while calling forgotPassword API:", error);
-            }
-        } else {
-            console.log('handle else n')
-            setTimeout(() => {
-                setIsLoading(false);
-            }, 1000);
+    // const handleSubmit = async (e: React.FormEvent) => {
+    //     setIsLoading(true);
+    //     console.log('handle')
+    //     e.preventDefault();
+    //     if (validateForm()) {
+    //         try {
+    //             const response = await register({ formData });
+    //             console.log('response', response)
+    //             setIsLoading(false);
+    //             if (response && response.status === "error") {
+    //                 setErrors((prevErrors) => ({
+    //                     ...prevErrors,
+    //                     response: response.msg,
+    //                 }));
+    //             } else if (response && response.status === "success") {
+    //                 console.log("Password reset email sent successfully");
+    //             }
+    //         } catch (error) {
+    //             setIsLoading(false);
+    //             console.log("An error occurred while calling forgotPassword API:", error);
+    //         }
+    //     } else {
+    //         console.log('handle else n')
+    //         setTimeout(() => {
+    //             setIsLoading(false);
+    //         }, 1000);
+    //     }
+    // };
+
+    const onSubmit = async (data) => {
+        console.log(data); // Access form data here
+        // Call your registration logic here
+        try {
+            const response = await register({ formData: data });
+            console.log('response', response);
+        } catch (error) {
+            console.log("An error occurred while calling the register API:", error);
         }
     };
+
     return (
-        <div className="relative">
+        <div className="relative"
+            key={i18n.language}>
             {isLoading ? (
                 <div className="absolute z-20 flex items-start justify-center pt-20 bg-gray-200 bg-opacity-75 -inset-4">
                     <Loader />
                 </div>
             ) : ('')}
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="grid grid-cols-2 gap-4 py-4 pb-5 text-left border-b-2 border-gray-200 border-solid lg:max-w-xl">
                     {errors.response && <p className="mt-1 text-xs text-red-500">{errors.response}</p>}
                     <div>
-                        <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> First name </label>
+                        <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> {t('checkout.first_name')} </label>
                         <div className="mt-1">
                             <input
                                 type="text"
-                                placeholder=""
-                                className={`w-full py-2 border border-gray-300 rounded-md text-gray-900 outline-none ${errors.first_name && 'border-red-500'}`}
-                                name="first_name"
-                                value={formData.first_name}
-                                onChange={handleChange}
+                                className={`w-full py-2 border border-gray-300 rounded-md text-gray-900 outline-none ${formErrors.first_name && 'border-red-500'}`}
+                                {...register('first_name', {
+                                    required: { value: true, message: t('fields.first_name_required') }
+                                })}
                             />
-                            {errors.first_name && <p className="mt-1 text-xs text-red-500">{errors.first_name}</p>}
+                            {formErrors.first_name && (
+                                <p className="mt-1 text-xs text-red-500">{formErrors.first_name.message}</p>
+                            )}
                         </div>
                     </div>
 
                     <div>
-                        <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> Last name </label>
+                        <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> {t('checkout.last_name')} </label>
                         <div className="mt-1">
                             <input
                                 type="text"
-                                className={`w-full py-2 border border-gray-300 rounded-md text-gray-900 outline-none ${errors.last_name && 'border-red-500'}`}
-                                name="last_name"
-                                value={formData.last_name}
-                                onChange={handleChange}
+                                className={`w-full py-2 border border-gray-300 rounded-md text-gray-900 outline-none ${formErrors.last_name && 'border-red-500'}`}
+                                {...register('last_name', {
+                                    required: { value: true, message: t('fields.last_name_required') }
+                                })}
                             />
-                            {errors.last_name && <p className="mt-1 text-xs text-red-500">{errors.last_name}</p>}
+                            {formErrors.last_name && (
+                                <p className="mt-1 text-xs text-red-500">{formErrors.last_name.message}</p>
+                            )}
                         </div>
                     </div>
 
                     <div className="col-span-2">
-                        <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> Email Address </label>
+                        <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> {t('checkout.email_address')} </label>
                         <div className="mt-1">
                             <input
                                 type="email"
-                                className={`w-full py-2 border border-gray-300 rounded-md text-gray-900 outline-none ${errors.email && 'border-red-500'}`}
-                                name="email"
-                                value={formData.email}
-                                onChange={handleChange}
+                                className={`w-full py-2 border border-gray-300 rounded-md text-gray-900 outline-none ${formErrors.email && 'border-red-500'}`}
+                                {...register('email', {
+                                    required: { value: true, message: t('fields.email_required') }
+                                })}
                             />
-                            {errors.email && <p className="mt-1 text-xs text-red-500">{errors.email}</p>}
+                            {formErrors.email && (
+                                <p className="mt-1 text-xs text-red-500">{formErrors.email.message}</p>
+                            )}
                         </div>
                     </div>
 
                     <div className="col-span-2">
-                        <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> Phone number </label>
+                        <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> {t('checkout.phone_number')} </label>
                         <div className="mt-1">
                             <input
                                 type="text"
                                 placeholder=""
                                 className={`w-full py-2 border border-gray-300 rounded-md text-gray-900 outline-none ${errors.phone && 'border-red-500'}`}
-                                name="phone"
-                                value={formData.phone}
-                                onChange={handleChange}
+                                {...register('phone', {
+                                    required: { value: true, message: t('fields.phone_required') }
+                                })}
                             />
-                            {errors.phone && <p className="mt-1 text-xs text-red-500">{errors.phone}</p>}
+                            {formErrors.phone && (
+                                <p className="mt-1 text-xs text-red-500">{formErrors.phone.message}</p>
+                            )}
                         </div>
                     </div>
 
@@ -224,13 +247,24 @@ export default function RegisterForm() {
                         <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> Password </label>
                         <div className="mt-1">
                             <input
-                                type="Password"
-                                className={`w-full py-2 border border-gray-300 rounded-md text-gray-900 outline-none ${errors.phone && 'border-red-500'}`}
-                                name="password"
-                                value={formData.password}
-                                onChange={handleChange}
+                                type="password"
+                                id="password"
+                                {...register("password", {
+                                    required: t("password_required"),
+                                    minLength: {
+                                        value: 5,
+                                        message: t("password_length")
+                                    },
+                                    // pattern: {
+                                    //   value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]*$/,
+                                    //   message: t("password_pattern")
+                                    // }
+                                })}
+                                className={`w-full py-2 border border-gray-300 rounded-md text-gray-900 outline-none ${formErrors.password && "border-red-500"}`}
                             />
-                            {errors.phone && <p className="mt-1 text-xs text-red-500">{errors.phone}</p>}
+                            {formErrors.password && (
+                                <p className="mt-1 text-xs text-red-500">{formErrors.password.message}</p>
+                            )}
                         </div>
                     </div>
 

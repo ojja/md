@@ -34,7 +34,7 @@ export default function AccountNav({ userInfo }: any) {
                 <div className="flex items-center p-2 space-x-4">
                     <img src={avatar_url} alt="avatar alt" className="w-12 h-12 bg-gray-500 rounded-full" />
                     <div>
-                        <h2 className="text-lg font-semibold">{first_name} {last_name}</h2>
+                        <h2 className="text-lg font-semibold capitalize">{first_name} {last_name}</h2>
                         <span className="flex items-center space-x-1">
                             <Link to="/my-account/profile" rel="noopener noreferrer" className="text-xs text-gray-400 hover:underline"> View profile </Link>
                         </span>

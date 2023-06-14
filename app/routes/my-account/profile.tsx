@@ -8,10 +8,33 @@ import Cookies from "js-cookie";
 import { fetchUserInfo, updateProfile } from "~/utils/account";
 import Msg from "~/components/Msg";
 import SelectInput from "~/components/SelectInput";
+import { useForm } from 'react-hook-form';
+import { useTranslation } from "react-i18next";
+import { Site_Title } from "~/config";
+
+
+export const meta: MetaFunction = () => {
+  return {
+    title: `My Profile | ${Site_Title}`
+  }
+}
+
+interface UserInfo {
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone: string;
+  birth_day: string;
+  birth_month: string;
+  birth_year: string;
+  gender: string;
+  avatar_url: string;
+}
+
 
 export default function profile() {
+  const { i18n } = useTranslation();
   const [userId, setUserId] = useState('');
-  const [message, setMessage] = useState('');
   const [userInfo, setUserInfo] = useState({
     first_name: '',
     last_name: '',
@@ -23,14 +46,13 @@ export default function profile() {
     gender: '',
     avatar_url: '',
   });
+
+  const [message, setMessage] = useState('');
   const navigate = useNavigate();
 
   useEffect(() => {
-    // setIsLoading(false);
-    // Check if the user is already logged in based on the cookie
     const user_id = Cookies.get('user_id');
     if (!user_id) {
-      // Redirect to the dashboard or any other authorized page
       navigate('/login');
       return;
     }
@@ -38,7 +60,7 @@ export default function profile() {
     const getUserInfo = async () => {
       const userInfo = await fetchUserInfo(Number(user_id));
       if (userInfo) {
-        setUserInfo(userInfo);
+        setUserInfo(userInfo as UserInfo);
       } else {
         // Handle the case when fetching user information fails
         // You can display an error message or redirect the user
@@ -48,29 +70,49 @@ export default function profile() {
     getUserInfo();
   }, []);
 
-  const handleSubmit = async (e: any) => {
-    e && e.preventDefault();
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+    setValue,
+  } = useForm({
+    defaultValues: userInfo,
+  })
+  useEffect(() => {
+    setValue('first_name', userInfo.first_name);
+    setValue('last_name', userInfo.last_name);
+    setValue('email', userInfo.email);
+    setValue('phone', userInfo.phone);
+    setValue('birth_day', userInfo.birth_day);
+    setValue('birth_month', userInfo.birth_month);
+    setValue('birth_year', userInfo.birth_year);
+    setValue('gender', userInfo.gender);
+    setValue('avatar_url', userInfo.avatar_url);
+  }, [userInfo, setValue]);
+
+  const onSubmit = async (data: UserInfo) => {
+    console.log(data)
     try {
-      const updatedUserInfo = await updateProfile(userInfo, userId);
-      console.log('before IF')
-      console.log('before msg', message)
+      const updatedUserInfo = await updateProfile(data, Number(userId));
       setMessage('Profile updated successfully');
       window.scrollTo({
         top: 0,
         behavior: 'smooth',
       });
-      if (updatedUserInfo) {
+      if (updatedUserInfo !== undefined) {
         setUserInfo(updatedUserInfo);
       } else {
         // Handle the case when updatedUserInfo is undefined
-        // You can display an error message or handle it as appropriate
       }
     } catch (error) {
       // Handle the case when updating user information fails
-      // You can display an error message or redirect the user
     }
   };
 
+  const validatePhoneNumber = (phoneNumber: string): boolean => {
+    const digitsOnly = phoneNumber.replace(/\D/g, '');
+    return digitsOnly.startsWith('0') && digitsOnly.length === 11;
+  };
 
   let [isOpenPassword, setIsOpenPassword] = useState(false)
 
@@ -99,21 +141,18 @@ export default function profile() {
       <div className="flex items-center justify-between py-5 pb-5 border-b-2 border-gray-200 border-solid">
         <h1 className="text-3xl">Account Info.</h1>
       </div>
-
-      <form onSubmit={handleSubmit}>
+      <form onSubmit={handleSubmit(onSubmit)}>
         <div className="grid grid-cols-2 gap-4 py-4 pb-5 border-b-2 border-gray-200 border-solid lg:max-w-xl">
           <div>
             <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> First name </label>
             <div className="mt-1">
               <input
                 type="text"
-                placeholder=""
-                className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                name="first_name"
-                value={userInfo.first_name}
-                onChange={(e) => setUserInfo({ ...userInfo, first_name: e.target.value })}
-
+                className={`w-full py-2 border border-gray-300 rounded-md text-gray-900 outline-none ${errors.first_name ? 'border-red-500' : ''}`}
+                {...register("first_name", { required: i18n.language === 'ar' ? 'يجب ادخال الاسم الأول' : 'First name is required', maxLength: 30 })}
+                defaultValue={userInfo.first_name}
               />
+              {errors.first_name && errors.first_name.type === "required" && (<p className="mt-1 text-xs text-red-500">{errors.first_name.message}</p>)}
             </div>
           </div>
 
@@ -122,12 +161,11 @@ export default function profile() {
             <div className="mt-1">
               <input
                 type="text"
-                placeholder=""
-                className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                name="last_name"
-                value={userInfo.last_name}
-                onChange={(e) => setUserInfo({ ...userInfo, last_name: e.target.value })}
+                className={`w-full py-2 border border-gray-300 rounded-md text-gray-900 outline-none ${errors.last_name && 'border-red-500'}`}
+                {...register("last_name", { required: i18n.language === 'ar' ? 'يجب ادخال الاسم الأخير' : 'Last name is required', maxLength: 30 })}
+                defaultValue={userInfo.last_name}
               />
+              {errors.last_name && errors.last_name.type === "required" && (<p className="mt-1 text-xs text-red-500">{errors.last_name.message}</p>)}
             </div>
           </div>
 
@@ -136,12 +174,18 @@ export default function profile() {
             <div className="mt-1">
               <input
                 type="email"
-                className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                name="email"
-                value={userInfo.email}
-                onChange={(e) => setUserInfo({ ...userInfo, email: e.target.value })}
+                className={`w-full py-2 border border-gray-300 rounded-md text-gray-900 outline-none ${errors.email && 'border-red-500'}`}
+                {...register("email", {
+                  required: i18n.language === 'ar' ? 'يجب ادخال البريد الإلكتروني' : 'Email is required',
+                  pattern: {
+                    value: /^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i,
+                    message: i18n.language === 'ar' ? 'صيغة البريد الإلكتروني غير صحيحة' : 'Invalid email format',
+                  },
+                })}
+                defaultValue={userInfo.email}
                 readOnly
               />
+              {errors.email && errors.email.type === "required" && (<p className="mt-1 text-xs text-red-500">{errors.email.message}</p>)}
             </div>
           </div>
 
@@ -151,33 +195,43 @@ export default function profile() {
               <input
                 type="text"
                 placeholder=""
-                className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                name="phone"
-                value={userInfo.phone}
-                onChange={(e) => setUserInfo({ ...userInfo, phone: e.target.value })}
+                className={`w-full py-2 border border-gray-300 rounded-md text-gray-900 outline-none ${errors.phone && 'border-red-500'}`}
+                {...register("phone", {
+                  required: i18n.language === 'ar' ? 'صيغة رقم الهاتف غير صحيحة' : 'Invalid phone number format',
+                  validate: validatePhoneNumber,
+                })}
+
+                defaultValue={userInfo.phone}
               />
+              {errors.phone && errors.phone.type === "required" && (<p className="mt-1 text-xs text-red-500">{errors.phone.message}</p>)}
             </div>
           </div>
 
           <div className="col-span-2">
             <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> Birth Date </label>
-            <div className="mt-1 space-x-3">
-              <SelectInput
-                value={userInfo.birth_day}
-                options={['Day', ...Array.from({ length: 31 }, (_, index) => (index + 1).toString().padStart(2, '0'))]}
-                onChange={(value) => setUserInfo({ ...userInfo, birth_day: value })}
-              />
+            <div className="flex mt-1 space-x-3">
+              <div className='w-1/3'>
+                <SelectInput
+                  value={userInfo.birth_day}
+                  options={['Day', ...Array.from({ length: 31 }, (_, index) => (index + 1).toString().padStart(2, '0'))]}
+                  register={register('birth_day')}
+                />
+              </div>
 
-              <SelectInput
-                value={userInfo.birth_month}
-                options={['Month', ...Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0'))]}
-                onChange={(value) => setUserInfo({ ...userInfo, birth_month: value })}
-              />
-              <SelectInput
-                value={userInfo.birth_year}
-                options={['Year', ...Array.from({ length: 74 }, (_, i) => String(2023 - i))]}
-                onChange={(value) => setUserInfo({ ...userInfo, birth_year: value })}
-              />
+              <div className='w-1/3'>
+                <SelectInput
+                  value={userInfo.birth_month}
+                  options={['Month', ...Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0'))]}
+                  register={register('birth_month')}
+                />
+              </div>
+              <div className='w-1/3'>
+                <SelectInput
+                  value={userInfo.birth_year}
+                  options={['Year', ...Array.from({ length: 74 }, (_, i) => String(2023 - i))]}
+                  register={register('birth_year')}
+                />
+              </div>
             </div>
           </div>
 
@@ -188,11 +242,11 @@ export default function profile() {
                 <div className='relative flex items-center py-1 pl-3'>
                   <input
                     type="radio"
-                    name="gender"
                     id="Male"
                     className='hidden peer'
-                    checked={userInfo.gender === 'M'}
-                    onChange={() => setUserInfo({ ...userInfo, gender: 'M' })}
+                    value="M"
+                    defaultChecked={userInfo.gender === 'M'}
+                    {...register('gender')}
                   />
                   <div className='invisible peer-checked:visible absolute left-0 top-1 mt-0.5'>
                     <RiRadioButtonLine className='peer-checked:bg-gray-700' />
@@ -207,11 +261,11 @@ export default function profile() {
                 <div className='relative flex items-center py-1 pl-3'>
                   <input
                     type="radio"
-                    name="gender"
                     id="Female"
                     className='hidden peer'
-                    checked={userInfo.gender === 'F'}
-                    onChange={() => setUserInfo({ ...userInfo, gender: 'F' })}
+                    value="F"
+                    defaultChecked={userInfo.gender === 'F'}
+                    {...register('gender')}
                   />
                   <div className='invisible peer-checked:visible absolute left-0 top-1 mt-0.5'>
                     <RiRadioButtonLine className='peer-checked:bg-gray-700' />
@@ -311,10 +365,4 @@ export default function profile() {
       </Transition>
     </div>
   )
-}
-
-export const meta: MetaFunction = () => {
-  return {
-    title: 'My Profile - Account | Sitename'
-  }
 }

@@ -1,8 +1,15 @@
 import { Link } from "@remix-run/react";
 import { LazyLoadImage } from "react-lazy-load-image-component";
-import { MetaFunction } from "remix";
 import WishListProducts from "~/components/AddWishList";
+import { Site_Title } from "~/config";
 import { FormatCurrency } from "~/utils/FormatCurrency";
+
+export const meta = () => {
+  return {
+    title: `My Wishtlist | ${Site_Title}`
+  }
+}
+
 export default function wishlist() {
   const fakeProducts = [
     {
@@ -115,10 +122,4 @@ export default function wishlist() {
       </div>
     </div>
   )
-}
-
-export const meta: MetaFunction = () => {
-  return {
-    title: 'My Wishtlist - Account | Sitename'
-  }
 }

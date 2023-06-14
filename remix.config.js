@@ -1,8 +1,8 @@
 const { withEsbuildOverride } = require("remix-esbuild-override");
+const { createRoutesFromFolders } = require("@remix-run/v1-route-convention");
 const {
-  createRoutesFromFolders,
-} = require("@remix-run/v1-route-convention");
-const { default: GlobalsPolyfills } = require("@esbuild-plugins/node-globals-polyfill");
+  default: GlobalsPolyfills,
+} = require("@esbuild-plugins/node-globals-polyfill");
 
 /**
  * Define callbacks for the arguments of withEsbuildOverride.
@@ -35,7 +35,8 @@ module.exports = {
     return createRoutesFromFolders(defineRoutes);
   },
   headers: {
-    'Content-Security-Policy': "frame-ancestors 'self' https://mtf.gateway.mastercard.com",
+    "Content-Security-Policy":
+      "frame-ancestors 'self' https://mtf.gateway.mastercard.com",
   },
   developmentServer: {
     compress: true, // Enable compression for served assets

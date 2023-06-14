@@ -1,7 +1,6 @@
 import { Fragment, useEffect, memo } from 'react'
 import { Dialog, Transition } from '@headlessui/react'
 import { XMarkIcon } from '@heroicons/react/24/outline'
-import { Link } from 'react-router-dom'
 import useShoppingCart from "~/stores/cartStore";
 import { v4 } from 'uuid';
 import MiniCartItem from './cart/MiniCartItem';
@@ -10,6 +9,7 @@ import MiniCartTools from './cart/MiniCartTools';
 import i18next from 'i18next';
 import { FormatCurrency } from '~/utils/FormatCurrency';
 import MiniCartItemLoader from './cart/MiniCartItemLoader';
+import { Link } from '@remix-run/react';
 
 
 const ShoppingCart = () => {
@@ -81,10 +81,6 @@ const ShoppingCart = () => {
                           <div className="mt-8">
                             <div className="flow-root">
                               <ul role="list" className="-my-6 divide-y divide-gray-200">
-
-                                <li className="flex py-6">
-                                  <MiniCartItemLoader />
-                                </li>
                                 {cartItems.map((item) => (
                                   <li key={v4()} className="flex py-6">
 

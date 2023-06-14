@@ -58,6 +58,7 @@
     "submit": "Submit",
     "forgot_btn": "Send Email to Reset",
     "view_details": "View Details",
+    "remember_me": "Remember Me",
     "sign_in": "Sign In"
   },
   "cities": {
@@ -67,5 +68,13 @@
     "sharm_el_sheikh": "Sharm El Sheikh",
     "luxor": "Luxor",
     "aswan": "Aswan"
+  },
+  "fields": {
+    "username_required": "Username is required",
+    "first_name_required": "First name is required",
+    "last_name_required": "Last name is required",
+    "password_required": "Password is required",
+    "password_length": "Password must be at least 5 characters",
+    "password_pattern": "Password must contain at least one uppercase letter, one lowercase letter, and one number"
   }
 }

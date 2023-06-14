@@ -7,6 +7,7 @@ import TrackingSteps from "~/components/TrackingSteps";
 import { FormatCurrency } from "~/utils/FormatCurrency";
 import Status from "~/components/Status";
 import Loader from "~/components/Loader";
+import { Site_Title } from "~/config";
 
 
 type OrderStatus = "processing" | "fulfilled" | "delivered" | "pending" | "on-hold" | "completed" | "cancelled" | "refunded" | "failed" | "checkout-draft";
@@ -33,9 +34,11 @@ interface Product {
     thumbnail?: string;
     slug?: string;
 }
-export const meta = {
-    title: 'Order Details | Sitename',
-};
+export const meta = () => {
+    return {
+        title: `Order Details | ${Site_Title}`
+    }
+}
 
 export const links = () => {
     return [];
@@ -121,7 +124,7 @@ export default function Order() {
 
     // Destructure order properties
     const { status, items, subtotal, total, discount, payment_method, fees, shipping_fees } = order;
-    
+
     const statusToStepMap: Record<OrderStatus, { step: number; message: string }> = {
         pending: { step: 1, message: "Your order is pending." },
         processing: { step: 1, message: "Your order is being processed." },

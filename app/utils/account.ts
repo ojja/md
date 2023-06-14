@@ -92,6 +92,34 @@ const updateProfile = async (userInfo: any, user_id: number) => {
   }
 };
 
+const userLogin = async (formData: any) => {
+  try {
+    const apiUrl = `${API_ENDPOINT}/my-account/login.php`;
+    const requestBody = {
+      username: formData.username,
+      password: formData.password,
+      remember: formData.remember,
+    };
+
+    const response = await fetch(apiUrl, {
+      method: "POST",
+      body: JSON.stringify(requestBody),
+    });
+
+    if (response.ok) {
+      console.log("Login successfully");
+      const responseData = await response.json();
+      return responseData; // Return the response data
+    } else {
+      console.log("Failed to Login");
+      throw new Error("Login failed"); // Throw an error for failed login
+    }
+  } catch (error) {
+    console.log("An error occurred", error);
+    throw error; // Throw the error for further handling
+  }
+};
+
 const forgotPassword = async (user_email: string) => {
   try {
     const apiUrl = `${API_ENDPOINT}/my-account/password/forgot-password.php`;
@@ -129,7 +157,6 @@ const register = async ({ formData }: any) => {
       birth_month: parseInt(formData.birth_month),
       birth_year: parseInt(formData.birth_year),
       gender: formData.gender,
-    
     };
     const response = await fetch(apiUrl, {
       method: "POST",
@@ -149,4 +176,11 @@ const register = async ({ formData }: any) => {
   }
 };
 
-export { fetchUserInfo, fetchUserOrders, updateProfile, forgotPassword, register };
+export {
+  fetchUserInfo,
+  fetchUserOrders,
+  updateProfile,
+  forgotPassword,
+  register,
+  userLogin,
+};

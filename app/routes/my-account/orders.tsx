@@ -1,16 +1,16 @@
 import { useNavigate } from "@remix-run/react";
-import { MetaFunction } from "remix";
 import OrdersTable from "~/components/OrdersTable";
 import { fetchUserOrders } from "~/utils/account";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import Loader from "~/components/Loader";
+import { Site_Title } from "~/config";
 
-export const meta: MetaFunction = () => {
+export const meta = () => {
   return {
-    title: "My Orders - My Account | Sitename",
-  };
-};
+    title: `My Orders | ${Site_Title}`
+  }
+}
 
 export default function Orders() {
   const [userOrders, setUserOrders] = useState([]);
