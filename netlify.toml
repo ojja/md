@@ -1,6 +1,7 @@
 [build]
 command = "remix build"
-publish = "public"
+publish = "/build"
+base = "build"
 
 [dev]
 command = "npm run dev"
