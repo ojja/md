@@ -4,7 +4,7 @@ import ReferralBox from "~/components/ReferralBox";
 import Status from "~/components/Status";
 import { FormatCurrency } from "~/utils/FormatCurrency";
 
-export default function DashBoard({ userOrders }) {
+export default function DashBoard({ userOrders, isLoading }: any) {
     return (
         <div>
             <Msg

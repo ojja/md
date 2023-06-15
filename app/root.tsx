@@ -15,6 +15,7 @@ import {
 import styles from './tailwind.[hash].css';
 import stylesRtl from './tailwind.rtl.[hash].css';
 import stylesBase from './base.css';
+import criticalCSS from './critical.css';
 import stylesSlick from 'slick-carousel/slick/slick.css';
 import stylesSlickTheme from 'slick-carousel/slick/slick-theme.css';
 import Footer from "./layouts/footer";
@@ -29,16 +30,23 @@ import { FB_PIXELCODE } from "./config";
 
 
 export const links: LinksFunction = () => {
+  const langStyles = i18n.language === "ar" ? stylesRtl : styles;
+  const isSingleProductPage = typeof window !== "undefined" && window.location.pathname.startsWith("/products/");
+
   return [
+    { rel: 'preload', as: 'style', href: criticalCSS },
+    { rel: 'preload', as: 'style', href: langStyles },
     { rel: 'preload', as: 'style', href: stylesBase },
-    { rel: 'preload', as: 'style', href: stylesSlick },
-    { rel: 'preload', as: 'style', href: stylesSlickTheme },
+    isSingleProductPage ? { rel: 'preload', as: 'style', href: stylesSlick } : null,
+    isSingleProductPage ? { rel: 'preload', as: 'style', href: stylesSlickTheme } : null,
     // { rel: 'preload', as: 'style', href: stylesSlickTheme },
     // { rel: 'preload', as: 'style', href: stylesSlickTheme },
+    { rel: 'stylesheet', href: criticalCSS },
+    { rel: 'stylesheet', href: langStyles },
     { rel: 'stylesheet', href: stylesBase },
-    { rel: 'stylesheet', href: stylesSlick },
-    { rel: 'stylesheet', href: stylesSlickTheme }
-  ];
+    isSingleProductPage ? { rel: 'stylesheet', href: stylesSlick } : null,
+    isSingleProductPage ? { rel: 'stylesheet', href: stylesSlickTheme } : null
+  ].filter(Boolean);
 }
 
 export const meta: MetaFunction = () => ({
@@ -58,8 +66,8 @@ export default function App() {
   if (typeof window !== "undefined") {
     initFacebookPixel(FB_PIXELCODE);
   }
-  
-  console.log('NODE_ENV',process.env.NODE_ENV);
+
+  console.log('NODE_ENV', process.env.NODE_ENV);
 
 
   return (
@@ -78,7 +86,7 @@ export default function App() {
         <Footer />
         <ScrollRestoration />
         <Scripts />
-        {/* {process.env.NODE_ENV === 'development' ? <LiveReload /> : null} */}
+        {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
       </body>
     </html >
   );

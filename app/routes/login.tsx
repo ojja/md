@@ -26,11 +26,6 @@ export default function login() {
   const navigate = useNavigate();
 
   const [isLoading, setIsLoading] = useState(true);
-  const [formData, setFormData] = useState({
-    username: '',
-    password: '',
-    remember: 1,
-  });
   const { register, handleSubmit, setValue, formState: { errors: formErrors } } = useForm();
 
   const [errors, setErrors] = useState({
@@ -62,9 +57,10 @@ export default function login() {
   };
 
 
-  const handleLoginSuccess = (user_id: number) => {
+  const handleLoginSuccess = (user_id: number, token: string) => {
     // Store user ID in a cookie
     Cookies.set('user_id', user_id);
+    Cookies.set('token', token);
 
     // Redirect to the dashboard or any other authorized page
     navigate('/my-account');
@@ -73,7 +69,6 @@ export default function login() {
   const onSubmit = (formData: FormData) => {
     const remember = formData.remember ? 1 : 0;
     userLogin(formData).then((responseData: any) => {
-      // Perform the necessary actions after login
       if (responseData.status === 'success' && responseData.msg) {
         if (responseData.msg_code === 'login_error') {
           setErrors((prevErrors) => ({
@@ -82,7 +77,7 @@ export default function login() {
           }));
         } else if (responseData.msg_code === 'login_success') {
           console.log('Success Login');
-          handleLoginSuccess(responseData.user_id);
+          handleLoginSuccess(responseData.user_id,responseData.token);
         } else {
           scrollToFirst();
           setErrors(prevErrors => ({
@@ -93,7 +88,6 @@ export default function login() {
         setIsLoading(false);
       }
     }).catch((error) => {
-      // Handle the login error
       console.log('Failed to login:', error);
     });
 
@@ -142,7 +136,7 @@ export default function login() {
                         id="username"
                         placeholder={t("common.login_label") as string}
                         {...register("username", {
-                          required: i18n.language === "ar" ? "يجب ادخال اسم المستخدم" : "username is required"
+                          required: t("fields.username_required")
                         })}
                         className={`w-full py-2 border border-gray-300 rounded-md text-gray-900 outline-none ${formErrors.username && "border-red-500"}`}
                       />
@@ -164,11 +158,11 @@ export default function login() {
                         id="password"
                         placeholder={t("common.password") as string}
                         {...register("password", {
-                          required: t("password_required"),
-                          minLength: {
-                            value: 5,
-                            message: t("password_length")
-                          },
+                          required: t("fields.password_required"),
+                          // minLength: {
+                          //   value: 5,
+                          //   message: t("password_length")
+                          // },
                           // pattern: {
                           //   value: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d]*$/,
                           //   message: t("password_pattern")
