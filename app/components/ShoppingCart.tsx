@@ -14,7 +14,7 @@ import MiniCartItemLoader from './cart/MiniCartItemLoader';
 
 const ShoppingCart = () => {
 
-  const { closeCart, cartItems, removeFromCart, openCart,decreaseCartQuantity, addToCart,isOpen, totalPrice } = useShoppingCart();
+  const { closeCart, cartItems, removeFromCart, openCart, decreaseCartQuantity, addToCart, isOpen, totalPrice } = useShoppingCart();
   // console.log('isOpen>', isOpen);
   // useEffect(() => {
   //   setTimeout(() => {
@@ -114,31 +114,34 @@ const ShoppingCart = () => {
                         )}
                       </div>
                       {cartItems.length > 0 && (
-                        <div className="px-4 py-4 border-t border-gray-200 top-shadow">
+                        <div className="px-10 py-10 border-t border-gray-200 top-shadow">
                           <div className="flex justify-between text-base font-medium text-gray-900">
-                            <p>Subtotal</p>
-                            <p>{FormatCurrency2(totalPrice)}</p>
+                            <p className=' text-base text-gray-50 font-semibold'>مصاريف التوصيل</p>
+                            <p className=' text-xl  font-bold text-black'>{FormatCurrency2(totalPrice)}</p>
                           </div>
-                          <p className="mt-0.5 text-sm text-gray-500">Shipping and taxes calculated at checkout.</p>
+                          <div className="flex justify-between text-base font-medium text-gray-900">
+                            <p className=' text-base text-gray-50 font-semibold'>الإجمالي </p>
+                            <p className=' text-xl  font-bold text-black'>{FormatCurrency2(totalPrice)}</p>
+                          </div>
                           <div className="mt-4">
                             <Link
                               to="/checkout"
                               onClick={closeCart}
                               className="flex items-center justify-center px-6 py-3 md:text-xl text-base font-semibold text-white border border-transparent rounded-100 shadow-sm bg-green-200 "
                             >
-                              Check Out
+                              أطلب الآن
                             </Link>
                           </div>
-                          <div className="flex justify-center mt-4 text-sm text-center text-gray-500">
-                            <p>
+                          <div className="flex justify-center mt-4 text-center">
+                            <p className='w-full'>
                               {/* or */}
                               <Link
                                 to="/cart"
-                                className="ml-2 font-medium text-primary-600 hover:text-primary-500"
+                                className=" bg-green-300 text-black text-xl font-semibold py-4 rounded-100 w-full block"
                                 onClick={closeCart}
                               >
-                                View Cart
-                                <span aria-hidden="true"> &rarr;</span>
+                                عرض السلة
+                                {/* <span aria-hidden="true"> &rarr;</span> */}
                               </Link>
                             </p>
                           </div>
