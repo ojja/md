@@ -57,7 +57,7 @@ export const getCart = () => {
     })
       .then((response) => {
         if (response.ok) {
-          console.log("response get CART", response);
+          // console.log("response get CART", response);
           return response.json();
         } else {
           throw new Error("Failed to update quantity in cart");

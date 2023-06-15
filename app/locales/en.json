@@ -34,8 +34,8 @@
     "street_name": "Street name",
     "select_area": "Select Area",
     "property_type": "Property Type",
-    "apartment": "apartment",
-    "villa": "villa",
+    "apartment": "Apartment",
+    "villa": "Villa",
     "building_no": "Building No.",
     "floor": "Floor",
     "today": "Today",
@@ -73,6 +73,7 @@
     "username_required": "Username is required",
     "first_name_required": "First name is required",
     "last_name_required": "Last name is required",
+    "phone_required": "Phone number is required",
     "password_required": "Password is required",
     "password_length": "Password must be at least 5 characters",
     "password_pattern": "Password must contain at least one uppercase letter, one lowercase letter, and one number"

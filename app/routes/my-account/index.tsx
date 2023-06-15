@@ -24,7 +24,7 @@ export default function index() {
     }
     const getUserOrders = async () => {
       setIsLoading(true);
-      const userOrders = await fetchUserOrders(Number(user_id));
+      const userOrders = await fetchUserOrders();
       if (userOrders) {
         setUserOrders(userOrders);
         setIsLoading(false);
@@ -36,7 +36,7 @@ export default function index() {
   }, []);
   return (
     <div>
-      <DashBoard userOrders={userOrders} />
+      <DashBoard userOrders={userOrders} isLoading={isLoading}/>
     </div>
   )
 }
