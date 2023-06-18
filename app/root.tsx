@@ -115,7 +115,7 @@ export default function App() {
         <Footer />
         <ScrollRestoration />
         <Scripts />
-        {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
+        {/* {process.env.NODE_ENV === 'development' ? <LiveReload /> : null} */}
       </body>
     </html >
   );
