@@ -20,7 +20,7 @@ import stylesSlick from 'slick-carousel/slick/slick.css';
 import stylesSlickTheme from 'slick-carousel/slick/slick-theme.css';
 import Footer from "./layouts/footer";
 import NavBar from "./layouts/navbar";
-import { useEffect, useState } from "react";
+import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from "./components/LanguageSwitcher";
@@ -35,14 +35,14 @@ export const links: LinksFunction = () => {
 
   return [
     { rel: 'preload', as: 'style', href: criticalCSS },
-    { rel: 'preload', as: 'style', href: langStyles },
+    // { rel: 'preload', as: 'style', href: langStyles },
     { rel: 'preload', as: 'style', href: stylesBase },
     isSingleProductPage ? { rel: 'preload', as: 'style', href: stylesSlick } : null,
     isSingleProductPage ? { rel: 'preload', as: 'style', href: stylesSlickTheme } : null,
     // { rel: 'preload', as: 'style', href: stylesSlickTheme },
     // { rel: 'preload', as: 'style', href: stylesSlickTheme },
     { rel: 'stylesheet', href: criticalCSS },
-    { rel: 'stylesheet', href: langStyles },
+    // { rel: 'stylesheet', href: langStyles },
     { rel: 'stylesheet', href: stylesBase },
     isSingleProductPage ? { rel: 'stylesheet', href: stylesSlick } : null,
     isSingleProductPage ? { rel: 'stylesheet', href: stylesSlickTheme } : null
@@ -68,19 +68,48 @@ export default function App() {
   }
 
   console.log('NODE_ENV', process.env.NODE_ENV);
+  // const mainRef = useRef(null);
+  const mainRef = useRef<HTMLDivElement>(null);
 
+  useEffect(() => {
+    function calculateMainHeight() {
+      const screenHeight = window.innerHeight;
+      const navbarElement = document.querySelector('header');
+      const footerElement = document.querySelector('footer');
+    
+      if (navbarElement && footerElement && mainRef.current) {
+        const navbarHeight = navbarElement.offsetHeight;
+        const footerHeight = footerElement.offsetHeight;
+        const minHeight = 700; // Specify your desired minimum height here
+        const mainHeight = Math.max(screenHeight - navbarHeight - footerHeight, minHeight);
+        mainRef.current.style.minHeight = `${mainHeight}px`;
+      }
+    }
+    
+
+    if (typeof window !== 'undefined') {
+      calculateMainHeight();
+      window.addEventListener('resize', calculateMainHeight);
+
+      return () => {
+        window.removeEventListener('resize', calculateMainHeight);
+      };
+    }
+  }, []);
 
   return (
     <html lang={language} dir={i18n.language === "ar" ? 'rtl' : 'ltr'}>
       <head>
         <Meta />
+        <link rel="preconnect" href="https://fonts.googleapis.com" />
+        <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
         <Links />
         <link rel="stylesheet" href={i18n.language === "ar" ? stylesRtl : styles} />
       </head>
-      <body className="box-border oultine-none">
+      <body className={`box-border oultine-none ${i18n.language === "ar" ? 'font-sans-ar rtl' : 'font-sans-en ltr'}`}>
         <NavBar
         />
-        <main className="relative z-10">
+        <main className="relative z-10 bg-gray-100" ref={mainRef}>
           <Outlet />
         </main>
         <Footer />

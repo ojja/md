@@ -4,10 +4,10 @@ export default function OrdersTableLoader() {
             <table className="w-full text-left table-fixed">
                 <thead>
                     <tr>
-                        <th>Order Number</th>
-                        <th>Date</th>
-                        <th>Status</th>
-                        <th>Price</th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
+                        <th></th>
                         <th></th>
                     </tr>
                 </thead>

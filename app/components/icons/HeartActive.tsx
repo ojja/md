@@ -1,8 +1,8 @@
 import { HeartIcon } from "@heroicons/react/20/solid";
 
-export default function Heart() {
+export default function HeartActive() {
     return (
-        <div className="text-gray-500">
+        <div className="text-red-400">
             <HeartIcon className='w-6 h-6'/>
         </div>
     )

@@ -65,14 +65,14 @@ export default function ChangePassword({ closePassword }: any) {
 
     return (
         <div>
-            <h3 className="text-xl font-semibold tracking-wider">Change Password</h3>
+            <h3 className="text-xl font-semibold tracking-wider">{t('common.change_password')}</h3>
             <div className="mt-3">
                 <form onSubmit={handleSubmit(handleChangePassword)}>
                     <div className='space-y-2'>
                         {errorMessage && <Msg color="red" message={errorMessage} />}
                         <div>
                             <label htmlFor="currentPassword" className="block mb-1 text-sm text-gray-400 capitalize">
-                                Please Enter Your Current Password
+                                {t('common.enterCurrentPassword')}
                             </label>
                             <div className="relative mt-1">
                                 <input
@@ -85,11 +85,11 @@ export default function ChangePassword({ closePassword }: any) {
                                     <EyeIcon />
                                 </span>
                             </div>
-                            {errors.currentPassword && <p className="mt-1 text-xs text-red-500">Current password is required</p>}
+                            {errors.currentPassword && <p className="mt-1 text-xs text-red-500">{t('common.currentPasswordRequired')}</p>}
                         </div>
                         <div>
                             <label htmlFor="newPassword" className="block mb-1 text-sm text-gray-400 capitalize">
-                                Enter Your New Password
+                                {t('common.enterNewPassword')}
                             </label>
                             <div className="relative mt-1">
                                 <input
@@ -116,7 +116,7 @@ export default function ChangePassword({ closePassword }: any) {
                         </div>
                         <div>
                             <label htmlFor="confirmPassword" className="block mb-1 text-sm text-gray-400 capitalize">
-                                Confirm Your New Password
+                                {t('common.confirmNewPassword')}
                             </label>
                             <div className="relative mt-1">
                                 <input
@@ -129,13 +129,13 @@ export default function ChangePassword({ closePassword }: any) {
                                     <EyeIcon />
                                 </span>
                             </div>
-                            {errors.confirmPassword && <p className="mt-1 text-xs text-red-500">Confirm password is required</p>}
+                            {errors.confirmPassword && <p className="mt-1 text-xs text-red-500">{t('common.confirmPasswordRequired')}</p>}
                         </div>
                         <button
                             type="submit"
                             className="inline-flex justify-center w-full px-3 py-2 text-sm font-semibold text-center text-white rounded-lg bg-slate-900 hover:bg-slate-700"
                         >
-                            Change Password
+                            {t('common.change_password')}
                         </button>
                     </div>
                 </form>

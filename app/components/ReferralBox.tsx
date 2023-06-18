@@ -1,5 +1,7 @@
+import { useTranslation } from "react-i18next";
 
-export default function ReferralBox({url}:any) {
+export default function ReferralBox({ url }: any) {
+    const { t } = useTranslation();
     return (
         <div className="flex items-center p-3 mt-3 bg-gray-100 border">
             <svg width="24" height="23" viewBox="0 0 24 23" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -13,7 +15,7 @@ export default function ReferralBox({url}:any) {
                 className="inline-flex justify-center px-4 py-2 ml-auto text-sm font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700"
                 onClick={() => navigator.clipboard.writeText(url)}
             >
-                Copy Link
+                {t("common.copy_link")}
             </button>
         </div>
     )
