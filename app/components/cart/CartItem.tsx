@@ -2,7 +2,7 @@ import { MinusIcon, PlusIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from '@remix-run/react';
 import { useEffect, useState } from 'react'
 import { getProductBySlug } from '~/api/products';
-import FormatCurrency from '~/utils/FormatCurrency';
+import FormatCurrency, { FormatCurrency2 } from '~/utils/FormatCurrency';
 import CartItemLoader from './CartItemLoader';
 
 interface CartItemProps {
@@ -79,53 +79,57 @@ const CartItem = ({ id, quantity, slug, thumbnail, removeFromCart, decreaseCartQ
                 <div className="flex items-start justify-between pb-6 mb-6 border-b border-black-300">
                     <div className="flex justify-between text-base font-medium text-gray-900">
                         <div>
-                            <Link to={`/products/${slug}`} className="flex items-center justify-center w-48 h-48 mr-5 bg-gray-100 rounded-md">
-                                <img src={thumbnail} className="max-w-[80%] max-h-[80%]" alt={slug} />
+                            <Link to={`/products/${slug}`} className="flex items-center justify-center w-[120px] h-[120px] mr-9 rounded-xl overflow-hidden">
+                                <img src={thumbnail} alt={slug} />
                             </Link>
                         </div>
-                        <div className="flex flex-col">
-                            <span className="text-base font-medium text-gray-900 md:text-md">{title}</span>
-                            <span className="flex my-1 text-xs font-light text-gray-400 capitalize">
-                                <span>{color}</span>
-                                <span className="w-px mx-3 bg-gray-300"></span>
-                                <span>{size}</span>
-                            </span>
+                        <div className="flex flex-col justify-between">
+                            <div>
+                                <span className=" text-xl font-semibold text-gray-900 md:text-md">{title}</span>
+                                {variation ?
+                                    <p className=" text-gray-50 text-base font-semibold">{color} - {size}</p>
+                                    :
+                                    ""
+                                }
+                            </div>
+
+                            <div className="flex justify-start items-center">
+
+                                <button
+                                    // type="button"
+                                    className={`w-10 h-10 border-2 border-gray-400  rounded-full cursor-pointer flex items-center justify-center ${quantity! > 9 ? "pointer-events-none" : ''}`}
+                                    type="button"
+                                    onClick={handleAddToCart}
+                                >
+                                    <PlusIcon className="w-6 h-6 text-green-200" aria-hidden="true" />
+                                </button>
+                                <input type="text" className=" w-10 p-0 text-xl  border-none font-semibold text-center text-green-200  select-none focus:outline-none" value={quantity!} readOnly />
+                                <button
+                                    onClick={handleDecrease}
+                                    type="button"
+                                    className="w-10 h-10 border-2 border-gray-400  rounded-full cursor-pointer flex items-center justify-center"
+                                >
+
+                                    <MinusIcon className="w-6 h-6 text-green-200" aria-hidden="true" />
+                                </button>
+
+                            </div>
                             {/* <span className="text-sm font-light text-slate-400">Categories-1</span> */}
                         </div>
+
                     </div>
                     <div className="flex items-start justify-center ml-auto">
-                        <div className="flex justify-start items-center">
 
-                            <button
-                                // type="button"
-                                className={`w-10 h-10 border-2 border-gray-400  rounded-full cursor-pointer flex items-center justify-center ${quantity! > 9 ? "pointer-events-none" : ''}`}
-                                type="button"
-                                onClick={handleAddToCart}
-                            >
-                                <PlusIcon className="w-6 h-6 text-green-200" aria-hidden="true" />
-                            </button>
-                            <input type="text" className=" w-10 p-0 text-xl  border-none font-semibold text-center text-green-200  select-none focus:outline-none" value={quantity!} readOnly />
-                            <button
-                                onClick={handleDecrease}
-                                type="button"
-                                className="w-10 h-10 border-2 border-gray-400  rounded-full cursor-pointer flex items-center justify-center"
-                            >
-
-                                <MinusIcon className="w-6 h-6 text-green-200" aria-hidden="true" />
-                            </button>
-
-                        </div>
                         <div className="pr-4 text-right">
                             {/* <span className="text-sm font-medium">{FormatCurrency(productPrice)}</span> */}
                             {salePrice !== null && salePrice != productPrice ? (
-                                <p className="flex flex-col-reverse text-xl text-gray-900">
-                                    <span className="align-middle">{FormatCurrency(salePrice)}</span>
-                                    <del className="ml-2 text-base text-red-400 line-through align-middle">{FormatCurrency(productPrice)}</del>
-                                </p>
+                                <>
+                                    <p className="ml-4 text-gray-400 text-sm line-through text-end">{FormatCurrency2(productPrice * quantity)}</p>
+                                    <p className="ml-4  w-fit bg-yellow-910 rounded h-[18px] flex rtl:flex-row-reverse gap-x-[2px] px-1 text-5xl">{FormatCurrency(salePrice * quantity, 'EGP', ["text-sm font-normal", "text-2xl font-semibold ltr:-ml-0.5 rtl:-mr-0.5", "text-sm font-normal"])}</p>
+                                </>
                             ) : (
-                                <p className="text-xl text-gray-900">
-                                    {FormatCurrency(productPrice)}
-                                </p>
+                                <p className="ml-4  w-fit bg-yellow-910 rounded h-[18px] flex rtl:flex-row-reverse gap-x-[2px] px-1 text-5xl">{FormatCurrency(productPrice, 'EGP', ["text-sm font-normal", "text-2xl font-semibold ltr:-ml-0.5 rtl:-mr-0.5", "text-sm font-normal"])}</p>
+
                             )}
                         </div>
                     </div>

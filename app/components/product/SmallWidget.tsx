@@ -11,8 +11,8 @@ const SmallWidget = ({ product }: any) => {
     return (
         <div className="flex items-center w-full p-4 border-b border-gray-300">
             <div className="flex-shrink-0  w-20 h-20 overflow-hidden">
-                <div className="rounded upsell_item_img border-2 border-gray-100 rounded-[10px] overflow-hidden">
-                    <img src={product.main_image} alt={product.name} />
+                <div className="rounded upsell_item_img border-2 border-gray-100 rounded-[10px] overflow-hidden h-full">
+                    <img className=" h-full w-full" src={product.main_image} alt={product.name} />
                 </div>
             </div>
             <div className="flex flex-col flex-1 ml-4">
