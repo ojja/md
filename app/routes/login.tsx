@@ -64,7 +64,6 @@ export default function login() {
       const wishlistItems = JSON.parse(localStorageWishlistItems) as ProductData[];
       updatedWishlistItems = wishlistItems.map((item: ProductData) => item.id);
     }
-    console.log('updatedWishlistItems', updatedWishlistItems)
   }
   const addBulkWishList = async () => {
     try {

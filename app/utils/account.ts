@@ -3,15 +3,19 @@ import Cookies from "js-cookie";
 
 const sendAuthenticatedRequest = async (
   endpoint: string,
-  requestData: any
+  requestData: any,
+  performLoginCheck: boolean = true
 ) => {
   try {
     const user_id = Cookies.get("user_id");
     const token = Cookies.get("token");
+    if (performLoginCheck) {
+
     if (!user_id || !token) {
       console.log("PLZ LOGIN");
       return null;
     }
+  }
     const apiUrl = `${API_ENDPOINT}/${endpoint}`;
     const requestBody = {
       user_id: user_id,
@@ -64,7 +68,7 @@ const forgotPassword = async (user_email: string) => {
 };
 
 const userRegister = async (formData: any) => {
-  return sendAuthenticatedRequest("my-account/register.php", formData);
+  return sendAuthenticatedRequest("my-account/register.php", formData, false);
 };
 
 const userLogin = async (formData: any) => {
