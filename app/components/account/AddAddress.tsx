@@ -7,6 +7,7 @@ import { fetchAreas, fetchGovs } from '~/utils/general';
 import Msg from "~/components/Msg";
 import ProfileLoader from './ProfileLoader';
 import Loader from '../Loader';
+import { useTranslation } from 'react-i18next';
 
 interface Address {
     address_id: string;
@@ -20,6 +21,7 @@ interface Address {
 }
 
 export default function AddAddress({ closeModal, resetAddresses }: any) {
+    const { t, i18n } = useTranslation();
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState('');
     const [govs, setGovs] = useState([]);
@@ -108,34 +110,34 @@ export default function AddAddress({ closeModal, resetAddresses }: any) {
                     <Loader />
                 </div>
                 : ''}
-            <h3 className="mb-3">Add Address</h3>
+            <h3 className="mb-3">{t('common.add_address')}</h3>
             {message && <Msg color="green" message={message} />}
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className="space-y-4">
                     <div>
-                        <label htmlFor="gov" className="block mb-1 text-xs text-gray-400 ">City</label>
+                        <label htmlFor="gov" className="block mb-1 text-xs text-gray-400 ">{t('checkout.city')}</label>
                         <SelectInput
                             value={watch('gov_id') || ''}
                             options={[
-                                { label: "Select Gov", value: "" },
-                                ...govs.map((gov: any) => ({ label: gov.name_en, value: gov.id })),
+                                { label: t('checkout.select_gov'), value: "" },
+                                ...govs.map((gov: any) => ({ label: i18n.language === 'ar' ? gov.name_ar : gov.name_en, value: gov.id })),
                             ]}
                             register={register('gov_id')}
                         />
                     </div>
                     <div>
-                        <label htmlFor="area" className="block mb-1 text-xs text-gray-400">Area</label>
+                        <label htmlFor="area" className="block mb-1 text-xs text-gray-400">{t('checkout.area')}</label>
                         <SelectInput
                             value={watch('area_id') || ''}
                             options={[
-                                { label: "Select Area", value: "" },
-                                ...areas?.map((area: any) => ({ label: area.name_en, value: area.area_id })),
+                                { label: t('checkout.select_area'), value: "" },
+                                ...areas?.map((area: any) => ({ label: i18n.language === 'ar' ? area.name_ar : area.name_en, value: area.area_id })),
                             ]}
                             register={register('area_id')}
                         />
                     </div>
                     <div>
-                        <label htmlFor="full_address" className="block mb-1 text-xs text-gray-400">Street & Building No.</label>
+                        <label htmlFor="full_address" className="block mb-1 text-xs text-gray-400">{t('checkout.street_name')}</label>
                         <input
                             type="text"
                             id="full_address"
@@ -145,7 +147,7 @@ export default function AddAddress({ closeModal, resetAddresses }: any) {
                     </div>
 
                     <div>
-                        <label htmlFor="apartment_type" className="block mb-1 text-xs text-gray-400">Apartment Type</label>
+                        <label htmlFor="apartment_type" className="block mb-1 text-xs text-gray-400">{t('checkout.property_type')}</label>
                         <div className="space-x-5">
                             <label htmlFor="Flat" className='inline-block text-gray-900 peer-checked:text-blue-600'>
                                 <div className='relative flex items-center py-1 pl-3'>
@@ -162,7 +164,7 @@ export default function AddAddress({ closeModal, resetAddresses }: any) {
                                     <div className='absolute left-0 visible mt-1 peer-checked:invisible top-1'>
                                         <RiCheckboxBlankCircleLine className='peer-checked:bg-gray-700' />
                                     </div>
-                                    <span className='ml-2 text-base font-medium'>Flat</span>
+                                    <span className='ml-2 text-base font-medium'>{t('checkout.apartment')}</span>
                                 </div>
                             </label>
                             <label htmlFor="Villa" className='inline-block text-gray-900 peer-checked:text-blue-600'>
@@ -180,7 +182,7 @@ export default function AddAddress({ closeModal, resetAddresses }: any) {
                                     <div className='absolute left-0 visible mt-1 peer-checked:invisible top-1'>
                                         <RiCheckboxBlankCircleLine className='peer-checked:bg-gray-700' />
                                     </div>
-                                    <span className='ml-2 text-base font-medium'>Villa</span>
+                                    <span className='ml-2 text-base font-medium'>{t('checkout.villa')}</span>
                                 </div>
                             </label>
                         </div>
@@ -188,7 +190,7 @@ export default function AddAddress({ closeModal, resetAddresses }: any) {
 
                     <div className="space-x-5">
                         <div className="inline-block">
-                            <label htmlFor="floor" className="block mb-1 text-xs text-gray-400">Floor</label>
+                            <label htmlFor="floor" className="block mb-1 text-xs text-gray-400">{t('checkout.floor')}</label>
                             <input
                                 type="text"
                                 id="floor"
@@ -198,7 +200,7 @@ export default function AddAddress({ closeModal, resetAddresses }: any) {
                             />
                         </div>
                         <div className="inline-block">
-                            <label htmlFor="apartment" className="block mb-1 text-xs text-gray-400">Apartment</label>
+                            <label htmlFor="apartment" className="block mb-1 text-xs text-gray-400">{t('checkout.apartment')}</label>
                             <input
                                 type="text"
                                 id="apartment"
@@ -208,7 +210,7 @@ export default function AddAddress({ closeModal, resetAddresses }: any) {
                             />
                         </div>
                     </div>
-                    <button type="submit" className="inline-flex justify-center w-full px-3 py-4 text-sm font-semibold text-center text-white rounded-md bg-slate-900 hover:bg-slate-700">Add Address</button>
+                    <button type="submit" className="inline-flex justify-center w-full px-3 py-4 text-sm font-semibold text-center text-white rounded-md bg-slate-900 hover:bg-slate-700">{t('common.add_address')}</button>
                 </div>
             </form>
         </div>

@@ -13,7 +13,7 @@ const sendRequest = async (endpoint: string, requestData: any) => {
     });
 
     if (response.ok) {
-      console.log("Request successful");
+      // console.log("Request successful");
       const responseData = await response.json();
       return responseData as unknown;
     } else {

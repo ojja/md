@@ -25,6 +25,7 @@ interface Order {
 export default function OrdersTableRow({ order }: { order: Order }) {
     const { t } = useTranslation();
     const { order_id, order_date, order_status, order_total } = order;
+    const translatedStatus = t(`status.${order_status}`);
 
     return (
         <tr>

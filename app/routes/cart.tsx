@@ -6,7 +6,7 @@ import CartItem from "~/components/cart/CartItem";
 import CouponForm from "~/components/CouponForm";
 import ExtraProducts from "~/components/ExtraProducts";
 import { Site_Title } from "~/config";
-import useShoppingCart from "~/stores/cartStore";
+import { useShoppingCart } from "~/stores/cartStore";
 import { FormatCurrency } from "~/utils/FormatCurrency";
 
 
@@ -58,7 +58,7 @@ export default function Cart() {
                                 <div className="flex flex-col">
                                     <div className="flex justify-between py-3 border-b border-black-300">
                                         <span className="font-light text-gray-600">Subtotal</span>
-                                        <span className="text-gray-600">{FormatCurrency(totalAPI+totalDiscountAPI)}</span>
+                                        <span className="text-gray-600">{FormatCurrency(totalAPI + totalDiscountAPI)}</span>
                                     </div>
                                     <div className="flex justify-between py-3 border-b border-black-300">
                                         <span className="font-light text-gray-600">Shipping estimate</span>

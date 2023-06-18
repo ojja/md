@@ -1,7 +1,9 @@
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import OrdersTableRow from "~/components/OrdersTableRow";
 
 export default function OrdersTable({ userOrders }: { userOrders: any[] }) {
+    const { t } = useTranslation();
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
@@ -13,17 +15,17 @@ export default function OrdersTable({ userOrders }: { userOrders: any[] }) {
         <div>
             {!isLoading && userOrders.length == 0 ?
                 <div className="w-full text-center ">
-                    <p className="py-4 mb-5 text-lg text-gray-500">There’s no orders yet</p>
-                    <a href="/" className="inline-flex justify-center px-10 py-2 text-sm font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700">Shop Now</a>
+                    <p className="py-4 mb-5 text-lg text-gray-500">{t('common.no_orders')}</p>
+                    <a href="/" className="inline-flex justify-center px-10 py-2 text-sm font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700">{t("common.shop_now")}</a>
                 </div>
                 :
                 <table className="w-full text-left table-fixed">
                     <thead>
                         <tr>
-                            <th>Order Number</th>
-                            <th>Date</th>
-                            <th>Status</th>
-                            <th>Price</th>
+                            <th>{t('common.order_number')}</th>
+                            <th>{t('common.date')}</th>
+                            <th>{t('common.status')}</th>
+                            <th>{t('common.price')}</th>
                             <th></th>
                         </tr>
                     </thead>

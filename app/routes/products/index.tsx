@@ -1,7 +1,7 @@
 import { json, MetaFunction } from "@remix-run/node";
 import { LoaderFunction } from "@remix-run/cloudflare"
 import { useLoaderData } from "@remix-run/react";
-import { ProductWidget } from "~/components/product/ProductWidget";
+import ProductWidget from "~/components/product/ProductWidget";
 import { v4 } from 'uuid';
 import React, { useEffect, useState } from "react";
 import Breadcrumbs from "~/components/Breadcrumbs";
@@ -236,7 +236,7 @@ export default function shop() {
                                             <Loader />
                                         </div>
                                     ) : ('')}
-                                    {products && products.map((productData: any) => (
+                                    {Array.isArray(products) && products.map((productData: any) => (
                                         <React.Fragment key={v4()}>
                                             <ProductWidget product={productData} />
                                         </React.Fragment>

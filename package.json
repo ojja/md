@@ -2,12 +2,14 @@
   "private": true,
   "sideEffects": true,
   "scripts": {
-    "build": "npm run build:css && remix build",
+    "build": "npm run build:css && remix build && npm run minify:js",
     "build:css": "tailwindcss -o ./app/tailwind.[hash].css && rtlcss ./app/tailwind.[hash].css ./app/tailwind.rtl.[hash].css",
-    "dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 concurrently \"npm:dev:css\" \"remix dev\" \"npm:json-server\"",
+    "dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 concurrently \"npm run dev:css\" \"npm run minify:js:watch\" \"remix dev\" \"npm run json-server\"",
     "dev:css": "tailwindcss -o ./app/tailwind.[hash].css && rtlcss ./app/tailwind.[hash].css ./app/tailwind.rtl.[hash].css",
     "postinstall": "remix setup node && remix-esbuild-override",
     "start": "remix-serve build",
+    "minify:js": "terser build/_shared/chunk-*.js --output-dir build/_shared/minified",
+    "minify:js:watch": "npm run minify:js -- --watch",
     "json-server": "json-server --watch db.json --port 3001"
   },
   "dependencies": {

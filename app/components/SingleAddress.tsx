@@ -5,9 +5,10 @@ import { makeAddressDefault, removeAddress } from "~/utils/account";
 import { fetchAreas, fetchGovs } from "~/utils/general";
 import EditAddress from "./account/EditAddress";
 import Popup from "./Popup";
+import AddressLoader from "~/components/account/AddressLoader";
 
 
-interface Address {
+interface AddressData {
     id: string;
     status: string;
     gov_id: string;
@@ -16,18 +17,22 @@ interface Address {
     apartment_type: string;
     floor: string;
     apartment: string;
+    area_name_en: string;
+    area_name_ar: string;
+    gov_name_en: string;
+    gov_name_ar: string;
 }
 
 interface SingleAddressProps {
-    address: Address;
-    resetAddresses: () => Promise<void>;
-    govs: [];
+    address: AddressData | null;
+    resetAddresses?: () => Promise<void>;
+    govs?: [];
 }
 
 export default function SingleAddress({ address, resetAddresses, govs }: SingleAddressProps) {
     const { t, i18n } = useTranslation();
     let [isOpenAdress, setIsOpenAdress] = useState(false)
-    const [isLoading, setIsLoading] = useState(true);
+    const [isLoading, setIsLoading] = useState(false);
 
     function closeModal() {
         setIsOpenAdress(false)
@@ -69,6 +74,9 @@ export default function SingleAddress({ address, resetAddresses, govs }: SingleA
         setIsOpenAdress(true)
     }
 
+    if (!address) {
+        return <AddressLoader />; // Or show a loading spinner
+    }
     const {
         id,
         status,
@@ -79,42 +87,22 @@ export default function SingleAddress({ address, resetAddresses, govs }: SingleA
         floor,
         apartment,
     } = address;
-    const addressID = status === 'default' ? 'Default Address' : `Address #${id}`;
-    const government = govs.find((gov) => gov.id === address.gov_id);
-    console.log('government', government)
-    const govName = useState(i18n.language === 'ar' ? government?.name_ar : government?.name_en);
-    const [areaName, setAreaName] = useState('');
-    useEffect(() => {
-        const fetchAreasByGovId = async () => {
-            if (gov_id) {
-                const response = await fetchAreas(gov_id);
-                if (response === "Err in payload") {
-                    return;
-                }
-                if (response) {
-                    const selectedArea = response.find((area) => area.area_id === area_id);
-                    if (selectedArea) {
-                        setAreaName(selectedArea.name_en);
-                        setIsLoading(false);
-                    }
-                } else {
-                    // Handle the case when fetching the areas fails
-                }
-            }
-        };
-
-        fetchAreasByGovId();
-    }, [gov_id]);
+    // const addressID = status === 'default' ? 'Default Address' : `Address #${id}`;
+    const addressID = status === 'default' ? t('common.defaultAddress') : t('common.address', { id });
+    let govName = '';
+    let government_name = '';
+    govName = (i18n.language === 'ar' ? address.area_name_ar : address.area_name_en);
+    government_name = (i18n.language === 'ar' ? address.gov_name_ar : address.gov_name_en);
 
     return (
-        <div className="relative px-4 py-5 space-y-2 bg-yellow-100 border-2 border-yellow-700" key={i18n.language}>
+        <div className="relative px-4 py-5 space-y-2 bg-yellow-100 border-2 border-yellow-700 shadow-sm shadow-gray-50" key={i18n.language}>
             <div className="mb-1 text-base font-semibold">{addressID}</div>
             <div className="inline-block mr-5 align-top">
                 <label className="text-xs text-gray-700">{t('checkout.city')}</label>
                 {isLoading ?
                     <div className="w-20 mt-1 animate-pulse"><div className="h-2 bg-gray-200 rounded-md"></div></div>
                     :
-                    <span className="block text-sm font-bold">{i18n.language === 'ar' ? government?.name_ar : government?.name_en}</span>
+                    <span className="block text-sm font-bold">{government_name}</span>
                 }
             </div>
             <div className="inline-block align-top">
@@ -122,7 +110,7 @@ export default function SingleAddress({ address, resetAddresses, govs }: SingleA
                 {isLoading ?
                     <div className="w-20 mt-1 animate-pulse"><div className="h-2 bg-gray-200 rounded-md"></div></div>
                     :
-                    <span className="block text-sm font-bold">{areaName}</span>
+                    <span className="block text-sm font-bold">{govName}</span>
                 }
             </div>
             <div className="block">
@@ -156,7 +144,7 @@ export default function SingleAddress({ address, resetAddresses, govs }: SingleA
                 </Popup>
             ) : ('')}
 
-            <span className="absolute top-0 !mt-0 cursor-pointer right-1">
+            <span className="absolute top-0 !mt-0 cursor-pointer right-1 left-auto">
                 <Menu as="div" className="relative">
                     <Menu.Button className="w-12 h-12">
                         <svg width="23" height="5" viewBox="0 0 23 5" fill="none" xmlns="http://www.w3.org/2000/svg" className="m-auto">
@@ -181,7 +169,7 @@ export default function SingleAddress({ address, resetAddresses, govs }: SingleA
                                         onClick={openEdit}
                                         className={`${active && 'bg-blue-500 text-white'}  w-full block pl-3 pr-7 py-2`}
                                     >
-                                        Edit Address
+                                        {t('common.edit_address')}
                                     </button>
                                 )}
                             </Menu.Item>
@@ -194,7 +182,8 @@ export default function SingleAddress({ address, resetAddresses, govs }: SingleA
                                             onClick={() => handleMakeAddressDefault(id)}
                                             className={`${active && 'bg-blue-500 text-white'}  w-full block pl-3 pr-7 py-2`}
                                         >
-                                            Make Default
+
+                                            {t('common.make_default')}
                                         </button>
                                     )}
                                 </Menu.Item>
@@ -205,7 +194,7 @@ export default function SingleAddress({ address, resetAddresses, govs }: SingleA
                                         onClick={() => handleRemoveAddress(id)}
                                         className={`${active && 'bg-red-100'} w-full block pl-3 pr-7 py-2 text-red-500 text-left`}
                                     >
-                                        <span>Remove</span>
+                                        <span>{t('common.remove')}</span>
                                     </button>
                                 )}
                             </Menu.Item>

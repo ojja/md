@@ -116,6 +116,10 @@ module.exports = {
       fontDisplay: {
         sans: "swap", // Use 'swap', 'block', 'fallback', or 'optional'
       },
+      fontFamily: {
+        'sans-en': '"Roboto"',
+        'sans-ar': '"Baloo Bhaijaan 2"',
+      },
     },
     // maxWidth: {
     //   '1/4': '25%',

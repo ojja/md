@@ -20,7 +20,7 @@ import SelectColor from "~/components/product/SelectColor";
 import SelectSize from "~/components/product/SelectSize";
 import { FormatCurrency } from "~/utils/FormatCurrency";
 import Frequently from "~/components/Frequently";
-import useRecentView from "~/stores/wishtList";
+import { useProductStore } from "~/stores/product";
 import RecentlyViewedProducts from "~/components/RecentlyViewedProducts";
 import Accordion from "~/components/Accordion";
 import { getSelectedCurrency } from "~/utils/currencyUtils";
@@ -115,7 +115,7 @@ export default function ProductSingle() {
         addToRecent,
         addToWishlist,
         wishlistItems
-    } = useRecentView();
+    } = useProductStore();
     const isWishlist = wishlistItems?.some((item) => item.id === product.id);
 
     const handleWishlistClick = () => {

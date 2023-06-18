@@ -1,5 +1,5 @@
 import { memo } from 'react';
-import useShoppingCart from "~/stores/cartStore";
+import { useShoppingCart } from "~/stores/cartStore";
 import { FormatCurrency } from "~/utils/FormatCurrency";
 import MiniCartItem from "../cart/MiniCartItem";
 

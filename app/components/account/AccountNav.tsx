@@ -2,8 +2,10 @@ import { Link, useLoaderData, useLocation } from "@remix-run/react";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
 import Avatar from "react-avatar";
+import { useTranslation } from "react-i18next";
 
 export default function AccountNav({ userInfo }: any) {
+    const { t } = useTranslation();
     const [isLoading, setIsLoading] = useState(true);
     // console.log('userInfo Nav', userInfo);
     const { first_name = '', last_name = '' } = userInfo || {};
@@ -14,12 +16,12 @@ export default function AccountNav({ userInfo }: any) {
         }
     }, [userInfo]);
     const navItems = [
-        { path: "/my-account", label: "Dashboard (Overview)" },
-        { path: "/my-account/addresses", label: "Shipping Addresses" },
-        { path: "/my-account/wallet", label: "My Wallet" },
-        { path: "/my-account/wishlist", label: "My Wishlist" },
-        { path: "/my-account/orders", label: "Orders & Returns" },
-        { path: "/my-account/profile", label: "Account Info" },
+        { path: "/my-account", label: t("nav.dashboard_overview") },
+        { path: "/my-account/addresses", label: t("nav.shipping_addresses") },
+        { path: "/my-account/wallet", label: t("nav.my_wallet") },
+        { path: "/my-account/wishlist", label: t("nav.my_wishlist") },
+        { path: "/my-account/orders", label: t("nav.orders_returns") },
+        { path: "/my-account/profile", label: t("nav.account_info") },
     ];
 
     const location = useLocation();
@@ -34,11 +36,12 @@ export default function AccountNav({ userInfo }: any) {
     const handleLogout = () => {
         Cookies.remove('user_id');
         Cookies.remove('token');
+        localStorage.removeItem("wishlistItems");
         window.location.reload();
     };
 
     return (
-        <div className='h-full p-3 space-y-2 text-gray-500 bg-white shadow-xl w-60 shadow-blue-100 max-w-[20rem] rounded-xl'>
+        <div className='h-full p-3 space-y-2 text-gray-500 bg-white  w-60 shadow-xl shadow-gray-100 max-w-[20rem] rounded-xl'>
             <div className='divide-y divide-gray-300'>
                 {/* Info */}
                 {isLoading ?
@@ -63,7 +66,7 @@ export default function AccountNav({ userInfo }: any) {
                         <div>
                             <h2 className="text-lg font-semibold capitalize">{first_name} {last_name}</h2>
                             <span className="flex items-center space-x-1">
-                                <Link to="/my-account/profile" rel="noopener noreferrer" className="text-xs text-gray-400 hover:underline"> View profile </Link>
+                                <Link to="/my-account/profile" rel="noopener noreferrer" className="text-xs text-gray-400 hover:underline">{t("common.view_profile")}</Link>
                             </span>
                         </div>
                     </div>
@@ -84,17 +87,17 @@ export default function AccountNav({ userInfo }: any) {
                 <ul className="pt-2 pb-4 space-y-1 text-sm">
                     <li className="">
                         <a rel="noopener noreferrer" href="#" className="flex items-center p-2 space-x-3 rounded-md hover:font-bold hover:drop-shadow-lg">
-                            <span>Need Help?</span>
+                            <span>{t("nav.need_help")}</span>
                         </a>
                     </li>
                     <li>
                         <a rel="noopener noreferrer" href="#" className="flex items-center p-2 space-x-3 rounded-md hover:font-bold hover:drop-shadow-lg">
-                            <span>FAQs</span>
+                            <span>{t("nav.faqs")}</span>
                         </a>
                     </li>
                     <li>
                         <button className="flex items-center p-2 space-x-3 text-gray-400 rounded-md hover:font-bold hover:drop-shadow-lg" onClick={handleLogout}>
-                            <span>Log Out</span>
+                            <span>{t("nav.log_out")}</span>
                         </button>
                     </li>
                 </ul>

@@ -343,16 +343,16 @@ export const useShoppingCart = () => {
     setTotalPrice(calculateTotalPrice(cartStore));
   }, [cartStore]);
 
-  useEffect(() => {
-    getCart()
-      .then(({ total, total_discount }) => {
-        setTotalAPI(total);
-        setTotalDiscountAPI(total_discount);
-      })
-      .catch((error) => {
-        console.error("Error:", error);
-      });
-  }, []);
+  // useEffect(() => {
+  //   getCart()
+  //     .then(({ total, total_discount }) => {
+  //       setTotalAPI(total);
+  //       setTotalDiscountAPI(total_discount);
+  //     })
+  //     .catch((error) => {
+  //       console.error("Error:", error);
+  //     });
+  // }, []);
 
   return {
     getItemQuantity,

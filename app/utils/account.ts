@@ -8,7 +8,10 @@ const sendAuthenticatedRequest = async (
   try {
     const user_id = Cookies.get("user_id");
     const token = Cookies.get("token");
-
+    if (!user_id || !token) {
+      console.log("PLZ LOGIN");
+      return null;
+    }
     const apiUrl = `${API_ENDPOINT}/${endpoint}`;
     const requestBody = {
       user_id: user_id,
@@ -22,7 +25,7 @@ const sendAuthenticatedRequest = async (
     });
 
     if (response.ok) {
-      console.log("Request successful");
+      // console.log("Request successful");
       const responseData = await response.json();
       return responseData as unknown;
     } else {
@@ -98,7 +101,6 @@ const getAllAddresses = async () => {
     const responseData = await sendAuthenticatedRequest("my-account/addresses/get-all-addresses.php", {});
 
     if (responseData && Array.isArray(responseData)) {
-      // Sort the addresses by status (default addresses first)
       responseData.sort((a, b) => {
         if (a.status === "default") return -1;
         if (b.status === "default") return 1;
@@ -135,6 +137,30 @@ const removeAddress = async (addressId: number) => {
     address_id: addressId,
   });
 };
+const getDefaultAddress = async () => {
+  return sendAuthenticatedRequest('my-account/addresses/get-default.php', {});
+};
+
+const addWishAPI = async (product_id: number) => {
+  return sendAuthenticatedRequest('my-account/wishlist/add-to-wishlist.php', {
+    product_id: product_id
+  });
+};
+const removeWishAPI = async (product_id: number) => {
+  return sendAuthenticatedRequest('my-account/wishlist/remove-from-wishlist.php', {
+    product_id: product_id
+  });
+};
+const getWishAPI = async () => {
+  return sendAuthenticatedRequest('my-account/wishlist/get-user-wishlist.php', {});
+};
+const addBulkWishAPI = async (bulkProducts: number[]) => {
+  const payload = {
+    products: bulkProducts,
+  };
+
+  return sendAuthenticatedRequest('my-account/wishlist/bulk-add-wishlist.php', payload);
+};
 
 export {
   fetchUserInfo,
@@ -149,4 +175,9 @@ export {
   editAddress,
   makeAddressDefault,
   removeAddress,
+  getDefaultAddress,
+  addWishAPI,
+  removeWishAPI,
+  getWishAPI,
+  addBulkWishAPI,
 };

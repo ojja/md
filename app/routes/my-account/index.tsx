@@ -13,21 +13,17 @@ export const meta = () => {
 export default function index() {
   const [userOrders, setUserOrders] = useState([]);
   const navigate = useNavigate();
-  const [isLoading, setIsLoading] = useState(true);
 
   useEffect(() => {
-    setIsLoading(false);
     const user_id = Cookies.get('user_id');
     if (!user_id) {
       navigate('/login');
       return;
     }
     const getUserOrders = async () => {
-      setIsLoading(true);
       const userOrders = await fetchUserOrders();
       if (userOrders) {
         setUserOrders(userOrders);
-        setIsLoading(false);
       } else {
       }
     };
@@ -36,7 +32,7 @@ export default function index() {
   }, []);
   return (
     <div>
-      <DashBoard userOrders={userOrders} isLoading={isLoading}/>
+      <DashBoard userOrders={userOrders}/>
     </div>
   )
 }

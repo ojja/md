@@ -119,6 +119,7 @@ export default function RegisterForm() {
         // Store user ID in a cookie
         Cookies.set('user_id', user_id);
         Cookies.set('token', token);
+        Cookies.set('isNewUser', 'true', { expires: new Date(Date.now() + 10 * 60 * 1000) });
 
         // Redirect to the dashboard or any other authorized page
         navigate('/my-account');
@@ -274,21 +275,39 @@ export default function RegisterForm() {
                             <div className='w-1/3'>
                                 <SelectInput
                                     value={formData.birth_day}
-                                    options={['Day', ...Array.from({ length: 31 }, (_, index) => (index + 1).toString().padStart(2, '0'))]}
+                                    options={[
+                                      { label: 'Day', value: '' }, // Add an empty option as the default
+                                      ...Array.from({ length: 31 }, (_, index) => ({
+                                        label: (index + 1).toString().padStart(2, '0'),
+                                        value: (index + 1).toString().padStart(2, '0'),
+                                      })),
+                                    ]}
                                     register={register('birth_day')}
                                 />
                             </div>
                             <div className='w-1/3'>
                                 <SelectInput
                                     value={formData.birth_month}
-                                    options={['Month', ...Array.from({ length: 12 }, (_, i) => String(i + 1).padStart(2, '0'))]}
+                                    options={[
+                                        { label: 'Month', value: '' },
+                                        ...Array.from({ length: 12 }, (_, i) => ({
+                                            label: String(i + 1).padStart(2, '0'),
+                                            value: String(i + 1).padStart(2, '0'),
+                                        })),
+                                    ]}
                                     register={register('birth_month')}
                                 />
                             </div>
                             <div className='w-1/3'>
                                 <SelectInput
                                     value={formData.birth_year}
-                                    options={['Year', ...Array.from({ length: 74 }, (_, i) => String(2023 - i))]}
+                                    options={[
+                                      { label: 'Year', value: '' }, // Add an empty option as the default
+                                      ...Array.from({ length: 74 }, (_, i) => ({
+                                        label: String(2023 - i),
+                                        value: String(2023 - i),
+                                      })),
+                                    ]}
                                     register={register('birth_year')}
                                 />
                             </div>

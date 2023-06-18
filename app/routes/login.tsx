@@ -4,10 +4,11 @@ import { useForm } from "react-hook-form";
 import Loader from "~/components/Loader";
 import { Link, useNavigate } from "@remix-run/react";
 import Cookies from "js-cookie";
-import { userLogin } from "~/utils/account";
+import { addBulkWishAPI, getWishAPI, userLogin } from "~/utils/account";
 import Dots from "~/components/Dots";
 import Button from "~/components/Button";
 import { Site_Title } from "~/config";
+import { ErrorResponse, ProductData } from "types";
 
 
 type FormData = {
@@ -55,43 +56,85 @@ export default function login() {
       }
     }, 500);
   };
-
+  let localStorageWishlistItems;
+  let updatedWishlistItems: number[] = [];
+  if (typeof window !== "undefined") {
+    localStorageWishlistItems = localStorage.getItem("wishlistItems");
+    if (localStorageWishlistItems) {
+      const wishlistItems = JSON.parse(localStorageWishlistItems) as ProductData[];
+      updatedWishlistItems = wishlistItems.map((item: ProductData) => item.id);
+    }
+    console.log('updatedWishlistItems', updatedWishlistItems)
+  }
+  const addBulkWishList = async () => {
+    try {
+      const response = await addBulkWishAPI(updatedWishlistItems);
+      if ((response as ErrorResponse).status === "error") {
+        throw new Error((response as ErrorResponse).msg);
+      }
+    } catch (error) {
+      console.error(error.message);
+    }
+  };
+  const fetchWishListData = async () => {
+    try {
+      const response = await getWishAPI();
+      setIsLoading(false);
+      if ((response as ErrorResponse).status === "error") {
+        throw new Error((response as ErrorResponse).msg);
+      }
+      localStorage.setItem("wishlistItems", JSON.stringify(response));
+    } catch (error) {
+      console.error(error.message);
+    }
+    setIsLoading(false);
+  };
 
   const handleLoginSuccess = (user_id: number, token: string) => {
     // Store user ID in a cookie
     Cookies.set('user_id', user_id);
     Cookies.set('token', token);
-
+    addBulkWishList();
+    fetchWishListData();
+    Cookies.set('isCurrentUser', 'true', { expires: new Date(Date.now() + 10 * 60 * 1000) });
     // Redirect to the dashboard or any other authorized page
     navigate('/my-account');
   };
 
   const onSubmit = (formData: FormData) => {
     const remember = formData.remember ? 1 : 0;
-    userLogin(formData).then((responseData: any) => {
-      if (responseData.status === 'success' && responseData.msg) {
-        if (responseData.msg_code === 'login_error') {
+    userLogin(formData)
+      .then((responseData: any) => {
+        if (responseData.status === 'success' && responseData.msg) {
+          if (responseData.msg_code === 'login_error') {
+            setErrors((prevErrors) => ({
+              ...prevErrors,
+              general: responseData.msg,
+            }));
+          } else if (responseData.msg_code === 'login_success') {
+            console.log('Success Login');
+            handleLoginSuccess(responseData.user_id, responseData.token);
+          } else {
+            scrollToFirst();
+            setErrors((prevErrors) => ({
+              ...prevErrors,
+              general: 'An error occurred.',
+            }));
+          }
+          setIsLoading(false);
+        } else if (responseData.ERR === 'ERR_No_Payload') {
           setErrors((prevErrors) => ({
             ...prevErrors,
-            general: responseData.msg
+            general: 'No payload received.',
           }));
-        } else if (responseData.msg_code === 'login_success') {
-          console.log('Success Login');
-          handleLoginSuccess(responseData.user_id,responseData.token);
-        } else {
-          scrollToFirst();
-          setErrors(prevErrors => ({
-            ...prevErrors,
-            general: 'An error occurred.'
-          }));
+          setIsLoading(false);
         }
-        setIsLoading(false);
-      }
-    }).catch((error) => {
-      console.log('Failed to login:', error);
-    });
-
+      })
+      .catch((error) => {
+        console.log('Failed to login:', error);
+      });
   };
+
   useEffect(() => {
     setIsLoading(false);
     const user_id = Cookies.get('user_id');
@@ -102,10 +145,10 @@ export default function login() {
   }, []);
 
   return (
-    <div>
-      <section className="p-8 mx-auto bg-gray-200">
-        <div className="container mx-auto">
-          <div className="flex flex-wrap -mx-4">
+    <div className="h-full flex items-center justify-center">
+      <section className="p-8 mx-auto">
+        <div className="">
+          <div className="flex flex-wrap -mx-4 min-w-[525px]">
             <div className="relative w-full px-4">
               {isLoading ? (
                 <div className="absolute z-20 flex items-start justify-center pt-20 bg-gray-200 bg-opacity-75 -inset-4">
@@ -114,7 +157,7 @@ export default function login() {
               ) : ('')}
 
               <div
-                className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white py-16 px-10 sm:px-12 md:px-[60px]"
+                className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white py-16 px-10 sm:px-12"
               >
                 <h1 className="mb-4 text-2xl font-extrabold leading-none tracking-tight text-center text-gray-900">{t('common.login')}</h1>
                 {errors.general && (
@@ -182,8 +225,8 @@ export default function login() {
                       {...register("remember")}
                       value='1'
                       onChange={(e) => {
-                        const value = e.target.checked ? 1 : 0; // Convert the checkbox status to 1 or 0
-                        setValue("remember", value); // Update the form value of "remember" field
+                        const value = e.target.checked ? 1 : 0;
+                        setValue("remember", value);
                       }}
                       className="mr-2 leading-tight text-primary"
                     />
