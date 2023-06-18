@@ -208,6 +208,7 @@ export default function shop() {
         // Simulate page loading
         const loadingTimeout = setTimeout(() => {
             setIsLoadingPage(false);
+            setIsLoading(false);
         }, 1500);
 
         return () => {
