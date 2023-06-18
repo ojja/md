@@ -1227,6 +1227,10 @@ video {
   height: 100%;
 }
 
+.h-screen {
+  height: 100vh;
+}
+
 .max-h-\[600px\] {
   max-height: 600px;
 }

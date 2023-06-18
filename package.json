@@ -4,7 +4,7 @@
   "scripts": {
     "build": "npm run build:css && remix build && npm run minify:js",
     "build:css": "tailwindcss -o ./app/tailwind.[hash].css && rtlcss ./app/tailwind.[hash].css ./app/tailwind.rtl.[hash].css",
-    "dev": "NODE_TLS_REJECT_UNAUTHORIZED=0 concurrently \"npm run dev:css\" \"npm run minify:js:watch\" \"remix dev\" \"npm run json-server\"",
+    "dev": "concurrently \"npm run dev:css\" \"npm run minify:js:watch\" \"remix dev\" \"npm run json-server\"",
     "dev:css": "tailwindcss -o ./app/tailwind.[hash].css && rtlcss ./app/tailwind.[hash].css ./app/tailwind.rtl.[hash].css",
     "postinstall": "remix setup node && remix-esbuild-override",
     "start": "remix-serve build",
