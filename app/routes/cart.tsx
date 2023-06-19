@@ -1,4 +1,5 @@
 import { MinusIcon, PlusIcon, XMarkIcon } from "@heroicons/react/20/solid";
+import { TrashIcon } from "@heroicons/react/24/outline";
 import { Link } from "@remix-run/react";
 import { useState } from "react";
 import { MetaFunction } from "remix";
@@ -23,17 +24,36 @@ export default function Cart() {
     // console.log('totalDiscountAPI', totalDiscountAPI)
     const [openCoupon, setOpenCoupon] = useState(false);
 
+    let [openNote, setOpenNote] = useState(true)
+    const [NoteApplied, setNoteApplied] = useState(false);
+    const applyNote = () => {
+        // Add logic to apply the Note here
+        setNoteApplied(true);
+    };
+
+    const editNote = () => {
+        // Add logic to edit the Note here
+    };
+
+    const deleteNote = () => {
+        // Add logic to delete the Note here
+        setNoteApplied(false);
+    };
+
+    function toggleNote() {
+        setOpenNote(!openNote)
+    }
     return (
-        <div className="p-8 mx-auto bg-white">
+        <div className="md:p-8 py-4 mx-auto bg-white">
             <div className="container px-4 mx-auto max-w-[1400px] sm:px-6 lg:px-8">
-                <div className="pb-10">
+                <div className="md:pb-10 pb-3  md:border-none border-b border-gray-100 ">
                     <h1 className="text-4xl font-semibold">سلة التسوق</h1>
                     {/* <span>totalAPI{totalAPI}</span>
                     <span>totalDiscountAPI{totalDiscountAPI}</span> */}
                 </div>
                 {cartItems.length > 0 ? (
                     <div className="grid grid-cols-2 gap-4 sm:grid-cols-3">
-                        <div className="col-span-2 pr-16">
+                        <div className="col-span-2 md:pr-16">
                             <div className="pt-6">
                                 {cartItems.map((item, index) => (
                                     <CartItem
@@ -104,14 +124,49 @@ export default function Cart() {
                                         <span className="font-semibold text-gray-50 text-base">الإجمالي </span>
                                         <span className=" text-[32px] text-black font-bold">{FormatCurrency(totalAPI)}</span>
                                     </div>
-                                    <div className="points flex items-center bg-yellow-910 py-4 px-10 justify-between mt-10">
+                                    <div className="points flex items-center bg-yellow-910 py-4 md:px-10 px-4 justify-between mt-10">
                                         <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
                                             <path d="M27.9865 11.0194C27.9974 10.465 27.8482 9.1722 26.163 8.72203L9.239 5.33398C7.99869 5.33398 6.99002 6.34263 6.99002 7.58297V10.5981L6.24036 10.5962C5.00454 10.6014 4 11.6071 4 12.8444V24.8345C4 26.0748 5.00867 27.0835 6.24898 27.0835H25.751C26.9914 27.0835 28 26.0748 28 24.8345L27.9865 11.0194ZM8.48932 7.58294C8.48932 7.19124 8.79106 6.86929 9.17376 6.8363L25.7131 10.1835C25.7191 10.1865 25.5902 10.6037 24.9897 10.5958H8.48932V7.58294ZM26.501 24.8349C26.501 25.2487 26.1652 25.5846 25.7513 25.5846H6.24893C5.83512 25.5846 5.49927 25.2487 5.49927 24.8349V12.8445C5.49927 12.4306 5.83512 12.0948 6.24893 12.0948H24.9919C25.7277 12.0948 26.5006 11.844 26.5006 11.3478V24.8349H26.501ZM8.49941 17.345C7.67141 17.345 7.00009 18.0164 7.00009 18.8444C7.00009 19.6724 7.67141 20.3437 8.49941 20.3437C9.32741 20.3437 9.99874 19.6724 9.99874 18.8444C9.99874 18.0164 9.32741 17.345 8.49941 17.345Z" fill="black" />
                                         </svg>
-                                        <p className=" text-base w-1/2 font-semibold  text-black">لديك 120 نقطة في محفظتك و يمكنك خصم 12 EGP</p>
-                                        <button className="bg-white rounded-100 text-base font-semibold  text-black py-2.5 px-5">خصم المبلغ</button>
+                                        <p className=" md:text-base text-xs w-1/2 font-semibold  text-black">لديك 120 نقطة في محفظتك و يمكنك خصم 12 EGP</p>
+                                        <button className="bg-white rounded-100 md:text-base text-sm  font-semibold  text-black py-2.5 px-5">خصم المبلغ</button>
                                     </div>
                                     <Link to="/checkout" className="px-3 py-4 text-xl text-center text-white rounded-100 pointer-events-auto mx-10 mt-10 bg-green-200 block ">أطلب الآن</Link>
+                                </div>
+                            </div>
+                            <div className="bg-white rounded-[32px] mt-9" style={{ boxShadow: ' 0px 20px 66px rgba(0, 0, 0, 0.2)' }}>
+                                <div className=" py-[30px] px-10 flex justify-between cursor-pointer" onClick={toggleNote}>
+                                    <p className=" font-bold text-xl">أضف ملاحظات علي الطلب</p>
+                                    {openNote && (
+
+                                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M14.8995 19.4014C14.8092 19.4961 14.7006 19.5715 14.5802 19.6231C14.4599 19.6746 14.3304 19.7012 14.1995 19.7012C14.0686 19.7012 13.9391 19.6746 13.8188 19.6231C13.6984 19.5715 13.5898 19.4961 13.4995 19.4014L3.5 9.4019L4.9 8.0019L14.1995 17.3014L23.5002 8.0019L24.9002 9.4019L14.8995 19.4014Z" fill="black" />
+                                        </svg>
+                                    )}
+
+                                    {!openNote && (
+                                        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M13.5012 8.29977C13.5916 8.20504 13.7002 8.12963 13.8205 8.0781C13.9408 8.02657 14.0704 8 14.2012 8C14.3321 8 14.4617 8.02657 14.582 8.0781C14.7023 8.12963 14.8109 8.20504 14.9012 8.29977L24.9007 18.2993L23.5007 19.6993L14.2012 10.3998L4.90058 19.6993L3.50058 18.2993L13.5012 8.29977Z" fill="black" />
+                                        </svg>
+                                    )}
+
+                                </div>
+                                <div className={`flex w-full pt-10 border-t border-[#C6C6C6] coupon flex-col md:px-10 pb-10     ${openNote ? 'hidden' : ''}`}>
+                                    <p className=" font-semibold text-base text-gray-50">اضف ملاحظة</p>
+                                    {/* <input type="text" name="order_note" className="w-full p-2 border border-gray-300 rounded-l outline-none bg-gray-50" id="order_note" placeholder="Add Order Note" /> */}
+                                    <textarea name="order_note" id="" cols="30" rows="10" id="order_note" className=" focus:outline-none h-[119px] border-2 border-x-gray-400 rounded-2xl mt-2 mb-6"></textarea>
+                                    {NoteApplied && (
+                                        <div className="flex w-full mt-2 justify-between gap-x-3">
+                                            <button
+                                                type="button"
+                                                className="text-black text-xl ml-2 flex w-fit justify-between items-center bg-green-300 py-4 px-11  font-semibold rounded-100"
+                                                onClick={deleteNote}
+                                            >
+                                                ألغاء
+                                            </button>
+                                        </div>
+                                    )}
+                                    <button type="submit" onClick={applyNote} className={`${NoteApplied ? 'hidden' : ''} text-white bg-green-200  rounded-100 focus:ring-4 focus:outline-none text-xl font-semibold w-full sm:w-auto px-5 py-[18px] text-center `} name="add_note" defaultValue="Add">أضف</button>
                                 </div>
                             </div>
                         </div>
@@ -122,7 +177,7 @@ export default function Cart() {
                         <Link to='/products' className="inline-flex justify-center px-4 py-2 mt-5 text-sm font-semibold text-white capitalize rounded-lg bg-slate-900 hover:bg-slate-700">continue shopping</Link>
                     </div>
                 )}
-                <ExtraProducts categorySlug="dress" count={5} title="Up Selling" />
+                <ExtraProducts categorySlug="dress" count={5} title="تسوق اكتر" />
             </div>
         </div >
     )

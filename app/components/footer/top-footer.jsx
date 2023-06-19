@@ -10,7 +10,7 @@ export default function TopFooter() {
     const { t } = useTranslation();
     return (
 
-        <div className=" bg-offwhite-100">
+        <div className=" bg-of-white-100">
             <div className="container flex justify-between m-auto md:py-16 md:flex-row flex-col-reverse px-5 py-9">
                 <div className=" md:w-1/3 w-full md:mt-0 mt-5">
                     <h4 className=" text-green-500 text-2xl md:text-4xl font-bold">{t('footer.faqs_title')}</h4>

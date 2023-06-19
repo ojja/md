@@ -26,13 +26,13 @@
     "ar": "العربية"
   },
   "checkout": {
-    "checkout": "إتمام الطلب",
+    "checkout": " إتمام عملية الشراء بأمان",
     "first_name": "الاسم الأول",
-    "last_name": "اسم العائلة",
+    "last_name": "الاسم الاخير",
     "phone_number": "رقم الهاتف",
     "email_address": "البريد الإلكتروني",
-    "shipping_information": "معلومات الشحن",
-    "choose_order_date": "اختر تاريخ الطلب",
+    "shipping_information": " بيانات العميل",
+    "choose_order_date": "وقت التوصيل",
     "shipping_method": "طريقة الشحن",
     "area": "المنطقة",
     "neighborhood": "الحي",
@@ -50,7 +50,7 @@
     "floor": "الطابق",
     "today": "اليوم",
     "terms": "لقد قرأت وقبلت جميع الشروط والأحكام",
-    "within_60_min": "في خلال 60 دقيقة",
+    "within_60_min": "في غضون 60 دقيقة",
     "choose_date": "اختر التاريخ"
   },
   "common": {

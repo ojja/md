@@ -105,6 +105,7 @@ module.exports = {
       },
       "of-white": {
         500: "#FAF9F6",
+        100: '#E8DFD0',
       },
       olive: {
         500: "#808000",

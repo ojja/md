@@ -18,7 +18,7 @@ const CartSummary = ({ thanks, rate }: any) => {
 
                 <div className="bg-white border border-gray-200 rounded-lg shadow-sm">
                     <h2 className="pt-6 pl-4 text-lg font-medium text-gray-900 sm:pl-6">
-                        Order summary {thanks?`#${thanks}`:''}
+                    ملخص السلة {thanks?`#${thanks}`:''}
                     </h2>
                     <ul role="list" className="divide-y divide-gray-200">
                         {cartItems.map((item) => (

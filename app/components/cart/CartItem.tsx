@@ -79,7 +79,7 @@ const CartItem = ({ id, quantity, slug, thumbnail, removeFromCart, decreaseCartQ
                 <div className="flex items-start justify-between pb-6 mb-6 border-b border-black-300">
                     <div className="flex justify-between text-base font-medium text-gray-900">
                         <div>
-                            <Link to={`/products/${slug}`} className="flex items-center justify-center w-[120px] h-[120px] mr-9 rounded-xl overflow-hidden">
+                            <Link to={`/products/${slug}`} className="flex items-center justify-center md:w-[120px] md:h-[120px] mr-9 rounded-xl overflow-hidden w-[60px] h-[60px]">
                                 <img src={thumbnail} alt={slug} />
                             </Link>
                         </div>

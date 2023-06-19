@@ -14,7 +14,7 @@ import useShoppingCart from "~/stores/cartStore";
 
 export default function Checkout() {
     const { t, i18n } = useTranslation();
-    const { cartItems, cartQuantity, resetCart } = useShoppingCart();
+    const { cartItems, cartQuantity, resetCart , cartQuantityTotal } = useShoppingCart();
 
     const [stepOne, setStepOne] = useState(true);
     const [isLoading, setIsLoading] = useState(true);
@@ -292,11 +292,10 @@ export default function Checkout() {
         }, 1000);
     }, []);
     return (
-        <div className="p-8 mx-auto bg-white">
-            <div className="container px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <div className="pb-10">
-                    <h1 className="text-4xl font-semibold">{t('checkout.checkout')}</h1>
-                </div>
+
+        <div className=" mx-auto">
+            {/* <div className="container px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
+
                 <div className="relative">
                     {cartItems?.length > 0 ? (
                         <>
@@ -397,7 +396,121 @@ export default function Checkout() {
                         </div>
                     )}
                 </div>
-            </div>
+            </div> */}
+            {cartItems?.length > 0 ? (
+
+                <div className="flex">
+                    <div className="first bg-white w-[66%] py-12">
+                        <div className=" max-w-[700px] m-auto">
+                            <div className="pb-10">
+                                <h1 className="text-4xl font-semibold">{t('checkout.checkout')}</h1>
+                            </div>
+                            <nav className="flex mb-10">
+                                <ol role="list" className="flex flex-wrap items-center text-gray-400 gap-y-2 gap-x-2 sm:gap-y-0">
+                                    <li>
+                                        <div className="-m-1">
+                                            <Link to="/cart" className="flex items-center p-1 leading-3">
+                                                سلة التسوق
+                                                <span className="inline-flex items-center justify-center w-5 h-5 ml-1 text-sm font-bold text-white bg-gray-400 rounded-full pt-[3px]">{cartQuantityTotal}</span>
+                                            </Link>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div className="flex items-center">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M4.94278 7.5153C4.88865 7.56691 4.84556 7.62897 4.81611 7.69773C4.78667 7.76648 4.77148 7.8405 4.77148 7.9153C4.77148 7.99009 4.78667 8.06411 4.81611 8.13286C4.84556 8.20162 4.88865 8.26368 4.94278 8.3153L10.6568 14.0293L11.4568 13.2293L6.14278 7.9153L11.4568 2.60063L10.6568 1.80063L4.94278 7.5153Z" fill="#777777" />
+                                            </svg>
+ 
+                                            <div className="-m-1">
+                                                <span className={`p-1 ml-2 cursor-pointer ${stepOne ? 'font-semibold text-black' : ''}`} onClick={() => setStepOne(true)}> بيانات العميل </span>
+                                            </div>
+                                        </div>
+                                    </li>
+
+                                    <li>
+                                        <div className="flex items-center">
+                                            <svg width="16" height="16" viewBox="0 0 16 16" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M4.94278 7.5153C4.88865 7.56691 4.84556 7.62897 4.81611 7.69773C4.78667 7.76648 4.77148 7.8405 4.77148 7.9153C4.77148 7.99009 4.78667 8.06411 4.81611 8.13286C4.84556 8.20162 4.88865 8.26368 4.94278 8.3153L10.6568 14.0293L11.4568 13.2293L6.14278 7.9153L11.4568 2.60063L10.6568 1.80063L4.94278 7.5153Z" fill="#777777" />
+                                            </svg>
+ 
+                                            <div className="-m-1">
+                                                <span className={`p-1 ml-2 cursor-pointer ${!stepOne ? 'font-semibold text-gray-700' : ''}`} onClick={handleClick}> طريقة الدفع </span>
+                                            </div>
+                                        </div>
+                                    </li>
+                                </ol>
+                            </nav>
+                            <div className="relative w-full">
+                                <form onSubmit={handleSubmit} className="checkout-form">
+                                    {stepOne ?
+                                        <div className="relative step-one">
+                                            {isLoading ? (
+                                                <div className="absolute z-20 flex items-start justify-center pt-20 bg-gray-200 bg-opacity-75 -inset-4">
+                                                    <Loader />
+                                                </div>
+                                            ) : ('')}
+
+                                            <h2 className="mb-5 flex justify-between items-center text-2xl font-bold pb-4 border-b border-[#D1D1D1] text-black">{t('checkout.shipping_information')}
+                                            <span className=" text-base text-gray-50 font-semibold flex flex-row-reverse gap-x-1">  <Link to='' className=" text-green-400 underline">تسجيل الدخول</Link>هل لديك حساب بالفعل؟ </span>
+                                           
+                                            </h2>
+
+                                            <ShippingInfo formData={formData} handleChange={handleChange} errors={errors} />
+
+                                            <h2 className="pt-5 mt-5 pb-4 border-b border-[#D1D1D1] mb-5 text-2xl font-bold text-black ">{t('checkout.choose_order_date')}</h2>
+                                            <TimeSlot formData={formData} handleChange={handleChange} errors={errors} />
+
+                                            <h2 className="pt-5 mt-5 mb-5 text-2xl pb-4 border-b border-[#D1D1D1] font-bold text-black ">{t('checkout.shipping_method')}</h2>
+                                            <ShippingOptions formData={formData} handleChange={handleChange} errors={errors} />
+                                            <Button
+                                                name={t('common.next_step')}
+                                                width="full"
+                                                extraclass="mt-5 leading-5"
+                                                onClick={handleClick}
+                                            />
+                                        </div>
+                                        :
+                                        <div className="step-two">
+                                            <PaymentMethod />
+                                            <div className="flex items-center pt-3 mt-3 border-t-2">
+                                                <input
+                                                    id="default-checkbox"
+                                                    type="checkbox"
+                                                    value={formData.terms}
+                                                    className={`w-4 h-4 text-blue-600 bg-gray-100 border-gray-300 rounded ${errors.terms && 'border-red-500'}`}
+                                                    name="terms"
+                                                    onChange={(e) => handleChange(e, 'checkbox')}
+
+                                                />
+                                                <label htmlFor="default-checkbox" className="ml-2 text-sm font-medium text-gray-900">{t('checkout.terms')}</label>
+                                            </div>
+                                            {errors.terms && <p className="mt-1 text-xs text-red-500">{errors.terms}</p>}
+                                            <Button
+                                                name={t('common.submit')}
+                                                width="full"
+                                                extraclass="mt-5 leading-5"
+                                                type="submit"
+                                            />
+                                        </div>
+                                    }
+
+                                </form>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div className="second bg-green-300 w-[44%] py-36 flex justify-center">
+                        <CartSummary rate={formData.shipping_fee} />
+                    </div>
+                </div>
+            ) : (
+                <div className='flex mt-auto items-center justify-center min-h-[400px] flex-col'>
+                    <p className="text-lg text-slate-500">Your cart is currently empty.</p>
+                    <Link to='/products' className="inline-flex justify-center px-4 py-2 mt-5 text-sm font-semibold text-white capitalize rounded-lg bg-slate-900 hover:bg-slate-700">continue shopping</Link>
+                </div>
+            )}
+
         </div>
     );
 }
