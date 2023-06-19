@@ -17,3 +17,9 @@ export type ErrorResponse = {
   status: string;
   msg: string;
 };
+
+export type CurrencyContextType = {
+  currency: string;
+  setCurrency: (currency: string) => void;
+  formatCurrency: (value: number, currency: string) => string;
+};

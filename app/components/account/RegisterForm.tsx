@@ -274,7 +274,6 @@ export default function RegisterForm() {
                         <div className="flex mt-1 space-x-3">
                             <div className='w-1/3'>
                                 <SelectInput
-                                    value={formData.birth_day}
                                     options={[
                                       { label: 'Day', value: '' }, // Add an empty option as the default
                                       ...Array.from({ length: 31 }, (_, index) => ({
@@ -287,7 +286,6 @@ export default function RegisterForm() {
                             </div>
                             <div className='w-1/3'>
                                 <SelectInput
-                                    value={formData.birth_month}
                                     options={[
                                         { label: 'Month', value: '' },
                                         ...Array.from({ length: 12 }, (_, i) => ({
@@ -300,7 +298,6 @@ export default function RegisterForm() {
                             </div>
                             <div className='w-1/3'>
                                 <SelectInput
-                                    value={formData.birth_year}
                                     options={[
                                       { label: 'Year', value: '' }, // Add an empty option as the default
                                       ...Array.from({ length: 74 }, (_, i) => ({

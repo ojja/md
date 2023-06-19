@@ -1,20 +1,19 @@
 import React, { Fragment, useEffect, useState } from 'react';
 
-import { Dialog, Menu, Popover, Tab, Transition } from '@headlessui/react'
-import { Bars3Icon, ChevronDownIcon, MagnifyingGlassIcon, ShoppingBagIcon, XMarkIcon } from '@heroicons/react/24/outline'
+import { Popover, Transition } from '@headlessui/react'
+import { Bars3Icon, ShoppingBagIcon } from '@heroicons/react/24/outline'
 import { useShoppingCart } from '~/stores/cartStore';
 import ShoppingCart from '~/components/ShoppingCart';
-import { Link, useLocation, useNavigate, useSearchParams } from '@remix-run/react';
+import { Link, useLocation } from '@remix-run/react';
 import { v4 } from 'uuid';
 import ChangeCountry from '~/components/ChangeCountry';
 import Search from '~/components/Search';
-import LanguageSwitcher from '~/components/LanguageSwitcher';
 import ChangeLanguage from '~/components/ChangeLanguage';
 import { useTranslation } from 'react-i18next';
 import NoInternetConnection from '~/components/NoInternetConnection';
-import { useStickyBox } from "react-sticky-box";
 import StickyDiv from '~/components/StickyDiv';
 import Cookies from "js-cookie";
+import CurrencySwitcher from '~/components/CurrencySwitcher';
 
 
 const navigation = {
@@ -333,63 +332,7 @@ export default function NavBar({ }) {
                     {/* Change Currncy */}
                     {isCheckoutPage ? null : (
                       <div className="hidden lg:ml-8 lg:flex">
-                        <Menu as="div" className="relative z-20 inline-block text-left">
-                          <div>
-                            <Menu.Button className="inline-flex items-center justify-center text-sm font-medium text-gray-700 group hover:text-gray-900">
-                              <img
-                                src="/images/en.svg"
-                                alt=""
-                                className="flex-shrink-0 block w-5 h-auto"
-                              />
-                              <span className="block ml-3 text-sm font-medium">USD</span>
-                              <span className="sr-only">, change currency</span>
-                            </Menu.Button>
-                          </div>
-
-                          <Transition
-                            as={Fragment}
-                            enter="transition ease-out duration-100"
-                            enterFrom="transform opacity-0 scale-95"
-                            enterTo="transform opacity-100 scale-100"
-                            leave="transition ease-in duration-75"
-                            leaveFrom="transform opacity-100 scale-100"
-                            leaveTo="transform opacity-0 scale-95"
-                          >
-                            <Menu.Items className="absolute right-0 z-10 w-40 mt-2 origin-top-right bg-white rounded-md shadow-2xl ring-1 ring-black ring-opacity-5 focus:outline-none">
-                              <div className="py-1">
-                                <Menu.Item key={v4()}>
-                                  {({ active }) => (
-                                    <div className='flex justify-center w-full px-4 py-2 text-sm font-medium text-gray-900 bg-gray-100'>
-                                      <img
-                                        src="/images/en.svg"
-                                        alt=""
-                                        className="flex-shrink-0 block w-5 h-auto"
-                                      />
-                                      <span className="block ml-3">USD</span>
-                                    </div>
-                                  )}
-                                </Menu.Item>
-                                <Menu.Item key={v4()}>
-                                  {({ active }) => (
-                                    <div
-                                      className={classNames(
-                                        active ? 'bg-gray-100' : '',
-                                        'flex justify-center px-4 py-2 text-sm font-medium text-gray-900 w-full cursor-pointer'
-                                      )}
-                                    >
-                                      <img
-                                        src="/images/eg.svg"
-                                        alt=""
-                                        className="flex-shrink-0 block w-5 h-auto"
-                                      />
-                                      <span className="block ml-3">EGP</span>
-                                    </div>
-                                  )}
-                                </Menu.Item>
-                              </div>
-                            </Menu.Items>
-                          </Transition>
-                        </Menu>
+                        <CurrencySwitcher />
                       </div>
                     )}
 

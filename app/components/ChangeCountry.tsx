@@ -1,6 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import { FormatCurrency } from "~/utils/FormatCurrency";
+// import { FormatCurrency } from "~/utils/FormatCurrency";
 import { getSelectedCurrency, setSelectedCurrency } from "~/utils/currencyUtils";
 import { useTranslation } from "react-i18next";
 import Popup from "./Popup";
@@ -71,7 +71,7 @@ export default function ChangeCountry() {
                                 Saudi Arabia
                             </button>
 
-                            <div>{FormatCurrency(872, getSelectedCurrency())}</div>
+                            {/* <div>{FormatCurrency(872, getSelectedCurrency())}</div> */}
                         </div>
                     </div>
                 </Popup>

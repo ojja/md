@@ -25,7 +25,7 @@ const isShoppingCartOpen = persistentAtom<boolean>(
   false,
   {
     listen: false,
-    defaultValue: false, // set the default value to false
+    // defaultValue: false, // set the default value to false
     encode: (value) => String(value),
     decode: (value) =>
       value === null || value === undefined ? false : Boolean(value),
@@ -35,10 +35,13 @@ const isShoppingCartOpen = persistentAtom<boolean>(
 const calculateTotalPrice = (cartItems: CartItem[]) => {
   let price = 0;
   cartItems.forEach((item) => {
-    price += (parseFloat(item.price) || 0) * item.quantity;
+    if (typeof item.price === 'string') {
+      price += (parseFloat(item.price) || 0) * item.quantity;
+    }
   });
   return price;
 };
+
 
 export const getCart = () => {
   console.log("called getCart 1");
