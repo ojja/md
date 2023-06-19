@@ -1,7 +1,7 @@
 import Msg from "~/components/Msg";
 import OrdersTable from "~/components/OrdersTable";
 import ReferralBox from "~/components/ReferralBox";
-import { FormatCurrency } from "~/utils/FormatCurrency";
+import FormatCurrency from "~/utils/FormatCurrency";
 import SingleAddress from "~/components/SingleAddress";
 import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
@@ -97,7 +97,7 @@ export default function DashBoard({ userOrders }: any) {
                 </div>
                 <div className="flex items-center justify-between px-4 py-6 border">
                     <span className="text-xl tracking-wider">{t("common.wallet_balance")}</span>
-                    <span className="ml-20 text-lg font-bold">{FormatCurrency(400)}</span>
+                    <span className="ml-20 text-lg font-bold"><FormatCurrency value={400}/></span>
                 </div>
             </div>
 

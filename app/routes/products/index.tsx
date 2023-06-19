@@ -30,25 +30,40 @@ export const loader: LoaderFunction = async ({ request }) => {
     const maxPrice = Number(searchParams.get("maxPrice")) || 500000;
     let selectedCategories = searchParams.get("selectedCategories") || "";
     const perPage = 20;
-
+  
     try {
-        const response = await getFilterProducts(
-            selectedCategories,
-            pageNumber,
-            perPage,
-            minPrice,
-            maxPrice
-        );
-        const filteredProducts = await response;
-        return json({
-            filteredProducts,
-        });
+      // Start the Server-Timing measurement
+      const start = process.hrtime();
+      
+      const response = await getFilterProducts(
+        selectedCategories,
+        pageNumber,
+        perPage,
+        minPrice,
+        maxPrice
+      );
+      const filteredProducts = await response;
+  
+      // Calculate the elapsed time
+      const elapsed = process.hrtime(start);
+      const responseTime = Math.round(elapsed[0] * 1000 + elapsed[1] / 1e6);
+  
+      // Create the Server-Timing header value
+      const serverTiming = `total;dur=${responseTime}`;
+      
+      // Create the response with the Server-Timing header
+      return new Response(JSON.stringify({ filteredProducts }), {
+        headers: {
+          "Content-Type": "application/json",
+          "Server-Timing": serverTiming,
+        },
+      });
     } catch (error) {
-        console.log("error", error);
-        return new Response("Internal Server Error", { status: 500 });
+      console.log("error", error);
+      return new Response("Internal Server Error", { status: 500 });
     }
-};
-
+  };
+  
 
 
 export default function shop() {

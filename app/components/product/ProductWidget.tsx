@@ -3,7 +3,7 @@ import { Link } from "@remix-run/react";
 import Quickview from "~/components/Quickview";
 import AddToCartSimple from "~/components/AddToCartSimple";
 import { useTranslation } from "react-i18next";
-import { FormatCurrency } from "~/utils/FormatCurrency";
+import FormatCurrency from "~/utils/FormatCurrency";
 import ProgressiveImage from "~/components/ProgressiveImage";
 import Img from "~/components/icons/Img";
 import WishlistBtn from "~/components/WishlistBtn";
@@ -87,7 +87,7 @@ const ProductWidget = ({ product, wishlist }: ProductWidgetProps) => {
                         <p className="mt-1 text-sm text-gray-500">{product?.id}</p>
                     </div>
                     <p className="text-sm font-medium text-gray-900">
-                        {FormatCurrency(product?.price ? product.price : 0)}
+                        <FormatCurrency value={(product?.price ? product.price : 0)}/>
                     </p>
                 </div>
                 <div className="relative z-1">

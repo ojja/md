@@ -7,7 +7,7 @@ import MiniCartItem from './cart/MiniCartItem';
 import MiniCartUpSell from './cart/MiniCartUpSell';
 import MiniCartTools from './cart/MiniCartTools';
 import i18next from 'i18next';
-import { FormatCurrency } from '~/utils/FormatCurrency';
+import FormatCurrency from '~/utils/FormatCurrency';
 import MiniCartItemLoader from './cart/MiniCartItemLoader';
 import { Link } from '@remix-run/react';
 import { useTranslation } from 'react-i18next';
@@ -116,7 +116,7 @@ const ShoppingCart = () => {
                         <div className="px-4 py-4 border-t border-gray-200 top-shadow">
                           <div className="flex justify-between text-base font-medium text-gray-900">
                             <p>{t('common.subtotal')}</p>
-                            <p>{FormatCurrency(totalPrice)}</p>
+                            <p><FormatCurrency value={totalPrice}/></p>
                           </div>
                           <p className="mt-0.5 text-sm text-gray-500">{t('common.shipping_subtotal')}</p>
                           <div className="mt-4">

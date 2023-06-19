@@ -4,7 +4,7 @@ import { Fragment, useEffect, useState } from "react";
 import Button from "~/components/Button";
 import { Dialog, Transition } from "@headlessui/react";
 import TrackingSteps from "~/components/TrackingSteps";
-import { FormatCurrency } from "~/utils/FormatCurrency";
+import FormatCurrency from "~/utils/FormatCurrency";
 import Status from "~/components/Status";
 import Loader from "~/components/Loader";
 import { Site_Title } from "~/config";
@@ -164,7 +164,7 @@ export default function Order() {
                         </div>
                         <div className="flex items-center">
                             <span className="text-sm text-[#929292] mr-2">{t('common.points_earned')}:</span>
-                            <strong className="text-[#777777] font-bold">2000 {t('common.point')} ({FormatCurrency(100)})</strong>
+                            <strong className="text-[#777777] font-bold">2000 {t('common.point')} (<FormatCurrency value={(100)}/>)</strong>
                         </div>
                     </div>
 
@@ -204,13 +204,13 @@ export default function Order() {
                                             </div>
                                             <div className="flex pl-2">
                                                 <dt className="font-medium text-gray-900">{t('common.price')}</dt>
-                                                <dd className="ml-2 text-gray-700">{FormatCurrency(product.subtotal)}</dd>
+                                                <dd className="ml-2 text-gray-700"><FormatCurrency value={(product.subtotal)}/></dd>
                                             </div>
                                         </dl>
                                         <dl className="flex space-x-4 text-base divide-x divide-gray-200 sm:space-x-6">
                                             <div className="flex">
                                                 <dt className="font-medium text-gray-900">{t('common.total')}</dt>
-                                                <dd className="ml-2 text-gray-700">{FormatCurrency(product.total)}</dd>
+                                                <dd className="ml-2 text-gray-700"><FormatCurrency value={(product.total)}/></dd>
                                             </div>
                                         </dl>
                                     </div>
@@ -262,7 +262,7 @@ export default function Order() {
                     <dl className="pt-10 space-y-6 text-sm border-t border-gray-200">
                         <div className="flex justify-between">
                             <dt className="font-medium text-gray-900">{t('common.subtotal')}</dt>
-                            <dd className="text-gray-700">{FormatCurrency(subtotal)}</dd>
+                            <dd className="text-gray-700"><FormatCurrency value={(subtotal)}/></dd>
                         </div>
                         {discount !== 0 && (
                             <div className="flex justify-between">
@@ -270,18 +270,18 @@ export default function Order() {
                                     {t('checkout.discount')}
                                     <span className="rounded-full bg-gray-200 text-xs text-gray-600 py-0.5 px-2 ml-2">STUDENT50</span>
                                 </dt>
-                                <dd className="text-gray-700">-{FormatCurrency(discount)}</dd>
+                                <dd className="text-gray-700">-<FormatCurrency value={(discount)}/></dd>
                             </div>
                         )}
                         {shipping_fees !== null && (
                             <div className="flex justify-between">
                                 <dt className="font-medium text-gray-900">{t('checkout.shipping')}</dt>
-                                <dd className="text-gray-700">{FormatCurrency(shipping_fees)}</dd>
+                                <dd className="text-gray-700"><FormatCurrency value={(shipping_fees)}/></dd>
                             </div>
                         )}
                         <div className="flex justify-between">
                             <dt className="text-lg font-medium text-gray-900 uppercase">{t('common.total')}</dt>
-                            <dd className="text-lg font-bold text-gray-900">{FormatCurrency(total)}</dd>
+                            <dd className="text-lg font-bold text-gray-900"><FormatCurrency value={(total)}/></dd>
                         </div>
                     </dl>
 
@@ -446,13 +446,13 @@ export default function Order() {
                                                                 </div>
                                                                 <div className="flex pl-4 sm:pl-6">
                                                                     <dt className="font-medium text-gray-900">Price</dt>
-                                                                    <dd className="ml-2 text-gray-700">{FormatCurrency(32)}</dd>
+                                                                    <dd className="ml-2 text-gray-700"><FormatCurrency value={(32)}/></dd>
                                                                 </div>
                                                             </dl>
                                                             <dl className="flex space-x-4 text-sm divide-x divide-gray-200 sm:space-x-6">
                                                                 <div className="flex">
                                                                     <dt className="font-medium text-gray-900">Total</dt>
-                                                                    <dd className="ml-2 text-gray-700">{FormatCurrency(32 * 1)}</dd>
+                                                                    <dd className="ml-2 text-gray-700"><FormatCurrency value={(32 * 1)}/></dd>
                                                                 </div>
                                                             </dl>
                                                         </div>
@@ -489,13 +489,13 @@ export default function Order() {
                                                                 </div>
                                                                 <div className="flex pl-4 sm:pl-6">
                                                                     <dt className="font-medium text-gray-900">Price</dt>
-                                                                    <dd className="ml-2 text-gray-700">{FormatCurrency(40)}</dd>
+                                                                    <dd className="ml-2 text-gray-700"><FormatCurrency value={(40)}/></dd>
                                                                 </div>
                                                             </dl>
                                                             <dl className="flex space-x-4 text-sm divide-x divide-gray-200 sm:space-x-6">
                                                                 <div className="flex">
                                                                     <dt className="font-medium text-gray-900">Total</dt>
-                                                                    <dd className="ml-2 text-gray-700">{FormatCurrency(40 * 3)}</dd>
+                                                                    <dd className="ml-2 text-gray-700"><FormatCurrency value={(40 * 3)}/></dd>
                                                                 </div>
                                                             </dl>
                                                         </div>
@@ -532,13 +532,13 @@ export default function Order() {
                                                                 </div>
                                                                 <div className="flex pl-4 sm:pl-6">
                                                                     <dt className="font-medium text-gray-900">Price</dt>
-                                                                    <dd className="ml-2 text-gray-700">{FormatCurrency(32)}</dd>
+                                                                    <dd className="ml-2 text-gray-700"><FormatCurrency value={(32)}/></dd>
                                                                 </div>
                                                             </dl>
                                                             <dl className="flex space-x-4 text-sm divide-x divide-gray-200 sm:space-x-6">
                                                                 <div className="flex">
                                                                     <dt className="font-medium text-gray-900">Total</dt>
-                                                                    <dd className="ml-2 text-gray-700">{FormatCurrency(32 * 2)}</dd>
+                                                                    <dd className="ml-2 text-gray-700"><FormatCurrency value={(32 * 2)}/></dd>
                                                                 </div>
                                                             </dl>
                                                         </div>

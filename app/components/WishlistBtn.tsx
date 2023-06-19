@@ -40,8 +40,6 @@ export default function WishlistBtn({
                     // Remove product from wishlist using removeWishAPI
                     const response = await removeWishAPI(id);
                     if (response.status === "success") {
-                        // setIsWishlist(false);
-                        console.log('removeWishAPI>success')
                     }
                 } else {
                     const response = await addWishAPI(id);
@@ -54,20 +52,15 @@ export default function WishlistBtn({
             } catch (error) {
                 console.log("Failed to add/remove wishlist:", error);
             }
-
-            // Update local storage wishlist for logged-in user
             const localStorageWishlistItems = localStorage.getItem("wishlistItems");
             let updatedWishlistItems: ProductData[] = [];
-
             if (localStorageWishlistItems) {
                 updatedWishlistItems = JSON.parse(localStorageWishlistItems) as ProductData[];
             }
 
             if (isWishlist) {
-                // Remove product from local storage wishlist
                 updatedWishlistItems = updatedWishlistItems.filter((item: ProductData) => item.id !== id);
             } else {
-                // Add product to local storage wishlist
                 updatedWishlistItems.push({ ...data });
             }
 

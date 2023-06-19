@@ -1,4 +1,3 @@
-import type { LinksFunction, MetaFunction } from "@remix-run/cloudflare";
 import {
   Link,
   Links,
@@ -20,36 +19,32 @@ import stylesSlick from 'slick-carousel/slick/slick.css';
 import stylesSlickTheme from 'slick-carousel/slick/slick-theme.css';
 import Footer from "./layouts/footer";
 import NavBar from "./layouts/navbar";
-import { useEffect, useLayoutEffect, useRef, useState } from "react";
+import { useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import i18n from 'i18next';
 import { useTranslation } from 'react-i18next';
 import LanguageSwitcher from "./components/LanguageSwitcher";
 import { initFacebookPixel } from './fb-pixel';
 import { FB_PIXELCODE } from "./config";
+import { CurrencyProvider } from "./CurrencyContext";
 
 
 
-export const links: LinksFunction = () => {
-  const langStyles = i18n.language === "ar" ? stylesRtl : styles;
+export const links = () => {
   const isSingleProductPage = typeof window !== "undefined" && window.location.pathname.startsWith("/products/");
 
   return [
     { rel: 'preload', as: 'style', href: criticalCSS },
-    // { rel: 'preload', as: 'style', href: langStyles },
     { rel: 'preload', as: 'style', href: stylesBase },
     isSingleProductPage ? { rel: 'preload', as: 'style', href: stylesSlick } : null,
     isSingleProductPage ? { rel: 'preload', as: 'style', href: stylesSlickTheme } : null,
-    // { rel: 'preload', as: 'style', href: stylesSlickTheme },
-    // { rel: 'preload', as: 'style', href: stylesSlickTheme },
     { rel: 'stylesheet', href: criticalCSS },
-    // { rel: 'stylesheet', href: langStyles },
     { rel: 'stylesheet', href: stylesBase },
     isSingleProductPage ? { rel: 'stylesheet', href: stylesSlick } : null,
     isSingleProductPage ? { rel: 'stylesheet', href: stylesSlickTheme } : null
   ].filter(Boolean);
 }
 
-export const meta: MetaFunction = () => ({
+export const meta = () => ({
   charset: "utf-8",
   title: "PWA",
   viewport: "width=device-width,initial-scale=1",
@@ -98,6 +93,7 @@ export default function App() {
   }, []);
 
   return (
+    <CurrencyProvider>
     <html lang={language} dir={i18n.language === "ar" ? 'rtl' : 'ltr'}>
       <head>
         <Meta />
@@ -115,9 +111,10 @@ export default function App() {
         <Footer />
         <ScrollRestoration />
         <Scripts />
-        {/* {process.env.NODE_ENV === 'development' ? <LiveReload /> : null} */}
+        {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
       </body>
     </html >
+    </CurrencyProvider>
   );
 }
 
