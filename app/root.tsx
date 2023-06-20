@@ -33,11 +33,10 @@ export const links = () => {
   const isSingleProductPage = typeof window !== "undefined" && window.location.pathname.startsWith("/products/");
 
   return [
-    { rel: 'preload', as: 'style', href: criticalCSS },
+    { rel: 'stylesheet', href: criticalCSS },
     { rel: 'preload', as: 'style', href: stylesBase },
     { rel: 'preload', as: 'style', href: stylesSlick },
     { rel: 'preload', as: 'style', href: stylesSlickTheme },
-    { rel: 'stylesheet', href: criticalCSS },
     { rel: 'stylesheet', href: stylesBase },
     { rel: 'stylesheet', href: stylesSlick },
     { rel: 'stylesheet', href: stylesSlickTheme }

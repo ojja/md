@@ -11,7 +11,7 @@ export default function Index() {
   return (
     <div>
       <HeroSection />
-      <ExtraProducts title='New Arrivls' count={20}/>
+      <ExtraProducts title='New Arrivals' count={20}/>
       <ExtraProducts categorySlug='clothing' title='Best Selling' count={20} arrangement="ASC"/>
       <AboutSection />
       <HeroTitle />
