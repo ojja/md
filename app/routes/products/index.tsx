@@ -11,7 +11,8 @@ import Filters from "~/components/Filters";
 import { getFilterProducts } from "~/models/category.server";
 import { API_ENDPOINT, Site_Title } from "~/config";
 import Loader from "~/components/Loader";
-import Sort from "~/components/Sort";
+import { createResponse } from "remix";
+import ListLoader from "~/components/ListLoader";
 
 
 function classNames(...classes: string[]) {
@@ -30,40 +31,40 @@ export const loader: LoaderFunction = async ({ request }) => {
     const maxPrice = Number(searchParams.get("maxPrice")) || 500000;
     let selectedCategories = searchParams.get("selectedCategories") || "";
     const perPage = 20;
-  
+
     try {
-      // Start the Server-Timing measurement
-      const start = process.hrtime();
-      
-      const response = await getFilterProducts(
-        selectedCategories,
-        pageNumber,
-        perPage,
-        minPrice,
-        maxPrice
-      );
-      const filteredProducts = await response;
-  
-      // Calculate the elapsed time
-      const elapsed = process.hrtime(start);
-      const responseTime = Math.round(elapsed[0] * 1000 + elapsed[1] / 1e6);
-  
-      // Create the Server-Timing header value
-      const serverTiming = `total;dur=${responseTime}`;
-      
-      // Create the response with the Server-Timing header
-      return new Response(JSON.stringify({ filteredProducts }), {
-        headers: {
-          "Content-Type": "application/json",
-          "Server-Timing": serverTiming,
-        },
-      });
+        // Start the Server-Timing measurement
+        const start = process.hrtime();
+
+        const response = await getFilterProducts(
+            selectedCategories,
+            pageNumber,
+            perPage,
+            minPrice,
+            maxPrice
+        );
+        const filteredProducts = await response;
+
+        // Calculate the elapsed time
+        const elapsed = process.hrtime(start);
+        const responseTime = Math.round(elapsed[0] * 1000 + elapsed[1] / 1e6);
+
+        // Create the Server-Timing header value
+        const serverTiming = `total;dur=${responseTime}`;
+
+        // Create the response with the Server-Timing header
+        return new Response(JSON.stringify({ filteredProducts }), {
+            headers: {
+                "Content-Type": "application/json",
+                "Server-Timing": serverTiming,
+            },
+        });
     } catch (error) {
-      console.log("error", error);
-      return new Response("Internal Server Error", { status: 500 });
+        console.log("error", error);
+        return new Response("Internal Server Error", { status: 500 });
     }
-  };
-  
+};
+
 
 
 export default function shop() {
@@ -224,7 +225,7 @@ export default function shop() {
         const loadingTimeout = setTimeout(() => {
             setIsLoadingPage(false);
             setIsLoading(false);
-        }, 1500);
+        }, 500);
 
         return () => {
             clearTimeout(loadingTimeout);
@@ -236,9 +237,7 @@ export default function shop() {
             <main className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
                 <div className='pt-5'>
                     {isLoadingPage ? (
-                        <div className="flex justify-center items-center h-screen">
-                            <Loader />
-                        </div>
+                        <ListLoader />
                     ) : (
                         <>
                             <ShopListTop grid={grid} setGrid={setGrid} setMobileFiltersOpen={setMobileFiltersOpen} title={'Shop All'} handleSortOptionChange={handleSortOptionChange} />

@@ -27,7 +27,8 @@ const FormatCurrency: React.FC<{ value: number }> = ({ value }) => {
   const { currency } = useCurrency();
   const formatCurrency = (number: number, currency: string) => {
     const customRates: CustomRates = {
-      USD: 0.032,
+      // USD: 0.032,
+      EGP: 30.90,
     };
     const exchangeRate = customRates[currency] || 1;
     const formattedValue = number * exchangeRate;

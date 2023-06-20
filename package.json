@@ -4,7 +4,7 @@
   "scripts": {
     "build": "npm run build:css && remix build",
     "build:css": "tailwindcss -o ./app/tailwind.[hash].css && rtlcss ./app/tailwind.[hash].css ./app/tailwind.rtl.[hash].css",
-    "dev": "concurrently \"npm run dev:css\" \"npm run minify:js:watch\" \"remix dev\" \"npm run json-server\"",
+    "dev": "concurrently \"npm run dev:css\" \"remix dev\" \"npm run json-server\"",
     "dev:css": "tailwindcss -o ./app/tailwind.[hash].css && rtlcss ./app/tailwind.[hash].css ./app/tailwind.rtl.[hash].css",
     "postinstall": "remix setup node && remix-esbuild-override",
     "start": "remix-serve build",
@@ -36,6 +36,7 @@
     "eslint-plugin-react-hooks": "^4.6.0",
     "express-session": "^1.17.3",
     "flickity": "^2.3.0",
+    "fsevents": "^2.3.2",
     "history": "^5.3.0",
     "i18next": "^22.4.15",
     "i18next-browser-languagedetector": "^6.1.4",

@@ -35,12 +35,12 @@ export const links = () => {
   return [
     { rel: 'preload', as: 'style', href: criticalCSS },
     { rel: 'preload', as: 'style', href: stylesBase },
-    isSingleProductPage ? { rel: 'preload', as: 'style', href: stylesSlick } : null,
-    isSingleProductPage ? { rel: 'preload', as: 'style', href: stylesSlickTheme } : null,
+    { rel: 'preload', as: 'style', href: stylesSlick },
+    { rel: 'preload', as: 'style', href: stylesSlickTheme },
     { rel: 'stylesheet', href: criticalCSS },
     { rel: 'stylesheet', href: stylesBase },
-    isSingleProductPage ? { rel: 'stylesheet', href: stylesSlick } : null,
-    isSingleProductPage ? { rel: 'stylesheet', href: stylesSlickTheme } : null
+    { rel: 'stylesheet', href: stylesSlick },
+    { rel: 'stylesheet', href: stylesSlickTheme }
   ].filter(Boolean);
 }
 
@@ -71,7 +71,7 @@ export default function App() {
       const screenHeight = window.innerHeight;
       const navbarElement = document.querySelector('header');
       const footerElement = document.querySelector('footer');
-    
+
       if (navbarElement && footerElement && mainRef.current) {
         const navbarHeight = navbarElement.offsetHeight;
         const footerHeight = footerElement.offsetHeight;
@@ -80,7 +80,7 @@ export default function App() {
         mainRef.current.style.minHeight = `${mainHeight}px`;
       }
     }
-    
+
 
     if (typeof window !== 'undefined') {
       calculateMainHeight();
@@ -94,26 +94,26 @@ export default function App() {
 
   return (
     <CurrencyProvider>
-    <html lang={language} dir={i18n.language === "ar" ? 'rtl' : 'ltr'}>
-      <head>
-        <Meta />
-        <link rel="preconnect" href="https://fonts.googleapis.com" />
-        <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
-        <Links />
-        <link rel="stylesheet" href={i18n.language === "ar" ? stylesRtl : styles} />
-      </head>
-      <body className={`box-border oultine-none ${i18n.language === "ar" ? 'font-sans-ar rtl' : 'font-sans-en ltr'}`}>
-        <NavBar
-        />
-        <main className="relative z-10 bg-gray-100" ref={mainRef}>
-          <Outlet />
-        </main>
-        <Footer />
-        <ScrollRestoration />
-        <Scripts />
-        {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
-      </body>
-    </html >
+      <html lang={language} dir={i18n.language === "ar" ? 'rtl' : 'ltr'}>
+        <head>
+          <Meta />
+          <link rel="preconnect" href="https://fonts.googleapis.com" />
+          <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
+          <Links />
+          <link rel="stylesheet" href={i18n.language === "ar" ? stylesRtl : styles} />
+        </head>
+        <body className={`box-border oultine-none ${i18n.language === "ar" ? 'font-sans-ar rtl' : 'font-sans-en ltr'}`}>
+          <NavBar
+          />
+          <main className="relative z-10 bg-gray-100" ref={mainRef}>
+            <Outlet />
+          </main>
+          <Footer />
+          <ScrollRestoration />
+          <Scripts />
+          {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
+        </body>
+      </html >
     </CurrencyProvider>
   );
 }
