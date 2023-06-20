@@ -7,7 +7,7 @@ type CurrencyContextType = {
 };
 
 type CurrencyProviderProps = {
-  children: ReactNode;
+  children: React.ReactNode;
 };
 
 const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined);

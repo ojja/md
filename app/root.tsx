@@ -21,14 +21,19 @@ import Footer from "./layouts/footer";
 import NavBar from "./layouts/navbar";
 import { useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import i18n from 'i18next';
-import { useTranslation } from 'react-i18next';
-import LanguageSwitcher from "./components/LanguageSwitcher";
+import { I18nextProvider, initReactI18next, useTranslation } from 'react-i18next';
 import { initFacebookPixel } from './fb-pixel';
 import { FB_PIXELCODE } from "./config";
 import { CurrencyProvider } from "./CurrencyContext";
+import en from "./locales/en.json";
+import ar from "./locales/ar.json";
 
-
-
+export const scripts = () => {
+  return [];
+};
+export const loader = async () => {
+  return { data: {} };
+};
 export const links = () => {
   const isSingleProductPage = typeof window !== "undefined" && window.location.pathname.startsWith("/products/");
 
@@ -37,9 +42,11 @@ export const links = () => {
     { rel: 'preload', as: 'style', href: stylesBase },
     { rel: 'preload', as: 'style', href: stylesSlick },
     { rel: 'preload', as: 'style', href: stylesSlickTheme },
+    { rel: 'preconnect', href: 'https://fonts.googleapis.com' },
+    { rel: 'stylesheet', as: 'style', href: 'https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap' },
     { rel: 'stylesheet', href: stylesBase },
     { rel: 'stylesheet', href: stylesSlick },
-    { rel: 'stylesheet', href: stylesSlickTheme }
+    { rel: 'stylesheet', href: stylesSlickTheme },
   ].filter(Boolean);
 }
 
@@ -49,6 +56,21 @@ export const meta = () => ({
   viewport: "width=device-width,initial-scale=1",
 });
 
+i18n.use(initReactI18next).init({
+  resources: {
+    en: { translation: en },
+    ar: { translation: ar },
+  },
+  lng: "en",
+  fallbackLng: "en",
+  debug: false,
+  interpolation: {
+    escapeValue: false,
+  },
+  react: {
+    useSuspense: false,
+  }
+});
 
 export default function App() {
   const [language, setLanguage] = useState(i18n.language);
@@ -91,28 +113,41 @@ export default function App() {
     }
   }, []);
 
+  // debugger;
+  console.clear();
+  console.log(`
+  Wᴇʟᴄᴏᴍᴇ ɪɴ
+  ██████╗░░██╗░░░░░░░██╗░█████╗░
+  ██╔══██╗░██║░░██╗░░██║██╔══██╗
+  ██████╔╝░╚██╗████╗██╔╝███████║
+  ██╔═══╝░░░████╔═████║░██╔══██║
+  ██║░░░░░░░╚██╔╝░╚██╔╝░██║░░██║
+  ╚═╝░░░░░░░░╚═╝░░░╚═╝░░╚═╝░░╚═╝
+`);
+
   return (
     <CurrencyProvider>
-      <html lang={language} dir={i18n.language === "ar" ? 'rtl' : 'ltr'}>
-        <head>
-          <Meta />
-          <link rel="preconnect" href="https://fonts.googleapis.com" />
-          <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
-          <Links />
-          <link rel="stylesheet" href={i18n.language === "ar" ? stylesRtl : styles} />
-        </head>
-        <body className={`box-border oultine-none ${i18n.language === "ar" ? 'font-sans-ar rtl' : 'font-sans-en ltr'}`}>
-          <NavBar
-          />
-          <main className="relative z-10 bg-gray-100" ref={mainRef}>
-            <Outlet />
-          </main>
-          <Footer />
-          <ScrollRestoration />
-          <Scripts />
-          {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
-        </body>
-      </html >
+      <I18nextProvider i18n={i18n}>
+        <html lang={language} dir={i18n.language === "ar" ? 'rtl' : 'ltr'}>
+          <head>
+            <Meta />
+            {/* <link rel="preconnect" href="https://fonts.googleapis.com" /> */}
+            {/* <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" /> */}
+            <Links />
+            <link rel="stylesheet" href={i18n.language === "ar" ? stylesRtl : styles} />
+          </head>
+          <body className={`box-border oultine-none ${i18n.language === "ar" ? 'font-sans-ar rtl' : 'font-sans-en ltr'}`}>
+            <NavBar />
+            <main className="relative z-10 bg-gray-100" ref={mainRef}>
+              <Outlet />
+            </main>
+            <Footer />
+            <ScrollRestoration />
+            <Scripts />
+            {/* {process.env.NODE_ENV === 'development' ? <LiveReload /> : null} */}
+          </body>
+        </html >
+      </I18nextProvider>
     </CurrencyProvider>
   );
 }

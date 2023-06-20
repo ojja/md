@@ -6,7 +6,7 @@ import FormatCurrency from "~/utils/FormatCurrency";
 
 export const meta = () => {
   return {
-      title: `My Wallet | ${Site_Title}`
+    title: `My Wallet | ${Site_Title}`
   }
 }
 
@@ -86,7 +86,7 @@ export default function wallet() {
       <div className="py-12 border-b-2 border-gray-200 border-solid">
         <div className="flex items-center justify-between px-4 py-6 border-2">
           <span className="text-xl tracking-wider">Wallet Balance</span>
-          <span className="ml-20 text-lg font-bold"><FormatCurrency value={(400)}/></span>
+          <span className="ml-20 text-lg font-bold"><FormatCurrency value={(400)} /></span>
         </div>
       </div>
 
@@ -150,38 +150,42 @@ export default function wallet() {
       <div className="py-8 border-b-2 border-gray-200 border-solid">
         <h2 className="pb-2 mb-4 text-3xl border-b-2 border-gray-200 border-solid">Points History</h2>
         <table className="w-full text-left">
-          <tr>
-            <th className="py-3">Points</th>
-            <th>Date</th>
-            <th>Reason</th>
-            <th>Total Points</th>
-          </tr>
-          <tr>
-            <td>
-              <div className="text-[#32A94C] flex items-center">
-                <svg width="14" height="6" viewBox="0 0 14 6" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-2">
-                  <path d="M7 0L13.0622 6H0.937822L7 0Z" fill="#32A94C" />
-                </svg>
-                9900 Points
-              </div>
-            </td>
-            <td>2023-04-26</td>
-            <td>Points Add By Admin </td>
-            <td>0 Points</td>
-          </tr>
-          <tr>
-            <td>
-              <div className="text-[#F44336] flex items-center">
-                <svg width="14" height="6" viewBox="0 0 14 6" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-2">
-                  <path d="M7 6L0.937822 1.14193e-06L13.0622 8.1987e-08L7 6Z" fill="#F44336" />
-                </svg>
-                10400 Points
-              </div>
-            </td>
-            <td>2023-04-26</td>
-            <td>Points Deducted For Return Request - #3775</td>
-            <td>-9900 Points</td>
-          </tr>
+          <thead>
+            <tr>
+              <th className="py-3">Points</th>
+              <th>Date</th>
+              <th>Reason</th>
+              <th>Total Points</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div className="text-[#32A94C] flex items-center">
+                  <svg width="14" height="6" viewBox="0 0 14 6" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-2">
+                    <path d="M7 0L13.0622 6H0.937822L7 0Z" fill="#32A94C" />
+                  </svg>
+                  9900 Points
+                </div>
+              </td>
+              <td>2023-04-26</td>
+              <td>Points Add By Admin </td>
+              <td>0 Points</td>
+            </tr>
+            <tr>
+              <td>
+                <div className="text-[#F44336] flex items-center">
+                  <svg width="14" height="6" viewBox="0 0 14 6" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-2">
+                    <path d="M7 6L0.937822 1.14193e-06L13.0622 8.1987e-08L7 6Z" fill="#F44336" />
+                  </svg>
+                  10400 Points
+                </div>
+              </td>
+              <td>2023-04-26</td>
+              <td>Points Deducted For Return Request - #3775</td>
+              <td>-9900 Points</td>
+            </tr>
+          </tbody>
         </table>
       </div>
     </div>

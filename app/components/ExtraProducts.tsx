@@ -35,7 +35,6 @@ export default function ExtraProducts({ categorySlug, count = 10, title, criteri
         criteria: criteria, // Sorting criteria (e.g., 'price', 'name', etc.)
         arrangement: arrangement, // Sorting arrangement (e.g., 'ASC', 'DESC')
     };
-    console.log('filterData',filterData)
     useEffect(() => {
         if (inView) {
             const fetchData = async () => {
