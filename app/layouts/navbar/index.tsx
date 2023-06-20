@@ -169,9 +169,7 @@ export default function NavBar({ }) {
 
 
         <div>
-          {isCheckoutPage ? null : (
-            typeof window !== 'undefined' && <ShoppingCart />
-          )}
+        {isCheckoutPage ? null : typeof window !== 'undefined' && <ShoppingCart />}
         </div>
         <header className="relative z-20 bg-white">
           {isCheckoutPage ? null : (

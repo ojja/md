@@ -10,7 +10,7 @@ export default function HeroSection() {
                     alt=""
                     className="absolute inset-0 -z-10 h-full w-full object-cover object-right md:object-center"
                 />
-                <div className="mx-auto max-w-2xl py-32 sm:py-48 lg:py-56">
+                <div className="mx-auto max-w-2xl py-16 sm:py-24 lg:py-28">
                     <div className="hidden sm:mb-8 sm:flex sm:justify-center">
                         <div className="relative rounded-full py-1 px-3 text-sm leading-6 text-gray-600 ring-1 ring-gray-900/10 hover:ring-gray-900/20">
                             Announcing our next round of funding.{' '}

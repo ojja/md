@@ -682,6 +682,10 @@ video {
   bottom: -1.75rem;
 }
 
+.-left-12 {
+  right: -3rem;
+}
+
 .-right-7 {
   left: -1.75rem;
 }
@@ -1207,10 +1211,6 @@ video {
   height: 2rem;
 }
 
-.h-96 {
-  height: 24rem;
-}
-
 .h-\[1px\] {
   height: 1px;
 }
@@ -1229,10 +1229,6 @@ video {
 
 .h-full {
   height: 100%;
-}
-
-.h-screen {
-  height: 100vh;
 }
 
 .max-h-\[600px\] {
@@ -2507,11 +2503,6 @@ video {
   padding-bottom: 0.75rem;
 }
 
-.py-32 {
-  padding-top: 8rem;
-  padding-bottom: 8rem;
-}
-
 .py-4 {
   padding-top: 1rem;
   padding-bottom: 1rem;
@@ -3314,6 +3305,11 @@ video {
 .placeholder\:text-gray-400::placeholder {
   --tw-text-opacity: 1;
   color: rgb(156 163 175 / var(--tw-text-opacity));
+}
+
+.before\:content-none::before {
+  --tw-content: none;
+  content: var(--tw-content);
 }
 
 .hover\:scale-105:hover {
@@ -4144,11 +4140,6 @@ video {
     padding-bottom: 1rem;
   }
 
-  .sm\:py-48 {
-    padding-top: 12rem;
-    padding-bottom: 12rem;
-  }
-
   .sm\:pl-6 {
     padding-right: 1.5rem;
   }
@@ -4585,14 +4576,14 @@ video {
     padding-bottom: 5rem;
   }
 
+  .lg\:py-28 {
+    padding-top: 7rem;
+    padding-bottom: 7rem;
+  }
+
   .lg\:py-48 {
     padding-top: 12rem;
     padding-bottom: 12rem;
-  }
-
-  .lg\:py-56 {
-    padding-top: 14rem;
-    padding-bottom: 14rem;
   }
 
   .lg\:py-\[120px\] {

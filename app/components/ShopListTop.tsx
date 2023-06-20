@@ -2,6 +2,7 @@ import Sort from "~/components/Sort";
 import { FunnelIcon, Squares2X2Icon, ViewColumnsIcon } from '@heroicons/react/20/solid';
 import { useTranslation } from "react-i18next";
 import { useLoaderData } from "@remix-run/react";
+import { useEffect } from "react";
 
 function classNames(...classes: string[]) {
     return classes.filter(Boolean).join(' ')
@@ -10,9 +11,14 @@ export const loader = async ({ params }: any) => {
     const categorySlug = params.catSlug;
 }
 export default function ShopListTop({ grid, setGrid, setMobileFiltersOpen, title, handleSortOptionChange }: any) {
+    const { t, i18n } = useTranslation();
     const { categorySlug } = useLoaderData();
-
-    const { t } = useTranslation();
+    useEffect(() => {
+        i18n.loadNamespaces("common").then(() => {
+          i18n.setDefaultNamespace("common");
+          i18n.changeLanguage("en");
+        });
+      }, [i18n]);
     return (
         <div>
             <div className="flex flex-col flex-wrap items-baseline justify-between pt-2 pb-6 mb-4 border-b border-gray-200 md:flex-row">

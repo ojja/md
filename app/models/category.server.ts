@@ -1,6 +1,16 @@
 import { API_ENDPOINT } from "~/config";
 
+// Define a cache object to store API responses
+const apiCache = new Map();
+
 export async function getCategoryProducts(categorySlug: string, pageNumber: number = 1, pageSize: number = 20) {
+  const cacheKey = `getCategoryProducts:${categorySlug}:${pageNumber}:${pageSize}`;
+  
+  // Check if the response is already cached
+  if (apiCache.has(cacheKey)) {
+    return apiCache.get(cacheKey);
+  }
+  
   const url: string = `${API_ENDPOINT}/category.php`;
   const data: any = { category: categorySlug, products_per_page: pageSize, page_number: pageNumber };
   const options: RequestInit = {
@@ -14,19 +24,26 @@ export async function getCategoryProducts(categorySlug: string, pageNumber: numb
   try {
     const response = await fetch(url, options);
     const result = await response.json();
+    
+    // Cache the response for future use
+    apiCache.set(cacheKey, result);
+    
     return result;
   } catch (error) {
     console.error('Error:', error);
   }
 }
 
-
 export async function getFilterProducts(categorySlug: any, pageNumber: number, perPage: number, minPrice: number = 0, maxPrice: number = 1000000): Promise<unknown> {
+  const cacheKey = `getFilterProducts:${categorySlug}:${pageNumber}:${perPage}:${minPrice}:${maxPrice}`;
+  
+  // Check if the response is already cached
+  if (apiCache.has(cacheKey)) {
+    return apiCache.get(cacheKey);
+  }
+  
   const url: string = `${API_ENDPOINT}/filter.php`;
   const data: any = {
-    // attributes: {
-    //   size:[40,38]
-    // },
     category: categorySlug,
     price_range: [minPrice, maxPrice],
     products_per_page: perPage,
@@ -50,6 +67,10 @@ export async function getFilterProducts(categorySlug: any, pageNumber: number, p
       throw new Error(`HTTP error! status: ${response.status}`);
     }
     const result = await response.json();
+    
+    // Cache the response for future use
+    apiCache.set(cacheKey, result);
+    
     return result;
   } catch (error) {
     console.error('Error:', error);

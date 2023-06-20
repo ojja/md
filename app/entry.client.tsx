@@ -25,6 +25,9 @@ i18n.use(initReactI18next)
     interpolation: {
       escapeValue: false,
     },
+    react: {
+      useSuspense: false,  // << ----- this line
+    },
   });
 
 // Wrap the App component with the I18nextProvider
