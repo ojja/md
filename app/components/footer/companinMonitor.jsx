@@ -106,7 +106,7 @@ const CampaignMonitorForm = () => {
                 size="1rem"
                 color="#fff"
                 type="submit"
-                className="js-cm-submit-button sc-jWBwVP fClqPV bg-green-200 py-2 md:px-10 text-white rounded-100 px-4"
+                className="js-cm-submit-button sc-jWBwVP fClqPV bg-green-200 hover:bg-green-400 py-2 md:px-10 text-white rounded-100 px-4"
               >
                 {t('footer.subscription_button')}
               </button>

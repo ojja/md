@@ -16,11 +16,11 @@ export default function Button({ name, style = "solid", onClick, width = "auto",
                     to={href}
                     className={classNames(
                         style === 'border' ? 'text-gray-700 bg-white border border-gray-300 shadow-lg hover:bg-gray-50' : '',
-                        style === 'solid' ? 'text-white border border-transparent bg-slate-900 hover:bg-slate-700' : '',
+                        style === 'solid' ? 'text-white border border-transparent bg-green-200 hover:bg-green-400' : '',
                         style === 'solid-red' ? 'text-white border border-transparent bg-red-600 hover:bg-red-800' : '',
                         width === 'auto' ? 'inline-flex ' : '',
                         width === 'full' ? 'flex w-full' : '',
-                        'items-center justify-center px-10 py-2 font-medium  rounded-lg shadow-sm  sm:flex-grow-0',
+                        'items-center justify-center px-10  py-5  font-semibold text-xl rounded-100 shadow-sm  sm:flex-grow-0',
                         extraclass ? extraclass : '',
                     )}
                 >
@@ -31,11 +31,11 @@ export default function Button({ name, style = "solid", onClick, width = "auto",
 
                     className={classNames(
                         style === 'border' ? 'text-gray-700 bg-white border border-gray-300 shadow-lg hover:bg-gray-50' : '',
-                        style === 'solid' ? 'text-white border border-transparent bg-slate-900 hover:bg-slate-700' : '',
+                        style === 'solid' ? 'text-white border border-transparent bg-green-200 hover:bg-green-400' : '',
                         style === 'solid-red' ? 'text-white border border-transparent bg-red-600 hover:bg-red-800' : '',
                         width === 'auto' ? 'inline-flex ' : '',
                         width === 'full' ? 'flex w-full' : '',
-                        'items-center justify-center px-10 py-2 font-medium  rounded-lg shadow-sm  sm:flex-grow-0',
+                        'items-center justify-center px-10  py-5  font-semibold text-xl rounded-100 shadow-sm  sm:flex-grow-0',
                         extraclass ? extraclass : '',
                     )}
                     type={type}

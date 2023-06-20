@@ -131,7 +131,7 @@ export default function Cart() {
                                         <p className=" md:text-base text-xs w-1/2 font-semibold  text-black">لديك 120 نقطة في محفظتك و يمكنك خصم 12 EGP</p>
                                         <button className="bg-white rounded-100 md:text-base text-sm  font-semibold  text-black py-2.5 px-5">خصم المبلغ</button>
                                     </div>
-                                    <Link to="/checkout" className="px-3 py-4 text-xl text-center text-white rounded-100 pointer-events-auto mx-10 mt-10 bg-green-200 block ">أطلب الآن</Link>
+                                    <Link to="/checkout" className="px-3 py-4 text-xl text-center text-white rounded-100 pointer-events-auto mx-10 mt-10 bg-green-200 hover:bg-green-400 block ">أطلب الآن</Link>
                                 </div>
                             </div>
                             <div className="bg-white rounded-[32px] mt-9" style={{ boxShadow: ' 0px 20px 66px rgba(0, 0, 0, 0.2)' }}>
@@ -166,15 +166,15 @@ export default function Cart() {
                                             </button>
                                         </div>
                                     )}
-                                    <button type="submit" onClick={applyNote} className={`${NoteApplied ? 'hidden' : ''} text-white bg-green-200  rounded-100 focus:ring-4 focus:outline-none text-xl font-semibold w-full sm:w-auto px-5 py-[18px] text-center `} name="add_note" defaultValue="Add">أضف</button>
+                                    <button type="submit" onClick={applyNote} className={`${NoteApplied ? 'hidden' : ''} text-white bg-green-200 hover:bg-green-400 rounded-100 focus:ring-4 focus:outline-none text-xl font-semibold w-full sm:w-auto px-5 py-[18px] text-center `} name="add_note" defaultValue="Add">أضف</button>
                                 </div>
                             </div>
                         </div>
                     </div>
                 ) : (
                     <div className='flex mt-auto items-center justify-center min-h-[400px] flex-col'>
-                        <p className="text-lg text-slate-500">Your cart is currently empty.</p>
-                        <Link to='/products' className="inline-flex justify-center px-4 py-2 mt-5 text-sm font-semibold text-white capitalize rounded-lg bg-slate-900 hover:bg-slate-700">continue shopping</Link>
+                        <p className="text-lg text-slate-500">عربة التسوق فارغة حاليا.</p>
+                        <Link to='/products' className="inline-flex justify-center px-4 py-2 mt-5 text-sm font-semibold text-white capitalize rounded-lg bg-slate-900 hover:bg-slate-700">مواصلة التسوق </Link>
                     </div>
                 )}
                 <ExtraProducts categorySlug="dress" count={5} title="تسوق اكتر" />

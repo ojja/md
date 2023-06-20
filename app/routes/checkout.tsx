@@ -400,7 +400,7 @@ export default function Checkout() {
             {cartItems?.length > 0 ? (
 
                 <div className="flex">
-                    <div className="first bg-white w-[66%] py-12">
+                    <div className="first bg-white w-[66%] pt-12  pb-10 relative">
                         <div className=" max-w-[700px] m-auto">
                             <div className="pb-10">
                                 <h1 className="text-4xl font-semibold">{t('checkout.checkout')}</h1>
@@ -441,10 +441,10 @@ export default function Checkout() {
                                     </li>
                                 </ol>
                             </nav>
-                            <div className="relative w-full">
+                            <div className=" w-full">
                                 <form onSubmit={handleSubmit} className="checkout-form">
                                     {stepOne ?
-                                        <div className="relative step-one">
+                                        <div className=" step-one">
                                             {isLoading ? (
                                                 <div className="absolute z-20 flex items-start justify-center pt-20 bg-gray-200 bg-opacity-75 -inset-4">
                                                     <Loader />
@@ -463,10 +463,11 @@ export default function Checkout() {
 
                                             <h2 className="pt-5 mt-5 mb-5 text-2xl pb-4 border-b border-[#D1D1D1] font-bold text-black ">{t('checkout.shipping_method')}</h2>
                                             <ShippingOptions formData={formData} handleChange={handleChange} errors={errors} />
+                                            <hr className="w-full h-[1px] bg-[#C6C6C6] absolute left-0 right-0"/>
                                             <Button
                                                 name={t('common.next_step')}
                                                 width="full"
-                                                extraclass="mt-5 leading-5"
+                                                extraclass=" mt-[140px] leading-5"
                                                 onClick={handleClick}
                                             />
                                         </div>
@@ -489,7 +490,7 @@ export default function Checkout() {
                                             <Button
                                                 name={t('common.submit')}
                                                 width="full"
-                                                extraclass="mt-5 leading-5"
+                                                extraclass=" mt-[155px] leading-5"
                                                 type="submit"
                                             />
                                         </div>

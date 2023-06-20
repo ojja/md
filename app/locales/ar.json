@@ -37,11 +37,12 @@
     "area": "المنطقة",
     "neighborhood": "الحي",
     "select_neighborhood": "اختار الحي",
-    "ship_to_me": "اشحن إلي",
+    "ship_to_me": "توصيل",
+    "message_to_me":"*يضاف مصاريف اضافية",
     "pick_from_branch": "استلام من الفرع",
     "choose_branch": "اختار المتجر",
     "city": "المدينة",
-    "street_name": "اسم الشارع",
+    "street_name": " رقم العقار و الشارع",
     "select_area": "اختار المنطقة",
     "property_type": "نوع العقار",
     "apartment": "شقة",
@@ -60,9 +61,12 @@
     "in": "في",
     "login": "دخول",
     "my_account": "حسابي",
+    "next_step": "  أكمل إلى الدفع",
     "change_country": "تغير البلد",
     "learn_more": "أقرأ المزيد",
-    "learn_less": "أقرأ أقل"
+    "learn_less": "أقرأ أقل",
+    "submit": " أكمل إلى الدفع"
+
   },
   "footer": {
     "faqs_title":"عندك اي اسئلة؟ كل حاجة هنا..",
@@ -79,7 +83,7 @@
     "faqs_name":"الاسئلة الشائعة",
     "faqs_title":"الأسئلة الشائعة",
     "login": "",
-    "next_step": "الخطوة التالية (اتمام الدفع)",
+    "next_step": "  أكمل إلى الدفع",
     "branch": "فرع",
     "my_account": "حسابي",
     "submit": "إرسال"

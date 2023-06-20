@@ -43,7 +43,7 @@ export default function AddToCartSimple({ className, product, disabled, singlePr
                 )}
             >
                 {quantity === 0 ? (
-                    <div className={` px-4 font-semibold text-white bg-green-200 ${singleProductView ? 'justify-center py-[18px]' : 'justify-between py-2.5'} text-xl rounded-100 w-full flex items-center `}>
+                    <div className={` px-4 font-semibold text-white bg-green-200 hover:bg-green-400 ${singleProductView ? 'justify-center py-[18px]' : 'justify-between py-2.5'} text-xl rounded-100 w-full flex items-center `}>
 
 
                         <p> 
@@ -75,7 +75,7 @@ export default function AddToCartSimple({ className, product, disabled, singlePr
                             <input type="text" className="w-8 w-8 p-0  mx-7 text-xl  border-none font-semibold text-center text-green-200  select-none focus:outline-none" value={quantity!} readOnly />
                             <span
                                 // type="button"
-                                className={`flex items-center text-white justify-center w-12 h-12 bg-green-200 rounded-full cursor-pointer ${quantity! > 9 ? "pointer-events-none" : ''}`}
+                                className={`flex items-center text-white justify-center w-12 h-12 bg-green-200 hover:bg-green-400 rounded-full cursor-pointer ${quantity! > 9 ? "pointer-events-none" : ''}`}
                                 onClick={(e) => { addToCart(product); e.stopPropagation() }}
                             >
                                 <PlusIcon className="w-6 h-6 text-white" aria-hidden="true" />

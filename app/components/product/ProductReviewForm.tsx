@@ -74,7 +74,7 @@ function ProductReviewForm() {
           <textarea className='w-full rounded-[20px] h-[119px] resize-none focus:outline-none' id="comment" name="comment"></textarea>
         </p>
         <p className="form-submit">
-          <button className=' mt-9 bg-green-200 text-white text-xl font-semibold w-full text-center rounded-100 py-2.5'>أضف التقييم</button>
+          <button className=' mt-9 bg-green-200 hover:bg-green-400 text-white text-xl font-semibold w-full text-center rounded-100 py-2.5'>أضف التقييم</button>
         </p>
 
       </form>

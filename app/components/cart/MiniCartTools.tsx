@@ -113,7 +113,7 @@ export default function MiniCartTools() {
                             <div className="flex w-full mt-2 justify-between gap-x-3">
                                 <button
                                     type="button"
-                                    className="text-white bg-green-200  rounded-100 w-full"
+                                    className="text-white bg-green-200 hover:bg-green-400 rounded-100 w-full"
                                     onClick={editCoupon}
                                 >
                                     تعديل الكوبون
@@ -132,7 +132,7 @@ export default function MiniCartTools() {
                         <button
                             type="submit"
                             className={`
-                ${couponApplied ? 'hidden' : ''} text-white bg-green-200  rounded-100 focus:ring-4 focus:outline-none text-xl font-semibold w-full sm:w-auto px-5 py-[18px] text-center              `}
+                ${couponApplied ? 'hidden' : ''} text-white bg-green-200 hover:bg-green-400 rounded-100 focus:ring-4 focus:outline-none text-xl font-semibold w-full sm:w-auto px-5 py-[18px] text-center              `}
                             name="apply_coupon"
                             defaultValue="Apply coupon"
                             onClick={applyCoupon}
@@ -168,7 +168,7 @@ export default function MiniCartTools() {
                             <div className="flex w-full mt-2 justify-between gap-x-3">
                                 <button
                                     type="button"
-                                    className="text-white bg-green-200  rounded-100 w-full"
+                                    className="text-white bg-green-200 hover:bg-green-400 rounded-100 w-full"
                                     onClick={editNote}
                                 >
                                     تعديل الملاحظة
@@ -183,7 +183,7 @@ export default function MiniCartTools() {
                                 </button>
                             </div>
                         )}
-                        <button type="submit" onClick={applyNote} className={`${NoteApplied ? 'hidden' : ''} text-white bg-green-200  rounded-100 focus:ring-4 focus:outline-none text-xl font-semibold w-full sm:w-auto px-5 py-[18px] text-center `} name="add_note" defaultValue="Add">أضف</button>
+                        <button type="submit" onClick={applyNote} className={`${NoteApplied ? 'hidden' : ''} text-white bg-green-200 hover:bg-green-400 rounded-100 focus:ring-4 focus:outline-none text-xl font-semibold w-full sm:w-auto px-5 py-[18px] text-center `} name="add_note" defaultValue="Add">أضف</button>
                     </div>
                 </div>
             </div>

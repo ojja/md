@@ -127,7 +127,7 @@ const ShoppingCart = () => {
                             <Link
                               to="/checkout"
                               onClick={closeCart}
-                              className="flex items-center justify-center px-6 py-3 md:text-xl text-base font-semibold text-white border border-transparent rounded-100 shadow-sm bg-green-200 "
+                              className="flex items-center justify-center px-6 py-3 md:text-xl text-base font-semibold text-white border border-transparent rounded-100 shadow-sm bg-green-200  hover:bg-green-400"
                             >
                               أطلب الآن
                             </Link>
