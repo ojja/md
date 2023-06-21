@@ -11,22 +11,25 @@ import {
   useNavigate,
   useParams,
 } from "@remix-run/react";
-import styles from './tailwind.[hash].css';
-import stylesRtl from './tailwind.rtl.[hash].css';
-import stylesBase from './base.css';
-import criticalCSS from './critical.css';
-import stylesSlick from 'slick-carousel/slick/slick.css';
-import stylesSlickTheme from 'slick-carousel/slick/slick-theme.css';
-import Footer from "./layouts/footer";
-import NavBar from "./layouts/navbar";
 import { useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import i18n from 'i18next';
 import { I18nextProvider, initReactI18next, useTranslation } from 'react-i18next';
 import { initFacebookPixel } from './fb-pixel';
 import { FB_PIXELCODE } from "./config";
 import { CurrencyProvider } from "./CurrencyContext";
-import en from "./locales/en.json";
-import ar from "./locales/ar.json";
+// import en from "./locales/en.json";
+import en from "~/locales/en.json";
+import ar from "~/locales/ar.json";
+
+import styles from './tailwind.[hash].css';
+import stylesRtl from './tailwind.rtl.[hash].css';
+import stylesBase from './base.css';
+import criticalCSS from './critical.css';
+import stylesSlick from 'slick-carousel/slick/slick.css';
+import stylesSlickTheme from 'slick-carousel/slick/slick-theme.css';
+
+import Footer from "./layouts/footer";
+import NavBar from "./layouts/navbar";
 
 export const scripts = () => {
   return [];
@@ -57,12 +60,12 @@ export const meta = () => ({
 });
 
 i18n.use(initReactI18next).init({
+  lng: "en",
+  fallbackLng: "en",
   resources: {
     en: { translation: en },
     ar: { translation: ar },
   },
-  lng: "en",
-  fallbackLng: "en",
   debug: false,
   interpolation: {
     escapeValue: false,
@@ -73,17 +76,15 @@ i18n.use(initReactI18next).init({
 });
 
 export default function App() {
-  const [language, setLanguage] = useState(i18n.language);
-
   const { t } = useTranslation();
-
+  const [language, setLanguage] = useState(i18n.language);
   const [isRtl, setIsRtl] = useState(false);
-  // console.log('Root i18n.language ', i18n.language);
-  if (typeof window !== "undefined") {
-    initFacebookPixel(FB_PIXELCODE);
-  }
+  console.log('Root i18n.language ', language);
 
   console.log('NODE_ENV', process.env.NODE_ENV);
+  console.log('LANG EN', en);
+  console.log('LANG AR', ar);
+  
   // const mainRef = useRef(null);
   const mainRef = useRef<HTMLDivElement>(null);
 
@@ -113,17 +114,26 @@ export default function App() {
     }
   }, []);
 
+  useEffect(() => {
+    if (typeof window !== "undefined") {
+      initFacebookPixel(FB_PIXELCODE);
+    }
+  }, []);
+  useEffect(() => {
+    setLanguage(i18n.language);
+  }, [i18n.language]);
+
   // debugger;
-  console.clear();
-  console.log(`
-  Wᴇʟᴄᴏᴍᴇ ɪɴ
-  ██████╗░░██╗░░░░░░░██╗░█████╗░
-  ██╔══██╗░██║░░██╗░░██║██╔══██╗
-  ██████╔╝░╚██╗████╗██╔╝███████║
-  ██╔═══╝░░░████╔═████║░██╔══██║
-  ██║░░░░░░░╚██╔╝░╚██╔╝░██║░░██║
-  ╚═╝░░░░░░░░╚═╝░░░╚═╝░░╚═╝░░╚═╝
-`);
+  //   console.clear();
+  //   console.log(`
+  //   Wᴇʟᴄᴏᴍᴇ ɪɴ
+  //   ██████╗░░██╗░░░░░░░██╗░█████╗░
+  //   ██╔══██╗░██║░░██╗░░██║██╔══██╗
+  //   ██████╔╝░╚██╗████╗██╔╝███████║
+  //   ██╔═══╝░░░████╔═████║░██╔══██║
+  //   ██║░░░░░░░╚██╔╝░╚██╔╝░██║░░██║
+  //   ╚═╝░░░░░░░░╚═╝░░░╚═╝░░╚═╝░░╚═╝
+  // `);
 
   return (
     <CurrencyProvider>
@@ -131,22 +141,21 @@ export default function App() {
         <html lang={language} dir={i18n.language === "ar" ? 'rtl' : 'ltr'}>
           <head>
             <Meta />
-            {/* <link rel="preconnect" href="https://fonts.googleapis.com" /> */}
-            {/* <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" /> */}
             <Links />
             <link rel="stylesheet" href={i18n.language === "ar" ? stylesRtl : styles} />
           </head>
           <body className={`box-border oultine-none ${i18n.language === "ar" ? 'font-sans-ar rtl' : 'font-sans-en ltr'}`}>
             <NavBar />
+            {t('home.title')}
             <main className="relative z-10 bg-gray-100" ref={mainRef}>
               <Outlet />
             </main>
             <Footer />
             <ScrollRestoration />
             <Scripts />
-            {/* {process.env.NODE_ENV === 'development' ? <LiveReload /> : null} */}
+            {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
           </body>
-        </html >
+        </html>
       </I18nextProvider>
     </CurrencyProvider>
   );

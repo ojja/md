@@ -9,6 +9,7 @@ import Dots from "~/components/Dots";
 import Button from "~/components/Button";
 import { Site_Title } from "~/config";
 import { ErrorResponse, ProductData } from "types";
+import FacebookLogin from 'react-facebook-login';
 
 
 type FormData = {
@@ -142,7 +143,9 @@ export default function login() {
       return;
     }
   }, []);
-
+  const responseFacebook = (response) => {
+    console.log(response);
+  }
   return (
     <div className="h-full flex items-center justify-center">
       <section className="p-8 mx-auto">
@@ -247,6 +250,11 @@ export default function login() {
                     >
                       <img src="/images/fb.svg" />
                     </a>
+                    <FacebookLogin
+                      appId="246500391469096" //APP ID NOT CREATED YET
+                      fields="name,email,picture"
+                      callback={responseFacebook}
+                    />
                   </li>
                   <li className="w-full px-2">
                     <a

@@ -28,7 +28,7 @@ export default function ExtraProducts({ categorySlug, count = 10, title, criteri
         triggerOnce: true,
     });
     const filterData = {
-        selectedCategories: categorySlug?categorySlug:'', // Array of selected category slugs
+        selectedCategories: categorySlug ? categorySlug : '', // Array of selected category slugs
         minPrice: 0, // Minimum price value
         maxPrice: 100000000, // Maximum price value
         pageNumber: 1, // Page number for pagination
@@ -88,6 +88,7 @@ export default function ExtraProducts({ categorySlug, count = 10, title, criteri
         infinite: false,
         arrows: true,
         dots: false,
+        adaptiveHeight: true,
         prevArrow: <CustomPrevArrow />,
         nextArrow: <CustomNextArrow />,
         responsive: [
@@ -113,9 +114,9 @@ export default function ExtraProducts({ categorySlug, count = 10, title, criteri
     };
 
     return (
-        <div className="mt-10 border-t-2" ref={ref}>
-            <div className="container px-4 py-16 mx-auto sm:py-24 sm:px-6">
-                <h2 className="text-2xl font-bold tracking-tight text-gray-900">{title || 'Customers also purchased'}</h2>
+        <div className="mt-10 border-b-2 py-16 sm:py-24" ref={ref}>
+            <div className="container px-6 mx-auto sm:px-8">
+                <h2 className="text-2xl font-bold tracking-tight text-gray-900 px-2">{title || 'Customers also purchased'}</h2>
                 {loading ? (
                     <div className="grid grid-cols-1 mt-6 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-5 xl:gap-x-8">
                         {Array.from({ length: PRODUCT_LOADERS_COUNT }).map((_, index) => (
@@ -123,13 +124,15 @@ export default function ExtraProducts({ categorySlug, count = 10, title, criteri
                         ))}
                     </div>
                 ) : (
-                    <Slider {...sliderSettings} className='z-20 mt-6'>
-                        {extraProducts.map((productData: any) => (
-                            <div key={productData.id} className='px-3'>
-                                <ProductWidget product={productData} key={undefined} isItemInWishlist={false} />
-                            </div>
-                        ))}
-                    </Slider>
+                    <div className='z-20 mt-6'>
+                        <Slider {...sliderSettings} className="products-slider">
+                            {extraProducts.map((productData: any) => (
+                                <div key={productData.id} className='px-3'>
+                                    <ProductWidget product={productData} key={undefined} isItemInWishlist={false} />
+                                </div>
+                            ))}
+                        </Slider>
+                    </div>
                 )}
             </div>
         </div>
