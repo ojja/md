@@ -271,7 +271,7 @@ export default function login() {
                       callback={responseFacebook}
                     /> */}
                     <FacebookLogin
-                      appId="2110158485982370"
+                      appId="246500391469096"
                       autoLoad={true}
                       fields="email"
                       callback={handleFacebookLogin}
