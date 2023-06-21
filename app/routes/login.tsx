@@ -9,7 +9,11 @@ import Dots from "~/components/Dots";
 import Button from "~/components/Button";
 import { Site_Title } from "~/config";
 import { ErrorResponse, ProductData } from "types";
-import FacebookLogin from 'react-facebook-login';
+import { LoginSocialFacebook } from "reactjs-social-login";
+import { FacebookLoginButton } from "react-social-login-buttons";
+import FacebookLogin from "react-facebook-login";
+import { useLoaderData } from "@remix-run/react";
+
 
 
 type FormData = {
@@ -26,6 +30,7 @@ export const meta = () => {
 export default function login() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const routeData = useLoaderData();
 
   const [isLoading, setIsLoading] = useState(true);
   const { register, handleSubmit, setValue, formState: { errors: formErrors } } = useForm();
@@ -143,9 +148,19 @@ export default function login() {
       return;
     }
   }, []);
-  const responseFacebook = (response) => {
+  const handleFacebookLogin = (response) => {
     console.log(response);
   }
+  const handleSocialLogin = (user) => {
+    console.log(user);
+  };
+
+  const handleSocialLoginFailure = (err) => {
+    console.error(err);
+  };
+
+  const [profile, setProfile] = useState(null);
+  console.log('profile', profile)
   return (
     <div className="h-full flex items-center justify-center">
       <section className="p-8 mx-auto">
@@ -250,10 +265,15 @@ export default function login() {
                     >
                       <img src="/images/fb.svg" />
                     </a>
-                    <FacebookLogin
+                    {/* <FacebookLogin
                       appId="246500391469096" //APP ID NOT CREATED YET
                       fields="name,email,picture"
                       callback={responseFacebook}
+                    /> */}
+                    <FacebookLogin
+                      appId="246500391469096"
+                      fields="name,email,picture"
+                      callback={handleFacebookLogin}
                     />
                   </li>
                   <li className="w-full px-2">
