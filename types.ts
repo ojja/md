@@ -3,7 +3,9 @@ export type ProductData = {
   slug: string;
   name: string;
   price: string;
+  attributes: string;
   is_on_sale: boolean;
+  variations: string;
   regular_price: string;
   main_image: string;
   main_image_small: string;

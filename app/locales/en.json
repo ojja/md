@@ -70,6 +70,9 @@
     "view_details": "View Details",
     "remember_me": "Remember Me",
     "sign_in": "Sign In",
+    "sign_up": "Sign Up",
+    "forget_password": "Forget Password?",
+    "not_member": "Not a member yet?",
     "orders_returns": "Orders & Returns",
     "no_orders": "There are no orders.",
     "order_number": "Order Number",
@@ -152,6 +155,7 @@
     "first_name_required": "First name is required",
     "last_name_required": "Last name is required",
     "phone_required": "Phone number is required",
+    "email_required": "Email Address is required",
     "password_required": "Password is required",
     "password_length": "Password must be at least 5 characters",
     "password_pattern": "Password must contain at least one uppercase letter, one lowercase letter, and one number"

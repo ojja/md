@@ -2885,11 +2885,6 @@ video {
   color: rgb(244 67 54 / var(--tw-text-opacity));
 }
 
-.text-\[\#adadad\] {
-  --tw-text-opacity: 1;
-  color: rgb(173 173 173 / var(--tw-text-opacity));
-}
-
 .text-black {
   --tw-text-opacity: 1;
   color: rgb(0 0 0 / var(--tw-text-opacity));
@@ -3857,6 +3852,10 @@ video {
 
 :is(.dark .dark\:bg-white\/10) {
   background-color: rgb(255 255 255 / 0.1);
+}
+
+:is(.dark .dark\:bg-white\/5) {
+  background-color: rgb(255 255 255 / 0.05);
 }
 
 :is(.dark .dark\:text-blue-400) {

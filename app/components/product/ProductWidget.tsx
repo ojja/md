@@ -1,5 +1,5 @@
 import { memo, useState } from "react";
-import { Link } from "@remix-run/react";
+// import { Link } from "@remix-run/react";
 import { useTranslation } from "react-i18next";
 import { ProductData } from "types";
 import FormatCurrency from "~/utils/FormatCurrency";
@@ -8,6 +8,7 @@ import ProgressiveImage from "~/components/ProgressiveImage";
 import Img from "~/components/icons/Img";
 import Quickview from "~/components/Quickview";
 import AddToCartSimple from "~/components/AddToCartSimple";
+import { Link } from "react-router-dom";
 
 type ProductWidgetProps = {
   product?: ProductData;
@@ -48,7 +49,7 @@ const ProductWidget = ({ product, wishlist }: ProductWidgetProps) => {
       <div className="relative z-10 w-full overflow-hidden bg-gray-200 rounded-md min-h-80 group-hover:opacity-75">
         <Link
           to={`/products/${product?.slug}`}
-          prefetch="intent"
+        //   prefetch="intent"
           onClick={handleLinkClick}
           className={`block aspect-w-4 aspect-h-3 lg:h-80 ${product?.slug ? product.slug : "pointer-events-none"}`}
         >
@@ -78,7 +79,7 @@ const ProductWidget = ({ product, wishlist }: ProductWidgetProps) => {
       <div className="flex justify-between mt-4 mb-4">
         <div>
           <h3 className="text-sm text-gray-700">
-            <Link to={`/products/${product?.slug}`} prefetch="intent">
+            <Link to={`/products/${product?.slug}`}>
               <span aria-hidden="true" className={`absolute inset-0 z-1 ${product?.slug ? "" : "pointer-events-none"}`} />
               {productTitle}
             </Link>

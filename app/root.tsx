@@ -15,7 +15,6 @@ import { useContext, useEffect, useLayoutEffect, useRef, useState } from "react"
 import i18n from 'i18next';
 import { I18nextProvider, initReactI18next, useTranslation } from 'react-i18next';
 import { initFacebookPixel } from './fb-pixel';
-import { FB_PIXELCODE } from "./config";
 import { CurrencyProvider } from "./CurrencyContext";
 // import en from "./locales/en.json";
 import en from "~/locales/en.json";
@@ -79,11 +78,11 @@ export default function App() {
   const { t } = useTranslation();
   const [language, setLanguage] = useState(i18n.language);
   const [isRtl, setIsRtl] = useState(false);
-  console.log('Root i18n.language ', language);
+  // console.log('Root i18n.language ', language);
 
-  console.log('NODE_ENV', process.env.NODE_ENV);
-  console.log('LANG EN', en);
-  console.log('LANG AR', ar);
+  // console.log('NODE_ENV', process.env.NODE_ENV);
+  // console.log('LANG EN', en);
+  // console.log('LANG AR', ar);
   
   // const mainRef = useRef(null);
   const mainRef = useRef<HTMLDivElement>(null);
@@ -116,14 +115,13 @@ export default function App() {
 
   useEffect(() => {
     if (typeof window !== "undefined") {
-      initFacebookPixel(FB_PIXELCODE);
+      initFacebookPixel();
     }
   }, []);
   useEffect(() => {
     setLanguage(i18n.language);
   }, [i18n.language]);
 
-  // debugger;
   //   console.clear();
   //   console.log(`
   //   Wᴇʟᴄᴏᴍᴇ ɪɴ
@@ -137,7 +135,6 @@ export default function App() {
 
   return (
     <CurrencyProvider>
-      <I18nextProvider i18n={i18n}>
         <html lang={language} dir={i18n.language === "ar" ? 'rtl' : 'ltr'}>
           <head>
             <Meta />
@@ -145,8 +142,8 @@ export default function App() {
             <link rel="stylesheet" href={i18n.language === "ar" ? stylesRtl : styles} />
           </head>
           <body className={`box-border oultine-none ${i18n.language === "ar" ? 'font-sans-ar rtl' : 'font-sans-en ltr'}`}>
+            <div>
             <NavBar />
-            {t('home.title')}
             <main className="relative z-10 bg-gray-100" ref={mainRef}>
               <Outlet />
             </main>
@@ -154,9 +151,9 @@ export default function App() {
             <ScrollRestoration />
             <Scripts />
             {/* {process.env.NODE_ENV === 'development' ? <LiveReload /> : null} */}
+            </div>
           </body>
         </html>
-      </I18nextProvider>
     </CurrencyProvider>
   );
 }

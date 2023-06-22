@@ -10,7 +10,7 @@ export default function TrackOrder() {
                 className="relative mx-auto max-w-[525px] overflow-hidden rounded-lg bg-white py-16 px-10 text-center sm:px-12 md:px-[60px]"
               >
                 <h1 className="mb-4 text-2xl font-extrabold leading-none tracking-tight text-gray-900">Order status tracking</h1>
-                <p className="text-base text-[#adadad] text-left mb-3">Enter the order number to track the delivery status</p>
+                <p className="text-base text-gray-400 text-left mb-3">Enter the order number to track the delivery status</p>
                 <form>
                   <div className="mb-6">
                     <input

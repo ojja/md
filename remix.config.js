@@ -26,6 +26,7 @@ withEsbuildOverride((option, { isServer }) => {
 module.exports = {
   devServerBroadcastDelay: 1000,
   devServerPort: 3002,
+  // server: "./server.js",
   serverDependenciesToBundle: "all",
   future: {
     unstable_tailwind: true,
