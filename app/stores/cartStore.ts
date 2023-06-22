@@ -86,9 +86,9 @@ const callAddToCart = (product: CartItem) => {
     headers: {
       'Content-Type': 'application/json;charset=UTF-8',
       'Accept': 'application/json',
-      "Access-Control-Allow-Origin": "*",
-      "Access-Control-Max-Age": "86400",
-      "User-Agent": "*",
+      // "Access-Control-Allow-Origin": "*",
+      // "Access-Control-Max-Age": "86400",
+      // "User-Agent": "*",
     },
     method: "POST",
     // credentials: "include",

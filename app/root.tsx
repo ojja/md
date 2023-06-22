@@ -20,6 +20,9 @@ import { CurrencyProvider } from "./CurrencyContext";
 import en from "~/locales/en.json";
 import ar from "~/locales/ar.json";
 
+import TagManager from 'react-gtm-module'
+import TiktokPixel from 'tiktok-pixel';
+
 import styles from './tailwind.[hash].css';
 import stylesRtl from './tailwind.rtl.[hash].css';
 import stylesBase from './base.css';
@@ -112,10 +115,26 @@ export default function App() {
       };
     }
   }, []);
+  const tagManagerArgs = {
+    gtmId: 'GTM-TTS4BML'
+}
+const advancedMatching = {
+  // email: 'some@email.com',
+  // phone_number: '0123456789',
+};
+const options = {
+  debug: true, // enable logs
+};
 
-  useEffect(() => {
-    if (typeof window !== "undefined") {
-      initFacebookPixel();
+
+
+useEffect(() => {
+  if (typeof window !== "undefined") {
+    TagManager.initialize(tagManagerArgs)
+    initFacebookPixel();
+    TiktokPixel.init('CIA567BC77U8RIVTN69G', advancedMatching, options);
+    TiktokPixel.pageView(); // For tracking page view
+    TiktokPixel.track(event, {}); // For tracking default events. More info about standard events: https://ads.tiktok.com/help/article?aid=10028
     }
   }, []);
   useEffect(() => {
