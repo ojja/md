@@ -33,7 +33,7 @@ export default function ShippingInfo({ formData, handleChange, errors }: any) {
                             name="lastName"
                             value={formData.lastName}
                             onChange={handleChange}
-                            className={`w-full py-4  border-2 border-gray-400  rounded-2xl  text-black outline-none ${errors.lastName && 'border-red-500'}`}
+                            className={`w-full py-4 px-5  border-2 border-gray-400  rounded-2xl  text-black outline-none ${errors.lastName && 'border-red-500'}`}
                         />
                         {errors.lastName && <p className="mt-1 text-xs text-red-500">{errors.lastName}</p>}
                     </div>
@@ -50,7 +50,7 @@ export default function ShippingInfo({ formData, handleChange, errors }: any) {
                             value={formData.emailAddress}
                             onChange={handleChange}
                             required
-                            className={`w-full py-4  border-2 border-gray-400  rounded-2xl  text-black outline-none ${errors.emailAddress && 'border-red-500'}`}
+                            className={`w-full  py-4 px-5  border-2 border-gray-400  rounded-2xl  text-black outline-none ${errors.emailAddress && 'border-red-500'}`}
                         />
                         {errors.emailAddress && <p className="mt-1 text-xs text-red-500">{errors.emailAddress}</p>}
                     </div>
@@ -66,7 +66,7 @@ export default function ShippingInfo({ formData, handleChange, errors }: any) {
                             name="phoneNumber"
                             value={formData.phoneNumber}
                             onChange={handleChange}
-                            className={`w-full py-4  border-2 border-gray-400  rounded-2xl  text-black outline-none ${errors.phoneNumber && 'border-red-500'}`}
+                            className={`w-full  py-4 px-5  border-2 border-gray-400  rounded-2xl  text-black outline-none ${errors.phoneNumber && 'border-red-500'}`}
                         />
                         {errors.phoneNumber && <p className="mt-1 text-xs text-red-500">{errors.phoneNumber}</p>}
                     </div>

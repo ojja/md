@@ -150,28 +150,36 @@ const PaymentForm = () => {
 
   return (
     <div>
-      <div>Please enter your payment details:</div>
-      <span>5123450000000008</span>
-      <ThreedsChallengeRedirectComponent response={response} />
-      <h3>Credit Card</h3>
+      {/* <div>Please enter your payment details:</div>
+      <span>5123450000000008</span> */}
+      {/* <ThreedsChallengeRedirectComponent response={response} /> */}
+      <h3 className=' text-xl font-bold mt-10 pb-3 border-b border-[#D1D1D1] mb-4' >بيانات الكارت</h3>
       <div>
-        Card Number: <input type="text" id="card-number" className="input-field" title="card number" aria-label="enter your card number" value="" tabIndex="1" readOnly />
+        <label className=' text-gray-50 text-base font-semibold pb-2 block'> رقم البطاقة* </label>
+        <input type="text" id="card-number" className="input-field border-2 rounded-2xl border-gray-400 px-5 py-3 text-base font-semibold" title="card number" aria-label="enter your card number" value="" tabIndex="1" readOnly />
       </div>
-      <div>
-        Expiry Month:<input type="text" id="expiry-month" className="input-field" title="expiry month" aria-label="two digit expiry month" value="" tabIndex="2" readOnly />
+      <div className='flex justify-between mt-8'>
+        <div>
+          <label className='text-gray-50 text-base font-semibold pb-2 block'>  تاريخ الانتهاء*</label>
+          <input type="text" id="expiry-month" className="input-field border-2 rounded-2xl border-gray-400  px-5 py-3 text-base font-semibold" title="expiry month" aria-label="two digit expiry month" value="" tabIndex="2" readOnly />
+        </div>
+        <div>
+          <label className='text-gray-50 text-base font-semibold pb-2 block opacity-0'>  تاريخ الانتهاء*</label>
+          <input type="text" id="expiry-year" className="input-field border-2 rounded-2xl border-gray-400  px-5 py-3 text-base font-semibold" title="expiry year" aria-label="two digit expiry year" value="" tabIndex="3" readOnly />
+        </div>
+        <div>
+        <label className='text-gray-50 text-base font-semibold pb-2 block'>CVV</label>
+
+        <input type="text" id="security-code" className="input-field border-2 rounded-2xl border-gray-400  px-5 py-3 text-base font-semibold" title="security code" aria-label="three digit CCV security code" value="" tabIndex="4" readOnly />
+        </div>
       </div>
-      <div>
-        Expiry Year:<input type="text" id="expiry-year" className="input-field" title="expiry year" aria-label="two digit expiry year" value="" tabIndex="3" readOnly />
-      </div>
-      <div>
-        Security Code:<input type="text" id="security-code" className="input-field" title="security code" aria-label="three digit CCV security code" value="" tabIndex="4" readOnly />
-      </div>
-      <div>
+
+      {/* <div>
         Cardholder Name:<input type="text" id="cardholder-name" className="input-field" title="cardholder name" aria-label="enter name on card" value="" tabIndex="5" readOnly />
-      </div>
-      <div>
+      </div> */}
+      {/* <div>
         <button id="payButton" type='button' onClick={pay}>Pay Now</button>
-      </div>
+      </div> */}
     </div>
   );
 };
