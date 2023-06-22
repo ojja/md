@@ -16,7 +16,7 @@ RUN npm cache clean --force
 # Install project dependencies
 RUN npm install -g npm@9.6.5
 RUN npm install --force && npm install -g remix json-server tailwindcss concurrently@8.0.1
-RUN npm install @tailwindcss/aspect-ratio --save-dev
+RUN npm install @tailwindcss/aspect-ratio --save-dev --legacy-peer-deps
 
 
 # Copy the entire project to the working directory
