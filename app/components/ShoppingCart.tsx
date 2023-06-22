@@ -33,7 +33,7 @@ const ShoppingCart = () => {
   }, [isClientRender]);
   return (
     <div>
-      {isOpen && (
+      {isOpen && isClientRender && (
         <Transition appear show={isOpen} as={Fragment}>
           <Dialog as="div" className="relative z-30" onClose={closeCart}>
             <Transition.Child

@@ -13,18 +13,18 @@ type CurrencyProviderProps = {
 const CurrencyContext = createContext<CurrencyContextType | undefined>(undefined);
 
 export const CurrencyProvider: React.FC<CurrencyProviderProps> = ({ children }) => {
-  const [currency, setCurrencyState] = useState<string>('EGP');
+  const [currency, setCurrency] = useState<string>('EGP');
 
   useEffect(() => {
     const savedCurrency = Cookies.get('currency');
     if (savedCurrency) {
-      setCurrencyState(savedCurrency);
+      setCurrency(savedCurrency);
     }
   }, []);
 
-  const handleCurrencyChange = (currency: string) => {
-    setCurrencyState(currency);
-    Cookies.set('currency', currency, { expires: 365, path: '/' });
+  const handleCurrencyChange = (newCurrency: string) => {
+    setCurrency(newCurrency);
+    Cookies.set('currency', newCurrency, { expires: 365, path: '/' });
   };
 
   const contextValue: CurrencyContextType = {

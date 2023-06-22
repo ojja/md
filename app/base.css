@@ -323,7 +323,9 @@ select {
 [type=file]:focus {
   outline: 1px auto -webkit-focus-ring-color
 }
-
+.products-slider .slick-slide{
+  height: auto;
+}
 .sticky {
   position: -webkit-sticky;
   position: sticky;

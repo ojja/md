@@ -116,10 +116,7 @@ interface ApiResponse {
     // total_pages: number;
   };
 }
-
-export async function getProductBySlug(
-  productSlug: string
-): Promise<Product[]> {
+export async function getProductBySlug(productSlug: string): Promise<Product> {
   const url: string = `${API_ENDPOINT}/single.php`;
   const data: any = {
     slug: productSlug,
@@ -134,14 +131,20 @@ export async function getProductBySlug(
 
   try {
     const response = await fetch(url, options);
+
+    if (!response.ok) {
+      throw new Error("Network response was not OK");
+    }
+
     const result: ApiResponse = await response.json();
-    const product: Product[] = result;
+    const product: Product = result;
     return product;
   } catch (error) {
     console.error("Error:", error);
-    return [];
+    throw new Error("Failed to fetch product");
   }
 }
+
 
 export async function getNewFilterProducts(
   categorySlug: any,

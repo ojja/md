@@ -84,15 +84,15 @@ const callAddToCart = (product: CartItem) => {
   };
   fetch(apiUrl, {
     headers: {
-      "Content-Type": "application/json",
-      Accept: "application/json",
-      "Access-Control-Allow-Origin": "https://pwa.cloudhosta.com",
-      "Access-Control-Allow-Headers": "Content-Type",
-      "Access-Control-Allow-Credentials": "true",  
+      'Content-Type': 'application/json;charset=UTF-8',
+      'Accept': 'application/json',
+      // "Access-Control-Allow-Origin": "*",
+      // "Access-Control-Max-Age": "86400",
+      // "User-Agent": "*",
     },
-    credentials: "include",
-    // credentials: "same-origin",
     method: "POST",
+    // credentials: "include",
+    // credentials: "same-origin",
     // mode: 'no-cors',
     body: JSON.stringify(requestData),
   })

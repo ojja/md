@@ -245,7 +245,7 @@ export default function RegisterForm() {
                     </div>
 
                     <div className="col-span-2">
-                        <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> Password </label>
+                        <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> {t('common.password')} </label>
                         <div className="mt-1">
                             <input
                                 type="password"
@@ -270,7 +270,7 @@ export default function RegisterForm() {
                     </div>
 
                     <div className="col-span-2">
-                        <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> Birth Date </label>
+                        <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize"> {t('checkout.birth_date')} </label>
                         <div className="flex mt-1 space-x-3">
                             <div className='w-1/3'>
                                 <SelectInput
@@ -315,7 +315,7 @@ export default function RegisterForm() {
                     </div>
 
                     <div className="col-span-2">
-                        <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize">Gender</label>
+                        <label htmlFor="" className="block mb-1 text-sm text-gray-400 capitalize">{t('checkout.gender')}</label>
                         <div className="mt-1 space-x-4">
                             <label htmlFor="gender_male" className='inline-block text-lg text-gray-900 cursor-pointer'>
                                 <div className='relative flex items-center py-1 pl-3'>
@@ -334,7 +334,7 @@ export default function RegisterForm() {
                                     <div className='visible peer-checked:invisible absolute left-0 top-1 mt-0.5'>
                                         <RiCheckboxBlankCircleLine className='peer-checked:bg-gray-700' />
                                     </div>
-                                    <span className='ml-2 text-base font-medium'>Male</span>
+                                    <span className='ml-2 text-base font-medium'>{t('checkout.gender_m')}</span>
                                 </div>
                             </label>
                             <label htmlFor="Female" className='inline-block text-lg text-gray-900 cursor-pointer'>
@@ -354,7 +354,7 @@ export default function RegisterForm() {
                                     <div className='visible peer-checked:invisible absolute left-0 top-1 mt-0.5'>
                                         <RiCheckboxBlankCircleLine className='peer-checked:bg-gray-700' />
                                     </div>
-                                    <span className='ml-2 text-base font-medium'>Female</span>
+                                    <span className='ml-2 text-base font-medium'>{t('checkout.gender_f')}</span>
                                 </div>
                             </label>
                         </div>
@@ -363,7 +363,7 @@ export default function RegisterForm() {
 
                     <div className="col-span-2">
                         <Button
-                            name="Sign Up"
+                            name={t('common.sign_up')}
                             width="full"
                             type="submit"
                         />

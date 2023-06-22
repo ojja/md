@@ -9,6 +9,9 @@ import Dots from "~/components/Dots";
 import Button from "~/components/Button";
 import { Site_Title } from "~/config";
 import { ErrorResponse, ProductData } from "types";
+import { useLoaderData } from "@remix-run/react";
+import SocialLogin from "~/components/account/SocialLogin";
+
 
 
 type FormData = {
@@ -25,6 +28,7 @@ export const meta = () => {
 export default function login() {
   const { t, i18n } = useTranslation();
   const navigate = useNavigate();
+  const routeData = useLoaderData();
 
   const [isLoading, setIsLoading] = useState(true);
   const { register, handleSubmit, setValue, formState: { errors: formErrors } } = useForm();
@@ -142,7 +146,7 @@ export default function login() {
       return;
     }
   }, []);
-
+  
   return (
     <div className="h-full flex items-center justify-center">
       <section className="p-8 mx-auto">
@@ -239,40 +243,15 @@ export default function login() {
                   </div>
                 </form>
                 <p className="mb-6 text-base text-center text-gray-400">Connect With</p>
-                <ul className="flex justify-between mb-12 -mx-2">
-                  <li className="w-full px-2">
-                    <a
-                      href="#"
-                      className="flex h-11 items-center justify-center rounded-md bg-[#4064AC] hover:bg-opacity-90"
-                    >
-                      <img src="/images/fb.svg" />
-                    </a>
-                  </li>
-                  <li className="w-full px-2">
-                    <a
-                      href="#"
-                      className="flex h-11 items-center justify-center rounded-md bg-[#1C9CEA] hover:bg-opacity-90"
-                    >
-                      <img src="/images/tw.svg" />
-                    </a>
-                  </li>
-                  <li className="w-full px-2">
-                    <a
-                      href="#"
-                      className="flex h-11 items-center justify-center rounded-md bg-[#D64937] hover:bg-opacity-90"
-                    >
-                      <img src="/images/tw.svg" />
-                    </a>
-                  </li>
-                </ul>
+                <SocialLogin />
                 <Link
                   to="/forgot"
                   className="inline-block mb-2 text-base text-gray-400 hover:text-primary hover:underline"
                 >
-                  Forget Password?
+                  {t('common.forget_password')}
                 </Link>
                 <p className="text-base text-gray-400">
-                  Not a member yet? <Link to="/signup" className="text-primary hover:underline" > Sign Up </Link>
+                {t('common.not_member')} <Link to="/signup" className="text-primary hover:underline" > {t('common.sign_up')} </Link>
                 </p>
                 <Dots />
               </div>

@@ -1,6 +1,9 @@
+import { FB_PIXELID, FB_Access_Token } from "./config";
+
+const pixelId = FB_PIXELID;
 let isPixelInitialized = false;
 
-export const initFacebookPixel = (pixelId) => {
+export const initFacebookPixel = () => {
   if (isPixelInitialized) {
     return;
   }

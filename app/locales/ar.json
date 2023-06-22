@@ -70,6 +70,9 @@
     "view_details": "عرض التفاصيل",
     "remember_me": "تذكرني",
     "sign_in": "تسجيل الدخول",
+    "sign_up": "انشئ حساب",
+    "forget_password": "نسيت كلمه السر؟",
+    "not_member": "لست مشترك؟",
     "orders_returns": "الطلبات والإرجاعات",
     "no_orders": "لا توجد طلبات.",
     "order_number": "رقم الطلب",
@@ -152,6 +155,7 @@
     "first_name_required": "يجب إدخال الاسم الأول",
     "last_name_required": "يجب إدخال اسم العائلة",
     "phone_required": "يجب إدخال رقم الهاتف",
+    "email_required": "يجب إدخال بريد الاكتروني",
     "password_required": "يجب إدخال كلمة المرور",
     "password_length": "يجب أن تكون كلمة المرور على الأقل 5 أحرف",
     "password_pattern": "يجب أن تحتوي كلمة المرور على حرف كبير وحرف صغير ورقم"

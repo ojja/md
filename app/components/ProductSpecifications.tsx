@@ -1,4 +1,5 @@
 import { LazyLoadImage } from "react-lazy-load-image-component";
+import ProgressiveImage from "./ProgressiveImage";
 
 interface Features {
     features: string[];
@@ -24,25 +25,29 @@ export default function ProductSpecifications({features}:Features) {
                     </dl>
                 </div>
                 <div className="grid grid-cols-2 grid-rows-2 gap-4 sm:gap-6 lg:gap-8">
-                    <LazyLoadImage
-                        src={"https://picsum.photos/350?random=1"}
-                        placeholderSrc="https://picsum.photos/50?random=1"
-                        className="bg-gray-100 rounded-lg"
+                    <ProgressiveImage
+                      src={'/images/random_01.jpg'}
+                      placeholder={''}
+                      alt={'alt'}
+                      className="bg-gray-100 rounded-lg"
                     />
-                    <LazyLoadImage
-                        src={"https://picsum.photos/350?random=2"}
-                        placeholderSrc="https://picsum.photos/50?random=2"
-                        className="bg-gray-100 rounded-lg"
+                    <ProgressiveImage
+                      src={'/images/random_02.jpg'}
+                      placeholder={''}
+                      alt={'alt'}
+                      className="bg-gray-100 rounded-lg"
                     />
-                    <LazyLoadImage
-                        src={"https://picsum.photos/350?random=3"}
-                        placeholderSrc="https://picsum.photos/50?random=3"
-                        className="bg-gray-100 rounded-lg"
+                    <ProgressiveImage
+                      src={'/images/random_03.jpg'}
+                      placeholder={''}
+                      alt={'alt'}
+                      className="bg-gray-100 rounded-lg"
                     />
-                    <LazyLoadImage
-                        src={"https://picsum.photos/350?random=5"}
-                        placeholderSrc="https://picsum.photos/50?random=5"
-                        className="bg-gray-100 rounded-lg"
+                    <ProgressiveImage
+                      src={'/images/random_04.jpg'}
+                      placeholder={''}
+                      alt={'alt'}
+                      className="bg-gray-100 rounded-lg"
                     />
                 </div>
             </div>

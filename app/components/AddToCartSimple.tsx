@@ -3,6 +3,7 @@ import { useTranslation } from "react-i18next";
 import { trackAddToCart } from "~/fb-pixel";
 import useShoppingCart, { CartItem } from "~/stores/cartStore";
 // import { TrashIcon } from "@heroicons/24/outline";
+import TiktokPixel from 'tiktok-pixel';
 
 
 
@@ -22,7 +23,22 @@ export default function AddToCartSimple({ className, product, disabled }: {
     } = useShoppingCart();
     const quantity = getItemQuantity(product) ?? 0;
     //  quantity = getItemQuantity(product);
-
+    const handleTracking = () =>{
+        console.log('here')
+    TiktokPixel.track('AddToCart', {
+        contents: [
+          {
+            content_id: '301',
+            content_name: 'dress',
+            quantity: 1,
+            price: 8,
+          }
+        ],
+        content_type: 'product',
+        value: 9.2,
+        currency: 'USD',
+      });
+    }
     return (
         <button
             disabled={disabled}
@@ -30,6 +46,7 @@ export default function AddToCartSimple({ className, product, disabled }: {
             onClick={() => {
                 addToCart(product);
                 trackAddToCart('EGP', product.price);
+                handleTracking;
             }}
             className={classNames(
                 disabled ? 'cursor-not-allowed' : '',

@@ -152,6 +152,7 @@ export default function NavBar({ }) {
   const { t } = useTranslation();
   const [isAnimating, setIsAnimating] = useState(false);
   useEffect(() => {
+    console.log('animate')
     setIsAnimating(true);
     const animationTimeout = setTimeout(() => {
       setIsAnimating(false);
