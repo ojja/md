@@ -17,7 +17,7 @@ RUN npm cache clean --force
 RUN npm install -g npm@9.6.5
 RUN npm install --force && npm install -g remix json-server tailwindcss concurrently@8.0.1
 RUN npm install -g remix-esbuild-override
-RUN npm install --save-dev --legacy-peer-deps --ignore-scripts @tailwindcss/aspect-ratio
+# RUN npm install --save-dev --legacy-peer-deps --ignore-scripts @tailwindcss/aspect-ratio
 
 # Copy the entire project to the working directory
 COPY . .

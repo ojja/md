@@ -137,7 +137,7 @@ module.exports = {
   variants: {
     extend: {},
   },
-  plugins: [require("@tailwindcss/aspect-ratio")],
+  // plugins: [require("@tailwindcss/aspect-ratio")],
   future: {
     unstable_tailwind: true,
   },
