@@ -20,7 +20,7 @@ const ProductWidget = ({ product, wishlist }: ProductWidgetProps) => {
   const [isOpenCart, setIsOpenCart] = useState(false);
   const [openQuick, setOpenQuick] = useState(false);
 
-  const productTitle = product?.name;
+  const productTitle = product?.name? product?.name : product?.title;
   const imageSrc = product?.main_image ? product.main_image.replace('/uploads/', '/uploads-webpc/uploads/').concat('.webp') : product?.thumbnail;
   const imageSrcSmall = product?.main_image_small ? product.main_image_small.replace('/uploads/', '/uploads-webpc/uploads/').concat('.webp') : product?.thumbnail;
 

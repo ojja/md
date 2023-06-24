@@ -23,3 +23,29 @@ export async function getOrderInfo(orderID: number) {
     return [];
   }
 }
+
+export async function searchForm(key_word: string) {
+  const url: string = `${API_ENDPOINT}/search.php`;
+  const data: any = {
+    products_per_page : 21,
+    page : 1,
+    keyword: key_word,
+  };
+  const options: RequestInit = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  };
+
+  try {
+    const response = await fetch(url, options);
+    const result = await response.json();
+    // console.log('result',result)
+    return result;
+  } catch (error) {
+    console.error("Error:", error);
+    return [];
+  }
+}

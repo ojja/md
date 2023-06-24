@@ -1,7 +1,7 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
 
-export default function Popup({ isOpen: initialOpenState, children, close }: any) {
+export default function Popup({ isOpen: initialOpenState, children, close, width }: any) {
     const [isOpen, setIsOpen] = useState(initialOpenState);
 
     function closeModal() {
@@ -38,7 +38,7 @@ export default function Popup({ isOpen: initialOpenState, children, close }: any
                                 leaveFrom="opacity-100 scale-100"
                                 leaveTo="opacity-0 scale-95"
                             >
-                                <Dialog.Panel className="w-full max-w-lg p-6 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
+                                <Dialog.Panel className={`w-full p-6 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl ${width === 'full' ? 'max-w-3xl pt-10': 'max-w-lg'}`}>
                                     <button onClick={closeModal} type="button" className="absolute p-2 -m-2 text-gray-400 outline-none hover:text-gray-500 top-2 right-2">
                                         <span className="sr-only">Close panel</span><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" aria-hidden="true" className="w-6 h-6"><path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12"></path></svg>
                                     </button>
