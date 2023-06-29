@@ -34,7 +34,7 @@ const isShoppingCartOpen = persistentAtom<boolean>(
 
 const calculateTotalPrice = (cartItems: CartItem[]) => {
   let price = 0;
-  cartItems.forEach((item) => {
+  cartItems?.forEach((item) => {
     if (typeof item.price === 'string') {
       price += (parseFloat(item.price) || 0) * item.quantity;
     }

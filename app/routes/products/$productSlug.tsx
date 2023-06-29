@@ -195,7 +195,6 @@ export default function ProductSingle() {
     return (
         <div>
             <Suspense fallback={<div>Loading...</div>}>
-                <Await resolve={product} errorElement={<p>Error loading img!</p>}>
                     {isLoadingPage ? (
                         <SingleLoader />
                     ) : (
@@ -336,7 +335,6 @@ export default function ProductSingle() {
                             />
                         </section>
                     )}
-                </Await>
             </Suspense>
         </div>
     )

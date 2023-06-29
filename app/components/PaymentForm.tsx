@@ -1,43 +1,14 @@
 import React, { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import { API_ENDPOINT } from '~/config';
 import ThreedsChallengeRedirectComponent from './payments/ThreedsChallengeRedirectComponent';
 
-const PaymentForm = ({ handleChange, handleSubmit }) => {
+const PaymentForm = ({ handleChange, handleSubmit, register, errors }: any) => {
+  const { t } = useTranslation();
   const [response, setResponse] = useState(null);
-  const callPay = async (sessionID: any) => {
-    const apiUrl = `${API_ENDPOINT}/payment/pay.php`;
-    const orderData = {
-      amount: 100.06,
-      currency: 'EGP',
-    };
-    const requestData = {
-      sessionID: sessionID,
-      orderData: orderData,
-    };
-    try {
-      const response = await fetch(apiUrl, {
-        headers: {
-          'Content-Type': 'application/json',
-          Accept: 'application/json',
-          Connection: 'keep-alive',
-        },
-        credentials: 'include',
-        method: 'POST',
-        body: JSON.stringify(requestData),
-      });
 
-      if (response.ok) {
-        const data = await response.json();
-        setResponse(data);
-      } else {
-        throw new Error('Failed to call PAY API');
-      }
-    } catch (error) {
-      // Handle network or parsing error
-      console.error('Error:', error);
-    }
-  }
   useEffect(() => {
+    console.log('here')
     const script = document.createElement('script');
     script.src = 'https://test-nbe.gateway.mastercard.com/form/version/71/merchant/TESTEGPTEST/session.js';
     document.head.appendChild(script);
@@ -50,8 +21,7 @@ const PaymentForm = ({ handleChange, handleSubmit }) => {
             number: "#card-number",
             securityCode: "#security-code",
             expiryMonth: "#expiry-month",
-            expiryYear: "#expiry-year",
-            nameOnCard: "#cardholder-name"
+            expiryYear: "#expiry-year"
           }
         },
         frameEmbeddingMitigation: ["javascript"],
@@ -75,13 +45,13 @@ const PaymentForm = ({ handleChange, handleSubmit }) => {
                 // callPay(response.session.id);
                 // Set the response.session.id in formData
                 // handleChange('sessionId', response.session.id);
-                handleChange({
-                  target: {
-                    name: "sessionId",
-                    value: response.session.id,
-                  },
-                });
-                handleSubmit();
+                // handleChange({
+                //   target: {
+                //     name: "sessionId",
+                //     value: response.session.id,
+                //   },
+                // });
+                // handleSubmit();
 
               } else if ("fields_in_error" === response.status) {
                 console.log("Session update failed with field errors.");
@@ -148,6 +118,11 @@ const PaymentForm = ({ handleChange, handleSubmit }) => {
       PaymentSession.onBlur(["card.number", "card.nameOnCard", "card.securityCode", "card.expiryYear", "card.expiryMonth"], function (selector, role) {
         onBlurValidation(selector, role);
       });
+      // Remove readOnly attribute from input fields
+      const inputFields = document.querySelectorAll('.input-field');
+      inputFields.forEach((field) => {
+        field.removeAttribute('readOnly');
+      });
     };
 
     return () => {
@@ -161,89 +136,97 @@ const PaymentForm = ({ handleChange, handleSubmit }) => {
 
   return (
     <div>
-      {/* <div className="grid grid-cols-2 gap-4">
-        <div className="col-span-2 ok">
-          <label htmlFor="card-number" className="block text-sm font-medium leading-6 text-gray-900"> Card number </label>
-          <div className="mt-1">
-            <input
-              type="text"
-              id="card-number"
-              placeholder="XXXX XXXX XXXX XXXX"
-              className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-              value=""
-              tabIndex="1"
-              readOnly
-            />
-          </div>
-        </div>
-
-        <div>
-          <label htmlFor="" className="block text-sm font-medium leading-6 text-gray-900"> Expiry date </label>
-          <div className="mt-1">
-            <div>
-              <input
-                type="text"
-                name=""
-                id="expiry-month"
-                placeholder="MM"
-                className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                value=""
-                tabIndex="2"
-                readOnly
-              />
-            </div>
-            <div>
-              <input
-                type="text"
-                name=""
-                id="expiry-year"
-                placeholder="YY"
-                className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-                value=""
-                tabIndex="3"
-                readOnly
-              />
-            </div>
-          </div>
-        </div>
-
-        <div>
-          <label htmlFor="" className="block text-sm font-medium leading-6 text-gray-900"> CSV </label>
-          <div className="mt-1">
-            <input
-              type="text"
-              name=""
-              id=""
-              placeholder="XXX"
-              className="block w-full rounded-md border-0 py-1.5 pl-3 pr-20 text-gray-900 ring-1 ring-inset ring-gray-300 placeholder:text-gray-400 sm:text-sm sm:leading-6"
-              value=""
-              tabIndex="4"
-              readOnly
-            />
-          </div>
-        </div>
-      </div> */}
       <div>Please enter your payment details:</div>
       <span>5123450000000008</span>
       {/* <ThreedsChallengeRedirectComponent response={response} /> */}
       <h3>Credit Card</h3>
       <div>
-        Card Number: <input type="text" id="card-number" className="input-field" title="card number" aria-label="enter your card number" value="" tabIndex="1" readOnly />
+        Card Number:{" "}
+        <input
+          type="text"
+          id="card-number"
+          className="input-field"
+          title="card number"
+          aria-label="enter your card number"
+          tabIndex="1"
+          readOnly
+          {...register('cardNumber', {
+            required: { value: true, minLength: 10, message: t('fields.cardNumber_required') }
+          })}
+        />
+        {errors?.cardNumber && errors.cardNumber.type === "required" && (
+          <p className="mt-1 text-xs text-red-500">
+            {errors.cardNumber.message}
+          </p>
+        )}
       </div>
       <div>
-        Expiry Month:<input type="text" id="expiry-month" className="input-field" title="expiry month" aria-label="two digit expiry month" value="" tabIndex="2" readOnly />
+        Expiry Month:
+        <input
+          type="text"
+          id="expiry-month"
+          className="input-field"
+          title="expiry month"
+          aria-label="two digit expiry month"
+          tabIndex="2"
+          readOnly
+          {...register('expiry_month', {
+            required: { value: true, minLength: 10, message: t('fields.expiry_month_required') }
+          })}
+        />
+        {/* Add error handling for expiry month */}
+        {errors?.expiry_month && errors.expiry_month.type === "required" && (
+          <p className="mt-1 text-xs text-red-500">
+            {errors.expiry_month.message}
+          </p>
+        )}
       </div>
       <div>
-        Expiry Year:<input type="text" id="expiry-year" className="input-field" title="expiry year" aria-label="two digit expiry year" value="" tabIndex="3" readOnly />
+        Expiry Year:
+        <input
+          type="text"
+          id="expiry-year"
+          className="input-field"
+          title="expiry year"
+          aria-label="two digit expiry year"
+          tabIndex="3"
+          readOnly
+          {...register('expiry_year', {
+            required: { value: true, minLength: 10, message: t('fields.expiry_year_required') }
+          })}
+        />
+        {/* Add error handling for expiry year */}
+        {errors?.expiry_year && errors.expiry_year.type === "required" && (
+          <p className="mt-1 text-xs text-red-500">
+            {errors.expiry_year.message}
+          </p>
+        )}
       </div>
       <div>
-        Security Code:<input type="text" id="security-code" className="input-field" title="security code" aria-label="three digit CCV security code" value="" tabIndex="4" readOnly />
+        Security Code:
+        <input
+          type="text"
+          id="security-code"
+          className="input-field"
+          title="security code"
+          aria-label="three digit CCV security code"
+          tabIndex="4"
+          readOnly
+          {...register('security_code', {
+            required: { value: true, minLength: 10, message: t('fields.security_code_required') }
+          })}
+        />
+        {/* Add error handling for security code */}
+        {errors?.security_code && errors.security_code.type === "required" && (
+          <p className="mt-1 text-xs text-red-500">
+            {errors.security_code.message}
+          </p>
+        )}
       </div>
       <div>
-        Cardholder Name:<input type="text" id="cardholder-name" className="input-field" title="cardholder name" aria-label="enter name on card" value="" tabIndex="5" readOnly />
-      </div>
-      <div>
-        <button id="payButton" type='button' onClick={pay}>Pay Now</button>
+        <button id="payButton" type="button" onClick={pay}>
+          Pay Now
+        </button>
       </div>
     </div>
   );

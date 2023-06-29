@@ -3,6 +3,7 @@ import { memo, useEffect, useState } from 'react'
 import { getProductBySlug } from '~/api/products';
 import FormatCurrency from '~/utils/FormatCurrency';
 import MiniCartItemLoader from './MiniCartItemLoader';
+import Img from "~/components/icons/Img";
 
 interface Product {
     id: number;
@@ -29,8 +30,13 @@ const MiniCartItem = ({ id, quantity, slug, thumbnail, removeFromCart, price }: 
     const [product, setProduct] = useState({});
     const [loading, setLoading] = useState(true);
     const handleRemoveClick = () => {
+        const parentDiv = document.getElementById(`mini-item-${id}`);
+        if (parentDiv) {
+            parentDiv.classList.add("hidden");
+        }
         removeFromCart(id);
     };
+
     useEffect(() => {
         const fetchProduct = async () => {
             setLoading(true);
@@ -63,6 +69,7 @@ const MiniCartItem = ({ id, quantity, slug, thumbnail, removeFromCart, price }: 
         salePrice = product.sale_price;
     }
 
+    // console.log('product MINI', product)
     return (
         <>
             {loading ?
@@ -70,11 +77,17 @@ const MiniCartItem = ({ id, quantity, slug, thumbnail, removeFromCart, price }: 
                 :
                 <>
                     <div className="flex-shrink-0 w-24 h-24 overflow-hidden border border-gray-200 rounded-md">
-                        <img
-                            src={thumbnail}
-                            alt={slug}
-                            className="object-cover object-center w-full h-full"
-                        />
+                        {thumbnail ?
+                            <img
+                                src={thumbnail}
+                                alt={slug}
+                                className="object-cover object-center w-full h-full"
+                            />
+                            :
+                            <span className="flex items-center justify-center h-full">
+                                <Img />
+                            </span>
+                        }
                     </div>
 
                     <div className="flex flex-col flex-1 ml-4">
@@ -84,7 +97,7 @@ const MiniCartItem = ({ id, quantity, slug, thumbnail, removeFromCart, price }: 
                                     <Link to={`/products/${slug}`}>{title}</Link>
                                 </h3>
                                 <div>
-                                    <p className="ml-4"><FormatCurrency value={(salePrice * quantity)}/></p>
+                                    <p className="ml-4"><FormatCurrency value={(price * quantity)} /></p>
                                 </div>
                             </div>
                             {variation ?
@@ -95,14 +108,14 @@ const MiniCartItem = ({ id, quantity, slug, thumbnail, removeFromCart, price }: 
                         </div>
                         <div className="flex items-end justify-between flex-1 text-sm text-gray-500">
                             <div className="flex flex-col">
-                                {salePrice !== null && salePrice != productPrice ? (
+                                {salePrice !== '' && salePrice != productPrice ? (
                                     <p className="">
-                                        <span className="align-middle"><FormatCurrency value={salePrice}/></span>
-                                        <del className="ml-2 text-xs text-red-400 line-through align-middle"><FormatCurrency value={productPrice}/></del>
+                                        <span className="align-middle"><FormatCurrency value={salePrice} /></span>
+                                        <del className="ml-2 text-xs text-red-400 line-through align-middle"><FormatCurrency value={productPrice} /></del>
                                     </p>
                                 ) : (
                                     <p className="">
-                                        <FormatCurrency value={price}/>
+                                        <FormatCurrency value={price} />
                                     </p>
                                 )}
                                 <p className="text-gray-500">Quantity: {quantity}</p>

@@ -1,6 +1,6 @@
 import { MinusIcon, PlusIcon, XMarkIcon } from '@heroicons/react/24/outline';
 import { Link } from '@remix-run/react';
-import { useEffect, useState } from 'react'
+import { memo, useEffect, useState, useContext } from 'react'
 import { getProductBySlug } from '~/api/products';
 import FormatCurrency from '~/utils/FormatCurrency';
 import CartItemLoader from './CartItemLoader';
@@ -22,7 +22,7 @@ interface CartItemProps {
     removeFromCart: (itemId: number) => void;
     // decreaseCartQuantity: (itemId: number) => void;
 }
-const CartItem = ({ id, quantity, slug, thumbnail, removeFromCart, decreaseCartQuantity, addToCart }: CartItemProps) => {
+const CartItem = ({ id, quantity, slug, thumbnail, removeFromCart, price, decreaseCartQuantity, addToCart }: CartItemProps) => {
 
     const [product, setProduct] = useState({});
     const [loading, setLoading] = useState(true);
@@ -55,8 +55,8 @@ const CartItem = ({ id, quantity, slug, thumbnail, removeFromCart, decreaseCartQ
         color = variation.attributes?.attribute_pa_color
         size = variation.attributes?.attribute_pa_size
     } else {
-        productPrice = product.price;
-        salePrice = product.sale_price;
+        productPrice = product?.price;
+        salePrice = product?.sale_price;
     }
     const productData = {
         id: id,
@@ -71,6 +71,10 @@ const CartItem = ({ id, quantity, slug, thumbnail, removeFromCart, decreaseCartQ
     const handleAddToCart = () => {
         addToCart(productData);
     };
+    console.log('product>> item',product)
+    console.log('productPrice',productPrice)
+    console.log('salePrice:',salePrice)
+    console.log('variation:',variation)
     return (
         <>
             {loading ?
@@ -114,10 +118,9 @@ const CartItem = ({ id, quantity, slug, thumbnail, removeFromCart, decreaseCartQ
                             </button>
                         </div>
                         <div className="pr-4 text-right">
-                            {/* <span className="text-sm font-medium">{FormatCurrency(productPrice)}</span> */}
-                            {salePrice !== null && salePrice != productPrice ? (
+                            {salePrice !== '' && salePrice != productPrice ? (
                                 <p className="flex flex-col-reverse text-xl text-gray-900">
-                                    <span className="align-middle">{FormatCurrency(salePrice)}</span>
+                                    <span className="align-middle"><FormatCurrency value={salePrice}/></span>
                                     <del className="ml-2 text-base text-red-400 line-through align-middle"><FormatCurrency value={productPrice}/></del>
                                 </p>
                             ) : (
@@ -143,4 +146,4 @@ const CartItem = ({ id, quantity, slug, thumbnail, removeFromCart, decreaseCartQ
         </>
     );
 };
-export default CartItem;
+export default memo(CartItem);

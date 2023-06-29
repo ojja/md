@@ -40,8 +40,8 @@ export default function Cart() {
                                         title={''}
                                         id={item.id}
                                         quantity={item.quantity}
-                                        color={item.color}
-                                        size={item.size}
+                                        // color={item.color}
+                                        // size={item.size}
                                         slug={item.slug}
                                         thumbnail={item.thumbnail}
                                         removeFromCart={removeFromCart}
