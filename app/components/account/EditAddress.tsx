@@ -143,7 +143,7 @@ export default function EditAddress({ closeModal, address, resetAddresses }: any
                         <SelectInput
                             value={watch('gov_id') || ''}
                             options={[
-                                { label: t('checkout.select_gov'), value: "" },
+                                { label: t('checkout.select_city'), value: "" },
                                 ...govs.map((gov: any) => ({ label: i18n.language === 'ar' ? gov.name_ar : gov.name_en, value: gov.id })),
                             ]}
                             register={register('gov_id')}

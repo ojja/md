@@ -1,67 +1,93 @@
-import { Dialog, Transition } from "@headlessui/react";
 import { MagnifyingGlassIcon } from "@heroicons/react/24/outline";
-import { Fragment, useState } from "react";
+import { useState } from "react";
+import { useForm } from "react-hook-form";
+import { searchForm } from "~/api/common";
+import Popup from "./Popup";
+import ProductWidget from './product/ProductWidget';
 
 export default function Search() {
-    let [isSearch, setIsSearch] = useState(false)
+    let [isSearch, setIsSearch] = useState(false);
+    const { register, handleSubmit, watch } = useForm();
+    const [searchResults, setSearchResults] = useState([]);
 
     function closeModal() {
-        setIsSearch(false)
+        setIsSearch(false);
     }
 
     function openModal() {
-        setIsSearch(true)
+        setIsSearch(true);
     }
+
+    const keyword = watch('keyword');
+    const onSubmit = async (data) => {
+        // Call the searchForm function with the entered keyword
+        const searchResult = await searchForm(keyword);
+        // Handle the search result here (e.g., update state, display data)
+        setSearchResults(Array.isArray(searchResult) ? searchResult : []); // Check if searchResult is an array
+        setSearchResults(searchResult);
+    };
+
+    const handleKeyPress = (event) => {
+        if (event.key === 'Enter') {
+            event.preventDefault(); // Prevent form submission on Enter press
+            handleSubmit(onSubmit)();
+        }
+    };
+
     return (
         <div>
             <span className="p-2 text-gray-400 cursor-pointer hover:text-gray-500" onClick={openModal}>
                 <span className="sr-only">Search</span>
                 <MagnifyingGlassIcon className="w-6 h-6" aria-hidden="true" />
             </span>
-            {isSearch &&
-                <Transition appear show={isSearch} as={Fragment}>
-                    <Dialog as="div" className="relative z-10" onClose={closeModal}>
-                        <Transition.Child
-                            as={Fragment}
-                            enter="ease-out duration-300"
-                            enterFrom="opacity-0"
-                            enterTo="opacity-100"
-                            leave="ease-in duration-200"
-                            leaveFrom="opacity-100"
-                            leaveTo="opacity-0"
-                        >
-                            <div className="fixed inset-0 bg-black bg-opacity-25" />
-                        </Transition.Child>
-
-                        <div className="fixed inset-0 overflow-y-auto">
-                            <div className="flex items-center justify-center min-h-full p-4 text-center">
-                                <Transition.Child
-                                    as={Fragment}
-                                    enter="ease-out duration-300"
-                                    enterFrom="opacity-0 scale-95"
-                                    enterTo="opacity-100 scale-100"
-                                    leave="ease-in duration-200"
-                                    leaveFrom="opacity-100 scale-100"
-                                    leaveTo="opacity-0 scale-95"
+            {isSearch && (
+                <Popup isOpen={isSearch} close={closeModal} width="full">
+                    <div className="w-full max-w-3xl">
+                        <form onSubmit={handleSubmit(onSubmit)}>
+                            <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only">
+                                Search
+                            </label>
+                            <div className="relative">
+                                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
+                                    <svg
+                                        aria-hidden="true"
+                                        className="w-5 h-5 text-gray-500"
+                                        fill="none"
+                                        stroke="currentColor"
+                                        viewBox="0 0 24 24"
+                                        xmlns="http://www.w3.org/2000/svg"
+                                    >
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path>
+                                    </svg>
+                                </div>
+                                <input
+                                    type="text"
+                                    id="default-search"
+                                    className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500"
+                                    placeholder="Search Products"
+                                    required
+                                    {...register('keyword')}
+                                    onKeyPress={handleKeyPress}
+                                />
+                                <button
+                                    type="submit"
+                                    className="absolute px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg right-2 bottom-2 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300"
                                 >
-                                    <Dialog.Panel className="w-full max-w-screen-md p-6 overflow-hidden text-left align-middle transition-all transform bg-white shadow-xl rounded-2xl">
-                                        <form>
-                                            <label htmlFor="default-search" className="mb-2 text-sm font-medium text-gray-900 sr-only">Search</label>
-                                            <div className="relative">
-                                                <div className="absolute inset-y-0 left-0 flex items-center pl-3 pointer-events-none">
-                                                    <svg aria-hidden="true" className="w-5 h-5 text-gray-500" fill="none" stroke="currentColor" viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"></path></svg>
-                                                </div>
-                                                <input type="search" id="default-search" className="block w-full p-4 pl-10 text-sm text-gray-900 border border-gray-300 rounded-lg bg-gray-50 focus:ring-blue-500 focus:border-blue-500 " placeholder="Search Mockups, Logos..." required />
-                                                <button type="submit" className="absolute px-4 py-2 text-sm font-medium text-white bg-blue-700 rounded-lg right-2 bottom-2 hover:bg-blue-800 focus:ring-4 focus:outline-none focus:ring-blue-300 ">Search</button>
-                                            </div>
-                                        </form>
-                                    </Dialog.Panel>
-                                </Transition.Child>
+                                    Search
+                                </button>
                             </div>
+                        </form>
+                        <div className="grid grid-cols-1 mt-6 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-3 xl:gap-x-8">
+                            {Array.isArray(searchResults) ?
+                                searchResults.map((productData) => (
+                                    <ProductWidget product={productData} key={productData.id} />
+                                )) : (
+                                    <p>No Products Fount</p>
+                                )}
                         </div>
-                    </Dialog>
-                </Transition>
-            }
+                    </div>
+                </Popup>
+            )}
         </div>
-    )
+    );
 }

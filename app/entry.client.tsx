@@ -15,7 +15,7 @@ i18n.use(initReactI18next).init({
   },
   lng: "en",
   fallbackLng: "en",
-  debug: true,
+  debug: false,
   interpolation: {
     escapeValue: false,
   },

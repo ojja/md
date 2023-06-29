@@ -79,19 +79,16 @@ const ShoppingCart = () => {
                             </div>
                           </div>
 
-                          {cartItems.length > 0 ? (
+                          {cartItems && cartItems.length > 0 ? (
                             <div className="mt-8">
                               <div className="flow-root">
                                 <ul role="list" className="-my-6 divide-y divide-gray-200">
                                   {cartItems.map((item) => (
-                                    <li key={v4()} className="flex py-6">
-
+                                    <li key={v4()} className="flex py-6" id={`${`mini-item-${item?.id}`}`}>
                                       <MiniCartItem
                                         id={item.id}
                                         price={item.price}
                                         quantity={item.quantity}
-                                        // color={item.color} 
-                                        // size={item.size} 
                                         slug={item.slug}
                                         thumbnail={item.thumbnail}
                                         removeFromCart={removeFromCart}
