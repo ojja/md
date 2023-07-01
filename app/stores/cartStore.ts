@@ -92,7 +92,7 @@ const callAddToCart = (product: CartItem) => {
     },
     method: "POST",
     // credentials: "include",
-    // credentials: "same-origin",
+    credentials: "same-origin",
     // mode: 'no-cors',
     body: JSON.stringify(requestData),
   })

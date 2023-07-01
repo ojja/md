@@ -166,7 +166,7 @@ export default function ProductSingle() {
         return JSON.stringify(schemaData);
     };
 
-    // console.log('product>>', product)
+    console.log('productSlug>>', product)
     // console.log('itemID', itemID);
     // console.log('productPrice', productPrice)
     // console.log('salePrice', salePrice)
@@ -198,7 +198,7 @@ export default function ProductSingle() {
                     {isLoadingPage ? (
                         <SingleLoader />
                     ) : (
-                        <section className="pt-12 pb-24 overflow-hidden rounded-b-10xl bg-white">
+                        <section className="pt-12 pb-24 overflow-hidden bg-white rounded-b-10xl">
                             {/* Add the JSON-LD script tag with the structured data */}
                             <script
                                 type="application/ld+json"
