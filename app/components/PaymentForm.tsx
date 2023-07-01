@@ -21,7 +21,7 @@ const PaymentForm = ({ handleChange, onSubmit, register, errors, setValue }: any
       frameEmbeddingMitigation: ["javascript"],
       callbacks: {
         initialized: function (response) {
-          console.log('initialized');
+          // console.log('initialized');
         },
         formSessionUpdate: function (response) {
           // Handle form session update response
@@ -120,7 +120,7 @@ const PaymentForm = ({ handleChange, onSubmit, register, errors, setValue }: any
   };
 
   useEffect(() => {
-    console.log('PaymentForm')
+    // console.log('PaymentForm')
     const script = document.createElement('script');
     script.src = 'https://test-nbe.gateway.mastercard.com/form/version/71/merchant/TESTEGPTEST/session.js';
     if (!scriptLoaded.current) {
@@ -130,11 +130,11 @@ const PaymentForm = ({ handleChange, onSubmit, register, errors, setValue }: any
       scriptLoaded.current = true; // Set the flag to true
 
       script.onload = () => {
-        console.log('onload')
+        // console.log('onload')
         initializePaymentSession();
       };
     }
-    console.log('OJJA 2 in effect');
+    // console.log('OJJA 2 in effect');
     return () => {
       if (script && script.parentNode === document.head) {
         document.head.removeChild(script);
@@ -146,7 +146,7 @@ const PaymentForm = ({ handleChange, onSubmit, register, errors, setValue }: any
     PaymentSession.updateSessionFromForm('card');
   };
 
-  console.log('OJJA 2');
+  // console.log('OJJA 2');
   return (
     <div>
       <span>5123450000000008</span>

@@ -10,14 +10,14 @@ const PaymentMethod = ({ formData, handleChange, register, setValue, errors, onS
     //     const paymentMethod = event.target.value;
     //     setShowPaymentForm(paymentMethod === "CC");
     // };
-    console.log('OJJA 1');
+    // console.log('OJJA 1');
     // useEffect(() => {
     //     setRenderCount((prevCount) => prevCount + 1);
     // }, []);
 
     // console.log("PaymentMethod render count:", renderCount);
     const payment_method = watch("payment_method");
-    console.log("payment_method:", payment_method);
+    // console.log("payment_method:", payment_method);
     return (
         <>
             <h3 className='mb-2 text-lg font-medium text-gray-900'>

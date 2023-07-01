@@ -38,7 +38,7 @@ export default function Checkout() {
   // console.log("errors>>", errors);
 
   const handleClick = async () => {
-    console.log('errors  nefore in CLICK', errors)
+    // console.log('errors  nefore in CLICK', errors)
 
     const output = await trigger([
       'first_name',
@@ -62,31 +62,12 @@ export default function Checkout() {
       setStepOne(false);
     }
   };
-  // const handlePayClick = async () => {
-  //   console.log("handlePayClick");
-  //   console.log("handlePayClick",formData);
-
-  //   const output = await trigger([
-  //     'terms'
-  //   ]);
-  //   if (output == true) {
-  //     if (formData.payment_method === 'CC') {
-  //       console.log("handlePayClick CC");
-  //       PaymentSession.updateSessionFromForm('card');
-  //     }
-  //     // if (formData.sessionId) {
-  //     //   console.log("handlePayClick sessionId submit");
-  //     //   handleSubmit(onSubmit)();
-  //     // }
-  //   }
-  // };
-  const handlePayClick = async () => {
-    // Your handlePayClick logic here
-    // ...
   
+  const handlePayClick = async () => {
+
     // Call the parent onSubmit function when needed
     if (formData.payment_method === "CC") {
-      console.log("handlePayClick CC");
+      // console.log("handlePayClick CC");
       PaymentSession.updateSessionFromForm("card");
       const sessionId = watch("sessionId");
       console.log('sessionId',sessionId)
@@ -96,7 +77,7 @@ export default function Checkout() {
       }
     }
     if (formData.payment_method === "COD") {
-      console.log("handlePayClick COD");
+      // console.log("handlePayClick COD");
       const output = await trigger(["terms"]);
       if (output === true) {
         onSubmit(formData); // Call the parent onSubmit function with form data
@@ -105,7 +86,7 @@ export default function Checkout() {
   };
   
   const onSubmit = async (formData) => {
-    console.log("formData:", formData); // Access form data here
+    // console.log("formData:", formData); // Access form data here
     setIsLoading(true);
 
     if (Object.keys(errors).length === 0) {
@@ -223,7 +204,7 @@ export default function Checkout() {
   // };
   useEffect(() => {
     setTimeout(() => {
-      console.log('Effect set load')
+      // console.log('Effect set load')
       setIsLoading(false);
       // console.log('data', formData)
     }, 1000);
