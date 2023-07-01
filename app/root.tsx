@@ -169,7 +169,7 @@ useEffect(() => {
             <Footer />
             <ScrollRestoration />
             <Scripts />
-            {/* {process.env.NODE_ENV === 'development' ? <LiveReload /> : null} */}
+            {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
             </div>
           </body>
         </html>

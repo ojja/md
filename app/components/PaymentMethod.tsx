@@ -1,18 +1,23 @@
-import { useState } from "react";
+import { memo, useEffect, useState } from "react";
 import { RiRadioButtonLine, RiCheckboxBlankCircleLine } from "react-icons/ri";
 import PaymentForm from "./PaymentForm";
 
-export default function PaymentMethod({ formData, handleChange, register, setValue, errors, handleSubmit, watch }: any) {
-    // const [selectedPaymentMethod, setSelectedPaymentMethod] = useState("COD");
+const PaymentMethod = ({ formData, handleChange, register, setValue, errors, onSubmit, watch }: any) => {
+    const [showPaymentForm, setShowPaymentForm] = useState(false);
+    const [renderCount, setRenderCount] = useState(0);
 
-    // const handlePaymentMethodChange = (event) => {
+    // const handlePaymentMethodChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     //     const paymentMethod = event.target.value;
-    //     // setSelectedPaymentMethod(paymentMethod);
-    //     handleChange(event);
-    //     setValue("payment_method", paymentMethod); // Use setValue to update the form value
+    //     setShowPaymentForm(paymentMethod === "CC");
     // };
-    const selectedPaymentMethod = watch("payment_method");
-    console.log('selectedPaymentMethod:',selectedPaymentMethod)
+    console.log('OJJA 1');
+    // useEffect(() => {
+    //     setRenderCount((prevCount) => prevCount + 1);
+    // }, []);
+
+    // console.log("PaymentMethod render count:", renderCount);
+    const payment_method = watch("payment_method");
+    console.log("payment_method:", payment_method);
     return (
         <>
             <h3 className='mb-2 text-lg font-medium text-gray-900'>
@@ -28,8 +33,6 @@ export default function PaymentMethod({ formData, handleChange, register, setVal
                                 id="Credit_Card"
                                 className="hidden peer"
                                 value="CC"
-                                // checked={selectedPaymentMethod === "CC"}
-                                // onChange={handlePaymentMethodChange}
                                 {...register("payment_method")}
                             />
                             <div className='invisible peer-checked:visible absolute left-0 top-1 mt-0.5'>
@@ -39,10 +42,8 @@ export default function PaymentMethod({ formData, handleChange, register, setVal
                                 <RiCheckboxBlankCircleLine className='peer-checked:bg-gray-700' />
                             </div>
                             <span className='block ml-2 text-sm font-medium'>Credit Card</span>
-                            <div className="grid h-0 grid-cols-2 gap-4 overflow-hidden peer-checked:h-auto peer-checked:p-2">
-                                {selectedPaymentMethod === "CC" && (
-                                    <PaymentForm handleChange={handleChange} handleSubmit={handleSubmit} register={register} setValue={setValue} errors={errors}/>
-                                )}
+                            <div className="h-0 overflow-hidden peer-checked:h-auto peer-checked:p-2">
+                                <PaymentForm handleChange={handleChange} onSubmit={onSubmit} register={register} setValue={setValue} errors={errors} />
                             </div>
                         </div>
                     </label>
@@ -57,8 +58,6 @@ export default function PaymentMethod({ formData, handleChange, register, setVal
                                 className="hidden peer"
                                 value="COD"
                                 defaultChecked
-                                // checked={selectedPaymentMethod === "COD"}
-                                // onChange={handlePaymentMethodChange}
                                 {...register("payment_method")}
                             />
                             <div className='invisible peer-checked:visible absolute left-0 top-1 mt-0.5'>
@@ -67,7 +66,7 @@ export default function PaymentMethod({ formData, handleChange, register, setVal
                             <div className='visible peer-checked:invisible absolute left-0 top-1 mt-0.5'>
                                 <RiCheckboxBlankCircleLine className='peer-checked:bg-gray-700' />
                             </div>
-                            <span className='ml-2 text-sm font-medium'>Cash on delivery</span>
+                            <span className='ml-2 text-sm font-medium'>Cash on Delivery</span>
                         </div>
                     </label>
                 </li>
@@ -75,3 +74,5 @@ export default function PaymentMethod({ formData, handleChange, register, setVal
         </>
     );
 }
+
+export default memo(PaymentMethod)
