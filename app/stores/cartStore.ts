@@ -191,9 +191,8 @@ const addCouponAPI = (couponCode: any) => {
     };
     fetch(apiUrl, {
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        // Connection: "keep-alive",
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Accept': 'application/json',
       },
       credentials: "include",
       method: "POST",
