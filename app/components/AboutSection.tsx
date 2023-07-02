@@ -13,14 +13,14 @@ export default function AboutSection() {
                             <div className="w-full px-3 sm:px-4 xl:w-1/2">
                                 <div className="py-3 sm:py-4">
                                     <img
-                                        src="/images/about/image-1.jpg"
+                                        src="/images/about/image-1.webp"
                                         alt=""
                                         className="w-full rounded-2xl"
                                     />
                                 </div>
                                 <div className="py-3 sm:py-4">
                                     <img
-                                        src="/images/about/image-2.jpg"
+                                        src="/images/about/image-2.webp"
                                         alt=""
                                         className="w-full rounded-2xl"
                                     />
@@ -29,7 +29,7 @@ export default function AboutSection() {
                             <div className="w-full px-3 sm:px-4 xl:w-1/2">
                                 <div className="relative z-10 my-4">
                                     <img
-                                        src="/images/about/image-3.jpg"
+                                        src="/images/about/image-3.webp"
                                         alt=""
                                         className="w-full rounded-2xl"
                                     />
