@@ -67,7 +67,6 @@ export const meta: MetaFunction = ({ data }: any) => {
 
 
 export default function ProductSingle() {
-    // debugger;
     const product = useLoaderData<typeof loader>();
     const navigate = useNavigate();
     const [isLoadingPage, setIsLoadingPage] = useState(true); // State for simulating page loading
@@ -82,12 +81,16 @@ export default function ProductSingle() {
     // let variationPrice = variation ? variation.price : null;
     // let variationSalePrice = variation ? variation.sale_price : null;
 
-    console.log('Selected currency:', getSelectedCurrency());
+    // console.log('Selected currency:', getSelectedCurrency());
 
     useEffect(() => {
+        setIsLoadingPage(true);
+        setTimeout(() => {
+            setIsLoadingPage(false);
+        }, 1000);
         setSelectedSize(product?.attributes?.pa_size?.[0] || '');
         setSelectedColor(product?.attributes?.pa_color?.[0] || '');
-        addToRecent(product)
+        addToRecent(product);
     }, [product]);
     let itemID;
     let salePrice = null;
@@ -166,23 +169,26 @@ export default function ProductSingle() {
         return JSON.stringify(schemaData);
     };
 
-    console.log('productSlug>>', product)
+    // console.clear();
+    // console.log('productSlug>>', product)
+    console.log('isLoadingPage>>', isLoadingPage)
+
     // console.log('itemID', itemID);
     // console.log('productPrice', productPrice)
     // console.log('salePrice', salePrice)
     // console.log('variationId',variationId)
     // console.log('variation',variation)
 
-    useEffect(() => {
-        // Simulate page loading
-        const loadingTimeout = setTimeout(() => {
-            setIsLoadingPage(false);
-        }, 500);
+    // useEffect(() => {
+    //     // Simulate page loading
+    //     const loadingTimeout = setTimeout(() => {
+    //         setIsLoadingPage(false);
+    //     }, 500);
 
-        return () => {
-            clearTimeout(loadingTimeout);
-        };
-    }, []);
+    //     return () => {
+    //         clearTimeout(loadingTimeout);
+    //     };
+    // }, []);
     const {
         addToCart,
     } = useShoppingCart();

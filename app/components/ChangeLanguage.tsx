@@ -17,7 +17,7 @@ export default function ChangeLanguage() {
         const newPathname = `/${lang}${pathname}`;
         console.log('newPathname', newPathname)
     }
-    console.clear();
+    // console.clear();
     // console.log('i18n', i18n)
     return (
         <div className="hidden lg:ml-8 lg:flex">

@@ -126,7 +126,7 @@ export default function App() {
     // phone_number: '0123456789',
   };
   const options = {
-    debug: true, // enable logs
+    debug: false, // enable logs
   };
 
 
@@ -170,7 +170,11 @@ export default function App() {
               <Outlet />
             </main>
             <Footer />
-            <ScrollRestoration />
+            <ScrollRestoration 
+              // getKey={location =>{
+              //   return location.pathname
+              // }}
+            />
             <Scripts />
             {/* {process.env.NODE_ENV === 'development' ? <LiveReload /> : null} */}
           </div>
