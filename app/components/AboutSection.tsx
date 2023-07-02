@@ -16,6 +16,7 @@ export default function AboutSection() {
                                         src="/images/about/image-1.webp"
                                         alt="img alt"
                                         width="360"
+                                        height="426"
                                         className="w-full rounded-2xl"
                                     />
                                 </div>
@@ -24,6 +25,7 @@ export default function AboutSection() {
                                         src="/images/about/image-2.webp"
                                         alt="img alt"
                                         width="360"
+                                        height="426"
                                         className="w-full rounded-2xl"
                                     />
                                 </div>
@@ -34,6 +36,7 @@ export default function AboutSection() {
                                         src="/images/about/image-3.webp"
                                         alt="img alt"
                                         width="360"
+                                        height="426"
                                         className="w-full rounded-2xl"
                                     />
                                     <span className="absolute -right-7 -bottom-7 z-[-1]">

@@ -29,6 +29,7 @@ export default function BlogList() {
                                     src="/images/blog/image-01.webp"
                                     alt="img alt"
                                     width="370"
+                                    height="220"
                                     className="w-full"
                                 />
                             </div>
@@ -60,6 +61,7 @@ export default function BlogList() {
                                     src="/images/blog/image-02.webp"
                                     alt="img alt"
                                     width="370"
+                                    height="220"
                                     className="w-full"
                                 />
                             </div>
@@ -91,6 +93,7 @@ export default function BlogList() {
                                     src="/images/blog/image-03.webp"
                                     alt="img alt"
                                     width="370"
+                                    height="220"
                                     className="w-full"
                                 />
                             </div>

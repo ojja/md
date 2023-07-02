@@ -32,7 +32,7 @@ const CurrencySwitcher: React.FC = () => {
                         className="inline-flex items-center justify-center text-sm font-medium text-gray-700 group hover:text-gray-900"
                         onClick={() => setIsOpen(!isOpen)}
                     >
-                        <img src={getFlagImage(currency)} alt="" className="flex-shrink-0 block w-5 h-auto" />
+                        <img src={getFlagImage(currency)} alt="currency" width="20" height="15" className="flex-shrink-0 block w-5 h-auto" />
                         <span className="block ml-3 text-sm font-medium">{currency}</span>
                         <span className="sr-only">, change currency</span>
                         <ChevronDownIcon className="w-5 h-5 ml-2 -mr-1 text-gray-400 group-hover:text-gray-500" />
@@ -61,7 +61,7 @@ const CurrencySwitcher: React.FC = () => {
                                         )}
                                         onClick={() => handleCurrencyChange('USD')}
                                     >
-                                        <img src="/images/en.svg" alt="" className="flex-shrink-0 block w-5 h-auto" />
+                                        <img src="/images/en.svg" alt="USC" width="20" height="15" className="flex-shrink-0 block w-5 h-auto" />
                                         <span className="block ml-3">USD</span>
                                     </div>
                                 )}
@@ -76,7 +76,7 @@ const CurrencySwitcher: React.FC = () => {
                                         )}
                                         onClick={() => handleCurrencyChange('EGP')}
                                     >
-                                        <img src="/images/eg.svg" alt="" className="flex-shrink-0 block w-5 h-auto" />
+                                        <img src="/images/eg.svg" alt="EGP" width="20" height="15" className="flex-shrink-0 block w-5 h-auto" />
                                         <span className="block ml-3">EGP</span>
                                     </div>
                                 )}
