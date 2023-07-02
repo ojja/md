@@ -128,8 +128,8 @@ const callRemoveItemCart = (itemId: number) => {
       Accept: "application/json",
       Connection: "keep-alive",
     },
-    // credentials: "include",
-    credentials: "same-origin",
+    credentials: "include",
+    // credentials: "same-origin",
     method: "POST",
     // mode: 'no-cors',
     body: JSON.stringify(requestData),
@@ -165,7 +165,7 @@ const setQty = (product: CartItem, qty: any) => {
       Accept: "application/json",
       // Connection: "keep-alive",
     },
-    // credentials: "include",
+    credentials: "include",
     method: "POST",
     body: JSON.stringify(requestData),
   })
@@ -199,7 +199,7 @@ const addCouponAPI = (couponCode: any) => {
         Accept: "application/json",
         Connection: "keep-alive",
       },
-      // credentials: "include",
+      credentials: "include",
       method: "POST",
       body: JSON.stringify(requestData),
     })
