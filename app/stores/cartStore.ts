@@ -254,10 +254,7 @@ export const useShoppingCart = () => {
     // debugger;
     const itemIndex = cartStore.findIndex(
       (item) =>
-        item.id === product.id &&
-        item.slug === product.slug &&
-        item.price === product.price &&
-        item.thumbnail === product.thumbnail
+        item.id === product.id
     );
 
     if (itemIndex !== -1) {
