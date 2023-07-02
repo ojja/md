@@ -6,7 +6,7 @@ export default function HeroSection() {
         <>
             <div className="relative px-6 isolate pt-14 lg:px-8">
                 <img
-                    src="/images/hero.webp"
+                    src="/images/hero_01.webp"
                     alt=""
                     className="absolute inset-0 object-cover object-right w-full h-full -z-10 md:object-center"
                 />
