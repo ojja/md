@@ -91,8 +91,8 @@ const callAddToCart = (product: CartItem) => {
       // "User-Agent": "*",
     },
     method: "POST",
-    // credentials: "include",
-    credentials: "same-origin",
+    credentials: "include",
+    // credentials: "same-origin",
     // mode: 'no-cors',
     body: JSON.stringify(requestData),
   })
