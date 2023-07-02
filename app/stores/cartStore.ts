@@ -188,6 +188,7 @@ const addCouponAPI = (couponCode: any) => {
     const apiUrl = `${API_ENDPOINT}/cart/coupon.php`;
     const requestData = {
       coupon: couponCode,
+      action: "add"
     };
     fetch(apiUrl, {
       headers: {
