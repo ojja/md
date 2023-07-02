@@ -40,7 +40,7 @@ const CurrencySwitcher: React.FC = () => {
                 </div>
 
                 <Transition
-                    show={isOpen}
+                    // show={isOpen}
                     as={Fragment}
                     enter="transition ease-out duration-100"
                     enterFrom="transform opacity-0 scale-95"
