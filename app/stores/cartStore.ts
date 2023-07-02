@@ -267,7 +267,7 @@ export const useShoppingCart = () => {
       shoppingCart.set(newCartItems);
       console.log("already exists", newCartItems[itemIndex].quantity);
       setQty(product, newCartItems[itemIndex].quantity);
-      callAddToCart(product);
+      // callAddToCart(product);
     } else {
       console.log("Not exists");
       shoppingCart.set([
