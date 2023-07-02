@@ -196,11 +196,12 @@ export default function NavBar({ }) {
                   {/* Logo */}
                   <div className="flex ml-4 lg:ml-0">
                     <Link to="/">
-                      <img
+                      {/* <img
                         className="w-auto h-8"
                         src="/images/logo.svg"
                         alt=""
-                      />
+                      /> */}
+                      <img src="/images/logo.svg" className="h-8" alt="Logo" width={38} height={32} />
                     </Link>
                   </div>
 
