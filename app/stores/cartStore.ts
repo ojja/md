@@ -193,7 +193,7 @@ const addCouponAPI = (couponCode: any) => {
       headers: {
         "Content-Type": "application/json",
         Accept: "application/json",
-        Connection: "keep-alive",
+        // Connection: "keep-alive",
       },
       credentials: "include",
       method: "POST",
