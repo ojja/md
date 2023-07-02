@@ -53,7 +53,7 @@ export const getCart = () => {
         "Content-Type": "application/json",
         Connection: "keep-alive",
       },
-      // credentials: "include",
+      credentials: "include",
       // credentials: 'same-origin',
       // credentials: "omit",
       // mode: "no-cors",
