@@ -98,10 +98,8 @@ const callAddToCart = (product: CartItem) => {
   })
     .then((response) => {
       if (response.ok) {
-        // debugger;
         console.log("called Add API success new");
         getCart();
-
         return response.json();
       } else {
         throw new Error("Failed to add item to cart");
@@ -136,8 +134,7 @@ const callRemoveItemCart = (itemId: number) => {
   })
     .then((response) => {
       if (response.ok) {
-        // debugger;
-        console.log("called remove API success");
+        getCart();
         return response.json();
       } else {
         throw new Error("Failed to remove item to cart");
@@ -171,15 +168,14 @@ const setQty = (product: CartItem, qty: any) => {
   })
     .then((response) => {
       if (response.ok) {
-        console.log("called setQty API success");
+        getCart();
         return response.json();
       } else {
         throw new Error("Failed to update quantity in cart");
       }
     })
     .then((data) => {
-      // Handle the response data
-      console.log("API response setQty:", data);
+      getCart();
       const { total, total_discount }: any = data;
     })
     .catch((error) => {
@@ -205,7 +201,7 @@ const addCouponAPI = (couponCode: any) => {
     })
       .then((response) => {
         if (response.ok) {
-          console.log("Called coupon API success");
+          getCart();
           return response.json();
         } else {
           throw new Error("Failed to update coupon in cart");
