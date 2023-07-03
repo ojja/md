@@ -12,6 +12,9 @@
 # production
 /build
 /public/build
+/public/build
+/app/tailwind.[hash].css
+/app/tailwind.rtl.[hash].css
 
 # misc
 .DS_Store
