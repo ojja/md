@@ -1,6 +1,6 @@
 import { json } from "@remix-run/cloudflare";
 import { API_ENDPOINT } from "~/config";
-import { woo } from "~/lib/woocommerce";
+// import { woo } from "~/lib/woocommerce";
 
 export type Product = {
   id: string;
