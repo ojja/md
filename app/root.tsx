@@ -61,7 +61,7 @@ export const meta = () => ({
   viewport: "width=device-width,initial-scale=1",
 });
 export const headers = {
-  "Cache-Control": "public, max-age=604800",
+  "Cache-Control": "public, max-age=31536000",
 };
 
 i18n.use(initReactI18next).init({
