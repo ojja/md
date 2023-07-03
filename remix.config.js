@@ -31,6 +31,7 @@ module.exports = {
   devServerBroadcastDelay: 1000,
   devServerPort: 3002,
   // server: "./server.js",
+  serverMinify: true,
   serverDependenciesToBundle: "all",
   future: {
     unstable_tailwind: true,

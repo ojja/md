@@ -26,6 +26,7 @@ export const loader = async () => {
   return { data: {} };
 };
 export const links = () => {
+  const isRtl = i18n.language === 'ar';
   const isSingleProductPage = typeof window !== "undefined" && window.location.pathname.startsWith("/products/");
 
   return [
@@ -38,6 +39,7 @@ export const links = () => {
     { rel: 'stylesheet', href: stylesBase },
     { rel: 'stylesheet', href: stylesSlick },
     { rel: 'stylesheet', href: stylesSlickTheme },
+    { rel: 'stylesheet', href: isRtl ? stylesRtl : styles },
   ].filter(Boolean);
 }
 
@@ -124,7 +126,6 @@ export default function App() {
         <head>
           <Meta />
           <Links />
-          <link rel="stylesheet" href={i18n.language === "ar" ? stylesRtl : styles} />
         </head>
         <body className={`box-border oultine-none ${i18n.language === "ar" ? 'font-sans-ar rtl' : 'font-sans-en ltr'}`}>
           <div>
