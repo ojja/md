@@ -4,6 +4,10 @@ const {
   default: GlobalsPolyfills,
 } = require("@esbuild-plugins/node-globals-polyfill");
 
+// Add cache control headers to the headers section
+const cacheControlHeaders = {
+  "Cache-Control": "public, max-age=31536000",
+};
 /**
  * Define callbacks for the arguments of withEsbuildOverride.
  * @param option - Default configuration values defined by the remix compiler
@@ -36,8 +40,8 @@ module.exports = {
     return createRoutesFromFolders(defineRoutes);
   },
   headers: {
-    "Content-Security-Policy":
-      "frame-ancestors 'self' https://mtf.gateway.mastercard.com",
+    "Content-Security-Policy": "frame-ancestors 'self' https://mtf.gateway.mastercard.com",
+    ...cacheControlHeaders,
   },
   developmentServer: {
     compress: true, // Enable compression for served assets

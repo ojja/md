@@ -14,7 +14,14 @@ const handleRequest = createRequestHandler({
     return {};
   },
   rootLoader,
-  headers, // Add the headers function here
+//   headers(req, res) {
+//     // Set the cache control headers
+//     res.setHeader('Cache-Control', 'public, max-age=31536000');
+//   },
+  headers(req, res) {
+    // Set the cache control headers
+    res.setHeader('Cache-Control', 'public, max-age=31536000'); // Set max-age to 1 year
+  },
 });
 
 // Rest of your server code...

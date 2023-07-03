@@ -1,27 +1,12 @@
-import {
-  Link,
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useCatch,
-  useLoaderData,
-  useNavigate,
-  useParams,
-} from "@remix-run/react";
+import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch,} from "@remix-run/react";
 import { useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import i18n from 'i18next';
-import { I18nextProvider, initReactI18next, useTranslation } from 'react-i18next';
-import { initFacebookPixel } from './fb-pixel';
+import { initReactI18next, useTranslation } from 'react-i18next';
 import { CurrencyProvider } from "./CurrencyContext";
 // import en from "./locales/en.json";
 import en from "~/locales/en.json";
 import ar from "~/locales/ar.json";
 
-import TagManager from 'react-gtm-module'
-import TiktokPixel from 'tiktok-pixel';
 
 import styles from './tailwind.[hash].css';
 import stylesRtl from './tailwind.rtl.[hash].css';
@@ -85,7 +70,7 @@ export default function App() {
   const { t } = useTranslation();
   const [language, setLanguage] = useState(i18n.language);
   const [isRtl, setIsRtl] = useState(false);
-  
+
   const mainRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -102,8 +87,6 @@ export default function App() {
         mainRef.current.style.minHeight = `${mainHeight}px`;
       }
     }
-
-
     if (typeof window !== 'undefined') {
       calculateMainHeight();
       window.addEventListener('resize', calculateMainHeight);
@@ -113,34 +96,15 @@ export default function App() {
       };
     }
   }, []);
-  // const tagManagerArgs = {
-  //   gtmId: 'GTM-TTS4BML'
-  // }
-  // const advancedMatching = {
-  //   // email: 'some@email.com',
-  //   // phone_number: '0123456789',
-  // };
-  // const options = {
-  //   debug: false, // enable logs
-  // };
 
-
-
-  // useEffect(() => {
-  //   if (typeof window !== "undefined") {
-  //     TagManager.initialize(tagManagerArgs)
-  //     initFacebookPixel();
-  //     TiktokPixel.init('CIA567BC77U8RIVTN69G', advancedMatching, options);
-  //     TiktokPixel.pageView(); // For tracking page view
-  //     TiktokPixel.track(event, {}); // For tracking default events. More info about standard events: https://ads.tiktok.com/help/article?aid=10028
-  //   }
-  // }, []);
   useEffect(() => {
     initializeAnalytics();
   }, []);
-  useLayoutEffect(() => {
-    setLanguage(i18n.language);
-    setIsRtl(i18n.language === 'ar');
+  useEffect(() => {
+    if (typeof window !== 'undefined') {
+      setLanguage(i18n.language);
+      setIsRtl(i18n.language === 'ar');
+    }
   }, [i18n.language]);
 
   //   console.clear();
@@ -169,10 +133,10 @@ export default function App() {
               <Outlet />
             </main>
             <Footer />
-            <ScrollRestoration 
-              // getKey={location =>{
-              //   return location.pathname
-              // }}
+            <ScrollRestoration
+            // getKey={location =>{
+            //   return location.pathname
+            // }}
             />
             <Scripts />
             {/* {process.env.NODE_ENV === 'development' ? <LiveReload /> : null} */}

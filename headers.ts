@@ -9,6 +9,7 @@ export const headers: HeadersFunction = () => {
   };
 };
 
+console.log("OJJJA")
 export default createRequestHandler({
   getLoadContext() {
     return {};
@@ -28,4 +29,5 @@ export default createRequestHandler({
   async notFound() {
     return { status: 404, statusText: 'Not Found' };
   },
+  headers,
 });
