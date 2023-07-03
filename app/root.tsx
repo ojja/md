@@ -32,6 +32,7 @@ import stylesSlickTheme from 'slick-carousel/slick/slick-theme.css';
 
 import Footer from "./layouts/footer";
 import NavBar from "./layouts/navbar";
+import { initializeAnalytics } from './analytics';
 
 export const scripts = () => {
   return [];
@@ -84,13 +85,7 @@ export default function App() {
   const { t } = useTranslation();
   const [language, setLanguage] = useState(i18n.language);
   const [isRtl, setIsRtl] = useState(false);
-  // console.log('Root i18n.language ', language);
-
-  // console.log('NODE_ENV', process.env.NODE_ENV);
-  // console.log('LANG EN', en);
-  // console.log('LANG AR', ar);
-
-  // const mainRef = useRef(null);
+  
   const mainRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -118,30 +113,34 @@ export default function App() {
       };
     }
   }, []);
-  const tagManagerArgs = {
-    gtmId: 'GTM-TTS4BML'
-  }
-  const advancedMatching = {
-    // email: 'some@email.com',
-    // phone_number: '0123456789',
-  };
-  const options = {
-    debug: false, // enable logs
-  };
+  // const tagManagerArgs = {
+  //   gtmId: 'GTM-TTS4BML'
+  // }
+  // const advancedMatching = {
+  //   // email: 'some@email.com',
+  //   // phone_number: '0123456789',
+  // };
+  // const options = {
+  //   debug: false, // enable logs
+  // };
 
 
 
+  // useEffect(() => {
+  //   if (typeof window !== "undefined") {
+  //     TagManager.initialize(tagManagerArgs)
+  //     initFacebookPixel();
+  //     TiktokPixel.init('CIA567BC77U8RIVTN69G', advancedMatching, options);
+  //     TiktokPixel.pageView(); // For tracking page view
+  //     TiktokPixel.track(event, {}); // For tracking default events. More info about standard events: https://ads.tiktok.com/help/article?aid=10028
+  //   }
+  // }, []);
   useEffect(() => {
-    if (typeof window !== "undefined") {
-      TagManager.initialize(tagManagerArgs)
-      initFacebookPixel();
-      TiktokPixel.init('CIA567BC77U8RIVTN69G', advancedMatching, options);
-      TiktokPixel.pageView(); // For tracking page view
-      TiktokPixel.track(event, {}); // For tracking default events. More info about standard events: https://ads.tiktok.com/help/article?aid=10028
-    }
+    initializeAnalytics();
   }, []);
-  useEffect(() => {
+  useLayoutEffect(() => {
     setLanguage(i18n.language);
+    setIsRtl(i18n.language === 'ar');
   }, [i18n.language]);
 
   //   console.clear();
