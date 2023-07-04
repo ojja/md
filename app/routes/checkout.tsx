@@ -35,10 +35,10 @@ export default function Checkout() {
   //   const isStepOne = Object.values(formData).every((value) => value !== "");
   // console.log(formData);
   // console.log(formErrors);
-  console.log("errors>>", errors);
+  // console.log("errors>>", errors);
 
   const handleClick = async () => {
-    console.log('errors  nefore in CLICK', errors)
+    // console.log('errors  nefore in CLICK', errors)
 
     const output = await trigger([
       'first_name',
@@ -62,9 +62,31 @@ export default function Checkout() {
       setStepOne(false);
     }
   };
+  
+  const handlePayClick = async () => {
 
+    // Call the parent onSubmit function when needed
+    if (formData.payment_method === "CC") {
+      // console.log("handlePayClick CC");
+      PaymentSession.updateSessionFromForm("card");
+      const sessionId = watch("sessionId");
+      console.log('sessionId',sessionId)
+      const output = await trigger(["terms", "sessionId"]);
+      if (output === true) {
+        onSubmit(formData); // Call the parent onSubmit function with form data
+      }
+    }
+    if (formData.payment_method === "COD") {
+      // console.log("handlePayClick COD");
+      const output = await trigger(["terms"]);
+      if (output === true) {
+        onSubmit(formData); // Call the parent onSubmit function with form data
+      }
+    }
+  };
+  
   const onSubmit = async (formData) => {
-    console.log("formData:", formData); // Access form data here
+    // console.log("formData:", formData); // Access form data here
     setIsLoading(true);
 
     if (Object.keys(errors).length === 0) {
@@ -142,8 +164,14 @@ export default function Checkout() {
           ) {
             setIsOTP(true);
             setResponseCreditCard(responseData);
+          } else if (
+            responseData.status === "err"
+          ) {
+            const errorExplanation = responseData.obj.error.explanation;
+            setErrorMessage(errorExplanation)
           } else {
             console.log("API call failed");
+            setErrorMessage('try submit again')
           }
         } else {
           console.log("API call failed");
@@ -160,8 +188,8 @@ export default function Checkout() {
   };
 
   let isStepOne = true;
-  console.log('isStepOne', isStepOne)
-  console.log('watch formData> ', formData)
+  // console.log('stepOne', stepOne)
+  // console.log('watch formData> ', formData)
   // const handleClick = () => {
   //   // setIsLoading(true);
   //   console.log("formData:", formData);
@@ -176,14 +204,14 @@ export default function Checkout() {
   // };
   useEffect(() => {
     setTimeout(() => {
-      console.log('Effect set load')
+      // console.log('Effect set load')
       setIsLoading(false);
       // console.log('data', formData)
     }, 1000);
   }, []);
 
   return (
-    <div className="p-8 mx-auto bg-white">
+    <div className="p-8 mx-aut">
       <div className="container px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
         <div className="pb-10">
           <h1 className="text-4xl font-semibold">{t('checkout.checkout')}</h1>
@@ -191,10 +219,13 @@ export default function Checkout() {
         <div className="relative">
           {cartItems?.length > 0 ? (
             <>
-              <Nav stepOne={stepOne} setStepOne={setStepOne} handleClick={handleClick}/>
+              <Nav stepOne={stepOne} setStepOne={setStepOne} handleClick={handleClick} />
               <div className="flex flex-col-reverse items-start md:flex-row">
                 <div className="relative w-full max-w-4xl p-4 bg-white border rounded-md">
                   <form onSubmit={handleSubmit(onSubmit)} className="checkout-form">
+                    {errorMessage &&
+                      <p className="text-red-500">{errorMessage}</p>
+                    }
                     {stepOne ?
                       <div className="relative step-one">
                         {isLoading ? (
@@ -217,18 +248,15 @@ export default function Checkout() {
                           extraclass="mt-5 leading-5"
                           onClick={handleClick}
                         />
-                        {errorMessage &&
-                          <p className="text-red-500">{errorMessage}</p>
-                        }
                       </div>
                       :
                       <div className="step-two">
                         {isOTP && (
                           <Popup isOpen={isOTP}>
-                            <ThreedsChallengeRedirectComponent response={responseCreditCard} />
+                            <ThreedsChallengeRedirectComponent response={responseCreditCard} sessionID={watch("sessionId")} />
                           </Popup>
                         )}
-                        <PaymentMethod register={register} errors={errors} setValue={setValue} watch={watch} handleSubmit={handleSubmit} />
+                        <PaymentMethod register={register} errors={errors} setValue={setValue} watch={watch} onSubmit={onSubmit} formData={formData} />
                         <div className="flex items-center pt-3 mt-3 border-t-2">
                           <input
                             id="default-checkbox"
@@ -249,7 +277,8 @@ export default function Checkout() {
                           name={t('common.submit')}
                           width="full"
                           extraclass="mt-5 leading-5"
-                          type="submit"
+                          onClick={handlePayClick}
+                        // type="submit"
                         />
                       </div>
                     }

@@ -7,10 +7,6 @@ const app = express();
 
 // Define the isLoggedIn function
 function isLoggedIn(req) {
-  // Check if the user session or authentication token indicates a logged-in user
-  // Implement your specific logic here
-  // Return true if the user is logged in, false otherwise
-  // For example:
   return req.session && req.session.user;
 }
 
@@ -38,7 +34,13 @@ app.use((req, res, next) => {
 app.use(express.static(path.join(__dirname, 'public'), {
   maxAge: '1y', // Set cache max age to 1 year
   immutable: true, // Enable immutability for cache optimization
+  setHeaders: (res, path) => {
+    if (path.endsWith('.webp')) {
+      res.setHeader('Cache-Control', 'public, max-age=31536000');
+    }
+  },
 }));
+
 
 // Handle Remix requests
 app.all(
@@ -60,6 +62,10 @@ app.all(
       // Return the session object for the current request
       // This is required when using session-based authentication
       return req.session;
+    },
+    headers(req, res) {
+      // Set the cache control headers
+      res.setHeader('Cache-Control', 'public, max-age=31536000'); // Set max-age to 1 hour
     },
   })
 );

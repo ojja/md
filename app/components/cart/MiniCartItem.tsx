@@ -97,7 +97,7 @@ const MiniCartItem = ({ id, quantity, slug, thumbnail, removeFromCart, price }: 
                                     <Link to={`/products/${slug}`}>{title}</Link>
                                 </h3>
                                 <div>
-                                    <p className="ml-4"><FormatCurrency value={(price * quantity)} /></p>
+                                    <p className="ml-4"><FormatCurrency value={(parseFloat(salePrice !== '' && salePrice != productPrice ? salePrice : productPrice) * quantity)} /></p>
                                 </div>
                             </div>
                             {variation ?

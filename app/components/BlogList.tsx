@@ -26,8 +26,10 @@ export default function BlogList() {
                         <div className="mx-auto mb-10 max-w-[370px]">
                             <div className="mb-8 overflow-hidden rounded">
                                 <img
-                                    src="/images/blog/image-01.jpg"
-                                    alt="image"
+                                    src="/images/blog/image-01.webp"
+                                    alt="img alt"
+                                    width="370"
+                                    height="220"
                                     className="w-full"
                                 />
                             </div>
@@ -40,7 +42,7 @@ export default function BlogList() {
                                 <h3>
                                     <a
                                         href="#"
-                                        className="inline-block mb-4 text-xl font-semibold  hover:text-primary-400 sm:text-2xl lg:text-xl xl:text-2xl"
+                                        className="inline-block mb-4 text-xl font-semibold hover:text-primary-400 sm:text-2xl lg:text-xl xl:text-2xl"
                                     >
                                         Meet AutoManage, the best AI management tools
                                     </a>
@@ -56,8 +58,10 @@ export default function BlogList() {
                         <div className="mx-auto mb-10 max-w-[370px]">
                             <div className="mb-8 overflow-hidden rounded">
                                 <img
-                                    src="/images/blog/image-02.jpg"
-                                    alt="image"
+                                    src="/images/blog/image-02.webp"
+                                    alt="img alt"
+                                    width="370"
+                                    height="220"
                                     className="w-full"
                                 />
                             </div>
@@ -70,7 +74,7 @@ export default function BlogList() {
                                 <h3>
                                     <a
                                         href="#"
-                                        className="inline-block mb-4 text-xl font-semibold  hover:text-primary-400 sm:text-2xl lg:text-xl xl:text-2xl"
+                                        className="inline-block mb-4 text-xl font-semibold hover:text-primary-400 sm:text-2xl lg:text-xl xl:text-2xl"
                                     >
                                         How to earn more money as a wellness coach
                                     </a>
@@ -86,8 +90,10 @@ export default function BlogList() {
                         <div className="mx-auto mb-10 max-w-[370px]">
                             <div className="mb-8 overflow-hidden rounded">
                                 <img
-                                    src="/images/blog/image-03.jpg"
-                                    alt="image"
+                                    src="/images/blog/image-03.webp"
+                                    alt="img alt"
+                                    width="370"
+                                    height="220"
                                     className="w-full"
                                 />
                             </div>
@@ -100,7 +106,7 @@ export default function BlogList() {
                                 <h3>
                                     <a
                                         href="#"
-                                        className="inline-block mb-4 text-xl font-semibold  hover:text-primary-400 sm:text-2xl lg:text-xl xl:text-2xl"
+                                        className="inline-block mb-4 text-xl font-semibold hover:text-primary-400 sm:text-2xl lg:text-xl xl:text-2xl"
                                     >
                                         The no-fuss guide to upselling and cross selling
                                     </a>

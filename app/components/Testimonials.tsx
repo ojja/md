@@ -1,15 +1,8 @@
-import React from 'react'
-
 export default function Testimonials() {
     return (
-
         <section className="py-10 bg-gray-100 sm:py-20">
             <div className="px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
-                <h2
-                    className=" mb-10 text-3xl font-bold sm:text-4xl md:text-[40px] text-center"
-                >
-                    Our Fans
-                </h2>
+                <h2 className=" mb-10 text-3xl font-bold sm:text-4xl md:text-[40px] text-center" > Our Fans </h2>
                 <ul role="list" className="grid max-w-2xl grid-cols-1 gap-6 mx-auto sm:gap-8 lg:max-w-none lg:grid-cols-3">
                     <li>
                         <ul role="list" className="flex flex-col gap-y-6 sm:gap-y-8">
@@ -31,7 +24,7 @@ export default function Testimonials() {
                                             </div>
                                         </div>
                                         <div className="overflow-hidden rounded-full bg-gray-50">
-                                            <img alt="" src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2070&amp;q=80" width="56" height="56" decoding="async" data-nimg="future" className="object-cover h-14 w-14" />
+                                            <img alt="" src="/images/testimonials/1.webp" width="56" height="56" decoding="async" data-nimg="future" className="object-cover h-14 w-14" />
                                         </div>
                                     </figcaption>
                                 </figure>
@@ -55,7 +48,7 @@ export default function Testimonials() {
                                             </div>
                                         </div>
                                         <div className="overflow-hidden rounded-full bg-gray-50">
-                                            <img alt="" src="https://images.unsplash.com/photo-1577202214328-c04b77cefb5d?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2073&amp;q=80" width="56" height="56" decoding="async" data-nimg="future" className="object-cover h-14 w-14" />
+                                            <img alt="" src="/images/testimonials/2.webp" width="56" height="56" decoding="async" data-nimg="future" className="object-cover h-14 w-14" />
                                         </div>
                                     </figcaption>
                                 </figure>
@@ -82,7 +75,7 @@ export default function Testimonials() {
                                             </div>
                                         </div>
                                         <div className="overflow-hidden rounded-full bg-gray-50">
-                                            <img alt="" src="https://images.unsplash.com/photo-1624224971170-2f84fed5eb5e?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1999&amp;q=80" width="56" height="56" decoding="async" data-nimg="future" className="object-cover h-14 w-14" />
+                                            <img alt="" src="/images/testimonials/3.webp" width="56" height="56" decoding="async" data-nimg="future" className="object-cover h-14 w-14" />
                                         </div>
                                     </figcaption>
                                 </figure>
@@ -106,7 +99,7 @@ export default function Testimonials() {
                                             </div>
                                         </div>
                                         <div className="overflow-hidden rounded-full bg-gray-50">
-                                            <img alt="" src="https://images.unsplash.com/photo-1548142813-c348350df52b?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=989&amp;q=80" width="56" height="56" decoding="async" data-nimg="future" className="object-cover h-14 w-14" />
+                                            <img alt="" src="/images/testimonials/4.webp" width="56" height="56" decoding="async" data-nimg="future" className="object-cover h-14 w-14" />
                                         </div>
                                     </figcaption>
                                 </figure>
@@ -133,7 +126,7 @@ export default function Testimonials() {
                                             </div>
                                         </div>
                                         <div className="overflow-hidden rounded-full bg-gray-50">
-                                            <img alt="" src="https://images.unsplash.com/photo-1602434228300-a645bce6891b?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=1639&amp;q=80" width="56" height="56" decoding="async" data-nimg="future" className="object-cover h-14 w-14" />
+                                            <img alt="" src="/images/testimonials/5.webp" width="56" height="56" decoding="async" data-nimg="future" className="object-cover h-14 w-14" />
                                         </div>
                                     </figcaption>
                                 </figure>
@@ -156,7 +149,7 @@ export default function Testimonials() {
                                             </div>
                                         </div>
                                         <div className="overflow-hidden rounded-full bg-gray-50">
-                                            <img alt="" src="https://images.unsplash.com/flagged/photo-1570612861542-284f4c12e75f?ixlib=rb-1.2.1&amp;ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&amp;auto=format&amp;fit=crop&amp;w=2070&amp;q=80" width="56" height="56" decoding="async" data-nimg="future" className="object-cover h-14 w-14" />
+                                            <img alt="" src="/images/testimonials/6.webp" width="56" height="56" decoding="async" data-nimg="future" className="object-cover h-14 w-14" />
                                         </div>
                                     </figcaption>
                                 </figure>

@@ -81,7 +81,7 @@ export default function ShippingOptions({ setValue, register, errors, watch }: a
 
   const selectedAreaId = watch("area_id");
   const formData = watch();
-  //   console.log(formData);
+  console.log(formData);
 
   useEffect(() => {
     if (selectedGovId) {
@@ -92,6 +92,8 @@ export default function ShippingOptions({ setValue, register, errors, watch }: a
   useEffect(() => {
     if (selectedAreaId) {
       Cookies.set("selectedAreaId", selectedAreaId);
+      const selectedArea = areas.find((area: any) => area.area_id === selectedAreaId);
+      setValue("shipping_fee", selectedArea ? selectedArea.rate : 0);
     }
   }, [selectedAreaId]);
 

@@ -33,6 +33,15 @@ export default function ThanksComponent({ orderID }: any) {
     };
     const { step, message } = statusToStepMap[status] || { step: 0, message: "" };
 
+    const first_name = orderData?.billing?.first_name;
+    const last_name = orderData?.billing?.last_name;
+    const email = orderData?.billing?.email;
+    const phone = orderData?.billing?.phone;
+    const created_at = orderData?.billing?.created_at;
+    const payment_method = orderData?.order?.payment_method;
+    const address = orderData?.billing?.address1;
+    const gov = orderData?.billing?.gov;
+    const area = orderData?.billing?.area;
     return (
         <div>
             <div className="container px-4 py-16 mx-auto sm:px-6 sm:py-24 lg:px-8">
@@ -54,19 +63,27 @@ export default function ThanksComponent({ orderID }: any) {
                                     <dd className="mt-2 text-gray-700">
                                         <div className="inline-block w-1/2 mb-2">
                                             <label className="text-sm text-gray-500">First Name</label>
-                                            <span className="block text-base font-bold">Ahmed Khaled</span>
+                                            <span className="block text-base font-bold">{first_name}</span>
                                         </div>
                                         <div className="inline-block w-1/2 mb-2">
                                             <label className="text-sm text-gray-500">Last Name</label>
-                                            <span className="block text-base font-bold">Ahmed Khaled</span>
+                                            <span className="block text-base font-bold">{last_name}</span>
                                         </div>
-                                        <div className="block mb-2">
+                                        <div className="inline-block w-1/2 mb-2">
                                             <label className="text-sm text-gray-500">E-mail</label>
-                                            <span className="block text-base font-bold">AhmedKhaled@gamail.com</span>
+                                            <span className="block text-base font-bold">{email}</span>
                                         </div>
-                                        <div className="block mb-2">
+                                        <div className="inline-block w-1/2 mb-2">
                                             <label className="text-sm text-gray-500">Phone Number</label>
-                                            <span className="block text-base font-bold">012764326754</span>
+                                            <span className="block text-base font-bold">{phone}</span>
+                                        </div>
+                                    </dd>
+                                </dl>
+                                <h2 className="text-xl font-medium text-gray-900">Payment Method</h2>
+                                <dl className="py-5 text-sm">
+                                    <dd className="mt-2 text-gray-700">
+                                        <div className="inline-block w-1/2 mb-2">
+                                            <span className="block text-base font-bold">{payment_method}</span>
                                         </div>
                                     </dd>
                                 </dl>
@@ -74,33 +91,37 @@ export default function ThanksComponent({ orderID }: any) {
                                 <dl className="py-5 text-sm">
                                     <dd className="mt-2 space-y-2 text-gray-700">
                                         <div className="block w-1/3 mb-2">
-                                            <label className="text-sm text-gray-500">Delivery Expected</label>
-                                            <span className="block text-base font-bold">23rd March 2023</span>
+                                            <label className="text-sm text-gray-500">Order Date</label>
+                                            <span className="block text-base font-bold">{created_at}</span>
                                         </div>
                                         <div className="inline-block w-1/3 mb-2">
                                             <label className="text-sm text-gray-500">City</label>
-                                            <span className="block text-base font-bold">Cairo</span>
+                                            <span className="block text-base font-bold">{gov}</span>
                                         </div>
-                                        <div className="inline-block w-1/3 mb-2">
+                                        {/* <div className="inline-block w-1/3 mb-2">
                                             <label className="text-sm text-gray-500">Neighborhood</label>
                                             <span className="block text-base font-bold">Heliopolis</span>
-                                        </div>
+                                        </div> */}
                                         <div className="inline-block w-1/3 mb-2">
                                             <label className="text-sm text-gray-500">Area</label>
-                                            <span className="block text-base font-bold">Korba</span>
-                                        </div>
-                                        <div className="block mb-2">
-                                            <label className="text-sm text-gray-500">Property number and street</label>
-                                            <span className="block text-base font-bold">Street 9, Building No. 4</span>
+                                            <span className="block text-base font-bold">{area}</span>
                                         </div>
                                         <div className="inline-block w-1/2 mb-2">
+                                            <label className="text-sm text-gray-500">Address</label>
+                                            <span className="block text-base font-bold">{address}</span>
+                                        </div>
+                                        <div className="inline-block w-1/2 mb-2">
+                                            <label className="text-sm text-gray-500">Property Type</label>
+                                            <span className="block text-base font-bold">Flat</span>
+                                        </div>
+                                        {/* <div className="inline-block w-1/2 mb-2">
                                             <label className="text-sm text-gray-500">Floor</label>
                                             <span className="block text-base font-bold">9</span>
                                         </div>
                                         <div className="inline-block w-1/2 mb-2">
                                             <label className="text-sm text-gray-500">Flat</label>
                                             <span className="block text-base font-bold">94</span>
-                                        </div>
+                                        </div> */}
                                     </dd>
                                 </dl>
                                 <div className="pt-10 border-t border-gray-200">
@@ -109,7 +130,7 @@ export default function ThanksComponent({ orderID }: any) {
                             </div>
                         </div>
 
-                        <div className="bg-red-100">
+                        <div className="hidden bg-red-100">
                             <div className="flex p-10">
                                 <div className="flex flex-col">
                                     <h3 className="text-[#CA4323] text-2xl font-bold mb-1">Congratulations!</h3>
@@ -134,7 +155,7 @@ export default function ThanksComponent({ orderID }: any) {
                             </div>
                         </div>
                     </div>
-                    <CartSummary thanks={orderID} />
+                    <CartSummary thanks={orderID} orderData={orderData}/>
                 </div>
                 <ExtraProducts categorySlug="food" count={5} title="Shop More" />
 

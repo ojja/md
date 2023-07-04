@@ -1,27 +1,12 @@
-import {
-  Link,
-  Links,
-  LiveReload,
-  Meta,
-  Outlet,
-  Scripts,
-  ScrollRestoration,
-  useCatch,
-  useLoaderData,
-  useNavigate,
-  useParams,
-} from "@remix-run/react";
+import { Links, LiveReload, Meta, Outlet, Scripts, ScrollRestoration, useCatch,} from "@remix-run/react";
 import { useContext, useEffect, useLayoutEffect, useRef, useState } from "react";
 import i18n from 'i18next';
-import { I18nextProvider, initReactI18next, useTranslation } from 'react-i18next';
-import { initFacebookPixel } from './fb-pixel';
+import { initReactI18next, useTranslation } from 'react-i18next';
 import { CurrencyProvider } from "./CurrencyContext";
 // import en from "./locales/en.json";
 import en from "~/locales/en.json";
 import ar from "~/locales/ar.json";
 
-import TagManager from 'react-gtm-module'
-import TiktokPixel from 'tiktok-pixel';
 
 import styles from './tailwind.[hash].css';
 import stylesRtl from './tailwind.rtl.[hash].css';
@@ -32,6 +17,7 @@ import stylesSlickTheme from 'slick-carousel/slick/slick-theme.css';
 
 import Footer from "./layouts/footer";
 import NavBar from "./layouts/navbar";
+import { initializeAnalytics } from './analytics';
 
 export const scripts = () => {
   return [];
@@ -40,6 +26,7 @@ export const loader = async () => {
   return { data: {} };
 };
 export const links = () => {
+  const isRtl = i18n.language === 'ar';
   const isSingleProductPage = typeof window !== "undefined" && window.location.pathname.startsWith("/products/");
 
   return [
@@ -52,6 +39,7 @@ export const links = () => {
     { rel: 'stylesheet', href: stylesBase },
     { rel: 'stylesheet', href: stylesSlick },
     { rel: 'stylesheet', href: stylesSlickTheme },
+    { rel: 'stylesheet', href: isRtl ? stylesRtl : styles },
   ].filter(Boolean);
 }
 
@@ -60,6 +48,9 @@ export const meta = () => ({
   title: "PWA",
   viewport: "width=device-width,initial-scale=1",
 });
+export const headers = {
+  "Cache-Control": "public, max-age=31536000",
+};
 
 i18n.use(initReactI18next).init({
   lng: "en",
@@ -81,13 +72,7 @@ export default function App() {
   const { t } = useTranslation();
   const [language, setLanguage] = useState(i18n.language);
   const [isRtl, setIsRtl] = useState(false);
-  // console.log('Root i18n.language ', language);
 
-  // console.log('NODE_ENV', process.env.NODE_ENV);
-  // console.log('LANG EN', en);
-  // console.log('LANG AR', ar);
-  
-  // const mainRef = useRef(null);
   const mainRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
@@ -104,8 +89,6 @@ export default function App() {
         mainRef.current.style.minHeight = `${mainHeight}px`;
       }
     }
-
-
     if (typeof window !== 'undefined') {
       calculateMainHeight();
       window.addEventListener('resize', calculateMainHeight);
@@ -115,30 +98,15 @@ export default function App() {
       };
     }
   }, []);
-  const tagManagerArgs = {
-    gtmId: 'GTM-TTS4BML'
-}
-const advancedMatching = {
-  // email: 'some@email.com',
-  // phone_number: '0123456789',
-};
-const options = {
-  debug: true, // enable logs
-};
 
-
-
-useEffect(() => {
-  if (typeof window !== "undefined") {
-    TagManager.initialize(tagManagerArgs)
-    initFacebookPixel();
-    TiktokPixel.init('CIA567BC77U8RIVTN69G', advancedMatching, options);
-    TiktokPixel.pageView(); // For tracking page view
-    TiktokPixel.track(event, {}); // For tracking default events. More info about standard events: https://ads.tiktok.com/help/article?aid=10028
-    }
+  useEffect(() => {
+    initializeAnalytics();
   }, []);
   useEffect(() => {
-    setLanguage(i18n.language);
+    if (typeof window !== 'undefined') {
+      setLanguage(i18n.language);
+      setIsRtl(i18n.language === 'ar');
+    }
   }, [i18n.language]);
 
   //   console.clear();
@@ -154,25 +122,28 @@ useEffect(() => {
 
   return (
     <CurrencyProvider>
-        <html lang={language} dir={i18n.language === "ar" ? 'rtl' : 'ltr'}>
-          <head>
-            <Meta />
-            <Links />
-            <link rel="stylesheet" href={i18n.language === "ar" ? stylesRtl : styles} />
-          </head>
-          <body className={`box-border oultine-none ${i18n.language === "ar" ? 'font-sans-ar rtl' : 'font-sans-en ltr'}`}>
-            <div>
+      <html lang={language} dir={i18n.language === "ar" ? 'rtl' : 'ltr'}>
+        <head>
+          <Meta />
+          <Links />
+        </head>
+        <body className={`box-border oultine-none ${i18n.language === "ar" ? 'font-sans-ar rtl' : 'font-sans-en ltr'}`}>
+          <div>
             <NavBar />
             <main className="relative z-10 bg-gray-100" ref={mainRef}>
               <Outlet />
             </main>
             <Footer />
-            <ScrollRestoration />
+            <ScrollRestoration
+            // getKey={location =>{
+            //   return location.pathname
+            // }}
+            />
             <Scripts />
-            {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
-            </div>
-          </body>
-        </html>
+            {/* {process.env.NODE_ENV === 'development' ? <LiveReload /> : null} */}
+          </div>
+        </body>
+      </html>
     </CurrencyProvider>
   );
 }

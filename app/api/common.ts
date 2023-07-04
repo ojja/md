@@ -49,3 +49,26 @@ export async function searchForm(key_word: string) {
     return [];
   }
 }
+
+export async function checkMPGS(sessionID: string) {
+  const url: string = `${API_ENDPOINT}/payment/MPGS/status.php`;
+  const data: any = {
+    sessionID: sessionID,
+  };
+  const options: RequestInit = {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json",
+    },
+    body: JSON.stringify(data),
+  };
+
+  try {
+    const response = await fetch(url, options);
+    const result = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Error:", error);
+    return [];
+  }
+}

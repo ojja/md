@@ -34,7 +34,7 @@ export default function TimeSlot({ register, errors, setValue, watch }: any) {
                         id="deliver_today"
                         value={"Today"}
                         className="hidden peer"
-                        // defaultChecked
+                        defaultChecked
                         {...register('order_date', {
                             required: { value: true, message: t('fields.order_date_required') },
                         })}

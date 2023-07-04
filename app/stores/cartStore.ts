@@ -53,7 +53,7 @@ export const getCart = () => {
         "Content-Type": "application/json",
         Connection: "keep-alive",
       },
-      // credentials: "include",
+      credentials: "include",
       // credentials: 'same-origin',
       // credentials: "omit",
       // mode: "no-cors",
@@ -91,17 +91,15 @@ const callAddToCart = (product: CartItem) => {
       // "User-Agent": "*",
     },
     method: "POST",
-    // credentials: "include",
+    credentials: "include",
     // credentials: "same-origin",
     // mode: 'no-cors',
     body: JSON.stringify(requestData),
   })
     .then((response) => {
       if (response.ok) {
-        // debugger;
         console.log("called Add API success new");
         getCart();
-
         return response.json();
       } else {
         throw new Error("Failed to add item to cart");
@@ -128,16 +126,15 @@ const callRemoveItemCart = (itemId: number) => {
       Accept: "application/json",
       Connection: "keep-alive",
     },
-    // credentials: "include",
-    credentials: "same-origin",
+    credentials: "include",
+    // credentials: "same-origin",
     method: "POST",
     // mode: 'no-cors',
     body: JSON.stringify(requestData),
   })
     .then((response) => {
       if (response.ok) {
-        // debugger;
-        console.log("called remove API success");
+        getCart();
         return response.json();
       } else {
         throw new Error("Failed to remove item to cart");
@@ -165,21 +162,20 @@ const setQty = (product: CartItem, qty: any) => {
       Accept: "application/json",
       // Connection: "keep-alive",
     },
-    // credentials: "include",
+    credentials: "include",
     method: "POST",
     body: JSON.stringify(requestData),
   })
     .then((response) => {
       if (response.ok) {
-        console.log("called setQty API success");
+        getCart();
         return response.json();
       } else {
         throw new Error("Failed to update quantity in cart");
       }
     })
     .then((data) => {
-      // Handle the response data
-      console.log("API response setQty:", data);
+      getCart();
       const { total, total_discount }: any = data;
     })
     .catch((error) => {
@@ -192,20 +188,20 @@ const addCouponAPI = (couponCode: any) => {
     const apiUrl = `${API_ENDPOINT}/cart/coupon.php`;
     const requestData = {
       coupon: couponCode,
+      action: "add"
     };
     fetch(apiUrl, {
       headers: {
-        "Content-Type": "application/json",
-        Accept: "application/json",
-        Connection: "keep-alive",
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Accept': 'application/json',
       },
-      // credentials: "include",
+      credentials: "include",
       method: "POST",
       body: JSON.stringify(requestData),
     })
       .then((response) => {
         if (response.ok) {
-          console.log("Called coupon API success");
+          getCart();
           return response.json();
         } else {
           throw new Error("Failed to update coupon in cart");
@@ -259,10 +255,7 @@ export const useShoppingCart = () => {
     // debugger;
     const itemIndex = cartStore.findIndex(
       (item) =>
-        item.id === product.id &&
-        item.slug === product.slug &&
-        item.price === product.price &&
-        item.thumbnail === product.thumbnail
+        item.id === product.id
     );
 
     if (itemIndex !== -1) {
@@ -272,7 +265,7 @@ export const useShoppingCart = () => {
       shoppingCart.set(newCartItems);
       console.log("already exists", newCartItems[itemIndex].quantity);
       setQty(product, newCartItems[itemIndex].quantity);
-      callAddToCart(product);
+      // callAddToCart(product);
     } else {
       console.log("Not exists");
       shoppingCart.set([

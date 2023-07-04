@@ -1,9 +1,14 @@
 import { useEffect, useState } from 'react';
+import { checkMPGS } from '~/api/common';
+import useShoppingCart from '~/stores/cartStore';
+import Loader from '../Loader';
 
-function ThreedsChallengeRedirectComponent({ response }: any) {
+function ThreedsChallengeRedirectComponent({ response, sessionID }: any) {
     const [creqValue, setCreqValue] = useState('');
     const [paymentStatus, setPaymentStatus] = useState('');
-
+    const [isLoading, setIsLoading] = useState(false);
+    const { resetCart } = useShoppingCart();
+    console.log('sessionID', sessionID)
 
     useEffect(() => {
         if (response) {
@@ -32,8 +37,6 @@ function ThreedsChallengeRedirectComponent({ response }: any) {
             if (event.source !== iframe.contentWindow) {
                 return;
             }
-
-            // Access the payment status data from the message event
             const paymentStatus = event.data;
             setPaymentStatus(paymentStatus);
 
@@ -44,7 +47,28 @@ function ThreedsChallengeRedirectComponent({ response }: any) {
             window.addEventListener('message', handleIframeMessage);
             window.addEventListener("message", (event) => {
                 console.log(`Received message: ${event.data}`);
-              });
+                const receivedData = JSON.parse(event.data);
+                if (receivedData.result === "SUCCESS") {
+                    setIsLoading(true);
+                    setTimeout(() => {
+                        checkMPGS(sessionID)
+                            .then(result => {
+                                console.log(result);
+                                const orderID = result.orderID;
+                                console.log("API 200", orderID);
+                                const thanksURL = `/thanks?orderID=${orderID}`;
+                                setTimeout(() => {
+                                    // console.log('a7a')
+                                    resetCart();
+                                    window.location.href = thanksURL;
+                                }, 2000);
+                            })
+                            .catch(error => {
+                                console.error("Error:", error);
+                            });
+                    }, 2000);
+                }
+            });
             return () => {
                 window.removeEventListener('message', handleIframeMessage);
             };
@@ -60,7 +84,11 @@ function ThreedsChallengeRedirectComponent({ response }: any) {
                 </form>
                 <iframe id="challengeFrame" name="challengeFrame" width="100%" height="100%" />
             </div>
-            {paymentStatus && <div>Payment Status: {paymentStatus}</div>}
+            {isLoading ? (
+                <div className="absolute z-20 flex items-start justify-center pt-20 bg-gray-200 bg-opacity-75 -inset-4">
+                    <Loader />
+                </div>
+            ) : ('')}
         </div>
     );
 }

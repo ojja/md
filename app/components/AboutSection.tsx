@@ -13,15 +13,19 @@ export default function AboutSection() {
                             <div className="w-full px-3 sm:px-4 xl:w-1/2">
                                 <div className="py-3 sm:py-4">
                                     <img
-                                        src="/images/about/image-1.jpg"
-                                        alt=""
+                                        src="/images/about/image-1.webp"
+                                        alt="img alt"
+                                        width="360"
+                                        height="426"
                                         className="w-full rounded-2xl"
                                     />
                                 </div>
                                 <div className="py-3 sm:py-4">
                                     <img
-                                        src="/images/about/image-2.jpg"
-                                        alt=""
+                                        src="/images/about/image-2.webp"
+                                        alt="img alt"
+                                        width="360"
+                                        height="426"
                                         className="w-full rounded-2xl"
                                     />
                                 </div>
@@ -29,8 +33,10 @@ export default function AboutSection() {
                             <div className="w-full px-3 sm:px-4 xl:w-1/2">
                                 <div className="relative z-10 my-4">
                                     <img
-                                        src="/images/about/image-3.jpg"
-                                        alt=""
+                                        src="/images/about/image-3.webp"
+                                        alt="img alt"
+                                        width="360"
+                                        height="426"
                                         className="w-full rounded-2xl"
                                     />
                                     <span className="absolute -right-7 -bottom-7 z-[-1]">

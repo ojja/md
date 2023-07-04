@@ -16,12 +16,15 @@ export const meta = () => {
     }
 }
 export default function Cart() {
-    const { cartItems, removeFromCart, decreaseCartQuantity, addToCart, totalPrice, addCoupon, totalAPI, totalDiscountAPI } = useShoppingCart();
+    let { cartItems, removeFromCart, decreaseCartQuantity, addToCart, totalPrice, addCoupon, totalAPI, totalDiscountAPI } = useShoppingCart();
+    // debugger;
     // console.log('cartItems', cartItems)
-    // console.log('totalAPI', totalAPI)
     // console.log('totalDiscountAPI', totalDiscountAPI)
     const [openCoupon, setOpenCoupon] = useState(false);
-
+    if (totalAPI === 0){
+        totalAPI = totalPrice;
+    }
+    console.log('totalAPI', totalAPI)
     return (
         <div className="p-8 mx-auto bg-white">
             <div className="container px-4 mx-auto max-w-7xl sm:px-6 lg:px-8">
