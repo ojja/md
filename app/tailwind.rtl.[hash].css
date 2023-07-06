@@ -1002,6 +1002,10 @@ video {
   margin-bottom: 0.625rem;
 }
 
+.mb-24 {
+  margin-bottom: 6rem;
+}
+
 .mb-28 {
   margin-bottom: 7rem;
 }
@@ -1481,6 +1485,10 @@ video {
   width: 15rem;
 }
 
+.w-666 {
+  width: calc(100% / 3 - 24px);
+}
+
 .w-7 {
   width: 1.75rem;
 }
@@ -1501,6 +1509,10 @@ video {
   width: 140px;
 }
 
+.w-\[1px\] {
+  width: 1px;
+}
+
 .w-\[22px\] {
   width: 22px;
 }
@@ -1511,6 +1523,10 @@ video {
 
 .w-\[68\.5625rem\] {
   width: 68.5625rem;
+}
+
+.w-\[calc\(50\%-12px\)\] {
+  width: calc(50% - 12px);
 }
 
 .w-auto {
@@ -1961,6 +1977,10 @@ video {
   row-gap: 0.75rem;
 }
 
+.gap-y-4 {
+  row-gap: 1rem;
+}
+
 .gap-y-6 {
   row-gap: 1.5rem;
 }
@@ -2127,6 +2147,10 @@ video {
   border-radius: 1.5rem;
 }
 
+.rounded-\[100px\] {
+  border-radius: 100px;
+}
+
 .rounded-\[10px\] {
   border-radius: 10px;
 }
@@ -2177,6 +2201,11 @@ video {
 .rounded-r-full {
   border-top-left-radius: 9999px;
   border-bottom-left-radius: 9999px;
+}
+
+.rounded-s {
+  border-start-start-radius: 0.25rem;
+  border-end-start-radius: 0.25rem;
 }
 
 .border {
@@ -2296,6 +2325,11 @@ video {
   border-color: rgb(134 134 133 / var(--tw-border-opacity));
 }
 
+.border-gray-50 {
+  --tw-border-opacity: 1;
+  border-color: rgb(119 119 119 / var(--tw-border-opacity));
+}
+
 .border-green-100 {
   --tw-border-opacity: 1;
   border-color: rgb(15 97 64 / var(--tw-border-opacity));
@@ -2395,6 +2429,11 @@ video {
   background-color: rgb(247 237 212 / var(--tw-bg-opacity));
 }
 
+.bg-\[\#F9A000\] {
+  --tw-bg-opacity: 1;
+  background-color: rgb(249 160 0 / var(--tw-bg-opacity));
+}
+
 .bg-\[\#FBF6E9\] {
   --tw-bg-opacity: 1;
   background-color: rgb(251 246 233 / var(--tw-bg-opacity));
@@ -2477,6 +2516,11 @@ video {
 .bg-green-300 {
   --tw-bg-opacity: 1;
   background-color: rgb(237 239 235 / var(--tw-bg-opacity));
+}
+
+.bg-green-400 {
+  --tw-bg-opacity: 1;
+  background-color: rgb(18 110 73 / var(--tw-bg-opacity));
 }
 
 .bg-green-500 {
@@ -3229,6 +3273,11 @@ video {
 .text-\[\#32A94C\] {
   --tw-text-opacity: 1;
   color: rgb(50 169 76 / var(--tw-text-opacity));
+}
+
+.text-\[\#3C926F\] {
+  --tw-text-opacity: 1;
+  color: rgb(60 146 111 / var(--tw-text-opacity));
 }
 
 .text-\[\#423C33\] {
@@ -4667,16 +4716,16 @@ video {
     margin-bottom: 2.75rem;
   }
 
+  .md\:mb-16 {
+    margin-bottom: 4rem;
+  }
+
   .md\:mb-2 {
     margin-bottom: 0.5rem;
   }
 
   .md\:mb-6 {
     margin-bottom: 1.5rem;
-  }
-
-  .md\:mb-7 {
-    margin-bottom: 1.75rem;
   }
 
   .md\:ml-10 {
@@ -4709,6 +4758,10 @@ video {
 
   .md\:mt-11 {
     margin-top: 2.75rem;
+  }
+
+  .md\:mt-12 {
+    margin-top: 3rem;
   }
 
   .md\:mt-16 {
@@ -4749,6 +4802,10 @@ video {
 
   .md\:h-12 {
     height: 3rem;
+  }
+
+  .md\:h-24 {
+    height: 6rem;
   }
 
   .md\:h-4 {
@@ -4815,8 +4872,16 @@ video {
     width: 15rem;
   }
 
+  .md\:w-666 {
+    width: calc(100% / 3 - 24px);
+  }
+
   .md\:w-\[120px\] {
     width: 120px;
+  }
+
+  .md\:w-\[230px\] {
+    width: 230px;
   }
 
   .md\:w-\[297px\] {
@@ -4841,6 +4906,10 @@ video {
 
   .md\:w-\[66\%\] {
     width: 66%;
+  }
+
+  .md\:w-\[700px\] {
+    width: 700px;
   }
 
   .md\:w-auto {
@@ -4917,6 +4986,11 @@ video {
          column-gap: 3rem;
   }
 
+  .md\:gap-x-6 {
+    -moz-column-gap: 1.5rem;
+         column-gap: 1.5rem;
+  }
+
   .md\:gap-y-12 {
     row-gap: 3rem;
   }
@@ -4960,12 +5034,20 @@ video {
     padding: 3rem;
   }
 
+  .md\:p-4 {
+    padding: 1rem;
+  }
+
   .md\:p-6 {
     padding: 1.5rem;
   }
 
   .md\:p-8 {
     padding: 2rem;
+  }
+
+  .md\:p-9 {
+    padding: 2.25rem;
   }
 
   .md\:px-0 {
@@ -5028,6 +5110,11 @@ video {
     padding-bottom: 1rem;
   }
 
+  .md\:py-6 {
+    padding-top: 1.5rem;
+    padding-bottom: 1.5rem;
+  }
+
   .md\:py-8 {
     padding-top: 2rem;
     padding-bottom: 2rem;
@@ -5035,6 +5122,14 @@ video {
 
   .md\:pb-10 {
     padding-bottom: 2.5rem;
+  }
+
+  .md\:pb-16 {
+    padding-bottom: 4rem;
+  }
+
+  .md\:pb-24 {
+    padding-bottom: 6rem;
   }
 
   .md\:pb-28 {
@@ -5067,6 +5162,10 @@ video {
 
   .md\:pt-20 {
     padding-top: 5rem;
+  }
+
+  .md\:pt-7 {
+    padding-top: 1.75rem;
   }
 
   .md\:text-start {

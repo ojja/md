@@ -129,7 +129,8 @@ module.exports = {
     extend: {
       borderWidth: ['responsive', 'focus'],
       width: {
-        '46': 'calc(100%/2 - 24px)'
+        '46': 'calc(100%/2 - 24px)',
+        '666': 'calc(100% / 3 - 24px)'
       },
       padding: {
         '15': '6px',

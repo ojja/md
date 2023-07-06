@@ -1,6 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
-import FaqsSection from "~/components/FaqsSection";
-// import AboutSection from "~/components/AboutSection";
+import ExportSection from "~/components/ExportSection";
 import { Site_Title } from "~/config";
 
 export default function Faqs() {
@@ -8,12 +7,12 @@ export default function Faqs() {
 
     return (
         <div className="flex flex-col items-center space-y-2">
-            <FaqsSection />
+            <ExportSection />
         </div>
     );
 }
 export const meta: MetaFunction = () => {
     return {
-        title: `FAQs Page - ${Site_Title}`
+        title: `Export Page - ${Site_Title}`
     }
 }

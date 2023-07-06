@@ -133,8 +133,14 @@ const navigation = {
     },
   ],
   pages: [
-    { name: 'About', href: 'about' },
-    { name: 'Blog', href: 'blog' },
+    { name: 'قصتنا', href: 'about' },
+    { name: 'البلوج', href: 'blog' },
+    { name: 'الاسئلة الشائعة', href: 'faqs' },
+    { name: 'منتجات أبو عوف خارج مصر', href: 'export' },
+    { name: 'الفروع', href: 'branches' },
+
+
+
   ],
 }
 
