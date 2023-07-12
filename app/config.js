@@ -4,7 +4,7 @@ export const Config ={
 }
 
 // export const API_ENDPOINT = "https://lecollezioni-eg.com/MitchAPI";
-export const API_ENDPOINT = 'https://md-cors.deno.dev/https://cloudhosta.com:68/MitchAPI_local';
+export const API_ENDPOINT = 'https://cloudhosta.com:68/MitchAPI';
 
 
 export const Site_Title = "MD PWA";

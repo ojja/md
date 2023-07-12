@@ -440,3 +440,27 @@ body.rtl .gallery .slick-track {
 .product-list .slick-slider .slick-arrow::before {
   display: none;
 }
+
+.scan-artwork:before{
+  content:'';
+  position: absolute;
+  inset: 0;
+  border-radius: 50px;
+  padding: 10px;
+  background: linear-gradient(180deg, rgba(24, 80, 57, 1.00) 0%,rgba(18, 110, 73, 0.00) 80%);
+  -webkit-mask: linear-gradient(#fff 0 0) content-box, linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  mask-composite: exclude;
+}
+.custom-negative-margin>div.first{z-index: 3;}
+.custom-negative-margin>div~div{
+  margin-left: -96px;
+  margin-top: calc(58px * 1);
+}
+.custom-negative-margin>div~div.second{
+  z-index: 2;
+}
+.custom-negative-margin>div~div.third{
+  margin-top: calc(58px * 2);
+  z-index: 1;
+}

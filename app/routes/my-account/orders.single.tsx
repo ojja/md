@@ -67,15 +67,15 @@ export default function ordersSingle() {
                     </div>
                     <div className="flex items-center">
                         <span className="text-sm text-[#929292] mr-2">Date:</span>
-                        <strong className="text-[#777777] font-bold">20/10/2022</strong>
+                        <strong className="font-bold text-gray-50">20/10/2022</strong>
                     </div>
                     <div className="flex items-center">
                         <span className="text-sm text-[#929292] mr-2">Items:</span>
-                        <strong className="text-[#777777] font-bold">2</strong>
+                        <strong className="font-bold text-gray-50">2</strong>
                     </div>
                     <div className="flex items-center">
                         <span className="text-sm text-[#929292] mr-2">Points Earned:</span>
-                        <strong className="text-[#777777] font-bold">2000 Point (100 EGP)</strong>
+                        <strong className="font-bold text-gray-50">2000 Point (100 EGP)</strong>
                     </div>
                 </div>
 

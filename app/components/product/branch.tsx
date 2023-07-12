@@ -1,6 +1,3 @@
-import { Link } from "@remix-run/react";
-import i18next from "i18next";
-import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 
 
@@ -16,7 +13,7 @@ export default function Branches() {
                 <div>
                     <img src="/images/car.png" alt="" width='57' height='48' />
                 </div>
-                <p className=" font-semibold text-base text-green-200">التوصيل في خلال ساعتين في <span className=" underline">الشروق, القاهرة</span> </p>
+                <p className="text-base font-semibold text-green-200 ">التوصيل في خلال ساعتين في <span className="underline ">الشروق, القاهرة</span> </p>
             </div>
             <button className=" rounded-100 bg-white py-2.5 px-5 text-base font-semibold text-green-200">تغيير المنطقة</button>
 

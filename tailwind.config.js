@@ -33,9 +33,9 @@ module.exports = {
         400: ' #868685',
         // 500: '#6b7280',
         // 600: '#4b5563',
-        // 700: '#374151',
-        // 800: '#1f2937',
-        // 900: '#111827',
+        700: '#A2A2A2',
+        800: '#EEEEEE',
+        900: '#999999',
       },
       slate: {
         200: "#e2e8f0",
@@ -68,7 +68,7 @@ module.exports = {
         800: "#991b1b",
         900: "#7f1d1d",
       },
-      'green': {
+      green: {
         100: '#0F6140',
         200: '#163300',
         300: '#EDEFEB',
@@ -117,6 +117,15 @@ module.exports = {
     extend: {
       fontDisplay: {
         sans: "swap", // Use 'swap', 'block', 'fallback', or 'optional'
+      },
+      borderWidth: {
+        '8': '8px',
+      },
+      borderImageSource: {
+        'gradient-green': 'linear-gradient(180deg, rgba(24, 80, 57, 1.00) 0%, rgba(18, 110, 73, 0.00) 100%)',
+      },
+      borderImageSlice: {
+        '1': '1',
       },
       'offwhite': {
         100: '#E8DFD0',

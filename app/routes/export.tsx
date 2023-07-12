@@ -2,7 +2,7 @@ import type { MetaFunction } from "@remix-run/node";
 import ExportSection from "~/components/ExportSection";
 import { Site_Title } from "~/config";
 
-export default function Faqs() {
+export default function Export() {
 
 
     return (

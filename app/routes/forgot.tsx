@@ -1,7 +1,7 @@
 import { Link } from "@remix-run/react";
 import Dots from "~/components/Dots";
 
-export default function forgot() {
+export default function Forgot() {
   return (
     <div>
       <section className="bg-[#F4F7FF] py-20 lg:py-[120px]">
@@ -25,7 +25,7 @@ export default function forgot() {
                     <input
                       type="submit"
                       value="Send Email to Reast"
-                      className="w-full px-5 py-3 text-base text-white transition bg-primary-500 border rounded-md cursor-pointer border-primary hover:bg-opacity-90"
+                      className="w-full px-5 py-3 text-base text-white transition border rounded-md cursor-pointer bg-primary-500 border-primary hover:bg-opacity-90"
                     />
                   </div>
                 </form>

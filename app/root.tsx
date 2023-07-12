@@ -36,6 +36,7 @@ export const links: LinksFunction = () => {
     // { rel: 'preload', as: 'style', href: stylesSlickTheme },
     // { rel: 'preload', as: 'style', href: stylesSlickTheme },
     { rel: 'stylesheet', href: stylesBase },
+    { rel: 'icon', href: '/favicon.ico', type:'image/x-icon' },
     { rel: 'stylesheet', href: stylesSlick },
     { rel: 'stylesheet', href: stylesSlickTheme }
   ];
@@ -66,12 +67,12 @@ export default function App() {
     <html lang={language} dir={i18n.language === "ar" ? 'rtl' : 'ltr'}>
       <head>
         <Meta />
-        <link rel="stylesheet" href={i18n.language === "ar" ? stylesRtl : styles} />
+        <Links />
         <link rel="preconnect" href="https://fonts.googleapis.com" />
         <link href="https://fonts.googleapis.com/css2?family=Baloo+Bhaijaan+2:wght@400;500;600;700;800&family=Roboto:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap" rel="stylesheet" />
-        <Links />
         <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.6.26/webfont.js"></script>
         <script type="text/javascript" src="https://js.createsend1.com/javascript/copypastesubscribeformlogic.js"></script>
+        <link rel="stylesheet" href={i18n.language === "ar" ? stylesRtl : styles} />
 
       </head>
       <body className={`box-border oultine-none ${i18n.language === "ar" ? 'font-sans-ar rtl' : 'font-sans-en ltr'}`} >
@@ -83,7 +84,7 @@ export default function App() {
         <Footer />
         <ScrollRestoration />
         <Scripts />
-        {/* {process.env.NODE_ENV === 'development' ? <LiveReload /> : null} */}
+        {process.env.NODE_ENV === 'development' ? <LiveReload /> : null}
       </body>
     </html >
   );

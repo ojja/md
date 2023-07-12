@@ -20,12 +20,12 @@ export default function BranchesSection() {
     }
     return (
 
-        <section className=" w-full">
-            <div className="pt-4 md:pb-16 pb-5">
-                <div className="details container mx-auto md:px-24 px-4">
-                    {/* <span className="hidden line-clamp-3 line-clamp-5 w-2/3"></span> */}
+        <section className="w-full ">
+            <div className="pt-4 pb-5 md:pb-16">
+                <div className="container px-4 mx-auto details md:px-24">
+                    {/* <span className="hidden w-2/3 line-clamp-3 line-clamp-5"></span> */}
                     <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-4" />
-                    <h1 className=" md:text-4xl text-2xl text-black font-bold  pt-2 md:pt-7">الفروع</h1>
+                    <h1 className="pt-2 text-2xl font-bold text-black  md:text-4xl md:pt-7">{t('corporate.branches')}</h1>
                 </div>
             </div>
            <LocationTabs />

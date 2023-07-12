@@ -33,7 +33,7 @@ export default function index() {
                             </div>
 
                             <div
-                                className="text-[#777777] text-center relative self-stretch"
+                                className="relative self-stretch text-center text-gray-50"
                                 style={{ font: "600 16px/22px 'Baloo Bhaijaan 2', sans-serif" }}
                             >
                                 500 Points
@@ -72,7 +72,7 @@ export default function index() {
                             </div>
 
                             <div
-                                className="text-[#777777] text-center relative self-stretch"
+                                className="relative self-stretch text-center text-gray-50"
                                 style={{ font: "600 16px/22px 'Baloo Bhaijaan 2', sans-serif" }}
                             >
                                 10 Points/ 1 EGP
@@ -111,7 +111,7 @@ export default function index() {
                             </div>
 
                             <div
-                                className="text-[#777777] text-center relative self-stretch"
+                                className="relative self-stretch text-center text-gray-50"
                                 style={{ font: "600 16px/22px 'Baloo Bhaijaan 2', sans-serif" }}
                             >
                                 10 Points
@@ -150,7 +150,7 @@ export default function index() {
                             </div>
 
                             <div
-                                className="text-[#777777] text-center relative self-stretch"
+                                className="relative self-stretch text-center text-gray-50"
                                 style={{ font: "600 16px/22px 'Baloo Bhaijaan 2', sans-serif" }}
                             >
                                 250 Points
@@ -187,7 +187,7 @@ export default function index() {
                             </div>
 
                             <div
-                                className="text-[#777777] text-center relative self-stretch"
+                                className="relative self-stretch text-center text-gray-50"
                                 style={{ font: "600 16px/22px 'Baloo Bhaijaan 2', sans-serif" }}
                             >
                                 100 Points
