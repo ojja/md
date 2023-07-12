@@ -190,7 +190,7 @@ export default function ShippingOptions({ setValue, register, errors, watch }: a
             <label className="block text-sm font-medium leading-6 text-gray-900 capitalize">
               {t('checkout.city')}
             </label>
-            <div className="mt-1">
+            {/* <div className="mt-1">
               <div>
                 <SelectInput
                   value={watch('gov_id') || ''}
@@ -204,12 +204,12 @@ export default function ShippingOptions({ setValue, register, errors, watch }: a
                 />
               </div>
               {errors.gov_id && errors.gov_id.type === "required" && (<p className="mt-1 text-xs text-red-500">{errors.gov_id.message}</p>)}
-            </div>
+            </div> */}
           </div>
 
           <div>
             <label htmlFor="" className="block text-sm font-medium leading-6 text-gray-900 capitalize">{t('checkout.area')}</label>
-            <div className="mt-1">
+            {/* <div className="mt-1">
               <SelectInput
                 value={watch("area_id") || ""}
                 options={[
@@ -225,7 +225,7 @@ export default function ShippingOptions({ setValue, register, errors, watch }: a
                 })}
               />
               {errors.area_id && errors.area_id.type === "required" && (<p className="mt-1 text-xs text-red-500">{errors.area_id.message}</p>)}
-            </div>
+            </div> */}
           </div>
           <div className="col-span-4">
             <div>

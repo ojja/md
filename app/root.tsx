@@ -182,7 +182,6 @@ export function CatchBoundary() {
         <title>Oops!</title>
         <Meta />
         <Links />
-        <link rel="stylesheet" href={i18n.language === "ar" ? stylesRtl : styles} />
       </head>
       <body className="h-full">
         <main
