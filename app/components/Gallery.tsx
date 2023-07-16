@@ -1,0 +1,98 @@
+import React, { useState, useEffect } from 'react';
+import Slider from "react-slick";
+import { v4 } from 'uuid';
+import i18n from 'i18next';
+interface GalleryProps {
+  galleryImages: string[];
+}
+
+export default function Gallery({ galleryImages = [] }: GalleryProps) {
+  const [language, setLanguage] = useState(i18n.language);
+  const [nav1, setNav1] = useState<Slider | null>(null);
+  const [nav2, setNav2] = useState<Slider | null>(null);
+  const [slider1, setSlider1] = useState<Slider | null>(null);
+  const [slider2, setSlider2] = useState<Slider | null>(null);
+  const [activeSlideIndex, setActiveSlideIndex] = useState(0);
+
+
+  useEffect(() => {
+    setNav1(slider1);
+    setNav2(slider2);
+  }, [slider1, slider2]);
+
+  const settingsMain = {
+    // rtl: i18n.language === "ar" ? false : false,
+    slidesToShow: 1,
+    slidesToScroll: 1,
+    arrows: false,
+    fade: true,
+    asNavFor: nav2,
+  };
+
+  const settingsThumbs = {
+    slidesToShow: 4,
+    slidesToScroll: 1,
+    asNavFor: nav1,
+    dots: false,
+    focusOnSelect: true,
+    arrows: false,
+    centerPadding: '10px',
+    vertical: true,
+    verticalSwiping: true,
+    responsive: [
+      {
+        breakpoint: 640,
+        settings: {
+          vertical: false,
+          verticalSwiping: false,
+          slidesToShow: 3,
+        },
+      },
+    ],
+  };
+
+  if (galleryImages.length === 0) {
+    galleryImages = ['/images/empty.jpg'];
+  }
+
+  return (
+    <div className="flex overflow-hidden gallery-slider-wrapper" data-lang={language}>
+      <Slider
+        {...settingsMain}
+        asNavFor={nav2}
+        ref={slider => (setSlider1(slider))}
+        className="order-1 w-10/12  rounded-3xl overflow-hidden h-fit gallery"
+        style={{ direction: i18n.language === "ar" ? 'rtl' : 'ltr' }}
+      >
+        {galleryImages.map(slide => (
+          <div className="slick-slide "  key={v4()}>
+            <img
+              className="slick-slide-image"
+              src={`${slide}`}
+            />
+          </div>
+        ))}
+      </Slider>
+      <div className="w-2/12 mr-2 gallery-thumbnail-slider-wrap max-h-[330px]">
+        <Slider
+          {...settingsThumbs}
+          asNavFor={nav1}
+          ref={slider => (setSlider2(slider))}
+          beforeChange={(oldIndex, newIndex) => {
+            setActiveSlideIndex(newIndex);
+            // setShowClonedSlides(false); // Reset the cloned slide display
+          }}
+        >
+          {galleryImages.map((slide, index) => (
+            <div className={`slick-slide rounded-xl overflow-hidden ${activeSlideIndex === index ? 'border-green-500 border-4' : 'border-2'}`} key={v4()} style={{ borderColor: `${activeSlideIndex === index ? 'green' : '#E8DFD0'} !important` }}>
+              <img
+                className="slick-slide-image"
+                src={`${slide}`}
+              />
+            </div>
+          ))}
+        </Slider>
+      </div>
+    </div>
+  );
+}
