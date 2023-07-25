@@ -55,7 +55,7 @@ export const links = () => {
     { rel: 'preload', as: 'style', href: isRtl ? stylesRtl : styles },
 
     // Preload other stylesheets
-    { rel: 'preload', as: 'style', href: styles },
+    { rel: 'preload', as: 'style', href: stylesRtl },
     { rel: 'preload', as: 'style', href: stylesBase },
     { rel: 'preload', as: 'style', href: stylesSlick },
 
@@ -65,6 +65,7 @@ export const links = () => {
     { rel: 'stylesheet', href: stylesBase },
     { rel: 'icon', href: '/favicon.ico', type: 'image/x-icon' },
     { rel: 'stylesheet', href: stylesSlick },
+    { rel: 'stylesheet', href: isRtl ? stylesRtl : styles },
     // { rel: 'stylesheet', href: stylesSlickTheme },
   ].filter(Boolean);
 }
@@ -184,12 +185,14 @@ export default function App() {
           <meta name="googlebot" content="noindex" />
           <Meta />
           <Links />
+          {/* <link rel="stylesheet" href={i18n.language === "ar" ? stylesRtl : styles} /> */}
+
         </head>
         <body className={`box-border oultine-none ${i18n.language === "ar" ? 'font-sans-ar rtl' : 'font-sans-en ltr'}`} >
 
           <NavBar />
           {isLoading ? (
-            <div className="loading-screen"><img src="/logo.webp" className="rotate-center" /></div>
+            <div className="loading-screen"><img src="/favicon.ico" className="rotate-center" /></div>
           ) : (
             <>
               <main className="relative z-10" ref={mainRef}>

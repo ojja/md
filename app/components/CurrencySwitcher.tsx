@@ -41,7 +41,7 @@ const CurrencySwitcher: React.FC = ({ inMobile }: any) => {
                         <Popover.Button
                             className={`
                 ${open ? '' : 'text-opacity-90'}
-                inline-flex items-center px-3 py-2 text-base font-medium focus:outline-none w-full md:bg-transparent bg-white md:rounded-none rounded-100 justify-between md:border-none border-2 border-gray-400
+                inline-flex items-center px-3 py-2 text-base font-medium focus:outline-none w-full bg-white md:!bg-transparent md:rounded-none rounded-100 justify-between md:border-none border-2 border-gray-400
                 `}
                         >
                             <div className="min-w-8 md:h-8 flex items-center">

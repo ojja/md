@@ -249,7 +249,7 @@ export default function NavBar({ }) {
                     {loading ?
                       <>
                         <div className="animate-pulse py-2 text-center">
-                          <div className="w-48 h-3 bg-black m-auto rounded-full"></div>
+                          <div className="w-48 h-4 bg-black m-auto rounded-full"></div>
                         </div>
                       </>
                       :

@@ -113,25 +113,22 @@ export default function Index() {
       </div>
 
 
-      <div className="py-10">
+      <div className="py-10 px-4 md:px-0">
         <div className="container mx-auto">
           <div className="rounded-3xl overflow-hidden">
-            <div className="grid grid-cols-5">
-              <div className="col-span-3">
-                <div className="grid grid-cols-2">
-                  <div className="grid grid-cols-2">
-                    <img src="/images/gift/gift_05.webp" alt="img alt" className="w-full h-full object-cover" />
-                    <img src="/images/gift/gift_02.webp" alt="img alt" className="w-full h-full object-cover" />
-                    <img src="/images/gift/gift_03.webp" alt="img alt" className="w-full h-full object-cover" />
-                    <img src="/images/gift/gift_01.webp" alt="img alt" className="w-full h-full object-cover" />
-                  </div>
-                  <div>
-                    <img src="/images/gift/gift_04.webp" alt="img alt" className="w-full h-full object-cover" />
-                  </div>
-                </div>
+            <div className="grid lg:grid-cols-12 grid-cols-1">
+              <div className="grid grid-cols-2 lg:col-span-4">
+                <img src="/images/gift/gift_05.webp" alt="img alt" className="w-full h-full object-cover" />
+                <img src="/images/gift/gift_02.webp" alt="img alt" className="w-full h-full object-cover" />
+                <img src="/images/gift/gift_03.webp" alt="img alt" className="w-full h-full object-cover" />
+                <img src="/images/gift/gift_01.webp" alt="img alt" className="w-full h-full object-cover" />
               </div>
-              <div className="col-span-2">
-                <div className="flex justify-center bg-green-950 p-12 flex-col gap-4 h-full items-start">
+
+              <div className="col-span-8 grid lg:grid-cols-12 grid-cols-1 row-start-1 md:row-start-2">
+                <div className="col-span-5">
+                  <img src="/images/gift/gift_04.webp" alt="img alt" className="w-full h-full object-cover" />
+                </div>
+                <div className="flex justify-center bg-green-950 p-12 flex-col gap-4 h-full items-start col-span-7">
                   <h5 className="text-yellow-910 text-xl font-semibold">خصم يصل إلى 20٪ على قسم</h5>
                   <h2 className="text-white text-8xl font-bold">الهدايا </h2>
                   <p className="text-[#3C926F] md:text-xl font-semibold">اعثر على الهدية المثالية لكل شخص وكل مناسبة</p>
@@ -203,7 +200,7 @@ export default function Index() {
           <div className="grid grid-cols-2 gap-10">
             <div className="bg-white rounded-3xl shadow-custom">
               <div className="flex flex-col justify-center text-center items-center h-full gap-4 p-16">
-                <img src="/images/export_around.webp" alt="export_around alt" className="-mb-16"/>
+                <img src="/images/export_around.webp" alt="export_around alt" className="-mb-16" />
                 <h3 className="text-3xl text-green-200 font-bold">منتجات أبو عوف خارج مصر</h3>
                 <p className="text-xl text-green-200 font-semibold max-w-xs px-4">ما بين أسواق أوروبا، آسيا، أمريكا و الوطن العربي</p>
                 <Link to="/export" className="inline-flex justify-center px-10 py-3 text-xl mt-8 font-semibold text-white capitalize rounded-100 bg-green-200 hover:bg-green-400">{t('know_more')}</Link>

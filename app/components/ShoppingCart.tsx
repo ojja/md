@@ -110,7 +110,7 @@ const ShoppingCart = () => {
                           )}
                         </div>
                         {cartItems.length > 0 && (
-                          <div className="px-10 py-10 border-t border-gray-200 top-shadow">
+                          <div className="px-4 py-10 border-t border-gray-200 top-shadow">
                             <div className="flex justify-between text-base font-medium text-gray-900">
                               <p className=' text-base text-gray-50 font-semibold'>{t('shipping_subtotal')}</p>
                               <p className=' text-xl  font-bold text-black'><FormatCurrency value={totalPrice} /></p>
