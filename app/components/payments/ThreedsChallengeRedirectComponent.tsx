@@ -58,7 +58,6 @@ function ThreedsChallengeRedirectComponent({ response, sessionID }: any) {
                                 console.log("API 200", orderID);
                                 const thanksURL = `/thanks?orderID=${orderID}`;
                                 setTimeout(() => {
-                                    // console.log('a7a')
                                     resetCart();
                                     window.location.href = thanksURL;
                                 }, 2000);

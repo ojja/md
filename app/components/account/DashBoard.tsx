@@ -8,7 +8,7 @@ import Cookies from "js-cookie";
 import { fetchUserInfo, getDefaultAddress } from "~/utils/account";
 import { Link } from "@remix-run/react";
 import { useTranslation } from "react-i18next";
-import { RiEdit2Fill, RiEdit2Line, RiEditBoxLine, RiEditFill } from "react-icons/ri";
+import { RiEdit2Fill, RiEdit2Line, RiEditBoxLine, RiEditFill, RiUserLine } from "react-icons/ri";
 
 
 interface AddressData {
@@ -37,7 +37,7 @@ interface UserInfo {
 }
 
 export default function DashBoard({ userOrders }: any) {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation('account');
     const [address, setAddress] = useState<AddressData | null>(null);
     const [userInfo, setUserInfo] = useState('');
     const [isLoading, setIsLoading] = useState(true);
@@ -63,7 +63,6 @@ export default function DashBoard({ userOrders }: any) {
             setAddress(responseAddress);
         };
         fetchData();
-
         const getUserInfo = async () => {
             const userInfo = await fetchUserInfo();
             if (userInfo) {
@@ -73,7 +72,6 @@ export default function DashBoard({ userOrders }: any) {
                 // Handle the case when fetching user information fails
             }
         };
-
         getUserInfo();
 
     }, []);
@@ -86,78 +84,73 @@ export default function DashBoard({ userOrders }: any) {
                     message={t(`${msg}`)}
                 />
             }
-            <div className="pb-5 border-b-2 border-gray-200 border-solid">
-                <h1 className="text-3xl">{t("overview")}</h1>
-            </div>
-
-            <div className="flex justify-between py-5 border-b-2 border-gray-200 border-solid">
-                <div className="flex flex-col max-w-[300px]">
-                    <h3 className="mb-2 text-2xl tracking-wider">{t("overview_title")}</h3>
-                    <p className="text-lg font-light">{t("overview_subtitle")}</p>
+            <div className="flex justify-between py-8 border-b border-gray-100 border-solid gap-10">
+                <div className="flex flex-col">
+                    <h1 className="text-3xl font-bold">{t("account_home")}</h1>
+                    <p className="text-gray-50 text-xl">{t("account_home_subtitle")}</p>
                 </div>
-                <div className="flex items-center justify-between px-4 py-6 border">
-                    <span className="text-xl tracking-wider">{t("wallet_balance")}</span>
-                    <span className="ml-20 text-lg font-bold"><FormatCurrency value={400}/></span>
+                <div className="flex items-center justify-between p-6 border-2 border-green-200 bg-green-300 rounded-2xl">
+                    <span className="text-xl tracking-wider text-gray-50">{t("wallet_balance")}</span>
+                    <span className="ml-20 text-3xl font-bold text-green-900"><FormatCurrency value={400} /></span>
                 </div>
             </div>
 
-            <div className="py-5 border-b-2 border-gray-200 border-solid">
-                <h2 className="text-3xl">{t("share_friends_title")}</h2>
-                <p className="text-gray-400">{t("share_friends_subtitle")}</p>
+            <div className="py-8 border-b border-gray-100 border-solid">
+                <div className="py-9">
+                    <h2 className="text-2xl font-bold">{t("share_friends_title")}</h2>
+                    <p className="text-gray-50 text-xl">{t("share_friends_subtitle")}</p>
+                </div>
                 <ReferralBox
                     url={'/ref?76543345'}
                 />
             </div>
 
-            <div className="py-5 mt-10">
-                <h2 className="pb-2 mb-4 text-3xl border-b-2 border-gray-200 border-solid">{t("nav.orders_returns")}</h2>
+            <div className="py-8 mt-10">
+                <h2 className="pb-2 mb-4 text-3xl border-b border-gray-100 border-solid">{t("orders_returns")}</h2>
                 <OrdersTable userOrders={userOrders} />
             </div>
 
-            <div className="py-5 mt-10">
-                <h2 className="pb-2 mb-4 text-3xl border-b-2 border-gray-200 border-solid">{t("orders_returns")}</h2>
+            <div className="py-8 mt-10">
+                <h2 className="pb-2 mb-4 text-3xl border-b border-gray-100 border-solid">{t("orders_returns")}</h2>
                 <div className="">
                     <div className="grid grid-cols-2 gap-4">
-                        <div className="bg-yellow-100 border-2 border-yellow-700 relative py-5 px-4 space-y-2 shadow shadow-gray-100">
-                            <div className="mb-1 text-base">{t('your_info')}</div>
-                            <div className="inline-block mr-5">
-                                <label className="text-gray-700 text-xs">{t('checkout.first_name')}</label>
-                                {isLoading ?
-                                    <div className="w-20 mt-1 animate-pulse"><div className="h-2 bg-gray-200 rounded-md"></div></div>
-                                    :
-                                    <span className="block text-sm font-bold">{userInfo.first_name}</span>
-                                }
+                        <div>
+                            <div className="bg-white border border-gray-400 rounded-[32px] divide-y divide-gray-400">
+                                <div className="py-5 px-4 space-y-2">
+                                    <div className="mb-1 flex items-center gap-2 font-semibold text-xl"><RiUserLine /> <span className="text-base">{t('your_info')}</span></div>
+                                    <div className="block">
+                                        {isLoading ?
+                                            <div className="w-20 mt-1 animate-pulse"><div className="h-2 bg-gray-200 rounded-md"></div></div>
+                                            :
+                                            <span className="block text-xl font-semibold text-gray-400">{userInfo.first_name}{" "}{userInfo.last_name}</span>
+                                        }
+                                    </div>
+                                    <div className="block">
+                                        {isLoading ?
+                                            <div className="w-20 mt-1 animate-pulse"><div className="h-2 bg-gray-200 rounded-md"></div></div>
+                                            :
+                                            <span className="block text-xl font-semibold text-gray-400">{userInfo.email}</span>
+                                        }
+                                    </div>
+                                    <div className="block">
+                                        {isLoading ?
+                                            <div className="w-20 mt-1 animate-pulse"><div className="h-2 bg-gray-200 rounded-md"></div></div>
+                                            :
+                                            <span className="block text-xl font-semibold text-gray-400">{userInfo.phone}</span>
+                                        }
+                                    </div>
+                                </div>
+                                <div className="py-5 px-4 flex">
+                                    <Link to="/my-account/profile" className="inline-flex items-center py-2.5 px-5 space-x-3 rounded-[32px] border-2 border-gray-400 hover:bg-green-200 font-semibold ml-auto hover:text-white hover:border-green-200">
+                                        {t('edit')}
+                                        <RiEditBoxLine className="ml-2" />
+                                    </Link>
+                                </div>
                             </div>
-                            <div className="inline-block">
-                                <label className="text-gray-700 text-xs">{t('checkout.last_name')}</label>
-                                {isLoading ?
-                                    <div className="w-20 mt-1 animate-pulse"><div className="h-2 bg-gray-200 rounded-md"></div></div>
-                                    :
-                                    <span className="block text-sm font-bold">{userInfo.last_name}</span>
-                                }
-                            </div>
-                            <div className="block">
-                                <label className="text-gray-700 text-xs">{t('checkout.email_address')}</label>
-                                {isLoading ?
-                                    <div className="w-20 mt-1 animate-pulse"><div className="h-2 bg-gray-200 rounded-md"></div></div>
-                                    :
-                                    <span className="block text-sm font-bold">{userInfo.email}</span>
-                                }
-                            </div>
-                            <div className="block">
-                                <label className="text-gray-700 text-xs">{t('checkout.phone_number')}</label>
-                                {isLoading ?
-                                    <div className="w-20 mt-1 animate-pulse"><div className="h-2 bg-gray-200 rounded-md"></div></div>
-                                    :
-                                    <span className="block text-sm font-bold">{userInfo.phone}</span>
-                                }
-                            </div>
-                            <Link to="/my-account/profile" className="absolute inline-flex items-center justify-center px-3 py-2 text-sm font-semibold text-white rounded-lg bottom-4 right-2 bg-slate-900 hover:bg-slate-700">
-                                <RiEditBoxLine className="mr-2" />
-                                {t('edit')}
-                            </Link>
                         </div>
-                        <SingleAddress address={address} />
+                        <div>
+                            <SingleAddress address={address} overview={true} />
+                        </div>
                     </div>
                 </div>
             </div>

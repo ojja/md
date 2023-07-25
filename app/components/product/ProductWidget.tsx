@@ -68,7 +68,7 @@ const ProductWidget = ({ product, wishlist }: ProductWidgetProps) => {
   // const imageSrc = product?.main_image ? product.main_image.replace('/uploads/', '/uploads-webpc/uploads/').concat('.webp') : product?.thumbnail;
   const imageSrc = product?.main_image ? product.main_image : product?.thumbnail;
   // const imageSrcSmall = product?.main_image_small ? product.main_image_small.replace('/uploads/', '/uploads-webpc/uploads/').concat('.webp') : product?.thumbnail;
-  const imageSrcSmall = product?.main_image_small ? product.main_image_small : product?.thumbnail;
+  const imageSrcSmall = imageSrc;
 
   const handleLinkClick = () => {
     window.scrollTo({
@@ -94,7 +94,7 @@ const ProductWidget = ({ product, wishlist }: ProductWidgetProps) => {
   }
   return (
     <>
-      <div className={`relative flex flex-col group border-2 border-gray-100 rounded-3xl overflow-hidden pb-5`}>
+      <div className={`relative flex flex-col group border-2 border-gray-100 rounded-3xl overflow-hidden pb-5 h-full`}>
         <div className="relative z-10 w-full overflow-hidden bg-green-300 min-h-80 group-hover:opacity-75 ">
           <Link to={
             `/products/${product?.slug
@@ -115,7 +115,7 @@ const ProductWidget = ({ product, wishlist }: ProductWidgetProps) => {
               )
             } </Link>
         </div>
-        <div className=" mt-4 mb-4 px-5">
+        <div className="py-4 px-5">
           <div>
             <h3 className="md:text-xl text-sm text-black">
               <Link to={
@@ -145,16 +145,15 @@ const ProductWidget = ({ product, wishlist }: ProductWidgetProps) => {
               <FormatCurrency value={product?.sale_price ? product.sale_price : 0} />
             </p>
           </div>
-
         </div>
-        <div className="flex justify-between px-5 items-center gap-x-3 mt-[50px]">
-          <div className="relative z-1 w-4/5">
+        <div className="flex justify-between px-5 items-center gap-x-3 mt-auto">
+          <div className="relative z-1 md:w-4/5">
             {
               product?.type != "variable" ? (
                 <AddToCartSimple className="inline-flex justify-center w-full text-sm font-semibold text-white rounded-lg"
                   product={
                     {
-                      id: product.id,
+                      id: itemID,
                       thumbnail: imageSrc,
                       slug: product.slug,
                       price: salePrice,

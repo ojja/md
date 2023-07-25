@@ -23,7 +23,7 @@ const ProgressiveImage = ({ src, placeholder, alt, className }: any) => {
         }
     }, [src, inView]);
 
-    return <img src={currentSrc} alt={alt} className={className} ref={ref} preload="lazy" />;
+    return <img src={currentSrc} alt={alt} className={`${className} mix-blend-multiply`} ref={ref} preload="lazy"/>;
 };
 
 export default ProgressiveImage;

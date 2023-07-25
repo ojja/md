@@ -8,6 +8,7 @@ import Msg from "~/components/Msg";
 import ProfileLoader from './ProfileLoader';
 import Loader from '../Loader';
 import { useTranslation } from 'react-i18next';
+import { INPUT_CLASSES, LABEL_CLASSES } from '~/commonUIClasses';
 
 interface Address {
     address_id: string;
@@ -21,7 +22,8 @@ interface Address {
 }
 
 export default function AddAddress({ closeModal, resetAddresses }: any) {
-    const { t, i18n } = useTranslation();
+    const { t } = useTranslation('fields');
+    const { i18n } = useTranslation();
     const [isLoading, setIsLoading] = useState(false);
     const [message, setMessage] = useState('');
     const [govs, setGovs] = useState([]);
@@ -41,7 +43,7 @@ export default function AddAddress({ closeModal, resetAddresses }: any) {
         const fetchData = async () => {
             const response = await fetchGovs();
             if (response) {
-                setGovs(response);
+                setGovs(response.govs);
             } else {
                 // Handle the case when fetching the cities fails
             }
@@ -73,6 +75,7 @@ export default function AddAddress({ closeModal, resetAddresses }: any) {
     selectedAreaId = watch('area_id');
 
     const formData = watch();
+    console.log('govs>', govs); // Log the form data on every change
     console.log(formData); // Log the form data on every change
 
     const onSubmit: SubmitHandler<Address> = async (data: Address) => {
@@ -110,44 +113,49 @@ export default function AddAddress({ closeModal, resetAddresses }: any) {
                     <Loader />
                 </div>
                 : ''}
-            <h3 className="mb-3">{t('add_address')}</h3>
+            <h3 className="mb-3 font-bold text-2xl">{t('add_address')}</h3>
+            <hr className="absolute -left-6 -right-6" />
             {message && <Msg color="green" message={message} />}
-            <form onSubmit={handleSubmit(onSubmit)}>
-                <div className="space-y-4">
+            <form onSubmit={handleSubmit(onSubmit)} className="pt-6">
+                <div className="space-y-6">
                     <div>
-                        <label htmlFor="gov" className="block mb-1 text-xs text-gray-400 ">{t('checkout.city')}</label>
+                        <label htmlFor="gov" className={LABEL_CLASSES}>{t('city')}</label>
                         <SelectInput
                             value={watch('gov_id') || ''}
                             options={[
-                                { label: t('checkout.select_city'), value: "" },
-                                ...govs.map((gov: any) => ({ label: i18n.language === 'ar' ? gov.name_ar : gov.name_en, value: gov.id })),
+                                { label: t('select_city'), value: "" },
+                                ...govs.map((item: any) => ({ label: i18n.language === 'ar' ? item.gov_name : item.gov_name_en, value: item.gov_id })),
                             ]}
                             register={register('gov_id')}
                         />
                     </div>
                     <div>
-                        <label htmlFor="area" className="block mb-1 text-xs text-gray-400">{t('checkout.area')}</label>
+                        <label htmlFor="area" className={LABEL_CLASSES}>{t('area')}</label>
                         <SelectInput
                             value={watch('area_id') || ''}
                             options={[
-                                { label: t('checkout.select_area'), value: "" },
-                                ...areas?.map((area: any) => ({ label: i18n.language === 'ar' ? area.name_ar : area.name_en, value: area.area_id })),
+                              { label: t("select_area"), value: "" },
+                              ...areas?.map((area) => ({
+                                label:
+                                  i18n.language === "ar" ? area.city_name : area.city_name_en,
+                                value: area.city_id,
+                              })),
                             ]}
                             register={register('area_id')}
                         />
                     </div>
                     <div>
-                        <label htmlFor="full_address" className="block mb-1 text-xs text-gray-400">{t('street_name')}</label>
+                        <label htmlFor="full_address" className={LABEL_CLASSES}>{t('street_name')}</label>
                         <input
                             type="text"
                             id="full_address"
                             {...register('full_address')}
-                            className="w-full p-2 text-sm text-gray-900 border border-gray-300 bg-gray-50"
+                            className={INPUT_CLASSES}
                         />
                     </div>
 
                     <div>
-                        <label htmlFor="apartment_type" className="block mb-1 text-xs text-gray-400">{t('checkout.property_type')}</label>
+                        <label htmlFor="apartment_type" className={LABEL_CLASSES}>{t('property_type')}</label>
                         <div className="space-x-5">
                             <label htmlFor="Flat" className='inline-block text-gray-900 peer-checked:text-blue-600'>
                                 <div className='relative flex items-center py-1 pl-3'>
@@ -164,7 +172,7 @@ export default function AddAddress({ closeModal, resetAddresses }: any) {
                                     <div className='absolute left-0 visible mt-1 peer-checked:invisible top-1'>
                                         <RiCheckboxBlankCircleLine className='peer-checked:bg-gray-700' />
                                     </div>
-                                    <span className='ml-2 text-base font-medium'>{t('checkout.apartment')}</span>
+                                    <span className='ml-2 text-base font-medium'>{t('apartment')}</span>
                                 </div>
                             </label>
                             <label htmlFor="Villa" className='inline-block text-gray-900 peer-checked:text-blue-600'>
@@ -182,7 +190,7 @@ export default function AddAddress({ closeModal, resetAddresses }: any) {
                                     <div className='absolute left-0 visible mt-1 peer-checked:invisible top-1'>
                                         <RiCheckboxBlankCircleLine className='peer-checked:bg-gray-700' />
                                     </div>
-                                    <span className='ml-2 text-base font-medium'>{t('checkout.villa')}</span>
+                                    <span className='ml-2 text-base font-medium'>{t('villa')}</span>
                                 </div>
                             </label>
                         </div>
@@ -190,27 +198,30 @@ export default function AddAddress({ closeModal, resetAddresses }: any) {
 
                     <div className="space-x-5">
                         <div className="inline-block">
-                            <label htmlFor="floor" className="block mb-1 text-xs text-gray-400">{t('checkout.floor')}</label>
+                            <label htmlFor="floor" className={LABEL_CLASSES}>{t('floor')}</label>
                             <input
                                 type="text"
                                 id="floor"
                                 placeholder="3"
-                                className="w-20 p-2 text-sm text-gray-900 border border-gray-300 bg-gray-50"
+                                className={INPUT_CLASSES}
                                 {...register('floor')}
                             />
                         </div>
                         <div className="inline-block">
-                            <label htmlFor="apartment" className="block mb-1 text-xs text-gray-400">{t('checkout.apartment')}</label>
+                            <label htmlFor="apartment" className={LABEL_CLASSES}>{t('apartment')}</label>
                             <input
                                 type="text"
                                 id="apartment"
                                 placeholder="33"
-                                className="w-20 p-2 text-sm text-gray-900 border border-gray-300 bg-gray-50"
+                                className={INPUT_CLASSES}
                                 {...register('apartment')}
                             />
                         </div>
                     </div>
-                    <button type="submit" className="inline-flex justify-center w-full px-3 py-4 text-sm font-semibold text-center text-white rounded-md bg-slate-900 hover:bg-slate-700">{t('add_address')}</button>
+                    <hr className="absolute -left-6 -right-6" />
+                    <dir className="p-0 pt-6">
+                        <button type="submit" className="inline-flex justify-center w-full px-8 py-4 font-semibold text-white bg-green-200 hover:bg-green-400 text-xl rounded-100 items-center whitespace-nowrap">{t('add_address')}</button>
+                    </dir>
                 </div>
             </form>
         </div>

@@ -14,8 +14,8 @@ export default function BranchesSection() {
     const { t } = useTranslation();
     const breadcrumbs = {
         pages: [
-            { name: t('home.name'), href: '/' },
-            { name: 'الفروع', href: '#' },
+            { name: t('home'), href: '/' },
+            { name: t('branches'), href: '#' },
         ]
     }
     return (
@@ -25,7 +25,7 @@ export default function BranchesSection() {
                 <div className="container px-4 mx-auto details md:px-24">
                     {/* <span className="hidden w-2/3 line-clamp-3 line-clamp-5"></span> */}
                     <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-4" />
-                    <h1 className="pt-2 text-2xl font-bold text-black  md:text-4xl md:pt-7">{t('corporate.branches')}</h1>
+                    <h1 className="pt-2 text-2xl font-bold text-black  md:text-4xl md:pt-7">{t('branches')}</h1>
                 </div>
             </div>
            <LocationTabs />

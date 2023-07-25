@@ -76,7 +76,6 @@ export default function ProductSingle() {
     const { t } = useTranslation();
     const [open, setOpen] = useState(false);
 
-    // debugger;
     const product = useLoaderData<typeof loader>();
     const navigate = useNavigate();
     const [isLoadingPage, setIsLoadingPage] = useState(true); // State for simulating page loading
@@ -201,7 +200,6 @@ export default function ProductSingle() {
     //     };
     // }, []);
 
-    debugger;
     const {
         addToCart,
     } = useShoppingCart();

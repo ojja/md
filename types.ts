@@ -1,7 +1,9 @@
 export type ProductData = {
   id: number;
   slug: string;
-  name: string;
+  name?: string;
+  ar_name?: string;
+  title?: string;
   price: string;
   attributes: string;
   is_on_sale: boolean;

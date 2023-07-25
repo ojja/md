@@ -17,27 +17,19 @@ const ShoppingCart = () => {
   const { t } = useTranslation();
 
   const { closeCart, cartItems, removeFromCart, openCart, decreaseCartQuantity, addToCart, isOpen, totalPrice } = useShoppingCart();
-  // console.log('isOpen>', isOpen);
-  // useEffect(() => {
-  //   setTimeout(() => {
-  //     closeCart();
-  //   }, 10);
-  // }, []);
   const isClientRender = typeof window !== 'undefined';
   useEffect(() => {
     if (isClientRender) {
-      // Hydrate the cart on the client side after rendering
       closeCart();
-      // You can perform any necessary client-side initialization here
     }
   }, [isClientRender]);
   return (
     <div>
       {isOpen && isClientRender && (
-        <Transition appear show={isOpen} as={Fragment}>
+        <Transition appear show={isOpen} as="div">
           <Dialog as="div" className="relative z-30" onClose={closeCart}>
             <Transition.Child
-              as={Fragment}
+              as='button'
               enter="ease-in-out duration-500"
               enterFrom="opacity-0"
               enterTo="opacity-100"
@@ -45,14 +37,14 @@ const ShoppingCart = () => {
               leaveFrom="opacity-100"
               leaveTo="opacity-0"
             >
-              <div className="fixed inset-0 transition-opacity bg-gray-500 bg-opacity-75" />
+              <div className="fixed inset-0 bg-black bg-opacity-25" onClick={() => closeCart} />
             </Transition.Child>
 
             <div className="fixed inset-0 overflow-hidden">
               <div className="absolute inset-0 overflow-hidden">
                 <div className="fixed inset-y-0 right-0 flex md:max-w-[600px] pointer-events-none">
                   <Transition.Child
-
+                    as="div"
                     enter="transform transition ease-in-out duration-500 sm:duration-700"
                     // enterFrom="-translate-x-full"
                     enterFrom={`${i18next.language === 'en' ? 'translate-x-full' : '-translate-x-full'}`}
@@ -62,8 +54,9 @@ const ShoppingCart = () => {
                     leaveTo={`${i18next.language === 'en' ? 'translate-x-full' : '-translate-x-full'}`}
                   >
                     <Dialog.Panel className="w-screen h-full max-w-[600px] pointer-events-auto">
+
                       <div className="relative flex flex-col h-full overflow-y-scroll bg-white shadow-xl">
-                        <div className="flex-1  py-5 overflow-y-auto">
+                        <div className="flex-1  py-5 overflow-y-auto relative">
                           <div className="flex items-start justify-between px-5 pb-5 border-b border-[#C6C6C6]">
                             {cartItems.length > 0 && (
                               <Dialog.Title className="t text-3xl font-bold text-black">سلة التسوق</Dialog.Title>
@@ -126,38 +119,20 @@ const ShoppingCart = () => {
                               <p className=' text-base text-gray-50 font-semibold'>{t('subtotal')}</p>
                               <p className=' text-xl  font-bold text-black'><FormatCurrency value={totalPrice} /></p>
                             </div>
-                            <div className="mt-4">
-                              <Link
-                                to="/checkout"
+                            <div className="flex justify-center mt-4 text-center gap-4 flex-col">
+                              <button
                                 onClick={closeCart}
                                 className="flex items-center justify-center px-6 py-3 md:text-xl text-base font-semibold text-white border border-transparent rounded-100 shadow-sm bg-green-200  hover:bg-green-400"
                               >
-                                {t('check_out')}
+                                {t('continue_shopping')}
+                              </button>
+                              <Link
+                                to="/cart"
+                                onClick={closeCart}
+                                className="flex items-center justify-center px-6 py-3 md:text-xl text-base font-semibold text-green-200 border border-transparent rounded-100 shadow-sm bg-green-300  hover:bg-green-200 hover:text-white"
+                              >
+                                {t('view_cart')}
                               </Link>
-                            </div>
-                            <div className="flex justify-center mt-4 text-center">
-                              <p className='w-full'>
-                                <Link
-                                  to="/cart"
-                                  className=" bg-green-300 text-black text-xl font-semibold py-4 rounded-100 w-full block"
-                                  onClick={closeCart}
-                                  className="flex items-center justify-center px-6 py-3 text-base font-medium text-white border border-transparent rounded-md shadow-sm bg-primary-600 hover:bg-primary-700"
-                                >
-                                  عرض السلة
-                                </Link>
-                              </p>
-                            </div>
-                            <div className="flex justify-center mt-4 text-sm text-center text-gray-500">
-                              <p>
-                                <Link
-                                  to="/cart"
-                                  className="ml-2 font-medium text-primary-600 hover:text-primary-500"
-                                  onClick={closeCart}
-                                >
-                                  {t('view_cart')}
-                                  <span aria-hidden="true"> &rarr;</span>
-                                </Link>
-                              </p>
                             </div>
                           </div>
                         )}
@@ -171,7 +146,6 @@ const ShoppingCart = () => {
         </Transition>
       )
       }
-      <div className='pointer-events-auto visible opacity-100 pointer-events-none invisible opacity-0 fixed top-0 right-0 w-full h-full bg-black bg-opacity-50 transition-all duration-300 ease-linear'></div>
     </div >
   )
 }

@@ -6,7 +6,6 @@ import { v4 } from "uuid";
 import { useShoppingCart } from "~/stores/cartStore";
 import FormatCurrency from "~/utils/FormatCurrency";
 import MiniCartItem from "../cart/MiniCartItem";
-// import { Link } from 'react-router-dom';
 import { XMarkIcon } from '@heroicons/react/20/solid';
 import CouponForm from '../CouponForm';
 import { Link } from '@remix-run/react';

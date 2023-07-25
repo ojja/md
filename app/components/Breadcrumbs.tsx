@@ -1,7 +1,5 @@
 import { ChevronRightIcon } from '@heroicons/react/20/solid';
 import React, { Fragment } from 'react';
-// import { Link, useParams } from 'react-router-dom';
-import { v4 } from 'uuid';
 import i18n from 'i18next';
 import { ChevronLeftIcon } from '@heroicons/react/24/outline';
 import { Link } from '@remix-run/react';

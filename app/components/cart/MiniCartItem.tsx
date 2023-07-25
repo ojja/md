@@ -90,7 +90,7 @@ const MiniCartItem = ({ id, quantity, slug, thumbnail, removeFromCart, price, de
                 <MiniCartItemLoader />
                 :
                 <>
-                    <div className="flex-shrink-0 w-24 h-24 overflow-hidden rounded-md">
+                    <div className="flex-shrink-0 w-24 h-24 overflow-hidden rounded-md bg-green-300">
                     {thumbnail ?
                             <img
                                 src={thumbnail}

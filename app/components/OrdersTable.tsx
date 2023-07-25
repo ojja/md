@@ -3,7 +3,7 @@ import { useTranslation } from "react-i18next";
 import OrdersTableRow from "~/components/OrdersTableRow";
 
 export default function OrdersTable({ userOrders }: { userOrders: any[] }) {
-    const { t } = useTranslation();
+    const { t } = useTranslation('account');
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {

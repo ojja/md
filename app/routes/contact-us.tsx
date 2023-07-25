@@ -13,6 +13,6 @@ export default function Contact() {
 }
 export const meta: MetaFunction = () => {
     return {
-        title: `${i18n.language === "en" ? 'Privacy Policy' : 'سياسة الخصوصية'} - ${Site_Title}`
+        title: `${i18n.language === "en" ? 'Contact Us' : 'أتصل بنا'} - ${Site_Title}`
     }
 }

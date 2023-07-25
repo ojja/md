@@ -9,8 +9,8 @@ export default function RewardsSection() {
 
     const breadcrumbs = {
         pages: [
-            { name: t('home.name'), href: '/' },
-            { name: t('corporate.reward'), href: '#' },
+            { name: t('home'), href: '/' },
+            { name: t('reward'), href: '#' },
         ]
     }
 
@@ -27,7 +27,7 @@ export default function RewardsSection() {
                     </div>
                     <div className="flex flex-col justify-center w-full px-4 py-6 md:w-1/2 md:p-12">
                         <div className="flex flex-col justify-center w-full">
-                            <span className="font-semibold text-gray-50 md:text-xl">{t('corporate.reward')}</span>
+                            <span className="font-semibold text-gray-50 md:text-xl">{t('reward')}</span>
                             <h1 className="py-3 text-white md:py-6 md:text-5xl">كل ما تشتري أكثر من أبوعوف هتكسب نقط و فلوس</h1>
                             <p className=" text-[#3C926F] md:text-xl font-semibold">تأسست شركة أبو عوف في عام 2010 وأصبحت من أشهر الأسماء في الأسواق لتقديم منتجات القهوة الطبيعية عالية الجودة والمكسرات وزبد المكسرات والأطعمة الصحية والفاكهة المجففة.. وأكثر فلكل مُنتَج حكايته الخاصة؛ وبسبب اهتمامنا المستمر بالتفاصيل، فإن كل خطوة في عملية الإنتاج في أبو عوف تُدار بعناية لضمان إنتاج منتجات عالية الجودة يتم توصيلها بحب وملئها بالمكونات المغذية من الطبيعة الأم نعطي الأولوية لابتكار المنتجات ونأخذ في الاعتبار اتجاهات السوق ورغبات العملاء وتغيُّر الأذواق، كما نشجع دائمًا نمط الحياة الصحي؛ لأن هدفنا ليس فقط تغذية الجسم، بل تغذية العقل والروح أيضًا، وذلك من خلال مجموعة متنوعة من الأعشاب والمنتجات العضوية المختلفة. نأمل في حكي قصة التغيير الذي يمكنك إحداثه في العالم عندما تقوم بتغيير عادات الأكل الخاصة بك إلى عادات صحية وممتعة ولذيذة.</p>
                         </div>
@@ -45,13 +45,13 @@ export default function RewardsSection() {
                         <div className="inline-flex w-full xl:w-1/2">
                             <div className="w-full flex flex-row-reverse items-start justify-center custom-negative-margin pointer-events-none">
                                 <div className="first">
-                                    <AccountNav customCall="platinum" />
+                                    <AccountNav customCall membershipClass="platinum" />
                                 </div>
                                 <div className="second">
-                                    <AccountNav customCall="gold" />
+                                    <AccountNav customCall membershipClass="gold" />
                                 </div>
                                 <div className="third">
-                                    <AccountNav customCall="silver" />
+                                    <AccountNav customCall membershipClass="silver" />
                                 </div>
                             </div>
                         </div>

@@ -60,7 +60,7 @@ export default function ShippingOptions({ setValue, register, errors, watch }: a
   const selectedGovId = watch("gov_id");
   const apartment_type = watch("apartment_type");
   const shipping_method = watch("shipping_method");
-  console.log('govs', govs)
+  // console.log('govs', govs)
   useEffect(() => {
     const fetchAreasByGovId = async () => {
       if (selectedGovId) {

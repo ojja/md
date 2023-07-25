@@ -10,7 +10,7 @@ import i18next from "i18next";
 
 
 export default function AboutSection() {
-    const { t } = useTranslation();
+    const { t } = useTranslation('about');
     const [click, setClick] = useState(false);
     const [showContent, setShowContent] = useState<number | null>(null); // Explicitly define the type as number or null
 
@@ -95,8 +95,8 @@ export default function AboutSection() {
     ];
     const breadcrumbs = {
         pages: [
-            { name:t('home.name'), href: '/' },
-            { name: t('about.name'), href: '#' },
+            { name:t('home'), href: '/' },
+            { name: t('about'), href: '#' },
         ]
     }
     
@@ -110,8 +110,8 @@ export default function AboutSection() {
                     <img src="/images/about/about-hero.png" alt="" />
                     <TextEllipsis
                         width='w-2/3'
-                        title= {t('about.hero_title')}
-                        content=  {t('about.hero_content')}     />
+                        title= {t('hero_title')}
+                        content=  {t('hero_content')}     />
                 </div>
             </div>
             <HistorySection />
@@ -122,19 +122,19 @@ export default function AboutSection() {
                         <img src="/images/about/image13.png" alt="" className="rounded-3xl" />
                     </div>
                     <div className="text md:w-1/2 w-full md:ml-9">
-                        <h3 className="text-green-400 font-bold md:text-5xl md:mb-6 mb-3 text-xl"> {t('about.mission_title')}</h3>
-                        <p className="text-gray-50 font-semibold md:leading-9 md:text-2xl text-sm">{t('about.mission_content')}</p>
+                        <h3 className="text-green-400 font-bold md:text-5xl md:mb-6 mb-3 text-xl"> {t('mission_title')}</h3>
+                        <p className="text-gray-50 font-semibold md:leading-9 md:text-2xl text-sm">{t('mission_content')}</p>
                         <ToggleSection />
                     </div>
 
                 </div>
                 <div className="flex items-center flex-col-reverse md:flex-row  md:mt-40 mt-6">
                     <div className="text md:w-1/2 w-full md:mr-9 ">
-                        <h3 className="text-green-400 font-bold md:text-5xl md:mb-6 mb-3 text-xl">{t('about.now')} </h3>
+                        <h3 className="text-green-400 font-bold md:text-5xl md:mb-6 mb-3 text-xl">{t('now')} </h3>
                         <TextEllipsis
                             lineClampNumber={5}
                             textAlign="text-start"
-                            content={t('about.now_content')}
+                            content={t('now_content')}
                         />
                     </div>
                     <div className="image md:w-1/2 w-full md:ml-9 mb-4 md:mb-0 ">

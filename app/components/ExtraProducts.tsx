@@ -5,6 +5,7 @@ import { fetchFilterProducts } from '~/utils/productsAPI';
 import ProductLoader from './product/ProductLoader';
 import ProductWidget from './product/ProductWidget';
 import i18n from 'i18next';
+import { useTranslation } from 'react-i18next';
 // import "slick-carousel/slick/slick.css";
 // import "slick-carousel/slick/slick-theme.css";
 
@@ -26,6 +27,7 @@ interface Product {
 const PRODUCT_LOADERS_COUNT = 4;
 
 export default function ExtraProducts({ categorySlug, count = 10, title, criteria = 'date', arrangement = 'arrangement' }: Props) {
+    const { t } = useTranslation();
     const [extraProducts, setExtraProducts] = useState<Product[]>([]);
     const [loading, setLoading] = useState(true);
     const [ref, inView] = useInView({
@@ -80,10 +82,13 @@ export default function ExtraProducts({ categorySlug, count = 10, title, criteri
             </div>
         );
     };
+    // const isMobileView = window.innerWidth < 768;
+    let isMobileView = false;
+    if (typeof window !== 'undefined') {
+        isMobileView = window.innerWidth < 768;
+    }
     // Configure the settings for the slider
     const sliderSettings = {
-        // rtl: i18n.language === "ar" ? true : false,
-        // initialSlide: 0, // Set initialSlide to 0
         slidesToShow: 4,
         slidesToScroll: 1,
         infinite: true,
@@ -91,7 +96,7 @@ export default function ExtraProducts({ categorySlug, count = 10, title, criteri
         dots: false,
         prevArrow: <CustomPrevArrow />,
         nextArrow: <CustomNextArrow />,
-        autoplay: true,
+        autoplay: false,
         autoplaySpeed: 2000,
         responsive: [
             {
@@ -114,28 +119,43 @@ export default function ExtraProducts({ categorySlug, count = 10, title, criteri
             },
         ],
     };
+    const firstFourProducts = extraProducts.slice(0, 4);
 
 
     return (
-        <div className="mt-10 product-list" ref={ref}>
-            <div className="container px-4 py-16 mx-auto sm:py-24 sm:px-6">
-                <h2 className="text-2xl font-bold tracking-tight text-gray-900 mb-7">
-                    {title || 'Customers also purchased'}
-                </h2>
+        <div className="" ref={ref}>
+            <div className="py-8 md:-mx-4 pb-12">
+                {title &&
+                    <h2 className="text-2xl font-bold tracking-tight text-black mb-7">
+                        {t(title)}
+                    </h2>
+                }
                 {loading ? (
-                    <div className="grid grid-cols-1 mt-6 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8">
+                    <div className="grid grid-cols-2 mt-6 gap-y-10 gap-x-6 sm:grid-cols-2 lg:grid-cols-4 xl:gap-x-8 px-4">
                         {Array.from({ length: PRODUCT_LOADERS_COUNT }).map((_, index) => (
                             <ProductLoader key={index} />
                         ))}
                     </div>
                 ) : (
-                    <Slider {...sliderSettings} className="products-slider">
-                        {extraProducts.map((productData: any) => (
-                            <div key={productData.id} className={`px-3 ${i18n.language === "ar" ? 'font-sans-ar rtl' : 'font-sans-en ltr'}`}>
-                                <ProductWidget product={productData} key={undefined} isItemInWishlist={false} />
+                    <>
+                        {isMobileView ? (
+                            <div className="grid grid-cols-2 mt-6 gap-y-3">
+                                {firstFourProducts.map((productData: any) => (
+                                    <div key={productData.id} className={`px-3 h-full ${i18n.language === "ar" ? 'font-sans-ar rtl' : 'font-sans-en ltr'}`}>
+                                        <ProductWidget product={productData} key={undefined} isItemInWishlist={false} />
+                                    </div>
+                                ))}
                             </div>
-                        ))}
-                    </Slider>
+                        ) : (
+                            <Slider {...sliderSettings} className="products-slider">
+                                {extraProducts.map((productData: any) => (
+                                    <div key={productData.id} className={`px-3 h-full ${i18n.language === "ar" ? 'font-sans-ar rtl' : 'font-sans-en ltr'}`}>
+                                        <ProductWidget product={productData} key={undefined} isItemInWishlist={false} />
+                                    </div>
+                                ))}
+                            </Slider>
+                        )}
+                    </>
                 )}
             </div>
         </div>

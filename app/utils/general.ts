@@ -29,10 +29,16 @@ const sendRequest = async (endpoint: string, requestData: any) => {
 const fetchGovs = async () => {
   return sendRequest("shipping.php", {});
 };
+const fetchNav = async () => {
+  return sendRequest("nav.php", {});
+};
+const fetchCats = async () => {
+  return sendRequest("cats.php", {});
+};
 
 const fetchAreas = async (govId: string) => {
   const requestData = { gov_id: govId };
   return sendRequest("shipping.php", requestData);
 };
 
-export { fetchGovs, fetchAreas };
+export { fetchGovs, fetchAreas, fetchNav, fetchCats };

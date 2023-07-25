@@ -8,6 +8,9 @@ const HeroImages = [
     {
         imageSrc: "/images/banner_02.webp",
     },
+    {
+        imageSrc: "/images/banner_01.webp",
+    },
 ];
 
 export default function HeroSection() {

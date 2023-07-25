@@ -92,23 +92,25 @@ export default function addresses() {
     <div>
       {/*  */}
       <div className="flex justify-between pb-5 mb-5 border-b-2 border-gray-200 border-solid">
-        <h1 className="text-3xl">{t("nav.shipping_addresses")}</h1>
-        <button className="inline-flex items-center justify-center px-10 py-2 text-sm font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700" onClick={openModal}>
-          <svg width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" className="mr-2">
-            <path d="M4.84619 0.642883V8.35717" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-            <path d="M0.692383 4.20331H9.00008" stroke="white" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
-          </svg>
-          {t("add_address")}
-        </button>
+        <h1 className="text-3xl font-bold">{t("my_addresses")}</h1>
+        {addresses.length > 0 && (
+          <button className="inline-flex justify-center px-6 py-3 font-semibold text-green-200 bg-green-300 hover:bg-green-400 text-base rounded-100 items-center whitespace-nowrap gap-4" onClick={openModal}>
+            {t("add_address")}
+            <svg width="10" height="9" viewBox="0 0 10 9" fill="none" xmlns="http://www.w3.org/2000/svg" className="ml-6">
+              <path d="M4.84619 0.642883V8.35717" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+              <path d="M0.692383 4.20331H9.00008" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </button>
+        )}
       </div>
       {isLoading ?
         <AddressesLoader />
         :
         <div className="grid grid-cols-2 gap-4">
           {addresses.length === 0 ? (
-            <div className="w-full text-center">
+            <div className="w-full text-left col-span-2">
               <p className="py-4 mb-5 text-lg text-gray-500">{t("no_address")}</p>
-              <a href="/" className="inline-flex justify-center px-10 py-2 text-sm font-semibold text-white rounded-lg bg-slate-900 hover:bg-slate-700">{t("add_address")}</a>
+              <button onClick={openModal} className="inline-flex justify-center px-8 py-4 font-semibold text-white bg-green-200 hover:bg-green-400 text-xl rounded-100 items-center whitespace-nowrap">{t("add_address")}</button>
             </div>
           ) : (
             addresses.map((address, index) => (

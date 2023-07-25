@@ -1,11 +1,9 @@
-import { Link } from "@remix-run/react";
 import i18next from "i18next";
-import { useState } from "react";
 import { useTranslation } from 'react-i18next';
 
 
 export default function ValuesSection() {
-    const { t } = useTranslation();
+    const { t } = useTranslation('about');
 
     const values = [
         {
@@ -36,10 +34,10 @@ export default function ValuesSection() {
     return (
         <div className="bg-green-300 md:pt-20 pb-24 pt-6">
             <div className="details container mx-auto md:px-24 px-4">
-                <h3 className=" font-bold text-xl md:text-5xl text-green-400 leading-none"> {t('about.value_title')}</h3>
+                <h3 className=" font-bold text-xl md:text-5xl text-green-400 leading-none"> {t('value_title')}</h3>
                 <div className="list flex flex-wrap md:mt-11 mt-6 md:gap-x-12 gap-x-0 md:gap-y-12 gap-y-3">
                     {values.map((value, index) => (
-                        <div className={`single bg-white shadow-lg drop-shadow-2xl rounded-xl md:py-8 md:px-8 md:w-46 w-full shadow-gray-200 p-5`}>
+                        <div className={`single bg-white shadow-lg drop-shadow-2xl rounded-xl md:py-8 md:px-8 md:w-46 w-full shadow-gray-200 p-5`} key={index}>
                             <h4 className="text-green-400 md:text-2xl mb-3 font-bold after:bg-primary-700">
                                 {i18next.language === "ar" ?
                                     value.title : value.title_en

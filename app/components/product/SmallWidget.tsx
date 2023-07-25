@@ -11,7 +11,7 @@ const SmallWidget = ({ product }: any) => {
     return (
         <div className="flex items-center w-full p-4 border-b border-gray-300">
             <div className="flex-shrink-0  w-20 h-20 overflow-hidden">
-                <div className="rounded upsell_item_img border-2 border-gray-100 rounded-[10px] overflow-hidden h-full">
+                <div className="upsell_item_img border-2 border-gray-100 rounded-xl overflow-hidden h-full">
                     <img className=" h-full w-full" src={product.main_image} alt={product.name} />
                 </div>
             </div>
@@ -19,6 +19,7 @@ const SmallWidget = ({ product }: any) => {
                 <a className=" text-base font-semibold text-black">{product.name}</a>
                 <span className="  w-fit bg-yellow-910 rounded h-[18px] flex rtl:flex-row-reverse gap-x-[2px] px-1 text-5xl">
                     {/* {FormatCurrency(product.price , 'EGP' , ["text-sm font-normal", "text-2xl font-semibold ltr:-ml-0.5 rtl:-mr-0.5", "text-sm font-normal"])} */}
+                    <FormatCurrency value={product.price}/>
                 </span>
             </div>
             <div className="">

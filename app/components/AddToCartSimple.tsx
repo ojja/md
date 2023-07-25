@@ -59,7 +59,7 @@ export default function AddToCartSimple({ className, product, disabled, singlePr
                 )}
             >
                 {quantity === 0 ? (
-                    <div className={`px-8 font-semibold text-white bg-green-200 hover:bg-green-400 ${singleProductView ? 'justify-center py-[18px]' : 'justify-between py-2.5'} text-xl rounded-100 w-full flex items-center `}>
+                    <div className={`px-8 font-semibold text-white bg-green-200 hover:bg-green-400 text-xl rounded-100 w-full flex items-center whitespace-nowrap ${singleProductView ? 'justify-center py-[18px]' : 'justify-between py-2.5'}`}>
                         <p>{t('add_to_cart')}</p>
                     </div>
 

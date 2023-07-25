@@ -3,28 +3,28 @@ import { useShoppingCart } from '~/stores/cartStore';
 
 export default function CouponForm() {
     const { addCoupon } = useShoppingCart();
-    const [couponMsg, setSouponMsg] = useState('');
+    const [couponMsg, setCouponMsg] = useState('');
     const [couponCode, setCouponCode] = useState('');
 
     const handleCouponApplication = async (event: React.FormEvent) => {
         event.preventDefault();
 
         if (couponCode.trim() === '') {
-            setSouponMsg('Coupon code is required');
+            setCouponMsg('Coupon code is required');
             return;
         }
 
         try {
             const response = await addCoupon(couponCode) as { status: string };
             if (response.status === 'success') {
-                setSouponMsg('Coupon applied successfully');
+                setCouponMsg('Coupon applied successfully');
             } else if (response.status === 'failed') {
-                setSouponMsg('Coupon application failed');
+                setCouponMsg('Coupon application failed');
             } else {
-                setSouponMsg('Unknown response status');
+                setCouponMsg('Unknown response status');
             }
         } catch (error) {
-            setSouponMsg('Error: ' + error);
+            setCouponMsg('Error: ' + error);
         }
     };
     return (

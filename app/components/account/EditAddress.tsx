@@ -8,6 +8,7 @@ import Msg from "~/components/Msg";
 import ProfileLoader from './ProfileLoader';
 import Loader from '../Loader';
 import { useTranslation } from 'react-i18next';
+import { INPUT_CLASSES, LABEL_CLASSES } from '~/commonUIClasses';
 
 interface Address {
     address_id: string;
@@ -161,12 +162,12 @@ export default function EditAddress({ closeModal, address, resetAddresses }: any
                         />
                     </div>
                     <div>
-                        <label htmlFor="full_address" className="block mb-1 text-xs text-gray-400">{t('street_name')}</label>
+                        <label htmlFor="full_address" className={LABEL_CLASSES}>{t('street_name')}</label>
                         <input
                             type="text"
                             id="full_address"
                             {...register('full_address')}
-                            className="w-full p-2 text-sm text-gray-900 border border-gray-300 bg-gray-50"
+                            className={INPUT_CLASSES}
                         />
                     </div>
 

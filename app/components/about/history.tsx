@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next';
 
 
 export default function HistorySection() {
-    const { t } = useTranslation();
+    const { t } = useTranslation('about');
     const items = [
         {
             imageSrc: "/images/image.png",
@@ -61,11 +61,11 @@ export default function HistorySection() {
     return (
 
         <div className="history container mx-auto mt-6 md:my-20 mb-14 md:px-24 px-4">
-            <h3 className=" font-bold text-xl md:text-5xl text-green-400 leading-none">{t('about.history_title')}</h3>
+            <h3 className=" font-bold text-xl md:text-5xl text-green-400 leading-none">{t('history_title')}</h3>
 
             <div className="list md:mt-16 mt-6 ">
                 {items.map((item, index) => (
-                    <div className="single flex md:h-64 h-28 md:w-2/4 overflow-hidden">
+                    <div className="single flex md:h-64 h-28 md:w-2/4 overflow-hidden" key={index}>
                         <img src={item.imageSrc} alt="" className=" md:w-60 w-32 md:h-44 h-24" />
                         <div className="border-new md:w-4 w-2 mx-5 mt-2">
                             <span className=" bg-black md:w-4 md:h-4 w-2 h-2 block rounded-full"></span>

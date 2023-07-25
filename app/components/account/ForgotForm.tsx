@@ -1,6 +1,7 @@
 
 import { useState } from "react";
 import { useTranslation } from "react-i18next";
+import { INPUT_CLASSES, LABEL_CLASSES } from "~/commonUIClasses";
 import Button from "~/components/Button";
 import { forgotPassword } from "~/utils/account";
 
@@ -52,10 +53,10 @@ export default function ForgotForm() {
             emailAddress: '',
         }
         if (formData.emailAddress.trim() === '') {
-            newErrors.emailAddress = i18n.language === 'ar' ? 'يجب ادخال البريد الإلكتروني' : 'Email address is required';
+            newErrors.emailAddress = t('email_address_required');
             isValid = false;
         } else if (!isValidEmail(formData.emailAddress)) {
-            newErrors.emailAddress = i18n.language === 'ar' ? 'صيغة البريد الإلكتروني غير صحيحة' : 'Invalid email address format';
+            newErrors.emailAddress = t('email_address_format');
             isValid = false;
         }
 
@@ -87,19 +88,18 @@ export default function ForgotForm() {
     return (
         <div>
             {isSend ?
-                <p className="text-base text-gray-900">An email has been sent. Please click the link when you get it</p>
+                <p className="text-base text-gray-900">{t('forgot_email_sent')}</p>
                 :
                 <form onSubmit={handleSubmit}>
-                    <p className="mb-3 text-base text-left text-gray-400">Please enter your email</p>
+                    <p className={LABEL_CLASSES}>{t('enter_your_email')}</p>
                     <div className="mb-6">
                         <input
-                            type="text"
-                            placeholder="Email"
+                            type="email"
                             name="emailAddress"
                             value={formData.emailAddress}
                             onChange={handleChange}
                             required
-                            className={`w-full py-2 border border-gray-300 rounded-md text-gray-900 outline-none ${errors.emailAddress && 'border-red-500'}`}
+                            className={`${INPUT_CLASSES} ${errors.emailAddress && 'border-red-500'}`}
                         />
                         {errors.emailAddress && <p className="mt-1 text-xs text-red-500">{errors.emailAddress}</p>}
                     </div>

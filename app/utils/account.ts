@@ -10,12 +10,11 @@ const sendAuthenticatedRequest = async (
     const user_id = Cookies.get("user_id");
     const token = Cookies.get("token");
     if (performLoginCheck) {
-
-    if (!user_id || !token) {
-      console.log("PLZ LOGIN");
-      return null;
+      if (!user_id || !token) {
+        console.log("PLZ LOGIN");
+        return null;
+      }
     }
-  }
     const apiUrl = `${API_ENDPOINT}/${endpoint}`;
     const requestBody = {
       user_id: user_id,
@@ -55,16 +54,35 @@ const updateProfile = async (userInfo: any) => {
 };
 
 const updatePassword = async (currentPassword: string, newPassword: string) => {
-  return sendAuthenticatedRequest('my-account/password/change-password.php', {
+  return sendAuthenticatedRequest("my-account/password/change-password.php", {
     current_password: currentPassword,
     new_password: newPassword,
   });
 };
 
 const forgotPassword = async (user_email: string) => {
-  return sendAuthenticatedRequest("my-account/password/forgot-password.php", {
-    user_email: user_email,
-  });
+  return sendAuthenticatedRequest(
+    "my-account/password/forgot-password.php",
+    {
+      user_email: user_email,
+    },
+    false
+  );
+};
+const checkFBLogin = async (
+  user_email: string,
+  user_id: string,
+  name: string
+) => {
+  return sendAuthenticatedRequest(
+    "my-account/fb-login.php",
+    {
+      email: user_email,
+      id: user_id,
+      name: name
+    },
+    false
+  );
 };
 
 const userRegister = async (formData: any) => {
@@ -75,8 +93,7 @@ const userLogin = async (formData: any) => {
   const apiUrl = `${API_ENDPOINT}/my-account/login.php`;
   const requestBody = {
     username: formData.username,
-    password: formData.password,
-    remember: formData.remember,
+    password: formData.password
   };
 
   try {
@@ -99,10 +116,12 @@ const userLogin = async (formData: any) => {
   }
 };
 
-
 const getAllAddresses = async () => {
   try {
-    const responseData = await sendAuthenticatedRequest("my-account/addresses/get-all-addresses.php", {});
+    const responseData = await sendAuthenticatedRequest(
+      "my-account/addresses/get-all-addresses.php",
+      {}
+    );
 
     if (responseData && Array.isArray(responseData)) {
       responseData.sort((a, b) => {
@@ -122,13 +141,18 @@ const getAllAddresses = async () => {
   }
 };
 
-
 const addAddress = async (addressData: any) => {
-  return sendAuthenticatedRequest("my-account/addresses/add-address.php", addressData);
+  return sendAuthenticatedRequest(
+    "my-account/addresses/add-address.php",
+    addressData
+  );
 };
 
 const editAddress = async (addressData: any) => {
-  return sendAuthenticatedRequest("my-account/addresses/edit-address.php", addressData);
+  return sendAuthenticatedRequest(
+    "my-account/addresses/edit-address.php",
+    addressData
+  );
 };
 
 const makeAddressDefault = async (addressId: number) => {
@@ -142,28 +166,37 @@ const removeAddress = async (addressId: number) => {
   });
 };
 const getDefaultAddress = async () => {
-  return sendAuthenticatedRequest('my-account/addresses/get-default.php', {});
+  return sendAuthenticatedRequest("my-account/addresses/get-default.php", {});
 };
 
 const addWishAPI = async (product_id: number) => {
-  return sendAuthenticatedRequest('my-account/wishlist/add-to-wishlist.php', {
-    product_id: product_id
+  return sendAuthenticatedRequest("my-account/wishlist/add-to-wishlist.php", {
+    product_id: product_id,
   });
 };
 const removeWishAPI = async (product_id: number) => {
-  return sendAuthenticatedRequest('my-account/wishlist/remove-from-wishlist.php', {
-    product_id: product_id
-  });
+  return sendAuthenticatedRequest(
+    "my-account/wishlist/remove-from-wishlist.php",
+    {
+      product_id: product_id,
+    }
+  );
 };
 const getWishAPI = async () => {
-  return sendAuthenticatedRequest('my-account/wishlist/get-user-wishlist.php', {});
+  return sendAuthenticatedRequest(
+    "my-account/wishlist/get-user-wishlist.php",
+    {}
+  );
 };
 const addBulkWishAPI = async (bulkProducts: number[]) => {
   const payload = {
     products: bulkProducts,
   };
 
-  return sendAuthenticatedRequest('my-account/wishlist/bulk-add-wishlist.php', payload);
+  return sendAuthenticatedRequest(
+    "my-account/wishlist/bulk-add-wishlist.php",
+    payload
+  );
 };
 
 export {
@@ -184,4 +217,5 @@ export {
   removeWishAPI,
   getWishAPI,
   addBulkWishAPI,
+  checkFBLogin,
 };

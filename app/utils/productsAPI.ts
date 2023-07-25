@@ -1,5 +1,4 @@
 import { API_ENDPOINT } from "~/config";
-import Cookies from "js-cookie";
 
 const sendAuthenticatedRequest = async (endpoint: string, requestData: any) => {
   try {
@@ -31,7 +30,7 @@ const fetchFilterProducts = async (filterData: any) => {
     const requestBody = {
       category: filterData.selectedCategories?filterData.selectedCategories:'',
       price_range: [filterData.minPrice, filterData.maxPrice],
-      products_per_page: 20,
+      products_per_page: filterData.products_per_page?filterData.products_per_page : 20,
       page: filterData.pageNumber,
       sort: {
         criteria: filterData.criteria, // Fixed: criteria and arrangement should be properties
@@ -63,14 +62,4 @@ const fetchFilterProducts = async (filterData: any) => {
   };
   
 
-const forgotPassword = async (user_email: string) => {
-  return sendAuthenticatedRequest("my-account/password/forgot-password.php", {
-    user_email: user_email,
-  });
-};
-
-const userRegister = async (formData: any) => {
-  return sendAuthenticatedRequest("my-account/register.php", formData);
-};
-
-export { fetchFilterProducts, forgotPassword, userRegister };
+export { fetchFilterProducts };

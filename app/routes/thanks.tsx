@@ -17,7 +17,7 @@ export default function Thanks() {
     const orderID = searchParams.get('orderID');
     return (
         <div className="bg-white">
-            <section className="bg-gray-100">
+            <section className="">
                 <ThanksComponent orderID={orderID}/>
             </section>
         </div>
