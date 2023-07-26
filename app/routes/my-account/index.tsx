@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import Cookies from "js-cookie";
 import { fetchUserOrders } from "~/utils/account";
 import DashBoard from "~/components/account/DashBoard";
-import { Site_Title } from "~/config";
+import { Site_Title } from "~/credentials";
 
 export const meta = () => {
   return {

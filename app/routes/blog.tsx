@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import BlogList from '~/components/BlogList';
-import { Site_Title } from "~/config";
+import { Site_Title } from "~/credentials";
 
 export default function Blog() {
 

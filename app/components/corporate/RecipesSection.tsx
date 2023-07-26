@@ -77,9 +77,9 @@ export default function RecipesSection(inHome: any) {
                         <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-5" />
                     }
                     {inHome ?
-                        <h2 className="font-bold text-green-950 sm:text-4xl">{t('discover_recipes')}</h2>
+                        <h2 className="font-bold text-green-950 text-2xl sm:text-4xl">{t('discover_recipes')}</h2>
                         :
-                        <h1 className="font-bold text-green-100 sm:text-4xl">{t('recipes')} </h1>
+                        <h1 className="font-bold text-green-100 text-2xl sm:text-4xl">{t('recipes')} </h1>
                     }
                 </div>
                 <div className="list">

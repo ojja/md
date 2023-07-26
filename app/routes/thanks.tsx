@@ -1,5 +1,5 @@
 import { LoaderArgs, MetaFunction } from "@remix-run/node";
-import { Site_Title } from "~/config";
+import { Site_Title } from "~/credentials";
 import {
     Link,
     useSearchParams,

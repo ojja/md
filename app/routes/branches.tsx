@@ -1,6 +1,6 @@
 import type { MetaFunction } from "@remix-run/node";
 import BranchesSection from "~/components/BranchesSection";
-import { Site_Title } from "~/config";
+import { Site_Title } from "~/credentials";
 
 export default function Branches() {
 

@@ -3,7 +3,7 @@ import OrdersTable from "~/components/OrdersTable";
 import { fetchUserOrders } from "~/utils/account";
 import Cookies from "js-cookie";
 import { useEffect, useState } from "react";
-import { Site_Title } from "~/config";
+import { Site_Title } from "~/credentials";
 import OrdersTableLoader from "~/components/account/OrderTableLoader";
 import { useTranslation } from "react-i18next";
 

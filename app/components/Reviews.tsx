@@ -7,7 +7,7 @@ import { Link } from "react-scroll";
 import ProductReviewForm from "./product/ProductReviewForm";
 
 
-export default function Reviews(inHome: any) {
+export default function Reviews(inHome: boolean = false) {
     const { t } = useTranslation();
     return (
 
@@ -17,12 +17,12 @@ export default function Reviews(inHome: any) {
                 <div className="flex justify-between">
                     <h2 className={`font-bold text-green-200 ${inHome ? 'text-xl sm:text-4xl' : 'text-xl sm:text-2xl'}`}>أراء العملاء</h2>
                     <div className="flex gap-4">
-                        <Link to="targetSection" className="border-2 bg-white border-gray-400 rounded-100 text-green-200 flex pb-1 pt-1.5 px-5 gap-6 cursor-pointer text-xl hover:text-white hover:bg-green-200 hover:border-green-200" smooth={true} duration={500} >
+                        <Link to={inHome ? "/reviews" : "targetSection"} className="border-2 bg-white border-gray-400 rounded-100 text-green-200 flex pb-1 pt-1.5 px-5 gap-6 cursor-pointer text-xl hover:text-white hover:bg-green-200 hover:border-green-200" smooth={true} duration={500} >
                             أضف رأي <PlusIcon className="w-6 h-6" aria-hidden="true" />
                         </Link>
-                        <Link to="targetSection" className="border-2 bg-white border-gray-400 rounded-100 text-green-200 flex pb-1 pt-1.5 px-5 gap-6 cursor-pointer text-xl hover:text-white hover:bg-green-200 hover:border-green-200" smooth={true} duration={500} >
+                        {/* <Link to={`${inHome ? "/reviews" : "targetSection"}`} className="border-2 bg-white border-gray-400 rounded-100 text-green-200 flex pb-1 pt-1.5 px-5 gap-6 cursor-pointer text-xl hover:text-white hover:bg-green-200 hover:border-green-200" smooth={true} duration={500} >
                             {t('load_more')}
-                        </Link>
+                        </Link> */}
                     </div>
 
                 </div>

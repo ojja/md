@@ -1,4 +1,5 @@
 import { API_ENDPOINT } from "~/config";
+import https from 'https';
 
 // Define a cache object to store API responses
 const apiCache = new Map();
@@ -18,13 +19,15 @@ export async function getCategoryProducts(categorySlug: string, pageNumber: numb
     headers: {
       'Content-Type': 'application/json'
     },
-    body: JSON.stringify(data)
+    body: JSON.stringify(data),
+    agent: new https.Agent({ rejectUnauthorized: false }), // Add this line to disable SSL verification
   };
 
+  console.log('data',JSON.stringify(data))
   try {
     const response = await fetch(url, options);
     const result = await response.json();
-    
+    console.log('result',result)
     // Cache the response for future use
     apiCache.set(cacheKey, result);
     

@@ -1,6 +1,26 @@
 import { ProductData } from "types";
 import { API_ENDPOINT } from "~/config";
-import https from 'https';
+import https from "https";
+
+export async function getCategoryInfo(slug: string) {
+  const url = `${API_ENDPOINT}/catInfo.php`;
+  const data = {
+    category: slug,
+  };
+  const options = {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify(data),
+  };
+  try {
+    const response = await fetch(url, options);
+    const result: ApiResponse = await response.json();
+    return result;
+  } catch (error) {
+    console.error("Error:", error);
+    return [];
+  }
+}
 
 export async function getProducts(name?: string | null) {
   const url = `${API_ENDPOINT}/category.php`;

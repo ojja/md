@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Site_Title } from "~/config";
+import { Site_Title } from "~/credentials";
 import Popup from "~/components/Popup";
 import ChangePassword from "~/components/account/ChangePassword";
 import ProfileForm from "~/components/account/ProfileForm";

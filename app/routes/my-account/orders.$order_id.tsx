@@ -7,7 +7,7 @@ import TrackingSteps from "~/components/TrackingSteps";
 import FormatCurrency from "~/utils/FormatCurrency";
 import Status from "~/components/Status";
 import Loader from "~/components/Loader";
-import { Site_Title } from "~/config";
+import { Site_Title } from "~/credentials";
 import { useTranslation } from "react-i18next";
 import Popup from "~/components/Popup";
 

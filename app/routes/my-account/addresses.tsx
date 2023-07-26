@@ -2,7 +2,7 @@ import { Dialog, Menu, Transition } from "@headlessui/react";
 import { Fragment, useEffect, useState } from "react";
 import SingleAddress from "~/components/SingleAddress";
 import { RiRadioButtonLine, RiCheckboxBlankCircleLine } from "react-icons/ri";
-import { Site_Title } from "~/config";
+import { Site_Title } from "~/credentials";
 import { getAllAddresses } from "~/utils/account";
 import { useNavigate } from "@remix-run/react";
 import Cookies from "js-cookie";

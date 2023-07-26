@@ -3,7 +3,7 @@ import { useEffect, useState } from "react";
 import AccountNav from '~/components/account/AccountNav'
 import Cookies from "js-cookie";
 import { fetchUserInfo } from "~/utils/account";
-import { Site_Title } from "~/config";
+import { Site_Title } from "~/credentials";
 
 
 interface UserInfo {

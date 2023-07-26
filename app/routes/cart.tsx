@@ -6,7 +6,7 @@ import { useState } from "react";
 import CartItem from "~/components/cart/CartItem";
 import CouponForm from "~/components/CouponForm";
 import ExtraProducts from "~/components/ExtraProducts";
-import { Site_Title } from "~/config";
+import { Site_Title } from "~/credentials";
 import useShoppingCart from "~/stores/cartStore";
 // import { useShoppingCart } from "~/stores/cartStore";
 import FormatCurrency from "~/utils/FormatCurrency";

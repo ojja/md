@@ -1,4 +1,4 @@
-import { FB_PIXELID, FB_Access_Token } from "./config";
+import { FB_PIXELID, FB_Access_Token } from "./credentials";
 
 const pixelId = FB_PIXELID;
 let isPixelInitialized = false;

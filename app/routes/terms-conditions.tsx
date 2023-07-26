@@ -1,5 +1,5 @@
 import type { MetaFunction } from "@remix-run/node";
-import { Site_Title } from "~/config";
+import { Site_Title } from "~/credentials";
 import i18n from 'i18next';
 import TermsSection from "~/components/corporate/TermsSection";
 

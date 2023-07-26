@@ -4,7 +4,7 @@ import HeroTitle from '~/components/HeroTitle';
 import Testimonials from '~/components/Testimonials';
 import BlogList from '~/components/BlogList';
 import { MetaFunction } from "@remix-run/node";
-import { Site_Title } from '~/config';
+import { Site_Title } from '~/credentials';
 import ExtraProducts from '~/components/ExtraProducts';
 import { Tab } from '@headlessui/react';
 import { useTranslation } from 'react-i18next';
@@ -19,7 +19,7 @@ function classNames(...classes: string[]) {
 export default function Index() {
   const { t } = useTranslation();
   return (
-    <div>
+    <div className="overflow-hidden">
       <HeroSection />
 
       <div className="bg-white">
@@ -124,7 +124,7 @@ export default function Index() {
                 <img src="/images/gift/gift_01.webp" alt="img alt" className="w-full h-full object-cover" />
               </div>
 
-              <div className="col-span-8 grid lg:grid-cols-12 grid-cols-1 row-start-1 md:row-start-2">
+              <div className="grid lg:grid-cols-12 grid-cols-1 row-start-1 lg:row-start-auto lg:col-span-8">
                 <div className="col-span-5">
                   <img src="/images/gift/gift_04.webp" alt="img alt" className="w-full h-full object-cover" />
                 </div>
@@ -147,7 +147,7 @@ export default function Index() {
       </div>
 
 
-      <div className="flex flex-col mb-6 md:mb-16 md:flex-row bg-green-950 py-16">
+      <div className="flex flex-col mb-6 md:mb-16 md:flex-row bg-green-950 py-16 px-4 md:px-0">
         <div className="w-full md:w-1/2">
           <img src="/images/store.webp" alt="image alt" className="rounded-3xl m-auto" />
         </div>
@@ -163,7 +163,7 @@ export default function Index() {
       </div>
 
 
-      <section className="w-full pb-24 ">
+      <section className="w-full pb-8 md:pb-24">
         <div className="pt-4 pb-5 md:pb-16">
           <div className="container px-4 mx-auto">
             <h2 className="pt-2 text-2xl font-bold text-green-950 md:text-4xl md:pt-7">{t('latest_news')}</h2>
@@ -196,8 +196,8 @@ export default function Index() {
 
 
       <div className="bg-green-300">
-        <div className="container mx-auto py-14">
-          <div className="grid grid-cols-2 gap-10">
+        <div className="container mx-auto py-14 px-4 md:px-0">
+          <div className="grid md:grid-cols-2 gap-10">
             <div className="bg-white rounded-3xl shadow-custom">
               <div className="flex flex-col justify-center text-center items-center h-full gap-4 p-16">
                 <img src="/images/export_around.webp" alt="export_around alt" className="-mb-16" />

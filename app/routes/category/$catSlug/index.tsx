@@ -7,12 +7,15 @@ import { v4 } from 'uuid';
 import Breadcrumbs from "~/components/Breadcrumbs";
 import ProductWidget from "~/components/product/ProductWidget";
 import { ProductWidgetWithVariation } from "~/components/product/ProductWidgetWithVariation";
-import { API_ENDPOINT, Site_Title } from "~/config";
+import { Site_Title } from "~/credentials";
+import { API_ENDPOINT } from "~/config";
 import { useTranslation } from "react-i18next";
 import ShopListTop from "~/components/ShopListTop";
 import Filters from "~/components/Filters";
 import Sort from "~/components/Sort";
 import Loader from "~/components/Loader";
+import { getCategoryInfo } from "~/api/products";
+import CategoryFilter from "~/components/CategoryFilter";
 
 
 
@@ -49,29 +52,40 @@ export const loader = async ({ params }: any) => {
 export default function CategorySlug() {
   const { products: initialProducts, categorySlug } = useLoaderData();
   const { t } = useTranslation();
+  const { i18n } = useTranslation();
   const [mobileFiltersOpen, setMobileFiltersOpen] = useState(false);
   const [grid, setGrid] = useState(false);
-  const cat = 'Category';
-  const breadcrumbs = {
-    pages: [
-      { name: 'Home', href: '/' },
-      { name: 'Woman', href: '#' },
-      { name: 'Parent Category', href: '#' },
-      { name: cat, href: '#' }
-    ]
-  }
   const [isLoading, setIsLoading] = useState(false);
+  const [isLoadingCat, setIsLoadingCat] = useState(true);
   const [isLoadMoreEnabled, setIsLoadMoreEnabled] = useState(true);
 
   const [products, setProducts] = useState(initialProducts);
   const [pageNumber, setPageNumber] = useState(1);
   const [minPrice, setMinPrice] = useState(0);
   const [maxPrice, setMaxPrice] = useState(10000000);
+  let [catInfo, setcatInfo] = useState('');
   let [selectedCategories, setSelectedCategories] = useState([categorySlug]);
   const [selectedSortOption, setSelectedSortOption] = useState({
     criteria: "date",
     arrangement: "DESC",
   });
+
+
+  useEffect(() => {
+    const fetchData = async () => {
+      setIsLoadingCat(true);
+      try {
+        const items = await getCategoryInfo(categorySlug);
+        setcatInfo(items);
+      } catch (error) {
+        console.error('Error fetching extra products:', error);
+      } finally {
+        setIsLoadingCat(false);
+      }
+    };
+
+    fetchData();
+  }, []);
 
   const handleSortOptionChange = (option: any) => {
     setSelectedSortOption(option);
@@ -172,21 +186,47 @@ export default function CategorySlug() {
   };
 
   // console.log('products>>',products)
+  console.log('catInfo>>', catInfo)
+  const breadcrumbs = {
+    pages: [
+      { name: t('home'), href: '/' },
+      { name: catInfo ? i18n.language === 'ar' ? catInfo.ar_name : catInfo.name : categorySlug, href: '#' }
+    ]
+  }
   return (
     <div className="bg-white" key={categorySlug}>
       <main className="px-4 mx-auto max-w-[1400px] sm:px-6 lg:px-8">
         <div className='pt-5 '>
-        {/* <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-4" /> */}
+          <Breadcrumbs breadcrumbs={breadcrumbs.pages} className="pb-4" />
 
           {/* <ShopListTop grid={grid} setGrid={setGrid} setMobileFiltersOpen={setMobileFiltersOpen} /> */}
-          <ShopListTop grid={grid} setGrid={setGrid} setMobileFiltersOpen={setMobileFiltersOpen} handleSortOptionChange={handleSortOptionChange} />
+          <ShopListTop grid={grid} setGrid={setGrid} setMobileFiltersOpen={setMobileFiltersOpen} handleSortOptionChange={handleSortOptionChange} title={catInfo ? i18n.language === 'ar' ? catInfo.ar_name : catInfo.name : categorySlug} />
 
           <section aria-labelledby="products-heading" className="pt-6 pb-24">
             {/* <div className="grid grid-cols-1 gap-x-8 gap-y-10 lg:grid-cols-4"> */}
             <div className="">
 
-              <div className="top  flex justify-between ">
-                <Filters />
+              <div className="top  flex justify-between items-center">
+                {!isLoadingCat && catInfo ?
+                  <CategoryFilter catInfo={catInfo} />
+                  :
+                  <div className="animate-pulse">
+                    <div className="gap-4 flex">
+                      <div className="bg-green-300 px-4 py-2.5 rounded-100 flex-col justify-center items-center gap-2.5 inline-flex">
+                        <div className="block w-32 px-2"><div className="h-4 bg-green-200 rounded-md" /></div>
+                      </div>
+                      <div className="bg-green-300 px-4 py-2.5 rounded-100 flex-col justify-center items-center gap-2.5 inline-flex">
+                        <div className="block w-32 px-2"><div className="h-4 bg-green-200 rounded-md" /></div>
+                      </div>
+                      <div className="bg-green-300 px-4 py-2.5 rounded-100 flex-col justify-center items-center gap-2.5 inline-flex">
+                        <div className="block w-32 px-2"><div className="h-4 bg-green-200 rounded-md" /></div>
+                      </div>
+                      <div className="bg-green-300 px-4 py-2.5 rounded-100 flex-col justify-center items-center gap-2.5 inline-flex">
+                        <div className="block w-32 px-2"><div className="h-4 bg-green-200 rounded-md" /></div>
+                      </div>`
+                    </div>
+                  </div>
+                }
                 <Sort onSortOptionChange={handleSortOptionChange} />
               </div>
 
@@ -210,7 +250,7 @@ export default function CategorySlug() {
                     </React.Fragment>
                   ))}
                 </div>
-                {isLoadMoreEnabled &&
+                {products.length > 7 && isLoadMoreEnabled &&
                   <div className="flex items-center justify-center mt-10 loadmore">
                     <button onClick={handleLoadMore} date-num={pageNumber} type="button" className="text-green-500 hover:bg-green-500 hover:text-white font-semibold border-2 border-green-500 rounded-full text-sm px-5 py-2.5 text-center mr-2 inline-flex items-center justify-center whitespace-nowrap">
                       {!isLoading ? (

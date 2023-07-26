@@ -17,7 +17,6 @@ export default function BottomFooter() {
                     <img src="/images/footer/visa.png" alt="" className=" w-fit h-6" />
                     <img src="/images/footer/master.png" alt="" className=" w-fit h-6" />
                     <img src="/images/footer/etisalat.png" alt="" className=" w-fit h-6" />
-
                 </div>
                 <a href="https://www.mitchdesigns.com/" className="flex gap-x-2 items-center opacity-40">
                     <img src="/images/footer/Logomark.png" alt="" className=" w-7 h-7" />

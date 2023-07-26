@@ -1,6 +1,6 @@
 import { Dialog, Transition } from "@headlessui/react";
 import { Fragment, useState } from "react";
-import { Site_Title } from "~/config";
+import { Site_Title } from "~/credentials";
 import FormatCurrency from "~/utils/FormatCurrency";
 
 

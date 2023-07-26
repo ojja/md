@@ -1,4 +1,4 @@
-import { Site_Title } from "~/config";
+import { Site_Title } from "~/credentials";
 import LoginForm from "~/components/account/LoginForm";
 import CreateAccountBox from "~/components/account/CreateAccountBox";
 import { useTranslation } from "react-i18next";

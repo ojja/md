@@ -5,7 +5,7 @@ import { Link } from "@remix-run/react";
 import Button from "~/components/Button";
 import type { MetaFunction } from "@remix-run/node";
 import CartSummary from "~/components/checkout/CartSummary";
-import { Site_Title } from "~/config";
+import { Site_Title } from "~/credentials";
 
 export default function Checkout() {
 

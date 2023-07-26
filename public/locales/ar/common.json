@@ -65,10 +65,12 @@
   "no_wishlist": "لا توجد منتجات في قائمة الرغبات الخاصة بك",
   "shop_now": "تسوق الآن",
   "sortOptions": {
-    "newest": "الأحدث",
+    "newest": "الأجدد",
+    "most_rated": "الأكثر تقييما",
+    "best_seller": "الأكثر مبيعًا",
     "oldest": "الأقدم",
-    "priceLowToHigh": "السعر: من الأدنى إلى الأعلى",
-    "priceHighToLow": "السعر: من الأعلى إلى الأدنى"
+    "priceLowToHigh": "الأرخص للأغلى",
+    "priceHighToLow": "الاأغلى للأرخص"
   },
   "discount": "خصم",
   "payment_method": "طريقة الدفع",

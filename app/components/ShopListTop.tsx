@@ -34,9 +34,9 @@ export default function ShopListTop({ grid, setGrid, setMobileFiltersOpen, title
         <div>
             <div className="flex flex-col flex-wrap items-baseline justify-between pt-2 pb-6 mb-4 md:flex-row">
                 {title ?
-                    <h1 className="text-4xl font-bold tracking-tight text-gray-900">{title}</h1>
+                    <h1 className="text-4xl font-bold tracking-tight text-black">{title}</h1>
                     :
-                    <h1 className="text-4xl font-bold tracking-tight text-gray-900"> {t('new_arrivals')} {t('in')} {categorySlug}</h1>
+                    <h1 className="text-4xl font-bold tracking-tight text-black"> {t('new_arrivals')} {t('in')} {categorySlug}</h1>
                 }
                 {/* <div className="flex items-center self-end mt-3 md:mt-0">
 

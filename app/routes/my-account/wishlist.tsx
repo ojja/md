@@ -4,7 +4,7 @@ import { MetaFunction } from "remix";
 import WishListProducts from "~/components/AddWishList";
 import FormatCurrency from "~/utils/FormatCurrency";
 import WishList from "~/components/WishList";
-import { Site_Title } from "~/config";
+import { Site_Title } from "~/credentials";
 
 export const meta = () => {
   return {

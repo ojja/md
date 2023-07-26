@@ -1,7 +1,7 @@
 import type { MetaFunction } from "@remix-run/node";
 import { useTranslation } from "react-i18next";
 import PrivacySection from "~/components/corporate/PrivacySection";
-import { Site_Title } from "~/config";
+import { Site_Title } from "~/credentials";
 import i18n from 'i18next';
 
 export default function PrivacyPolicy() {

@@ -1,5 +1,5 @@
 import WishList from "~/components/WishList";
-import { Site_Title } from "~/config";
+import { Site_Title } from "~/credentials";
 
 export const meta = () => {
   return {
