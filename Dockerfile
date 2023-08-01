@@ -1,23 +1,18 @@
-# Use the official Node.js image as the base
-FROM node:18
+FROM node:18.14.2
 
-# Set the working directory inside the container
 WORKDIR /app
 
 # Copy package.json and package-lock.json to the working directory
 COPY package*.json ./
 
-
 # Update npm to the latest version
-# RUN npm update -g npm
-RUN npm cache clean --force
-# RUN rm -rf node_modules
-
-# Install project dependencies
 RUN npm install -g npm@9.6.5
+RUN npm install remix -g
 RUN npm install --force && npm install -g remix json-server tailwindcss concurrently@8.0.1
 RUN npm install -g remix-esbuild-override
-# RUN npm install --save-dev --legacy-peer-deps --ignore-scripts @tailwindcss/aspect-ratio
+RUN npm install -g cross-env
+RUN npm install -g rtlcss
+RUN npm install -g @remix-run/serve
 
 # Copy the entire project to the working directory
 COPY . .
